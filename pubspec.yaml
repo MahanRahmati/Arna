@@ -1,0 +1,31 @@
+name: arna
+description: Arna framework for Flutter.
+version: 0.0.1
+homepage: https://github.com/MahanRahmati/Arna
+
+environment:
+  sdk: ">=2.15.1 <3.0.0"
+  flutter: ">=2.8.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.4
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter-Bold.otf
+          weight: 700
+        - asset: fonts/Inter-Light.otf
+          weight: 300
+        - asset: fonts/Inter-Medium.otf
+          weight: 500
+        - asset: fonts/Inter-Regular.otf
+          weight: 400

@@ -1,115 +1,238 @@
-import 'package:flutter/material.dart';
+import 'package:arna/arna.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return const ArnaApp(debugShowCheckedModeBanner: false, home: Home());
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Home> createState() => _HomeState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _HomeState extends State<Home> {
+  var _selectedType = "1";
+  bool _checkBox1 = false;
+  bool? _checkBox2 = false;
+  final bool _checkBox3 = false;
+  bool _switch1 = false;
+  bool _switch2 = false;
+  final bool _switch3 = false;
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+    return ArnaScaffold(
+      title: "Arna Demo",
+      headerBarTrailing: ArnaIconButton(
+        icon: Icons.info_outlined,
+        onPressed: () {
+          showArnaPopupDialog(
+            context: context,
+            title: "Title",
+            body: Container(),
+          );
+          // showArnaDialog(
+          //   context: context,
+          //   builder: (_) => ArnaAlertDialog(
+          //     title: "Title",
+          //     message: "Message",
+          //     primary: ArnaTextButton(
+          //       title: "OK",
+          //       onPressed: Navigator.of(context).pop,
+          //     ),
+          //   ),
+          //   barrierDismissible: true,
+          // );
+        },
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      items: [
+        NavigationItem(
+          title: "Inputs",
+          icon: Icons.check_box_outlined,
+          builder: (_) => SingleChildScrollView(
+            child: Column(
+              children: [
+                ArnaList(
+                  title: "Buttons",
+                  items: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ArnaIconButton(
+                          icon: Icons.add_outlined,
+                          onPressed: () {},
+                        ),
+                        ArnaTextButton(title: "Add", onPressed: () {}),
+                        ArnaButton(
+                          title: "Add",
+                          icon: Icons.add_outlined,
+                          onPressed: () {},
+                        ),
+                        const ArnaButton(
+                          title: "Add",
+                          icon: Icons.add_outlined,
+                          onPressed: null,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                ArnaList(
+                  title: "Linked buttons",
+                  items: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ArnaLinkedButtons(
+                          buttons: [
+                            ArnaLinkedIconButton(
+                              icon: Icons.add_outlined,
+                              onPressed: () {},
+                            ),
+                            ArnaLinkedTextButton(
+                              title: "Add",
+                              onPressed: () {},
+                            ),
+                            ArnaLinkedButton(
+                              title: "Add",
+                              icon: Icons.add_outlined,
+                              onPressed: () {},
+                            ),
+                            const ArnaLinkedButton(
+                              title: "Add",
+                              icon: Icons.add_outlined,
+                              onPressed: null,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                ArnaList(
+                  title: "CheckBox",
+                  items: [
+                    ArnaCheckBoxListTile(
+                      value: _checkBox1,
+                      title: "CheckBox 1",
+                      onChanged: (value) => setState(() => _checkBox1 = value!),
+                    ),
+                    ArnaCheckBoxListTile(
+                      value: _checkBox2,
+                      title: "CheckBox 2",
+                      subtitle: "Subtitle 2",
+                      tristate: true,
+                      onChanged: (value) => setState(() => _checkBox2 = value),
+                      trailingButton: ArnaIconButton(
+                        icon: Icons.add_outlined,
+                        onPressed: () {},
+                      ),
+                    ),
+                    ArnaCheckBoxListTile(
+                      value: _checkBox3,
+                      title: "CheckBox 3",
+                      subtitle: "Subtitle 3",
+                      onChanged: null,
+                    ),
+                  ],
+                ),
+                ArnaList(
+                  title: "Radio",
+                  items: [
+                    ArnaRadioListTile(
+                      value: "1",
+                      groupValue: _selectedType,
+                      title: "Radio 1",
+                      onChanged: (value) =>
+                          setState(() => _selectedType = value as String),
+                    ),
+                    ArnaRadioListTile(
+                      value: "2",
+                      groupValue: _selectedType,
+                      title: "Radio 2",
+                      subtitle: "Subtitle 2",
+                      onChanged: (value) =>
+                          setState(() => _selectedType = value as String),
+                      trailingButton: ArnaIconButton(
+                        icon: Icons.add_outlined,
+                        onPressed: () {},
+                      ),
+                    ),
+                    ArnaRadioListTile(
+                      value: "3",
+                      groupValue: _selectedType,
+                      title: "Radio 3",
+                      subtitle: "Subtitle 3",
+                      onChanged: null,
+                    ),
+                  ],
+                ),
+                ArnaList(
+                  title: "Switch",
+                  items: [
+                    ArnaSwitchListTile(
+                      title: "Switch 1",
+                      value: _switch1,
+                      onChanged: (value) => setState(() => _switch1 = value),
+                    ),
+                    ArnaSwitchListTile(
+                      title: "Switch 2",
+                      subtitle: "Subtitle 2",
+                      value: _switch2,
+                      onChanged: (value) => setState(() => _switch2 = value),
+                      trailingButton: ArnaIconButton(
+                        icon: Icons.add_outlined,
+                        onPressed: () {},
+                      ),
+                    ),
+                    ArnaSwitchListTile(
+                      title: "Switch 3",
+                      subtitle: "Subtitle 3",
+                      value: _switch3,
+                      onChanged: null,
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        NavigationItem(
+          title: "List",
+          icon: Icons.list_outlined,
+          badge: const ArnaBadge(title: "New"),
+          builder: (_) => SingleChildScrollView(
+            child: Column(
+              children: [
+                ArnaList(
+                  title: "List tile",
+                  items: [
+                    ArnaListTile(
+                      title: "Title 1",
+                      subtitle: "Subtitle 1",
+                      trailing: const ArnaBadge(title: "Badge 1"),
+                      onTap: () {},
+                    ),
+                    const ArnaListTile(
+                      title: "Title 2",
+                      subtitle: "Subtitle 2",
+                      trailing: ArnaBadge(title: "Badge 2"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

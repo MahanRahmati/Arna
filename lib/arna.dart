@@ -2,11 +2,13 @@ library arna;
 
 export 'package:arna/src/base/app.dart';
 export 'package:arna/src/base/bottom_bar.dart';
+export 'package:arna/src/base/bottom_bar_item.dart';
 export 'package:arna/src/base/drawer.dart';
 export 'package:arna/src/base/header_bar.dart';
 export 'package:arna/src/base/scaffold.dart';
 export 'package:arna/src/base/scroll_bar.dart';
 export 'package:arna/src/base/side_bar_item.dart';
+export 'package:arna/src/base/side_scaffold.dart';
 export 'package:arna/src/buttons/button.dart';
 export 'package:arna/src/buttons/icon_button.dart';
 export 'package:arna/src/buttons/linked_buttons.dart';

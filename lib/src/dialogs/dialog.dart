@@ -19,9 +19,7 @@ class ArnaAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: deviceWidth(context) < 644
-          ? Alignment.bottomCenter
-          : Alignment.center,
+      alignment: phone(context) ? Alignment.bottomCenter : Alignment.center,
       child: Padding(
         padding: Styles.large,
         child: MediaQuery.removeViewInsets(
@@ -32,10 +30,10 @@ class ArnaAlertDialog extends StatelessWidget {
           context: context,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minWidth: deviceWidth(context) < 644
+              minWidth: phone(context)
                   ? deviceWidth(context) - Styles.largePadding
                   : Styles.dialogSize,
-              maxWidth: deviceWidth(context) < 644
+              maxWidth: phone(context)
                   ? deviceWidth(context) - Styles.largePadding
                   : Styles.dialogSize,
             ),
@@ -119,12 +117,12 @@ Future<T?> showArnaDialog<T>({
     transitionDuration: Styles.basicDuration,
     routeSettings: routeSettings,
     pageBuilder: (context, animation, secondaryAnimation) => builder(context),
-    transitionBuilder: (_, anim, __, child) {
-      Tween<Offset> tween = Tween(begin: const Offset(0, 1), end: Offset.zero);
-      return SlideTransition(
-        position: tween.animate(anim),
-        child: FadeTransition(opacity: anim, child: child),
-      );
-    },
+    transitionBuilder: (_, anim, __, child) => SlideTransition(
+      position: Tween(
+        begin: const Offset(0, 1),
+        end: Offset.zero,
+      ).animate(anim),
+      child: FadeTransition(opacity: anim, child: child),
+    ),
   );
 }

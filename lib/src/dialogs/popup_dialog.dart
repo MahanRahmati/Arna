@@ -27,8 +27,8 @@ class ArnaPopupDialog extends StatelessWidget {
           context: context,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minWidth: deviceWidth(context) * 0.8,
-              maxWidth: deviceWidth(context) * 0.8,
+              maxHeight: deviceHeight(context) * 0.84,
+              maxWidth: deviceWidth(context) * 0.84,
             ),
             child: AnimatedContainer(
               duration: Styles.basicDuration,
@@ -41,27 +41,19 @@ class ArnaPopupDialog extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,
-                child: Column(
-                  children: [
-                    ArnaHeaderBar(
-                      leading: headerBarLeading,
-                      middle: title != null
-                          ? Text(title!, style: titleText(context))
-                          : const SizedBox.shrink(),
-                      trailing: Row(
-                        children: [
-                          ArnaTextButton(
-                            title: "Close",
-                            onPressed: Navigator.of(context).pop,
-                          ),
-                          headerBarTrailing,
-                        ],
+                child: ArnaScaffold(
+                  headerBarLeading: headerBarLeading,
+                  title: title,
+                  headerBarTrailing: Row(
+                    children: [
+                      ArnaTextButton(
+                        title: "Close",
+                        onPressed: Navigator.of(context).pop,
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(padding: Styles.horizontal, child: body),
-                    ),
-                  ],
+                      headerBarTrailing,
+                    ],
+                  ),
+                  body: body,
                 ),
               ),
             ),
@@ -107,7 +99,7 @@ class ArnaPopupPage extends StatelessWidget {
                 : const SizedBox.shrink(),
             trailing: headerBarTrailing,
           ),
-          Expanded(child: Padding(padding: Styles.horizontal, child: body)),
+          Expanded(child: body),
         ],
       ),
     );
@@ -126,9 +118,8 @@ Future<T?> showArnaPopupDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
 }) {
-  return deviceWidth(context) < 644
-      ? Navigator.push(
-          context,
+  return phone(context)
+      ? Navigator.of(context).push(
           CupertinoPageRoute(
             builder: (context) => ArnaPopupPage(
               title: title,
@@ -153,13 +144,12 @@ Future<T?> showArnaPopupDialog<T>({
               body: body,
             );
           },
-          transitionBuilder: (_, anim, __, child) {
-            Tween<Offset> tween =
-                Tween(begin: const Offset(0, 1), end: Offset.zero);
-            return SlideTransition(
-              position: tween.animate(anim),
-              child: FadeTransition(opacity: anim, child: child),
-            );
-          },
+          transitionBuilder: (_, anim, __, child) => SlideTransition(
+            position: Tween(
+              begin: const Offset(0, 1),
+              end: Offset.zero,
+            ).animate(anim),
+            child: FadeTransition(opacity: anim, child: child),
+          ),
         );
 }

@@ -64,7 +64,7 @@ class _ArnaCheckBoxListTileState extends State<ArnaCheckBoxListTile> {
 
   @override
   Widget build(BuildContext context) {
-    _selected = widget.value != null ? widget.value! : true;
+    _selected = widget.value ?? false;
     return MergeSemantics(
       child: Semantics(
         label: widget.semanticLabel,

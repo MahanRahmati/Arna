@@ -8,6 +8,7 @@ class ArnaScrollbar extends RawScrollbar {
     bool isAlwaysShown = false,
     ScrollNotificationPredicate? notificationPredicate,
     ScrollbarOrientation? scrollbarOrientation,
+    Color? thumbColor,
   }) : super(
           key: key,
           child: child,
@@ -16,6 +17,7 @@ class ArnaScrollbar extends RawScrollbar {
           notificationPredicate:
               notificationPredicate ?? defaultScrollNotificationPredicate,
           scrollbarOrientation: scrollbarOrientation,
+          thumbColor: thumbColor,
         );
 
   @override
@@ -26,15 +28,13 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   @override
   void updateScrollbarPainter() {
     scrollbarPainter
-      ..color = Styles.accentColor
+      ..color = widget.thumbColor ?? Styles.accentColor
       ..textDirection = Directionality.of(context)
-      ..thickness = Styles.smallPadding
+      ..thickness = Styles.scrollBarThickness
       ..mainAxisMargin = Styles.smallPadding
       ..crossAxisMargin = Styles.smallPadding
       ..radius = const Radius.circular(Styles.borderRadiusSize)
       ..padding = MediaQuery.of(context).padding
-      ..minLength = Styles.buttonSize
-      ..minOverscrollLength = Styles.padding
       ..scrollbarOrientation = widget.scrollbarOrientation;
   }
 

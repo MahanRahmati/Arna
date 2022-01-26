@@ -83,20 +83,16 @@ class _ArnaCheckBoxState extends State<ArnaCheckBox> {
   }
 
   void _handleHover(hover) {
-    if (hover != _hover) {
-      if (mounted) setState(() => _hover = hover);
-    }
+    if (hover != _hover && mounted) setState(() => _hover = hover);
   }
 
   void _handleFocus(focus) {
-    if (focus != _focused) {
-      if (mounted) setState(() => _focused = focus);
-    }
+    if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
   @override
   Widget build(BuildContext context) {
-    _selected = widget.value != null ? widget.value! : true;
+    _selected = widget.value ?? false;
     return Padding(
       padding: Styles.small,
       child: MergeSemantics(

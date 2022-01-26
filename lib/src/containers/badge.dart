@@ -18,7 +18,6 @@ class ArnaBadge extends StatelessWidget {
       padding: Styles.small,
       child: AnimatedContainer(
         height: Styles.badgeSize,
-        constraints: const BoxConstraints(minWidth: Styles.badgeSize),
         duration: Styles.basicDuration,
         curve: Styles.basicCurve,
         decoration: BoxDecoration(
@@ -26,7 +25,16 @@ class ArnaBadge extends StatelessWidget {
           color: accentColor,
         ),
         padding: Styles.horizontal,
-        child: Align(child: Text(title, style: badgeText(context, textColor))),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Flexible(
+              child: FittedBox(
+                child: Text(title, style: badgeText(context, textColor)),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

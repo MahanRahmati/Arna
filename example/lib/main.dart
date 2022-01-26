@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaScaffold(
+    return ArnaSideScaffold(
       title: "Arna Demo",
       headerBarTrailing: ArnaIconButton(
         icon: Icons.info_outlined,
@@ -208,7 +208,7 @@ class _HomeState extends State<Home> {
         NavigationItem(
           title: "List",
           icon: Icons.list_outlined,
-          badge: const ArnaBadge(title: "New"),
+          badge: const ArnaBadge(title: "1"),
           builder: (_) => SingleChildScrollView(
             child: Column(
               children: [
@@ -231,6 +231,11 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
+        ),
+        NavigationItem(
+          title: "Dummy",
+          icon: Icons.info_outlined,
+          builder: (_) => Container(),
         ),
       ],
     );

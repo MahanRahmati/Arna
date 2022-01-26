@@ -1,14 +1,10 @@
 import 'package:arna/arna.dart';
 
 class ArnaList extends StatelessWidget {
-  final String title;
+  final String? title;
   final List<Widget> items;
 
-  const ArnaList({
-    Key? key,
-    required this.title,
-    required this.items,
-  }) : super(key: key);
+  const ArnaList({Key? key, this.title, required this.items}) : super(key: key);
 
   List<Widget> _updateChildren() {
     final List<Widget> children = [];
@@ -30,19 +26,20 @@ class ArnaList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(
-              Styles.padding,
-              0,
-              Styles.padding,
-              Styles.largePadding,
+          if (title != null)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                Styles.padding,
+                0,
+                Styles.padding,
+                Styles.largePadding,
+              ),
+              child: Text(
+                title!,
+                style: titleText(context),
+                textAlign: TextAlign.left,
+              ),
             ),
-            child: Text(
-              title,
-              style: titleText(context),
-              textAlign: TextAlign.left,
-            ),
-          ),
           AnimatedContainer(
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,

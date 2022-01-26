@@ -82,8 +82,10 @@ abstract class Styles {
 
   // Doubles
   static const double smallPadding = 3.5;
+  static const double scrollBarThickness = 3.5;
   static const double padding = 7;
   static const double borderRadiusSize = 7;
+  static const double sliderRadiusSize = 7;
   static const double radioIndicatorSize = 12.25;
   static const double largePadding = 14;
   static const double checkBoxIconSize = 14;
@@ -147,7 +149,7 @@ abstract class Styles {
     smallPadding,
     smallPadding,
     smallPadding,
-    0,
+    padding,
   );
 
   // BorderRadius

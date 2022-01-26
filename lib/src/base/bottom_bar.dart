@@ -17,11 +17,13 @@ class ArnaBottomBar extends StatelessWidget {
             children: [
               const ArnaHorizontalDivider(),
               Container(
-                height: Styles.headerBarHeight,
                 decoration: BoxDecoration(color: headerColor(context)),
                 child: Padding(
                   padding: Styles.horizontal,
-                  child: Row(children: items),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: items,
+                  ),
                 ),
               ),
             ],

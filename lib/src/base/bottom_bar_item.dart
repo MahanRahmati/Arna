@@ -1,11 +1,10 @@
 import 'package:arna/arna.dart';
 
-class ArnaSideBarItem extends StatefulWidget {
+class ArnaBottomBarItem extends StatefulWidget {
   final String title;
   final IconData icon;
   final VoidCallback? onPressed;
   final ArnaBadge? badge;
-  final bool compact;
   final bool selected;
   final bool isFocusable;
   final bool autofocus;
@@ -13,13 +12,12 @@ class ArnaSideBarItem extends StatefulWidget {
   final MouseCursor cursor;
   final String? semanticLabel;
 
-  const ArnaSideBarItem({
+  const ArnaBottomBarItem({
     Key? key,
     required this.title,
     required this.icon,
     required this.onPressed,
     this.badge,
-    this.compact = false,
     this.selected = false,
     this.isFocusable = true,
     this.autofocus = false,
@@ -29,10 +27,10 @@ class ArnaSideBarItem extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ArnaSideBarItemState createState() => _ArnaSideBarItemState();
+  _ArnaBottomBarItemState createState() => _ArnaBottomBarItemState();
 }
 
-class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
+class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
   FocusNode? focusNode;
   bool _hover = false;
   bool _focused = false;
@@ -55,7 +53,7 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
   }
 
   @override
-  void didUpdateWidget(ArnaSideBarItem oldWidget) {
+  void didUpdateWidget(ArnaBottomBarItem oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.onPressed != oldWidget.onPressed) {
       focusNode!.canRequestFocus = isEnabled;
@@ -102,33 +100,22 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
     if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
-  Widget _updateChildren() {
-    return ScrollConfiguration(
-      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const NeverScrollableScrollPhysics(),
-        child: Row(
-          children: [
-            Padding(
-              padding: Styles.normal,
-              child: Icon(
-                widget.icon,
-                size: Styles.iconSize,
-                color: !isEnabled ? disabledColor(context) : iconColor(context),
-              ),
-            ),
-            const SizedBox(width: Styles.padding),
-            Align(
-              child: Text(
-                widget.title,
-                style: bodyText(context, !isEnabled),
-              ),
-            ),
-          ],
-        ),
+  List<Widget> _updateChildren() {
+    final List<Widget> children = [];
+    Widget icon = Icon(
+      widget.icon,
+      size: Styles.iconSize,
+      color: !isEnabled ? disabledColor(context) : iconColor(context),
+    );
+    children.add(icon);
+    children.add(const SizedBox(width: Styles.padding));
+    children.add(
+      Align(
+        child: Text(widget.title, style: buttonText(context, !isEnabled)),
       ),
     );
+    children.add(const SizedBox(width: Styles.padding));
+    return children;
   }
 
   @override
@@ -158,16 +145,13 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
               actions: _actions,
               shortcuts: _shortcuts,
               child: Stack(
-                alignment: Alignment.centerLeft,
+                alignment: Alignment.bottomCenter,
                 children: [
                   Stack(
-                    alignment: widget.compact
-                        ? Alignment.topRight
-                        : Alignment.centerRight,
+                    alignment: Alignment.topRight,
                     children: [
                       AnimatedContainer(
                         height: Styles.sideBarItemHeight,
-                        width: double.infinity,
                         duration: Styles.basicDuration,
                         curve: Styles.basicCurve,
                         clipBehavior: Clip.antiAlias,
@@ -178,7 +162,7 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
                                 ? Styles.color00
                                 : _focused
                                     ? widget.accentColor
-                                    : Styles.color00,
+                                    : borderColor(context),
                           ),
                           color: !isEnabled
                               ? Styles.color00
@@ -188,23 +172,22 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
                                       ? buttonColorHover(context)
                                       : _hover
                                           ? buttonColorHover(context)
-                                          : buttonColor(context),
+                                          : headerColor(context),
                         ),
                         padding: Styles.horizontal,
-                        child: _updateChildren(),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: _updateChildren(),
+                          ),
+                        ),
                       ),
-                      if (widget.badge != null)
-                        widget.compact
-                            ? widget.badge!
-                            : Padding(
-                                padding: Styles.horizontal,
-                                child: widget.badge!,
-                              ),
+                      if (widget.badge != null) widget.badge!,
                     ],
                   ),
                   AnimatedContainer(
-                    height: widget.selected ? Styles.iconSize : 0,
-                    width: Styles.smallPadding,
+                    height: Styles.smallPadding,
+                    width: widget.selected ? Styles.iconSize : 0,
                     duration: Styles.basicDuration,
                     curve: Styles.basicCurve,
                     decoration: BoxDecoration(

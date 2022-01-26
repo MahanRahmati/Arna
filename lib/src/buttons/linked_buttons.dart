@@ -181,9 +181,12 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
     if (widget.button.title != null) {
       children.add(
         Align(
-          child: Text(
-            widget.button.title!,
-            style: buttonText(context, !isEnabled),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              widget.button.title!,
+              style: buttonText(context, !isEnabled),
+            ),
           ),
         ),
       );

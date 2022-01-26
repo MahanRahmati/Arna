@@ -39,18 +39,6 @@ class _HomeState extends State<Home> {
             title: "Title",
             body: Container(),
           );
-          // showArnaDialog(
-          //   context: context,
-          //   builder: (_) => ArnaAlertDialog(
-          //     title: "Title",
-          //     message: "Message",
-          //     primary: ArnaTextButton(
-          //       title: "OK",
-          //       onPressed: Navigator.of(context).pop,
-          //     ),
-          //   ),
-          //   barrierDismissible: true,
-          // );
         },
       ),
       items: [
@@ -233,9 +221,51 @@ class _HomeState extends State<Home> {
           ),
         ),
         NavigationItem(
-          title: "Dummy",
-          icon: Icons.info_outlined,
-          builder: (_) => Container(),
+          title: "Typography",
+          icon: Icons.font_download_outlined,
+          builder: (_) => SingleChildScrollView(
+            child: Padding(
+              padding: Styles.normal,
+              child: SizedBox(
+                width: deviceWidth(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text(
+                        "Large Title",
+                        style: largeTitleText(context),
+                      ),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text("Title", style: titleText(context)),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text("Body", style: bodyText(context, false)),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text("Button", style: buttonText(context, false)),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text(
+                        "Subtitle",
+                        style: subtitleText(context, false),
+                      ),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text("Caption", style: captionText(context)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );

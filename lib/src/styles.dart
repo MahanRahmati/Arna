@@ -145,12 +145,6 @@ abstract class Styles {
     padding,
     smallPadding,
   );
-  static const EdgeInsets sideBarItemPadding = EdgeInsets.fromLTRB(
-    smallPadding,
-    smallPadding,
-    smallPadding,
-    padding,
-  );
 
   // BorderRadius
   static BorderRadius borderRadius = borderRadiusAll(borderRadiusSize);

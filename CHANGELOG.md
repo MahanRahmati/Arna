@@ -1,3 +1,12 @@
+## 0.0.4
+
+- Update Readme
+- Add Typography to Example
+- Update ArnaBottomBarItem
+- Update ArnaSideBarItem
+- Update ArnaButton
+- Update ArnaLinkedButtons
+
 ## 0.0.3
 
 - Update ArnaApp

@@ -110,8 +110,11 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
     children.add(icon);
     children.add(const SizedBox(width: Styles.padding));
     children.add(
-      Align(
-        child: Text(widget.title, style: buttonText(context, !isEnabled)),
+      Flexible(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(widget.title, style: buttonText(context, !isEnabled)),
+        ),
       ),
     );
     children.add(const SizedBox(width: Styles.padding));

@@ -1,6 +1,6 @@
 name: arna
-description: Arna framework for Flutter.
-version: 0.0.3
+description: Arna framework and widgets for Flutter.
+version: 0.0.4
 homepage: https://github.com/MahanRahmati/Arna
 
 environment:

@@ -120,9 +120,12 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
             ),
             const SizedBox(width: Styles.padding),
             Align(
-              child: Text(
-                widget.title,
-                style: bodyText(context, !isEnabled),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.title,
+                  style: bodyText(context, !isEnabled),
+                ),
               ),
             ),
           ],

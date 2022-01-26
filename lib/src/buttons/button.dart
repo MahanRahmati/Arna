@@ -112,9 +112,12 @@ class _ArnaButtonState extends State<ArnaButton> {
     if (widget.title != null) {
       children.add(
         Align(
-          child: Text(
-            widget.title!,
-            style: buttonText(context, !isEnabled),
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              widget.title!,
+              style: buttonText(context, !isEnabled),
+            ),
           ),
         ),
       );

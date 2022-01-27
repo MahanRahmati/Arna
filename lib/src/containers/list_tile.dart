@@ -41,6 +41,38 @@ class _ArnaListTileState extends State<ArnaListTile> {
     if (mounted) setState(() => _hover = false);
   }
 
+  List<Widget> _updateChildren() {
+    final List<Widget> children = [];
+    if (widget.leading != null) {
+      children.add(Padding(padding: Styles.normal, child: widget.leading));
+    }
+    children.add(
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (widget.title != null)
+            Padding(
+              padding: Styles.tileTextPadding,
+              child: Text(widget.title!, style: bodyText(context, false)),
+            ),
+          if (widget.subtitle != null)
+            Padding(
+              padding: Styles.tileTextPadding,
+              child: Text(
+                widget.subtitle!,
+                style: subtitleText(context, false),
+              ),
+            ),
+        ],
+      ),
+    );
+    children.add(const Spacer());
+    if (widget.trailing != null) {
+      children.add(Padding(padding: Styles.normal, child: widget.trailing));
+    }
+    return children;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MergeSemantics(
@@ -66,36 +98,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
                         : cardColor(context),
               ),
               padding: Styles.tilePadding,
-              child: Row(
-                children: [
-                  if (widget.leading != null)
-                    Padding(padding: Styles.normal, child: widget.leading),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (widget.title != null)
-                        Padding(
-                          padding: Styles.tileTextPadding,
-                          child: Text(
-                            widget.title!,
-                            style: bodyText(context, false),
-                          ),
-                        ),
-                      if (widget.subtitle != null)
-                        Padding(
-                          padding: Styles.tileTextPadding,
-                          child: Text(
-                            widget.subtitle!,
-                            style: subtitleText(context, false),
-                          ),
-                        ),
-                    ],
-                  ),
-                  const Spacer(),
-                  if (widget.trailing != null)
-                    Padding(padding: Styles.normal, child: widget.trailing),
-                ],
-              ),
+              child: Row(children: _updateChildren()),
             ),
           ),
         ),

@@ -14,11 +14,9 @@ class ArnaLinkedButtons extends StatelessWidget {
         if (button is ArnaLinkedButton ||
             button is ArnaLinkedIconButton ||
             button is ArnaLinkedTextButton) {
-          bool first = false;
-          bool last = false;
-          var index = buttons.indexOf(button);
-          if (index == 0) first = true;
-          if (index == buttons.length - 1) last = true;
+          int index = buttons.indexOf(button);
+          bool first = index == 0 ? true : false;
+          bool last = index == buttons.length - 1 ? true : false;
           if (button is ArnaLinkedButton) {
             return _ArnaLinked(button: button, first: first, last: last);
           } else if (button is ArnaLinkedIconButton) {
@@ -231,7 +229,6 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
               height: Styles.buttonSize - 2,
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
-              margin: const EdgeInsets.all(0.5),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.horizontal(left: first, right: last),
@@ -246,6 +243,7 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
                             ? buttonColorHover(context)
                             : buttonColor(context),
               ),
+              margin: const EdgeInsets.all(0.5),
               padding: widget.button.icon != null
                   ? Styles.horizontal
                   : Styles.largeHorizontal,

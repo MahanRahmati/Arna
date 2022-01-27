@@ -34,6 +34,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 
   void onTap(int index) {
     showDrawer = false;
+    if (widget.onItemSelected != null) widget.onItemSelected!(index);
     setState(() => _currentIndex = index);
   }
 
@@ -42,6 +43,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   }
 
   Widget _updateChildren() => ListView.builder(
+        controller: ScrollController(),
         itemCount: widget.items.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(

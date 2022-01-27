@@ -5,6 +5,8 @@ export 'package:arna/src/base/bottom_bar.dart';
 export 'package:arna/src/base/bottom_bar_item.dart';
 export 'package:arna/src/base/drawer.dart';
 export 'package:arna/src/base/header_bar.dart';
+export 'package:arna/src/base/master_detail_scaffold.dart';
+export 'package:arna/src/base/master_item.dart';
 export 'package:arna/src/base/scaffold.dart';
 export 'package:arna/src/base/scroll_bar.dart';
 export 'package:arna/src/base/side_bar_item.dart';

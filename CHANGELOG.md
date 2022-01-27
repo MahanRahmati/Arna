@@ -1,3 +1,12 @@
+## 0.0.5
+
+- Update ArnaSideScaffold
+- Add ArnaMasterDetailScaffold
+- Add ArnaMasterItem
+- Update ArnaLinkedButtons
+- Update ArnaListTile
+- Update Readme
+
 ## 0.0.4
 
 - Update Readme

@@ -8,26 +8,28 @@ Arna framework and widgets for Flutter.
   - [Content](#content)
   - [Getting Started](#getting-started)
   - [Usage](#usage)
-    - [ArnaApp](#arnaapp)
-    - [ArnaScaffold](#arnascaffold)
-    - [ArnaSideScaffold](#arnasidescaffold)
-    - [ArnaButton](#arnabutton)
-    - [ArnaIconButton](#arnaiconbutton)
-    - [ArnaTextButton](#arnatextbutton)
-    - [ArnaLinkedButtons](#arnalinkedbuttons)
-    - [ArnaCheckBox](#arnacheckbox)
-    - [ArnaCheckBoxListTile](#arnacheckboxlisttile)
-    - [ArnaRadio](#arnaradio)
-    - [ArnaRadioListTile](#arnaradiolisttile)
-    - [ArnaSwitch](#arnaswitch)
-    - [ArnaSwitchListTile](#arnaswitchlisttile)
-    - [ArnaList](#arnalist)
-    - [ArnaCard](#arnacard)
-    - [ArnaBadge](#arnabadge)
-    - [ArnaDividers](#arnadividers)
-    - [ArnaSeparators](#arnaseparators)
-    - [ArnaPopupDialog](#arnapopupdialog)
-    - [ArnaDialog](#arnadialog)
+    - [Arna App](#arna-app)
+    - [Arna Scaffold](#arna-scaffold)
+    - [Arna Side Scaffold](#arna-side-scaffold)
+    - [Arna Master Detail Scaffold](#arna-master-detail-scaffold)
+    - [Arna Button](#arna-button)
+    - [Arna Icon Button](#arna-icon-button)
+    - [Arna Text Button](#arna-text-button)
+    - [Arna Linked Buttons](#arna-linked-buttons)
+    - [Arna CheckBox](#arna-checkbox)
+    - [Arna CheckBox List Tile](#arna-checkbox-list-tile)
+    - [Arna Radio](#arna-radio)
+    - [Arna Radio List Tile](#arna-radio-list-tile)
+    - [Arna Switch](#arna-switch)
+    - [Arna Switch List Tile](#arna-switch-list-tile)
+    - [Arna List](#arna-list)
+    - [Arna Card](#arna-card)
+    - [Arna Badge](#arna-badge)
+    - [Arna Dividers](#arna-dividers)
+    - [Arna Separators](#arna-separators)
+    - [Arna PopupDialog](#arna-popupdialog)
+    - [Arna Dialog](#arna-dialog)
+  - [Special thanks](#special-thanks)
 
 ## Getting Started
 
@@ -35,7 +37,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.0.4
+  arna: ^0.0.5
 ```
 
 And import it
@@ -46,7 +48,7 @@ import 'package:arna/arna.dart';
 
 ## Usage
 
-### ArnaApp
+### Arna App
 
 ```dart
 ArnaApp(
@@ -55,7 +57,7 @@ ArnaApp(
 );
 ```
 
-### ArnaScaffold
+### Arna Scaffold
 
 ```dart
 ArnaScaffold(
@@ -72,7 +74,7 @@ ArnaScaffold(
 );
 ```
 
-### ArnaSideScaffold
+### Arna Side Scaffold
 
 ```dart
 ArnaSideScaffold(
@@ -100,7 +102,36 @@ ArnaSideScaffold(
 );
 ```
 
-### ArnaButton
+### Arna Master Detail Scaffold
+
+```dart
+ArnaMasterDetailScaffold(
+    headerBarLeading: ArnaIconButton(
+        icon: Icons.add_outlined,
+        onPressed: () {},
+    ),
+    title: "Title",
+    headerBarTrailing: ArnaIconButton(
+        icon: Icons.info_outlined,
+        onPressed: () {},
+    ),
+    emptyBody : Container(),
+    items: [
+        MasterNavigationItem(
+          title: "Title 1",
+          subtitle: "Subtitle 1",
+          builder: (_) => Container(),
+        ),
+        MasterNavigationItem(
+          title: "Title 2",
+          subtitle: "Subtitle 2",
+          builder: (_) => Container(),
+        ),
+    ],
+);
+```
+
+### Arna Button
 
 ```dart
 ArnaButton(
@@ -110,7 +141,7 @@ ArnaButton(
 );
 ```
 
-### ArnaIconButton
+### Arna Icon Button
 
 ```dart
 ArnaIconButton(
@@ -119,7 +150,7 @@ ArnaIconButton(
 );
 ```
 
-### ArnaTextButton
+### Arna Text Button
 
 ```dart
 ArnaTextButton(
@@ -128,7 +159,7 @@ ArnaTextButton(
 );
 ```
 
-### ArnaLinkedButtons
+### Arna Linked Buttons
 
 ```dart
 ArnaLinkedButtons(
@@ -150,7 +181,7 @@ ArnaLinkedButtons(
 );
 ```
 
-### ArnaCheckBox
+### Arna CheckBox
 
 ```dart
 ArnaCheckBox(
@@ -159,7 +190,7 @@ ArnaCheckBox(
 );
 ```
 
-### ArnaCheckBoxListTile
+### Arna CheckBox List Tile
 
 ```dart
 ArnaCheckBoxListTile(
@@ -174,7 +205,7 @@ ArnaCheckBoxListTile(
 );
 ```
 
-### ArnaRadio
+### Arna Radio
 
 ```dart
 ArnaRadio<SingingCharacter>(
@@ -184,7 +215,7 @@ ArnaRadio<SingingCharacter>(
 );
 ```
 
-### ArnaRadioListTile
+### Arna Radio List Tile
 
 ```dart
 ArnaRadioListTile<SingingCharacter>(
@@ -200,7 +231,7 @@ ArnaRadioListTile<SingingCharacter>(
 );
 ```
 
-### ArnaSwitch
+### Arna Switch
 
 ```dart
 ArnaSwitch(
@@ -209,7 +240,7 @@ ArnaSwitch(
 );
 ```
 
-### ArnaSwitchListTile
+### Arna Switch List Tile
 
 ```dart
 ArnaSwitchListTile(
@@ -224,7 +255,7 @@ ArnaSwitchListTile(
 );
 ```
 
-### ArnaList
+### Arna List
 
 ```dart
 ArnaList(
@@ -245,7 +276,7 @@ ArnaList(
 );
 ```
 
-### ArnaCard
+### Arna Card
 
 ```dart
 ArnaCard(
@@ -255,27 +286,27 @@ ArnaCard(
 );
 ```
 
-### ArnaBadge
+### Arna Badge
 
 ```dart
 ArnaBadge(title: "Title");
 ```
 
-### ArnaDividers
+### Arna Dividers
 
 ```dart
 ArnaHorizontalDivider();
 ArnaVerticalDivider();
 ```
 
-### ArnaSeparators
+### Arna Separators
 
 ```dart
 ArnaHorizontalSeparator();
 ArnaVerticalSeparator();
 ```
 
-### ArnaPopupDialog
+### Arna PopupDialog
 
 ```dart
 ArnaIconButton(
@@ -288,7 +319,7 @@ ArnaIconButton(
 );
 ```
 
-### ArnaDialog
+### Arna Dialog
 
 ```dart
 ArnaIconButton(
@@ -307,3 +338,11 @@ ArnaIconButton(
     ),
 );
 ```
+
+## Special thanks
+
+- [bdlukaa](https://github.com/bdlukaa) for [fluent_ui](https://github.com/bdlukaa/fluent_ui).
+- [GroovinChip](https://github.com/GroovinChip) for [macos_ui](https://github.com/GroovinChip/macos_ui).
+- [gtk-flutter](https://github.com/gtk-flutter) for [libadwaita](https://github.com/gtk-flutter/libadwaita).
+- [ubuntu](https://github.com/ubuntu) for [yaru_widgets.dart](https://github.com/ubuntu/yaru_widgets.dart) and [yaru.dart](https://github.com/ubuntu/yaru.dart).
+- [rsms](https://github.com/rsms) for [inter](https://github.com/rsms/inter).

@@ -6,10 +6,6 @@ bool isDark(context) =>
 Color buttonColor(context) =>
     isDark(context) ? Styles.buttonColorDark : Styles.buttonColorLight;
 
-Color buttonColorDisabled(context) => isDark(context)
-    ? Styles.buttonColorDisabledDark
-    : Styles.buttonColorDisabledLight;
-
 Color buttonColorPressed(context) => isDark(context)
     ? Styles.buttonColorPressedDark
     : Styles.buttonColorPressedLight;
@@ -17,6 +13,13 @@ Color buttonColorPressed(context) => isDark(context)
 Color buttonColorHover(context) => isDark(context)
     ? Styles.buttonColorHoverDark
     : Styles.buttonColorHoverLight;
+
+Color textFieldColor(context) =>
+    isDark(context) ? Styles.textFieldColorDark : Styles.textFieldColorLight;
+
+Color textFieldColorHover(context) => isDark(context)
+    ? Styles.textFieldColorHoverDark
+    : Styles.textFieldColorHoverLight;
 
 Color backgroundColor(context) =>
     isDark(context) ? Styles.backgroundColorDark : Styles.backgroundColorLight;

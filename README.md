@@ -29,6 +29,7 @@ Arna framework and widgets for Flutter.
     - [Arna Separators](#arna-separators)
     - [Arna PopupDialog](#arna-popupdialog)
     - [Arna Dialog](#arna-dialog)
+    - [Arna TextField](#arna-textfield)
   - [Special thanks](#special-thanks)
 
 ## Getting Started
@@ -336,6 +337,14 @@ ArnaIconButton(
             )
         ),
     ),
+);
+```
+
+### Arna TextField
+
+```dart
+ArnaTextField(
+  obscureText: true,
 );
 ```
 

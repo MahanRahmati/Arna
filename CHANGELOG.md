@@ -1,3 +1,12 @@
+## 0.0.6
+
+- Add ArnaTextField
+- Add ArnaSearchField
+- Update ArnaButton
+- Update ArnaLinkedButtons
+- Update ArnaCheckBox
+- Update Readme
+
 ## 0.0.5
 
 - Update ArnaSideScaffold

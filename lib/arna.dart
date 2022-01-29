@@ -28,8 +28,10 @@ export 'package:arna/src/inputs/checkbox.dart';
 export 'package:arna/src/inputs/checkbox_list_tile.dart';
 export 'package:arna/src/inputs/radio.dart';
 export 'package:arna/src/inputs/radio_list_tile.dart';
+export 'package:arna/src/inputs/search_field.dart';
 export 'package:arna/src/inputs/switch.dart';
 export 'package:arna/src/inputs/switch_list_tile.dart';
+export 'package:arna/src/inputs/text_field.dart';
 export 'package:arna/src/styles.dart';
 export 'package:flutter/cupertino.dart'
     show CupertinoPageRoute, DefaultCupertinoLocalizations;

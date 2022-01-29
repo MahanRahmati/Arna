@@ -49,8 +49,8 @@ abstract class Styles {
   static const Color headerColorLight = color32;
   static const Color backgroundColorDisabledLight = color32;
   static const Color buttonColorHoverLight = color30;
+  static const Color textFieldColorHoverLight = color30;
   static const Color cardColorHoverLight = color30;
-  static const Color buttonColorDisabledLight = color28;
   static const Color borderColorLight = color26;
   static const Color buttonColorPressedLight = color26;
   static const Color disabledLight = color18;
@@ -62,13 +62,13 @@ abstract class Styles {
   static const Color headerColorDark = color01;
   static const Color backgroundColorDark = color03;
   static const Color sideColorDark = color03;
-  static const Color textFieldBackgroundColorDark = color03;
+  static const Color textFieldColorDark = color03;
   static const Color buttonColorDark = color03;
   static const Color backgroundColorDisabledDark = color03;
   static const Color cardColorDark = color05;
   static const Color buttonColorHoverDark = color05;
+  static const Color textFieldColorHoverDark = color05;
   static const Color cardColorHoverDark = color07;
-  static const Color buttonColorDisabledDark = color07;
   static const Color borderColorDark = color09;
   static const Color buttonColorPressedDark = color09;
   static const Color disabledDark = color18;
@@ -81,8 +81,10 @@ abstract class Styles {
   static const Color barrierColor = Color(0x70000000);
 
   // Doubles
+  static const double cursorWidth = 1.75;
   static const double smallPadding = 3.5;
   static const double scrollBarThickness = 3.5;
+  static const double cursorRadius = 3.5;
   static const double padding = 7;
   static const double borderRadiusSize = 7;
   static const double sliderRadiusSize = 7;
@@ -93,6 +95,7 @@ abstract class Styles {
   static const double badgeSize = 21;
   static const double checkBoxSize = 21;
   static const double radioSize = 21;
+  static const double scrollPaddingSize = 21;
   static const double switchThumbSize = 24.5;
   static const double switchHeight = 28;
   static const double buttonSize = 35;
@@ -100,6 +103,7 @@ abstract class Styles {
   static const double headerBarHeight = 49;
   static const double sideBarItemHeight = 49;
   static const double sideBarCompactWidth = 63;
+   static const double searchWidth = 301;
   static const double sideBarWidth = 315;
   static const double dialogSize = 630;
 
@@ -145,6 +149,7 @@ abstract class Styles {
     padding,
     smallPadding,
   );
+  static const EdgeInsets scrollPadding = EdgeInsets.all(scrollPaddingSize);
 
   // BorderRadius
   static BorderRadius borderRadius = borderRadiusAll(borderRadiusSize);

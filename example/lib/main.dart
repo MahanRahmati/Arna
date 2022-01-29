@@ -189,6 +189,10 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+                const ArnaList(
+                  title: "Text Field",
+                  items: [ArnaTextField()],
+                )
               ],
             ),
           ),

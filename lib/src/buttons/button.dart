@@ -165,7 +165,7 @@ class _ArnaButtonState extends State<ArnaButton> {
                     color: _focused ? widget.accentColor : borderColor(context),
                   ),
                   color: !isEnabled
-                      ? buttonColorDisabled(context)
+                      ? backgroundColorDisabled(context)
                       : _pressed
                           ? buttonColorPressed(context)
                           : _hover

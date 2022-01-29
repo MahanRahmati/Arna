@@ -236,7 +236,7 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
                     ? Border.all(color: Styles.accentColor)
                     : Border.all(color: Styles.color00),
                 color: !isEnabled
-                    ? buttonColorDisabled(context)
+                    ? backgroundColorDisabled(context)
                     : _pressed
                         ? buttonColorPressed(context)
                         : _hover

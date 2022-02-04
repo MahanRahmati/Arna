@@ -1,3 +1,7 @@
+## 0.0.8
+
+- Fix for https://pub.dev/
+
 ## 0.0.7
 
 - Update ArnaApp

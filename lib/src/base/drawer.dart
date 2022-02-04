@@ -19,9 +19,9 @@ class ArnaDrawer extends StatelessWidget {
       label: semanticLabel,
       child: ConstrainedBox(
         constraints: BoxConstraints.expand(
-          width: Styles.sideBarWidth < (deviceWidth(context) * 0.75)
+          width: Styles.sideBarWidth < (deviceWidth(context) * 0.7)
               ? Styles.sideBarWidth
-              : deviceWidth(context) * 0.75,
+              : deviceWidth(context) * 0.7,
         ),
         child: AnimatedContainer(
           duration: Styles.basicDuration,
@@ -38,12 +38,12 @@ class ArnaDrawer extends StatelessWidget {
 typedef DrawerCallback = void Function(bool isOpened);
 
 class ArnaDrawerController extends StatefulWidget {
-  final Widget child;
+  final ArnaDrawer drawer;
   final DrawerCallback? drawerCallback;
 
   const ArnaDrawerController({
     GlobalKey? key,
-    required this.child,
+    required this.drawer,
     this.drawerCallback,
   }) : super(key: key);
 
@@ -67,7 +67,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> {
               child: Container(color: Styles.barrierColor),
             ),
           ),
-          RepaintBoundary(child: SafeArea(child: widget.child)),
+          RepaintBoundary(child: SafeArea(child: widget.drawer)),
         ],
       ),
     );

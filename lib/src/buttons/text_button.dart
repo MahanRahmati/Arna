@@ -1,8 +1,9 @@
 import 'package:arna/arna.dart';
 
 class ArnaTextButton extends StatelessWidget {
-  final String title;
+  final String label;
   final VoidCallback? onPressed;
+  final String? tooltipMessage;
   final bool isFocusable;
   final bool autofocus;
   final Color accentColor;
@@ -11,8 +12,9 @@ class ArnaTextButton extends StatelessWidget {
 
   const ArnaTextButton({
     Key? key,
-    required this.title,
+    required this.label,
     required this.onPressed,
+    this.tooltipMessage,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor = Styles.accentColor,
@@ -22,8 +24,9 @@ class ArnaTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ArnaButton(
-        title: title,
+        label: label,
         onPressed: onPressed,
+        tooltipMessage: tooltipMessage,
         isFocusable: isFocusable,
         autofocus: autofocus,
         accentColor: accentColor,

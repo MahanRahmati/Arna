@@ -7,6 +7,7 @@ class ArnaScrollbar extends RawScrollbar {
     ScrollController? controller,
     bool isAlwaysShown = false,
     ScrollNotificationPredicate? notificationPredicate,
+    bool? interactive,
     ScrollbarOrientation? scrollbarOrientation,
     Color? thumbColor,
   }) : super(
@@ -14,8 +15,10 @@ class ArnaScrollbar extends RawScrollbar {
           child: child,
           controller: controller,
           isAlwaysShown: isAlwaysShown,
+          pressDuration: Duration.zero,
           notificationPredicate:
               notificationPredicate ?? defaultScrollNotificationPredicate,
+          interactive: interactive,
           scrollbarOrientation: scrollbarOrientation,
           thumbColor: thumbColor,
         );
@@ -25,59 +28,42 @@ class ArnaScrollbar extends RawScrollbar {
 }
 
 class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
+  late AnimationController _hoverAnimationController;
+
+  @override
+  bool get showScrollbar => widget.isAlwaysShown ?? false;
+
+  @override
+  bool get enableGestures => widget.interactive ?? true;
+
+  @override
+  void initState() {
+    super.initState();
+    _hoverAnimationController = AnimationController(
+      vsync: this,
+      duration: Styles.basicDuration,
+    );
+    _hoverAnimationController.addListener(() => updateScrollbarPainter());
+  }
+
   @override
   void updateScrollbarPainter() {
     scrollbarPainter
       ..color = widget.thumbColor ?? Styles.accentColor
+      ..trackBorderColor = borderColor(context)
       ..textDirection = Directionality.of(context)
       ..thickness = Styles.scrollBarThickness
-      ..mainAxisMargin = Styles.smallPadding
-      ..crossAxisMargin = Styles.smallPadding
       ..radius = const Radius.circular(Styles.borderRadiusSize)
+      ..crossAxisMargin = 0
+      ..mainAxisMargin = 0
       ..padding = MediaQuery.of(context).padding
-      ..scrollbarOrientation = widget.scrollbarOrientation;
-  }
-
-  double _pressStartAxisPosition = 0.0;
-
-  @override
-  void handleThumbPressStart(Offset localPosition) {
-    super.handleThumbPressStart(localPosition);
-    final Axis direction = getScrollbarDirection()!;
-    switch (direction) {
-      case Axis.vertical:
-        _pressStartAxisPosition = localPosition.dy;
-        break;
-      case Axis.horizontal:
-        _pressStartAxisPosition = localPosition.dx;
-        break;
-    }
+      ..scrollbarOrientation = widget.scrollbarOrientation
+      ..ignorePointer = !enableGestures;
   }
 
   @override
-  void handleThumbPress() {
-    if (getScrollbarDirection() == null) return;
-    super.handleThumbPress();
-  }
-
-  @override
-  void handleThumbPressEnd(Offset localPosition, Velocity velocity) {
-    final Axis? direction = getScrollbarDirection();
-    if (direction == null) return;
-    super.handleThumbPressEnd(localPosition, velocity);
-    switch (direction) {
-      case Axis.vertical:
-        if (velocity.pixelsPerSecond.dy.abs() < 10 &&
-            (localPosition.dy - _pressStartAxisPosition).abs() > 0) {
-          HapticFeedback.mediumImpact();
-        }
-        break;
-      case Axis.horizontal:
-        if (velocity.pixelsPerSecond.dx.abs() < 10 &&
-            (localPosition.dx - _pressStartAxisPosition).abs() > 0) {
-          HapticFeedback.mediumImpact();
-        }
-        break;
-    }
+  void dispose() {
+    _hoverAnimationController.dispose();
+    super.dispose();
   }
 }

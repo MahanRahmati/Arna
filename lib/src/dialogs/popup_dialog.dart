@@ -4,6 +4,7 @@ class ArnaPopupDialog extends StatelessWidget {
   final String? title;
   final Widget headerBarLeading;
   final Widget headerBarTrailing;
+  final ArnaSearchField? searchField;
   final Widget body;
 
   const ArnaPopupDialog({
@@ -11,6 +12,7 @@ class ArnaPopupDialog extends StatelessWidget {
     this.title,
     this.headerBarLeading = const SizedBox.shrink(),
     this.headerBarTrailing = const SizedBox.shrink(),
+    this.searchField,
     required this.body,
   }) : super(key: key);
 
@@ -27,8 +29,8 @@ class ArnaPopupDialog extends StatelessWidget {
           context: context,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: deviceHeight(context) * 0.84,
-              maxWidth: deviceWidth(context) * 0.84,
+              maxHeight: deviceHeight(context) * 0.77,
+              maxWidth: deviceWidth(context) * 0.77,
             ),
             child: AnimatedContainer(
               duration: Styles.basicDuration,
@@ -46,13 +48,14 @@ class ArnaPopupDialog extends StatelessWidget {
                   title: title,
                   headerBarTrailing: Row(
                     children: [
+                      headerBarTrailing,
                       ArnaTextButton(
-                        title: "Close",
+                        label: "Close",
                         onPressed: Navigator.of(context).pop,
                       ),
-                      headerBarTrailing,
                     ],
                   ),
+                  searchField: searchField,
                   body: body,
                 ),
               ),
@@ -68,6 +71,7 @@ class ArnaPopupPage extends StatelessWidget {
   final String? title;
   final Widget headerBarLeading;
   final Widget headerBarTrailing;
+  final ArnaSearchField? searchField;
   final Widget body;
 
   const ArnaPopupPage({
@@ -75,33 +79,26 @@ class ArnaPopupPage extends StatelessWidget {
     this.title,
     this.headerBarLeading = const SizedBox.shrink(),
     this.headerBarTrailing = const SizedBox.shrink(),
+    this.searchField,
     required this.body,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: backgroundColor(context)),
-      child: Column(
+    return ArnaScaffold(
+      headerBarLeading: Row(
         children: [
-          ArnaHeaderBar(
-            leading: Row(
-              children: [
-                ArnaIconButton(
-                  icon: Icons.arrow_back_outlined,
-                  onPressed: () => Navigator.pop(context),
-                ),
-                headerBarLeading,
-              ],
-            ),
-            middle: title != null
-                ? Text(title!, style: titleText(context))
-                : const SizedBox.shrink(),
-            trailing: headerBarTrailing,
+          ArnaIconButton(
+            icon: Icons.arrow_back_outlined,
+            onPressed: () => Navigator.pop(context),
           ),
-          Expanded(child: body),
+          headerBarLeading,
         ],
       ),
+      title: title,
+      headerBarTrailing: headerBarTrailing,
+      searchField: searchField,
+      body: body,
     );
   }
 }
@@ -111,6 +108,7 @@ Future<T?> showArnaPopupDialog<T>({
   String? title,
   Widget headerBarLeading = const SizedBox.shrink(),
   Widget headerBarTrailing = const SizedBox.shrink(),
+  ArnaSearchField? searchField,
   required Widget body,
   bool barrierDismissible = false,
   Color barrierColor = Styles.barrierColor,
@@ -125,6 +123,7 @@ Future<T?> showArnaPopupDialog<T>({
               title: title,
               headerBarLeading: headerBarLeading,
               headerBarTrailing: headerBarTrailing,
+              searchField: searchField,
               body: body,
             ),
           ),
@@ -141,15 +140,22 @@ Future<T?> showArnaPopupDialog<T>({
               title: title,
               headerBarLeading: headerBarLeading,
               headerBarTrailing: headerBarTrailing,
+              searchField: searchField,
               body: body,
             );
           },
-          transitionBuilder: (_, anim, __, child) => SlideTransition(
-            position: Tween(
-              begin: const Offset(0, 1),
-              end: Offset.zero,
-            ).animate(anim),
-            child: FadeTransition(opacity: anim, child: child),
+          transitionBuilder: (_, anim, __, child) => ScaleTransition(
+            scale: CurvedAnimation(
+              parent: anim,
+              curve: Styles.basicCurve,
+            ),
+            child: FadeTransition(
+              opacity: CurvedAnimation(
+                parent: anim,
+                curve: Styles.basicCurve,
+              ),
+              child: child,
+            ),
           ),
         );
 }

@@ -42,28 +42,30 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     if (showDrawer != isOpened) setState(() => showDrawer = isOpened);
   }
 
-  Widget _updateChildren() => ListView.builder(
-        controller: ScrollController(),
-        itemCount: widget.items.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: Styles.small,
-            child: ArnaSideBarItem(
-              title: widget.items[index].title,
-              icon: widget.items[index].icon,
-              onPressed: () => onTap(index),
-              badge: widget.items[index].badge,
-              compact: tablet(context) ? true : false,
-              selected: index == _currentIndex,
-              isFocusable: widget.items[index].isFocusable,
-              autofocus: widget.items[index].autofocus,
-              accentColor: widget.items[index].accentColor,
-              cursor: widget.items[index].cursor,
-              semanticLabel: widget.items[index].semanticLabel,
-            ),
-          );
-        },
-      );
+  Widget _buildChild() {
+    return ListView.builder(
+      controller: ScrollController(),
+      itemCount: widget.items.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Padding(
+          padding: Styles.small,
+          child: ArnaSideBarItem(
+            label: widget.items[index].title,
+            icon: widget.items[index].icon,
+            onPressed: () => onTap(index),
+            badge: widget.items[index].badge,
+            compact: tablet(context) ? true : false,
+            selected: index == _currentIndex,
+            isFocusable: widget.items[index].isFocusable,
+            autofocus: widget.items[index].autofocus,
+            accentColor: widget.items[index].accentColor,
+            cursor: widget.items[index].cursor,
+            semanticLabel: widget.items[index].semanticLabel,
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,41 +90,34 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                       decoration: BoxDecoration(
                         color: sideColor(context),
                       ),
-                      child: _updateChildren(),
+                      child: _buildChild(),
                     ),
                   if (constraints.maxWidth > 644) const ArnaVerticalDivider(),
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: backgroundColor(context),
-                      ),
-                      child: Column(
+                    child: ArnaScaffold(
+                      headerBarLeading: Row(
                         children: [
-                          ArnaHeaderBar(
-                            leading: Row(
-                              children: [
-                                if (constraints.maxWidth < 644 &&
-                                    widget.items.length > 3)
-                                  ArnaIconButton(
-                                    icon: Icons.menu_outlined,
-                                    onPressed: () =>
-                                        _drawerOpenedCallback(!showDrawer),
-                                  ),
-                                widget.headerBarLeading,
-                                widget.items[_currentIndex].headerBarLeading,
-                              ],
+                          if (constraints.maxWidth < 644 &&
+                              widget.items.length > 3)
+                            ArnaIconButton(
+                              icon: Icons.menu_outlined,
+                              onPressed: () =>
+                                  _drawerOpenedCallback(!showDrawer),
                             ),
-                            middle: Text(
-                              widget.title ?? "",
-                              style: titleText(context),
-                            ),
-                            trailing: Row(
-                              children: [
-                                widget.items[_currentIndex].headerBarTrailing,
-                                widget.headerBarTrailing,
-                              ],
-                            ),
-                          ),
+                          widget.headerBarLeading,
+                          widget.items[_currentIndex].headerBarLeading,
+                        ],
+                      ),
+                      title: widget.title,
+                      headerBarTrailing: Row(
+                        children: [
+                          widget.items[_currentIndex].headerBarTrailing,
+                          widget.headerBarTrailing,
+                        ],
+                      ),
+                      searchField: widget.items[_currentIndex].searchField,
+                      body: Column(
+                        children: [
                           Expanded(
                             child: widget.items[_currentIndex].builder(context),
                           ),
@@ -136,7 +131,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                                     child: Padding(
                                       padding: Styles.small,
                                       child: ArnaBottomBarItem(
-                                        title: item.title,
+                                        label: item.title,
                                         icon: item.icon,
                                         onPressed: () => onTap(index),
                                         badge: item.badge,
@@ -163,7 +158,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   widget.items.length > 3)
                 ArnaDrawerController(
                   drawerCallback: _drawerOpenedCallback,
-                  child: ArnaDrawer(child: _updateChildren()),
+                  drawer: ArnaDrawer(child: _buildChild()),
                 ),
             ],
           );
@@ -182,6 +177,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               widget.headerBarTrailing,
             ],
           ),
+          searchField: widget.items[_currentIndex].searchField,
           body: widget.items[_currentIndex].builder(context),
         );
       },
@@ -195,6 +191,7 @@ class NavigationItem {
   final WidgetBuilder builder;
   final Widget headerBarLeading;
   final Widget headerBarTrailing;
+  final ArnaSearchField? searchField;
   final ArnaBadge? badge;
   final bool isFocusable;
   final bool autofocus;
@@ -208,6 +205,7 @@ class NavigationItem {
     required this.builder,
     this.headerBarLeading = const SizedBox.shrink(),
     this.headerBarTrailing = const SizedBox.shrink(),
+    this.searchField,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,

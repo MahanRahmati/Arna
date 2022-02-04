@@ -1,3 +1,36 @@
+## 0.0.7
+
+- Update ArnaApp
+- Update ArnaBottomBarItem
+- Update ArnaDrawer
+- Add ArnaIndicator
+- Update ArnaMasterDetailScaffold
+- Update ArnaMasterItem
+- Update ArnaScaffold
+- Update ArnaScrollbar
+- Update ArnaSearchField
+- Update ArnaSideBarItem
+- Update ArnaSideScaffold
+- Add ArnaTooltip
+- Update ArnaButton
+- Update ArnaIconButton
+- Update ArnaLinkedButtons
+- Update ArnaTextButton
+- Update ArnaCard
+- Add ArnaExpansionPanel
+- Update ArnaListTile
+- Update ArnaList
+- Update ArnaAlertDialog
+- Update ArnaPopupDialog
+- Update ArnaCheckBoxListTile
+- Update ArnaCheckBox
+- Update ArnaRadioListTile
+- Add ArnaSlider
+- Update ArnaSwitchListTile
+- Update ArnaSwitch
+- Update ArnaTextField
+- Update Readme
+
 ## 0.0.6
 
 - Add ArnaTextField
@@ -65,7 +98,7 @@
 - Add ArnaPopupDialog and ArnaPopupPage
 - Add ArnaDrawer and ArnaDrawerController
 - Add ArnaApp
-- Add ArnaScrollbar  
+- Add ArnaScrollbar
 
 ## 0.0.1
 

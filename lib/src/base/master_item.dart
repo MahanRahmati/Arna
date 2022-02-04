@@ -2,9 +2,9 @@ import 'package:arna/arna.dart';
 
 class ArnaMasterItem extends StatefulWidget {
   final Widget? leading;
-  final Widget? trailing;
   final String? title;
   final String? subtitle;
+  final Widget? trailing;
   final VoidCallback? onPressed;
   final bool selected;
   final bool isFocusable;
@@ -16,9 +16,9 @@ class ArnaMasterItem extends StatefulWidget {
   const ArnaMasterItem({
     Key? key,
     this.leading,
-    this.trailing,
     this.title,
     this.subtitle,
+    this.trailing,
     required this.onPressed,
     this.selected = false,
     this.isFocusable = true,
@@ -102,7 +102,7 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
     if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
-  List<Widget> _updateChildren() {
+  Widget _buildChild() {
     final List<Widget> children = [];
     if (widget.leading != null) {
       children.add(Padding(padding: Styles.normal, child: widget.leading));
@@ -114,14 +114,14 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
           if (widget.title != null)
             Padding(
               padding: Styles.tileTextPadding,
-              child: Text(widget.title!, style: bodyText(context, false)),
+              child: Text(widget.title!, style: bodyText(context)),
             ),
           if (widget.subtitle != null)
             Padding(
               padding: Styles.tileTextPadding,
               child: Text(
                 widget.subtitle!,
-                style: subtitleText(context, false),
+                style: subtitleText(context),
               ),
             ),
         ],
@@ -131,7 +131,7 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
     if (widget.trailing != null) {
       children.add(Padding(padding: Styles.normal, child: widget.trailing));
     }
-    return children;
+    return Row(children: children);
   }
 
   @override
@@ -188,7 +188,7 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
                                       : cardColor(context),
                     ),
                     padding: Styles.tilePadding,
-                    child: Row(children: _updateChildren()),
+                    child: _buildChild(),
                   ),
                   AnimatedContainer(
                     height: widget.selected ? Styles.iconSize : 0,

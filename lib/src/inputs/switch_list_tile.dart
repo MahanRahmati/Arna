@@ -74,28 +74,47 @@ class _ArnaSwitchListTileState extends State<ArnaSwitchListTile> {
               padding: Styles.tilePadding,
               child: Row(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (widget.title != null)
-                        Padding(
-                          padding: Styles.tileTextPadding,
-                          child: Text(
-                            widget.title!,
-                            style: bodyText(context, !isEnabled),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (widget.title != null)
+                          Padding(
+                            padding: Styles.tileTextPadding,
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    widget.title!,
+                                    style: bodyText(
+                                      context,
+                                      disabled: !isEnabled,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      if (widget.subtitle != null)
-                        Padding(
-                          padding: Styles.tileTextPadding,
-                          child: Text(
-                            widget.subtitle!,
-                            style: subtitleText(context, !isEnabled),
+                        if (widget.subtitle != null)
+                          Padding(
+                            padding: Styles.tileTextPadding,
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    widget.subtitle!,
+                                    style: subtitleText(
+                                      context,
+                                      disabled: !isEnabled,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
-                  const Spacer(),
                   Padding(
                     padding: Styles.small,
                     child: ArnaSwitch(

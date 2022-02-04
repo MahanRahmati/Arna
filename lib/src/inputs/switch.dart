@@ -145,7 +145,7 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                         ),
                         color: !isEnabled
                             ? backgroundColorDisabled(context)
-                            : Styles.cardColorLight,
+                            : Styles.switchThumbColor,
                       ),
                     ),
                   ),

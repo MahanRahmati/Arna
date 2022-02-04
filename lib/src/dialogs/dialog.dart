@@ -60,7 +60,7 @@ class ArnaAlertDialog extends StatelessWidget {
                               padding: Styles.normal,
                               child: Text(
                                 title!,
-                                style: titleText(context),
+                                style: headline2(context),
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -70,7 +70,7 @@ class ArnaAlertDialog extends StatelessWidget {
                               child: Text(
                                 message!,
                                 maxLines: 5,
-                                style: bodyText(context, false),
+                                style: bodyText(context),
                                 textAlign: TextAlign.left,
                               ),
                             ),
@@ -117,12 +117,32 @@ Future<T?> showArnaDialog<T>({
     transitionDuration: Styles.basicDuration,
     routeSettings: routeSettings,
     pageBuilder: (context, animation, secondaryAnimation) => builder(context),
-    transitionBuilder: (_, anim, __, child) => SlideTransition(
-      position: Tween(
-        begin: const Offset(0, 1),
-        end: Offset.zero,
-      ).animate(anim),
-      child: FadeTransition(opacity: anim, child: child),
-    ),
+    transitionBuilder: (_, anim, __, child) => phone(context)
+        ? SlideTransition(
+            position: Tween(
+              begin: const Offset(0, 1),
+              end: Offset.zero,
+            ).animate(anim),
+            child: FadeTransition(
+              opacity: CurvedAnimation(
+                parent: anim,
+                curve: Styles.basicCurve,
+              ),
+              child: child,
+            ),
+          )
+        : ScaleTransition(
+            scale: CurvedAnimation(
+              parent: anim,
+              curve: Styles.basicCurve,
+            ),
+            child: FadeTransition(
+              opacity: CurvedAnimation(
+                parent: anim,
+                curve: Styles.basicCurve,
+              ),
+              child: child,
+            ),
+          ),
   );
 }

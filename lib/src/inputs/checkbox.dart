@@ -92,7 +92,7 @@ class _ArnaCheckBoxState extends State<ArnaCheckBox> {
 
   @override
   Widget build(BuildContext context) {
-    _selected = widget.value ?? false;
+    _selected = widget.value ?? true;
     return Padding(
       padding: Styles.small,
       child: MergeSemantics(
@@ -153,7 +153,7 @@ class _ArnaCheckBoxState extends State<ArnaCheckBox> {
                             ? Icons.check_outlined
                             : Icons.remove_outlined,
                         size: Styles.checkBoxIconSize,
-                        color: Styles.cardColorLight,
+                        color: Styles.checkColor,
                       ),
                     ),
                   ),

@@ -75,68 +75,76 @@ Color iconColor(context) =>
 Color disabledColor(context) =>
     isDark(context) ? Styles.disabledDark : Styles.disabledLight;
 
-TextStyle largeTitleText(context) => TextStyle(
+TextStyle headline1(context) => TextStyle(
       fontFamily: 'Inter',
       fontWeight: FontWeight.w300,
-      fontSize: 48,
+      fontSize: 32,
       decoration: TextDecoration.none,
       color: primaryTextColor(context),
+      overflow: TextOverflow.ellipsis,
     );
 
-TextStyle titleText(context) => TextStyle(
+TextStyle headline2(context) => TextStyle(
       fontFamily: 'Inter',
       fontWeight: FontWeight.normal,
-      fontSize: 20,
+      fontSize: 23,
       decoration: TextDecoration.none,
       color: primaryTextColor(context),
+      overflow: TextOverflow.ellipsis,
     );
 
-TextStyle bodyText(context, bool disabled) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      decoration: TextDecoration.none,
-      color: disabled ? disabledColor(context) : primaryTextColor(context),
-    );
-
-TextStyle buttonText(context, bool disabled) => TextStyle(
+TextStyle bodyText(context, {bool disabled = false}) => TextStyle(
       fontFamily: 'Inter',
       fontWeight: FontWeight.normal,
       fontSize: 16,
       decoration: TextDecoration.none,
       color: disabled ? disabledColor(context) : primaryTextColor(context),
+      overflow: TextOverflow.ellipsis,
     );
 
-TextStyle subtitleText(context, bool disabled) => TextStyle(
+TextStyle buttonText(context, {bool disabled = false}) => TextStyle(
+      fontFamily: 'Inter',
+      fontWeight: FontWeight.w500,
+      fontSize: 16,
+      decoration: TextDecoration.none,
+      color: disabled ? disabledColor(context) : primaryTextColor(context),
+      overflow: TextOverflow.ellipsis,
+    );
+
+TextStyle subtitleText(context, {bool disabled = false}) => TextStyle(
       fontFamily: 'Inter',
       fontWeight: FontWeight.normal,
       fontSize: 14,
       decoration: TextDecoration.none,
       color: disabled ? disabledColor(context) : secondaryTextColor(context),
+      overflow: TextOverflow.ellipsis,
     );
 
 TextStyle captionText(context) => TextStyle(
       fontFamily: 'Inter',
-      fontWeight: FontWeight.normal,
-      fontSize: 12,
+      fontWeight: FontWeight.w700,
+      fontSize: 11,
       decoration: TextDecoration.none,
       color: primaryTextColor(context),
+      overflow: TextOverflow.ellipsis,
     );
 
 TextStyle statusBarText(context) => TextStyle(
       fontFamily: 'Inter',
-      fontWeight: FontWeight.normal,
-      fontSize: 12,
+      fontWeight: FontWeight.w700,
+      fontSize: 11,
       decoration: TextDecoration.none,
       color: reversePrimaryTextColor(context),
+      overflow: TextOverflow.ellipsis,
     );
 
 TextStyle badgeText(context, Color textColor) => TextStyle(
       fontFamily: 'Inter',
-      fontWeight: FontWeight.normal,
-      fontSize: 12,
+      fontWeight: FontWeight.w700,
+      fontSize: 11,
       decoration: TextDecoration.none,
       color: textColor,
+      overflow: TextOverflow.ellipsis,
     );
 
 double deviceHeight(context) => MediaQuery.of(context).size.height;

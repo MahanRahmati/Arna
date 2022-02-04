@@ -34,7 +34,6 @@ class ArnaCheckBoxListTile extends StatefulWidget {
 
 class _ArnaCheckBoxListTileState extends State<ArnaCheckBoxListTile> {
   bool _hover = false;
-  bool _selected = false;
 
   bool get isEnabled => widget.onChanged != null;
 
@@ -64,71 +63,79 @@ class _ArnaCheckBoxListTileState extends State<ArnaCheckBoxListTile> {
 
   @override
   Widget build(BuildContext context) {
-    _selected = widget.value ?? false;
-    return MergeSemantics(
-      child: Semantics(
-        label: widget.semanticLabel,
-        checked: _selected,
-        enabled: isEnabled,
-        child: MouseRegion(
-          cursor: widget.cursor,
-          onEnter: _handleEnter,
-          onExit: _handleExit,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            child: AnimatedContainer(
-              duration: Styles.basicDuration,
-              curve: Styles.basicCurve,
-              decoration: BoxDecoration(
-                color: !isEnabled
-                    ? backgroundColorDisabled(context)
-                    : _hover
-                        ? cardColorHover(context)
-                        : cardColor(context),
+    return MouseRegion(
+      cursor: widget.cursor,
+      onEnter: _handleEnter,
+      onExit: _handleExit,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: _handleTap,
+        child: AnimatedContainer(
+          duration: Styles.basicDuration,
+          curve: Styles.basicCurve,
+          decoration: BoxDecoration(
+            color: !isEnabled
+                ? backgroundColorDisabled(context)
+                : _hover
+                    ? cardColorHover(context)
+                    : cardColor(context),
+          ),
+          padding: Styles.tilePadding,
+          child: Row(
+            children: [
+              Padding(
+                padding: Styles.small,
+                child: ArnaCheckBox(
+                  value: widget.value,
+                  tristate: widget.tristate,
+                  onChanged: widget.onChanged,
+                  isFocusable: widget.isFocusable,
+                  autofocus: widget.autofocus,
+                  accentColor: widget.accentColor,
+                  cursor: widget.cursor,
+                  semanticLabel: widget.semanticLabel,
+                ),
               ),
-              padding: Styles.tilePadding,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: Styles.small,
-                    child: ArnaCheckBox(
-                      value: widget.value,
-                      tristate: widget.tristate,
-                      onChanged: widget.onChanged,
-                      isFocusable: widget.isFocusable,
-                      autofocus: widget.autofocus,
-                      accentColor: widget.accentColor,
-                      cursor: widget.cursor,
-                      semanticLabel: widget.semanticLabel,
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      if (widget.title != null)
-                        Padding(
-                          padding: Styles.tileTextPadding,
-                          child: Text(
-                            widget.title!,
-                            style: bodyText(context, !isEnabled),
-                          ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (widget.title != null)
+                      Padding(
+                        padding: Styles.tileTextPadding,
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                widget.title!,
+                                style: bodyText(context, disabled: !isEnabled),
+                              ),
+                            ),
+                          ],
                         ),
-                      if (widget.subtitle != null)
-                        Padding(
-                          padding: Styles.tileTextPadding,
-                          child: Text(
-                            widget.subtitle!,
-                            style: subtitleText(context, !isEnabled),
-                          ),
+                      ),
+                    if (widget.subtitle != null)
+                      Padding(
+                        padding: Styles.tileTextPadding,
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                widget.subtitle!,
+                                style: subtitleText(
+                                  context,
+                                  disabled: !isEnabled,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                    ],
-                  ),
-                  const Spacer(),
-                  if (widget.trailingButton != null) widget.trailingButton!,
-                ],
+                      ),
+                  ],
+                ),
               ),
-            ),
+              if (widget.trailingButton != null) widget.trailingButton!,
+            ],
           ),
         ),
       ),

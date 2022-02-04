@@ -1,7 +1,7 @@
 import 'package:arna/arna.dart';
 
 class ArnaBottomBarItem extends StatefulWidget {
-  final String title;
+  final String label;
   final IconData icon;
   final VoidCallback? onPressed;
   final ArnaBadge? badge;
@@ -14,7 +14,7 @@ class ArnaBottomBarItem extends StatefulWidget {
 
   const ArnaBottomBarItem({
     Key? key,
-    required this.title,
+    required this.label,
     required this.icon,
     required this.onPressed,
     this.badge,
@@ -100,7 +100,7 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
     if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
-  List<Widget> _updateChildren() {
+  Widget _buildChild() {
     final List<Widget> children = [];
     Widget icon = Icon(
       widget.icon,
@@ -113,12 +113,15 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
       Flexible(
         child: FittedBox(
           fit: BoxFit.scaleDown,
-          child: Text(widget.title, style: buttonText(context, !isEnabled)),
+          child: Text(
+            widget.label,
+            style: buttonText(context, disabled: !isEnabled),
+          ),
         ),
       ),
     );
     children.add(const SizedBox(width: Styles.padding));
-    return children;
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: children);
   }
 
   @override
@@ -178,12 +181,7 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
                                           : headerColor(context),
                         ),
                         padding: Styles.horizontal,
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: _updateChildren(),
-                          ),
-                        ),
+                        child: _buildChild(),
                       ),
                       if (widget.badge != null) widget.badge!,
                     ],

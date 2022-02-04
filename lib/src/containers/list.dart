@@ -6,7 +6,7 @@ class ArnaList extends StatelessWidget {
 
   const ArnaList({Key? key, this.title, required this.items}) : super(key: key);
 
-  List<Widget> _updateChildren() {
+  Widget _buildChild() {
     final List<Widget> children = [];
     if (items.isNotEmpty) {
       for (int i = 0; i < items.length; i++) {
@@ -16,13 +16,13 @@ class ArnaList extends StatelessWidget {
         }
       }
     }
-    return children;
+    return Column(children: children);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: Styles.normal,
+      padding: Styles.listPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,14 +30,14 @@ class ArnaList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(
                 Styles.padding,
-                0,
                 Styles.padding,
-                Styles.largePadding,
+                Styles.padding,
+                Styles.largePadding * 1.5,
               ),
-              child: Text(
-                title!,
-                style: titleText(context),
-                textAlign: TextAlign.left,
+              child: Row(
+                children: [
+                  Flexible(child: Text(title!, style: headline2(context))),
+                ],
               ),
             ),
           AnimatedContainer(
@@ -51,7 +51,7 @@ class ArnaList extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: Styles.listBorderRadius,
-              child: Column(children: _updateChildren()),
+              child: _buildChild(),
             ),
           ),
         ],

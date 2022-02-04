@@ -53,19 +53,21 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
               ArnaIconButton(
                 icon: Icons.arrow_back_outlined,
                 onPressed: () => _navigator.pop(context),
+                tooltipMessage: "Back",
               ),
               page.headerBarLeading,
             ],
           ),
           title: page.title,
           headerBarTrailing: page.headerBarTrailing,
+          searchField: page.searchField,
           body: page.builder(context),
         );
       },
     );
   }
 
-  Widget _updateChildren(bool isPhone) {
+  Widget _buildChild(bool isPhone) {
     return ListView.builder(
       itemCount: widget.items.length,
       itemBuilder: (BuildContext context, int index) {
@@ -73,9 +75,9 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
           padding: Styles.small,
           child: ArnaMasterItem(
             leading: widget.items[index].leading,
-            trailing: widget.items[index].trailing,
             title: widget.items[index].title,
             subtitle: widget.items[index].subtitle,
+            trailing: widget.items[index].trailing,
             onPressed: () => onTap(index, isPhone),
             selected: isPhone ? false : index == _currentIndex,
             isFocusable: widget.items[index].isFocusable,
@@ -93,7 +95,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
         headerBarLeading: widget.headerBarLeading,
         title: widget.title,
         headerBarTrailing: widget.headerBarTrailing,
-        body: _updateChildren(isPhone),
+        body: _buildChild(isPhone),
       );
 
   @override
@@ -126,6 +128,8 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                             title: widget.items[_currentIndex].title,
                             headerBarTrailing:
                                 widget.items[_currentIndex].headerBarTrailing,
+                            searchField:
+                                widget.items[_currentIndex].searchField,
                             body: widget.items[_currentIndex].builder(context),
                           ),
                         ),
@@ -152,12 +156,13 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
 
 class MasterNavigationItem {
   final Widget? leading;
-  final Widget? trailing;
   final String? title;
   final String? subtitle;
+  final Widget? trailing;
   final WidgetBuilder builder;
   final Widget headerBarLeading;
   final Widget headerBarTrailing;
+  final ArnaSearchField? searchField;
   final ArnaBadge? badge;
   final bool isFocusable;
   final bool autofocus;
@@ -167,12 +172,13 @@ class MasterNavigationItem {
 
   const MasterNavigationItem({
     this.leading,
-    this.trailing,
     this.title,
     this.subtitle,
+    this.trailing,
     required this.builder,
     this.headerBarLeading = const SizedBox.shrink(),
     this.headerBarTrailing = const SizedBox.shrink(),
+    this.searchField,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,

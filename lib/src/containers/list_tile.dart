@@ -2,9 +2,9 @@ import 'package:arna/arna.dart';
 
 class ArnaListTile extends StatefulWidget {
   final Widget? leading;
-  final Widget? trailing;
   final String? title;
   final String? subtitle;
+  final Widget? trailing;
   final GestureTapCallback? onTap;
   final MouseCursor cursor;
   final String? semanticLabel;
@@ -12,9 +12,9 @@ class ArnaListTile extends StatefulWidget {
   const ArnaListTile({
     Key? key,
     this.leading,
-    this.trailing,
     this.title,
     this.subtitle,
+    this.trailing,
     this.onTap,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
@@ -41,36 +41,49 @@ class _ArnaListTileState extends State<ArnaListTile> {
     if (mounted) setState(() => _hover = false);
   }
 
-  List<Widget> _updateChildren() {
+  Widget _buildChild() {
     final List<Widget> children = [];
     if (widget.leading != null) {
       children.add(Padding(padding: Styles.normal, child: widget.leading));
     }
     children.add(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (widget.title != null)
-            Padding(
-              padding: Styles.tileTextPadding,
-              child: Text(widget.title!, style: bodyText(context, false)),
-            ),
-          if (widget.subtitle != null)
-            Padding(
-              padding: Styles.tileTextPadding,
-              child: Text(
-                widget.subtitle!,
-                style: subtitleText(context, false),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.title != null)
+              Padding(
+                padding: Styles.tileTextPadding,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(widget.title!, style: bodyText(context)),
+                    ),
+                  ],
+                ),
               ),
-            ),
-        ],
+            if (widget.subtitle != null)
+              Padding(
+                padding: Styles.tileTextPadding,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        widget.subtitle!,
+                        style: subtitleText(context),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
-    children.add(const Spacer());
     if (widget.trailing != null) {
       children.add(Padding(padding: Styles.normal, child: widget.trailing));
     }
-    return children;
+    return Row(children: children);
   }
 
   @override
@@ -98,7 +111,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
                         : cardColor(context),
               ),
               padding: Styles.tilePadding,
-              child: Row(children: _updateChildren()),
+              child: _buildChild(),
             ),
           ),
         ),

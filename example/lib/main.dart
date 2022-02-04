@@ -19,6 +19,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var showSearch = false;
+  TextEditingController controller = TextEditingController();
   var _selectedType = "1";
   bool _checkBox1 = false;
   bool? _checkBox2 = false;
@@ -26,6 +28,7 @@ class _HomeState extends State<Home> {
   bool _switch1 = false;
   bool _switch2 = false;
   final bool _switch3 = false;
+  double _sliderValue = 50;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +46,21 @@ class _HomeState extends State<Home> {
       ),
       items: [
         NavigationItem(
-          title: "Inputs",
-          icon: Icons.check_box_outlined,
+          headerBarLeading: ArnaIconButton(
+            icon: Icons.search_outlined,
+            onPressed: () => setState(
+              () {
+                showSearch = !showSearch;
+                controller.text = "";
+              },
+            ),
+          ),
+          title: "Widgets",
+          icon: Icons.widgets_outlined,
+          searchField: ArnaSearchField(
+            showSearch: showSearch,
+            controller: controller,
+          ),
           builder: (_) => SingleChildScrollView(
             child: Column(
               children: [
@@ -57,17 +73,18 @@ class _HomeState extends State<Home> {
                         ArnaIconButton(
                           icon: Icons.add_outlined,
                           onPressed: () {},
+                          tooltipMessage: "Add",
                         ),
-                        ArnaTextButton(title: "Add", onPressed: () {}),
+                        ArnaTextButton(
+                          label: "Add",
+                          onPressed: () {},
+                          tooltipMessage: "Add",
+                        ),
                         ArnaButton(
-                          title: "Add",
+                          label: "Add",
                           icon: Icons.add_outlined,
                           onPressed: () {},
-                        ),
-                        const ArnaButton(
-                          title: "Add",
-                          icon: Icons.add_outlined,
-                          onPressed: null,
+                          tooltipMessage: "Add",
                         ),
                       ],
                     ),
@@ -81,23 +98,18 @@ class _HomeState extends State<Home> {
                       children: [
                         ArnaLinkedButtons(
                           buttons: [
-                            ArnaLinkedIconButton(
+                            ArnaLinkedButton(
                               icon: Icons.add_outlined,
-                              onPressed: () {},
-                            ),
-                            ArnaLinkedTextButton(
-                              title: "Add",
                               onPressed: () {},
                             ),
                             ArnaLinkedButton(
-                              title: "Add",
-                              icon: Icons.add_outlined,
+                              label: "Add",
                               onPressed: () {},
                             ),
-                            const ArnaLinkedButton(
-                              title: "Add",
+                            ArnaLinkedButton(
+                              label: "Add",
                               icon: Icons.add_outlined,
-                              onPressed: null,
+                              onPressed: () {},
                             ),
                           ],
                         ),
@@ -189,21 +201,6 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                const ArnaList(
-                  title: "Text Field",
-                  items: [ArnaTextField()],
-                )
-              ],
-            ),
-          ),
-        ),
-        NavigationItem(
-          title: "List",
-          icon: Icons.list_outlined,
-          badge: const ArnaBadge(title: "1"),
-          builder: (_) => SingleChildScrollView(
-            child: Column(
-              children: [
                 ArnaList(
                   title: "List tile",
                   items: [
@@ -220,6 +217,49 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
+                const ArnaList(
+                  title: "Expansion Panel",
+                  items: [
+                    ArnaExpansionPanel(
+                      title: "Title 1",
+                      subtitle: "Subtitle 1",
+                      child: ArnaListTile(
+                        title: "Title 2",
+                        subtitle: "Subtitle 2",
+                        trailing: ArnaBadge(title: "Badge 2"),
+                      ),
+                    ),
+                  ],
+                ),
+                ArnaList(
+                  title: "Indicator",
+                  items: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        ArnaIndicator(),
+                        ArnaIndicator(size: 140),
+                      ],
+                    ),
+                  ],
+                ),
+                ArnaList(
+                  title: "Slider",
+                  items: [
+                    ArnaSlider(
+                      value: _sliderValue,
+                      min: 0,
+                      max: 100,
+                      onChanged: (double newValue) {
+                        setState(() => _sliderValue = newValue);
+                      },
+                    )
+                  ],
+                ),
+                const ArnaList(
+                  title: "Text Field",
+                  items: [ArnaTextField()],
+                )
               ],
             ),
           ),
@@ -238,32 +278,44 @@ class _HomeState extends State<Home> {
                     Padding(
                       padding: Styles.normal,
                       child: Text(
-                        "Large Title",
-                        style: largeTitleText(context),
+                        "Lorem ipsum dolor",
+                        style: headline1(context),
                       ),
-                    ),
-                    Padding(
-                      padding: Styles.normal,
-                      child: Text("Title", style: titleText(context)),
-                    ),
-                    Padding(
-                      padding: Styles.normal,
-                      child: Text("Body", style: bodyText(context, false)),
-                    ),
-                    Padding(
-                      padding: Styles.normal,
-                      child: Text("Button", style: buttonText(context, false)),
                     ),
                     Padding(
                       padding: Styles.normal,
                       child: Text(
-                        "Subtitle",
-                        style: subtitleText(context, false),
+                        "Lorem ipsum dolor",
+                        style: headline2(context),
                       ),
                     ),
                     Padding(
                       padding: Styles.normal,
-                      child: Text("Caption", style: captionText(context)),
+                      child: Text(
+                        "Lorem ipsum dolor",
+                        style: bodyText(context),
+                      ),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text(
+                        "Lorem ipsum dolor",
+                        style: buttonText(context),
+                      ),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text(
+                        "Lorem ipsum dolor",
+                        style: subtitleText(context),
+                      ),
+                    ),
+                    Padding(
+                      padding: Styles.normal,
+                      child: Text(
+                        "Lorem ipsum dolor",
+                        style: captionText(context),
+                      ),
                     ),
                   ],
                 ),

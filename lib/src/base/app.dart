@@ -244,7 +244,19 @@ class _ArnaAppState extends State<ArnaApp> {
       behavior: widget.scrollBehavior ?? const ArnaScrollBehavior(),
       child: HeroControllerScope(
         controller: _heroController,
-        child: _buildWidgetApp(context),
+        child: Focus(
+          canRequestFocus: false,
+          onKey: (FocusNode node, RawKeyEvent event) {
+            if (event is! RawKeyDownEvent ||
+                event.logicalKey != LogicalKeyboardKey.escape) {
+              return KeyEventResult.ignored;
+            }
+            return Tooltip.dismissAllToolTips()
+                ? KeyEventResult.handled
+                : KeyEventResult.ignored;
+          },
+          child: _buildWidgetApp(context),
+        ),
       ),
     );
   }

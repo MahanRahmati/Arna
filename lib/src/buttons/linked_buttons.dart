@@ -5,59 +5,19 @@ class ArnaLinkedButtons extends StatelessWidget {
 
   const ArnaLinkedButtons({Key? key, required this.buttons}) : super(key: key);
 
-  List<Widget> _updateChildren() {
+  Widget _buildChild() {
     List<Widget> children = [];
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
-
     children.addAll(
       buttons.map((button) {
-        if (button is ArnaLinkedButton ||
-            button is ArnaLinkedIconButton ||
-            button is ArnaLinkedTextButton) {
-          int index = buttons.indexOf(button);
-          bool first = index == 0 ? true : false;
-          bool last = index == buttons.length - 1 ? true : false;
-          if (button is ArnaLinkedButton) {
-            return _ArnaLinked(button: button, first: first, last: last);
-          } else if (button is ArnaLinkedIconButton) {
-            return _ArnaLinked(
-              button: ArnaLinkedButton(
-                icon: button.icon,
-                onPressed: button.onPressed,
-                isFocusable: button.isFocusable,
-                autofocus: button.autofocus,
-                accentColor: button.accentColor,
-                cursor: button.cursor,
-                semanticLabel: button.semanticLabel,
-              ),
-              first: first,
-              last: last,
-            );
-          } else if (button is ArnaLinkedTextButton) {
-            return _ArnaLinked(
-              button: ArnaLinkedButton(
-                title: button.title,
-                onPressed: button.onPressed,
-                isFocusable: button.isFocusable,
-                autofocus: button.autofocus,
-                accentColor: button.accentColor,
-                cursor: button.cursor,
-                semanticLabel: button.semanticLabel,
-              ),
-              first: first,
-              last: last,
-            );
-          }
-        } else {
-          throw UnsupportedError(
-            "${button.runtimeType} is not a supported linked type.",
-          );
-        }
-        return const SizedBox.shrink();
+        int index = buttons.indexOf(button);
+        bool first = index == 0 ? true : false;
+        bool last = index == buttons.length - 1 ? true : false;
+        return _ArnaLinked(button: button, first: first, last: last);
       }).toList(),
     );
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
-    return children;
+    return Row(children: children);
   }
 
   @override
@@ -71,7 +31,7 @@ class ArnaLinkedButtons extends StatelessWidget {
           borderRadius: Styles.borderRadius,
           color: borderColor(context),
         ),
-        child: Row(children: _updateChildren()),
+        child: _buildChild(),
       ),
     );
   }
@@ -163,7 +123,7 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
     if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
-  List<Widget> _updateChildren() {
+  Widget _buildChild() {
     final List<Widget> children = [];
     if (widget.button.icon != null) {
       Widget icon = Icon(
@@ -172,82 +132,82 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
         color: !isEnabled ? disabledColor(context) : iconColor(context),
       );
       children.add(icon);
-      if (widget.button.title != null) {
+      if (widget.button.label != null) {
         children.add(const SizedBox(width: Styles.padding));
       }
     }
-    if (widget.button.title != null) {
-      children.add(
-        Align(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              widget.button.title!,
-              style: buttonText(context, !isEnabled),
-            ),
-          ),
+    if (widget.button.label != null) {
+      Widget label = Flexible(
+        child: Text(
+          widget.button.label!,
+          style: buttonText(context, disabled: !isEnabled),
         ),
       );
+      children.add(label);
       if (widget.button.icon != null) {
         children.add(const SizedBox(width: Styles.padding));
       }
     }
-    return children;
+    return Row(mainAxisSize: MainAxisSize.min, children: children);
   }
 
   @override
   Widget build(BuildContext context) {
-    Radius first = widget.first
-        ? const Radius.circular(Styles.borderRadiusSize - 1)
-        : const Radius.circular(0);
-    Radius last = widget.last
-        ? const Radius.circular(Styles.borderRadiusSize - 1)
-        : const Radius.circular(0);
-    return MergeSemantics(
-      child: Semantics(
-        label: widget.button.semanticLabel,
-        button: true,
-        enabled: isEnabled,
-        focusable: isEnabled,
-        focused: _focused,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: _handleTap,
-          onTapDown: _handleTapDown,
-          onTapUp: _handleTapUp,
-          child: FocusableActionDetector(
-            enabled: isEnabled && widget.button.isFocusable,
-            focusNode: focusNode,
-            autofocus: !isEnabled ? false : widget.button.autofocus,
-            mouseCursor: widget.button.cursor,
-            onShowHoverHighlight: _handleHover,
-            onShowFocusHighlight: _handleFocus,
-            onFocusChange: _handleFocusChange,
-            actions: _actions,
-            shortcuts: _shortcuts,
-            child: AnimatedContainer(
-              height: Styles.buttonSize - 2,
-              duration: Styles.basicDuration,
-              curve: Styles.basicCurve,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.horizontal(left: first, right: last),
-                border: _focused
-                    ? Border.all(color: Styles.accentColor)
-                    : Border.all(color: Styles.color00),
-                color: !isEnabled
-                    ? backgroundColorDisabled(context)
-                    : _pressed
-                        ? buttonColorPressed(context)
-                        : _hover
-                            ? buttonColorHover(context)
-                            : buttonColor(context),
+    return ArnaTooltip(
+      message: widget.button.tooltipMessage,
+      child: MergeSemantics(
+        child: Semantics(
+          label: widget.button.semanticLabel,
+          button: true,
+          enabled: isEnabled,
+          focusable: isEnabled,
+          focused: _focused,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _handleTap,
+            onTapDown: _handleTapDown,
+            onTapUp: _handleTapUp,
+            child: FocusableActionDetector(
+              enabled: isEnabled && widget.button.isFocusable,
+              focusNode: focusNode,
+              autofocus: !isEnabled ? false : widget.button.autofocus,
+              mouseCursor: widget.button.cursor,
+              onShowHoverHighlight: _handleHover,
+              onShowFocusHighlight: _handleFocus,
+              onFocusChange: _handleFocusChange,
+              actions: _actions,
+              shortcuts: _shortcuts,
+              child: AnimatedContainer(
+                height: Styles.buttonSize - 2,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.horizontal(
+                    left: widget.first
+                        ? const Radius.circular(Styles.borderRadiusSize - 1)
+                        : const Radius.circular(0),
+                    right: widget.last
+                        ? const Radius.circular(Styles.borderRadiusSize - 1)
+                        : const Radius.circular(0),
+                  ),
+                  border: _focused
+                      ? Border.all(color: Styles.accentColor)
+                      : Border.all(color: Styles.color00),
+                  color: !isEnabled
+                      ? backgroundColorDisabled(context)
+                      : _pressed
+                          ? buttonColorPressed(context)
+                          : _hover
+                              ? buttonColorHover(context)
+                              : buttonColor(context),
+                ),
+                margin: const EdgeInsets.all(0.5),
+                padding: widget.button.icon != null
+                    ? Styles.horizontal
+                    : Styles.largeHorizontal,
+                child: _buildChild(),
               ),
-              margin: const EdgeInsets.all(0.5),
-              padding: widget.button.icon != null
-                  ? Styles.horizontal
-                  : Styles.largeHorizontal,
-              child: Center(child: Row(children: _updateChildren())),
             ),
           ),
         ),
@@ -257,9 +217,10 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
 }
 
 class ArnaLinkedButton {
-  final String? title;
+  final String? label;
   final IconData? icon;
   final VoidCallback? onPressed;
+  final String? tooltipMessage;
   final bool isFocusable;
   final bool autofocus;
   final Color accentColor;
@@ -268,51 +229,10 @@ class ArnaLinkedButton {
 
   const ArnaLinkedButton({
     Key? key,
-    this.title,
+    this.label,
     this.icon,
     required this.onPressed,
-    this.isFocusable = true,
-    this.autofocus = false,
-    this.accentColor = Styles.accentColor,
-    this.cursor = MouseCursor.defer,
-    this.semanticLabel,
-  });
-}
-
-class ArnaLinkedIconButton {
-  final IconData? icon;
-  final VoidCallback? onPressed;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
-  const ArnaLinkedIconButton({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
-    this.isFocusable = true,
-    this.autofocus = false,
-    this.accentColor = Styles.accentColor,
-    this.cursor = MouseCursor.defer,
-    this.semanticLabel,
-  });
-}
-
-class ArnaLinkedTextButton {
-  final String? title;
-  final VoidCallback? onPressed;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
-  const ArnaLinkedTextButton({
-    Key? key,
-    required this.title,
-    required this.onPressed,
+    this.tooltipMessage,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor = Styles.accentColor,

@@ -1,6 +1,12 @@
 # Arna
 
-Arna framework and widgets for Flutter.
+Arna Framework - A unique set of widgets for building applications with Flutter.
+
+<p align="start">
+  <a href="https://pub.dartlang.org/packages/arna"><img src="https://img.shields.io/pub/v/arna.svg" alt="pub.dev"></a>
+  <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
+  <img src="https://img.shields.io/github/license/MahanRahmati/arna">
+</p>
 
 ## Content
 
@@ -23,6 +29,7 @@ Arna framework and widgets for Flutter.
     - [Arna Switch](#arna-switch)
     - [Arna Switch List Tile](#arna-switch-list-tile)
     - [Arna List](#arna-list)
+    - [Arna Expansion Panel](#arna-expansion-panel)
     - [Arna Card](#arna-card)
     - [Arna Badge](#arna-badge)
     - [Arna Dividers](#arna-dividers)
@@ -30,6 +37,11 @@ Arna framework and widgets for Flutter.
     - [Arna PopupDialog](#arna-popupdialog)
     - [Arna Dialog](#arna-dialog)
     - [Arna TextField](#arna-textfield)
+    - [Arna Slider](#arna-slider)
+    - [Arna Tooltip](#arna-tooltip)
+    - [Arna Indicator](#arna-indicator)
+    - [Arna Search Field](#arna-search-field)
+  - [TODO](#todo)
   - [Special thanks](#special-thanks)
 
 ## Getting Started
@@ -38,7 +50,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.0.5
+  arna: ^0.0.7
 ```
 
 And import it
@@ -136,7 +148,7 @@ ArnaMasterDetailScaffold(
 
 ```dart
 ArnaButton(
-    title: "Add",
+    label: "Add",
     icon: Icons.add_outlined,
     onPressed: () {},
 );
@@ -148,6 +160,7 @@ ArnaButton(
 ArnaIconButton(
     icon: Icons.add_outlined,
     onPressed: () {},
+    tooltipMessage: "Add",
 );
 ```
 
@@ -155,8 +168,9 @@ ArnaIconButton(
 
 ```dart
 ArnaTextButton(
-    title: "Add",
+    label: "Add",
     onPressed: () {},
+    tooltipMessage: "Add",
 );
 ```
 
@@ -166,17 +180,20 @@ ArnaTextButton(
 ArnaLinkedButtons(
     buttons: [
         ArnaLinkedButton(
-            title: "Add",
+            label: "Add",
             icon: Icons.add_outlined,
             onPressed: () {},
+            tooltipMessage: "Add",
         ),
-        ArnaLinkedIconButton(
+        ArnaLinkedButton(
             icon: Icons.add_outlined,
             onPressed: () {},
+            tooltipMessage: "Add",
         ),
-        ArnaLinkedTextButton(
-            title: "Add",
+        ArnaLinkedButton(
+            label: "Add",
             onPressed: () {},
+            tooltipMessage: "Add",
         ),
     ],
 );
@@ -277,6 +294,16 @@ ArnaList(
 );
 ```
 
+### Arna Expansion Panel
+
+```dart
+ArnaExpansionPanel(
+    title: "Title 1",
+    subtitle: "Subtitle 1",
+    child: Container(),
+);
+```
+
 ### Arna Card
 
 ```dart
@@ -347,6 +374,58 @@ ArnaTextField(
   obscureText: true,
 );
 ```
+
+### Arna Slider
+
+```dart
+ArnaSlider(
+    value: _sliderValue,
+    min: 0,
+    max: 100,
+    onChanged: (double newValue) {
+        setState(() => _sliderValue = newValue);
+    },
+);
+```
+
+### Arna Tooltip
+
+```dart
+ArnaTooltip(
+    message: _sliderValue,
+    child: ArnaIconButton(
+        icon: Icons.add_outlined,
+        onPressed: () {},
+    ),
+);
+```
+
+### Arna Indicator
+
+```dart
+ArnaIndicator(value: 0.35);
+```
+
+### Arna Search Field
+
+```dart
+ArnaSearchField(
+    showSearch: showSearch,
+    controller: controller,
+);
+```
+
+## TODO
+
+- Tab
+- Browser Tab
+- Dropdown Button
+- Popup Button
+- Date and Time Pickers
+- Snackbar
+- Status Bar
+- Banner
+- Chip
 
 ## Special thanks
 

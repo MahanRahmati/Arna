@@ -79,18 +79,25 @@ abstract class Styles {
   static const Color accentColor = Color(0xFF36AEF9);
   static const Color errorColor = Color(0xFFF44336);
   static const Color barrierColor = Color(0x70000000);
+  static const Color checkColor = color36;
+  static const Color switchThumbColor = color36;
+  static const Color sliderTickMarkColor = color36;
+  static const Color sliderThumbColor = color36;
+  static const Color indicatorColor = color36;
 
   // Doubles
   static const double cursorWidth = 1.75;
   static const double smallPadding = 3.5;
-  static const double scrollBarThickness = 3.5;
   static const double cursorRadius = 3.5;
   static const double padding = 7;
   static const double borderRadiusSize = 7;
-  static const double sliderRadiusSize = 7;
+  static const double sliderTrackSize = 7;
+  static const double scrollBarThickness = 7;
+  static const double sliderSize = 10.5;
   static const double radioIndicatorSize = 12.25;
   static const double largePadding = 14;
   static const double checkBoxIconSize = 14;
+  static const double tooltipOffset = 14;
   static const double iconSize = 21;
   static const double badgeSize = 21;
   static const double checkBoxSize = 21;
@@ -99,16 +106,18 @@ abstract class Styles {
   static const double switchThumbSize = 24.5;
   static const double switchHeight = 28;
   static const double buttonSize = 35;
+  static const double indicatorSize = 35;
   static const double switchWidth = 49;
   static const double headerBarHeight = 49;
   static const double sideBarItemHeight = 49;
   static const double sideBarCompactWidth = 63;
-   static const double searchWidth = 301;
-  static const double sideBarWidth = 315;
+  static const double searchWidth = 308;
+  static const double sideBarWidth = 308;
   static const double dialogSize = 630;
 
   // Durations
   static const Duration basicDuration = Duration(milliseconds: 210);
+  static const Duration indicatorDuration = Duration(milliseconds: 2100);
 
   // Curves
   static const Curve basicCurve = Curves.ease;
@@ -150,6 +159,10 @@ abstract class Styles {
     smallPadding,
   );
   static const EdgeInsets scrollPadding = EdgeInsets.all(scrollPaddingSize);
+  static const EdgeInsets listPadding = EdgeInsets.symmetric(
+    vertical: padding,
+    horizontal: largePadding,
+  );
 
   // BorderRadius
   static BorderRadius borderRadius = borderRadiusAll(borderRadiusSize);

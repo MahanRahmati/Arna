@@ -1,9 +1,10 @@
 import 'package:arna/arna.dart';
 
 class ArnaButton extends StatefulWidget {
-  final String? title;
+  final String? label;
   final IconData? icon;
   final VoidCallback? onPressed;
+  final String? tooltipMessage;
   final bool isFocusable;
   final bool autofocus;
   final Color accentColor;
@@ -12,9 +13,10 @@ class ArnaButton extends StatefulWidget {
 
   const ArnaButton({
     Key? key,
-    this.title,
+    this.label,
     this.icon,
     required this.onPressed,
+    this.tooltipMessage,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor = Styles.accentColor,
@@ -96,7 +98,7 @@ class _ArnaButtonState extends State<ArnaButton> {
     if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
-  List<Widget> _updateChildren() {
+  Widget _buildChild() {
     final List<Widget> children = [];
     if (widget.icon != null) {
       Widget icon = Icon(
@@ -105,77 +107,77 @@ class _ArnaButtonState extends State<ArnaButton> {
         color: !isEnabled ? disabledColor(context) : iconColor(context),
       );
       children.add(icon);
-      if (widget.title != null) {
+      if (widget.label != null) {
         children.add(const SizedBox(width: Styles.padding));
       }
     }
-    if (widget.title != null) {
-      children.add(
-        Align(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              widget.title!,
-              style: buttonText(context, !isEnabled),
-            ),
-          ),
+    if (widget.label != null) {
+      Widget label = Flexible(
+        child: Text(
+          widget.label!,
+          style: buttonText(context, disabled: !isEnabled),
         ),
       );
+      children.add(label);
       if (widget.icon != null) {
         children.add(const SizedBox(width: Styles.padding));
       }
     }
-    return children;
+    return Row(mainAxisSize: MainAxisSize.min, children: children);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: Styles.small,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          button: true,
-          enabled: isEnabled,
-          focusable: isEnabled,
-          focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            onTapDown: _handleTapDown,
-            onTapUp: _handleTapUp,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
-              mouseCursor: widget.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: AnimatedContainer(
-                height: Styles.buttonSize,
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: Styles.borderRadius,
-                  border: Border.all(
-                    color: _focused ? widget.accentColor : borderColor(context),
+      child: ArnaTooltip(
+        message: widget.tooltipMessage,
+        child: MergeSemantics(
+          child: Semantics(
+            label: widget.semanticLabel,
+            button: true,
+            enabled: isEnabled,
+            focusable: isEnabled,
+            focused: _focused,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _handleTap,
+              onTapDown: _handleTapDown,
+              onTapUp: _handleTapUp,
+              child: FocusableActionDetector(
+                enabled: isEnabled && widget.isFocusable,
+                focusNode: focusNode,
+                autofocus: !isEnabled ? false : widget.autofocus,
+                mouseCursor: widget.cursor,
+                onShowHoverHighlight: _handleHover,
+                onShowFocusHighlight: _handleFocus,
+                onFocusChange: _handleFocusChange,
+                actions: _actions,
+                shortcuts: _shortcuts,
+                child: AnimatedContainer(
+                  height: Styles.buttonSize,
+                  duration: Styles.basicDuration,
+                  curve: Styles.basicCurve,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.borderRadius,
+                    border: Border.all(
+                      color:
+                          _focused ? widget.accentColor : borderColor(context),
+                    ),
+                    color: !isEnabled
+                        ? backgroundColorDisabled(context)
+                        : _pressed
+                            ? buttonColorPressed(context)
+                            : _hover
+                                ? buttonColorHover(context)
+                                : buttonColor(context),
                   ),
-                  color: !isEnabled
-                      ? backgroundColorDisabled(context)
-                      : _pressed
-                          ? buttonColorPressed(context)
-                          : _hover
-                              ? buttonColorHover(context)
-                              : buttonColor(context),
+                  padding: widget.icon != null
+                      ? Styles.horizontal
+                      : Styles.largeHorizontal,
+                  child: _buildChild(),
                 ),
-                padding: widget.icon != null
-                    ? Styles.horizontal
-                    : Styles.largeHorizontal,
-                child: Center(child: Row(children: _updateChildren())),
               ),
             ),
           ),

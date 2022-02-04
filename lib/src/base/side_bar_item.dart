@@ -1,7 +1,7 @@
 import 'package:arna/arna.dart';
 
 class ArnaSideBarItem extends StatefulWidget {
-  final String title;
+  final String label;
   final IconData icon;
   final VoidCallback? onPressed;
   final ArnaBadge? badge;
@@ -15,7 +15,7 @@ class ArnaSideBarItem extends StatefulWidget {
 
   const ArnaSideBarItem({
     Key? key,
-    required this.title,
+    required this.label,
     required this.icon,
     required this.onPressed,
     this.badge,
@@ -102,7 +102,7 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
     if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
-  Widget _updateChildren() {
+  Widget _buildChild() {
     return ScrollConfiguration(
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: SingleChildScrollView(
@@ -123,8 +123,8 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  widget.title,
-                  style: bodyText(context, !isEnabled),
+                  widget.label,
+                  style: bodyText(context, disabled: !isEnabled),
                 ),
               ),
             ),
@@ -138,84 +138,87 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
   Widget build(BuildContext context) {
     return Padding(
       padding: Styles.small,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          button: true,
-          enabled: isEnabled,
-          focusable: isEnabled,
-          focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            onTapDown: _handleTapDown,
-            onTapUp: _handleTapUp,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
-              mouseCursor: widget.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: Stack(
-                alignment: Alignment.centerLeft,
-                children: [
-                  Stack(
-                    alignment: widget.compact
-                        ? Alignment.topRight
-                        : Alignment.centerRight,
-                    children: [
-                      AnimatedContainer(
-                        height: Styles.sideBarItemHeight,
-                        width: double.infinity,
-                        duration: Styles.basicDuration,
-                        curve: Styles.basicCurve,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          borderRadius: Styles.borderRadius,
-                          border: Border.all(
+      child: ArnaTooltip(
+        message: widget.compact ? widget.label : null,
+        child: MergeSemantics(
+          child: Semantics(
+            label: widget.semanticLabel,
+            button: true,
+            enabled: isEnabled,
+            focusable: isEnabled,
+            focused: _focused,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: _handleTap,
+              onTapDown: _handleTapDown,
+              onTapUp: _handleTapUp,
+              child: FocusableActionDetector(
+                enabled: isEnabled && widget.isFocusable,
+                focusNode: focusNode,
+                autofocus: !isEnabled ? false : widget.autofocus,
+                mouseCursor: widget.cursor,
+                onShowHoverHighlight: _handleHover,
+                onShowFocusHighlight: _handleFocus,
+                onFocusChange: _handleFocusChange,
+                actions: _actions,
+                shortcuts: _shortcuts,
+                child: Stack(
+                  alignment: Alignment.centerLeft,
+                  children: [
+                    Stack(
+                      alignment: widget.compact
+                          ? Alignment.topRight
+                          : Alignment.centerRight,
+                      children: [
+                        AnimatedContainer(
+                          height: Styles.sideBarItemHeight,
+                          width: double.infinity,
+                          duration: Styles.basicDuration,
+                          curve: Styles.basicCurve,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius: Styles.borderRadius,
+                            border: Border.all(
+                              color: !isEnabled
+                                  ? Styles.color00
+                                  : _focused
+                                      ? widget.accentColor
+                                      : Styles.color00,
+                            ),
                             color: !isEnabled
                                 ? Styles.color00
-                                : _focused
-                                    ? widget.accentColor
-                                    : Styles.color00,
+                                : _pressed
+                                    ? buttonColorPressed(context)
+                                    : widget.selected
+                                        ? buttonColorHover(context)
+                                        : _hover
+                                            ? buttonColorHover(context)
+                                            : buttonColor(context),
                           ),
-                          color: !isEnabled
-                              ? Styles.color00
-                              : _pressed
-                                  ? buttonColorPressed(context)
-                                  : widget.selected
-                                      ? buttonColorHover(context)
-                                      : _hover
-                                          ? buttonColorHover(context)
-                                          : buttonColor(context),
+                          padding: Styles.horizontal,
+                          child: _buildChild(),
                         ),
-                        padding: Styles.horizontal,
-                        child: _updateChildren(),
-                      ),
-                      if (widget.badge != null)
-                        widget.compact
-                            ? widget.badge!
-                            : Padding(
-                                padding: Styles.horizontal,
-                                child: widget.badge!,
-                              ),
-                    ],
-                  ),
-                  AnimatedContainer(
-                    height: widget.selected ? Styles.iconSize : 0,
-                    width: Styles.smallPadding,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.borderRadius,
-                      color: widget.accentColor,
+                        if (widget.badge != null)
+                          widget.compact
+                              ? widget.badge!
+                              : Padding(
+                                  padding: Styles.horizontal,
+                                  child: widget.badge!,
+                                ),
+                      ],
                     ),
-                  ),
-                ],
+                    AnimatedContainer(
+                      height: widget.selected ? Styles.iconSize : 0,
+                      width: Styles.smallPadding,
+                      duration: Styles.basicDuration,
+                      curve: Styles.basicCurve,
+                      decoration: BoxDecoration(
+                        borderRadius: Styles.borderRadius,
+                        color: widget.accentColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

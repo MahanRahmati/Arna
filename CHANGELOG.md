@@ -1,3 +1,11 @@
+## 0.1.1
+
+- Recfactor imports and exports
+- Add documentation to Arna
+- Add documentation to ArnaApp
+- Add documentation to ArnaBottomBar
+- Add documentation to ArnaBottomBarItem
+
 ## 0.1.0
 
 - Add theme and themeMode to ArnaApp

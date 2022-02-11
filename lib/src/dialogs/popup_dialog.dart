@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
 
 class ArnaPopupDialog extends StatelessWidget {
   final String? title;

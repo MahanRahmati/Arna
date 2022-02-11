@@ -1,9 +1,14 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled bottom bar.
+///
+/// Displays multiple items using [ArnaBottomBarItem]
 class ArnaBottomBar extends StatelessWidget {
-  final List<Widget> items;
-
+  /// Creates a bottom bar in the Arna style.
   const ArnaBottomBar({Key? key, required this.items}) : super(key: key);
+
+  /// The items laid out within the bottom bar.
+  final List<Widget> items;
 
   @override
   Widget build(BuildContext context) {

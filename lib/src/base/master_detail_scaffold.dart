@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
 
 class ArnaMasterDetailScaffold extends StatefulWidget {
   final Widget headerBarLeading;

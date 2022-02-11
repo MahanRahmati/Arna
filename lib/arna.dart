@@ -1,3 +1,7 @@
+/// Flutter widgets implementing Arna design language.
+///
+/// To use, import `package:arna/arna.dart`.
+
 library arna;
 
 export 'package:arna/src/base/app.dart';
@@ -41,9 +45,6 @@ export 'package:arna/src/theme/colors.dart';
 export 'package:arna/src/theme/icon_theme_data.dart';
 export 'package:arna/src/theme/text_theme.dart';
 export 'package:arna/src/theme/theme_data.dart';
-export 'package:flutter/cupertino.dart'
-    show CupertinoPageRoute, DefaultCupertinoLocalizations;
-export 'package:flutter/material.dart'
-    show Icons, DefaultMaterialLocalizations, Tooltip;
+export 'package:flutter/material.dart' show Icons;
 export 'package:flutter/services.dart';
 export 'package:flutter/widgets.dart';

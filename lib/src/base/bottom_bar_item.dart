@@ -1,17 +1,14 @@
 import 'package:arna/arna.dart';
 
+/// An interactive button within [ArnaBottomBar].
+///
+/// This class is rarely used in isolation. It is typically embedded
+/// in [ArnaBottomBar].
+///
+/// See also:
+///
+///  * [ArnaBottomBar]
 class ArnaBottomBarItem extends StatefulWidget {
-  final String label;
-  final IconData icon;
-  final VoidCallback? onPressed;
-  final ArnaBadge? badge;
-  final bool selected;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
   const ArnaBottomBarItem({
     Key? key,
     required this.label,
@@ -21,10 +18,42 @@ class ArnaBottomBarItem extends StatefulWidget {
     this.selected = false,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
+
+  /// The text label of the item.
+  final String label;
+
+  /// The icon of the item.
+  final IconData icon;
+
+  /// The callback that is called when a item is tapped.
+  final VoidCallback? onPressed;
+
+  /// The [ArnaBadge] of the item.
+  final ArnaBadge? badge;
+
+  /// Whether this item is selected or not.
+  final bool selected;
+
+  /// Whether this item is focusable or not.
+  final bool isFocusable;
+
+  /// Whether this item should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
+
+  /// The color of the item's focused border.
+  final Color accentColor;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// widget.
+  final MouseCursor cursor;
+
+  /// The semantic label of the item.
+  final String? semanticLabel;
 
   @override
   _ArnaBottomBarItemState createState() => _ArnaBottomBarItemState();
@@ -38,6 +67,8 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
   late Map<Type, Action<Intent>> _actions;
   late Map<ShortcutActivator, Intent> _shortcuts;
 
+  /// Whether the item is enabled or disabled. Items are disabled by default. To
+  /// enable an item, set its [onPressed] property to a non-null value.
   bool get isEnabled => widget.onPressed != null;
 
   @override

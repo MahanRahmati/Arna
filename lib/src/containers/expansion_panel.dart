@@ -62,13 +62,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
             if (widget.title != null)
               Padding(
                 padding: Styles.tileTextPadding,
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(widget.title!, style: bodyText(context)),
-                    ),
-                  ],
-                ),
+                child: Row(children: [Flexible(child: Text(widget.title!))]),
               ),
             if (widget.subtitle != null)
               Padding(
@@ -78,7 +72,8 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
                     Flexible(
                       child: Text(
                         widget.subtitle!,
-                        style: subtitleText(context),
+                        style:
+                            ArnaTheme.of(context).textTheme.subtitleTextStyle,
                       ),
                     ),
                   ],
@@ -100,7 +95,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
               child: Icon(
                 Icons.arrow_back_ios_new_outlined,
                 size: Styles.iconSize,
-                color: iconColor(context),
+                color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
               ),
             ),
           ),
@@ -154,7 +149,12 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  border: Border.all(color: borderColor(context)),
+                  border: Border.all(
+                    color: ArnaDynamicColor.resolve(
+                      ArnaColors.borderColor,
+                      context,
+                    ),
+                  ),
                   color: !isEnabled
                       ? cardColor(context)
                       : _hover

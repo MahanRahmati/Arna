@@ -9,7 +9,7 @@ class ArnaHorizontalDivider extends StatelessWidget {
       height: 1.0,
       child: Center(
         child: Container(
-          decoration: BoxDecoration(color: borderColor(context)),
+          color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
         ),
       ),
     );
@@ -25,7 +25,7 @@ class ArnaVerticalDivider extends StatelessWidget {
       width: 1.0,
       child: Center(
         child: Container(
-          decoration: BoxDecoration(color: borderColor(context)),
+          color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
         ),
       ),
     );

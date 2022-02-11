@@ -29,7 +29,7 @@ class ArnaLinkedButtons extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: borderColor(context),
+          color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
         ),
         child: _buildChild(),
       ),
@@ -129,7 +129,10 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
       Widget icon = Icon(
         widget.button.icon,
         size: Styles.iconSize,
-        color: !isEnabled ? disabledColor(context) : iconColor(context),
+        color: ArnaDynamicColor.resolve(
+          !isEnabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
+          context,
+        ),
       );
       children.add(icon);
       if (widget.button.label != null) {
@@ -140,7 +143,14 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
       Widget label = Flexible(
         child: Text(
           widget.button.label!,
-          style: buttonText(context, disabled: !isEnabled),
+          style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+                color: ArnaDynamicColor.resolve(
+                  !isEnabled
+                      ? ArnaColors.disabledColor
+                      : ArnaColors.primaryTextColor,
+                  context,
+                ),
+              ),
         ),
       );
       children.add(label);

@@ -50,7 +50,8 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   void updateScrollbarPainter() {
     scrollbarPainter
       ..color = widget.thumbColor ?? Styles.accentColor
-      ..trackBorderColor = borderColor(context)
+      ..trackBorderColor =
+          ArnaDynamicColor.resolve(ArnaColors.borderColor, context)
       ..textDirection = Directionality.of(context)
       ..thickness = Styles.scrollBarThickness
       ..radius = const Radius.circular(Styles.borderRadiusSize)

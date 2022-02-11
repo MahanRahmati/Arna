@@ -86,10 +86,17 @@ class _ArnaSwitchListTileState extends State<ArnaSwitchListTile> {
                                 Flexible(
                                   child: Text(
                                     widget.title!,
-                                    style: bodyText(
-                                      context,
-                                      disabled: !isEnabled,
-                                    ),
+                                    style: ArnaTheme.of(context)
+                                        .textTheme
+                                        .buttonTextStyle
+                                        .copyWith(
+                                          color: ArnaDynamicColor.resolve(
+                                            !isEnabled
+                                                ? ArnaColors.disabledColor
+                                                : ArnaColors.primaryTextColor,
+                                            context,
+                                          ),
+                                        ),
                                   ),
                                 ),
                               ],
@@ -103,10 +110,17 @@ class _ArnaSwitchListTileState extends State<ArnaSwitchListTile> {
                                 Flexible(
                                   child: Text(
                                     widget.subtitle!,
-                                    style: subtitleText(
-                                      context,
-                                      disabled: !isEnabled,
-                                    ),
+                                    style: ArnaTheme.of(context)
+                                        .textTheme
+                                        .buttonTextStyle
+                                        .copyWith(
+                                          color: ArnaDynamicColor.resolve(
+                                            !isEnabled
+                                                ? ArnaColors.disabledColor
+                                                : ArnaColors.secondaryTextColor,
+                                            context,
+                                          ),
+                                        ),
                                   ),
                                 ),
                               ],

@@ -114,14 +114,14 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
           if (widget.title != null)
             Padding(
               padding: Styles.tileTextPadding,
-              child: Text(widget.title!, style: bodyText(context)),
+              child: Text(widget.title!),
             ),
           if (widget.subtitle != null)
             Padding(
               padding: Styles.tileTextPadding,
               child: Text(
                 widget.subtitle!,
-                style: subtitleText(context),
+                style: ArnaTheme.of(context).textTheme.subtitleTextStyle,
               ),
             ),
         ],
@@ -175,7 +175,10 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
                             ? Styles.color00
                             : _focused
                                 ? widget.accentColor
-                                : borderColor(context),
+                                : ArnaDynamicColor.resolve(
+                                    ArnaColors.borderColor,
+                                    context,
+                                  ),
                       ),
                       color: !isEnabled
                           ? Styles.color00

@@ -115,9 +115,8 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                       ? Expanded(
                           child: Container(
                             height: double.infinity,
-                            decoration: BoxDecoration(
-                              color: backgroundColor(context),
-                            ),
+                            color:
+                                ArnaTheme.of(context).scaffoldBackgroundColor,
                             child: widget.emptyBody,
                           ),
                         )

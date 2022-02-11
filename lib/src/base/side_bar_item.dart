@@ -115,7 +115,10 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
               child: Icon(
                 widget.icon,
                 size: Styles.iconSize,
-                color: !isEnabled ? disabledColor(context) : iconColor(context),
+                color: ArnaDynamicColor.resolve(
+                  !isEnabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
+                  context,
+                ),
               ),
             ),
             const SizedBox(width: Styles.padding),
@@ -124,7 +127,15 @@ class _ArnaSideBarItemState extends State<ArnaSideBarItem> {
                 fit: BoxFit.scaleDown,
                 child: Text(
                   widget.label,
-                  style: bodyText(context, disabled: !isEnabled),
+                  style:
+                      ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+                            color: ArnaDynamicColor.resolve(
+                              !isEnabled
+                                  ? ArnaColors.disabledColor
+                                  : ArnaColors.primaryTextColor,
+                              context,
+                            ),
+                          ),
                 ),
               ),
             ),

@@ -171,9 +171,12 @@ class ArnaTextField extends StatelessWidget {
                     child: Icon(
                       prefixIcon,
                       size: Styles.iconSize,
-                      color: !enabled
-                          ? disabledColor(context)
-                          : secondaryTextColor(context),
+                      color: ArnaDynamicColor.resolve(
+                        !enabled
+                            ? ArnaColors.disabledColor
+                            : ArnaColors.secondaryTextColor,
+                        context,
+                      ),
                     ),
                   )
                 : null,
@@ -196,11 +199,21 @@ class ArnaTextField extends StatelessWidget {
                 : backgroundColorDisabled(context),
             border: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
-              borderSide: BorderSide(color: borderColor(context)),
+              borderSide: BorderSide(
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.borderColor,
+                  context,
+                ),
+              ),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
-              borderSide: BorderSide(color: borderColor(context)),
+              borderSide: BorderSide(
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.borderColor,
+                  context,
+                ),
+              ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
@@ -208,7 +221,12 @@ class ArnaTextField extends StatelessWidget {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
-              borderSide: BorderSide(color: borderColor(context)),
+              borderSide: BorderSide(
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.borderColor,
+                  context,
+                ),
+              ),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,

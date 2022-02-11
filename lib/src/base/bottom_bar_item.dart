@@ -105,7 +105,10 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
     Widget icon = Icon(
       widget.icon,
       size: Styles.iconSize,
-      color: !isEnabled ? disabledColor(context) : iconColor(context),
+      color: ArnaDynamicColor.resolve(
+        !isEnabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
+        context,
+      ),
     );
     children.add(icon);
     children.add(const SizedBox(width: Styles.padding));
@@ -115,7 +118,14 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
           fit: BoxFit.scaleDown,
           child: Text(
             widget.label,
-            style: buttonText(context, disabled: !isEnabled),
+            style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+                  color: ArnaDynamicColor.resolve(
+                    !isEnabled
+                        ? ArnaColors.disabledColor
+                        : ArnaColors.primaryTextColor,
+                    context,
+                  ),
+                ),
           ),
         ),
       ),
@@ -168,7 +178,10 @@ class _ArnaBottomBarItemState extends State<ArnaBottomBarItem> {
                                 ? Styles.color00
                                 : _focused
                                     ? widget.accentColor
-                                    : borderColor(context),
+                                    : ArnaDynamicColor.resolve(
+                                        ArnaColors.borderColor,
+                                        context,
+                                      ),
                           ),
                           color: !isEnabled
                               ? Styles.color00

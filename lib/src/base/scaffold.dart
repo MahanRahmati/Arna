@@ -29,12 +29,15 @@ class ArnaScaffold extends StatelessWidget {
             ),
           ),
           child: Container(
-            decoration: BoxDecoration(color: backgroundColor(context)),
+            color: ArnaTheme.of(context).scaffoldBackgroundColor,
             child: Column(
               children: [
                 ArnaHeaderBar(
                   leading: headerBarLeading,
-                  middle: Text(title ?? "", style: headline2(context)),
+                  middle: Text(
+                    title ?? "",
+                    style: ArnaTheme.of(context).textTheme.titleTextStyle,
+                  ),
                   trailing: headerBarTrailing,
                 ),
                 if (searchField != null) searchField!,

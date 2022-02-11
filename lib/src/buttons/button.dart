@@ -104,7 +104,10 @@ class _ArnaButtonState extends State<ArnaButton> {
       Widget icon = Icon(
         widget.icon,
         size: Styles.iconSize,
-        color: !isEnabled ? disabledColor(context) : iconColor(context),
+        color: ArnaDynamicColor.resolve(
+          !isEnabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
+          context,
+        ),
       );
       children.add(icon);
       if (widget.label != null) {
@@ -115,7 +118,14 @@ class _ArnaButtonState extends State<ArnaButton> {
       Widget label = Flexible(
         child: Text(
           widget.label!,
-          style: buttonText(context, disabled: !isEnabled),
+          style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+                color: ArnaDynamicColor.resolve(
+                  !isEnabled
+                      ? ArnaColors.disabledColor
+                      : ArnaColors.primaryTextColor,
+                  context,
+                ),
+              ),
         ),
       );
       children.add(label);
@@ -162,8 +172,12 @@ class _ArnaButtonState extends State<ArnaButton> {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color:
-                          _focused ? widget.accentColor : borderColor(context),
+                      color: _focused
+                          ? widget.accentColor
+                          : ArnaDynamicColor.resolve(
+                              ArnaColors.borderColor,
+                              context,
+                            ),
                     ),
                     color: !isEnabled
                         ? backgroundColorDisabled(context)

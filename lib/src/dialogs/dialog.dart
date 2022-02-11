@@ -43,8 +43,13 @@ class ArnaAlertDialog extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
-                border: Border.all(color: borderColor(context)),
-                color: cardColor(context),
+                border: Border.all(
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.borderColor,
+                    context,
+                  ),
+                ),
+                color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
               ),
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,
@@ -60,7 +65,9 @@ class ArnaAlertDialog extends StatelessWidget {
                               padding: Styles.normal,
                               child: Text(
                                 title!,
-                                style: headline2(context),
+                                style: ArnaTheme.of(context)
+                                    .textTheme
+                                    .titleTextStyle,
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -70,7 +77,6 @@ class ArnaAlertDialog extends StatelessWidget {
                               child: Text(
                                 message!,
                                 maxLines: 5,
-                                style: bodyText(context),
                                 textAlign: TextAlign.left,
                               ),
                             ),
@@ -80,7 +86,7 @@ class ArnaAlertDialog extends StatelessWidget {
                     const ArnaHorizontalDivider(),
                     Container(
                       height: Styles.headerBarHeight,
-                      decoration: BoxDecoration(color: headerColor(context)),
+                      color: ArnaTheme.of(context).barBackgroundColor,
                       child: Padding(
                         padding: Styles.horizontal,
                         child: Row(

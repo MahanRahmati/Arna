@@ -1,3 +1,12 @@
+## 0.1.0
+
+- Add theme and themeMode to ArnaApp
+- Refactor many widgets
+
+## 0.0.9
+
+- Fix for https://pub.dev/
+
 ## 0.0.8
 
 - Fix for https://pub.dev/

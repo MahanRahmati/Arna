@@ -36,7 +36,12 @@ class ArnaList extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Flexible(child: Text(title!, style: headline2(context))),
+                  Flexible(
+                    child: Text(
+                      title!,
+                      style: ArnaTheme.of(context).textTheme.titleTextStyle,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -46,8 +51,13 @@ class ArnaList extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
-              border: Border.all(color: borderColor(context)),
-              color: cardColor(context),
+              border: Border.all(
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.borderColor,
+                  context,
+                ),
+              ),
+              color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
             ),
             child: ClipRRect(
               borderRadius: Styles.listBorderRadius,

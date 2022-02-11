@@ -21,11 +21,7 @@ Color textFieldColorHover(context) => isDark(context)
     ? Styles.textFieldColorHoverDark
     : Styles.textFieldColorHoverLight;
 
-Color backgroundColor(context) =>
-    isDark(context) ? Styles.backgroundColorDark : Styles.backgroundColorLight;
-
-Color reverseBackgroundColor(context) =>
-    isDark(context) ? Styles.backgroundColorLight : Styles.backgroundColorDark;
+Color backgroundColor(context) => ArnaTheme.of(context).scaffoldBackgroundColor;
 
 Color backgroundColorDisabled(context) => isDark(context)
     ? Styles.backgroundColorDisabledDark
@@ -35,23 +31,13 @@ Color reverseBackgroundColorDisabled(context) => isDark(context)
     ? Styles.backgroundColorDisabledLight
     : Styles.backgroundColorDisabledDark;
 
-Color headerColor(context) =>
-    isDark(context) ? Styles.headerColorDark : Styles.headerColorLight;
-
-Color sideColor(context) =>
-    isDark(context) ? Styles.sideColorDark : Styles.sideColorLight;
+Color headerColor(context) => ArnaTheme.of(context).barBackgroundColor;
 
 Color cardColor(context) =>
-    isDark(context) ? Styles.cardColorDark : Styles.cardColorLight;
+    ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
 
 Color cardColorHover(context) =>
     isDark(context) ? Styles.cardColorHoverDark : Styles.cardColorHoverLight;
-
-Color borderColor(context) =>
-    isDark(context) ? Styles.borderColorDark : Styles.borderColorLight;
-
-Color reverseBorderColor(context) =>
-    isDark(context) ? Styles.borderColorLight : Styles.borderColorDark;
 
 Color primaryTextColor(context) => isDark(context)
     ? Styles.primaryTextColorDark
@@ -69,81 +55,15 @@ Color reverseSecondaryTextColor(context) => isDark(context)
     ? Styles.secondaryTextColorLight
     : Styles.secondaryTextColorDark;
 
-Color iconColor(context) =>
-    isDark(context) ? Styles.iconColorDark : Styles.iconColorLight;
-
-Color disabledColor(context) =>
-    isDark(context) ? Styles.disabledDark : Styles.disabledLight;
-
-TextStyle headline1(context) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w300,
-      fontSize: 32,
-      decoration: TextDecoration.none,
-      color: primaryTextColor(context),
-      overflow: TextOverflow.ellipsis,
-    );
-
-TextStyle headline2(context) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.normal,
-      fontSize: 23,
-      decoration: TextDecoration.none,
-      color: primaryTextColor(context),
-      overflow: TextOverflow.ellipsis,
-    );
-
-TextStyle bodyText(context, {bool disabled = false}) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.normal,
-      fontSize: 16,
-      decoration: TextDecoration.none,
-      color: disabled ? disabledColor(context) : primaryTextColor(context),
-      overflow: TextOverflow.ellipsis,
-    );
-
-TextStyle buttonText(context, {bool disabled = false}) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w500,
-      fontSize: 16,
-      decoration: TextDecoration.none,
-      color: disabled ? disabledColor(context) : primaryTextColor(context),
-      overflow: TextOverflow.ellipsis,
-    );
-
 TextStyle subtitleText(context, {bool disabled = false}) => TextStyle(
       fontFamily: 'Inter',
       fontWeight: FontWeight.normal,
       fontSize: 14,
       decoration: TextDecoration.none,
-      color: disabled ? disabledColor(context) : secondaryTextColor(context),
-      overflow: TextOverflow.ellipsis,
-    );
-
-TextStyle captionText(context) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w700,
-      fontSize: 11,
-      decoration: TextDecoration.none,
-      color: primaryTextColor(context),
-      overflow: TextOverflow.ellipsis,
-    );
-
-TextStyle statusBarText(context) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w700,
-      fontSize: 11,
-      decoration: TextDecoration.none,
-      color: reversePrimaryTextColor(context),
-      overflow: TextOverflow.ellipsis,
-    );
-
-TextStyle badgeText(context, Color textColor) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w700,
-      fontSize: 11,
-      decoration: TextDecoration.none,
-      color: textColor,
+      color: ArnaDynamicColor.resolve(
+        disabled ? ArnaColors.disabledColor : ArnaColors.secondaryTextColor,
+        context,
+      ),
       overflow: TextOverflow.ellipsis,
     );
 

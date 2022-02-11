@@ -37,6 +37,10 @@ export 'package:arna/src/inputs/switch.dart';
 export 'package:arna/src/inputs/switch_list_tile.dart';
 export 'package:arna/src/inputs/text_field.dart';
 export 'package:arna/src/styles.dart';
+export 'package:arna/src/theme/colors.dart';
+export 'package:arna/src/theme/icon_theme_data.dart';
+export 'package:arna/src/theme/text_theme.dart';
+export 'package:arna/src/theme/theme_data.dart';
 export 'package:flutter/cupertino.dart'
     show CupertinoPageRoute, DefaultCupertinoLocalizations;
 export 'package:flutter/material.dart'

@@ -1,8 +1,12 @@
 import 'package:arna/arna.dart';
 
+enum ArnaThemeMode { system, light, dark }
+
 class ArnaApp extends StatefulWidget {
   final GlobalKey<NavigatorState>? navigatorKey;
   final Widget? home;
+  final ArnaThemeData? theme;
+  final ArnaThemeMode? themeMode;
   final Map<String, WidgetBuilder>? routes;
   final String? initialRoute;
   final RouteFactory? onGenerateRoute;
@@ -37,6 +41,8 @@ class ArnaApp extends StatefulWidget {
     Key? key,
     this.navigatorKey,
     this.home,
+    this.theme,
+    this.themeMode = ArnaThemeMode.system,
     Map<String, WidgetBuilder> this.routes = const {},
     this.initialRoute,
     this.onGenerateRoute,
@@ -74,6 +80,8 @@ class ArnaApp extends StatefulWidget {
     required RouteInformationParser<Object> this.routeInformationParser,
     required RouterDelegate<Object> this.routerDelegate,
     this.backButtonDispatcher,
+    this.theme,
+    this.themeMode = ArnaThemeMode.system,
     this.builder,
     this.title = '',
     this.onGenerateTitle,
@@ -165,13 +173,10 @@ class _ArnaAppState extends State<ArnaApp> {
       ArnaIconButton(icon: Icons.search, onPressed: onPressed);
 
   WidgetsApp _buildWidgetApp(BuildContext context) {
-    final Color color = widget.color ?? Styles.accentColor;
-
-    const TextStyle _textStyle = TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.w700,
-      fontSize: 16,
-      decoration: TextDecoration.none,
+    final ArnaThemeData effectiveThemeData = ArnaTheme.of(context);
+    final Color color = ArnaDynamicColor.resolve(
+      widget.color ?? effectiveThemeData.primaryColor,
+      context,
     );
 
     if (_usesRouter) {
@@ -184,7 +189,7 @@ class _ArnaAppState extends State<ArnaApp> {
         builder: widget.builder,
         title: widget.title,
         onGenerateTitle: widget.onGenerateTitle,
-        textStyle: _textStyle,
+        textStyle: effectiveThemeData.textTheme.textStyle,
         color: color,
         locale: widget.locale,
         localizationsDelegates: _localizationsDelegates,
@@ -218,7 +223,7 @@ class _ArnaAppState extends State<ArnaApp> {
       builder: widget.builder,
       title: widget.title,
       onGenerateTitle: widget.onGenerateTitle,
-      textStyle: _textStyle,
+      textStyle: effectiveThemeData.textTheme.textStyle,
       color: color,
       locale: widget.locale,
       localizationsDelegates: _localizationsDelegates,
@@ -240,22 +245,35 @@ class _ArnaAppState extends State<ArnaApp> {
 
   @override
   Widget build(BuildContext context) {
+    final ArnaThemeMode mode = widget.themeMode ?? ArnaThemeMode.system;
+    final Brightness platformBrightness =
+        MediaQuery.platformBrightnessOf(context);
+    final bool useDarkTheme = mode == ArnaThemeMode.dark ||
+        (mode == ArnaThemeMode.system && platformBrightness == Brightness.dark);
+
+    ArnaThemeData theme = useDarkTheme
+        ? const ArnaThemeData(brightness: Brightness.dark)
+        : const ArnaThemeData(brightness: Brightness.light);
+
     return ScrollConfiguration(
       behavior: widget.scrollBehavior ?? const ArnaScrollBehavior(),
-      child: HeroControllerScope(
-        controller: _heroController,
-        child: Focus(
-          canRequestFocus: false,
-          onKey: (FocusNode node, RawKeyEvent event) {
-            if (event is! RawKeyDownEvent ||
-                event.logicalKey != LogicalKeyboardKey.escape) {
-              return KeyEventResult.ignored;
-            }
-            return Tooltip.dismissAllToolTips()
-                ? KeyEventResult.handled
-                : KeyEventResult.ignored;
-          },
-          child: _buildWidgetApp(context),
+      child: ArnaTheme(
+        data: widget.theme ?? theme,
+        child: HeroControllerScope(
+          controller: _heroController,
+          child: Focus(
+            canRequestFocus: false,
+            onKey: (FocusNode node, RawKeyEvent event) {
+              if (event is! RawKeyDownEvent ||
+                  event.logicalKey != LogicalKeyboardKey.escape) {
+                return KeyEventResult.ignored;
+              }
+              return Tooltip.dismissAllToolTips()
+                  ? KeyEventResult.handled
+                  : KeyEventResult.ignored;
+            },
+            child: _buildWidgetApp(context),
+          ),
         ),
       ),
     );

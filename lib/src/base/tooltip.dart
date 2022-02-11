@@ -21,11 +21,19 @@ class ArnaTooltip extends StatelessWidget {
             padding: Styles.normal,
             margin: Styles.normal,
             verticalOffset: Styles.tooltipOffset,
-            textStyle: statusBarText(context),
+            textStyle: ArnaTheme.of(context).textTheme.statusBarTextStyle,
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
-              border: Border.all(color: borderColor(context)),
-              color: reverseBackgroundColor(context),
+              border: Border.all(
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.borderColor,
+                  context,
+                ),
+              ),
+              color: ArnaDynamicColor.resolve(
+                ArnaColors.reverseBackgroundColor,
+                context,
+              ),
             ),
             child: child,
           );

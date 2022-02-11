@@ -7,7 +7,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ArnaApp(debugShowCheckedModeBanner: false, home: Home());
+    return const ArnaApp(
+      debugShowCheckedModeBanner: false,
+      themeMode: ArnaThemeMode.light,
+      home: Home(),
+    );
   }
 }
 
@@ -279,42 +283,44 @@ class _HomeState extends State<Home> {
                       padding: Styles.normal,
                       child: Text(
                         "Lorem ipsum dolor",
-                        style: headline1(context),
+                        style:
+                            ArnaTheme.of(context).textTheme.largeTitleTextStyle,
                       ),
                     ),
                     Padding(
                       padding: Styles.normal,
                       child: Text(
                         "Lorem ipsum dolor",
-                        style: headline2(context),
+                        style: ArnaTheme.of(context).textTheme.titleTextStyle,
                       ),
                     ),
                     Padding(
                       padding: Styles.normal,
                       child: Text(
                         "Lorem ipsum dolor",
-                        style: bodyText(context),
+                        style: ArnaTheme.of(context).textTheme.textStyle,
                       ),
                     ),
                     Padding(
                       padding: Styles.normal,
                       child: Text(
                         "Lorem ipsum dolor",
-                        style: buttonText(context),
+                        style: ArnaTheme.of(context).textTheme.buttonTextStyle,
                       ),
                     ),
                     Padding(
                       padding: Styles.normal,
                       child: Text(
                         "Lorem ipsum dolor",
-                        style: subtitleText(context),
+                        style:
+                            ArnaTheme.of(context).textTheme.subtitleTextStyle,
                       ),
                     ),
                     Padding(
                       padding: Styles.normal,
                       child: Text(
                         "Lorem ipsum dolor",
-                        style: captionText(context),
+                        style: ArnaTheme.of(context).textTheme.captionTextStyle,
                       ),
                     ),
                   ],

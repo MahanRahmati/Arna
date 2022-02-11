@@ -38,8 +38,13 @@ class ArnaPopupDialog extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
-                border: Border.all(color: borderColor(context)),
-                color: backgroundColor(context),
+                border: Border.all(
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.borderColor,
+                    context,
+                  ),
+                ),
+                color: ArnaTheme.of(context).scaffoldBackgroundColor,
               ),
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,

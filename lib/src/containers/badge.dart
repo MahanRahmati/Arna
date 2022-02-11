@@ -30,7 +30,13 @@ class ArnaBadge extends StatelessWidget {
           children: [
             Flexible(
               child: FittedBox(
-                child: Text(title, style: badgeText(context, textColor)),
+                child: Text(
+                  title,
+                  style: ArnaTheme.of(context)
+                      .textTheme
+                      .textStyle
+                      .copyWith(color: textColor),
+                ),
               ),
             ),
           ],

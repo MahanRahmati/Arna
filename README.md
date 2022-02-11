@@ -35,7 +35,7 @@ Arna Framework - A unique set of widgets for building applications with Flutter.
     - [Arna Dividers](#arna-dividers)
     - [Arna Separators](#arna-separators)
     - [Arna PopupDialog](#arna-popupdialog)
-    - [Arna Dialog](#arna-dialog)
+    - [Arna Alert Dialog](#arna-alert-dialog)
     - [Arna TextField](#arna-textfield)
     - [Arna Slider](#arna-slider)
     - [Arna Tooltip](#arna-tooltip)
@@ -50,7 +50,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.0.8
+  arna: ^0.1.0
 ```
 
 And import it
@@ -66,6 +66,7 @@ import 'package:arna/arna.dart';
 ```dart
 ArnaApp(
     debugShowCheckedModeBanner: false,
+    themeMode: ArnaThemeMode.light,
     home: Home(),
 );
 ```
@@ -347,19 +348,19 @@ ArnaIconButton(
 );
 ```
 
-### Arna Dialog
+### Arna Alert Dialog
 
 ```dart
 ArnaIconButton(
     icon: Icons.info_outlined,
-    onPressed: () => ArnaDialog(
+    onPressed: () => showArnaDialog(
         context: context,
         barrierDismissible: true,
         builder: (_) => ArnaAlertDialog(
             title: "Title",
             message: "Message",
             primary: ArnaTextButton(
-                title: "OK",
+                label: "OK",
                 onPressed: Navigator.of(context).pop,
             )
         ),

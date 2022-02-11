@@ -27,7 +27,7 @@ class ArnaDrawer extends StatelessWidget {
           duration: Styles.basicDuration,
           curve: Styles.basicCurve,
           clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(color: sideColor(context)),
+          color: ArnaTheme.of(context).scaffoldBackgroundColor,
           child: child,
         ),
       ),

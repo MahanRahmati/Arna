@@ -202,7 +202,7 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
                         : const Radius.circular(0),
                   ),
                   border: _focused
-                      ? Border.all(color: Styles.accentColor)
+                      ? Border.all(color: ArnaColors.accentColor)
                       : Border.all(color: Styles.color00),
                   color: !isEnabled
                       ? backgroundColorDisabled(context)
@@ -245,7 +245,7 @@ class ArnaLinkedButton {
     this.tooltipMessage,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });

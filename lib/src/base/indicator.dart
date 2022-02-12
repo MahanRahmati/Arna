@@ -11,7 +11,7 @@ class ArnaIndicator extends StatefulWidget {
     Key? key,
     this.value,
     this.size = Styles.indicatorSize,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
   }) : super(key: key);
 
   @override

@@ -23,7 +23,7 @@ class ArnaRadioListTile<T> extends StatefulWidget {
     this.trailingButton,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);

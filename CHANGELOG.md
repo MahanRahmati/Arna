@@ -1,3 +1,11 @@
+## 0.1.2
+
+- Recfactor Example
+- Recfactor ArnaDrawer
+- Add documentation to ArnaDrawer
+- Convert Styles.accentColor to ArnaColors.accentColor
+- Update Readme
+
 ## 0.1.1
 
 - Recfactor imports and exports

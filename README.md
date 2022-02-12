@@ -50,7 +50,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.1.1
+  arna: ^0.1.2
 ```
 
 And import it
@@ -430,9 +430,10 @@ ArnaSearchField(
 
 ## Special thanks
 
-- [flutter](https://github.com/flutter/) for [flutter](https://github.com/flutter/flutter/)
+- [flutter](https://github.com/flutter/) for [flutter](https://github.com/flutter/flutter/).
 - [bdlukaa](https://github.com/bdlukaa) for [fluent_ui](https://github.com/bdlukaa/fluent_ui).
 - [GroovinChip](https://github.com/GroovinChip) for [macos_ui](https://github.com/GroovinChip/macos_ui).
 - [gtk-flutter](https://github.com/gtk-flutter) for [libadwaita](https://github.com/gtk-flutter/libadwaita).
 - [ubuntu](https://github.com/ubuntu) for [yaru_widgets.dart](https://github.com/ubuntu/yaru_widgets.dart) and [yaru.dart](https://github.com/ubuntu/yaru.dart).
+- [tvolkert](https://github.com/tvolkert) for [chicago](https://github.com/tvolkert/chicago).
 - [rsms](https://github.com/rsms) for [inter](https://github.com/rsms/inter).

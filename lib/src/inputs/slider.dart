@@ -24,7 +24,7 @@ class ArnaSlider extends StatefulWidget {
     this.divisions,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
     this.cursor = MouseCursor.defer,
   }) : super(key: key);
 
@@ -105,7 +105,7 @@ class _ArnaSliderThumb extends SliderComponentShape {
 
   const _ArnaSliderThumb({
     this.thumbRadius = 10.0,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
   });
 
   @override

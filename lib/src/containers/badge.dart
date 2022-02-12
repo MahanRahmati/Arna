@@ -8,7 +8,7 @@ class ArnaBadge extends StatelessWidget {
   const ArnaBadge({
     Key? key,
     required this.title,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
     this.textColor = Styles.primaryTextColorDark,
   }) : super(key: key);
 

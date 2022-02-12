@@ -149,7 +149,7 @@ class ArnaTextField extends StatelessWidget {
           enabled: enabled,
           cursorWidth: Styles.cursorWidth,
           cursorRadius: const Radius.circular(Styles.cursorRadius),
-          cursorColor: Styles.accentColor,
+          cursorColor: ArnaColors.accentColor,
           keyboardAppearance: keyboardAppearance,
           dragStartBehavior: dragStartBehavior,
           enableInteractiveSelection: enableInteractiveSelection,
@@ -217,7 +217,7 @@ class ArnaTextField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
-              borderSide: const BorderSide(color: Styles.accentColor),
+              borderSide: const BorderSide(color: ArnaColors.accentColor),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,

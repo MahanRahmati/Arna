@@ -69,7 +69,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    if (!phone(context) && showDrawer) setState(() => showDrawer = false);
+    if (!phone(context) && showDrawer) _drawerOpenedCallback(false);
     return LayoutBuilder(
       builder: (context, constraints) {
         if (widget.items.length > 1) {
@@ -151,11 +151,10 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   ),
                 ],
               ),
-              if (constraints.maxWidth < 644 &&
-                  showDrawer &&
-                  widget.items.length > 3)
+              if (constraints.maxWidth < 644 && widget.items.length > 3)
                 ArnaDrawerController(
                   drawerCallback: _drawerOpenedCallback,
+                  isDrawerOpen: showDrawer,
                   drawer: ArnaDrawer(child: _buildChild()),
                 ),
             ],
@@ -207,7 +206,7 @@ class NavigationItem {
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = Styles.accentColor,
+    this.accentColor = ArnaColors.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });

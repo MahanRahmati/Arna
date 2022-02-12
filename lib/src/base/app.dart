@@ -473,7 +473,7 @@ class ArnaApp extends StatefulWidget {
   /// {@macro flutter.widgets.widgetsApp.restorationScopeId}
   final String? restorationScopeId;
 
-  /// {@macro flutter.material.materialApp.scrollBehavior}
+  /// {@macro flutter.widgets.scrollBehavior}
   ///
   /// When null, defaults to [ArnaScrollBehavior].
   ///

@@ -1,9 +1,11 @@
 import 'package:arna/arna.dart';
 
 class ArnaLinkedButtons extends StatelessWidget {
-  final List<dynamic> buttons;
-
+  /// Creates linked buttons.
   const ArnaLinkedButtons({Key? key, required this.buttons}) : super(key: key);
+
+  /// List of linked buttons.
+  final List<ArnaLinkedButton> buttons;
 
   Widget _buildChild() {
     List<Widget> children = [];
@@ -37,7 +39,7 @@ class ArnaLinkedButtons extends StatelessWidget {
   }
 }
 
-class _ArnaLinked extends StatefulWidget {
+class _ArnaLinked extends StatelessWidget {
   final ArnaLinkedButton button;
   final bool first;
   final bool last;
@@ -49,103 +51,29 @@ class _ArnaLinked extends StatefulWidget {
     required this.last,
   }) : super(key: key);
 
-  @override
-  _ArnaLinkedState createState() => _ArnaLinkedState();
-}
-
-class _ArnaLinkedState extends State<_ArnaLinked> {
-  FocusNode? focusNode;
-  bool _hover = false;
-  bool _focused = false;
-  bool _pressed = false;
-  late Map<Type, Action<Intent>> _actions;
-  late Map<ShortcutActivator, Intent> _shortcuts;
-
-  bool get isEnabled => widget.button.onPressed != null;
-
-  @override
-  void initState() {
-    super.initState();
-    focusNode = FocusNode(canRequestFocus: isEnabled);
-    if (widget.button.autofocus) focusNode!.requestFocus();
-    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
-    _shortcuts = const {
-      SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-      SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-    };
-  }
-
-  @override
-  void didUpdateWidget(_ArnaLinked oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.button.onPressed != oldWidget.button.onPressed) {
-      focusNode!.canRequestFocus = isEnabled;
-      if (!isEnabled) _hover = _pressed = false;
-    }
-  }
-
-  @override
-  void dispose() {
-    focusNode!.dispose();
-    focusNode = null;
-    super.dispose();
-  }
-
-  void _handleFocusChange(bool hasFocus) {
-    setState(() {
-      _focused = hasFocus;
-      if (!hasFocus) _pressed = false;
-    });
-  }
-
-  Future<void> _handleTap() async {
-    if (isEnabled) {
-      setState(() => _pressed = true);
-      widget.button.onPressed!();
-      await Future.delayed(Styles.basicDuration);
-      if (mounted) setState(() => _pressed = false);
-    }
-  }
-
-  void _handleTapDown(_) {
-    if (mounted) setState(() => _pressed = true);
-  }
-
-  void _handleTapUp(_) {
-    if (mounted) setState(() => _pressed = false);
-  }
-
-  void _handleHover(hover) {
-    if (hover != _hover && mounted) setState(() => _hover = hover);
-  }
-
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
-  }
-
-  Widget _buildChild() {
+  Widget _buildChild(BuildContext context, bool enabled) {
     final List<Widget> children = [];
-    if (widget.button.icon != null) {
-      Widget icon = Icon(
-        widget.button.icon,
+    if (button.icon != null) {
+      Widget iconWidget = Icon(
+        button.icon,
         size: Styles.iconSize,
         color: ArnaDynamicColor.resolve(
-          !isEnabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
+          !enabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
           context,
         ),
       );
-      children.add(icon);
-      if (widget.button.label != null) {
+      children.add(iconWidget);
+      if (button.label != null) {
         children.add(const SizedBox(width: Styles.padding));
       }
     }
-    if (widget.button.label != null) {
-      Widget label = Flexible(
+    if (button.label != null) {
+      Widget labelWidget = Flexible(
         child: Text(
-          widget.button.label!,
+          button.label!,
           style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
                 color: ArnaDynamicColor.resolve(
-                  !isEnabled
+                  !enabled
                       ? ArnaColors.disabledColor
                       : ArnaColors.primaryTextColor,
                   context,
@@ -153,8 +81,8 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
               ),
         ),
       );
-      children.add(label);
-      if (widget.button.icon != null) {
+      children.add(labelWidget);
+      if (button.icon != null) {
         children.add(const SizedBox(width: Styles.padding));
       }
     }
@@ -163,80 +91,51 @@ class _ArnaLinkedState extends State<_ArnaLinked> {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaTooltip(
-      message: widget.button.tooltipMessage,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.button.semanticLabel,
-          button: true,
-          enabled: isEnabled,
-          focusable: isEnabled,
-          focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            onTapDown: _handleTapDown,
-            onTapUp: _handleTapUp,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.button.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.button.autofocus,
-              mouseCursor: widget.button.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: AnimatedContainer(
-                height: Styles.buttonSize - 2,
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.horizontal(
-                    left: widget.first
-                        ? const Radius.circular(Styles.borderRadiusSize - 1)
-                        : const Radius.circular(0),
-                    right: widget.last
-                        ? const Radius.circular(Styles.borderRadiusSize - 1)
-                        : const Radius.circular(0),
-                  ),
-                  border: _focused
-                      ? Border.all(color: ArnaColors.accentColor)
-                      : Border.all(color: Styles.color00),
-                  color: !isEnabled
-                      ? backgroundColorDisabled(context)
-                      : _pressed
-                          ? buttonColorPressed(context)
-                          : _hover
-                              ? buttonColorHover(context)
-                              : buttonColor(context),
-                ),
-                margin: const EdgeInsets.all(0.5),
-                padding: widget.button.icon != null
-                    ? Styles.horizontal
-                    : Styles.largeHorizontal,
-                child: _buildChild(),
-              ),
+    return ArnaBaseButton(
+      builder: (context, enabled, hover, focused, pressed) {
+        return AnimatedContainer(
+          height: Styles.buttonSize - 2,
+          duration: Styles.basicDuration,
+          curve: Styles.basicCurve,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.horizontal(
+              left: first
+                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  : const Radius.circular(0),
+              right: last
+                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  : const Radius.circular(0),
             ),
+            border: focused
+                ? Border.all(color: ArnaColors.accentColor)
+                : Border.all(color: Styles.color00),
+            color: !enabled
+                ? backgroundColorDisabled(context)
+                : pressed
+                    ? buttonColorPressed(context)
+                    : hover
+                        ? buttonColorHover(context)
+                        : buttonColor(context),
           ),
-        ),
-      ),
+          margin: const EdgeInsets.all(0.5),
+          padding:
+              button.icon != null ? Styles.horizontal : Styles.largeHorizontal,
+          child: _buildChild(context, enabled),
+        );
+      },
+      onPressed: button.onPressed,
+      tooltipMessage: button.tooltipMessage,
+      isFocusable: button.isFocusable,
+      autofocus: button.autofocus,
+      cursor: button.cursor,
+      semanticLabel: button.semanticLabel,
     );
   }
 }
 
 class ArnaLinkedButton {
-  final String? label;
-  final IconData? icon;
-  final VoidCallback? onPressed;
-  final String? tooltipMessage;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
+  /// Creates a linked button.
   const ArnaLinkedButton({
     Key? key,
     this.label,
@@ -249,4 +148,33 @@ class ArnaLinkedButton {
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
+
+  /// The text label of the button.
+  final String? label;
+
+  /// The icon of the button.
+  final IconData? icon;
+
+  /// The callback that is called when a button is tapped.
+  final VoidCallback? onPressed;
+
+  /// The tooltip message of the button.
+  final String? tooltipMessage;
+
+  /// Whether this button is focusable or not.
+  final bool isFocusable;
+
+  /// Whether this button should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
+
+  /// The color of the button's focused border.
+  final Color accentColor;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// button.
+  final MouseCursor cursor;
+
+  /// The semantic label of the button.
+  final String? semanticLabel;
 }

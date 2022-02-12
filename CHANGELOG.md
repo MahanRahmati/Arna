@@ -1,3 +1,16 @@
+## 0.1.3
+  
+- Add ArnaBaseButton
+- Recfactor ArnaButton
+- Add documentation to ArnaButton
+- Add documentation to ArnaIconButton
+- Add documentation to ArnaTextButton
+- Recfactor ArnaLinkedButtons
+- Add documentation to ArnaLinkedButtons
+- Recfactor ArnaBottomBarItem
+- Add documentation to ArnaSideBarItem
+- Recfactor ArnaSideBarItem
+
 ## 0.1.2
 
 - Recfactor Example

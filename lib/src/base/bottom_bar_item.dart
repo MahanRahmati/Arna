@@ -110,24 +110,20 @@ class ArnaBottomBarItem extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: Styles.borderRadius,
                       border: Border.all(
-                        color: !enabled
-                            ? Styles.color00
-                            : focused
-                                ? accentColor
-                                : ArnaDynamicColor.resolve(
-                                    ArnaColors.borderColor,
-                                    context,
-                                  ),
+                        color: buttonBorder(
+                          context,
+                          enabled,
+                          focused,
+                          accentColor,
+                        ),
                       ),
-                      color: !enabled
-                          ? Styles.color00
-                          : pressed
-                              ? buttonColorPressed(context)
-                              : selected
-                                  ? buttonColorHover(context)
-                                  : hover
-                                      ? buttonColorHover(context)
-                                      : headerColor(context),
+                      color: buttonBackground(
+                        context,
+                        enabled,
+                        hover,
+                        focused,
+                        pressed,
+                      ),
                     ),
                     padding: Styles.horizontal,
                     child: _buildChild(context, enabled),

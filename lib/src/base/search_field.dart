@@ -1,13 +1,13 @@
 import 'package:arna/arna.dart';
 
+/// Shows a search field inside the scaffold.
+/// See also:
+///
+///  * [ArnaScaffold]
+///  * [ArnaSideScaffold]
+///  * [ArnaMasterDetailScaffold]
 class ArnaSearchField extends StatefulWidget {
-  final bool showSearch;
-  final TextEditingController controller;
-  final ValueChanged<String>? onChanged;
-  final VoidCallback? onEditingComplete;
-  final ValueChanged<String>? onSubmitted;
-  final String? hint;
-
+  /// Creates a search field in the Arna style.
   const ArnaSearchField({
     Key? key,
     required this.showSearch,
@@ -17,6 +17,29 @@ class ArnaSearchField extends StatefulWidget {
     this.onSubmitted,
     this.hint,
   }) : super(key: key);
+
+  /// Whether to show search or not.
+  final bool showSearch;
+
+  /// Controls the text being edited.
+  final TextEditingController controller;
+
+  /// {@macro flutter.widgets.editableText.onChanged}
+  ///
+  /// See also:
+  ///
+  ///  * [onEditingComplete], [onSubmitted]:
+  ///    which are more specialized input change notifications.
+  final ValueChanged<String>? onChanged;
+
+  /// {@macro flutter.widgets.editableText.onEditingComplete}
+  final VoidCallback? onEditingComplete;
+
+  /// {@macro flutter.widgets.editableText.onSubmitted}
+  final ValueChanged<String>? onSubmitted;
+
+  /// The hint text of the search field.
+  final String? hint;
 
   @override
   State<ArnaSearchField> createState() => _ArnaSearchFieldState();

@@ -1,8 +1,12 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
 
+/// Implements the master detail layout structure.
+/// See also:
+///
+///  * [ArnaHeaderBar], which is a horizontal bar shown at the top of the app.
 class ArnaMasterDetailScaffold extends StatefulWidget {
-  /// Create a master detail scaffold.
+  /// Creates a master detail structure in the Arna style.
   const ArnaMasterDetailScaffold({
     Key? key,
     this.headerBarLeading,

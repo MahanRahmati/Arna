@@ -117,7 +117,7 @@ Future<T?> showArnaPopupDialog<T>({
   ArnaSearchField? searchField,
   required Widget body,
   bool barrierDismissible = false,
-  Color barrierColor = Styles.barrierColor,
+  Color barrierColor = ArnaColors.barrierColor,
   String? barrierLabel = "label",
   bool useRootNavigator = true,
   RouteSettings? routeSettings,

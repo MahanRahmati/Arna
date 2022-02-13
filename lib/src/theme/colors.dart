@@ -102,6 +102,22 @@ class ArnaColors {
     darkHighContrastColor: color03,
   );
 
+  static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
+    debugLabel: 'buttonHoverColor',
+    color: color30,
+    darkColor: color05,
+    highContrastColor: color30,
+    darkHighContrastColor: color05,
+  );
+
+  static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
+    debugLabel: 'buttonPressedColor',
+    color: color26,
+    darkColor: color09,
+    highContrastColor: color26,
+    darkHighContrastColor: color09,
+  );
+
   static const ArnaDynamicColor primaryTextColor = ArnaDynamicColor(
     debugLabel: 'primaryTextColor',
     color: color03,

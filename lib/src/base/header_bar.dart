@@ -28,12 +28,11 @@ class ArnaHeaderBar extends StatelessWidget {
 
   Widget _buildChild() {
     final List<Widget> children = [];
-    children.add(leading != null ? leading! : const SizedBox.shrink());
-    children.add(middle != null ? middle! : const SizedBox.shrink());
-    children.add(trailing != null ? trailing! : const SizedBox.shrink());
+    children.add(leading != null ? leading! : const SizedBox.expand());
+    children.add(middle != null ? middle! : const SizedBox.expand());
+    children.add(trailing != null ? trailing! : const SizedBox.expand());
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.min,
       children: children,
     );
   }

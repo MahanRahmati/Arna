@@ -109,14 +109,14 @@ class _ArnaLinked extends StatelessWidget {
             ),
             border: focused
                 ? Border.all(color: ArnaColors.accentColor)
-                : Border.all(color: Styles.color00),
-            color: !enabled
-                ? backgroundColorDisabled(context)
-                : pressed
-                    ? buttonColorPressed(context)
-                    : hover
-                        ? buttonColorHover(context)
-                        : buttonColor(context),
+                : Border.all(color: ArnaColors.color00),
+            color: buttonBackground(
+              context,
+              enabled,
+              hover,
+              focused,
+              pressed,
+            ),
           ),
           margin: const EdgeInsets.all(0.5),
           padding:

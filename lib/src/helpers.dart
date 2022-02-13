@@ -1,5 +1,34 @@
 import 'package:arna/arna.dart';
 
+Color buttonBorder(
+  BuildContext context,
+  bool enabled,
+  bool focused,
+  Color accentColor,
+) {
+  return !enabled
+      ? ArnaColors.color00
+      : focused
+          ? accentColor
+          : ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
+}
+
+Color buttonBackground(
+  BuildContext context,
+  bool enabled,
+  bool hover,
+  bool focused,
+  bool pressed,
+) {
+  return !enabled
+      ? backgroundColorDisabled(context)
+      : pressed
+          ? ArnaDynamicColor.resolve(ArnaColors.buttonPressedColor, context)
+          : hover
+              ? ArnaDynamicColor.resolve(ArnaColors.buttonHoverColor, context)
+              : ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+}
+
 bool isDark(context) =>
     MediaQuery.of(context).platformBrightness == Brightness.dark;
 
@@ -27,33 +56,11 @@ Color backgroundColorDisabled(context) => isDark(context)
     ? Styles.backgroundColorDisabledDark
     : Styles.backgroundColorDisabledLight;
 
-Color reverseBackgroundColorDisabled(context) => isDark(context)
-    ? Styles.backgroundColorDisabledLight
-    : Styles.backgroundColorDisabledDark;
-
-Color headerColor(context) => ArnaTheme.of(context).barBackgroundColor;
-
 Color cardColor(context) =>
     ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
 
 Color cardColorHover(context) =>
     isDark(context) ? Styles.cardColorHoverDark : Styles.cardColorHoverLight;
-
-Color primaryTextColor(context) => isDark(context)
-    ? Styles.primaryTextColorDark
-    : Styles.primaryTextColorLight;
-
-Color reversePrimaryTextColor(context) => isDark(context)
-    ? Styles.primaryTextColorLight
-    : Styles.primaryTextColorDark;
-
-Color secondaryTextColor(context) => isDark(context)
-    ? Styles.secondaryTextColorDark
-    : Styles.secondaryTextColorLight;
-
-Color reverseSecondaryTextColor(context) => isDark(context)
-    ? Styles.secondaryTextColorLight
-    : Styles.secondaryTextColorDark;
 
 TextStyle subtitleText(context, {bool disabled = false}) => TextStyle(
       fontFamily: 'Inter',

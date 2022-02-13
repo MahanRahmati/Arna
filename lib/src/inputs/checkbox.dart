@@ -156,7 +156,7 @@ class _ArnaCheckBoxState extends State<ArnaCheckBox> {
                             ? Icons.check_outlined
                             : Icons.remove_outlined,
                         size: Styles.checkBoxIconSize,
-                        color: Styles.checkColor,
+                        color: ArnaColors.color36,
                       ),
                     ),
                   ),

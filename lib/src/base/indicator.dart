@@ -118,7 +118,7 @@ class _ProgressPainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
-        ..color = Styles.indicatorColor
+        ..color = ArnaColors.color36
         ..strokeWidth = size.width / 8,
     );
   }

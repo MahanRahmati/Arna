@@ -1,6 +1,11 @@
 import 'package:arna/arna.dart';
 
+/// Implements the basic layout structure.
+/// See also:
+///
+///  * [ArnaHeaderBar], which is a horizontal bar shown at the top of the app.
 class ArnaScaffold extends StatelessWidget {
+  /// Creates a basic layout structure in the Arna style.
   const ArnaScaffold({
     Key? key,
     this.headerBarLeading,

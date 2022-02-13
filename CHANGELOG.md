@@ -1,3 +1,19 @@
+## 0.1.5
+
+- Update documentation of ArnaMasterDetailScaffold
+- Update documentation of ArnaScaffold
+- Add documentation to ArnaScrollbar
+- Add documentation to ArnaSearchField
+- Add documentation to ArnaSideScaffold
+- Add documentation to ArnaTooltip
+- Fix ArnaHeaderBar
+- Remove border of ArnaTooltip
+- Fix Colors of ArnaButton
+- Fix Colors of ArnaBottomBarItem
+- Fix Colors of ArnaLinkedButtons
+- Cleanup more colors
+- Cleanup helpers
+
 ## 0.1.4
 
 - Add documentation to ArnaHeaderBar
@@ -9,7 +25,7 @@
 - Add documentation to ArnaScaffold
 
 ## 0.1.3
-  
+
 - Add ArnaBaseButton
 - Recfactor ArnaButton
 - Add documentation to ArnaButton

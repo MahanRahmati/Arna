@@ -70,9 +70,9 @@ class _ArnaSliderState extends State<ArnaSlider> {
             activeTrackColor: widget.accentColor,
             inactiveTrackColor: widget.accentColor.withOpacity(0.3),
             trackHeight: Styles.sliderTrackSize,
-            activeTickMarkColor: Styles.sliderTickMarkColor,
-            inactiveTickMarkColor: Styles.sliderTickMarkColor.withOpacity(0.3),
-            thumbColor: Styles.sliderThumbColor,
+            activeTickMarkColor: ArnaColors.color36,
+            inactiveTickMarkColor: ArnaColors.color36.withOpacity(0.3),
+            thumbColor: ArnaColors.color36,
             thumbShape: _ArnaSliderThumb(
               thumbRadius: Styles.sliderSize,
               accentColor: isEnabled
@@ -132,7 +132,7 @@ class _ArnaSliderThumb extends SliderComponentShape {
     canvas.drawCircle(
       center,
       thumbRadius * 0.7,
-      Paint()..color = Styles.sliderThumbColor,
+      Paint()..color = ArnaColors.color36,
     );
   }
 }

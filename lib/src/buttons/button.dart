@@ -96,20 +96,15 @@ class ArnaButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
-                color: focused
-                    ? accentColor
-                    : ArnaDynamicColor.resolve(
-                        ArnaColors.borderColor,
-                        context,
-                      ),
+                color: buttonBorder(context, enabled, focused, accentColor),
               ),
-              color: !enabled
-                  ? backgroundColorDisabled(context)
-                  : pressed
-                      ? buttonColorPressed(context)
-                      : hover
-                          ? buttonColorHover(context)
-                          : buttonColor(context),
+              color: buttonBackground(
+                context,
+                enabled,
+                hover,
+                focused,
+                pressed,
+              ),
             ),
             padding: icon != null ? Styles.horizontal : Styles.largeHorizontal,
             child: _buildChild(context, enabled),

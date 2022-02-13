@@ -42,26 +42,15 @@ abstract class Styles {
 
   // Light
   static const Color cardColorLight = color36; //
-  static const Color backgroundColorLight = color34; //
-  static const Color sideColorLight = color34; //
   static const Color textFieldColorLight = color34; //
   static const Color buttonColorLight = color34; //
-  static const Color headerColorLight = color32; //
   static const Color backgroundColorDisabledLight = color32;
   static const Color buttonColorHoverLight = color30;
   static const Color textFieldColorHoverLight = color30;
   static const Color cardColorHoverLight = color30;
-  static const Color borderColorLight = color26; //
   static const Color buttonColorPressedLight = color26;
-  static const Color disabledLight = color18; //
-  static const Color secondaryTextColorLight = color11; //
-  static const Color primaryTextColorLight = color03; //
-  static const Color iconColorLight = color03;
 
   // Dark
-  static const Color headerColorDark = color01; //
-  static const Color backgroundColorDark = color03; //
-  static const Color sideColorDark = color03; //
   static const Color textFieldColorDark = color03; //
   static const Color buttonColorDark = color03; //
   static const Color backgroundColorDisabledDark = color03;
@@ -69,21 +58,9 @@ abstract class Styles {
   static const Color buttonColorHoverDark = color05;
   static const Color textFieldColorHoverDark = color05;
   static const Color cardColorHoverDark = color07;
-  static const Color borderColorDark = color09; //
   static const Color buttonColorPressedDark = color09;
-  static const Color disabledDark = color18; //
-  static const Color secondaryTextColorDark = color26; //
-  static const Color primaryTextColorDark = color34; //
-  static const Color iconColorDark = color34;
 
-  static const Color accentColor = Color(0xFF36AEF9);
   static const Color errorColor = Color(0xFFF44336);
-  static const Color barrierColor = Color(0x70000000);
-  static const Color checkColor = color36;
-  static const Color switchThumbColor = color36;
-  static const Color sliderTickMarkColor = color36;
-  static const Color sliderThumbColor = color36;
-  static const Color indicatorColor = color36;
 
   // Doubles
   static const double cursorWidth = 1.75;

@@ -112,13 +112,16 @@ class ArnaMasterItem extends StatelessWidget {
                   ),
                   color: !enabled
                       ? Styles.color00
-                      : pressed
-                          ? buttonColorPressed(context)
-                          : selected
-                              ? buttonColorHover(context)
-                              : hover
-                                  ? cardColorHover(context)
-                                  : cardColor(context),
+                      : ArnaDynamicColor.resolve(
+                          pressed
+                              ? ArnaColors.cardPressedColor
+                              : selected
+                                  ? ArnaColors.cardHoverColor
+                                  : hover
+                                      ? ArnaColors.cardHoverColor
+                                      : ArnaColors.cardColor,
+                          context,
+                        ),
                 ),
                 padding: Styles.tilePadding,
                 child: _buildChild(context),

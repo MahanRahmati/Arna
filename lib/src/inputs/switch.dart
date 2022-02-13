@@ -120,12 +120,18 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                                   ),
                       ),
                       color: !isEnabled
-                          ? backgroundColorDisabled(context)
+                          ? ArnaDynamicColor.resolve(
+                              ArnaColors.backgroundDisabledColor,
+                              context,
+                            )
                           : widget.value
                               ? widget.accentColor
-                              : _hover
-                                  ? buttonColorHover(context)
-                                  : backgroundColor(context),
+                              : ArnaDynamicColor.resolve(
+                                  _hover
+                                      ? ArnaColors.buttonHoverColor
+                                      : ArnaColors.backgroundColor,
+                                  context,
+                                ),
                     ),
                   ),
                   AnimatedPositioned(
@@ -150,7 +156,10 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                                 ),
                         ),
                         color: !isEnabled
-                            ? backgroundColorDisabled(context)
+                            ? ArnaDynamicColor.resolve(
+                                ArnaColors.backgroundDisabledColor,
+                                context,
+                              )
                             : ArnaColors.color36,
                       ),
                     ),

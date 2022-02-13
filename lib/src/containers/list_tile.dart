@@ -98,12 +98,13 @@ class _ArnaListTileState extends State<ArnaListTile> {
             child: AnimatedContainer(
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
-              decoration: BoxDecoration(
-                color: !isEnabled
-                    ? cardColor(context)
+              color: ArnaDynamicColor.resolve(
+                !isEnabled
+                    ? ArnaColors.cardColor
                     : _hover
-                        ? cardColorHover(context)
-                        : cardColor(context),
+                        ? ArnaColors.cardHoverColor
+                        : ArnaColors.cardColor,
+                context,
               ),
               padding: Styles.tilePadding,
               child: _buildChild(),

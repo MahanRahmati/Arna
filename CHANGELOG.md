@@ -1,3 +1,16 @@
+## 0.1.6
+
+- Refactor ArnaBadge
+- Add documentation to ArnaBadge
+- Add documentation to ArnaCard
+- Fix ArnaTooltip
+- Fix ArnaIconButton's size
+- Add disabled buttons to Example
+- Add documentation to ArnaExpansionPanel
+- Cleanup more colors
+- Cleanup helpers
+- Fix Changelog
+
 ## 0.1.5
 
 - Update documentation of ArnaMasterDetailScaffold
@@ -20,34 +33,34 @@
 - Rename ArnaIndicator to ArnaProgressIndicator
 - Add documentation to ArnaProgressIndicator
 - Add documentation to ArnaMasterDetailScaffold
-- Recfactor ArnaMasterItem
+- Refactor ArnaMasterItem
 - Add documentation to ArnaMasterItem
 - Add documentation to ArnaScaffold
 
 ## 0.1.3
 
 - Add ArnaBaseButton
-- Recfactor ArnaButton
+- Refactor ArnaButton
 - Add documentation to ArnaButton
 - Add documentation to ArnaIconButton
 - Add documentation to ArnaTextButton
-- Recfactor ArnaLinkedButtons
+- Refactor ArnaLinkedButtons
 - Add documentation to ArnaLinkedButtons
-- Recfactor ArnaBottomBarItem
+- Refactor ArnaBottomBarItem
 - Add documentation to ArnaSideBarItem
-- Recfactor ArnaSideBarItem
+- Refactor ArnaSideBarItem
 
 ## 0.1.2
 
-- Recfactor Example
-- Recfactor ArnaDrawer
+- Refactor Example
+- Refactor ArnaDrawer
 - Add documentation to ArnaDrawer
 - Convert Styles.accentColor to ArnaColors.accentColor
 - Update Readme
 
 ## 0.1.1
 
-- Recfactor imports and exports
+- Refactor imports and exports
 - Add documentation to Arna
 - Add documentation to ArnaApp
 - Add documentation to ArnaBottomBar

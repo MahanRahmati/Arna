@@ -369,8 +369,4 @@ class _DefaultArnaTextThemeData extends ArnaTextThemeData {
   @override
   TextStyle get captionTextStyle =>
       super.captionTextStyle.copyWith(color: labelColor);
-
-  @override
-  TextStyle get statusBarTextStyle =>
-      super.statusBarTextStyle.copyWith(color: labelColor);
 }

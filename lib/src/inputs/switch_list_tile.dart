@@ -64,12 +64,13 @@ class _ArnaSwitchListTileState extends State<ArnaSwitchListTile> {
             child: AnimatedContainer(
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
-              decoration: BoxDecoration(
-                color: !isEnabled
-                    ? backgroundColorDisabled(context)
+              color: ArnaDynamicColor.resolve(
+                !isEnabled
+                    ? ArnaColors.backgroundDisabledColor
                     : _hover
-                        ? cardColorHover(context)
-                        : cardColor(context),
+                        ? ArnaColors.cardHoverColor
+                        : ArnaColors.cardColor,
+                context,
               ),
               padding: Styles.tilePadding,
               child: Row(

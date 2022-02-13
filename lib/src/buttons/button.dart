@@ -106,7 +106,9 @@ class ArnaButton extends StatelessWidget {
                 pressed,
               ),
             ),
-            padding: icon != null ? Styles.horizontal : Styles.largeHorizontal,
+            padding: icon != null
+                ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
+                : Styles.largeHorizontal,
             child: _buildChild(context, enabled),
           );
         },

@@ -58,16 +58,6 @@ const TextStyle _kDefaultCaptionTextStyle = TextStyle(
   overflow: TextOverflow.ellipsis,
 );
 
-const TextStyle _kDefaultStatusBarTextStyle = TextStyle(
-  inherit: false,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w700,
-  fontSize: 11,
-  color: ArnaColors.reversePrimaryTextColor,
-  decoration: TextDecoration.none,
-  overflow: TextOverflow.ellipsis,
-);
-
 TextStyle? _resolveTextStyle(TextStyle? style, BuildContext context) {
   return style?.copyWith(
     color: ArnaDynamicColor.maybeResolve(style.color, context),
@@ -87,7 +77,6 @@ class ArnaTextThemeData with Diagnosticable {
   final TextStyle? _subtitleTextStyle;
   final TextStyle? _buttonTextStyle;
   final TextStyle? _captionTextStyle;
-  final TextStyle? _statusBarTextStyle;
 
   const ArnaTextThemeData({
     Color primaryColor = ArnaColors.accentColor,
@@ -97,7 +86,6 @@ class ArnaTextThemeData with Diagnosticable {
     TextStyle? subtitleTextStyle,
     TextStyle? buttonTextStyle,
     TextStyle? captionTextStyle,
-    TextStyle? statusBarTextStyle,
   }) : this._raw(
           const _TextThemeDefaultsBuilder(ArnaColors.primaryTextColor),
           primaryColor,
@@ -107,7 +95,6 @@ class ArnaTextThemeData with Diagnosticable {
           subtitleTextStyle,
           buttonTextStyle,
           captionTextStyle,
-          statusBarTextStyle,
         );
 
   const ArnaTextThemeData._raw(
@@ -119,7 +106,6 @@ class ArnaTextThemeData with Diagnosticable {
     this._subtitleTextStyle,
     this._buttonTextStyle,
     this._captionTextStyle,
-    this._statusBarTextStyle,
   ) : assert(_primaryColor != null);
 
   final _TextThemeDefaultsBuilder _defaults;
@@ -140,9 +126,6 @@ class ArnaTextThemeData with Diagnosticable {
   TextStyle get captionTextStyle =>
       _captionTextStyle ?? _defaults.captionTextStyle;
 
-  TextStyle get statusBarTextStyle =>
-      _statusBarTextStyle ?? _defaults.statusBarTextStyle;
-
   ArnaTextThemeData resolveFrom(BuildContext context) {
     return ArnaTextThemeData._raw(
       _defaults.resolveFrom(context),
@@ -153,7 +136,6 @@ class ArnaTextThemeData with Diagnosticable {
       _resolveTextStyle(_subtitleTextStyle, context),
       _resolveTextStyle(_buttonTextStyle, context),
       _resolveTextStyle(_captionTextStyle, context),
-      _resolveTextStyle(_statusBarTextStyle, context),
     );
   }
 
@@ -176,7 +158,6 @@ class ArnaTextThemeData with Diagnosticable {
       subtitleTextStyle ?? _subtitleTextStyle,
       buttonTextStyle ?? _buttonTextStyle,
       captionTextStyle ?? _captionTextStyle,
-      statusBarTextStyle ?? _statusBarTextStyle,
     );
   }
 
@@ -226,13 +207,6 @@ class ArnaTextThemeData with Diagnosticable {
         defaultValue: defaultData.captionTextStyle,
       ),
     );
-    properties.add(
-      DiagnosticsProperty<TextStyle>(
-        'statusBarTextStyle',
-        statusBarTextStyle,
-        defaultValue: defaultData.statusBarTextStyle,
-      ),
-    );
   }
 }
 
@@ -272,11 +246,6 @@ class _TextThemeDefaultsBuilder {
 
   TextStyle get captionTextStyle => _applyLabelColor(
         _kDefaultCaptionTextStyle,
-        labelColor,
-      );
-
-  TextStyle get statusBarTextStyle => _applyLabelColor(
-        _kDefaultStatusBarTextStyle,
         labelColor,
       );
 

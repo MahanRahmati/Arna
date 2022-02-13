@@ -123,7 +123,15 @@ class ArnaTextField extends StatelessWidget {
           keyboardType: keyboardType,
           textInputAction: textInputAction,
           textCapitalization: textCapitalization,
-          style: subtitleText(context, disabled: !enabled),
+          style: ArnaTheme.of(context).textTheme.subtitleTextStyle.copyWith(
+                color: ArnaDynamicColor.resolve(
+                  !enabled
+                      ? ArnaColors.disabledColor
+                      : ArnaColors.secondaryTextColor,
+                  context,
+                ),
+                textBaseline: TextBaseline.alphabetic,
+              ),
           textAlign: textAlign,
           textAlignVertical: textAlignVertical,
           textDirection: textDirection,
@@ -194,9 +202,12 @@ class ArnaTextField extends StatelessWidget {
                   )
                 : null,
             filled: true,
-            fillColor: enabled
-                ? textFieldColor(context)
-                : backgroundColorDisabled(context),
+            fillColor: ArnaDynamicColor.resolve(
+              enabled
+                  ? ArnaColors.textFieldColor
+                  : ArnaColors.backgroundDisabledColor,
+              context,
+            ),
             border: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
               borderSide: BorderSide(
@@ -239,7 +250,15 @@ class ArnaTextField extends StatelessWidget {
             errorStyle: const TextStyle(height: 0, color: Colors.transparent),
             contentPadding: Styles.normal,
             // isDense: true,
-            hintStyle: subtitleText(context, disabled: !enabled),
+            hintStyle:
+                ArnaTheme.of(context).textTheme.subtitleTextStyle.copyWith(
+                      color: ArnaDynamicColor.resolve(
+                        !enabled
+                            ? ArnaColors.disabledColor
+                            : ArnaColors.secondaryTextColor,
+                        context,
+                      ),
+                    ),
             hintText: hintText,
           ),
         ),

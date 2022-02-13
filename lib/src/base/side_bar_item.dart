@@ -124,13 +124,16 @@ class ArnaSideBarItem extends StatelessWidget {
                       ),
                       color: !enabled
                           ? Styles.color00
-                          : pressed
-                              ? buttonColorPressed(context)
-                              : selected
-                                  ? buttonColorHover(context)
-                                  : hover
-                                      ? buttonColorHover(context)
-                                      : buttonColor(context),
+                          : ArnaDynamicColor.resolve(
+                              pressed
+                                  ? ArnaColors.buttonPressedColor
+                                  : selected
+                                      ? ArnaColors.buttonHoverColor
+                                      : hover
+                                          ? ArnaColors.buttonHoverColor
+                                          : ArnaColors.buttonColor,
+                              context,
+                            ),
                     ),
                     padding: Styles.horizontal,
                     child: _buildChild(context, enabled),
@@ -138,10 +141,7 @@ class ArnaSideBarItem extends StatelessWidget {
                   if (badge != null)
                     compact
                         ? badge!
-                        : Padding(
-                            padding: Styles.horizontal,
-                            child: badge!,
-                          ),
+                        : Padding(padding: Styles.horizontal, child: badge!),
                 ],
               ),
               AnimatedContainer(

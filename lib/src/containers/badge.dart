@@ -1,17 +1,23 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled badge.
 class ArnaBadge extends StatelessWidget {
-  final String title;
-  final Color accentColor;
-  final Color textColor;
-
+  /// Creates a badge in the Arna style.
   const ArnaBadge({
     Key? key,
-    required this.title,
+    required this.label,
     this.accentColor = ArnaColors.accentColor,
     this.textColor = ArnaColors.color34,
   }) : super(key: key);
 
+  /// The text label of the badge.
+  final String label;
+
+  /// The background color of the badge.
+  final Color accentColor;
+
+  /// The label color of the badge.
+  final Color textColor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +37,7 @@ class ArnaBadge extends StatelessWidget {
             Flexible(
               child: FittedBox(
                 child: Text(
-                  title,
+                  label,
                   style: ArnaTheme.of(context)
                       .textTheme
                       .textStyle

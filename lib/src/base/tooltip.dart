@@ -26,6 +26,8 @@ class ArnaTooltip extends StatelessWidget {
   final String? message;
 
   /// The widget below this widget in the tree.
+  ///
+  /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
 
   @override
@@ -39,7 +41,13 @@ class ArnaTooltip extends StatelessWidget {
             padding: Styles.normal,
             margin: Styles.normal,
             verticalOffset: Styles.tooltipOffset,
-            textStyle: ArnaTheme.of(context).textTheme.statusBarTextStyle,
+            textStyle:
+                ArnaTheme.of(context).textTheme.captionTextStyle.copyWith(
+                      color: ArnaDynamicColor.resolve(
+                        ArnaColors.reversePrimaryTextColor,
+                        context,
+                      ),
+                    ),
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               color: ArnaDynamicColor.resolve(

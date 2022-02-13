@@ -1,16 +1,25 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled container with slightly rounded corners and border.
 class ArnaCard extends StatelessWidget {
-  final double? height;
-  final double? width;
-  final Widget child;
-
+  /// Creates a card in the Arna style.
   const ArnaCard({
     Key? key,
     this.height,
     this.width,
     required this.child,
   }) : super(key: key);
+
+  /// The card's height.
+  final double? height;
+
+  /// The card's width.
+  final double? width;
+
+  /// The widget below this widget in the tree.
+  ///
+  /// {@macro flutter.widgets.ProxyWidget.child}
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {

@@ -119,8 +119,9 @@ class _ArnaLinked extends StatelessWidget {
             ),
           ),
           margin: const EdgeInsets.all(0.5),
-          padding:
-              button.icon != null ? Styles.horizontal : Styles.largeHorizontal,
+          padding: button.icon != null
+              ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
+              : Styles.largeHorizontal,
           child: _buildChild(context, enabled),
         );
       },

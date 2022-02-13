@@ -124,12 +124,18 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                                   ),
                       ),
                       color: !isEnabled
-                          ? backgroundColorDisabled(context)
+                          ? ArnaDynamicColor.resolve(
+                              ArnaColors.backgroundDisabledColor,
+                              context,
+                            )
                           : _selected && isEnabled
                               ? widget.accentColor
-                              : _hover
-                                  ? buttonColorHover(context)
-                                  : backgroundColor(context),
+                              : ArnaDynamicColor.resolve(
+                                  _hover
+                                      ? ArnaColors.buttonHoverColor
+                                      : ArnaColors.backgroundColor,
+                                  context,
+                                ),
                     ),
                   ),
                   AnimatedContainer(
@@ -142,12 +148,18 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                     decoration: BoxDecoration(
                       borderRadius: Styles.radioBorderRadius,
                       color: !isEnabled
-                          ? backgroundColorDisabled(context)
+                          ? ArnaDynamicColor.resolve(
+                              ArnaColors.backgroundDisabledColor,
+                              context,
+                            )
                           : _selected && isEnabled
                               ? Styles.cardColorLight
-                              : _hover
-                                  ? buttonColorHover(context)
-                                  : backgroundColor(context),
+                              : ArnaDynamicColor.resolve(
+                                  _hover
+                                      ? ArnaColors.buttonHoverColor
+                                      : ArnaColors.backgroundColor,
+                                  context,
+                                ),
                     ),
                   ),
                 ],

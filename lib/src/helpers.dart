@@ -20,59 +20,17 @@ Color buttonBackground(
   bool focused,
   bool pressed,
 ) {
-  return !enabled
-      ? backgroundColorDisabled(context)
-      : pressed
-          ? ArnaDynamicColor.resolve(ArnaColors.buttonPressedColor, context)
-          : hover
-              ? ArnaDynamicColor.resolve(ArnaColors.buttonHoverColor, context)
-              : ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+  return ArnaDynamicColor.resolve(
+    !enabled
+        ? ArnaColors.backgroundDisabledColor
+        : pressed
+            ? ArnaColors.buttonPressedColor
+            : hover
+                ? ArnaColors.buttonHoverColor
+                : ArnaColors.buttonColor,
+    context,
+  );
 }
-
-bool isDark(context) =>
-    MediaQuery.of(context).platformBrightness == Brightness.dark;
-
-Color buttonColor(context) =>
-    isDark(context) ? Styles.buttonColorDark : Styles.buttonColorLight;
-
-Color buttonColorPressed(context) => isDark(context)
-    ? Styles.buttonColorPressedDark
-    : Styles.buttonColorPressedLight;
-
-Color buttonColorHover(context) => isDark(context)
-    ? Styles.buttonColorHoverDark
-    : Styles.buttonColorHoverLight;
-
-Color textFieldColor(context) =>
-    isDark(context) ? Styles.textFieldColorDark : Styles.textFieldColorLight;
-
-Color textFieldColorHover(context) => isDark(context)
-    ? Styles.textFieldColorHoverDark
-    : Styles.textFieldColorHoverLight;
-
-Color backgroundColor(context) => ArnaTheme.of(context).scaffoldBackgroundColor;
-
-Color backgroundColorDisabled(context) => isDark(context)
-    ? Styles.backgroundColorDisabledDark
-    : Styles.backgroundColorDisabledLight;
-
-Color cardColor(context) =>
-    ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
-
-Color cardColorHover(context) =>
-    isDark(context) ? Styles.cardColorHoverDark : Styles.cardColorHoverLight;
-
-TextStyle subtitleText(context, {bool disabled = false}) => TextStyle(
-      fontFamily: 'Inter',
-      fontWeight: FontWeight.normal,
-      fontSize: 14,
-      decoration: TextDecoration.none,
-      color: ArnaDynamicColor.resolve(
-        disabled ? ArnaColors.disabledColor : ArnaColors.secondaryTextColor,
-        context,
-      ),
-      overflow: TextOverflow.ellipsis,
-    );
 
 double deviceHeight(context) => MediaQuery.of(context).size.height;
 

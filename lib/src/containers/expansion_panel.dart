@@ -1,14 +1,9 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled expansion panel. The body of the panel is only visible when
+/// it is expanded.
 class ArnaExpansionPanel extends StatefulWidget {
-  final Widget? leading;
-  final String? title;
-  final String? subtitle;
-  final Widget? child;
-  final bool isExpanded;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
+  /// Creates an expansion panel in the Arna style.
   const ArnaExpansionPanel({
     Key? key,
     this.leading,
@@ -19,6 +14,30 @@ class ArnaExpansionPanel extends StatefulWidget {
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
+
+  /// The leading widget of the panel.
+  final Widget? leading;
+
+  /// The title of the panel.
+  final String? title;
+
+  /// The subtitle of the panel.
+  final String? subtitle;
+
+  /// The widget below this widget in the tree.
+  ///
+  /// {@macro flutter.widgets.ProxyWidget.child}
+  final Widget? child;
+
+  /// Whether this panel is expanded or not.
+  final bool isExpanded;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// widget.
+  final MouseCursor cursor;
+
+  /// The semantic label of the panel.
+  final String? semanticLabel;
 
   @override
   _ArnaExpansionPanelState createState() => _ArnaExpansionPanelState();
@@ -108,11 +127,14 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
         duration: Styles.basicDuration,
         curve: Styles.basicCurve,
         clipBehavior: Clip.antiAlias,
-        color: cardColor(context),
+        color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
         child: Column(
           children: [
             Container(
-              color: cardColorHover(context),
+              color: ArnaDynamicColor.resolve(
+                ArnaColors.cardHoverColor,
+                context,
+              ),
               child: Padding(
                 padding: Styles.vertical,
                 child: Row(children: children),
@@ -155,11 +177,14 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
                       context,
                     ),
                   ),
-                  color: !isEnabled
-                      ? cardColor(context)
-                      : _hover
-                          ? cardColorHover(context)
-                          : cardColor(context),
+                  color: ArnaDynamicColor.resolve(
+                    !isEnabled
+                        ? ArnaColors.cardColor
+                        : _hover
+                            ? ArnaColors.cardHoverColor
+                            : ArnaColors.cardColor,
+                    context,
+                  ),
                 ),
                 child: ClipRRect(
                   borderRadius: Styles.listBorderRadius,

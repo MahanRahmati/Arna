@@ -20,6 +20,8 @@ class ArnaDrawer extends StatelessWidget {
   }) : super(key: key);
 
   /// The widget below this widget in the tree.
+  ///
+  /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget? child;
 
   /// The semantic label of the dialog used by accessibility frameworks to

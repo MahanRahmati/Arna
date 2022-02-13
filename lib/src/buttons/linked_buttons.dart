@@ -4,7 +4,7 @@ class ArnaLinkedButtons extends StatelessWidget {
   /// Creates linked buttons.
   const ArnaLinkedButtons({Key? key, required this.buttons}) : super(key: key);
 
-  /// List of linked buttons.
+  /// The list of linked buttons.
   final List<ArnaLinkedButton> buttons;
 
   Widget _buildChild() {

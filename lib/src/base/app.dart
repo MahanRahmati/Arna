@@ -541,8 +541,9 @@ class ArnaScrollBehavior extends ScrollBehavior {
   }
 
   @override
-  ScrollPhysics getScrollPhysics(BuildContext context) =>
-      const BouncingScrollPhysics();
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const BouncingScrollPhysics();
+  }
 }
 
 class _ArnaAppState extends State<ArnaApp> {

@@ -2,24 +2,38 @@ import 'package:arna/arna.dart';
 import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
 
 class ArnaMasterDetailScaffold extends StatefulWidget {
-  final Widget headerBarLeading;
-  final String? title;
-  final Widget headerBarTrailing;
-  final List<MasterNavigationItem> items;
-  final Widget emptyBody;
-  final ValueChanged<int>? onItemSelected;
-  final int? currentIndex;
-
+  /// Create a master detail scaffold.
   const ArnaMasterDetailScaffold({
     Key? key,
-    this.headerBarLeading = const SizedBox.shrink(),
+    this.headerBarLeading,
     this.title,
-    this.headerBarTrailing = const SizedBox.shrink(),
+    this.headerBarTrailing,
     required this.items,
     required this.emptyBody,
     this.onItemSelected,
     this.currentIndex,
   }) : super(key: key);
+
+  /// The leading widget laid out within the header bar.
+  final Widget? headerBarLeading;
+
+  /// The title displayed in the header bar.
+  final String? title;
+
+  /// The trailing widget laid out within the header bar.
+  final Widget? headerBarTrailing;
+
+  /// The list of navigation items.
+  final List<MasterNavigationItem> items;
+
+  /// The widget to show when no item is selected.
+  final Widget emptyBody;
+
+  /// Called when one of the [items] is tapped.
+  final ValueChanged<int>? onItemSelected;
+
+  /// The index into [items] for the current active [MasterNavigationItem].
+  final int? currentIndex;
 
   @override
   _ArnaMasterDetailScaffoldState createState() =>
@@ -56,7 +70,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 onPressed: () => _navigator.pop(context),
                 tooltipMessage: "Back",
               ),
-              page.headerBarLeading,
+              if (page.headerBarLeading != null) page.headerBarLeading!,
             ],
           ),
           title: page.title,
@@ -155,29 +169,15 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
 }
 
 class MasterNavigationItem {
-  final Widget? leading;
-  final String? title;
-  final String? subtitle;
-  final Widget? trailing;
-  final WidgetBuilder builder;
-  final Widget headerBarLeading;
-  final Widget headerBarTrailing;
-  final ArnaSearchField? searchField;
-  final ArnaBadge? badge;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
+  /// Creates a master navigation item.
   const MasterNavigationItem({
     this.leading,
     this.title,
     this.subtitle,
     this.trailing,
     required this.builder,
-    this.headerBarLeading = const SizedBox.shrink(),
-    this.headerBarTrailing = const SizedBox.shrink(),
+    this.headerBarLeading,
+    this.headerBarTrailing,
     this.searchField,
     this.badge,
     this.isFocusable = true,
@@ -186,4 +186,48 @@ class MasterNavigationItem {
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
+
+  /// The leading widget of the item.
+  final Widget? leading;
+
+  /// The title of the item.
+  final String? title;
+
+  /// The subtitle of the item.
+  final String? subtitle;
+
+  /// The trailing widget of the item.
+  final Widget? trailing;
+
+  /// The widget builder of the item.
+  final WidgetBuilder builder;
+
+  /// The leading widget laid out within the detailed page's header bar.
+  final Widget? headerBarLeading;
+
+  /// The trailing widget laid out within the detailed page's header bar.
+  final Widget? headerBarTrailing;
+
+  /// The [ArnaSearchField] of the item.
+  final ArnaSearchField? searchField;
+
+  /// The [ArnaBadge] of the item.
+  final ArnaBadge? badge;
+
+  /// Whether this item is focusable or not.
+  final bool isFocusable;
+
+  /// Whether this item should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
+
+  /// The color of the item's focused border.
+  final Color accentColor;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// item.
+  final MouseCursor cursor;
+
+  /// The semantic label of the item.
+  final String? semanticLabel;
 }

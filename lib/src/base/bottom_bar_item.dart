@@ -9,6 +9,7 @@ import 'package:arna/arna.dart';
 ///
 ///  * [ArnaBottomBar]
 class ArnaBottomBarItem extends StatelessWidget {
+  /// Creates a bottom bar item.
   const ArnaBottomBarItem({
     Key? key,
     required this.label,

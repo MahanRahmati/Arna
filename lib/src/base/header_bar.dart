@@ -1,16 +1,42 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled header bar.
+///
+/// The HeaderBar displays [leading], [middle], and [trailing] widgets.
+/// [leading] widget is in the top left, the [trailing] is in the top right,
+/// the [middle] is between them.
+/// See also:
+///
+///  * [ArnaScaffold], which displays the [ArnaHeaderBar].
 class ArnaHeaderBar extends StatelessWidget {
-  final Widget leading;
-  final Widget middle;
-  final Widget trailing;
-
+  /// Creates a header bar in the Arna style.
   const ArnaHeaderBar({
     Key? key,
-    this.leading = const SizedBox.shrink(),
-    this.middle = const SizedBox.shrink(),
-    this.trailing = const SizedBox.shrink(),
+    this.leading,
+    this.middle,
+    this.trailing,
   }) : super(key: key);
+
+  /// The leading widget laid out within the header bar.
+  final Widget? leading;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? middle;
+
+  /// The trailing widget laid out within the header bar.
+  final Widget? trailing;
+
+  Widget _buildChild() {
+    final List<Widget> children = [];
+    children.add(leading != null ? leading! : const SizedBox.shrink());
+    children.add(middle != null ? middle! : const SizedBox.shrink());
+    children.add(trailing != null ? trailing! : const SizedBox.shrink());
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
+      children: children,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +53,7 @@ class ArnaHeaderBar extends StatelessWidget {
                 color: ArnaTheme.of(context).barBackgroundColor,
                 child: Padding(
                   padding: Styles.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [leading, middle, trailing],
-                  ),
+                  child: _buildChild(),
                 ),
               ),
               const ArnaHorizontalDivider(),

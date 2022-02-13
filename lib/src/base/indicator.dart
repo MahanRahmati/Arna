@@ -1,24 +1,48 @@
-import 'dart:math' as math;
-
 import 'package:arna/arna.dart';
 
-class ArnaIndicator extends StatefulWidget {
-  final double? value;
-  final double? size;
-  final Color accentColor;
-
-  const ArnaIndicator({
+/// A circular progress indicator, which spins to indicate that the application
+/// is busy.
+///
+/// There are two kinds of circular progress indicators:
+///
+///  * _Determinate_. Determinate progress indicators have a specific value at
+///    each point in time, and the value should increase monotonically from 0.0
+///    to 1.0, at which time the indicator is complete. To create a determinate
+///    progress indicator, use a non-null [value] between 0.0 and 1.0.
+///  * _Indeterminate_. Indeterminate progress indicators do not have a specific
+///    value at each point in time and instead indicate that progress is being
+///    made without indicating how much progress remains. To create an
+///    indeterminate progress indicator, use a null [value].
+class ArnaProgressIndicator extends StatefulWidget {
+  /// Creates a circular progress indicator.
+  const ArnaProgressIndicator({
     Key? key,
     this.value,
     this.size = Styles.indicatorSize,
     this.accentColor = ArnaColors.accentColor,
   }) : super(key: key);
 
+  /// If non-null, the value of this progress indicator.
+  ///
+  /// A value of 0.0 means no progress and 1.0 means that progress is complete.
+  /// The value will be clamped to be in the range 0.0-1.0.
+  ///
+  /// If null, this progress indicator is indeterminate, which means the
+  /// indicator displays a predetermined animation that does not indicate how
+  /// much actual progress is being made.
+  final double? value;
+
+  /// The progress indicator's size.
+  final double? size;
+
+  /// The progress indicator's background color.
+  final Color accentColor;
+
   @override
-  _ArnaIndicatorState createState() => _ArnaIndicatorState();
+  _ArnaProgressIndicatorState createState() => _ArnaProgressIndicatorState();
 }
 
-class _ArnaIndicatorState extends State<ArnaIndicator>
+class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -41,6 +65,7 @@ class _ArnaIndicatorState extends State<ArnaIndicator>
   @override
   Widget build(BuildContext context) {
     final double? value = widget.value;
+    const pi = 3.1415926535897932;
     return SizedBox(
       height: widget.size,
       width: widget.size,
@@ -51,8 +76,8 @@ class _ArnaIndicatorState extends State<ArnaIndicator>
             painter: _ProgressPainter(
               color: widget.accentColor,
               value: widget.value == null
-                  ? _controller.value * 2 * math.pi
-                  : value!.clamp(0.0, 1.0) * (math.pi * 2.0 - .001),
+                  ? _controller.value * 2 * pi
+                  : value!.clamp(0.0, 1.0) * (pi * 2.0 - .001),
               offset: widget.value == null,
             ),
           );
@@ -87,7 +112,7 @@ class _ProgressPainter extends CustomPainter {
     );
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: size.width / 4),
-      math.pi * 1.5 + (offset ? value : 0),
+      (3.1415926535897932) * 1.5 + (offset ? value : 0),
       value,
       false,
       Paint()

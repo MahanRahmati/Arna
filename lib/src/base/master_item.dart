@@ -1,18 +1,7 @@
 import 'package:arna/arna.dart';
 
-class ArnaMasterItem extends StatefulWidget {
-  final Widget? leading;
-  final String? title;
-  final String? subtitle;
-  final Widget? trailing;
-  final VoidCallback? onPressed;
-  final bool selected;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
+class ArnaMasterItem extends StatelessWidget {
+  /// Creates a master item.
   const ArnaMasterItem({
     Key? key,
     this.leading,
@@ -28,99 +17,60 @@ class ArnaMasterItem extends StatefulWidget {
     this.semanticLabel,
   }) : super(key: key);
 
-  @override
-  _ArnaMasterItemState createState() => _ArnaMasterItemState();
-}
+  /// The leading widget of the item.
+  final Widget? leading;
 
-class _ArnaMasterItemState extends State<ArnaMasterItem> {
-  FocusNode? focusNode;
-  bool _hover = false;
-  bool _focused = false;
-  bool _pressed = false;
-  late Map<Type, Action<Intent>> _actions;
-  late Map<ShortcutActivator, Intent> _shortcuts;
+  /// The title of the item.
+  final String? title;
 
-  bool get isEnabled => widget.onPressed != null;
+  /// The subtitle of the item.
+  final String? subtitle;
 
-  @override
-  void initState() {
-    super.initState();
-    focusNode = FocusNode(canRequestFocus: isEnabled);
-    if (widget.autofocus) focusNode!.requestFocus();
-    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
-    _shortcuts = const {
-      SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-      SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-    };
-  }
+  /// The trailing widget of the item.
+  final Widget? trailing;
 
-  @override
-  void didUpdateWidget(ArnaMasterItem oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.onPressed != oldWidget.onPressed) {
-      focusNode!.canRequestFocus = isEnabled;
-      if (!isEnabled) _hover = _pressed = false;
-    }
-  }
+  /// The callback that is called when a item is tapped.
+  final VoidCallback? onPressed;
 
-  @override
-  void dispose() {
-    focusNode!.dispose();
-    focusNode = null;
-    super.dispose();
-  }
+  /// Whether this item is selected or not.
+  final bool selected;
 
-  void _handleFocusChange(bool hasFocus) {
-    setState(() {
-      _focused = hasFocus;
-      if (!hasFocus) _pressed = false;
-    });
-  }
+  /// Whether this item is focusable or not.
+  final bool isFocusable;
 
-  Future<void> _handleTap() async {
-    if (isEnabled) {
-      setState(() => _pressed = true);
-      widget.onPressed!();
-      await Future.delayed(Styles.basicDuration);
-      if (mounted) setState(() => _pressed = false);
-    }
-  }
+  /// Whether this item should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
 
-  void _handleTapDown(_) {
-    if (mounted) setState(() => _pressed = true);
-  }
+  /// The color of the item's focused border.
+  final Color accentColor;
 
-  void _handleTapUp(_) {
-    if (mounted) setState(() => _pressed = false);
-  }
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// widget.
+  final MouseCursor cursor;
 
-  void _handleHover(hover) {
-    if (hover != _hover && mounted) setState(() => _hover = hover);
-  }
+  /// The semantic label of the item.
+  final String? semanticLabel;
 
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
-  }
-
-  Widget _buildChild() {
+  Widget _buildChild(BuildContext context) {
     final List<Widget> children = [];
-    if (widget.leading != null) {
-      children.add(Padding(padding: Styles.normal, child: widget.leading));
+    if (leading != null) {
+      children.add(Padding(padding: Styles.normal, child: leading));
     }
     children.add(
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.title != null)
+          if (title != null)
             Padding(
               padding: Styles.tileTextPadding,
-              child: Text(widget.title!),
+              child: Text(title!),
             ),
-          if (widget.subtitle != null)
+          if (subtitle != null)
             Padding(
               padding: Styles.tileTextPadding,
               child: Text(
-                widget.subtitle!,
+                subtitle!,
                 style: ArnaTheme.of(context).textTheme.subtitleTextStyle,
               ),
             ),
@@ -128,8 +78,8 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
       ),
     );
     children.add(const Spacer());
-    if (widget.trailing != null) {
-      children.add(Padding(padding: Styles.normal, child: widget.trailing));
+    if (trailing != null) {
+      children.add(Padding(padding: Styles.normal, child: trailing));
     }
     return Row(children: children);
   }
@@ -137,77 +87,61 @@ class _ArnaMasterItemState extends State<ArnaMasterItem> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: Styles.smallHorizontal,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          button: true,
-          enabled: isEnabled,
-          focusable: isEnabled,
-          focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            onTapDown: _handleTapDown,
-            onTapUp: _handleTapUp,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
-              mouseCursor: widget.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: Stack(
-                alignment: Alignment.centerLeft,
-                children: [
-                  AnimatedContainer(
-                    width: double.infinity,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.borderRadius,
-                      border: Border.all(
-                        color: !isEnabled
-                            ? Styles.color00
-                            : _focused
-                                ? widget.accentColor
-                                : ArnaDynamicColor.resolve(
-                                    ArnaColors.borderColor,
-                                    context,
-                                  ),
-                      ),
-                      color: !isEnabled
-                          ? Styles.color00
-                          : _pressed
-                              ? buttonColorPressed(context)
-                              : widget.selected
-                                  ? buttonColorHover(context)
-                                  : _hover
-                                      ? cardColorHover(context)
-                                      : cardColor(context),
-                    ),
-                    padding: Styles.tilePadding,
-                    child: _buildChild(),
+      padding: Styles.small,
+      child: ArnaBaseButton(
+        builder: (context, enabled, hover, focused, pressed) {
+          return Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              AnimatedContainer(
+                width: double.infinity,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.borderRadius,
+                  border: Border.all(
+                    color: !enabled
+                        ? Styles.color00
+                        : focused
+                            ? accentColor
+                            : ArnaDynamicColor.resolve(
+                                ArnaColors.borderColor,
+                                context,
+                              ),
                   ),
-                  AnimatedContainer(
-                    height: widget.selected ? Styles.iconSize : 0,
-                    width: Styles.smallPadding,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.borderRadius,
-                      color: widget.accentColor,
-                    ),
-                  ),
-                ],
+                  color: !enabled
+                      ? Styles.color00
+                      : pressed
+                          ? buttonColorPressed(context)
+                          : selected
+                              ? buttonColorHover(context)
+                              : hover
+                                  ? cardColorHover(context)
+                                  : cardColor(context),
+                ),
+                padding: Styles.tilePadding,
+                child: _buildChild(context),
               ),
-            ),
-          ),
-        ),
+              AnimatedContainer(
+                height: selected ? Styles.iconSize : 0,
+                width: Styles.smallPadding,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.borderRadius,
+                  color: accentColor,
+                ),
+              ),
+            ],
+          );
+        },
+        onPressed: onPressed,
+        tooltipMessage: title,
+        isFocusable: isFocusable,
+        autofocus: autofocus,
+        cursor: cursor,
+        semanticLabel: semanticLabel,
       ),
     );
   }

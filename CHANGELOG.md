@@ -1,3 +1,13 @@
+## 0.1.4
+
+- Add documentation to ArnaHeaderBar
+- Rename ArnaIndicator to ArnaProgressIndicator
+- Add documentation to ArnaProgressIndicator
+- Add documentation to ArnaMasterDetailScaffold
+- Recfactor ArnaMasterItem
+- Add documentation to ArnaMasterItem
+- Add documentation to ArnaScaffold
+
 ## 0.1.3
   
 - Add ArnaBaseButton

@@ -228,8 +228,8 @@ class _HomeState extends State<Home> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    ArnaIndicator(),
-                    ArnaIndicator(size: 140),
+                    ArnaProgressIndicator(),
+                    ArnaProgressIndicator(size: 140),
                   ],
                 ),
               ],

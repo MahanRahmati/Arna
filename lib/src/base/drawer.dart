@@ -36,13 +36,11 @@ class ArnaDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String label =
-        semanticLabel ?? MaterialLocalizations.of(context).drawerLabel;
     return Semantics(
       scopesRoute: true,
       namesRoute: true,
       explicitChildNodes: true,
-      label: label,
+      label: semanticLabel ?? MaterialLocalizations.of(context).drawerLabel,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -149,7 +147,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
     }
   }
 
-// The animation controller's state is our build state, and it changed already.
+  // The animation controller's state is our build state, and it changed already.
   void _animationChanged() => setState(() {});
 
   ColorTween _buildScrimColorTween() =>

@@ -1,3 +1,8 @@
+## 0.1.7
+
+- Cleanup colors
+- Update Readme
+
 ## 0.1.6
 
 - Refactor ArnaBadge

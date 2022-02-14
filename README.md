@@ -5,8 +5,13 @@ Arna Framework - A unique set of widgets for building applications with Flutter.
 <p align="start">
   <a href="https://pub.dartlang.org/packages/arna"><img src="https://img.shields.io/pub/v/arna.svg" alt="pub.dev"></a>
   <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
+  <a href="https://github.com/leanflutter/awesome-flutter-desktop">
+   <img alt="Awesome Flutter Desktop" src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg?longCache=true&style=flat-square" />
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
+
+<img alt="Main_light" src="https://user-images.githubusercontent.com/16052180/153841747-9b501bb0-f78a-4d90-bbec-88ae51982df3.png">
+<img alt="Main_dark" src="https://user-images.githubusercontent.com/16052180/153842559-3a34ab18-d056-40f9-b083-dedf9cb9a9aa.png">
 
 ## Content
 
@@ -50,7 +55,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.1.6
+  arna: ^0.1.7
 ```
 
 And import it

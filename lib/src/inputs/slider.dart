@@ -64,7 +64,7 @@ class _ArnaSliderState extends State<ArnaSlider> {
     return Padding(
       padding: Styles.small,
       child: Material(
-        color: Styles.color00,
+        color: ArnaColors.color00,
         child: SliderTheme(
           data: SliderThemeData(
             activeTrackColor: widget.accentColor,
@@ -79,7 +79,7 @@ class _ArnaSliderState extends State<ArnaSlider> {
                   ? widget.accentColor
                   : widget.accentColor.withOpacity(0.3),
             ),
-            overlayColor: Styles.color00,
+            overlayColor: ArnaColors.color00,
           ),
           child: Slider(
             value: widget.value,

@@ -153,7 +153,7 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                               context,
                             )
                           : _selected && isEnabled
-                              ? Styles.cardColorLight
+                              ? ArnaColors.color36
                               : ArnaDynamicColor.resolve(
                                   _hover
                                       ? ArnaColors.buttonHoverColor

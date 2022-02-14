@@ -117,7 +117,7 @@ class ArnaTextField extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: Material(
-        color: Styles.color00,
+        color: ArnaColors.color00,
         child: TextField(
           controller: controller,
           keyboardType: keyboardType,
@@ -241,11 +241,11 @@ class ArnaTextField extends StatelessWidget {
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
-              borderSide: const BorderSide(color: Styles.errorColor),
+              borderSide: const BorderSide(color: ArnaColors.errorColor),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
-              borderSide: const BorderSide(color: Styles.errorColor),
+              borderSide: const BorderSide(color: ArnaColors.errorColor),
             ),
             errorStyle: const TextStyle(height: 0, color: Colors.transparent),
             contentPadding: Styles.normal,

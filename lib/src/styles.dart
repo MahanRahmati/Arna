@@ -1,35 +1,36 @@
 import 'package:arna/arna.dart';
 
 abstract class Styles {
+  static const double base = 7;
   // Doubles
-  static const double cursorWidth = 1.75;
-  static const double smallPadding = 3.5;
-  static const double cursorRadius = 3.5;
-  static const double padding = 7;
-  static const double borderRadiusSize = 7;
-  static const double sliderTrackSize = 7;
-  static const double scrollBarThickness = 7;
-  static const double sliderSize = 10.5;
-  static const double radioIndicatorSize = 12.25;
-  static const double largePadding = 14;
-  static const double checkBoxIconSize = 14;
-  static const double tooltipOffset = 14;
-  static const double iconSize = 21;
-  static const double badgeSize = 21;
-  static const double checkBoxSize = 21;
-  static const double radioSize = 21;
-  static const double scrollPaddingSize = 21;
-  static const double switchThumbSize = 24.5;
-  static const double switchHeight = 28;
-  static const double buttonSize = 35;
-  static const double indicatorSize = 35;
-  static const double switchWidth = 49;
-  static const double headerBarHeight = 49;
-  static const double sideBarItemHeight = 49;
-  static const double sideBarCompactWidth = 63;
-  static const double searchWidth = 308;
-  static const double sideBarWidth = 308;
-  static const double dialogSize = 630;
+  static const double cursorWidth = base / 4;
+  static const double smallPadding = base / 2;
+  static const double cursorRadius = base / 2;
+  static const double padding = base;
+  static const double borderRadiusSize = base;
+  static const double sliderTrackSize = base;
+  static const double scrollBarThickness = base;
+  static const double sliderSize = base * 1.5;
+  static const double radioIndicatorSize = base * 1.75;
+  static const double largePadding = base * 2;
+  static const double checkBoxIconSize = base * 2;
+  static const double tooltipOffset = base * 2;
+  static const double iconSize = base * 3;
+  static const double badgeSize = base * 3;
+  static const double checkBoxSize = base * 3;
+  static const double radioSize = base * 3;
+  static const double scrollPaddingSize = base * 3;
+  static const double switchThumbSize = base * 3.5;
+  static const double switchHeight = base * 4;
+  static const double buttonSize = base * 5;
+  static const double indicatorSize = base * 5;
+  static const double switchWidth = base * 7;
+  static const double headerBarHeight = base * 7;
+  static const double sideBarItemHeight = base * 7;
+  static const double sideBarCompactWidth = base * 9;
+  static const double searchWidth = base * 44;
+  static const double sideBarWidth = base * 44;
+  static const double dialogSize = base * 90;
 
   // Durations
   static const Duration basicDuration = Duration(milliseconds: 210);

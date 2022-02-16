@@ -1,3 +1,11 @@
+## 0.1.8
+
+- Fix long press on ArnaBaseButton
+- Do not show Tooltip when button is disabled
+- New light theme
+- Update ArnaSideBarItem
+- Update Styles
+
 ## 0.1.7
 
 - Cleanup colors

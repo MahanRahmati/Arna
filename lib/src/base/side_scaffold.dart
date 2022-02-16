@@ -103,7 +103,9 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                       duration: Styles.basicDuration,
                       curve: Styles.basicCurve,
                       clipBehavior: Clip.antiAlias,
-                      color: ArnaTheme.of(context).scaffoldBackgroundColor,
+                      color: ArnaTheme.of(context)
+                          .scaffoldBackgroundColor
+                          .withAlpha(126),
                       child: _buildChild(),
                     ),
                   if (constraints.maxWidth > 644) const ArnaVerticalDivider(),

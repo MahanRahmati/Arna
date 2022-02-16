@@ -7,7 +7,7 @@ Color buttonBorder(
   Color accentColor,
 ) {
   return !enabled
-      ? ArnaColors.color00
+      ? ArnaDynamicColor.resolve(ArnaColors.borderColor, context)
       : focused
           ? accentColor
           : ArnaDynamicColor.resolve(ArnaColors.borderColor, context);

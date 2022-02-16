@@ -55,7 +55,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.1.7
+  arna: ^0.1.8
 ```
 
 And import it

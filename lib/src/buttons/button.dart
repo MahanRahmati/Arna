@@ -113,7 +113,7 @@ class ArnaButton extends StatelessWidget {
           );
         },
         onPressed: onPressed,
-        tooltipMessage: tooltipMessage,
+        tooltipMessage: onPressed != null ? tooltipMessage : null,
         isFocusable: isFocusable,
         autofocus: autofocus,
         cursor: cursor,

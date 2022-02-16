@@ -126,7 +126,7 @@ class _ArnaLinked extends StatelessWidget {
         );
       },
       onPressed: button.onPressed,
-      tooltipMessage: button.tooltipMessage,
+      tooltipMessage: button.onPressed != null ? button.tooltipMessage : null,
       isFocusable: button.isFocusable,
       autofocus: button.autofocus,
       cursor: button.cursor,

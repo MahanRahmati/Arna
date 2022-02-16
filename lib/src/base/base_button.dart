@@ -112,11 +112,11 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
   }
 
   void _handleTapDown(_) {
-    if (mounted) setState(() => _pressed = true);
+    if (!_pressed && mounted) setState(() => _pressed = true);
   }
 
   void _handleTapUp(_) {
-    if (mounted) setState(() => _pressed = false);
+    if (_pressed && mounted) setState(() => _pressed = false);
   }
 
   void _handleHover(hover) {
@@ -143,6 +143,8 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
             onTap: _handleTap,
             onTapDown: _handleTapDown,
             onTapUp: _handleTapUp,
+            onLongPressStart: _handleTapDown,
+            onLongPressEnd: _handleTapUp,
             child: FocusableActionDetector(
               enabled: isEnabled && widget.isFocusable,
               focusNode: focusNode,

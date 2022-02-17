@@ -97,7 +97,7 @@ class ArnaColors {
 
   static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
     debugLabel: 'cardHoverColor',
-    color: color30,
+    color: color32,
     darkColor: color11,
     highContrastColor: color30,
     darkHighContrastColor: color11,
@@ -105,7 +105,7 @@ class ArnaColors {
 
   static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
     debugLabel: 'cardPressedColor',
-    color: color24,
+    color: color30,
     darkColor: color17,
     highContrastColor: color24,
     darkHighContrastColor: color17,

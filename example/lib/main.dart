@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
   bool _switch2 = false;
   final bool _switch3 = false;
   double _sliderValue = 50;
+  int segmentedControlGroupValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +89,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             ArnaList(
-              title: "Linked buttons",
+              title: "Linked Buttons",
               items: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -114,6 +115,22 @@ class _HomeState extends State<Home> {
                           onPressed: null,
                         ),
                       ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            ArnaList(
+              title: "Segmented Control",
+              items: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ArnaSegmentedControl(
+                      groupValue: segmentedControlGroupValue,
+                      children: const {0: "Item 1", 1: "Item 2", 2: "Item 3"},
+                      onValueChanged: (int i) =>
+                          setState(() => segmentedControlGroupValue = i),
                     ),
                   ],
                 ),
@@ -204,7 +221,7 @@ class _HomeState extends State<Home> {
               ],
             ),
             ArnaList(
-              title: "List tile",
+              title: "List Tile",
               items: [
                 ArnaListTile(
                   title: "Title 1",
@@ -260,7 +277,12 @@ class _HomeState extends State<Home> {
             ),
             const ArnaList(
               title: "Text Field",
-              items: [ArnaTextField()],
+              items: [
+                Padding(
+                  padding: Styles.large,
+                  child: ArnaTextField(),
+                )
+              ],
             )
           ],
         ),

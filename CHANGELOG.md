@@ -1,3 +1,16 @@
+## 0.1.9
+
+- Add ArnaSegmentedControl
+- Add hover to inputs
+- Fix accentColor in ArnaLinkedButtons
+- Add documentation to ArnaListTile
+- Refactor ArnaListTile
+- Add documentation to ArnaList
+- Add new image for light theme
+- Refactor ArnaCheckBoxListTile
+- Refactor ArnaRadioListTile
+- Refactor ArnaSwitchListTile
+
 ## 0.1.8
 
 - Fix long press on ArnaBaseButton

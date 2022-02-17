@@ -1,6 +1,6 @@
 import 'package:arna/arna.dart';
 
-class ArnaRadioListTile<T> extends StatefulWidget {
+class ArnaRadioListTile<T> extends StatelessWidget {
   final T value;
   final T? groupValue;
   final ValueChanged<T?>? onChanged;
@@ -28,123 +28,32 @@ class ArnaRadioListTile<T> extends StatefulWidget {
     this.semanticLabel,
   }) : super(key: key);
 
-  @override
-  State<ArnaRadioListTile> createState() => _ArnaRadioListTileState();
-}
-
-class _ArnaRadioListTileState extends State<ArnaRadioListTile> {
-  bool _hover = false;
-
-  bool get isEnabled => widget.onChanged != null;
-
   void _handleTap() {
-    if (isEnabled) widget.onChanged!(widget.value);
-  }
-
-  void _handleEnter(event) {
-    if (mounted) setState(() => _hover = true);
-  }
-
-  void _handleExit(event) {
-    if (mounted) setState(() => _hover = false);
+    if (onChanged != null) onChanged!(value);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: widget.cursor,
-      onEnter: _handleEnter,
-      onExit: _handleExit,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: _handleTap,
-        child: AnimatedContainer(
-          duration: Styles.basicDuration,
-          curve: Styles.basicCurve,
-          color: ArnaDynamicColor.resolve(
-            !isEnabled
-                ? ArnaColors.backgroundDisabledColor
-                : _hover
-                    ? ArnaColors.cardHoverColor
-                    : ArnaColors.cardColor,
-            context,
-          ),
-          padding: Styles.tilePadding,
-          child: Row(
-            children: [
-              Padding(
-                padding: Styles.small,
-                child: ArnaRadio(
-                  value: widget.value,
-                  groupValue: widget.groupValue,
-                  onChanged: widget.onChanged,
-                  isFocusable: widget.isFocusable,
-                  autofocus: widget.autofocus,
-                  accentColor: widget.accentColor,
-                  cursor: widget.cursor,
-                  semanticLabel: widget.semanticLabel,
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (widget.title != null)
-                      Padding(
-                        padding: Styles.tileTextPadding,
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                widget.title!,
-                                style: ArnaTheme.of(context)
-                                    .textTheme
-                                    .buttonTextStyle
-                                    .copyWith(
-                                      color: ArnaDynamicColor.resolve(
-                                        !isEnabled
-                                            ? ArnaColors.disabledColor
-                                            : ArnaColors.primaryTextColor,
-                                        context,
-                                      ),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (widget.subtitle != null)
-                      Padding(
-                        padding: Styles.tileTextPadding,
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                widget.subtitle!,
-                                style: ArnaTheme.of(context)
-                                    .textTheme
-                                    .buttonTextStyle
-                                    .copyWith(
-                                      color: ArnaDynamicColor.resolve(
-                                        !isEnabled
-                                            ? ArnaColors.disabledColor
-                                            : ArnaColors.secondaryTextColor,
-                                        context,
-                                      ),
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              if (widget.trailingButton != null) widget.trailingButton!,
-            ],
-          ),
+    return ArnaListTile(
+      leading: Padding(
+        padding: Styles.small,
+        child: ArnaRadio(
+          value: value,
+          groupValue: groupValue,
+          onChanged: onChanged,
+          isFocusable: isFocusable,
+          autofocus: autofocus,
+          accentColor: accentColor,
+          cursor: cursor,
+          semanticLabel: semanticLabel,
         ),
       ),
+      title: title,
+      subtitle: subtitle,
+      trailing: trailingButton,
+      onTap: onChanged != null ? _handleTap : null,
+      actionable: true,
+      cursor: cursor,
     );
   }
 }

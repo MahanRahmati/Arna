@@ -1,10 +1,15 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled list view.
 class ArnaList extends StatelessWidget {
-  final String? title;
-  final List<Widget> items;
-
+  /// Creates a vertical array of children.
   const ArnaList({Key? key, this.title, required this.items}) : super(key: key);
+
+  /// The title of list view.
+  final String? title;
+
+  /// The items of list view.
+  final List<Widget> items;
 
   Widget _buildChild() {
     final List<Widget> children = [];

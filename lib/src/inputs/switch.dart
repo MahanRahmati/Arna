@@ -112,12 +112,14 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                       border: Border.all(
                         color: _focused
                             ? widget.accentColor
-                            : widget.value
+                            : _hover && isEnabled
                                 ? widget.accentColor
-                                : ArnaDynamicColor.resolve(
-                                    ArnaColors.borderColor,
-                                    context,
-                                  ),
+                                : widget.value
+                                    ? widget.accentColor
+                                    : ArnaDynamicColor.resolve(
+                                        ArnaColors.borderColor,
+                                        context,
+                                      ),
                       ),
                       color: !isEnabled
                           ? ArnaDynamicColor.resolve(

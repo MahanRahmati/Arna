@@ -108,7 +108,7 @@ class _ArnaLinked extends StatelessWidget {
                   : const Radius.circular(0),
             ),
             border: focused
-                ? Border.all(color: ArnaColors.accentColor)
+                ? Border.all(color: button.accentColor)
                 : Border.all(color: ArnaColors.color00),
             color: buttonBackground(
               context,

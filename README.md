@@ -10,7 +10,7 @@ Arna Framework - A unique set of widgets for building applications with Flutter.
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-<img alt="Main_light" src="https://user-images.githubusercontent.com/16052180/153841747-9b501bb0-f78a-4d90-bbec-88ae51982df3.png">
+<img alt="Main_light" src="https://user-images.githubusercontent.com/16052180/154450510-d94ac97b-356c-4f0d-b842-7be8d941aaf6.png">
 <img alt="Main_dark" src="https://user-images.githubusercontent.com/16052180/153842559-3a34ab18-d056-40f9-b083-dedf9cb9a9aa.png">
 
 ## Content
@@ -27,6 +27,7 @@ Arna Framework - A unique set of widgets for building applications with Flutter.
     - [Arna Icon Button](#arna-icon-button)
     - [Arna Text Button](#arna-text-button)
     - [Arna Linked Buttons](#arna-linked-buttons)
+    - [Arna Segmented Control](#arna-segmented-control)
     - [Arna CheckBox](#arna-checkbox)
     - [Arna CheckBox List Tile](#arna-checkbox-list-tile)
     - [Arna Radio](#arna-radio)
@@ -55,7 +56,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.1.8
+  arna: ^0.1.9
 ```
 
 And import it
@@ -202,6 +203,16 @@ ArnaLinkedButtons(
             tooltipMessage: "Add",
         ),
     ],
+);
+```
+
+### Arna Segmented Control
+
+```dart
+ArnaSegmentedControl(
+    groupValue: segmentedControlGroupValue,
+    children: {0: "Item 1", 1: "Item 2", 2: "Item 3"},
+    onValueChanged: (int i) => setState(() => segmentedControlGroupValue = i),
 );
 ```
 
@@ -423,7 +434,6 @@ ArnaSearchField(
 
 ## TODO
 
-- Tab
 - Browser Tab
 - Dropdown Button
 - Popup Button

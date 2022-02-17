@@ -37,6 +37,7 @@ export 'package:arna/src/inputs/checkbox.dart';
 export 'package:arna/src/inputs/checkbox_list_tile.dart';
 export 'package:arna/src/inputs/radio.dart';
 export 'package:arna/src/inputs/radio_list_tile.dart';
+export 'package:arna/src/inputs/segmented_control.dart';
 export 'package:arna/src/inputs/slider.dart';
 export 'package:arna/src/inputs/switch.dart';
 export 'package:arna/src/inputs/switch_list_tile.dart';

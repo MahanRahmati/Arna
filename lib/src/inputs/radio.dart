@@ -118,10 +118,12 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                             ? widget.accentColor
                             : _selected && isEnabled
                                 ? widget.accentColor
-                                : ArnaDynamicColor.resolve(
-                                    ArnaColors.borderColor,
-                                    context,
-                                  ),
+                                : _hover && isEnabled
+                                    ? widget.accentColor
+                                    : ArnaDynamicColor.resolve(
+                                        ArnaColors.borderColor,
+                                        context,
+                                      ),
                       ),
                       color: !isEnabled
                           ? ArnaDynamicColor.resolve(

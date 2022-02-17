@@ -130,10 +130,12 @@ class _ArnaCheckBoxState extends State<ArnaCheckBox> {
                             ? widget.accentColor
                             : _selected && isEnabled
                                 ? widget.accentColor
-                                : ArnaDynamicColor.resolve(
-                                    ArnaColors.borderColor,
-                                    context,
-                                  ),
+                                : _hover && isEnabled
+                                    ? widget.accentColor
+                                    : ArnaDynamicColor.resolve(
+                                        ArnaColors.borderColor,
+                                        context,
+                                      ),
                       ),
                       color: !isEnabled
                           ? ArnaDynamicColor.resolve(

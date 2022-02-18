@@ -9,7 +9,7 @@
 - Add documentation to ArnaTextThemeData
 - Add documentation to ArnaTheme
 - Add documentation to ArnaThemeData
-- Refactor to ArnaThemeData
+- Refactor ArnaThemeData
 - Remove ArnaThemeMode
 
 ## 0.1.9

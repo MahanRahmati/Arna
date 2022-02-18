@@ -1,7 +1,8 @@
 name: Flutter CI
 
 on:
-  release: [published]
+  release:
+    types: [published]
 
 jobs:
   build:

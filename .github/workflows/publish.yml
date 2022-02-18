@@ -1,4 +1,4 @@
-name: Flutter CI
+name: Publish Package
 
 on:
   release:
@@ -10,10 +10,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Install Flutter
-        uses: subosito/flutter-action@v1
+      # Setup the flutter environment.
+      - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '2.10.0'
+          channel: 'stable' # 'dev', 'alpha', default to: 'stable'
+          # flutter-version: '1.12.x' # you can also specify exact version of flutter
       - name: Install dependencies
         run: flutter pub get
       - name: Analyze

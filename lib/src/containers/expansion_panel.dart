@@ -81,7 +81,16 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
             if (widget.title != null)
               Padding(
                 padding: Styles.tileTextPadding,
-                child: Row(children: [Flexible(child: Text(widget.title!))]),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        widget.title!,
+                        style: ArnaTheme.of(context).textTheme.textStyle,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             if (widget.subtitle != null)
               Padding(

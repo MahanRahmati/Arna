@@ -59,6 +59,7 @@ const TextStyle _kDefaultCaptionTextStyle = TextStyle(
 );
 
 TextStyle? _resolveTextStyle(TextStyle? style, BuildContext context) {
+  // This does not resolve the shadow color, foreground, background, etc.
   return style?.copyWith(
     color: ArnaDynamicColor.maybeResolve(style.color, context),
     backgroundColor:
@@ -68,18 +69,11 @@ TextStyle? _resolveTextStyle(TextStyle? style, BuildContext context) {
   );
 }
 
+/// Arna typography theme in a [ArnaThemeData].
 @immutable
 class ArnaTextThemeData with Diagnosticable {
-  final Color? _primaryColor;
-  final TextStyle? _largeTitleTextStyle;
-  final TextStyle? _titleTextStyle;
-  final TextStyle? _textStyle;
-  final TextStyle? _subtitleTextStyle;
-  final TextStyle? _buttonTextStyle;
-  final TextStyle? _captionTextStyle;
-
+  /// Create a [ArnaTextThemeData].
   const ArnaTextThemeData({
-    Color primaryColor = ArnaColors.accentColor,
     TextStyle? largeTitleTextStyle,
     TextStyle? titleTextStyle,
     TextStyle? textStyle,
@@ -88,7 +82,6 @@ class ArnaTextThemeData with Diagnosticable {
     TextStyle? captionTextStyle,
   }) : this._raw(
           const _TextThemeDefaultsBuilder(ArnaColors.primaryTextColor),
-          primaryColor,
           largeTitleTextStyle,
           titleTextStyle,
           textStyle,
@@ -99,37 +92,58 @@ class ArnaTextThemeData with Diagnosticable {
 
   const ArnaTextThemeData._raw(
     this._defaults,
-    this._primaryColor,
     this._largeTitleTextStyle,
     this._titleTextStyle,
     this._textStyle,
     this._subtitleTextStyle,
     this._buttonTextStyle,
     this._captionTextStyle,
-  ) : assert(_primaryColor != null);
+  );
 
   final _TextThemeDefaultsBuilder _defaults;
 
+  final TextStyle? _largeTitleTextStyle;
+
+  /// The [TextStyle] of large titles.
   TextStyle get largeTitleTextStyle =>
       _largeTitleTextStyle ?? _defaults.largeTitleTextStyle;
 
+  final TextStyle? _titleTextStyle;
+
+  /// The [TextStyle] of titles.
   TextStyle get titleTextStyle => _titleTextStyle ?? _defaults.titleTextStyle;
 
+  final TextStyle? _textStyle;
+
+  /// The [TextStyle] of general text content for Arna widgets.
   TextStyle get textStyle => _textStyle ?? _defaults.textStyle;
 
+  final TextStyle? _subtitleTextStyle;
+
+  /// The [TextStyle] of subtitles.
   TextStyle get subtitleTextStyle =>
       _subtitleTextStyle ?? _defaults.subtitleTextStyle;
+  final TextStyle? _buttonTextStyle;
 
+  /// The [TextStyle] of buttons.
   TextStyle get buttonTextStyle =>
       _buttonTextStyle ?? _defaults.buttonTextStyle;
+  final TextStyle? _captionTextStyle;
 
+  /// The [TextStyle] of captions.
   TextStyle get captionTextStyle =>
       _captionTextStyle ?? _defaults.captionTextStyle;
 
+  /// Returns a copy of the current [ArnaTextThemeData] with all the colors
+  /// resolved against the given [BuildContext].
+  ///
+  /// If any of the [InheritedWidget]s required to resolve this
+  /// [ArnaTextThemeData] is not found in [context], any unresolved
+  /// [ArnaDynamicColor]s will use the default trait value
+  /// ([Brightness.light] platform brightness and normal contrast).
   ArnaTextThemeData resolveFrom(BuildContext context) {
     return ArnaTextThemeData._raw(
       _defaults.resolveFrom(context),
-      ArnaDynamicColor.maybeResolve(_primaryColor, context),
       _resolveTextStyle(_largeTitleTextStyle, context),
       _resolveTextStyle(_titleTextStyle, context),
       _resolveTextStyle(_textStyle, context),
@@ -139,8 +153,9 @@ class ArnaTextThemeData with Diagnosticable {
     );
   }
 
+  /// Returns a copy of the current [ArnaTextThemeData] instance with
+  /// specified overrides.
   ArnaTextThemeData copyWith({
-    Color? primaryColor,
     TextStyle? largeTitleTextStyle,
     TextStyle? titleTextStyle,
     TextStyle? textStyle,
@@ -151,7 +166,6 @@ class ArnaTextThemeData with Diagnosticable {
   }) {
     return ArnaTextThemeData._raw(
       _defaults,
-      primaryColor ?? _primaryColor,
       largeTitleTextStyle ?? _largeTitleTextStyle,
       titleTextStyle ?? _titleTextStyle,
       textStyle ?? _textStyle,

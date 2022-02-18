@@ -12,7 +12,7 @@ class ArnaMasterItem extends StatelessWidget {
     this.selected = false,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -43,7 +43,7 @@ class ArnaMasterItem extends StatelessWidget {
   final bool autofocus;
 
   /// The color of the item's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// widget.
@@ -104,7 +104,7 @@ class ArnaMasterItem extends StatelessWidget {
                     color: !enabled
                         ? ArnaColors.color00
                         : focused
-                            ? accentColor
+                            ? accentColor ?? ArnaTheme.of(context).accentColor
                             : ArnaDynamicColor.resolve(
                                 ArnaColors.borderColor,
                                 context,

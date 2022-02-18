@@ -8,7 +8,7 @@ class ArnaSwitchListTile extends StatelessWidget {
   final ArnaIconButton? trailingButton;
   final bool isFocusable;
   final bool autofocus;
-  final Color accentColor;
+  final Color? accentColor;
   final MouseCursor cursor;
   final String? semanticLabel;
 
@@ -21,7 +21,7 @@ class ArnaSwitchListTile extends StatelessWidget {
     this.trailingButton,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);

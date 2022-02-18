@@ -10,7 +10,7 @@ class ArnaButton extends StatelessWidget {
     this.tooltipMessage,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -35,7 +35,7 @@ class ArnaButton extends StatelessWidget {
   final bool autofocus;
 
   /// The color of the button's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// button.
@@ -96,7 +96,12 @@ class ArnaButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
-                color: buttonBorder(context, enabled, focused, accentColor),
+                color: buttonBorder(
+                  context,
+                  enabled,
+                  focused,
+                  accentColor ?? ArnaTheme.of(context).accentColor,
+                ),
               ),
               color: buttonBackground(
                 context,

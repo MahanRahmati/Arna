@@ -22,7 +22,10 @@ class ArnaBottomBar extends StatelessWidget {
             children: [
               const ArnaHorizontalDivider(),
               Container(
-                color: ArnaTheme.of(context).barBackgroundColor,
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.headerColor,
+                  context,
+                ),
                 child: Padding(
                   padding: Styles.horizontal,
                   child: Row(

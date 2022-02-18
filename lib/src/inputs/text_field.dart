@@ -203,9 +203,7 @@ class ArnaTextField extends StatelessWidget {
                 : null,
             filled: true,
             fillColor: ArnaDynamicColor.resolve(
-              enabled
-                  ? ArnaColors.textFieldColor
-                  : ArnaColors.backgroundDisabledColor,
+              enabled ? ArnaColors.textFieldColor : ArnaColors.backgroundColor,
               context,
             ),
             border: OutlineInputBorder(

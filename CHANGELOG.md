@@ -1,3 +1,17 @@
+## 0.2.0
+
+- Fix ArnaThemeMode
+- Fix ArnaSideScaffold
+- Fix ArnaExpansionPanel
+- New dark theme
+- Update light theme
+- Add documentation to ArnaColors
+- Add documentation to ArnaTextThemeData
+- Add documentation to ArnaTheme
+- Add documentation to ArnaThemeData
+- Refactor to ArnaThemeData
+- Remove ArnaThemeMode
+
 ## 0.1.9
 
 - Add ArnaSegmentedControl

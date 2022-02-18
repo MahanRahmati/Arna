@@ -19,7 +19,7 @@ class ArnaBottomBarItem extends StatelessWidget {
     this.selected = false,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -47,7 +47,7 @@ class ArnaBottomBarItem extends StatelessWidget {
   final bool autofocus;
 
   /// The color of the item's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// widget.
@@ -114,7 +114,7 @@ class ArnaBottomBarItem extends StatelessWidget {
                           context,
                           enabled,
                           focused,
-                          accentColor,
+                          accentColor ?? ArnaTheme.of(context).accentColor,
                         ),
                       ),
                       color: buttonBackground(

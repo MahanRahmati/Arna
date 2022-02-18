@@ -11,7 +11,7 @@ class ArnaSlider extends StatefulWidget {
   final int? divisions;
   final bool isFocusable;
   final bool autofocus;
-  final Color accentColor;
+  final Color? accentColor;
   final MouseCursor cursor;
   const ArnaSlider({
     Key? key,
@@ -24,7 +24,7 @@ class ArnaSlider extends StatefulWidget {
     this.divisions,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
   }) : super(key: key);
 
@@ -61,23 +61,22 @@ class _ArnaSliderState extends State<ArnaSlider> {
 
   @override
   Widget build(BuildContext context) {
+    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: Material(
         color: ArnaColors.color00,
         child: SliderTheme(
           data: SliderThemeData(
-            activeTrackColor: widget.accentColor,
-            inactiveTrackColor: widget.accentColor.withOpacity(0.3),
+            activeTrackColor: accent,
+            inactiveTrackColor: accent.withOpacity(0.3),
             trackHeight: Styles.sliderTrackSize,
             activeTickMarkColor: ArnaColors.color36,
             inactiveTickMarkColor: ArnaColors.color36.withOpacity(0.3),
             thumbColor: ArnaColors.color36,
             thumbShape: _ArnaSliderThumb(
               thumbRadius: Styles.sliderSize,
-              accentColor: isEnabled
-                  ? widget.accentColor
-                  : widget.accentColor.withOpacity(0.3),
+              accentColor: isEnabled ? accent : accent.withOpacity(0.3),
             ),
             overlayColor: ArnaColors.color00,
           ),

@@ -43,7 +43,10 @@ class ArnaScaffold extends StatelessWidget {
             ),
           ),
           child: Container(
-            color: ArnaTheme.of(context).scaffoldBackgroundColor,
+            color: ArnaDynamicColor.resolve(
+              ArnaColors.backgroundColor,
+              context,
+            ),
             child: Column(
               children: [
                 ArnaHeaderBar(

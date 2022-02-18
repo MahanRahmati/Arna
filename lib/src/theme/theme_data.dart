@@ -4,159 +4,72 @@ import 'package:flutter/foundation.dart';
 const _ArnaThemeDefaults _kDefaultTheme = _ArnaThemeDefaults(
   null,
   ArnaColors.accentColor,
-  ArnaColors.primaryTextColor,
-  ArnaColors.headerColor,
-  ArnaColors.backgroundColor,
   _ArnaTextThemeDefaults(ArnaColors.primaryTextColor),
 );
 
-class ArnaTheme extends StatelessWidget {
-  final ArnaThemeData data;
-  final Widget child;
-
-  const ArnaTheme({
-    Key? key,
-    required this.data,
-    required this.child,
-  }) : super(key: key);
-
-  static ArnaThemeData of(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return (inheritedTheme?.theme.data ?? const ArnaThemeData())
-        .resolveFrom(context);
-  }
-
-  static Brightness brightnessOf(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return inheritedTheme?.theme.data.brightness ??
-        MediaQuery.of(context).platformBrightness;
-  }
-
-  static Brightness? maybeBrightnessOf(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return inheritedTheme?.theme.data.brightness ??
-        MediaQuery.maybeOf(context)?.platformBrightness;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _InheritedArnaTheme(
-      theme: this,
-      child: IconTheme(
-        data: ArnaIconThemeData(color: data.primaryColor),
-        child: child,
-      ),
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    data.debugFillProperties(properties);
-  }
-}
-
-class _InheritedArnaTheme extends InheritedWidget {
-  const _InheritedArnaTheme({
-    Key? key,
-    required this.theme,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  final ArnaTheme theme;
-
-  @override
-  bool updateShouldNotify(_InheritedArnaTheme old) =>
-      theme.data != old.theme.data;
-}
-
+/// Styling specifications for a [ArnaTheme].
+///
+/// All constructor parameters can be null.
+///
+/// Parameters can also be partially specified, in which case some parameters
+/// will cascade down to other dependent parameters to create a cohesive
+/// visual effect.
+///
+/// See also:
+///
+///  * [ArnaTheme], in which this [ArnaThemeData] is inserted.
 @immutable
 class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
+  /// Creates a [ArnaTheme] styling specification.
   const ArnaThemeData({
     Brightness? brightness,
-    Color? primaryColor,
-    Color? onPrimaryColor,
+    Color? accentColor,
     ArnaTextThemeData? textTheme,
-    Color? barBackgroundColor,
-    Color? scaffoldBackgroundColor,
-  }) : this.raw(
-          brightness,
-          primaryColor,
-          onPrimaryColor,
-          textTheme,
-          barBackgroundColor,
-          scaffoldBackgroundColor,
-        );
+  }) : this.raw(brightness, accentColor, textTheme);
 
+  /// Same as the default constructor but with positional arguments to avoid
+  /// forgetting any and to specify all arguments.
+  ///
+  /// Used by subclasses to get the superclass's defaulting behaviors.
   @protected
   const ArnaThemeData.raw(
     Brightness? brightness,
-    Color? primaryColor,
-    Color? onPrimaryColor,
+    Color? accentColor,
     ArnaTextThemeData? textTheme,
-    Color? barBackgroundColor,
-    Color? scaffoldBackgroundColor,
   ) : this._rawWithDefaults(
           brightness,
-          primaryColor,
-          onPrimaryColor,
+          accentColor,
           textTheme,
-          barBackgroundColor,
-          scaffoldBackgroundColor,
           _kDefaultTheme,
         );
 
   const ArnaThemeData._rawWithDefaults(
     Brightness? brightness,
-    Color? primaryColor,
-    Color? onPrimaryColor,
+    Color? accentColor,
     ArnaTextThemeData? textTheme,
-    Color? barBackgroundColor,
-    Color? scaffoldBackgroundColor,
     this._defaults,
   ) : super(
           brightness: brightness,
-          primaryColor: primaryColor,
-          onPrimaryColor: onPrimaryColor,
+          accentColor: accentColor,
           textTheme: textTheme,
-          barBackgroundColor: barBackgroundColor,
-          scaffoldBackgroundColor: scaffoldBackgroundColor,
         );
 
   final _ArnaThemeDefaults _defaults;
 
   @override
-  Color get primaryColor => super.primaryColor ?? _defaults.primaryColor;
-
-  @override
-  Color get onPrimaryColor => super.onPrimaryColor ?? _defaults.onPrimaryColor;
+  Color get accentColor => super.accentColor ?? _defaults.accentColor;
 
   @override
   ArnaTextThemeData get textTheme {
-    return super.textTheme ??
-        _defaults.textThemeDefaults.createDefaults(primaryColor: primaryColor);
+    return super.textTheme ?? _defaults.textThemeDefaults.createDefaults();
   }
-
-  @override
-  Color get barBackgroundColor =>
-      super.barBackgroundColor ?? _defaults.barBackgroundColor;
-
-  @override
-  Color get scaffoldBackgroundColor =>
-      super.scaffoldBackgroundColor ?? _defaults.scaffoldBackgroundColor;
 
   @override
   NoDefaultArnaThemeData noDefault() {
     return NoDefaultArnaThemeData(
       brightness: super.brightness,
-      primaryColor: super.primaryColor,
-      onPrimaryColor: super.onPrimaryColor,
+      accentColor: super.accentColor,
       textTheme: super.textTheme,
-      barBackgroundColor: super.barBackgroundColor,
-      scaffoldBackgroundColor: super.scaffoldBackgroundColor,
     );
   }
 
@@ -167,11 +80,8 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
 
     return ArnaThemeData._rawWithDefaults(
       brightness,
-      convertColor(super.primaryColor),
-      convertColor(super.onPrimaryColor),
+      convertColor(super.accentColor),
       super.textTheme?.resolveFrom(context),
-      convertColor(super.barBackgroundColor),
-      convertColor(super.scaffoldBackgroundColor),
       _defaults.resolveFrom(context, super.textTheme == null),
     );
   }
@@ -179,19 +89,13 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
   @override
   ArnaThemeData copyWith({
     Brightness? brightness,
-    Color? primaryColor,
-    Color? onPrimaryColor,
+    Color? accentColor,
     ArnaTextThemeData? textTheme,
-    Color? barBackgroundColor,
-    Color? scaffoldBackgroundColor,
   }) {
     return ArnaThemeData._rawWithDefaults(
       brightness ?? super.brightness,
-      primaryColor ?? super.primaryColor,
-      onPrimaryColor ?? super.onPrimaryColor,
+      accentColor ?? super.accentColor,
       textTheme ?? super.textTheme,
-      barBackgroundColor ?? super.barBackgroundColor,
-      scaffoldBackgroundColor ?? super.scaffoldBackgroundColor,
       _defaults,
     );
   }
@@ -205,55 +109,67 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
     );
     properties.add(
       createArnaColorProperty(
-        'primaryColor',
-        primaryColor,
-        defaultValue: defaultData.primaryColor,
-      ),
-    );
-    properties.add(
-      createArnaColorProperty(
-        'onPrimaryColor',
-        onPrimaryColor,
-        defaultValue: defaultData.onPrimaryColor,
-      ),
-    );
-    properties.add(
-      createArnaColorProperty(
-        'barBackgroundColor',
-        barBackgroundColor,
-        defaultValue: defaultData.barBackgroundColor,
-      ),
-    );
-    properties.add(
-      createArnaColorProperty(
-        'scaffoldBackgroundColor',
-        scaffoldBackgroundColor,
-        defaultValue: defaultData.scaffoldBackgroundColor,
+        'accentColor',
+        accentColor,
+        defaultValue: defaultData.accentColor,
       ),
     );
     textTheme.debugFillProperties(properties);
   }
 }
 
+/// Styling specifications for an Arna theme without default values for
+/// unspecified properties.
+///
+/// Unlike [ArnaThemeData] instances of this class do not return default
+/// values for properties that have been left unspecified in the constructor.
+/// Instead, unspecified properties will return null.
+///
+/// See also:
+///
+///  * [ArnaThemeData], which uses reasonable default values for
+///    unspecified theme properties.
 class NoDefaultArnaThemeData {
-  final Brightness? brightness;
-  final Color? primaryColor;
-  final Color? onPrimaryColor;
-  final ArnaTextThemeData? textTheme;
-  final Color? barBackgroundColor;
-  final Color? scaffoldBackgroundColor;
-
+  /// Creates a [NoDefaultArnaThemeData] styling specification.
+  ///
+  /// Unspecified properties default to null.
   const NoDefaultArnaThemeData({
     this.brightness,
-    this.primaryColor,
-    this.onPrimaryColor,
+    this.accentColor,
     this.textTheme,
-    this.barBackgroundColor,
-    this.scaffoldBackgroundColor,
   });
 
+  /// The brightness override for Arna descendants.
+  ///
+  /// Defaults to null. If a non-null [Brightness] is specified, the value will
+  /// take precedence over the ambient [MediaQueryData.platformBrightness], when
+  /// determining the brightness of descendant Arna widgets.
+  ///
+  ///
+  /// See also:
+  ///
+  ///  * [ArnaTheme.brightnessOf], a method used to retrieve the overall
+  ///    [Brightness] from a [BuildContext], for Arna widgets.
+  final Brightness? brightness;
+
+  /// A color used on interactive elements of the theme.
+  ///
+  /// This color is generally used on tappable elements.
+  /// Defaults to [ArnaColors.accentColor].
+  final Color? accentColor;
+
+  /// Text styles used by Arna widgets.
+  final ArnaTextThemeData? textTheme;
+
+  /// Returns an instance of the theme data whose property getters only return
+  /// the construction time specifications with no derived values.
   NoDefaultArnaThemeData noDefault() => this;
 
+  /// Returns a new theme data with all its colors resolved against the
+  /// given [BuildContext].
+  ///
+  /// Called by [ArnaTheme.of] to resolve colors defined in the retrieved
+  /// [ArnaThemeData].
   @protected
   NoDefaultArnaThemeData resolveFrom(BuildContext context) {
     Color? convertColor(Color? color) =>
@@ -261,30 +177,26 @@ class NoDefaultArnaThemeData {
 
     return NoDefaultArnaThemeData(
       brightness: brightness,
-      primaryColor: convertColor(primaryColor),
-      onPrimaryColor: convertColor(onPrimaryColor),
+      accentColor: convertColor(accentColor),
       textTheme: textTheme?.resolveFrom(context),
-      barBackgroundColor: convertColor(barBackgroundColor),
-      scaffoldBackgroundColor: convertColor(scaffoldBackgroundColor),
     );
   }
 
+  /// Creates a copy of the theme data with specified attributes overridden.
+  ///
+  /// Only the current instance's specified attributes are copied instead of
+  /// derived values. For instance, if the current [textTheme] is implied from
+  /// the current [accentColor] because it was not specified, copying with a
+  /// different [accentColor] will also change the copy's implied [textTheme].
   NoDefaultArnaThemeData copyWith({
     Brightness? brightness,
-    Color? primaryColor,
-    Color? onPrimaryColor,
+    Color? accentColor,
     ArnaTextThemeData? textTheme,
-    Color? barBackgroundColor,
-    Color? scaffoldBackgroundColor,
   }) {
     return NoDefaultArnaThemeData(
       brightness: brightness ?? this.brightness,
-      primaryColor: primaryColor ?? this.primaryColor,
-      onPrimaryColor: onPrimaryColor ?? this.onPrimaryColor,
+      accentColor: accentColor ?? this.accentColor,
       textTheme: textTheme ?? this.textTheme,
-      barBackgroundColor: barBackgroundColor ?? this.barBackgroundColor,
-      scaffoldBackgroundColor:
-          scaffoldBackgroundColor ?? this.scaffoldBackgroundColor,
     );
   }
 }
@@ -293,18 +205,12 @@ class NoDefaultArnaThemeData {
 class _ArnaThemeDefaults {
   const _ArnaThemeDefaults(
     this.brightness,
-    this.primaryColor,
-    this.onPrimaryColor,
-    this.barBackgroundColor,
-    this.scaffoldBackgroundColor,
+    this.accentColor,
     this.textThemeDefaults,
   );
 
   final Brightness? brightness;
-  final Color primaryColor;
-  final Color onPrimaryColor;
-  final Color barBackgroundColor;
-  final Color scaffoldBackgroundColor;
+  final Color accentColor;
   final _ArnaTextThemeDefaults textThemeDefaults;
 
   _ArnaThemeDefaults resolveFrom(BuildContext context, bool resolveTextTheme) {
@@ -312,10 +218,7 @@ class _ArnaThemeDefaults {
 
     return _ArnaThemeDefaults(
       brightness,
-      convertColor(primaryColor),
-      convertColor(onPrimaryColor),
-      convertColor(barBackgroundColor),
-      convertColor(scaffoldBackgroundColor),
+      convertColor(accentColor),
       resolveTextTheme
           ? textThemeDefaults.resolveFrom(context)
           : textThemeDefaults,
@@ -332,18 +235,15 @@ class _ArnaTextThemeDefaults {
   _ArnaTextThemeDefaults resolveFrom(BuildContext context) =>
       _ArnaTextThemeDefaults(ArnaDynamicColor.resolve(labelColor, context));
 
-  ArnaTextThemeData createDefaults({required Color primaryColor}) =>
-      _DefaultArnaTextThemeData(
-        primaryColor: primaryColor,
-        labelColor: labelColor,
-      );
+  ArnaTextThemeData createDefaults() =>
+      _DefaultArnaTextThemeData(labelColor: labelColor);
 }
 
+// ArnaTextThemeData with no text styles explicitly specified.
+// The implementation of this class may need to be updated when any of the default
+// text styles changes.
 class _DefaultArnaTextThemeData extends ArnaTextThemeData {
-  const _DefaultArnaTextThemeData({
-    required this.labelColor,
-    required Color primaryColor,
-  }) : super(primaryColor: primaryColor);
+  const _DefaultArnaTextThemeData({required this.labelColor}) : super();
 
   final Color labelColor;
 

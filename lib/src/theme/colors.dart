@@ -1,7 +1,10 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 
+/// A palette of [Color] constants that describe colors
 class ArnaColors {
+  // This class is not meant to be instantiated or extended; this constructor
+  // prevents instantiation and extension.
   ArnaColors._();
 
   static const Color color00 = Color(0x00000000); // 00
@@ -46,162 +49,238 @@ class ArnaColors {
   static const Color errorColor = Color(0xFFF44336);
   static const Color barrierColor = Color(0x70000000);
 
+  /// The color of the background.
   static const ArnaDynamicColor backgroundColor = ArnaDynamicColor(
     debugLabel: 'backgroundColor',
-    color: color34,
-    darkColor: color03,
+    color: color33,
+    darkColor: color06,
     highContrastColor: color36,
-    darkHighContrastColor: color03,
+    darkHighContrastColor: color01,
   );
 
-  static const ArnaDynamicColor backgroundDisabledColor = ArnaDynamicColor(
-    debugLabel: 'backgroundDisabledColor',
+  /// The reverse color of the background.
+  static const ArnaDynamicColor reverseBackgroundColor = ArnaDynamicColor(
+    debugLabel: 'reverseBackgroundColor',
+    color: color06,
+    darkColor: color33,
+    highContrastColor: color01,
+    darkHighContrastColor: color36,
+  );
+
+  /// The color of the side bar's background.
+  static const ArnaDynamicColor sideColor = ArnaDynamicColor(
+    debugLabel: 'sideColor',
     color: color34,
-    darkColor: color10,
+    darkColor: color07,
     highContrastColor: color36,
+    darkHighContrastColor: color01,
+  );
+
+  /// The color of the header bar's background.
+  static const ArnaDynamicColor headerColor = ArnaDynamicColor(
+    debugLabel: 'headerColor',
+    color: color34,
+    darkColor: color07,
+    highContrastColor: color36,
+    darkHighContrastColor: color01,
+  );
+
+  /// The color of borders.
+  static const ArnaDynamicColor borderColor = ArnaDynamicColor(
+    debugLabel: 'borderColor',
+    color: color30,
+    darkColor: color03,
+    highContrastColor: color01,
+    darkHighContrastColor: color36,
+  );
+
+  /// The color of card's background.
+  static const ArnaDynamicColor cardColor = ArnaDynamicColor(
+    debugLabel: 'cardColor',
+    color: color35,
+    darkColor: color08,
+    highContrastColor: color36,
+    darkHighContrastColor: color01,
+  );
+
+  /// The color of card's background when it is hoverd.
+  static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
+    debugLabel: 'cardHoverColor',
+    color: color31,
+    darkColor: color12,
+    highContrastColor: color31,
+    darkHighContrastColor: color12,
+  );
+
+  /// The color of card's background when it is pressed.
+  static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
+    debugLabel: 'cardPressedColor',
+    color: color29,
+    darkColor: color14,
+    highContrastColor: color29,
+    darkHighContrastColor: color14,
+  );
+
+  /// The color of text field's background.
+  static const ArnaDynamicColor textFieldColor = ArnaDynamicColor(
+    debugLabel: 'textFieldColor',
+    color: color33,
+    darkColor: color06,
+    highContrastColor: color36,
+    darkHighContrastColor: color01,
+  );
+
+  /// The color of text field's background when it is hoverd.
+  static const ArnaDynamicColor textFieldHoverColor = ArnaDynamicColor(
+    debugLabel: 'textFieldHoverColor',
+    color: color29,
+    darkColor: color10,
+    highContrastColor: color29,
     darkHighContrastColor: color10,
   );
 
-  static const ArnaDynamicColor reverseBackgroundColor = ArnaDynamicColor(
-    debugLabel: 'reverseBackgroundColor',
-    color: color03,
-    darkColor: color34,
-    highContrastColor: color03,
-    darkHighContrastColor: color34,
-  );
-
-  static const ArnaDynamicColor headerColor = ArnaDynamicColor(
-    debugLabel: 'headerColor',
-    color: color35,
-    darkColor: color01,
-    highContrastColor: color36,
-    darkHighContrastColor: color03,
-  );
-
-  static const ArnaDynamicColor borderColor = ArnaDynamicColor(
-    debugLabel: 'borderColor',
-    color: color31,
-    // color: color23,
-    darkColor: color14,
-    highContrastColor: color36,
-    darkHighContrastColor: color03,
-  );
-
-  static const ArnaDynamicColor cardColor = ArnaDynamicColor(
-    debugLabel: 'cardColor',
-    color: color36,
-    darkColor: color05,
-    highContrastColor: color36,
-    darkHighContrastColor: color03,
-  );
-
-  static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
-    debugLabel: 'cardHoverColor',
-    color: color32,
-    darkColor: color11,
-    highContrastColor: color30,
-    darkHighContrastColor: color11,
-  );
-
-  static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
-    debugLabel: 'cardPressedColor',
-    color: color30,
-    darkColor: color17,
-    highContrastColor: color24,
-    darkHighContrastColor: color17,
-  );
-
-  static const ArnaDynamicColor textFieldColor = ArnaDynamicColor(
-    debugLabel: 'textFieldColor',
-    color: color34,
-    darkColor: color03,
-    highContrastColor: color34,
-    darkHighContrastColor: color03,
-  );
-
-  static const ArnaDynamicColor textFieldHoverColor = ArnaDynamicColor(
-    debugLabel: 'textFieldHoverColor',
-    color: color30,
-    darkColor: color07,
-    highContrastColor: color30,
-    darkHighContrastColor: color07,
-  );
-
+  /// The color of button's background.
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
     color: color36,
-    darkColor: color03,
+    darkColor: color09,
     highContrastColor: color36,
     darkHighContrastColor: color03,
   );
 
+  /// The color of button's background when it is hoverd.
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
     color: color32,
-    darkColor: color07,
-    highContrastColor: color30,
-    darkHighContrastColor: color07,
+    darkColor: color13,
+    highContrastColor: color32,
+    darkHighContrastColor: color13,
   );
 
+  /// The color of button's background when it is pressed.
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
     color: color30,
-    darkColor: color11,
-    highContrastColor: color26,
-    darkHighContrastColor: color11,
+    darkColor: color15,
+    highContrastColor: color30,
+    darkHighContrastColor: color15,
   );
 
+  /// The primary text color.
   static const ArnaDynamicColor primaryTextColor = ArnaDynamicColor(
     debugLabel: 'primaryTextColor',
-    color: color05,
-    darkColor: color34,
-    highContrastColor: color03,
-    darkHighContrastColor: color34,
+    color: color06,
+    darkColor: color33,
+    highContrastColor: color01,
+    darkHighContrastColor: color36,
   );
 
+  /// The reverse color of the primary text color.
   static const ArnaDynamicColor reversePrimaryTextColor = ArnaDynamicColor(
     debugLabel: 'reversePrimaryTextColor',
-    color: color34,
-    darkColor: color03,
-    highContrastColor: color34,
-    darkHighContrastColor: color03,
+    color: color33,
+    darkColor: color06,
+    highContrastColor: color36,
+    darkHighContrastColor: color01,
   );
 
+  /// The secondary text color.
   static const ArnaDynamicColor secondaryTextColor = ArnaDynamicColor(
     debugLabel: 'secondaryTextColor',
     color: color11,
-    darkColor: color26,
-    highContrastColor: color03,
-    darkHighContrastColor: color34,
+    darkColor: color28,
+    highContrastColor: color01,
+    darkHighContrastColor: color36,
   );
 
+  /// The reverse color of the secondary text color.
   static const ArnaDynamicColor reverseSecondaryTextColor = ArnaDynamicColor(
     debugLabel: 'reverseSecondaryTextColor',
-    color: color26,
+    color: color28,
     darkColor: color11,
-    highContrastColor: color34,
-    darkHighContrastColor: color03,
+    highContrastColor: color36,
+    darkHighContrastColor: color01,
   );
 
+  /// The color of icons.
   static const ArnaDynamicColor iconColor = ArnaDynamicColor(
     debugLabel: 'iconColor',
-    color: color03,
-    darkColor: color34,
-    highContrastColor: color03,
-    darkHighContrastColor: color34,
+    color: color06,
+    darkColor: color33,
+    highContrastColor: color01,
+    darkHighContrastColor: color36,
   );
 
-  static const ArnaDynamicColor disabledColor = ArnaDynamicColor(
-    debugLabel: 'disabledColor',
-    color: color18,
-    darkColor: color18,
-    highContrastColor: color18,
-    darkHighContrastColor: color18,
-  );
+  /// The color of disabled items.
+  static const Color disabledColor = color18;
 }
 
+/// A [Color] subclass that represents a family of colors, and the correct effective
+/// color in the color family.
+///
+/// When used as a regular color, [ArnaDynamicColor] is equivalent to the
+/// effective color (i.e. [ArnaDynamicColor.value] will come from the effective
+/// color), which is determined by the [BuildContext] it is last resolved against.
+/// If it has never been resolved, the light, normal contrast, base elevation variant
+/// [ArnaDynamicColor.color] will be the default effective color.
+///
+/// Sometimes manually resolving a [ArnaDynamicColor] is not necessary, because
+/// the Arna Library provides built-in support for it.
+///
+/// ### Using a [ArnaDynamicColor] from a [ArnaTheme]
+///
+/// When referring to a [ArnaTheme] color, generally the color will already
+/// have adapted to the ambient [BuildContext], because [ArnaTheme.of]
+/// implicitly resolves all the colors used in the retrieved [ArnaThemeData],
+/// before returning it.
+///
+/// {@tool snippet}
+/// The following code sample creates a [Container] with the `primaryColor` of the
+/// current theme. If `primaryColor` is a [ArnaDynamicColor], the container
+/// will be adaptive, thanks to [ArnaTheme.of]: it will switch to `primaryColor`'s
+/// dark variant once dark mode is turned on, and turns to primaryColor`'s high
+/// contrast variant when [MediaQueryData.highContrast] is requested in the ambient
+/// [MediaQuery], etc.
+///
+/// ```dart
+/// Container(
+///   // Container is not a Arna widget, but ArnaTheme.of implicitly
+///   // resolves colors used in the retrieved ArnaThemeData.
+///   color: ArnaTheme.of(context).accentColor,
+/// )
+/// ```
+/// {@end-tool}
+///
+/// ### Manually Resolving a [ArnaDynamicColor]
+///
+/// When used to configure a non-Arna widget, or wrapped in an object opaque
+/// to the receiving Arna component, a [ArnaDynamicColor] may need to be
+/// manually resolved using [ArnaDynamicColor.resolve], before it can used
+/// to paint.
+///
+/// {@tool snippet}
+///
+/// The following code samples demonstrate a cases where you have to manually
+/// resolve a [ArnaDynamicColor].
+///
+/// ```dart
+/// Container(
+///   // Container is not a Arna widget.
+///   color: ArnaDynamicColor.resolve(ArnaColors.accentColor, context),
+/// )
+/// ```
+/// {@end-tool}
+///
+/// See also:
+///
+///  * [ArnaTheme.of], a static method that retrieves the ambient [ArnaThemeData],
+///    and then resolves [ArnaDynamicColor]s used in the retrieved data.
 @immutable
 class ArnaDynamicColor extends Color with Diagnosticable {
+  /// Creates an adaptive [Color] that changes its effective color based on the
+  /// [BuildContext] given. The default effective color is [color].
+  ///
+  /// All the colors must not be null.
   const ArnaDynamicColor({
     String? debugLabel,
     required Color color,
@@ -226,8 +305,16 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     this.darkHighContrastColor,
     this._debugResolveContext,
     this._debugLabel,
-  ) : super(0);
+  ) :
+        // The super constructor has to be called with a dummy value in order to mark
+        // this constructor const.
+        // The field `value` is overridden in the class implementation.
+        super(0);
 
+  /// The current effective color.
+  ///
+  /// Must not be null. Defaults to [color] if this [ArnaDynamicColor] has
+  /// never been resolved.
   final Color _effectiveColor;
 
   @override
@@ -237,16 +324,74 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 
   final Element? _debugResolveContext;
 
+  /// The color to use when the [BuildContext] implies a combination of light
+  /// mode and normal contrast.
+  ///
+  /// In other words, this color will be the effective color of the [ArnaDynamicColor]
+  /// after it is resolved against a [BuildContext] that:
+  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.light],
+  /// or a [MediaQuery] whose [MediaQueryData.platformBrightness] is [Brightness.light].
+  /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `false`.
   final Color color;
+
+  /// The color to use when the [BuildContext] implies a combination of dark
+  /// mode and normal contrast.
+  ///
+  /// In other words, this color will be the effective color of the [ArnaDynamicColor]
+  /// after it is resolved against a [BuildContext] that:
+  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.dark],
+  /// or a [MediaQuery] whose [MediaQueryData.platformBrightness] is [Brightness.dark].
+  /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `false`.
   final Color darkColor;
+
+  /// The color to use when the [BuildContext] implies a combination of light
+  /// mode and high contrast.
+  ///
+  /// In other words, this color will be the effective color of the [ArnaDynamicColor]
+  /// after it is resolved against a [BuildContext] that:
+  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.light],
+  /// or a [MediaQuery] whose [MediaQueryData.platformBrightness] is [Brightness.light].
+  /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `true`.
   final Color highContrastColor;
+
+  /// The color to use when the [BuildContext] implies a combination of dark
+  /// mode and high contrast.
+  ///
+  /// In other words, this color will be the effective color of the [ArnaDynamicColor]
+  /// after it is resolved against a [BuildContext] that:
+  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.dark],
+  /// or a [MediaQuery] whose [MediaQueryData.platformBrightness] is [Brightness.dark].
+  /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `true`.
   final Color darkHighContrastColor;
 
+  /// Resolves the given [Color] by calling [resolveFrom].
+  ///
+  /// If the given color is already a concrete [Color], it will be returned as is.
+  /// If the given color is a [ArnaDynamicColor], but the given [BuildContext]
+  /// lacks the dependencies required to the color resolution, the default trait
+  /// value will be used ([Brightness.light] platform brightness, normal contrast).
+  ///
+  /// See also:
+  ///
+  ///  * [maybeResolve], which is similar to this function, but will allow a
+  ///    null `resolvable` color.
   static Color resolve(Color resolvable, BuildContext context) =>
       (resolvable is ArnaDynamicColor)
           ? resolvable.resolveFrom(context)
           : resolvable;
 
+  /// Resolves the given [Color] by calling [resolveFrom].
+  ///
+  /// If the given color is already a concrete [Color], it will be returned as is.
+  /// If the given color is null, returns null.
+  /// If the given color is a [ArnaDynamicColor], but the given [BuildContext]
+  /// lacks the dependencies required to the color resolution, the default trait
+  /// value will be used ([Brightness.light] platform brightness, normal contrast).
+  ///
+  /// See also:
+  ///
+  ///  * [resolve], which is similar to this function, but returns a
+  ///    non-nullable value, and does not allow a null `resolvable` color.
   static Color? maybeResolve(Color? resolvable, BuildContext context) {
     if (resolvable == null) return null;
     return (resolvable is ArnaDynamicColor)
@@ -260,6 +405,32 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   bool get _isHighContrastDependent =>
       color != highContrastColor || darkColor != darkHighContrastColor;
 
+  /// Resolves this [ArnaDynamicColor] using the provided [BuildContext].
+  ///
+  /// Calling this method will create a new [ArnaDynamicColor] that is almost
+  /// identical to this [ArnaDynamicColor], except the effective color is
+  /// changed to adapt to the given [BuildContext].
+  ///
+  /// For example, if the given [BuildContext] indicates the widgets in the
+  /// subtree should be displayed in dark mode (the surrounding
+  /// [ArnaTheme]'s [ArnaThemeData.brightness] or [MediaQuery]'s
+  /// [MediaQueryData.platformBrightness] is [Brightness.dark]), and with a high
+  /// accessibility contrast (the surrounding [MediaQuery]'s
+  /// [MediaQueryData.highContrast] is `true`), the resolved
+  /// [ArnaDynamicColor] will be the same as this [ArnaDynamicColor],
+  /// except its effective color will be the `darkHighContrastColor`
+  /// variant from the original [ArnaDynamicColor].
+  ///
+  /// Calling this function may create dependencies on the closest instance of some
+  /// [InheritedWidget]s that enclose the given [BuildContext]. E.g., if [darkColor]
+  /// is different from [color], this method will call [ArnaTheme.of], and
+  /// then [MediaQuery.of] if brightness wasn't specified in the theme data retrieved
+  /// from the previous [ArnaTheme.of] call, in an effort to determine the
+  /// brightness value.
+  ///
+  /// If any of the required dependencies are missing from the given context, the
+  /// default value of that trait will be used ([Brightness.light] platform
+  /// brightness and normal contrast).
   ArnaDynamicColor resolveFrom(BuildContext context) {
     Brightness brightness = Brightness.light;
     if (_isPlatformBrightnessDependent) {
@@ -364,6 +535,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 }
 
+/// Creates a diagnostics property for [ArnaDynamicColor].
+///
+/// The [showName], [style], and [level] arguments must not be null.
 DiagnosticsProperty<Color> createArnaColorProperty(
   String name,
   Color? value, {

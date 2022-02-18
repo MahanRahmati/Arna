@@ -19,7 +19,7 @@ class ArnaProgressIndicator extends StatefulWidget {
     Key? key,
     this.value,
     this.size = Styles.indicatorSize,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
   }) : super(key: key);
 
   /// If non-null, the value of this progress indicator.
@@ -36,7 +36,7 @@ class ArnaProgressIndicator extends StatefulWidget {
   final double? size;
 
   /// The progress indicator's background color.
-  final Color accentColor;
+  final Color? accentColor;
 
   @override
   _ArnaProgressIndicatorState createState() => _ArnaProgressIndicatorState();
@@ -74,7 +74,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
         builder: (BuildContext context, Widget? child) {
           return CustomPaint(
             painter: _ProgressPainter(
-              color: widget.accentColor,
+              color: widget.accentColor ?? ArnaTheme.of(context).accentColor,
               value: widget.value == null
                   ? _controller.value * 2 * pi
                   : value!.clamp(0.0, 1.0) * (pi * 2.0 - .001),

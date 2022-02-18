@@ -86,7 +86,10 @@ class ArnaAlertDialog extends StatelessWidget {
                     const ArnaHorizontalDivider(),
                     Container(
                       height: Styles.headerBarHeight,
-                      color: ArnaTheme.of(context).barBackgroundColor,
+                      color: ArnaDynamicColor.resolve(
+                        ArnaColors.backgroundColor,
+                        context,
+                      ),
                       child: Padding(
                         padding: Styles.horizontal,
                         child: Row(

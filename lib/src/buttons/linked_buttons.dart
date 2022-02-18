@@ -108,7 +108,10 @@ class _ArnaLinked extends StatelessWidget {
                   : const Radius.circular(0),
             ),
             border: focused
-                ? Border.all(color: button.accentColor)
+                ? Border.all(
+                    color:
+                        button.accentColor ?? ArnaTheme.of(context).accentColor,
+                  )
                 : Border.all(color: ArnaColors.color00),
             color: buttonBackground(
               context,
@@ -145,7 +148,7 @@ class ArnaLinkedButton {
     this.tooltipMessage,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
@@ -170,7 +173,7 @@ class ArnaLinkedButton {
   final bool autofocus;
 
   /// The color of the button's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// button.

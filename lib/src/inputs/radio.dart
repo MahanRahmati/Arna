@@ -6,7 +6,7 @@ class ArnaRadio<T> extends StatefulWidget {
   final ValueChanged<T?>? onChanged;
   final bool isFocusable;
   final bool autofocus;
-  final Color accentColor;
+  final Color? accentColor;
   final MouseCursor cursor;
   final String? semanticLabel;
 
@@ -17,7 +17,7 @@ class ArnaRadio<T> extends StatefulWidget {
     required this.onChanged,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -115,11 +115,14 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                       borderRadius: Styles.radioBorderRadius,
                       border: Border.all(
                         color: _focused
-                            ? widget.accentColor
+                            ? widget.accentColor ??
+                                ArnaTheme.of(context).accentColor
                             : _selected && isEnabled
-                                ? widget.accentColor
+                                ? widget.accentColor ??
+                                    ArnaTheme.of(context).accentColor
                                 : _hover && isEnabled
-                                    ? widget.accentColor
+                                    ? widget.accentColor ??
+                                        ArnaTheme.of(context).accentColor
                                     : ArnaDynamicColor.resolve(
                                         ArnaColors.borderColor,
                                         context,
@@ -127,7 +130,7 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                       ),
                       color: !isEnabled
                           ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundDisabledColor,
+                              ArnaColors.backgroundColor,
                               context,
                             )
                           : _selected && isEnabled
@@ -135,7 +138,7 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                               : ArnaDynamicColor.resolve(
                                   _hover
                                       ? ArnaColors.buttonHoverColor
-                                      : ArnaColors.backgroundColor,
+                                      : ArnaColors.buttonColor,
                                   context,
                                 ),
                     ),
@@ -151,7 +154,7 @@ class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
                       borderRadius: Styles.radioBorderRadius,
                       color: !isEnabled
                           ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundDisabledColor,
+                              ArnaColors.backgroundColor,
                               context,
                             )
                           : _selected && isEnabled

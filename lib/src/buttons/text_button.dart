@@ -9,7 +9,7 @@ class ArnaTextButton extends StatelessWidget {
     this.tooltipMessage,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -31,7 +31,7 @@ class ArnaTextButton extends StatelessWidget {
   final bool autofocus;
 
   /// The color of the button's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// button.

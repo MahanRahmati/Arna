@@ -22,7 +22,7 @@ Color buttonBackground(
 ) {
   return ArnaDynamicColor.resolve(
     !enabled
-        ? ArnaColors.backgroundDisabledColor
+        ? ArnaColors.backgroundColor
         : pressed
             ? ArnaColors.buttonPressedColor
             : hover

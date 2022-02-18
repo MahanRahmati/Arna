@@ -6,12 +6,12 @@ Arna Framework - A unique set of widgets for building applications with Flutter.
   <a href="https://pub.dartlang.org/packages/arna"><img src="https://img.shields.io/pub/v/arna.svg" alt="pub.dev"></a>
   <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
   <a href="https://github.com/leanflutter/awesome-flutter-desktop">
-   <img alt="Awesome Flutter Desktop" src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg?longCache=true&style=flat-square" />
+   <img alt="Awesome Flutter Desktop" src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg" />
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-<img alt="Main_light" src="https://user-images.githubusercontent.com/16052180/154450510-d94ac97b-356c-4f0d-b842-7be8d941aaf6.png">
-<img alt="Main_dark" src="https://user-images.githubusercontent.com/16052180/153842559-3a34ab18-d056-40f9-b083-dedf9cb9a9aa.png">
+<img alt="Light" src="https://user-images.githubusercontent.com/16052180/154751611-95129fda-0ae5-4354-ba94-e8ef2c5732b6.png">
+<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/154751586-d03b523d-3b5b-4265-8f7d-4fa05ecf3eab.png">
 
 ## Content
 
@@ -56,7 +56,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.1.9
+  arna: ^0.2.0
 ```
 
 And import it
@@ -72,7 +72,10 @@ import 'package:arna/arna.dart';
 ```dart
 ArnaApp(
     debugShowCheckedModeBanner: false,
-    themeMode: ArnaThemeMode.light,
+    theme: ArnaThemeData(
+        accentColor: ArnaColors.accentColor,
+        brightness: Brightness.light,
+    ),
     home: Home(),
 );
 ```
@@ -378,7 +381,7 @@ ArnaIconButton(
             primary: ArnaTextButton(
                 label: "OK",
                 onPressed: Navigator.of(context).pop,
-            )
+            ),
         ),
     ),
 );

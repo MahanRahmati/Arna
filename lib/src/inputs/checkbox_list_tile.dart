@@ -9,7 +9,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   final bool tristate;
   final bool isFocusable;
   final bool autofocus;
-  final Color accentColor;
+  final Color? accentColor;
   final MouseCursor cursor;
   final String? semanticLabel;
 
@@ -23,7 +23,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
     this.tristate = false,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -55,7 +55,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
           onChanged: onChanged,
           isFocusable: isFocusable,
           autofocus: autofocus,
-          accentColor: accentColor,
+          accentColor: accentColor ?? ArnaTheme.of(context).accentColor,
           cursor: cursor,
           semanticLabel: semanticLabel,
         ),

@@ -5,7 +5,7 @@ class ArnaSwitch extends StatefulWidget {
   final ValueChanged<bool>? onChanged;
   final bool isFocusable;
   final bool autofocus;
-  final Color accentColor;
+  final Color? accentColor;
   final MouseCursor cursor;
   final String? semanticLabel;
 
@@ -15,7 +15,7 @@ class ArnaSwitch extends StatefulWidget {
     required this.onChanged,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -111,11 +111,14 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                       borderRadius: Styles.switchBorderRadius,
                       border: Border.all(
                         color: _focused
-                            ? widget.accentColor
+                            ? widget.accentColor ??
+                                ArnaTheme.of(context).accentColor
                             : _hover && isEnabled
-                                ? widget.accentColor
+                                ? widget.accentColor ??
+                                    ArnaTheme.of(context).accentColor
                                 : widget.value
-                                    ? widget.accentColor
+                                    ? widget.accentColor ??
+                                        ArnaTheme.of(context).accentColor
                                     : ArnaDynamicColor.resolve(
                                         ArnaColors.borderColor,
                                         context,
@@ -123,11 +126,12 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                       ),
                       color: !isEnabled
                           ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundDisabledColor,
+                              ArnaColors.backgroundColor,
                               context,
                             )
                           : widget.value
-                              ? widget.accentColor
+                              ? widget.accentColor ??
+                                  ArnaTheme.of(context).accentColor
                               : ArnaDynamicColor.resolve(
                                   _hover
                                       ? ArnaColors.buttonHoverColor
@@ -151,7 +155,8 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                         borderRadius: Styles.radioBorderRadius,
                         border: Border.all(
                           color: widget.value
-                              ? widget.accentColor
+                              ? widget.accentColor ??
+                                  ArnaTheme.of(context).accentColor
                               : ArnaDynamicColor.resolve(
                                   ArnaColors.borderColor,
                                   context,
@@ -159,7 +164,7 @@ class _ArnaSwitchState extends State<ArnaSwitch> {
                         ),
                         color: !isEnabled
                             ? ArnaDynamicColor.resolve(
-                                ArnaColors.backgroundDisabledColor,
+                                ArnaColors.backgroundColor,
                                 context,
                               )
                             : ArnaColors.color36,

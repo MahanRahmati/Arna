@@ -101,7 +101,8 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
             selected: isPhone ? false : index == _currentIndex,
             isFocusable: widget.items[index].isFocusable,
             autofocus: widget.items[index].autofocus,
-            accentColor: widget.items[index].accentColor,
+            accentColor: widget.items[index].accentColor ??
+                ArnaTheme.of(context).accentColor,
             cursor: widget.items[index].cursor,
             semanticLabel: widget.items[index].semanticLabel,
           ),
@@ -134,8 +135,10 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                       ? Expanded(
                           child: Container(
                             height: double.infinity,
-                            color:
-                                ArnaTheme.of(context).scaffoldBackgroundColor,
+                            color: ArnaDynamicColor.resolve(
+                              ArnaColors.backgroundColor,
+                              context,
+                            ),
                             child: widget.emptyBody,
                           ),
                         )
@@ -186,7 +189,7 @@ class MasterNavigationItem {
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
@@ -226,7 +229,7 @@ class MasterNavigationItem {
   final bool autofocus;
 
   /// The color of the item's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// item.

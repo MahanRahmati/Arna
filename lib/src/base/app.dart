@@ -4,19 +4,6 @@ import 'package:flutter/cupertino.dart'
 import 'package:flutter/material.dart'
     show DefaultMaterialLocalizations, Tooltip;
 
-/// Describes which theme will be used by [ArnaApp].
-enum ArnaThemeMode {
-  /// Use either the light or dark theme based on what the user has selected in
-  /// the system settings.
-  system,
-
-  /// Always use the light mode regardless of system preference.
-  light,
-
-  /// Always use the dark mode regardless of system preference.
-  dark,
-}
-
 /// An application that uses Arna design.
 ///
 /// It builds upon a [WidgetsApp] by Arna specific defaulting such as fonts and
@@ -119,7 +106,6 @@ class ArnaApp extends StatefulWidget {
     this.navigatorKey,
     this.home,
     this.theme,
-    this.themeMode = ArnaThemeMode.system,
     Map<String, WidgetBuilder> this.routes = const <String, WidgetBuilder>{},
     this.initialRoute,
     this.onGenerateRoute,
@@ -160,7 +146,6 @@ class ArnaApp extends StatefulWidget {
     required RouterDelegate<Object> this.routerDelegate,
     this.backButtonDispatcher,
     this.theme,
-    this.themeMode = ArnaThemeMode.system,
     this.builder,
     this.title = '',
     this.onGenerateTitle,
@@ -198,22 +183,6 @@ class ArnaApp extends StatefulWidget {
 
   /// The top-level [ArnaTheme] styling.
   final ArnaThemeData? theme;
-
-  /// Determines which theme will be used by the application.
-  ///
-  /// If set to [ArnaThemeMode.system], the choice of which theme to use will
-  /// be based on the user's system preferences. If the [MediaQuery.platformBrightnessOf]
-  /// is [Brightness.light], light theme will be used. If it is [Brightness.dark],
-  /// dark theme will be used.
-  ///
-  /// If set to [ArnaThemeMode.light] the light theme will always be used,
-  /// regardless of the user's system preference.
-  ///
-  /// If set to [ArnaThemeMode.dark] the dark theme will always be used,
-  /// regardless of the user's system preference.
-  ///
-  /// The default value is [ArnaThemeMode.system].
-  final ArnaThemeMode? themeMode;
 
   /// The application's top-level routing table.
   ///
@@ -580,7 +549,7 @@ class _ArnaAppState extends State<ArnaApp> {
   WidgetsApp _buildWidgetApp(BuildContext context) {
     final ArnaThemeData effectiveThemeData = ArnaTheme.of(context);
     final Color color = ArnaDynamicColor.resolve(
-      widget.color ?? effectiveThemeData.primaryColor,
+      widget.color ?? effectiveThemeData.accentColor,
       context,
     );
 
@@ -650,20 +619,10 @@ class _ArnaAppState extends State<ArnaApp> {
 
   @override
   Widget build(BuildContext context) {
-    final ArnaThemeMode mode = widget.themeMode ?? ArnaThemeMode.system;
-    final Brightness platformBrightness =
-        MediaQuery.platformBrightnessOf(context);
-    final bool useDarkTheme = mode == ArnaThemeMode.dark ||
-        (mode == ArnaThemeMode.system && platformBrightness == Brightness.dark);
-
-    ArnaThemeData theme = useDarkTheme
-        ? const ArnaThemeData(brightness: Brightness.dark)
-        : const ArnaThemeData(brightness: Brightness.light);
-
     return ScrollConfiguration(
       behavior: widget.scrollBehavior ?? const ArnaScrollBehavior(),
       child: ArnaTheme(
-        data: widget.theme ?? theme,
+        data: widget.theme ?? const ArnaThemeData(),
         child: HeroControllerScope(
           controller: _heroController,
           child: Focus(

@@ -49,7 +49,10 @@ class ArnaHeaderBar extends StatelessWidget {
             children: [
               Container(
                 height: Styles.headerBarHeight,
-                color: ArnaTheme.of(context).barBackgroundColor,
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.headerColor,
+                  context,
+                ),
                 child: Padding(
                   padding: Styles.horizontal,
                   child: _buildChild(),

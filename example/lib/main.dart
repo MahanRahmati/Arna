@@ -9,7 +9,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ArnaApp(
       debugShowCheckedModeBanner: false,
-      themeMode: ArnaThemeMode.light,
+      theme: ArnaThemeData(
+        accentColor: ArnaColors.accentColor,
+        brightness: Brightness.light,
+      ),
       home: Home(),
     );
   }
@@ -357,15 +360,34 @@ class _HomeState extends State<Home> {
 
     return ArnaSideScaffold(
       title: "Arna Demo",
-      headerBarTrailing: ArnaIconButton(
-        icon: Icons.info_outlined,
-        onPressed: () {
-          showArnaPopupDialog(
-            context: context,
-            title: "Title",
-            body: Container(),
-          );
-        },
+      headerBarTrailing: Row(
+        children: [
+          ArnaIconButton(
+            icon: Icons.info_outlined,
+            onPressed: () => showArnaDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (_) => ArnaAlertDialog(
+                title: "Title",
+                message: "Message",
+                primary: ArnaTextButton(
+                  label: "OK",
+                  onPressed: Navigator.of(context).pop,
+                ),
+              ),
+            ),
+          ),
+          ArnaIconButton(
+            icon: Icons.settings_outlined,
+            onPressed: () {
+              showArnaPopupDialog(
+                context: context,
+                title: "Settings",
+                body: Container(),
+              );
+            },
+          ),
+        ],
       ),
       items: [
         widgets,

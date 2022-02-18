@@ -45,7 +45,10 @@ class ArnaPopupDialog extends StatelessWidget {
                     context,
                   ),
                 ),
-                color: ArnaTheme.of(context).scaffoldBackgroundColor,
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.backgroundColor,
+                  context,
+                ),
               ),
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,

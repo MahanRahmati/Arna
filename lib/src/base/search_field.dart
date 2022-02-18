@@ -71,7 +71,10 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> {
                 height: widget.showSearch ? Styles.headerBarHeight : 0,
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
-                color: ArnaTheme.of(context).barBackgroundColor,
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.headerColor,
+                  context,
+                ),
                 child: Padding(
                   padding: Styles.horizontal,
                   child: Center(

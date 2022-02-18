@@ -6,7 +6,7 @@ class ArnaCheckBox extends StatefulWidget {
   final bool tristate;
   final bool isFocusable;
   final bool autofocus;
-  final Color accentColor;
+  final Color? accentColor;
   final MouseCursor cursor;
   final String? semanticLabel;
 
@@ -17,7 +17,7 @@ class ArnaCheckBox extends StatefulWidget {
     this.tristate = false,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -127,11 +127,14 @@ class _ArnaCheckBoxState extends State<ArnaCheckBox> {
                       borderRadius: Styles.checkBoxBorderRadius,
                       border: Border.all(
                         color: _focused
-                            ? widget.accentColor
+                            ? widget.accentColor ??
+                                ArnaTheme.of(context).accentColor
                             : _selected && isEnabled
-                                ? widget.accentColor
+                                ? widget.accentColor ??
+                                    ArnaTheme.of(context).accentColor
                                 : _hover && isEnabled
-                                    ? widget.accentColor
+                                    ? widget.accentColor ??
+                                        ArnaTheme.of(context).accentColor
                                     : ArnaDynamicColor.resolve(
                                         ArnaColors.borderColor,
                                         context,
@@ -139,7 +142,7 @@ class _ArnaCheckBoxState extends State<ArnaCheckBox> {
                       ),
                       color: !isEnabled
                           ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundDisabledColor,
+                              ArnaColors.backgroundColor,
                               context,
                             )
                           : _selected && isEnabled

@@ -9,7 +9,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   final ArnaIconButton? trailingButton;
   final bool isFocusable;
   final bool autofocus;
-  final Color accentColor;
+  final Color? accentColor;
   final MouseCursor cursor;
   final String? semanticLabel;
 
@@ -23,7 +23,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
     this.trailingButton,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -43,7 +43,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
           onChanged: onChanged,
           isFocusable: isFocusable,
           autofocus: autofocus,
-          accentColor: accentColor,
+          accentColor: accentColor ?? ArnaTheme.of(context).accentColor,
           cursor: cursor,
           semanticLabel: semanticLabel,
         ),

@@ -103,9 +103,10 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                       duration: Styles.basicDuration,
                       curve: Styles.basicCurve,
                       clipBehavior: Clip.antiAlias,
-                      color: ArnaTheme.of(context)
-                          .scaffoldBackgroundColor
-                          .withAlpha(126),
+                      color: ArnaDynamicColor.resolve(
+                        ArnaColors.sideColor,
+                        context,
+                      ),
                       child: _buildChild(),
                     ),
                   if (constraints.maxWidth > 644) const ArnaVerticalDivider(),
@@ -220,7 +221,7 @@ class NavigationItem {
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
@@ -254,7 +255,7 @@ class NavigationItem {
   final bool autofocus;
 
   /// The color of the item's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// item.

@@ -6,7 +6,7 @@ class ArnaBadge extends StatelessWidget {
   const ArnaBadge({
     Key? key,
     required this.label,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.textColor = ArnaColors.color34,
   }) : super(key: key);
 
@@ -14,7 +14,7 @@ class ArnaBadge extends StatelessWidget {
   final String label;
 
   /// The background color of the badge.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The label color of the badge.
   final Color textColor;
@@ -28,7 +28,7 @@ class ArnaBadge extends StatelessWidget {
         curve: Styles.basicCurve,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: accentColor,
+          color: accentColor ?? ArnaTheme.of(context).accentColor,
         ),
         padding: Styles.horizontal,
         child: Row(

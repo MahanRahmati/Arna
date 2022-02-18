@@ -12,7 +12,7 @@ class ArnaSideBarItem extends StatelessWidget {
     this.selected = false,
     this.isFocusable = true,
     this.autofocus = false,
-    this.accentColor = ArnaColors.accentColor,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -43,7 +43,7 @@ class ArnaSideBarItem extends StatelessWidget {
   final bool autofocus;
 
   /// The color of the item's focused border.
-  final Color accentColor;
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// widget.
@@ -119,7 +119,8 @@ class ArnaSideBarItem extends StatelessWidget {
                         color: !enabled
                             ? ArnaColors.color00
                             : focused
-                                ? accentColor
+                                ? accentColor ??
+                                    ArnaTheme.of(context).accentColor
                                 : ArnaColors.color00,
                       ),
                       color: !enabled
@@ -127,15 +128,25 @@ class ArnaSideBarItem extends StatelessWidget {
                               ArnaColors.backgroundColor,
                               context,
                             )
-                          : accentColor.withAlpha(
-                              pressed
-                                  ? 77
-                                  : selected
-                                      ? 56
-                                      : hover
-                                          ? 35
-                                          : 0,
-                            ),
+                          : accentColor == null
+                              ? ArnaTheme.of(context).accentColor.withAlpha(
+                                    pressed
+                                        ? 77
+                                        : selected
+                                            ? 56
+                                            : hover
+                                                ? 35
+                                                : 0,
+                                  )
+                              : accentColor!.withAlpha(
+                                  pressed
+                                      ? 77
+                                      : selected
+                                          ? 56
+                                          : hover
+                                              ? 35
+                                              : 0,
+                                ),
                     ),
                     padding: Styles.horizontal,
                     child: _buildChild(context, enabled),
@@ -153,7 +164,7 @@ class ArnaSideBarItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: accentColor,
+                  color: accentColor ?? ArnaTheme.of(context).accentColor,
                 ),
               ),
             ],

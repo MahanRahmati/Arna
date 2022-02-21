@@ -42,11 +42,13 @@ Arna Framework - A unique set of widgets for building applications with Flutter.
     - [Arna Separators](#arna-separators)
     - [Arna PopupDialog](#arna-popupdialog)
     - [Arna Alert Dialog](#arna-alert-dialog)
-    - [Arna TextField](#arna-textfield)
+    - [Arna Text Field](#arna-text-field)
     - [Arna Slider](#arna-slider)
     - [Arna Tooltip](#arna-tooltip)
     - [Arna Indicator](#arna-indicator)
     - [Arna Search Field](#arna-search-field)
+    - [Arna Snack Bar](#arna-snack-bar)
+    - [Arna Banner](#arna-banner)
   - [TODO](#todo)
   - [Special thanks](#special-thanks)
 
@@ -56,7 +58,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.2.0
+  arna: ^0.2.1
 ```
 
 And import it
@@ -387,7 +389,7 @@ ArnaIconButton(
 );
 ```
 
-### Arna TextField
+### Arna Text Field
 
 ```dart
 ArnaTextField(
@@ -435,15 +437,37 @@ ArnaSearchField(
 );
 ```
 
+### Arna Snack Bar
+
+```dart
+showArnaSnackbar(
+    context: context,
+    message: "SnackBar Title",
+    trailing: ArnaIconButton(
+        icon: Icons.add_outlined,
+        onPressed: () {},
+    ),
+);
+```
+
+### Arna Banner
+
+```dart
+ArnaBanner(
+    showBanner: showBanner,
+    message: "This is a message!",
+    trailing: ArnaIconButton(
+        icon: Icons.close_outlined,
+        onPressed: () => setState(() => showBanner = false),
+    ),
+);
+```
+
 ## TODO
 
-- Browser Tab
 - Dropdown Button
 - Popup Button
 - Date and Time Pickers
-- Snackbar
-- Status Bar
-- Banner
 - Chip
 
 ## Special thanks

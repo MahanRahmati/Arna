@@ -29,7 +29,7 @@ class ArnaMasterItem extends StatelessWidget {
   /// The trailing widget of the item.
   final Widget? trailing;
 
-  /// The callback that is called when a item is tapped.
+  /// The callback that is called when an item is tapped.
   final VoidCallback? onPressed;
 
   /// Whether this item is selected or not.

@@ -35,7 +35,7 @@ class ArnaProgressIndicator extends StatefulWidget {
   /// The progress indicator's size.
   final double? size;
 
-  /// The progress indicator's background color.
+  /// The progress indicator's color.
   final Color? accentColor;
 
   @override
@@ -53,7 +53,17 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
       duration: Styles.indicatorDuration,
       vsync: this,
     );
-    if (widget.value == null) _controller.repeat();
+    if (widget.value == null) _controller.repeat(reverse: true);
+  }
+
+  @override
+  void didUpdateWidget(ArnaProgressIndicator oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.value == null && !_controller.isAnimating) {
+      _controller.repeat(reverse: true);
+    } else if (widget.value != null && _controller.isAnimating) {
+      _controller.stop();
+    }
   }
 
   @override
@@ -101,15 +111,6 @@ class _ProgressPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    canvas.drawCircle(
-      center,
-      size.width / 4,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeCap = StrokeCap.round
-        ..color = color
-        ..strokeWidth = size.width / 4,
-    );
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: size.width / 4),
       (3.1415926535897932) * 1.5 + (offset ? value : 0),
@@ -118,7 +119,7 @@ class _ProgressPainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
-        ..color = ArnaColors.color36
+        ..color = color
         ..strokeWidth = size.width / 8,
     );
   }

@@ -31,7 +31,7 @@ class ArnaSideScaffold extends StatefulWidget {
   /// Called when one of the [items] is tapped.
   final ValueChanged<int>? onItemSelected;
 
-  /// The index into [items] for the current active [MasterNavigationItem].
+  /// The index into [items] for the current active [NavigationItem].
   final int currentIndex;
 
   @override
@@ -139,6 +139,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                         ],
                       ),
                       searchField: widget.items[_currentIndex].searchField,
+                      banner: widget.items[_currentIndex].banner,
                       body: Column(
                         children: [
                           Expanded(
@@ -202,6 +203,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
             ],
           ),
           searchField: widget.items[_currentIndex].searchField,
+          banner: widget.items[_currentIndex].banner,
           body: widget.items[_currentIndex].builder(context),
         );
       },
@@ -218,6 +220,7 @@ class NavigationItem {
     this.headerBarLeading,
     this.headerBarTrailing,
     this.searchField,
+    this.banner,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -243,6 +246,9 @@ class NavigationItem {
 
   /// The [ArnaSearchField] of the item.
   final ArnaSearchField? searchField;
+
+  /// The [ArnaBanner] of the item.
+  final ArnaBanner? banner;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

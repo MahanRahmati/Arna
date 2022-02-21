@@ -9,10 +9,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ArnaApp(
       debugShowCheckedModeBanner: false,
-      theme: ArnaThemeData(
-        accentColor: ArnaColors.accentColor,
-        brightness: Brightness.light,
-      ),
       home: Home(),
     );
   }
@@ -37,6 +33,7 @@ class _HomeState extends State<Home> {
   final bool _switch3 = false;
   double _sliderValue = 50;
   int segmentedControlGroupValue = 0;
+  var showBanner = true;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +53,14 @@ class _HomeState extends State<Home> {
         showSearch: showSearch,
         controller: controller,
       ),
+      banner: ArnaBanner(
+        showBanner: showBanner,
+        message: "This is a message!",
+        trailing: ArnaIconButton(
+          icon: Icons.close_outlined,
+          onPressed: () => setState(() => showBanner = false),
+        ),
+      ),
       builder: (_) => SingleChildScrollView(
         child: Column(
           children: [
@@ -67,18 +72,27 @@ class _HomeState extends State<Home> {
                   children: [
                     ArnaIconButton(
                       icon: Icons.add_outlined,
-                      onPressed: () {},
+                      onPressed: () => showArnaSnackbar(
+                        context: context,
+                        message: "Hello There!",
+                      ),
                       tooltipMessage: "Add",
                     ),
                     ArnaTextButton(
                       label: "Add",
-                      onPressed: () {},
+                      onPressed: () => showArnaSnackbar(
+                        context: context,
+                        message: "Hello There!",
+                      ),
                       tooltipMessage: "Add",
                     ),
                     ArnaButton(
                       label: "Add",
                       icon: Icons.add_outlined,
-                      onPressed: () {},
+                      onPressed: () => showArnaSnackbar(
+                        context: context,
+                        message: "Hello There!",
+                      ),
                       tooltipMessage: "Add",
                     ),
                     const ArnaButton(
@@ -101,16 +115,25 @@ class _HomeState extends State<Home> {
                       buttons: [
                         ArnaLinkedButton(
                           icon: Icons.add_outlined,
-                          onPressed: () {},
+                          onPressed: () => showArnaSnackbar(
+                            context: context,
+                            message: "Hello There!",
+                          ),
                         ),
                         ArnaLinkedButton(
                           label: "Add",
-                          onPressed: () {},
+                          onPressed: () => showArnaSnackbar(
+                            context: context,
+                            message: "Hello There!",
+                          ),
                         ),
                         ArnaLinkedButton(
                           label: "Add",
                           icon: Icons.add_outlined,
-                          onPressed: () {},
+                          onPressed: () => showArnaSnackbar(
+                            context: context,
+                            message: "Hello There!",
+                          ),
                         ),
                         const ArnaLinkedButton(
                           label: "Add",
@@ -254,18 +277,6 @@ class _HomeState extends State<Home> {
               ],
             ),
             ArnaList(
-              title: "Indicator",
-              items: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    ArnaProgressIndicator(),
-                    ArnaProgressIndicator(size: 140),
-                  ],
-                ),
-              ],
-            ),
-            ArnaList(
               title: "Slider",
               items: [
                 ArnaSlider(
@@ -286,7 +297,7 @@ class _HomeState extends State<Home> {
                   child: ArnaTextField(),
                 )
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -352,6 +363,25 @@ class _HomeState extends State<Home> {
       ),
     );
 
+    NavigationItem indicators = NavigationItem(
+      title: "Indicators",
+      icon: Icons.refresh_outlined,
+      builder: (_) => SingleChildScrollView(
+        child: ArnaList(
+          title: "Indicator",
+          items: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                ArnaProgressIndicator(),
+                ArnaProgressIndicator(size: 140),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
     NavigationItem dummy = NavigationItem(
       title: "Dummy",
       icon: Icons.info_outlined,
@@ -367,7 +397,7 @@ class _HomeState extends State<Home> {
             onPressed: () => showArnaDialog(
               context: context,
               barrierDismissible: true,
-              builder: (_) => ArnaAlertDialog(
+              dialog: ArnaAlertDialog(
                 title: "Title",
                 message: "Message",
                 primary: ArnaTextButton(
@@ -392,7 +422,7 @@ class _HomeState extends State<Home> {
       items: [
         widgets,
         typography,
-        dummy,
+        indicators,
         dummy,
       ],
     );

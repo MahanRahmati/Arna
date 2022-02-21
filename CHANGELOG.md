@@ -1,3 +1,16 @@
+## 0.2.1
+
+- Refactor ArnaProgressIndicator
+- Add ArnaBanner
+- Fix some documentations
+- Add ArnaSnackBar
+- Add documentation to ArnaAlertDialog
+- [BREAKING] Refactor showArnaDialog 
+- Add documentation to ArnaPopupDialog
+- [BREAKING] Refactor ArnaPopupDialog 
+- Add documentation to ArnaHorizontalDivider
+- Add documentation to ArnaVerticalDivider
+
 ## 0.2.0
 
 - Fix ArnaThemeMode

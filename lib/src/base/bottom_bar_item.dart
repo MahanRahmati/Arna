@@ -30,7 +30,7 @@ class ArnaBottomBarItem extends StatelessWidget {
   /// The icon of the item.
   final IconData icon;
 
-  /// The callback that is called when a item is tapped.
+  /// The callback that is called when an item is tapped.
   final VoidCallback? onPressed;
 
   /// The [ArnaBadge] of the item.

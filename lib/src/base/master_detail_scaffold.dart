@@ -80,6 +80,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
           title: page.title,
           headerBarTrailing: page.headerBarTrailing,
           searchField: page.searchField,
+          banner: page.banner,
           body: page.builder(context),
         );
       },
@@ -151,6 +152,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                                 widget.items[_currentIndex].headerBarTrailing,
                             searchField:
                                 widget.items[_currentIndex].searchField,
+                            banner: widget.items[_currentIndex].banner,
                             body: widget.items[_currentIndex].builder(context),
                           ),
                         ),
@@ -186,6 +188,7 @@ class MasterNavigationItem {
     this.headerBarLeading,
     this.headerBarTrailing,
     this.searchField,
+    this.banner,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -217,6 +220,9 @@ class MasterNavigationItem {
 
   /// The [ArnaSearchField] of the item.
   final ArnaSearchField? searchField;
+
+  /// The [ArnaBanner] of the item.
+  final ArnaBanner? banner;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

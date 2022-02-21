@@ -12,6 +12,7 @@ class ArnaScaffold extends StatelessWidget {
     this.title,
     this.headerBarTrailing,
     this.searchField,
+    this.banner,
     required this.body,
   }) : super(key: key);
 
@@ -26,6 +27,9 @@ class ArnaScaffold extends StatelessWidget {
 
   /// The [ArnaSearchField] of the scaffold.
   final ArnaSearchField? searchField;
+
+  /// The [ArnaBanner] of the scaffold.
+  final ArnaBanner? banner;
 
   /// The body widget of the scaffold.
   final Widget body;
@@ -42,10 +46,12 @@ class ArnaScaffold extends StatelessWidget {
               bottom: metrics.padding.top,
             ),
           ),
-          child: Container(
-            color: ArnaDynamicColor.resolve(
-              ArnaColors.backgroundColor,
-              context,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: ArnaDynamicColor.resolve(
+                ArnaColors.backgroundColor,
+                context,
+              ),
             ),
             child: Column(
               children: [
@@ -58,6 +64,7 @@ class ArnaScaffold extends StatelessWidget {
                   trailing: headerBarTrailing,
                 ),
                 if (searchField != null) searchField!,
+                if (banner != null) banner!,
                 Flexible(child: body),
               ],
             ),

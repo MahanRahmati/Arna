@@ -1,6 +1,8 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 
+/// An [IconThemeData] subclass that automatically resolves its [color] when retrieved
+/// using [IconTheme.of].
 class ArnaIconThemeData extends IconThemeData with Diagnosticable {
   /// Creates a [ArnaIconThemeData].
   ///

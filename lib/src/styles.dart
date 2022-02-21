@@ -35,6 +35,7 @@ abstract class Styles {
   // Durations
   static const Duration basicDuration = Duration(milliseconds: 210);
   static const Duration indicatorDuration = Duration(milliseconds: 2100);
+  static const Duration snackbarDuration = Duration(milliseconds: 3500);
 
   // Curves
   static const Curve basicCurve = Curves.ease;

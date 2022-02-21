@@ -1,6 +1,8 @@
 import 'package:arna/arna.dart';
 
+/// A thin horizontal line to separate content.
 class ArnaHorizontalDivider extends StatelessWidget {
+  /// Creates a horizontal divider.
   const ArnaHorizontalDivider({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +18,9 @@ class ArnaHorizontalDivider extends StatelessWidget {
   }
 }
 
+/// A thin vertical line to separate content.
 class ArnaVerticalDivider extends StatelessWidget {
+  /// Creates a vertical divider.
   const ArnaVerticalDivider({Key? key}) : super(key: key);
 
   @override

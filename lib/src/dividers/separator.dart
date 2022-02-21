@@ -1,6 +1,8 @@
 import 'package:arna/arna.dart';
 
+/// A thin horizontal line with paddings to separate content.
 class ArnaHorizontalSeparator extends StatelessWidget {
+  /// Creates a horizontal separator.
   const ArnaHorizontalSeparator({Key? key}) : super(key: key);
 
   @override
@@ -10,7 +12,9 @@ class ArnaHorizontalSeparator extends StatelessWidget {
       );
 }
 
+/// A thin vertical line with paddings to separate content.
 class ArnaVerticalSeparator extends StatelessWidget {
+  /// Creates a vertical separator.
   const ArnaVerticalSeparator({Key? key}) : super(key: key);
 
   @override

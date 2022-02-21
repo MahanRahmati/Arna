@@ -5,6 +5,7 @@
 library arna;
 
 export 'package:arna/src/base/app.dart';
+export 'package:arna/src/base/banner.dart';
 export 'package:arna/src/base/base_button.dart';
 export 'package:arna/src/base/bottom_bar.dart';
 export 'package:arna/src/base/bottom_bar_item.dart';
@@ -18,6 +19,7 @@ export 'package:arna/src/base/scroll_bar.dart';
 export 'package:arna/src/base/search_field.dart';
 export 'package:arna/src/base/side_bar_item.dart';
 export 'package:arna/src/base/side_scaffold.dart';
+export 'package:arna/src/base/snack_bar.dart';
 export 'package:arna/src/base/tooltip.dart';
 export 'package:arna/src/buttons/button.dart';
 export 'package:arna/src/buttons/icon_button.dart';

@@ -1,3 +1,7 @@
+## 0.2.4
+
+- Update ArnaBaseButton
+
 ## 0.2.3
 
 - Fix ArnaBaseButton

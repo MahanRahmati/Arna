@@ -99,7 +99,6 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                       width: constraints.maxWidth > 960
                           ? Styles.sideBarWidth
                           : Styles.sideBarCompactWidth,
-                      height: constraints.maxHeight,
                       duration: Styles.basicDuration,
                       curve: Styles.basicCurve,
                       clipBehavior: Clip.antiAlias,

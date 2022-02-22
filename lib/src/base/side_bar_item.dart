@@ -98,10 +98,12 @@ class ArnaSideBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    bool buttonSelected = selected;
     return Padding(
       padding: Styles.small,
       child: ArnaBaseButton(
         builder: (context, enabled, hover, focused, pressed, selected) {
+          selected = buttonSelected;
           return Stack(
             alignment: Alignment.centerLeft,
             children: [

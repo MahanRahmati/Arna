@@ -92,10 +92,12 @@ class ArnaBottomBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool buttonSelected = selected;
     return Padding(
       padding: Styles.small,
       child: ArnaBaseButton(
         builder: (context, enabled, hover, focused, pressed, selected) {
+          selected = buttonSelected;
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [

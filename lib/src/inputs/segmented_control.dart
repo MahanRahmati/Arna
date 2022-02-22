@@ -109,7 +109,7 @@ class _ArnaSegmentedControlState<T extends Object>
       children.add(
         _ArnaSegmentedControlItem(
           label: widget.children[currentKey],
-          selected: widget.groupValue == currentKey,
+          buttonSelected: widget.groupValue == currentKey,
           onPressed: () => _onPressed(currentKey),
           first: first,
           last: last,
@@ -144,7 +144,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   const _ArnaSegmentedControlItem({
     Key? key,
     required this.label,
-    required this.selected,
+    required this.buttonSelected,
     required this.onPressed,
     required this.first,
     required this.last,
@@ -153,7 +153,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   }) : super(key: key);
 
   final String? label;
-  final bool selected;
+  final bool buttonSelected;
   final GestureTapCallback? onPressed;
   final bool first;
   final bool last;
@@ -185,6 +185,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ArnaBaseButton(
       builder: (context, enabled, hover, focused, pressed, selected) {
+        selected = buttonSelected;
         return AnimatedContainer(
           height: Styles.buttonSize - 2,
           duration: Styles.basicDuration,

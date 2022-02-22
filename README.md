@@ -60,7 +60,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.2.2
+  arna: ^0.2.3
 ```
 
 And import it
@@ -379,7 +379,7 @@ ArnaIconButton(
     onPressed: () => showArnaDialog(
         context: context,
         barrierDismissible: true,
-        builder: (_) => ArnaAlertDialog(
+        dialog: ArnaAlertDialog(
             title: "Title",
             message: "Message",
             primary: ArnaTextButton(

@@ -203,7 +203,7 @@ Future<T?> showArnaDialog<T>({
   required ArnaAlertDialog dialog,
   bool barrierDismissible = false,
   Color barrierColor = ArnaColors.barrierColor,
-  String? barrierLabel,
+  String? barrierLabel = "label",
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
 }) {
@@ -214,7 +214,9 @@ Future<T?> showArnaDialog<T>({
     barrierDismissible: barrierDismissible,
     transitionDuration: Styles.basicDuration,
     routeSettings: routeSettings,
-    pageBuilder: (context, animation, secondaryAnimation) => dialog,
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return dialog;
+    },
     transitionBuilder: (_, anim, __, child) => phone(context)
         ? SlideTransition(
             position: Tween(

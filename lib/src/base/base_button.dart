@@ -149,6 +149,10 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
             onTapUp: _handleTapUp,
             onLongPressStart: _handleTapDown,
             onLongPressEnd: _handleTapUp,
+            onHorizontalDragStart: _handleTapDown,
+            onHorizontalDragEnd: _handleTapUp,
+            onVerticalDragStart: _handleTapDown,
+            onVerticalDragEnd: _handleTapUp,
             child: FocusableActionDetector(
               enabled: isEnabled && widget.isFocusable,
               focusNode: focusNode,

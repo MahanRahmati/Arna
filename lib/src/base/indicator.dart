@@ -86,8 +86,10 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
             painter: _ProgressPainter(
               color: widget.accentColor ?? ArnaTheme.of(context).accentColor,
               value: widget.value == null
-                  ? _controller.value * 2 * pi
-                  : value!.clamp(0.0, 1.0) * (pi * 2.0 - .001),
+                  ? _controller.value == 0
+                      ? 0.001 * 2 * pi
+                      : _controller.value * 2 * pi
+                  : value!.clamp(0.0, 1.0) * (pi * 2.0 - 0.001),
               offset: widget.value == null,
             ),
           );

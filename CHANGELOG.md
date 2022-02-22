@@ -1,3 +1,15 @@
+## 0.2.3
+
+- Fix ArnaBaseButton
+- Fix ArnaBottomBarItem
+- Fix ArnaMasterItem
+- Fix ArnaSideBarItem
+- Fix ArnaSegmentedControl
+- Fix ArnaAlertDialog
+- Fix ArnaPopupDialo
+- Fix ArnaProgressIndicator
+- Update Readme
+
 ## 0.2.2
 
 - Add selected state to ArnaBaseButton

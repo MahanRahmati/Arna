@@ -1,6 +1,9 @@
 ## 0.2.4
 
 - Update ArnaBaseButton
+- Update ArnaDynamicColor
+- Update ArnaSegmentedControl
+- Update ArnaList
 
 ## 0.2.3
 

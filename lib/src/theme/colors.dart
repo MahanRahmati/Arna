@@ -399,6 +399,16 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         : resolvable;
   }
 
+  /// Computes the luminance of given [Color] by calling [luminance].
+  static Color luminance(
+    Color backgroundColor,
+    ArnaDynamicColor foregroundColor,
+  ) {
+    return backgroundColor.computeLuminance() > 0.5
+        ? foregroundColor.color
+        : foregroundColor.darkColor;
+  }
+
   bool get _isPlatformBrightnessDependent =>
       color != darkColor || highContrastColor != darkHighContrastColor;
 

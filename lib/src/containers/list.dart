@@ -37,7 +37,7 @@ class ArnaList extends StatelessWidget {
                 Styles.padding,
                 Styles.padding,
                 Styles.padding,
-                Styles.largePadding * 1.5,
+                Styles.largePadding,
               ),
               child: Row(
                 children: [

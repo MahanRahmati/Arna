@@ -160,7 +160,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   final Color accentColor;
   final MouseCursor cursor;
 
-  Widget _buildChild(BuildContext context, bool enabled) {
+  Widget _buildChild(BuildContext context, bool enabled, bool selected) {
     final List<Widget> children = [];
     if (label != null) {
       Widget labelWidget = Flexible(
@@ -170,7 +170,12 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                 color: ArnaDynamicColor.resolve(
                   !enabled
                       ? ArnaColors.disabledColor
-                      : ArnaColors.primaryTextColor,
+                      : selected
+                          ? ArnaDynamicColor.luminance(
+                              accentColor,
+                              ArnaColors.primaryTextColor,
+                            )
+                          : ArnaColors.primaryTextColor,
                   context,
                 ),
               ),
@@ -205,7 +210,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                 : Border.all(color: ArnaColors.color00),
             color: ArnaDynamicColor.resolve(
               selected
-                  ? ArnaColors.buttonPressedColor
+                  ? accentColor
                   : pressed
                       ? ArnaColors.buttonPressedColor
                       : hover
@@ -216,7 +221,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
           ),
           margin: const EdgeInsets.all(0.5),
           padding: Styles.largeHorizontal,
-          child: _buildChild(context, enabled),
+          child: _buildChild(context, enabled, selected),
         );
       },
       onPressed: onPressed,

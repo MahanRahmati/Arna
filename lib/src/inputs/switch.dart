@@ -1,14 +1,25 @@
 import 'package:arna/arna.dart';
 
-class ArnaSwitch extends StatefulWidget {
-  final bool value;
-  final ValueChanged<bool>? onChanged;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color? accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
+/// An Arna-styled switch.
+///
+/// Used to toggle the on/off state of a single setting.
+///
+/// The switch itself does not maintain any state. Instead, when the state of
+/// the switch changes, the widget calls the [onChanged] callback. Most widgets
+/// that use a switch will listen for the [onChanged] callback and rebuild the
+/// switch with a new [value] to update the visual appearance of the switch.
+///
+/// If the [onChanged] callback is null, then the switch will be disabled (it
+/// will not respond to input).
+///
+/// See also:
+///
+///  * [ArnaSwitchListTile], which combines this widget with a [ArnaListTile] so that
+///    you can give the switch a label.
+///  * [ArnaCheckBox], another widget with similar semantics.
+///  * [ArnaRadio], for selecting among a set of explicit values.
+///  * [ArnaSlider], for selecting a value in a range.
+class ArnaSwitch extends StatelessWidget {
   const ArnaSwitch({
     Key? key,
     required this.value,
@@ -20,162 +31,130 @@ class ArnaSwitch extends StatefulWidget {
     this.semanticLabel,
   }) : super(key: key);
 
-  @override
-  _ArnaSwitchState createState() => _ArnaSwitchState();
-}
+  /// Whether this switch is on or off.
+  final bool value;
 
-class _ArnaSwitchState extends State<ArnaSwitch> {
-  FocusNode? focusNode;
-  bool _hover = false;
-  bool _focused = false;
-  late Map<Type, Action<Intent>> _actions;
-  late Map<ShortcutActivator, Intent> _shortcuts;
+  /// Called when the user toggles the switch on or off.
+  ///
+  /// The switch passes the new value to the callback but does not actually
+  /// change state until the parent widget rebuilds the switch with the new
+  /// value.
+  ///
+  /// If null, the switch will be displayed as disabled.
+  ///
+  /// The callback provided to [onChanged] should update the state of the parent
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt; for example:
+  ///
+  /// ```dart
+  /// ArnaSwitch(
+  ///   value: _giveVerse,
+  ///   onChanged: (bool newValue) {
+  ///     setState(() {
+  ///       _giveVerse = newValue;
+  ///     });
+  ///   },
+  /// )
+  /// ```
+  final ValueChanged<bool>? onChanged;
 
-  bool get isEnabled => widget.onChanged != null;
+  /// Whether this switch is focusable or not.
+  final bool isFocusable;
 
-  @override
-  void initState() {
-    super.initState();
-    focusNode = FocusNode(canRequestFocus: isEnabled);
-    if (widget.autofocus) focusNode!.requestFocus();
-    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
-    _shortcuts = const {
-      SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-      SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-    };
-  }
+  /// Whether this switch should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
 
-  @override
-  void didUpdateWidget(ArnaSwitch oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.onChanged != oldWidget.onChanged) {
-      focusNode!.canRequestFocus = isEnabled;
-      if (!isEnabled) _hover = false;
-    }
-  }
+  /// The color of the switch's focused border and selected state.
+  final Color? accentColor;
 
-  @override
-  void dispose() {
-    focusNode!.dispose();
-    focusNode = null;
-    super.dispose();
-  }
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// switch.
+  final MouseCursor cursor;
 
-  void _handleFocusChange(bool hasFocus) => setState(() => _focused = hasFocus);
+  /// The semantic label of the switch.
+  final String? semanticLabel;
 
   void _handleTap() {
-    if (isEnabled) widget.onChanged!(!widget.value);
-  }
-
-  void _handleHover(hover) {
-    if (hover != _hover && mounted) setState(() => _hover = hover);
-  }
-
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
+    if (onChanged != null) onChanged!(!value);
   }
 
   @override
   Widget build(BuildContext context) {
+    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          checked: widget.value,
-          enabled: isEnabled,
-          focusable: isEnabled,
-          focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
-              mouseCursor: widget.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AnimatedContainer(
-                    height: Styles.switchHeight,
-                    width: Styles.switchWidth,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.switchBorderRadius,
-                      border: Border.all(
-                        color: _focused
-                            ? widget.accentColor ??
-                                ArnaTheme.of(context).accentColor
-                            : _hover && isEnabled
-                                ? widget.accentColor ??
-                                    ArnaTheme.of(context).accentColor
-                                : widget.value
-                                    ? widget.accentColor ??
-                                        ArnaTheme.of(context).accentColor
-                                    : ArnaDynamicColor.resolve(
-                                        ArnaColors.borderColor,
-                                        context,
-                                      ),
-                      ),
-                      color: !isEnabled
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundColor,
-                              context,
-                            )
-                          : widget.value
-                              ? widget.accentColor ??
-                                  ArnaTheme.of(context).accentColor
-                              : ArnaDynamicColor.resolve(
-                                  _hover
-                                      ? ArnaColors.buttonHoverColor
-                                      : ArnaColors.backgroundColor,
-                                  context,
-                                ),
-                    ),
-                  ),
-                  AnimatedPositioned(
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    left: widget.value
-                        ? Styles.switchWidth - Styles.switchThumbSize - 2
-                        : 2,
-                    child: AnimatedContainer(
-                      height: Styles.switchThumbSize,
-                      width: Styles.switchThumbSize,
-                      duration: Styles.basicDuration,
-                      curve: Styles.basicCurve,
-                      decoration: BoxDecoration(
-                        borderRadius: Styles.radioBorderRadius,
-                        border: Border.all(
-                          color: widget.value
-                              ? widget.accentColor ??
-                                  ArnaTheme.of(context).accentColor
-                              : ArnaDynamicColor.resolve(
-                                  ArnaColors.borderColor,
-                                  context,
-                                ),
-                        ),
-                        color: !isEnabled
-                            ? ArnaDynamicColor.resolve(
-                                ArnaColors.backgroundColor,
-                                context,
-                              )
-                            : ArnaColors.color36,
+      child: ArnaBaseButton(
+        builder: (context, enabled, hover, focused, pressed, selected) {
+          enabled = onChanged != null;
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedContainer(
+                height: Styles.switchHeight,
+                width: Styles.switchWidth,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                decoration: BoxDecoration(
+                    borderRadius: Styles.switchBorderRadius,
+                    border: Border.all(
+                      color: ArnaDynamicColor.resolve(
+                        focused
+                            ? accent
+                            : hover && enabled
+                                ? accent
+                                : value
+                                    ? accent
+                                    : ArnaColors.borderColor,
+                        context,
                       ),
                     ),
-                  ),
-                ],
+                    color: ArnaDynamicColor.resolve(
+                      !enabled
+                          ? ArnaColors.backgroundColor
+                          : value
+                              ? accent
+                              : hover
+                                  ? ArnaColors.buttonHoverColor
+                                  : ArnaColors.backgroundColor,
+                      context,
+                    )),
               ),
-            ),
-          ),
-        ),
+              AnimatedPositioned(
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                left:
+                    value ? Styles.switchWidth - Styles.switchThumbSize - 2 : 2,
+                child: AnimatedContainer(
+                  height: Styles.switchThumbSize,
+                  width: Styles.switchThumbSize,
+                  duration: Styles.basicDuration,
+                  curve: Styles.basicCurve,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.radioBorderRadius,
+                    border: Border.all(
+                      color: ArnaDynamicColor.resolve(
+                        value ? accent : ArnaColors.borderColor,
+                        context,
+                      ),
+                    ),
+                    color: ArnaDynamicColor.resolve(
+                      !enabled
+                          ? ArnaColors.backgroundColor
+                          : ArnaColors.color36,
+                      context,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+        onPressed: _handleTap,
+        isFocusable: isFocusable,
+        autofocus: autofocus,
+        cursor: cursor,
+        semanticLabel: semanticLabel,
       ),
     );
   }

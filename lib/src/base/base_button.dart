@@ -6,6 +6,7 @@ typedef ArnaBaseButtonBuilder = Widget Function(
   bool hover,
   bool focused,
   bool pressed,
+  bool selected,
 );
 
 /// The base [StatefulWidget] class for buttons.
@@ -60,6 +61,8 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
   bool _hover = false;
   bool _focused = false;
   bool _pressed = false;
+  // ignore: prefer_final_fields
+  bool _selected = false;
   late Map<Type, Action<Intent>> _actions;
   late Map<ShortcutActivator, Intent> _shortcuts;
 
@@ -138,6 +141,7 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
           enabled: isEnabled,
           focusable: isEnabled,
           focused: _focused,
+          checked: _selected,
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: _handleTap,
@@ -161,6 +165,7 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
                 _hover,
                 _focused,
                 _pressed,
+                _selected,
               ),
             ),
           ),

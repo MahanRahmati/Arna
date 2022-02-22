@@ -1,3 +1,16 @@
+## 0.2.2
+
+- Add selected state to ArnaBaseButton
+- Refactor ArnaCheckBox
+- Add documentation to ArnaCheckBox
+- Add documentation to ArnaCheckBoxListTile
+- Add documentation to ArnaRadio
+- Refactor ArnaRadio
+- Add documentation to ArnaRadioListTile
+- Add documentation to ArnaSwitch
+- Refactor ArnaSwitch
+- Add documentation to ArnaSwitchListTile
+
 ## 0.2.1
 
 - Refactor ArnaProgressIndicator
@@ -5,9 +18,9 @@
 - Fix some documentations
 - Add ArnaSnackBar
 - Add documentation to ArnaAlertDialog
-- [BREAKING] Refactor showArnaDialog 
+- [BREAKING] Refactor showArnaDialog
 - Add documentation to ArnaPopupDialog
-- [BREAKING] Refactor ArnaPopupDialog 
+- [BREAKING] Refactor ArnaPopupDialog
 - Add documentation to ArnaHorizontalDivider
 - Add documentation to ArnaVerticalDivider
 

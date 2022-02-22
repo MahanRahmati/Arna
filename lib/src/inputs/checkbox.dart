@@ -1,15 +1,39 @@
 import 'package:arna/arna.dart';
 
-class ArnaCheckBox extends StatefulWidget {
-  final bool? value;
-  final ValueChanged<bool?>? onChanged;
-  final bool tristate;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color? accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
+/// An Arna-styled checkbox.
+///
+/// The checkbox itself does not maintain any state. Instead, when the state of
+/// the checkbox changes, the widget calls the [onChanged] callback. Most
+/// widgets that use a checkbox will listen for the [onChanged] callback and
+/// rebuild the checkbox with a new [value] to update the visual appearance of
+/// the checkbox.
+///
+/// The checkbox can optionally display three values - true, false, and null -
+/// if [tristate] is true. When [value] is null a dash is displayed. By default
+/// [tristate] is false and the checkbox's [value] must be true or false.
+///
+/// See also:
+///
+///  * [ArnaCheckBoxListTile], which combines this widget with a [ArnaListTile] so that
+///    you can give the checkbox a label.
+///  * [ArnaSwitch], a widget with semantics similar to [ArnaCheckBox].
+///  * [ArnaRadio], for selecting among a set of explicit values.
+///  * [ArnaSlider], for selecting a value in a range.
+class ArnaCheckBox extends StatelessWidget {
+  /// Creates An Arna-styled checkbox.
+  ///
+  /// The checkbox itself does not maintain any state. Instead, when the state of
+  /// the checkbox changes, the widget calls the [onChanged] callback. Most
+  /// widgets that use a checkbox will listen for the [onChanged] callback and
+  /// rebuild the checkbox with a new [value] to update the visual appearance of
+  /// the checkbox.
+  ///
+  /// The following arguments are required:
+  ///
+  /// * [value], which determines whether the checkbox is checked. The [value]
+  ///   can only be null if [tristate] is true.
+  /// * [onChanged], which is called when the value of the checkbox should
+  ///   change. It can be set to null to disable the checkbox.
   const ArnaCheckBox({
     Key? key,
     required this.value,
@@ -22,163 +46,150 @@ class ArnaCheckBox extends StatefulWidget {
     this.semanticLabel,
   }) : super(key: key);
 
-  @override
-  _ArnaCheckBoxState createState() => _ArnaCheckBoxState();
-}
+  /// Whether this checkbox is checked.
+  final bool? value;
 
-class _ArnaCheckBoxState extends State<ArnaCheckBox> {
-  FocusNode? focusNode;
-  bool _hover = false;
-  bool _focused = false;
-  bool _selected = false;
-  late Map<Type, Action<Intent>> _actions;
-  late Map<ShortcutActivator, Intent> _shortcuts;
+  /// Called when the value of the checkbox should change.
+  ///
+  /// The checkbox passes the new value to the callback but does not actually
+  /// change state until the parent widget rebuilds the checkbox with the new
+  /// value.
+  ///
+  /// If this callback is null, the checkbox will be displayed as disabled
+  /// and will not respond to input gestures.
+  ///
+  /// When the checkbox is tapped, if [tristate] is false (the default) then
+  /// the [onChanged] callback will be applied to `!value`. If [tristate] is
+  /// true this callback cycle from false to true to null.
+  ///
+  /// The callback provided to [onChanged] should update the state of the parent
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt; for example:
+  ///
+  /// ```dart
+  /// ArnaCheckBox(
+  ///   value: _throwShotAway,
+  ///   onChanged: (bool? newValue) {
+  ///     setState(() {
+  ///       _throwShotAway = newValue!;
+  ///     });
+  ///   },
+  /// )
+  /// ```
+  final ValueChanged<bool?>? onChanged;
 
-  bool get isEnabled => widget.onChanged != null;
+  /// If true the checkbox's [value] can be true, false, or null.
+  ///
+  /// Checkbox displays a dash when its value is null.
+  ///
+  /// When a tri-state checkbox ([tristate] is true) is tapped, its [onChanged]
+  /// callback will be applied to true if the current value is false, to null if
+  /// value is true, and to false if value is null (i.e. it cycles through false
+  /// => true => null => false when tapped).
+  ///
+  /// If tristate is false (the default), [value] must not be null.
+  final bool tristate;
 
-  @override
-  void initState() {
-    super.initState();
-    focusNode = FocusNode(canRequestFocus: isEnabled);
-    if (widget.autofocus) focusNode!.requestFocus();
-    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
-    _shortcuts = const {
-      SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-      SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-    };
-  }
+  /// Whether this checkbox is focusable or not.
+  final bool isFocusable;
 
-  @override
-  void didUpdateWidget(ArnaCheckBox oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.onChanged != oldWidget.onChanged) {
-      focusNode!.canRequestFocus = isEnabled;
-      if (!isEnabled) _hover = false;
-    }
-  }
+  /// Whether this checkbox should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
 
-  @override
-  void dispose() {
-    focusNode!.dispose();
-    focusNode = null;
-    super.dispose();
-  }
+  /// The color of the checkbox's focused border and selected state.
+  final Color? accentColor;
 
-  void _handleFocusChange(bool hasFocus) => setState(() => _focused = hasFocus);
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// checkbox.
+  final MouseCursor cursor;
+
+  /// The semantic label of the checkbox.
+  final String? semanticLabel;
 
   void _handleTap() {
-    if (isEnabled) {
-      switch (widget.value) {
+    if (onChanged != null) {
+      switch (value) {
         case false:
-          widget.onChanged!(true);
+          onChanged!(true);
           break;
         case true:
-          widget.onChanged!(widget.tristate ? null : false);
+          onChanged!(tristate ? null : false);
           break;
         case null:
-          widget.onChanged!(false);
+          onChanged!(false);
           break;
       }
     }
   }
 
-  void _handleHover(hover) {
-    if (hover != _hover && mounted) setState(() => _hover = hover);
-  }
-
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
-  }
-
   @override
   Widget build(BuildContext context) {
-    _selected = widget.value ?? true;
+    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          checked: _selected,
-          enabled: isEnabled,
-          focusable: isEnabled,
-          focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
-              mouseCursor: widget.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AnimatedContainer(
-                    height: Styles.checkBoxSize,
-                    width: Styles.checkBoxSize,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.checkBoxBorderRadius,
-                      border: Border.all(
-                        color: _focused
-                            ? widget.accentColor ??
-                                ArnaTheme.of(context).accentColor
-                            : _selected && isEnabled
-                                ? widget.accentColor ??
-                                    ArnaTheme.of(context).accentColor
-                                : _hover && isEnabled
-                                    ? widget.accentColor ??
-                                        ArnaTheme.of(context).accentColor
-                                    : ArnaDynamicColor.resolve(
-                                        ArnaColors.borderColor,
-                                        context,
-                                      ),
-                      ),
-                      color: !isEnabled
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundColor,
-                              context,
-                            )
-                          : _selected && isEnabled
-                              ? widget.accentColor
-                              : _hover
-                                  ? ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonHoverColor,
-                                      context,
-                                    )
-                                  : ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
-                                      context,
-                                    ),
+      child: ArnaBaseButton(
+        builder: (context, enabled, hover, focused, pressed, selected) {
+          selected = value ?? true;
+          enabled = onChanged != null;
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedContainer(
+                height: Styles.checkBoxSize,
+                width: Styles.checkBoxSize,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.checkBoxBorderRadius,
+                  border: Border.all(
+                    color: ArnaDynamicColor.resolve(
+                      focused
+                          ? accent
+                          : selected && enabled
+                              ? accent
+                              : hover && enabled
+                                  ? accent
+                                  : ArnaColors.borderColor,
+                      context,
                     ),
                   ),
-                  AnimatedContainer(
-                    height: Styles.checkBoxSize,
-                    width: Styles.checkBoxSize,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    child: Opacity(
-                      opacity: _selected && isEnabled ? 1.0 : 0.0,
-                      child: Icon(
-                        widget.value != null
-                            ? Icons.check_outlined
-                            : Icons.remove_outlined,
-                        size: Styles.checkBoxIconSize,
-                        color: ArnaColors.color36,
-                      ),
-                    ),
+                  color: ArnaDynamicColor.resolve(
+                    !enabled
+                        ? ArnaColors.backgroundColor
+                        : selected && enabled
+                            ? accent
+                            : hover
+                                ? ArnaColors.buttonHoverColor
+                                : ArnaColors.buttonColor,
+                    context,
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
+              AnimatedContainer(
+                height: Styles.checkBoxSize,
+                width: Styles.checkBoxSize,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                child: Opacity(
+                  opacity: selected && enabled ? 1.0 : 0.0,
+                  child: Icon(
+                    value != null
+                        ? Icons.check_outlined
+                        : Icons.remove_outlined,
+                    size: Styles.checkBoxIconSize,
+                    color: ArnaColors.color36,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+        onPressed: _handleTap,
+        isFocusable: isFocusable,
+        autofocus: autofocus,
+        cursor: cursor,
+        semanticLabel: semanticLabel,
       ),
     );
   }

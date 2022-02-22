@@ -1,15 +1,37 @@
 import 'package:arna/arna.dart';
 
-class ArnaRadio<T> extends StatefulWidget {
-  final T value;
-  final T? groupValue;
-  final ValueChanged<T?>? onChanged;
-  final bool isFocusable;
-  final bool autofocus;
-  final Color? accentColor;
-  final MouseCursor cursor;
-  final String? semanticLabel;
-
+/// An Arna-styled radio button.
+///
+/// Used to select between a number of mutually exclusive values. When one radio
+/// button in a group is selected, the other radio buttons in the group cease to
+/// be selected. The values are of type `T`, the type parameter of the [ArnaRadio]
+/// class. Enums are commonly used for this purpose.
+///
+/// The radio button itself does not maintain any state. Instead, selecting the
+/// radio invokes the [onChanged] callback, passing [value] as a parameter. If
+/// [groupValue] and [value] match, this radio will be selected. Most widgets
+/// will respond to [onChanged] by calling [State.setState] to update the
+/// radio button's [groupValue].
+/// See also:
+///
+///  * [ArnaRadioListTile], which combines this widget with a [ArnaListTile] so that
+///    you can give the radio button a label.
+///  * [ArnaSlider], for selecting a value in a range.
+///  * [ArnaCheckBox] and [ArnaSwitch], for toggling a particular value on or off.
+class ArnaRadio<T> extends StatelessWidget {
+  /// Creates An Arna-styled radio button.
+  ///
+  /// The radio button itself does not maintain any state. Instead, when the
+  /// radio button is selected, the widget calls the [onChanged] callback. Most
+  /// widgets that use a radio button will listen for the [onChanged] callback
+  /// and rebuild the radio button with a new [groupValue] to update the visual
+  /// appearance of the radio button.
+  ///
+  /// The following arguments are required:
+  ///
+  /// * [value] and [groupValue] together determine whether the radio button is
+  ///   selected.
+  /// * [onChanged] is called when the user selects this radio button.
   const ArnaRadio({
     Key? key,
     required this.value,
@@ -22,156 +44,137 @@ class ArnaRadio<T> extends StatefulWidget {
     this.semanticLabel,
   }) : super(key: key);
 
-  @override
-  State<ArnaRadio<T>> createState() => _ArnaRadioState<T>();
-}
+  /// The value represented by this radio button.
+  final T value;
 
-class _ArnaRadioState<T> extends State<ArnaRadio<T>> {
-  FocusNode? focusNode;
-  bool _hover = false;
-  bool _focused = false;
-  bool _selected = false;
-  late Map<Type, Action<Intent>> _actions;
-  late Map<ShortcutActivator, Intent> _shortcuts;
+  /// The currently selected value for a group of radio buttons.
+  ///
+  /// This radio button is considered selected if its [value] matches the
+  /// [groupValue].
+  final T? groupValue;
 
-  bool get isEnabled => widget.onChanged != null;
+  /// Called when the user selects this radio button.
+  ///
+  /// The radio button passes [value] as a parameter to this callback. The radio
+  /// button does not actually change state until the parent widget rebuilds the
+  /// radio button with the new [groupValue].
+  ///
+  /// If null, the radio button will be displayed as disabled.
+  ///
+  /// The provided callback will not be invoked if this radio button is already
+  /// selected.
+  ///
+  /// The callback provided to [onChanged] should update the state of the parent
+  /// [StatefulWidget] using the [State.setState] method, so that the parent
+  /// gets rebuilt; for example:
+  ///
+  /// ```dart
+  /// ArnaRadio<SingingCharacter>(
+  ///   value: SingingCharacter.lafayette,
+  ///   groupValue: _character,
+  ///   onChanged: (SingingCharacter newValue) {
+  ///     setState(() {
+  ///       _character = newValue;
+  ///     });
+  ///   },
+  /// )
+  /// ```
+  final ValueChanged<T?>? onChanged;
 
-  @override
-  void initState() {
-    super.initState();
-    focusNode = FocusNode(canRequestFocus: isEnabled);
-    if (widget.autofocus) focusNode!.requestFocus();
-    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
-    _shortcuts = const {
-      SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-      SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-    };
-  }
+  /// Whether this radio button is focusable or not.
+  final bool isFocusable;
 
-  @override
-  void didUpdateWidget(ArnaRadio<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.onChanged != oldWidget.onChanged) {
-      focusNode!.canRequestFocus = isEnabled;
-      if (!isEnabled) _hover = false;
-    }
-  }
+  /// Whether this radio button should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
 
-  @override
-  void dispose() {
-    focusNode!.dispose();
-    focusNode = null;
-    super.dispose();
-  }
+  /// The color of the radio button's focused border and selected state.
+  final Color? accentColor;
 
-  void _handleFocusChange(bool hasFocus) => setState(() => _focused = hasFocus);
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// radio button.
+  final MouseCursor cursor;
+
+  /// The semantic label of the radio button.
+  final String? semanticLabel;
 
   void _handleTap() {
-    if (isEnabled) widget.onChanged!(widget.value);
-  }
-
-  void _handleHover(hover) {
-    if (hover != _hover && mounted) setState(() => _hover = hover);
-  }
-
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
+    if (onChanged != null) onChanged!(value);
   }
 
   @override
   Widget build(BuildContext context) {
-    _selected = widget.value == widget.groupValue;
+    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          checked: _selected,
-          enabled: isEnabled,
-          focusable: isEnabled,
-          focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
-              mouseCursor: widget.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AnimatedContainer(
-                    height: Styles.radioSize,
-                    width: Styles.radioSize,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.radioBorderRadius,
-                      border: Border.all(
-                        color: _focused
-                            ? widget.accentColor ??
-                                ArnaTheme.of(context).accentColor
-                            : _selected && isEnabled
-                                ? widget.accentColor ??
-                                    ArnaTheme.of(context).accentColor
-                                : _hover && isEnabled
-                                    ? widget.accentColor ??
-                                        ArnaTheme.of(context).accentColor
-                                    : ArnaDynamicColor.resolve(
-                                        ArnaColors.borderColor,
-                                        context,
-                                      ),
-                      ),
-                      color: !isEnabled
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundColor,
-                              context,
-                            )
-                          : _selected && isEnabled
-                              ? widget.accentColor
-                              : ArnaDynamicColor.resolve(
-                                  _hover
-                                      ? ArnaColors.buttonHoverColor
-                                      : ArnaColors.buttonColor,
-                                  context,
-                                ),
+      child: ArnaBaseButton(
+        builder: (context, enabled, hover, focused, pressed, selected) {
+          selected = value == groupValue;
+          enabled = onChanged != null;
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              AnimatedContainer(
+                height: Styles.radioSize,
+                width: Styles.radioSize,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.radioBorderRadius,
+                  border: Border.all(
+                    color: ArnaDynamicColor.resolve(
+                      focused
+                          ? accent
+                          : selected && enabled
+                              ? accent
+                              : hover && enabled
+                                  ? accent
+                                  : ArnaColors.borderColor,
+                      context,
                     ),
                   ),
-                  AnimatedContainer(
-                    height:
-                        _selected && isEnabled ? Styles.radioIndicatorSize : 0,
-                    width:
-                        _selected && isEnabled ? Styles.radioIndicatorSize : 0,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.radioBorderRadius,
-                      color: !isEnabled
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundColor,
-                              context,
-                            )
-                          : _selected && isEnabled
-                              ? ArnaColors.color36
-                              : ArnaDynamicColor.resolve(
-                                  _hover
-                                      ? ArnaColors.buttonHoverColor
-                                      : ArnaColors.backgroundColor,
-                                  context,
-                                ),
-                    ),
+                  color: ArnaDynamicColor.resolve(
+                    !enabled
+                        ? ArnaColors.backgroundColor
+                        : selected && enabled
+                            ? accent
+                            : hover
+                                ? ArnaColors.buttonHoverColor
+                                : ArnaColors.buttonColor,
+                    context,
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-        ),
+              AnimatedContainer(
+                height: selected && enabled ? Styles.radioIndicatorSize : 0,
+                width: selected && enabled ? Styles.radioIndicatorSize : 0,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.radioBorderRadius,
+                  color: !enabled
+                      ? ArnaDynamicColor.resolve(
+                          ArnaColors.backgroundColor,
+                          context,
+                        )
+                      : selected && enabled
+                          ? ArnaColors.color36
+                          : ArnaDynamicColor.resolve(
+                              hover
+                                  ? ArnaColors.buttonHoverColor
+                                  : ArnaColors.backgroundColor,
+                              context,
+                            ),
+                ),
+              ),
+            ],
+          );
+        },
+        onPressed: _handleTap,
+        isFocusable: isFocusable,
+        autofocus: autofocus,
+        cursor: cursor,
+        semanticLabel: semanticLabel,
       ),
     );
   }

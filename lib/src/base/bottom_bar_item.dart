@@ -95,7 +95,7 @@ class ArnaBottomBarItem extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseButton(
-        builder: (context, enabled, hover, focused, pressed) {
+        builder: (context, enabled, hover, focused, pressed, selected) {
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [

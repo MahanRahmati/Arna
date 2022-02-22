@@ -86,10 +86,11 @@ class ArnaMasterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: ArnaBaseButton(
-        builder: (context, enabled, hover, focused, pressed) {
+        builder: (context, enabled, hover, focused, pressed, selected) {
           return Stack(
             alignment: Alignment.centerLeft,
             children: [
@@ -104,7 +105,7 @@ class ArnaMasterItem extends StatelessWidget {
                     color: !enabled
                         ? ArnaColors.color00
                         : focused
-                            ? accentColor ?? ArnaTheme.of(context).accentColor
+                            ? accent
                             : ArnaDynamicColor.resolve(
                                 ArnaColors.borderColor,
                                 context,
@@ -133,7 +134,7 @@ class ArnaMasterItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: accentColor,
+                  color: accent,
                 ),
               ),
             ],

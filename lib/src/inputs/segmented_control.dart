@@ -184,7 +184,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaBaseButton(
-      builder: (context, enabled, hover, focused, pressed) {
+      builder: (context, enabled, hover, focused, pressed, selected) {
         return AnimatedContainer(
           height: Styles.buttonSize - 2,
           duration: Styles.basicDuration,

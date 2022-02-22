@@ -1,6 +1,7 @@
 # Arna
 
 Arna Framework - A unique set of widgets for building applications with Flutter.
+
 This Framework is in active development. Any contribution, idea, criticism or feedback is welcomed.
 
 <p align="start">

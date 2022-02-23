@@ -1,3 +1,9 @@
+## 0.2.5
+
+- Cleanup helpers
+- Add type to ArnaButton
+- Update colors of ArnaSegmentedControl
+
 ## 0.2.4
 
 - Update ArnaBaseButton

@@ -7,6 +7,7 @@ class ArnaTextButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     this.tooltipMessage,
+    this.buttonType = ButtonType.normal,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -22,6 +23,9 @@ class ArnaTextButton extends StatelessWidget {
 
   /// The tooltip message of the button.
   final String? tooltipMessage;
+
+  /// The type of the button.
+  final ButtonType buttonType;
 
   /// Whether this button is focusable or not.
   final bool isFocusable;
@@ -46,6 +50,7 @@ class ArnaTextButton extends StatelessWidget {
       label: label,
       onPressed: onPressed,
       tooltipMessage: tooltipMessage,
+      buttonType: buttonType,
       isFocusable: isFocusable,
       autofocus: autofocus,
       accentColor: accentColor,

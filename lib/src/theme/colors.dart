@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:math' as math;
 
 /// A palette of [Color] constants that describe colors
 class ArnaColors {
@@ -407,6 +408,27 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return backgroundColor.computeLuminance() > 0.5
         ? foregroundColor.color
         : foregroundColor.darkColor;
+  }
+
+  /// Blends the given [Color] by [percentage] and [luminance].
+  static Color colorBlender(
+    Color color,
+    int percentage, {
+    bool isBorder = false,
+  }) {
+    Color secondColor = color.computeLuminance() > 0.5
+        ? isBorder
+            ? ArnaColors.color36
+            : ArnaColors.color01
+        : isBorder
+            ? ArnaColors.color01
+            : ArnaColors.color36;
+    int r = color.red + percentage * (secondColor.red - color.red) ~/ 100;
+    int g = color.green + percentage * (secondColor.green - color.green) ~/ 100;
+    int b = color.blue + percentage * (secondColor.blue - color.blue) ~/ 100;
+    int upperBound = math.max(r, math.max(g, b));
+    int a = math.max(252, upperBound);
+    return Color.fromRGBO(r * 252 ~/ a, g * 252 ~/ a, b * 252 ~/ a, 1.0);
   }
 
   bool get _isPlatformBrightnessDependent =>

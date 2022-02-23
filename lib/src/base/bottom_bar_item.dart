@@ -93,6 +93,7 @@ class ArnaBottomBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool buttonSelected = selected;
+    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: ArnaBaseButton(
@@ -112,19 +113,24 @@ class ArnaBottomBarItem extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: Styles.borderRadius,
                       border: Border.all(
-                        color: buttonBorder(
+                        color: ArnaDynamicColor.resolve(
+                          !enabled
+                              ? ArnaColors.borderColor
+                              : focused
+                                  ? accent
+                                  : ArnaColors.borderColor,
                           context,
-                          enabled,
-                          focused,
-                          accentColor ?? ArnaTheme.of(context).accentColor,
                         ),
                       ),
-                      color: buttonBackground(
+                      color: ArnaDynamicColor.resolve(
+                        !enabled
+                            ? ArnaColors.backgroundColor
+                            : pressed
+                                ? ArnaColors.buttonPressedColor
+                                : hover
+                                    ? ArnaColors.buttonHoverColor
+                                    : ArnaColors.buttonColor,
                         context,
-                        enabled,
-                        hover,
-                        focused,
-                        pressed,
                       ),
                     ),
                     padding: Styles.horizontal,

@@ -101,6 +101,15 @@ class _HomeState extends State<Home> {
                       onPressed: null,
                       tooltipMessage: "Add",
                     ),
+                    ArnaIconButton(
+                      icon: Icons.add_outlined,
+                      buttonType: ButtonType.suggested,
+                      onPressed: () => showArnaSnackbar(
+                        context: context,
+                        message: "Hello There!",
+                      ),
+                      tooltipMessage: "Add",
+                    ),
                   ],
                 ),
               ],

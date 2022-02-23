@@ -7,6 +7,7 @@ class ArnaIconButton extends StatelessWidget {
     required this.icon,
     required this.onPressed,
     this.tooltipMessage,
+    this.buttonType = ButtonType.normal,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -22,6 +23,9 @@ class ArnaIconButton extends StatelessWidget {
 
   /// The tooltip message of the button.
   final String? tooltipMessage;
+
+  /// The type of the button.
+  final ButtonType buttonType;
 
   /// Whether this button is focusable or not.
   final bool isFocusable;
@@ -46,6 +50,7 @@ class ArnaIconButton extends StatelessWidget {
       icon: icon,
       onPressed: onPressed,
       tooltipMessage: tooltipMessage,
+      buttonType: buttonType,
       isFocusable: isFocusable,
       autofocus: autofocus,
       accentColor: accentColor,

@@ -1,7 +1,7 @@
 name: example
 description: Showcase Arna.
 
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0
 
@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   arna:
     path: ../
+  flutter_riverpod: ^2.0.0-dev.3
+  url_launcher: ^6.0.20
 
 dev_dependencies:
   flutter_test:

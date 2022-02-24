@@ -98,11 +98,11 @@ class _ArnaPopupDialog extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,
                 child: ArnaScaffold(
-                  headerBarLeading: headerBarLeading ?? const SizedBox.shrink(),
+                  headerBarLeading: headerBarLeading,
                   title: title,
                   headerBarTrailing: Row(
                     children: [
-                      headerBarTrailing ?? const SizedBox.shrink(),
+                      if (headerBarTrailing != null) headerBarTrailing!,
                       ArnaTextButton(
                         label: "Close",
                         onPressed: Navigator.of(context).pop,
@@ -192,11 +192,11 @@ class _ArnaPopupPage extends StatelessWidget {
             icon: Icons.arrow_back_outlined,
             onPressed: () => Navigator.pop(context),
           ),
-          headerBarLeading ?? const SizedBox.shrink(),
+          if (headerBarLeading != null) headerBarLeading!,
         ],
       ),
       title: title,
-      headerBarTrailing: headerBarTrailing ?? const SizedBox.shrink(),
+      headerBarTrailing: headerBarTrailing,
       searchField: searchField,
       banner: banner,
       body: body,

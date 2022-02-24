@@ -28,9 +28,9 @@ class ArnaHeaderBar extends StatelessWidget {
 
   Widget _buildChild() {
     final List<Widget> children = [];
-    children.add(leading != null ? leading! : const SizedBox.expand());
-    children.add(middle != null ? middle! : const SizedBox.expand());
-    children.add(trailing != null ? trailing! : const SizedBox.expand());
+    children.add(leading ?? const SizedBox.expand());
+    children.add(Flexible(child: middle ?? const SizedBox.expand()));
+    children.add(trailing ?? const SizedBox.expand());
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: children,

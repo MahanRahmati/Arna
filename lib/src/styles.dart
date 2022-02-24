@@ -24,6 +24,7 @@ abstract class Styles {
   static const double switchHeight = base * 4;
   static const double buttonSize = base * 5;
   static const double indicatorSize = base * 5;
+  static const double minMasterItemHeight = base * 5;
   static const double switchWidth = base * 7;
   static const double headerBarHeight = base * 7;
   static const double sideBarItemHeight = base * 7;
@@ -64,17 +65,13 @@ abstract class Styles {
   static const EdgeInsets top = EdgeInsets.only(top: padding);
   static const EdgeInsets right = EdgeInsets.only(right: padding);
   static const EdgeInsets bottom = EdgeInsets.only(bottom: padding);
-  static const EdgeInsets tilePadding = EdgeInsets.fromLTRB(
-    largePadding,
-    padding,
-    largePadding,
-    padding,
+  static const EdgeInsets tilePadding = EdgeInsets.symmetric(
+    horizontal: largePadding,
+    vertical: padding,
   );
-  static const EdgeInsets tileTextPadding = EdgeInsets.fromLTRB(
-    padding,
-    smallPadding,
-    padding,
-    smallPadding,
+  static const EdgeInsets tileTextPadding = EdgeInsets.symmetric(
+    horizontal: padding,
+    vertical: smallPadding,
   );
   static const EdgeInsets scrollPadding = EdgeInsets.all(scrollPaddingSize);
   static const EdgeInsets listPadding = EdgeInsets.symmetric(

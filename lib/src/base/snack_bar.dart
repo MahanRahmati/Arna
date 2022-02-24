@@ -49,16 +49,14 @@ class ArnaSnackBarState extends State<ArnaSnackBar>
     final List<Widget> children = [];
     children.add(
       Flexible(
-        child: FittedBox(
-          child: Text(
-            widget.message,
-            style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
-                  color: ArnaDynamicColor.resolve(
-                    ArnaColors.reversePrimaryTextColor,
-                    context,
-                  ),
+        child: Text(
+          widget.message,
+          style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.reversePrimaryTextColor,
+                  context,
                 ),
-          ),
+              ),
         ),
       ),
     );

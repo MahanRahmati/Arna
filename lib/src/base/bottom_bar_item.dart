@@ -70,19 +70,16 @@ class ArnaBottomBarItem extends StatelessWidget {
     children.add(const SizedBox(width: Styles.padding));
     children.add(
       Flexible(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: Text(
-            label,
-            style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
-                  color: ArnaDynamicColor.resolve(
-                    !enabled
-                        ? ArnaColors.disabledColor
-                        : ArnaColors.primaryTextColor,
-                    context,
-                  ),
+        child: Text(
+          label,
+          style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+                color: ArnaDynamicColor.resolve(
+                  !enabled
+                      ? ArnaColors.disabledColor
+                      : ArnaColors.primaryTextColor,
+                  context,
                 ),
-          ),
+              ),
         ),
       ),
     );

@@ -58,26 +58,33 @@ class ArnaMasterItem extends StatelessWidget {
       children.add(Padding(padding: Styles.normal, child: leading));
     }
     children.add(
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (title != null)
-            Padding(
-              padding: Styles.tileTextPadding,
-              child: Text(title!),
-            ),
-          if (subtitle != null)
-            Padding(
-              padding: Styles.tileTextPadding,
-              child: Text(
-                subtitle!,
-                style: ArnaTheme.of(context).textTheme.subtitleTextStyle,
+      Flexible(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (title != null)
+              SizedBox(
+                width: Styles.sideBarWidth,
+                child: Padding(
+                  padding: Styles.tileTextPadding,
+                  child: Text(
+                    title!,
+                    style: ArnaTheme.of(context).textTheme.textStyle,
+                  ),
+                ),
               ),
-            ),
-        ],
+            if (subtitle != null)
+              Padding(
+                padding: Styles.tileTextPadding,
+                child: Text(
+                  subtitle!,
+                  style: ArnaTheme.of(context).textTheme.subtitleTextStyle,
+                ),
+              ),
+          ],
+        ),
       ),
     );
-    children.add(const Spacer());
     if (trailing != null) {
       children.add(Padding(padding: Styles.normal, child: trailing));
     }
@@ -97,6 +104,9 @@ class ArnaMasterItem extends StatelessWidget {
             alignment: Alignment.centerLeft,
             children: [
               AnimatedContainer(
+                constraints: const BoxConstraints(
+                  minHeight: Styles.minMasterItemHeight,
+                ),
                 width: double.infinity,
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,

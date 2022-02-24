@@ -1,3 +1,16 @@
+## 0.2.6
+
+- Update Example
+- Update ArnaBottomBarItem
+- Update ArnaHeaderBar
+- Update ArnaMasterItem
+- Update ArnaScaffold
+- Update ArnaSideBarItem
+- Update ArnaSnackBar
+- Update ArnaBadge
+- Update ArnaPopupDialog
+- Update Readme
+
 ## 0.2.5
 
 - Cleanup helpers

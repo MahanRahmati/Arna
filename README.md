@@ -12,8 +12,8 @@ This Framework is in active development. Any contribution, idea, criticism or fe
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-<img alt="Light" src="https://user-images.githubusercontent.com/16052180/154751611-95129fda-0ae5-4354-ba94-e8ef2c5732b6.png">
-<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/154751586-d03b523d-3b5b-4265-8f7d-4fa05ecf3eab.png">
+<img alt="Light" src="https://user-images.githubusercontent.com/16052180/155535449-7bfe6a05-303a-47cb-8e95-99024fed3141.png">
+<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/155535372-f29b06a8-396a-4a9e-a9f4-63ef0d1ec9e2.png">
 
 ## Content
 
@@ -60,7 +60,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.2.5
+  arna: ^0.2.6
 ```
 
 And import it

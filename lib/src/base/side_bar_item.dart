@@ -72,22 +72,16 @@ class ArnaSideBarItem extends StatelessWidget {
               ),
             ),
             const SizedBox(width: Styles.padding),
-            Align(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  label,
-                  style:
-                      ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
-                            color: ArnaDynamicColor.resolve(
-                              !enabled
-                                  ? ArnaColors.disabledColor
-                                  : ArnaColors.primaryTextColor,
-                              context,
-                            ),
-                          ),
-                ),
-              ),
+            Text(
+              label,
+              style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+                    color: ArnaDynamicColor.resolve(
+                      !enabled
+                          ? ArnaColors.disabledColor
+                          : ArnaColors.primaryTextColor,
+                      context,
+                    ),
+                  ),
             ),
           ],
         ),

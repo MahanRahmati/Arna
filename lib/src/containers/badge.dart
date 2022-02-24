@@ -35,14 +35,12 @@ class ArnaBadge extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Flexible(
-              child: FittedBox(
-                child: Text(
-                  label,
-                  style: ArnaTheme.of(context)
-                      .textTheme
-                      .textStyle
-                      .copyWith(color: textColor),
-                ),
+              child: Text(
+                label,
+                style: ArnaTheme.of(context)
+                    .textTheme
+                    .textStyle
+                    .copyWith(color: textColor),
               ),
             ),
           ],

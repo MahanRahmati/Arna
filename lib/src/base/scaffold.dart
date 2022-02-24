@@ -56,12 +56,12 @@ class ArnaScaffold extends StatelessWidget {
             child: Column(
               children: [
                 ArnaHeaderBar(
-                  leading: headerBarLeading,
+                  leading: headerBarLeading ?? const SizedBox.shrink(),
                   middle: Text(
                     title ?? "",
                     style: ArnaTheme.of(context).textTheme.titleTextStyle,
                   ),
-                  trailing: headerBarTrailing,
+                  trailing: headerBarTrailing ?? const SizedBox.shrink(),
                 ),
                 if (searchField != null) searchField!,
                 if (banner != null) banner!,

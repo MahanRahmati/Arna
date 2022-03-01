@@ -12,8 +12,8 @@ This Framework is in active development. Any contribution, idea, criticism or fe
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-<img alt="Light" src="https://user-images.githubusercontent.com/16052180/155535449-7bfe6a05-303a-47cb-8e95-99024fed3141.png">
-<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/155535372-f29b06a8-396a-4a9e-a9f4-63ef0d1ec9e2.png">
+<img alt="Light" src="https://user-images.githubusercontent.com/16052180/156184852-66b51dbf-13df-42eb-8bbc-687c2b9ed2c7.png">
+<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/156184833-3ea850b2-7317-45d8-a83b-0c019a5fa28a.png">
 
 ## Content
 
@@ -46,6 +46,7 @@ This Framework is in active development. Any contribution, idea, criticism or fe
     - [Arna Alert Dialog](#arna-alert-dialog)
     - [Arna Text Field](#arna-text-field)
     - [Arna Slider](#arna-slider)
+    - [Arna Slider List Tile](#arna-slider-list-tile)
     - [Arna Tooltip](#arna-tooltip)
     - [Arna Indicator](#arna-indicator)
     - [Arna Search Field](#arna-search-field)
@@ -60,7 +61,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.2.6
+  arna: ^0.2.7
 ```
 
 And import it
@@ -412,6 +413,23 @@ ArnaSlider(
 );
 ```
 
+### Arna Slider List Tile
+
+```dart
+ArnaSliderListTile(
+    value: _sliderValue,
+    title: "Title",
+    subtitle: "Subtitle",
+    onChanged: (double newValue) {
+        setState(() => _sliderValue = newValue);
+    },
+    trailingButton: ArnaIconButton(
+        icon: Icons.add_outlined,
+        onPressed: () {},
+    ),
+);
+```
+
 ### Arna Tooltip
 
 ```dart
@@ -481,3 +499,4 @@ ArnaBanner(
 - [ubuntu](https://github.com/ubuntu) for [yaru_widgets.dart](https://github.com/ubuntu/yaru_widgets.dart) and [yaru.dart](https://github.com/ubuntu/yaru.dart).
 - [tvolkert](https://github.com/tvolkert) for [chicago](https://github.com/tvolkert/chicago).
 - [rsms](https://github.com/rsms) for [inter](https://github.com/rsms/inter).
+- [WangYng](https://github.com/WangYng) for [better_cupertino_slider](https://github.com/WangYng/better_cupertino_slider).

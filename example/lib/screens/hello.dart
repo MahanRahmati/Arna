@@ -18,7 +18,7 @@ class HelloWorld extends ConsumerWidget {
         children: [
           Text(
             "You have pushed the button this many times:",
-            style: ArnaTheme.of(context).textTheme.titleTextStyle,
+            style: ArnaTheme.of(context).textTheme.textStyle,
           ),
           const SizedBox(height: Styles.padding),
           Consumer(

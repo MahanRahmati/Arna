@@ -18,6 +18,7 @@ import 'package:arna/arna.dart';
 ///
 ///  * [ArnaRadioListTile], a similar widget for radio buttons.
 ///  * [ArnaSwitchListTile], a similar widget for switches.
+///  * [ArnaSliderListTile], a similar widget for sliders.
 ///  * [ArnaListTile] and [ArnaCheckBox], the widgets from which this widget is made.
 class ArnaCheckBoxListTile extends StatelessWidget {
   /// Creates a combination of a list tile and a checkbox.
@@ -140,18 +141,15 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaListTile(
-      leading: Padding(
-        padding: Styles.small,
-        child: ArnaCheckBox(
-          value: value,
-          tristate: tristate,
-          onChanged: onChanged,
-          isFocusable: isFocusable,
-          autofocus: autofocus,
-          accentColor: accentColor ?? ArnaTheme.of(context).accentColor,
-          cursor: cursor,
-          semanticLabel: semanticLabel,
-        ),
+      leading: ArnaCheckBox(
+        value: value,
+        tristate: tristate,
+        onChanged: onChanged,
+        isFocusable: isFocusable,
+        autofocus: autofocus,
+        accentColor: accentColor,
+        cursor: cursor,
+        semanticLabel: semanticLabel,
       ),
       title: title,
       subtitle: subtitle,

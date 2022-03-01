@@ -3,6 +3,7 @@ import 'package:arna/arna.dart';
 /// Button types.
 enum ButtonType { normal, colored, destructive, suggested }
 
+/// An Arna-styled button.
 class ArnaButton extends StatelessWidget {
   /// Creates a button.
   const ArnaButton({

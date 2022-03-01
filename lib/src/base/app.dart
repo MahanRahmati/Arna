@@ -1,8 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/cupertino.dart'
     show CupertinoPageRoute, DefaultCupertinoLocalizations;
-import 'package:flutter/material.dart'
-    show DefaultMaterialLocalizations, Tooltip;
+import 'package:flutter/material.dart' show DefaultMaterialLocalizations;
 
 /// An application that uses Arna design.
 ///
@@ -632,7 +631,7 @@ class _ArnaAppState extends State<ArnaApp> {
                   event.logicalKey != LogicalKeyboardKey.escape) {
                 return KeyEventResult.ignored;
               }
-              return Tooltip.dismissAllToolTips()
+              return ArnaTooltip.dismissAllToolTips()
                   ? KeyEventResult.handled
                   : KeyEventResult.ignored;
             },

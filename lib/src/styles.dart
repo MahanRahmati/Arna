@@ -8,7 +8,6 @@ abstract class Styles {
   static const double cursorRadius = base / 2;
   static const double padding = base;
   static const double borderRadiusSize = base;
-  static const double sliderTrackSize = base;
   static const double scrollBarThickness = base;
   static const double sliderSize = base * 1.5;
   static const double radioIndicatorSize = base * 1.75;
@@ -20,8 +19,10 @@ abstract class Styles {
   static const double checkBoxSize = base * 3;
   static const double radioSize = base * 3;
   static const double scrollPaddingSize = base * 3;
+  static const double sliderTrackSize = base * 3;
   static const double switchThumbSize = base * 3.5;
   static const double switchHeight = base * 4;
+  static const double tooltipHeight = base * 4;
   static const double buttonSize = base * 5;
   static const double indicatorSize = base * 5;
   static const double minMasterItemHeight = base * 5;
@@ -34,8 +35,11 @@ abstract class Styles {
   static const double dialogSize = base * 90;
 
   // Durations
+  static const Duration tooltipHoverShowDuration = Duration(milliseconds: 70);
+  static const Duration tooltipReverseDuration = Duration(milliseconds: 105);
   static const Duration basicDuration = Duration(milliseconds: 210);
   static const Duration indicatorDuration = Duration(milliseconds: 2100);
+  static const Duration tooltipDuration = Duration(milliseconds: 2100);
   static const Duration snackbarDuration = Duration(milliseconds: 3500);
 
   // Curves

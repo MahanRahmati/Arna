@@ -43,9 +43,13 @@ class ArnaExpansionPanel extends StatefulWidget {
   _ArnaExpansionPanelState createState() => _ArnaExpansionPanelState();
 }
 
-class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
+class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
+    with SingleTickerProviderStateMixin {
   late bool expanded;
   bool _hover = false;
+  late AnimationController _controller;
+  late Animation<double> _expandAnimation;
+  late Animation<double> _rotateAnimation;
 
   bool get isEnabled => widget.child != null;
 
@@ -53,10 +57,32 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
   void initState() {
     super.initState();
     expanded = widget.isExpanded;
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      vsync: this,
+    );
+    _expandAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: Styles.basicCurve,
+    );
+    _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: Styles.basicCurve,
+      ),
+    );
   }
 
-  void _handleTap() {
-    if (isEnabled) setState(() => expanded = !expanded);
+  void _handleTap() async {
+    if (isEnabled) {
+      if (expanded) {
+        await _controller.reverse();
+        setState(() => expanded = false);
+      } else {
+        setState(() => expanded = true);
+        _controller.forward();
+      }
+    }
   }
 
   void _handleEnter(event) {
@@ -118,12 +144,18 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
           child: SizedBox(
             height: Styles.buttonSize,
             width: Styles.buttonSize,
-            child: Transform.rotate(
-              angle: expanded ? 3.14 / 2 : -3.14 / 2,
-              child: Icon(
-                Icons.arrow_back_ios_new_outlined,
-                size: Styles.iconSize,
-                color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+            child: RotationTransition(
+              turns: _rotateAnimation,
+              child: Transform.rotate(
+                angle: -3.14 / 2,
+                child: Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  size: Styles.iconSize,
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
+                ),
               ),
             ),
           ),
@@ -150,7 +182,14 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> {
               ),
             ),
             const ArnaHorizontalDivider(),
-            Padding(padding: Styles.normal, child: widget.child!),
+            SizeTransition(
+              axisAlignment: 1,
+              sizeFactor: _expandAnimation,
+              child: Padding(
+                padding: Styles.normal,
+                child: widget.child!,
+              ),
+            ),
           ],
         ),
       );

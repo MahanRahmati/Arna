@@ -15,7 +15,9 @@ class _WidgetsState extends State<Widgets> {
   bool _switch1 = false;
   bool _switch2 = false;
   final bool _switch3 = false;
-  double _sliderValue = 50;
+  double _sliderValue1 = 0;
+  double _sliderValue2 = 0;
+  final double _sliderValue3 = 0;
   int segmentedControlGroupValue = 0;
 
   @override
@@ -247,14 +249,35 @@ class _WidgetsState extends State<Widgets> {
           ArnaList(
             title: "Slider",
             items: [
-              ArnaSlider(
-                value: _sliderValue,
+              ArnaSliderListTile(
+                title: "Title 1",
+                value: _sliderValue1,
                 min: 0,
                 max: 100,
-                onChanged: (double newValue) {
-                  setState(() => _sliderValue = newValue);
-                },
-              )
+                onChanged: (double newValue) =>
+                    setState(() => _sliderValue1 = newValue),
+              ),
+              ArnaSliderListTile(
+                title: "Title 2",
+                subtitle: "Subtitle 2",
+                value: _sliderValue2,
+                min: 0,
+                max: 100,
+                onChanged: (double newValue) =>
+                    setState(() => _sliderValue2 = newValue),
+                trailingButton: ArnaIconButton(
+                  icon: Icons.add_outlined,
+                  onPressed: () {},
+                ),
+              ),
+              ArnaSliderListTile(
+                title: "Title 3",
+                subtitle: "Subtitle 3",
+                value: _sliderValue3,
+                min: 0,
+                max: 100,
+                onChanged: null,
+              ),
             ],
           ),
           const ArnaList(

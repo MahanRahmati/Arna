@@ -1,3 +1,18 @@
+## 0.2.7
+
+- Update ArnaBaseButton
+- Update documentations of ArnaButton
+- Update ArnaExpansionPanel
+- Update ArnaCheckBoxListTile
+- Update ArnaRadioListTile
+- Update ArnaSwitchListTile
+- Update HelloWorld
+- Refactor ArnaSlider
+- Add documentation to ArnaSlider
+- Refactor ArnaTooltip
+- Add ArnaSliderListTile
+- Update Readme
+
 ## 0.2.6
 
 - Update Example

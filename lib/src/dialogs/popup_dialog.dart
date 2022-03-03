@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
 
 /// An Arna-styled popup dialog.
 ///
@@ -255,7 +254,7 @@ Future<T?> showArnaPopupDialog<T>({
 }) {
   return phone(context)
       ? Navigator.of(context).push(
-          CupertinoPageRoute(
+          ArnaPageRoute(
             builder: (context) => _ArnaPopupPage(
               headerBarLeading: headerBarLeading,
               title: title,

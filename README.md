@@ -12,8 +12,8 @@ This Framework is in active development. Any contribution, idea, criticism or fe
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-<img alt="Light" src="https://user-images.githubusercontent.com/16052180/156184852-66b51dbf-13df-42eb-8bbc-687c2b9ed2c7.png">
-<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/156184833-3ea850b2-7317-45d8-a83b-0c019a5fa28a.png">
+<img alt="Light" src="https://user-images.githubusercontent.com/16052180/156654600-b8be06db-1cb1-411b-adf9-0bba86dd9704.png">
+<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/156654550-cef8b2c8-b95a-41de-9d4e-903c6968637b.png">
 
 ## Content
 
@@ -61,7 +61,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.2.7
+  arna: ^0.2.8
 ```
 
 And import it
@@ -475,7 +475,7 @@ showArnaSnackbar(
 ```dart
 ArnaBanner(
     showBanner: showBanner,
-    message: "This is a message!",
+    title: "This is an information banner!",
     trailing: ArnaIconButton(
         icon: Icons.close_outlined,
         onPressed: () => setState(() => showBanner = false),
@@ -500,3 +500,4 @@ ArnaBanner(
 - [tvolkert](https://github.com/tvolkert) for [chicago](https://github.com/tvolkert/chicago).
 - [rsms](https://github.com/rsms) for [inter](https://github.com/rsms/inter).
 - [WangYng](https://github.com/WangYng) for [better_cupertino_slider](https://github.com/WangYng/better_cupertino_slider).
+- [MingSern](https://github.com/MingSern) for [flutter_bounceable](https://github.com/MingSern/flutter_bounceable).

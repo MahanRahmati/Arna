@@ -150,7 +150,7 @@ class ArnaSwitch extends StatelessWidget {
             ],
           );
         },
-        onPressed: _handleTap,
+        onPressed: onChanged != null ? _handleTap : null,
         isFocusable: isFocusable,
         autofocus: autofocus,
         cursor: cursor,

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '/screens/hello.dart';
-import '/screens/indicators.dart';
 import '/screens/settings.dart';
 import '/screens/typography.dart';
 import '/screens/widgets.dart';
@@ -79,7 +78,8 @@ class _HomeState extends ConsumerState<Home> {
       ),
       banner: ArnaBanner(
         showBanner: showBanner,
-        message: "Hello There!",
+        title: "This is an information banner!",
+        subtitle: "Hello There!",
         trailing: ArnaIconButton(
           icon: Icons.close_outlined,
           onPressed: () => setState(() => showBanner = false),
@@ -92,12 +92,6 @@ class _HomeState extends ConsumerState<Home> {
       title: "Typography",
       icon: Icons.font_download_outlined,
       builder: (_) => const Typography(),
-    );
-
-    NavigationItem indicators = NavigationItem(
-      title: "Indicators",
-      icon: Icons.refresh_outlined,
-      builder: (_) => const Indicators(),
     );
 
     return showMaster
@@ -124,7 +118,7 @@ class _HomeState extends ConsumerState<Home> {
                     dialog: ArnaAlertDialog(
                       title: "Arna Framework",
                       message:
-                          "A unique set of widgets for building applications with Flutter",
+                          "A unique set of widgets for building applications with Flutter.",
                       primary: ArnaTextButton(
                         label: "Source code",
                         onPressed: () async => await launch(url),
@@ -152,7 +146,6 @@ class _HomeState extends ConsumerState<Home> {
               hello,
               widgets,
               typography,
-              indicators,
             ],
           );
   }

@@ -1,19 +1,27 @@
 import 'package:arna/arna.dart';
 
+/// Banner types.
+enum BannerType { information, warning, error, success, colored }
+
 class ArnaBanner extends StatefulWidget {
   const ArnaBanner({
     Key? key,
     required this.showBanner,
-    required this.message,
+    required this.title,
+    this.subtitle,
     this.trailing,
     this.accentColor,
+    this.bannerType = BannerType.information,
   }) : super(key: key);
 
   /// Whether to show banner or not.
   final bool showBanner;
 
-  /// The message of the banner.
-  final String message;
+  /// The primary content of the banner.
+  final String title;
+
+  /// Additional content displayed below the title.
+  final String? subtitle;
 
   /// The trailing widget laid out within the banner.
   final Widget? trailing;
@@ -21,28 +29,97 @@ class ArnaBanner extends StatefulWidget {
   /// The indicator color of the banner.
   final Color? accentColor;
 
+  /// The type of the banner.
+  final BannerType bannerType;
+
   @override
   _ArnaBannerState createState() => _ArnaBannerState();
 }
 
 class _ArnaBannerState extends State<ArnaBanner> {
-  Widget _buildChild(BuildContext context) {
+  Widget _buildChild() {
     final List<Widget> children = [];
+    Color accent;
+    IconData icon = Icons.info;
+    switch (widget.bannerType) {
+      case BannerType.warning:
+        accent = ArnaColors.warningColor;
+        icon = Icons.warning;
+        break;
+      case BannerType.error:
+        accent = ArnaColors.errorColor;
+        icon = Icons.error;
+        break;
+      case BannerType.success:
+        accent = ArnaColors.successColor;
+        icon = Icons.check_circle;
+        break;
+      case BannerType.colored:
+        accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+        break;
+      default:
+        accent = ArnaColors.accentColor;
+    }
     children.add(
-      Flexible(
-        child: Text(
-          widget.message,
-          style: ArnaTheme.of(context).textTheme.textStyle,
+      Icon(
+        icon,
+        color: ArnaDynamicColor.resolve(accent, context),
+      ),
+    );
+    children.add(const SizedBox(width: Styles.padding));
+    children.add(
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: Styles.tileTextPadding,
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      widget.title,
+                      style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
+                            color: ArnaDynamicColor.resolve(
+                              ArnaColors.primaryTextColor,
+                              context,
+                            ),
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (widget.subtitle != null)
+              Padding(
+                padding: Styles.tileSubtitleTextPadding,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        widget.subtitle!,
+                        style: ArnaTheme.of(context)
+                            .textTheme
+                            .subtitleTextStyle
+                            .copyWith(
+                              color: ArnaDynamicColor.resolve(
+                                ArnaColors.secondaryTextColor,
+                                context,
+                              ),
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+          ],
         ),
       ),
     );
-    children.add(
-      widget.trailing != null ? widget.trailing! : const SizedBox.shrink(),
-    );
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: children,
-    );
+    if (widget.trailing != null) {
+      children.add(Padding(padding: Styles.normal, child: widget.trailing));
+    }
+    return Row(children: children);
   }
 
   @override
@@ -51,17 +128,14 @@ class _ArnaBannerState extends State<ArnaBanner> {
         ? Column(
             children: [
               AnimatedContainer(
-                height: widget.showBanner ? Styles.headerBarHeight : 0,
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
                 color: ArnaDynamicColor.resolve(
-                  widget.accentColor ?? ArnaTheme.of(context).accentColor,
+                  ArnaColors.headerColor,
                   context,
-                ).withAlpha(56),
-                child: Padding(
-                  padding: Styles.horizontal,
-                  child: _buildChild(context),
                 ),
+                padding: Styles.tilePadding,
+                child: _buildChild(),
               ),
               if (widget.showBanner) const ArnaHorizontalDivider(),
             ],

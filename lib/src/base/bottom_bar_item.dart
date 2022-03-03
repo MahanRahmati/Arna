@@ -143,7 +143,7 @@ class ArnaBottomBarItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: accentColor,
+                  color: accent,
                 ),
               ),
             ],

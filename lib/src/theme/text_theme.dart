@@ -14,7 +14,7 @@ const TextStyle _kDefaultLargeTitleTextStyle = TextStyle(
 const TextStyle _kDefaultTitleTextStyle = TextStyle(
   inherit: false,
   fontFamily: 'Inter',
-  fontSize: 23,
+  fontSize: 21,
   color: ArnaColors.primaryTextColor,
   decoration: TextDecoration.none,
   overflow: TextOverflow.ellipsis,
@@ -23,7 +23,7 @@ const TextStyle _kDefaultTitleTextStyle = TextStyle(
 const TextStyle _kDefaultBodyTextStyle = TextStyle(
   inherit: false,
   fontFamily: 'Inter',
-  fontSize: 16,
+  fontSize: 17,
   color: ArnaColors.primaryTextColor,
   decoration: TextDecoration.none,
   overflow: TextOverflow.ellipsis,
@@ -52,7 +52,7 @@ const TextStyle _kDefaultCaptionTextStyle = TextStyle(
   inherit: false,
   fontFamily: 'Inter',
   fontWeight: FontWeight.w700,
-  fontSize: 11,
+  fontSize: 12,
   color: ArnaColors.primaryTextColor,
   decoration: TextDecoration.none,
   overflow: TextOverflow.ellipsis,

@@ -14,11 +14,11 @@ abstract class Styles {
   static const double largePadding = base * 2;
   static const double checkBoxIconSize = base * 2;
   static const double tooltipOffset = base * 2;
+  static const double arrowSize = base * 2.5;
   static const double iconSize = base * 3;
   static const double badgeSize = base * 3;
   static const double checkBoxSize = base * 3;
   static const double radioSize = base * 3;
-  static const double scrollPaddingSize = base * 3;
   static const double sliderTrackSize = base * 3;
   static const double switchThumbSize = base * 3.5;
   static const double switchHeight = base * 4;
@@ -38,6 +38,9 @@ abstract class Styles {
   static const Duration tooltipHoverShowDuration = Duration(milliseconds: 70);
   static const Duration tooltipReverseDuration = Duration(milliseconds: 105);
   static const Duration basicDuration = Duration(milliseconds: 210);
+  static const Duration routeDuration = Duration(milliseconds: 210);
+  static const Duration tooltipWaitDuration = Duration(milliseconds: 350);
+  static const Duration scaffoldDuration = Duration(milliseconds: 770);
   static const Duration indicatorDuration = Duration(milliseconds: 2100);
   static const Duration tooltipDuration = Duration(milliseconds: 2100);
   static const Duration snackbarDuration = Duration(milliseconds: 3500);
@@ -73,11 +76,20 @@ abstract class Styles {
     horizontal: largePadding,
     vertical: padding,
   );
+  static const EdgeInsets tooltipPadding = EdgeInsets.symmetric(
+    horizontal: largePadding,
+    vertical: padding,
+  );
   static const EdgeInsets tileTextPadding = EdgeInsets.symmetric(
     horizontal: padding,
     vertical: smallPadding,
   );
-  static const EdgeInsets scrollPadding = EdgeInsets.all(scrollPaddingSize);
+  static const EdgeInsets tileSubtitleTextPadding = EdgeInsets.fromLTRB(
+    padding,
+    0,
+    padding,
+    padding,
+  );
   static const EdgeInsets listPadding = EdgeInsets.symmetric(
     vertical: padding,
     horizontal: largePadding,

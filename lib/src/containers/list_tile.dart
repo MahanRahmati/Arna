@@ -84,17 +84,15 @@ class _ArnaListTileState extends State<ArnaListTile> {
                     Flexible(
                       child: Text(
                         widget.title!,
-                        style: ArnaTheme.of(context)
-                            .textTheme
-                            .buttonTextStyle
-                            .copyWith(
-                              color: ArnaDynamicColor.resolve(
-                                !isEnabled && widget.actionable
-                                    ? ArnaColors.disabledColor
-                                    : ArnaColors.primaryTextColor,
-                                context,
-                              ),
-                            ),
+                        style:
+                            ArnaTheme.of(context).textTheme.textStyle.copyWith(
+                                  color: ArnaDynamicColor.resolve(
+                                    !isEnabled && widget.actionable
+                                        ? ArnaColors.disabledColor
+                                        : ArnaColors.primaryTextColor,
+                                    context,
+                                  ),
+                                ),
                       ),
                     ),
                   ],
@@ -102,7 +100,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
               ),
             if (widget.subtitle != null)
               Padding(
-                padding: Styles.tileTextPadding,
+                padding: Styles.tileSubtitleTextPadding,
                 child: Row(
                   children: [
                     Flexible(

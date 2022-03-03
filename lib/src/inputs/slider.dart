@@ -190,6 +190,92 @@ class ArnaSlider extends StatefulWidget {
 }
 
 class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
+  FocusNode? focusNode;
+  bool _focused = false;
+  final GlobalKey _renderObjectKey = GlobalKey();
+  late Map<Type, Action<Intent>> _actions;
+  final Map<ShortcutActivator, Intent> _shortcuts =
+      const <ShortcutActivator, Intent>{
+    SingleActivator(LogicalKeyboardKey.arrowUp): _AdjustSliderIntent.up(),
+    SingleActivator(LogicalKeyboardKey.arrowDown): _AdjustSliderIntent.down(),
+    SingleActivator(LogicalKeyboardKey.arrowLeft): _AdjustSliderIntent.left(),
+    SingleActivator(LogicalKeyboardKey.arrowRight): _AdjustSliderIntent.right(),
+  };
+
+  bool get isEnabled => widget.onChanged != null;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = FocusNode(canRequestFocus: isEnabled);
+    if (widget.autofocus) focusNode!.requestFocus();
+    _actions = {
+      _AdjustSliderIntent: CallbackAction<_AdjustSliderIntent>(
+        onInvoke: _actionHandler,
+      ),
+    };
+  }
+
+  @override
+  void didUpdateWidget(ArnaSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.onChanged != oldWidget.onChanged) {
+      focusNode!.canRequestFocus = isEnabled;
+    }
+  }
+
+  @override
+  void dispose() {
+    focusNode!.dispose();
+    focusNode = null;
+    super.dispose();
+  }
+
+  void _actionHandler(_AdjustSliderIntent intent) {
+    final _RenderArnaSlider renderSlider = _renderObjectKey.currentContext!
+        .findRenderObject()! as _RenderArnaSlider;
+    final TextDirection textDirection =
+        Directionality.of(_renderObjectKey.currentContext!);
+    switch (intent.type) {
+      case _SliderAdjustmentType.right:
+        switch (textDirection) {
+          case TextDirection.rtl:
+            renderSlider.decreaseAction();
+            break;
+          case TextDirection.ltr:
+            renderSlider.increaseAction();
+            break;
+        }
+        break;
+      case _SliderAdjustmentType.left:
+        switch (textDirection) {
+          case TextDirection.rtl:
+            renderSlider.increaseAction();
+            break;
+          case TextDirection.ltr:
+            renderSlider.decreaseAction();
+            break;
+        }
+        break;
+      case _SliderAdjustmentType.up:
+        renderSlider.increaseAction();
+        break;
+      case _SliderAdjustmentType.down:
+        renderSlider.decreaseAction();
+        break;
+    }
+  }
+
+  void _handleFocusChange(bool hasFocus) {
+    setState(() {
+      _focused = hasFocus;
+    });
+  }
+
+  void _handleFocus(focus) {
+    if (focus != _focused && mounted) setState(() => _focused = focus);
+  }
+
   void _handleChanged(double value) {
     final double lerpValue = lerpDouble(widget.min, widget.max, value)!;
     if (lerpValue != widget.value) {
@@ -207,16 +293,28 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return _ArnaSliderRenderObjectWidget(
-      value: (widget.value - widget.min) / (widget.max - widget.min),
-      divisions: widget.divisions,
-      onChanged: widget.onChanged != null ? _handleChanged : null,
-      onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
-      onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
-      accent: widget.accentColor ?? ArnaTheme.of(context).accentColor,
-      borderColor: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
-      trackColor: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
-      vsync: this,
+    return FocusableActionDetector(
+      enabled: isEnabled && widget.isFocusable,
+      focusNode: focusNode,
+      autofocus: !isEnabled ? false : widget.autofocus,
+      mouseCursor: widget.cursor,
+      onShowFocusHighlight: _handleFocus,
+      onFocusChange: _handleFocusChange,
+      actions: _actions,
+      shortcuts: _shortcuts,
+      child: _ArnaSliderRenderObjectWidget(
+        key: _renderObjectKey,
+        value: (widget.value - widget.min) / (widget.max - widget.min),
+        divisions: widget.divisions,
+        onChanged: isEnabled ? _handleChanged : null,
+        onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
+        onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
+        accent: widget.accentColor ?? ArnaTheme.of(context).accentColor,
+        borderColor: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+        trackColor:
+            ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+        vsync: this,
+      ),
     );
   }
 }
@@ -621,8 +719,8 @@ class _RenderArnaSlider extends RenderConstrainedBox {
     config.isSemanticBoundary = isInteractive;
     if (isInteractive) {
       config.textDirection = textDirection;
-      config.onIncrease = _increaseAction;
-      config.onDecrease = _decreaseAction;
+      config.onIncrease = increaseAction;
+      config.onDecrease = decreaseAction;
       config.value = "${(value * 100).round()}%";
       config.increasedValue =
           "${((value + _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%";
@@ -633,15 +731,31 @@ class _RenderArnaSlider extends RenderConstrainedBox {
 
   double get _semanticActionUnit => divisions != null ? 1.0 / divisions! : 0.1;
 
-  void _increaseAction() {
+  void increaseAction() {
     if (isInteractive) {
       onChanged!((value + _semanticActionUnit).clamp(0.0, 1.0));
     }
   }
 
-  void _decreaseAction() {
+  void decreaseAction() {
     if (isInteractive) {
       onChanged!((value - _semanticActionUnit).clamp(0.0, 1.0));
     }
   }
 }
+
+class _AdjustSliderIntent extends Intent {
+  const _AdjustSliderIntent({required this.type});
+
+  const _AdjustSliderIntent.right() : type = _SliderAdjustmentType.right;
+
+  const _AdjustSliderIntent.left() : type = _SliderAdjustmentType.left;
+
+  const _AdjustSliderIntent.up() : type = _SliderAdjustmentType.up;
+
+  const _AdjustSliderIntent.down() : type = _SliderAdjustmentType.down;
+
+  final _SliderAdjustmentType type;
+}
+
+enum _SliderAdjustmentType { right, left, up, down }

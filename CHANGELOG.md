@@ -1,3 +1,29 @@
+## 0.2.8
+
+- [Example] Update Widgets page
+- [Example] Update Settings page
+- Refactor ArnaList
+- Refactor ArnaExpansionPanel
+- Refactor ArnaSlider
+- Fix ArnaCheckBox
+- Fix ArnaRadio
+- Fix ArnaSwitch
+- Fix ArnaBottomBarItem
+- [BREAKING] Refactor ArnaBanner
+- Add ArnaColumn
+- Add ArnaRow
+- Add ArnaGroupedView
+- Add bounce animation to ArnaBaseButton
+- Add animation to ArnaSideScaffold
+- Add animation to ArnaMasterDetailScaffold
+- Add ArnaPageRoute
+- Update ArnaListTile
+- Update ArnaTooltip
+- Update ArnaColors
+- Update ArnaTextTheme
+- Update ArnaTheme
+- Cleanup Styles
+
 ## 0.2.7
 
 - Update ArnaBaseButton

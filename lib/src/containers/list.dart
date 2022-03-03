@@ -11,17 +11,11 @@ class ArnaList extends StatelessWidget {
   /// The items of list view.
   final List<Widget> items;
 
-  Widget _buildChild() {
-    final List<Widget> children = [];
-    if (items.isNotEmpty) {
-      for (int i = 0; i < items.length; i++) {
-        children.add(items[i]);
-        if (items.length - i != 1) {
-          children.add(const ArnaHorizontalDivider());
-        }
-      }
-    }
-    return Column(children: children);
+  Widget _buildChild(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: items,
+    );
   }
 
   @override
@@ -33,12 +27,7 @@ class ArnaList extends StatelessWidget {
         children: [
           if (title != null)
             Padding(
-              padding: const EdgeInsets.fromLTRB(
-                Styles.padding,
-                Styles.padding,
-                Styles.padding,
-                Styles.largePadding,
-              ),
+              padding: Styles.normal,
               child: Row(
                 children: [
                   Flexible(
@@ -50,25 +39,7 @@ class ArnaList extends StatelessWidget {
                 ],
               ),
             ),
-          AnimatedContainer(
-            duration: Styles.basicDuration,
-            curve: Styles.basicCurve,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: Styles.borderRadius,
-              border: Border.all(
-                color: ArnaDynamicColor.resolve(
-                  ArnaColors.borderColor,
-                  context,
-                ),
-              ),
-              color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
-            ),
-            child: ClipRRect(
-              borderRadius: Styles.listBorderRadius,
-              child: _buildChild(),
-            ),
-          ),
+          _buildChild(context),
         ],
       ),
     );

@@ -49,6 +49,8 @@ class ArnaColors {
   static const Color accentColor = Color(0xFF36AEF9);
   static const Color errorColor = Color(0xFFF44336);
   static const Color barrierColor = Color(0x70000000);
+  static const Color warningColor = Color(0xFFFFA726);
+  static const Color successColor = Color(0xFF26A69A);
 
   /// The color of the background.
   static const ArnaDynamicColor backgroundColor = ArnaDynamicColor(
@@ -188,8 +190,8 @@ class ArnaColors {
   /// The secondary text color.
   static const ArnaDynamicColor secondaryTextColor = ArnaDynamicColor(
     debugLabel: 'secondaryTextColor',
-    color: color11,
-    darkColor: color28,
+    color: color15,
+    darkColor: color21,
     highContrastColor: color01,
     darkHighContrastColor: color36,
   );
@@ -197,8 +199,8 @@ class ArnaColors {
   /// The reverse color of the secondary text color.
   static const ArnaDynamicColor reverseSecondaryTextColor = ArnaDynamicColor(
     debugLabel: 'reverseSecondaryTextColor',
-    color: color28,
-    darkColor: color11,
+    color: color21,
+    darkColor: color15,
     highContrastColor: color36,
     darkHighContrastColor: color01,
   );

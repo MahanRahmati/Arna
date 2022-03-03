@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/cupertino.dart' show CupertinoPageRoute;
 
 /// Implements the master detail layout structure.
 /// See also:
@@ -44,14 +43,26 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
       _ArnaMasterDetailScaffoldState();
 }
 
-class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
+class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
+    with SingleTickerProviderStateMixin {
   late int _currentIndex;
   final _navigatorKey = GlobalKey<NavigatorState>();
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   NavigatorState get _navigator => _navigatorKey.currentState!;
 
   @override
   void initState() {
+    _controller = AnimationController(
+      duration: Styles.scaffoldDuration,
+      vsync: this,
+      value: 1,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Styles.basicCurve,
+    );
     _currentIndex = widget.currentIndex ?? -1;
     super.initState();
   }
@@ -60,10 +71,12 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
     if (isPhone) _navigator.push(pageRoute(index));
     if (widget.onItemSelected != null) widget.onItemSelected!(index);
     setState(() => _currentIndex = index);
+    _controller.value = 0;
+    _controller.forward().then((value) => null);
   }
 
-  CupertinoPageRoute pageRoute(int index) {
-    return CupertinoPageRoute(
+  ArnaPageRoute pageRoute(int index) {
+    return ArnaPageRoute(
       builder: (context) {
         final page = widget.items[index];
         return ArnaScaffold(
@@ -153,7 +166,11 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                             searchField:
                                 widget.items[_currentIndex].searchField,
                             banner: widget.items[_currentIndex].banner,
-                            body: widget.items[_currentIndex].builder(context),
+                            body: FadeTransition(
+                              opacity: _animation,
+                              child:
+                                  widget.items[_currentIndex].builder(context),
+                            ),
                           ),
                         ),
                 ],
@@ -164,7 +181,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                   key: _navigatorKey,
                   onGenerateInitialRoutes: (navigator, initialRoute) {
                     return [
-                      CupertinoPageRoute(
+                      ArnaPageRoute(
                         builder: (context) => listBuilder(true),
                       ),
                       if (_currentIndex != -1) pageRoute(_currentIndex)

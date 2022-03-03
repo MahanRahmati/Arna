@@ -38,12 +38,24 @@ class ArnaSideScaffold extends StatefulWidget {
   State<ArnaSideScaffold> createState() => _ArnaSideScaffoldState();
 }
 
-class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
+class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
+    with SingleTickerProviderStateMixin {
   late int _currentIndex;
   var showDrawer = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
+    _controller = AnimationController(
+      duration: Styles.scaffoldDuration,
+      vsync: this,
+      value: 1,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Styles.basicCurve,
+    );
     _currentIndex = widget.currentIndex;
     super.initState();
   }
@@ -52,6 +64,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     showDrawer = false;
     if (widget.onItemSelected != null) widget.onItemSelected!(index);
     setState(() => _currentIndex = index);
+    _controller.value = 0;
+    _controller.forward().then((value) => null);
   }
 
   void _drawerOpenedCallback(bool isOpened) {
@@ -142,7 +156,11 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                       body: Column(
                         children: [
                           Expanded(
-                            child: widget.items[_currentIndex].builder(context),
+                            child: FadeTransition(
+                              opacity: _animation,
+                              child:
+                                  widget.items[_currentIndex].builder(context),
+                            ),
                           ),
                           if (constraints.maxWidth < 644 &&
                               widget.items.length < 4)
@@ -203,7 +221,10 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
           ),
           searchField: widget.items[_currentIndex].searchField,
           banner: widget.items[_currentIndex].banner,
-          body: widget.items[_currentIndex].builder(context),
+          body: FadeTransition(
+            opacity: _animation,
+            child: widget.items[_currentIndex].builder(context),
+          ),
         );
       },
     );

@@ -7,9 +7,9 @@ class Settings extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     Theme? themeMode = ref.watch(changeTheme).theme;
-    return ArnaList(
+    return ArnaGroupedView(
       title: "Theme mode",
-      items: [
+      children: [
         ArnaRadioListTile(
           value: Theme.system,
           groupValue: themeMode,

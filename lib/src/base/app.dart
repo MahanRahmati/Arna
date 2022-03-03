@@ -1,6 +1,5 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/cupertino.dart'
-    show CupertinoPageRoute, DefaultCupertinoLocalizations;
+import 'package:flutter/cupertino.dart' show DefaultCupertinoLocalizations;
 import 'package:flutter/material.dart' show DefaultMaterialLocalizations;
 
 /// An application that uses Arna design.
@@ -585,8 +584,9 @@ class _ArnaAppState extends State<ArnaApp> {
       key: GlobalObjectKey(this),
       navigatorKey: widget.navigatorKey,
       navigatorObservers: widget.navigatorObservers!,
-      pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) =>
-          CupertinoPageRoute<T>(settings: settings, builder: builder),
+      pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) {
+        return ArnaPageRoute<T>(settings: settings, builder: builder);
+      },
       home: widget.home,
       routes: widget.routes!,
       initialRoute: widget.initialRoute,

@@ -96,7 +96,9 @@ class ArnaTheme extends StatelessWidget {
     return _InheritedArnaTheme(
       theme: this,
       child: IconTheme(
-        data: ArnaIconThemeData(color: data.accentColor),
+        data: ArnaIconThemeData(
+          color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        ),
         child: child,
       ),
     );

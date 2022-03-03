@@ -223,7 +223,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
       ensureTooltipVisible();
       return;
     }
-    _showTimer ??= Timer(Duration.zero, ensureTooltipVisible);
+    _showTimer ??= Timer(Styles.tooltipWaitDuration, ensureTooltipVisible);
   }
 
   void _concealTooltip() {
@@ -517,7 +517,7 @@ class _ArnaTooltipOverlay extends StatelessWidget {
                 context,
               ),
             ),
-            padding: Styles.normal,
+            padding: Styles.tooltipPadding,
             margin: Styles.normal,
             child: Center(
               widthFactor: 1.0,

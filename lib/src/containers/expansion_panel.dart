@@ -9,8 +9,12 @@ class ArnaExpansionPanel extends StatefulWidget {
     this.leading,
     this.title,
     this.subtitle,
+    this.trailing,
     this.child,
     this.isExpanded = false,
+    this.isFocusable = true,
+    this.autofocus = false,
+    this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   }) : super(key: key);
@@ -24,6 +28,9 @@ class ArnaExpansionPanel extends StatefulWidget {
   /// The subtitle of the panel.
   final String? subtitle;
 
+  /// The trailing widget of the panel.
+  final Widget? trailing;
+
   /// The widget below this widget in the tree.
   ///
   /// {@macro flutter.widgets.ProxyWidget.child}
@@ -31,6 +38,16 @@ class ArnaExpansionPanel extends StatefulWidget {
 
   /// Whether this panel is expanded or not.
   final bool isExpanded;
+
+  /// Whether this panel is focusable or not.
+  final bool isFocusable;
+
+  /// Whether this panel should focus itself if nothing else is already
+  /// focused.
+  final bool autofocus;
+
+  /// The color of the panel's focused border.
+  final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// widget.
@@ -45,18 +62,21 @@ class ArnaExpansionPanel extends StatefulWidget {
 
 class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     with SingleTickerProviderStateMixin {
+  FocusNode? focusNode;
   late bool expanded;
   bool _hover = false;
+  bool _focused = false;
   late AnimationController _controller;
   late Animation<double> _expandAnimation;
   late Animation<double> _rotateAnimation;
+  late Map<Type, Action<Intent>> _actions;
+  late Map<ShortcutActivator, Intent> _shortcuts;
 
   bool get isEnabled => widget.child != null;
 
   @override
   void initState() {
     super.initState();
-    expanded = widget.isExpanded;
     _controller = AnimationController(
       duration: Styles.basicDuration,
       vsync: this,
@@ -71,6 +91,27 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
         curve: Styles.basicCurve,
       ),
     );
+    focusNode = FocusNode(canRequestFocus: isEnabled);
+    if (widget.autofocus) focusNode!.requestFocus();
+    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
+    _shortcuts = const {
+      SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+      SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+    };
+    expanded = widget.isExpanded;
+    if (expanded) _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    focusNode!.dispose();
+    focusNode = null;
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleFocusChange(bool hasFocus) {
+    if (mounted) setState(() => _focused = hasFocus);
   }
 
   void _handleTap() async {
@@ -85,12 +126,12 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     }
   }
 
-  void _handleEnter(event) {
-    if (mounted) setState(() => _hover = true);
+  void _handleHover(hover) {
+    if (hover != _hover && mounted) setState(() => _hover = hover);
   }
 
-  void _handleExit(event) {
-    if (mounted) setState(() => _hover = false);
+  void _handleFocus(focus) {
+    if (focus != _focused && mounted) setState(() => _focused = focus);
   }
 
   Widget _buildChild() {
@@ -120,14 +161,23 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
               ),
             if (widget.subtitle != null)
               Padding(
-                padding: Styles.tileTextPadding,
+                padding: Styles.tileSubtitleTextPadding,
                 child: Row(
                   children: [
                     Flexible(
                       child: Text(
                         widget.subtitle!,
-                        style:
-                            ArnaTheme.of(context).textTheme.subtitleTextStyle,
+                        style: ArnaTheme.of(context)
+                            .textTheme
+                            .subtitleTextStyle
+                            .copyWith(
+                              color: ArnaDynamicColor.resolve(
+                                !isEnabled
+                                    ? ArnaColors.disabledColor
+                                    : ArnaColors.secondaryTextColor,
+                                context,
+                              ),
+                            ),
                       ),
                     ),
                   ],
@@ -139,26 +189,27 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     );
     if (isEnabled) {
       children.add(
-        Padding(
-          padding: Styles.horizontal,
-          child: SizedBox(
-            height: Styles.buttonSize,
-            width: Styles.buttonSize,
-            child: RotationTransition(
-              turns: _rotateAnimation,
-              child: Transform.rotate(
-                angle: -3.14 / 2,
-                child: Icon(
-                  Icons.arrow_back_ios_new_outlined,
-                  size: Styles.iconSize,
-                  color: ArnaDynamicColor.resolve(
-                    ArnaColors.iconColor,
-                    context,
+        Row(
+          children: [
+            if (widget.trailing != null) widget.trailing!,
+            Padding(
+              padding: Styles.horizontal,
+              child: RotationTransition(
+                turns: _rotateAnimation,
+                child: Transform.rotate(
+                  angle: -3.14 / 2,
+                  child: Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    size: Styles.arrowSize,
+                    color: ArnaDynamicColor.resolve(
+                      ArnaColors.iconColor,
+                      context,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       );
     }
@@ -173,7 +224,9 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
           children: [
             Container(
               color: ArnaDynamicColor.resolve(
-                ArnaColors.cardHoverColor,
+                _focused
+                    ? ArnaColors.cardHoverColor
+                    : ArnaColors.cardHoverColor,
                 context,
               ),
               child: Padding(
@@ -185,10 +238,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
             SizeTransition(
               axisAlignment: 1,
               sizeFactor: _expandAnimation,
-              child: Padding(
-                padding: Styles.normal,
-                child: widget.child!,
-              ),
+              child: widget.child!,
             ),
           ],
         ),
@@ -199,20 +249,29 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
 
   @override
   Widget build(BuildContext context) {
+    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
-      padding: Styles.large,
+      padding: Styles.normal,
       child: MergeSemantics(
         child: Semantics(
           label: widget.semanticLabel,
           container: true,
           enabled: true,
-          child: MouseRegion(
-            cursor: widget.cursor,
-            onEnter: _handleEnter,
-            onExit: _handleExit,
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: _handleTap,
+          focusable: isEnabled,
+          focused: _focused,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: _handleTap,
+            child: FocusableActionDetector(
+              enabled: isEnabled && widget.isFocusable,
+              focusNode: focusNode,
+              autofocus: !isEnabled ? false : widget.autofocus,
+              mouseCursor: widget.cursor,
+              onShowHoverHighlight: _handleHover,
+              onShowFocusHighlight: _handleFocus,
+              onFocusChange: _handleFocusChange,
+              actions: _actions,
+              shortcuts: _shortcuts,
               child: AnimatedContainer(
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
@@ -221,7 +280,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                   borderRadius: Styles.borderRadius,
                   border: Border.all(
                     color: ArnaDynamicColor.resolve(
-                      ArnaColors.borderColor,
+                      _focused ? accent : ArnaColors.borderColor,
                       context,
                     ),
                   ),

@@ -56,13 +56,16 @@ class ArnaBaseButton extends StatefulWidget {
   _ArnaBaseButtonState createState() => _ArnaBaseButtonState();
 }
 
-class _ArnaBaseButtonState extends State<ArnaBaseButton> {
+class _ArnaBaseButtonState extends State<ArnaBaseButton>
+    with SingleTickerProviderStateMixin {
   FocusNode? focusNode;
   bool _hover = false;
   bool _focused = false;
   bool _pressed = false;
   // ignore: prefer_final_fields
   bool _selected = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
   late Map<Type, Action<Intent>> _actions;
   late Map<ShortcutActivator, Intent> _shortcuts;
 
@@ -73,6 +76,14 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Styles.basicDuration,
+      value: 1.0,
+      upperBound: 1.0,
+      lowerBound: 0.7,
+    );
+    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     focusNode = FocusNode(canRequestFocus: isEnabled);
     if (widget.autofocus) focusNode!.requestFocus();
     _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
@@ -95,6 +106,7 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
   void dispose() {
     focusNode!.dispose();
     focusNode = null;
+    _controller.dispose();
     super.dispose();
   }
 
@@ -109,17 +121,28 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
     if (isEnabled) {
       setState(() => _pressed = true);
       widget.onPressed!();
+      _controller.reverse().then((_) => _controller.forward());
       await Future.delayed(Styles.basicDuration);
       if (mounted) setState(() => _pressed = false);
     }
   }
 
   void _handleTapDown(_) {
-    if (!_pressed && mounted) setState(() => _pressed = true);
+    if (!_pressed && mounted) {
+      _controller.reverse();
+      setState(() => _pressed = true);
+    }
   }
 
   void _handleTapUp(_) {
-    if (_pressed && mounted) setState(() => _pressed = false);
+    if (_pressed && mounted) {
+      _controller.forward();
+      setState(() => _pressed = false);
+    }
+  }
+
+  void _handleTapCancel() {
+    if (mounted) _controller.forward();
   }
 
   void _handleHover(hover) {
@@ -147,6 +170,7 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
             onTap: _handleTap,
             onTapDown: _handleTapDown,
             onTapUp: _handleTapUp,
+            onTapCancel: _handleTapCancel,
             onLongPress: _handleTap,
             onLongPressStart: _handleTapDown,
             onLongPressEnd: _handleTapUp,
@@ -164,13 +188,16 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton> {
               onFocusChange: _handleFocusChange,
               actions: _actions,
               shortcuts: _shortcuts,
-              child: widget.builder(
-                context,
-                isEnabled,
-                _hover,
-                _focused,
-                _pressed,
-                _selected,
+              child: ScaleTransition(
+                scale: _animation,
+                child: widget.builder(
+                  context,
+                  isEnabled,
+                  _hover,
+                  _focused,
+                  _pressed,
+                  _selected,
+                ),
               ),
             ),
           ),

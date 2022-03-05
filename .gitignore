@@ -54,3 +54,20 @@ linux/*
 web/*
 
 !./linux/my_application.cc
+example/windows/CMakeLists.txt
+example/windows/flutter/CMakeLists.txt
+example/windows/flutter/generated_plugin_registrant.cc
+example/windows/flutter/generated_plugin_registrant.h
+example/windows/flutter/generated_plugins.cmake
+example/windows/runner/CMakeLists.txt
+example/windows/runner/flutter_window.cpp
+example/windows/runner/flutter_window.h
+example/windows/runner/main.cpp
+example/windows/runner/resource.h
+example/windows/runner/resources/app_icon.ico
+example/windows/runner/runner.exe.manifest
+example/windows/runner/Runner.rc
+example/windows/runner/utils.cpp
+example/windows/runner/utils.h
+example/windows/runner/win32_window.cpp
+example/windows/runner/win32_window.h

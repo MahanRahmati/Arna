@@ -100,11 +100,20 @@ class ArnaSwitch extends StatelessWidget {
                     border: Border.all(
                       color: ArnaDynamicColor.resolve(
                         focused
-                            ? accent
+                            ? ArnaDynamicColor.borderColor(
+                                accent,
+                                context,
+                              )
                             : hover && enabled
-                                ? accent
+                                ? ArnaDynamicColor.borderColor(
+                                    accent,
+                                    context,
+                                  )
                                 : value
-                                    ? accent
+                                    ? ArnaDynamicColor.borderColor(
+                                        accent,
+                                        context,
+                                      )
                                     : ArnaColors.borderColor,
                         context,
                       ),
@@ -113,7 +122,11 @@ class ArnaSwitch extends StatelessWidget {
                       !enabled
                           ? ArnaColors.backgroundColor
                           : value
-                              ? accent
+                              ? ArnaDynamicColor.borderColor(
+                                  accent,
+                                  context,
+                                  value ? 1 : 0,
+                                )
                               : hover
                                   ? ArnaColors.buttonHoverColor
                                   : ArnaColors.backgroundColor,
@@ -124,7 +137,7 @@ class ArnaSwitch extends StatelessWidget {
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
                 left:
-                    value ? Styles.switchWidth - Styles.switchThumbSize - 2 : 2,
+                    value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
                 child: AnimatedContainer(
                   height: Styles.switchThumbSize,
                   width: Styles.switchThumbSize,
@@ -133,15 +146,31 @@ class ArnaSwitch extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.radioBorderRadius,
                     border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        value ? accent : ArnaColors.borderColor,
-                        context,
-                      ),
+                      color: !enabled
+                          ? ArnaDynamicColor.resolve(
+                              ArnaColors.borderColor,
+                              context,
+                            )
+                          : !value
+                              ? ArnaDynamicColor.resolve(
+                                  ArnaColors.borderColor,
+                                  context,
+                                )
+                              : hover
+                                  ? ArnaDynamicColor.borderColor(
+                                      accent,
+                                      context,
+                                    )
+                                  : ArnaDynamicColor.borderColor(
+                                      accent,
+                                      context,
+                                      3,
+                                    ),
                     ),
                     color: ArnaDynamicColor.resolve(
                       !enabled
                           ? ArnaColors.backgroundColor
-                          : ArnaDynamicColor.innerColor(accent, value),
+                          : ArnaDynamicColor.innerColor(accent, value ? 1 : 0),
                       context,
                     ),
                   ),

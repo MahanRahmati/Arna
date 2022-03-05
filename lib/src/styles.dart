@@ -20,7 +20,7 @@ abstract class Styles {
   static const double checkBoxSize = base * 3;
   static const double radioSize = base * 3;
   static const double sliderTrackSize = base * 3;
-  static const double switchThumbSize = base * 3.5;
+  static const double switchThumbSize = base * 3;
   static const double switchHeight = base * 4;
   static const double tooltipHeight = base * 4;
   static const double buttonSize = base * 5;

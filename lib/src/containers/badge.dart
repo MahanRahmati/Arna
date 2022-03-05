@@ -37,10 +37,11 @@ class ArnaBadge extends StatelessWidget {
             Flexible(
               child: Text(
                 label,
-                style: ArnaTheme.of(context)
-                    .textTheme
-                    .textStyle
-                    .copyWith(color: textColor),
+                style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
+                      color: ArnaDynamicColor.innerColor(
+                        accentColor ?? ArnaTheme.of(context).accentColor,
+                      ),
+                    ),
               ),
             ),
           ],

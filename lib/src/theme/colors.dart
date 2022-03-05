@@ -415,6 +415,36 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.color36;
   }
 
+  static Color borderColor(Color accent, BuildContext context) {
+    Brightness brightness =
+        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
+    bool isHighContrastEnabled =
+        MediaQuery.maybeOf(context)?.highContrast ?? false;
+
+    switch (brightness) {
+      case Brightness.light:
+        return isHighContrastEnabled
+            ? ArnaColors.color01
+            : accent.computeLuminance() > 0.8
+                ? ArnaColors.color03
+                : accent.computeLuminance() > 0.5
+                    ? accent
+                    : accent.computeLuminance() > 0.2
+                        ? accent
+                        : ArnaColors.color30;
+      case Brightness.dark:
+        return isHighContrastEnabled
+            ? ArnaColors.color36
+            : accent.computeLuminance() > 0.8
+                ? ArnaColors.color03
+                : accent.computeLuminance() > 0.5
+                    ? accent
+                    : accent.computeLuminance() > 0.2
+                        ? accent
+                        : ArnaColors.color30;
+    }
+  }
+
   /// Blends the given [Color] by [percentage] and [computeLuminance].
   static Color colorBlender(
     Color color,

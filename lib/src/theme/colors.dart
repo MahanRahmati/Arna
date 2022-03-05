@@ -403,45 +403,62 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// Computes the inner color from [backgroundColor] by using
-  /// [computeLuminance].
-  static Color innerColor(Color backgroundColor, [bool state = true]) {
-    if (state == false) return ArnaColors.color36;
-    return backgroundColor.computeLuminance() > 0.8
+  /// [computeLuminance], state is used for handling Switch.
+  static Color innerColor(Color backgroundColor, [int state = 2]) {
+    double colorLuminance = backgroundColor.computeLuminance();
+    if (state == 2) return ArnaColors.color36;
+    if (state < 2) {
+      return (state == 0)
+          ? ArnaColors.color36
+          : (colorLuminance > 0.7)
+              ? ArnaColors.color07
+              : ArnaColors.color36;
+    }
+    return colorLuminance > 0.7
         ? ArnaColors.color01
-        : backgroundColor.computeLuminance() > 0.5
+        : colorLuminance > 0.5
             ? ArnaColors.color07
-            : backgroundColor.computeLuminance() > 0.2
+            : colorLuminance > 0.3
                 ? ArnaColors.color34
                 : ArnaColors.color36;
   }
 
-  static Color borderColor(Color accent, BuildContext context) {
+  /// Computes the border color from [accentColor] by using
+  /// [computeLuminance], state is used for handling Switch and other states.
+  static Color borderColor(Color accent, BuildContext context,
+      [int state = 2]) {
+    double accentLuminance = accent.computeLuminance();
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
+    if (state < 2) {
+      return (state == 0)
+          ? (accentLuminance < 0.3)
+              ? ArnaColors.color07
+              : accent
+          : accent;
+    }
+    if (state == 3) return ArnaColors.color00;
+
     switch (brightness) {
       case Brightness.light:
         return isHighContrastEnabled
             ? ArnaColors.color01
-            : accent.computeLuminance() > 0.8
-                ? ArnaColors.color03
-                : accent.computeLuminance() > 0.5
+            : accentLuminance > 0.7
+                ? ArnaColors.color30
+                : accentLuminance > 0.3
                     ? accent
-                    : accent.computeLuminance() > 0.2
-                        ? accent
-                        : ArnaColors.color30;
+                    : ArnaColors.color03;
       case Brightness.dark:
         return isHighContrastEnabled
             ? ArnaColors.color36
-            : accent.computeLuminance() > 0.8
+            : accentLuminance > 0.7
                 ? ArnaColors.color03
-                : accent.computeLuminance() > 0.5
+                : accentLuminance > 0.3
                     ? accent
-                    : accent.computeLuminance() > 0.2
-                        ? accent
-                        : ArnaColors.color30;
+                    : ArnaColors.color30;
     }
   }
 

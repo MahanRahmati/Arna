@@ -61,6 +61,7 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
     this.buttonType = ButtonType.normal,
     this.isFocusable = true,
     this.autofocus = false,
+    this.hasBorder = true,
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
@@ -111,6 +112,9 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
   /// Whether this button should focus itself if nothing else is already
   /// focused.
   final bool autofocus;
+
+  /// Whether this button has border or not.
+  final bool hasBorder;
 
   /// The color of the button's focused border.
   final Color? accentColor;
@@ -174,9 +178,16 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
   Widget build(BuildContext context) {
     return ArnaIconButton(
       icon: widget.icon ?? Icons.more_vert_outlined,
+      onPressed: widget.enabled ? showArnaButtonMenu : null,
       tooltipMessage: widget.tooltipMessage ??
           MaterialLocalizations.of(context).showMenuTooltip,
-      onPressed: widget.enabled ? showArnaButtonMenu : null,
+      buttonType: widget.buttonType,
+      isFocusable: widget.isFocusable,
+      autofocus: widget.autofocus,
+      hasBorder: widget.hasBorder,
+      accentColor: widget.accentColor ?? ArnaTheme.of(context).accentColor,
+      cursor: widget.cursor,
+      semanticLabel: widget.semanticLabel,
     );
   }
 }

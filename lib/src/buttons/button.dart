@@ -15,6 +15,7 @@ class ArnaButton extends StatelessWidget {
     this.buttonType = ButtonType.normal,
     this.isFocusable = true,
     this.autofocus = false,
+    this.hasBorder = true,
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
@@ -42,6 +43,9 @@ class ArnaButton extends StatelessWidget {
   /// focused.
   final bool autofocus;
 
+  /// Whether this button has border or not.
+  final bool hasBorder;
+
   /// The color of the button's focused border.
   final Color? accentColor;
 
@@ -63,13 +67,17 @@ class ArnaButton extends StatelessWidget {
               ? ArnaColors.disabledColor
               : buttonType == ButtonType.normal
                   ? ArnaColors.iconColor
-                  : ArnaDynamicColor.innerColor(accent),
+                  : hasBorder
+                      ? ArnaDynamicColor.innerColor(accent)
+                      : ArnaDynamicColor.borderColor(accent, context),
           context,
         ),
       );
       children.add(iconWidget);
       if (label != null) {
-        children.add(const SizedBox(width: Styles.padding));
+        children.add(
+          const SizedBox(width: Styles.padding),
+        );
       }
     }
     if (label != null) {
@@ -122,32 +130,36 @@ class ArnaButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
-                color: ArnaDynamicColor.resolve(
-                  buttonType == ButtonType.normal
-                      ? !enabled
-                          ? ArnaColors.borderColor
-                          : focused
-                              ? accent
-                              : ArnaColors.borderColor
-                      : !enabled
-                          ? ArnaDynamicColor.colorBlender(
-                              accent,
-                              42,
-                              isBorder: true,
-                            )
-                          : focused
-                              ? ArnaDynamicColor.colorBlender(
-                                  accent,
-                                  28,
-                                  isBorder: true,
-                                )
-                              : ArnaDynamicColor.colorBlender(
-                                  accent,
-                                  42,
-                                  isBorder: true,
-                                ),
-                  context,
-                ),
+                color: hasBorder
+                    ? ArnaDynamicColor.resolve(
+                        buttonType == ButtonType.normal
+                            ? !enabled
+                                ? ArnaColors.borderColor
+                                : focused
+                                    ? accent
+                                    : ArnaColors.borderColor
+                            : !enabled
+                                ? ArnaDynamicColor.colorBlender(
+                                    accent,
+                                    42,
+                                    isBorder: true,
+                                  )
+                                : focused
+                                    ? ArnaDynamicColor.colorBlender(
+                                        accent,
+                                        28,
+                                        isBorder: true,
+                                      )
+                                    : ArnaDynamicColor.colorBlender(
+                                        accent,
+                                        42,
+                                        isBorder: true,
+                                      ),
+                        context,
+                      )
+                    : focused
+                        ? ArnaColors.borderColor
+                        : ArnaColors.color00,
               ),
               color: ArnaDynamicColor.resolve(
                 !enabled
@@ -157,14 +169,18 @@ class ArnaButton extends StatelessWidget {
                             ? ArnaColors.buttonPressedColor
                             : hover
                                 ? ArnaColors.buttonHoverColor
-                                : ArnaColors.buttonColor
+                                : hasBorder
+                                    ? ArnaColors.buttonColor
+                                    : ArnaColors.color00
                         : pressed
                             ? ArnaDynamicColor.colorBlender(accent, 42)
                             : hover
                                 ? ArnaDynamicColor.colorBlender(accent, 28)
                                 : focused
                                     ? ArnaDynamicColor.colorBlender(accent, 28)
-                                    : accent,
+                                    : hasBorder
+                                        ? accent
+                                        : ArnaColors.color00,
                 context,
               ),
             ),

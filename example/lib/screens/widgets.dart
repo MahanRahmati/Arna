@@ -76,6 +76,16 @@ class _WidgetsState extends State<Widgets> {
                         ),
                         tooltipMessage: "Add",
                       ),
+                      ArnaIconButton(
+                        icon: Icons.add_outlined,
+                        hasBorder: false,
+                        buttonType: ButtonType.normal,
+                        onPressed: () => showArnaSnackbar(
+                          context: context,
+                          message: "Hello There!",
+                        ),
+                        tooltipMessage: "Add",
+                      ),
                       ArnaPopupMenuButton<String>(
                         itemBuilder: (context) => [
                           ArnaPopupMenuItem(

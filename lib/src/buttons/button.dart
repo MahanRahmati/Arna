@@ -190,7 +190,10 @@ class ArnaButton extends StatelessWidget {
                                       ArnaColors.buttonColor,
                                       context,
                                     )
-                                  : ArnaColors.color00
+                                  : ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor,
+                                      context,
+                                    ).withAlpha(0)
                       : pressed
                           ? ArnaDynamicColor.colorBlender(accent, 42)
                           : hover

@@ -412,6 +412,17 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         : foregroundColor.darkColor;
   }
 
+  static Color widgetColor(Color backgroundColor, [bool state = true]) {
+    if (state == false) return ArnaColors.color36;
+    return backgroundColor.computeLuminance() > 0.8
+        ? ArnaColors.color08
+        : backgroundColor.computeLuminance() > 0.5
+            ? ArnaColors.color10
+            : backgroundColor.computeLuminance() > 0.2
+                ? ArnaColors.color34
+                : ArnaColors.color36;
+  }
+
   /// Blends the given [Color] by [percentage] and [luminance].
   static Color colorBlender(
     Color color,

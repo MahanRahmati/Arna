@@ -67,9 +67,19 @@ class _WidgetsState extends State<Widgets> {
                       onPressed: null,
                       tooltipMessage: "Add",
                     ),
-                    ArnaIconButton(
+                    /*ArnaIconButton(
                       icon: Icons.add_outlined,
                       buttonType: ButtonType.suggested,
+                      onPressed: () => showArnaSnackbar(
+                        context: context,
+                        message: "Hello There!",
+                      ),
+                      tooltipMessage: "Add",
+                    ),*/
+                    ArnaIconButton(
+                      icon: Icons.add_outlined,
+                      //accentColor: const Color.fromARGB(255, 255, 217, 217),
+                      buttonType: ButtonType.colored,
                       onPressed: () => showArnaSnackbar(
                         context: context,
                         message: "Hello There!",

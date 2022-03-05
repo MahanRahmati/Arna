@@ -158,7 +158,9 @@ class ArnaRadio<T> extends StatelessWidget {
                           context,
                         )
                       : selected && enabled
-                          ? ArnaColors.color36
+                          ? ArnaDynamicColor.widgetColor(
+                              accent,
+                            )
                           : ArnaDynamicColor.resolve(
                               hover
                                   ? ArnaColors.buttonHoverColor

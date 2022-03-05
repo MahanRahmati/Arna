@@ -178,7 +178,9 @@ class ArnaCheckBox extends StatelessWidget {
                         ? Icons.check_outlined
                         : Icons.remove_outlined,
                     size: Styles.checkBoxIconSize,
-                    color: ArnaColors.color36,
+                    color: ArnaDynamicColor.widgetColor(
+                      accent,
+                    ),
                   ),
                 ),
               ),

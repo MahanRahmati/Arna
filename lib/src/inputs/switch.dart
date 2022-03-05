@@ -141,7 +141,7 @@ class ArnaSwitch extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(
                       !enabled
                           ? ArnaColors.backgroundColor
-                          : ArnaColors.color36,
+                          : ArnaDynamicColor.widgetColor(accent, value),
                       context,
                     ),
                   ),

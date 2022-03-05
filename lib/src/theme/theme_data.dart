@@ -75,12 +75,9 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
 
   @override
   ArnaThemeData resolveFrom(BuildContext context) {
-    Color? convertColor(Color? color) =>
-        ArnaDynamicColor.maybeResolve(color, context);
-
     return ArnaThemeData._rawWithDefaults(
       brightness,
-      convertColor(super.accentColor),
+      ArnaDynamicColor.maybeResolve(super.accentColor, context),
       super.textTheme?.resolveFrom(context),
       _defaults.resolveFrom(context, super.textTheme == null),
     );
@@ -172,12 +169,12 @@ class NoDefaultArnaThemeData {
   /// [ArnaThemeData].
   @protected
   NoDefaultArnaThemeData resolveFrom(BuildContext context) {
-    Color? convertColor(Color? color) =>
-        ArnaDynamicColor.maybeResolve(color, context);
-
     return NoDefaultArnaThemeData(
       brightness: brightness,
-      accentColor: convertColor(accentColor),
+      accentColor: ArnaDynamicColor.maybeResolve(
+        accentColor,
+        context,
+      ),
       textTheme: textTheme?.resolveFrom(context),
     );
   }
@@ -214,11 +211,9 @@ class _ArnaThemeDefaults {
   final _ArnaTextThemeDefaults textThemeDefaults;
 
   _ArnaThemeDefaults resolveFrom(BuildContext context, bool resolveTextTheme) {
-    Color convertColor(Color color) => ArnaDynamicColor.resolve(color, context);
-
     return _ArnaThemeDefaults(
       brightness,
-      convertColor(accentColor),
+      ArnaDynamicColor.resolve(accentColor, context),
       resolveTextTheme
           ? textThemeDefaults.resolveFrom(context)
           : textThemeDefaults,
@@ -233,10 +228,13 @@ class _ArnaTextThemeDefaults {
   final Color labelColor;
 
   _ArnaTextThemeDefaults resolveFrom(BuildContext context) =>
-      _ArnaTextThemeDefaults(ArnaDynamicColor.resolve(labelColor, context));
+      _ArnaTextThemeDefaults(
+        ArnaDynamicColor.resolve(labelColor, context),
+      );
 
-  ArnaTextThemeData createDefaults() =>
-      _DefaultArnaTextThemeData(labelColor: labelColor);
+  ArnaTextThemeData createDefaults() => _DefaultArnaTextThemeData(
+        labelColor: labelColor,
+      );
 }
 
 // ArnaTextThemeData with no text styles explicitly specified.

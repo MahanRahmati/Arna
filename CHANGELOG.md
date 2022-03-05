@@ -1,3 +1,26 @@
+## 0.2.9
+
+- Update ArnaExpansionPanel
+- Update ArnaListTile
+- Update ArnaSlider
+- Update ArnaThemeData
+- Update ArnaTextTheme
+- Update ArnaColors [Thanks to @h1376h]
+- Update ArnaCheckBox
+- Update ArnaRadio
+- Update ArnaSwitch
+- Update ArnaSegmentedControl
+- Add ArnaPopupMenu
+- Update ArnaBaseButton
+- Update ArnaButton
+- Update ArnaIconButton
+- Update ArnaLinkedButtons
+- Add ArnaPopupMenuButton
+- Update ArnaTextButton
+- [Example] Update Widgets page
+- [Example] Update main page
+- Update Readme
+
 ## 0.2.8
 
 - [Example] Update Widgets page

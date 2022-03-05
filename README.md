@@ -29,6 +29,7 @@ This Framework is in active development. Any contribution, idea, criticism or fe
     - [Arna Icon Button](#arna-icon-button)
     - [Arna Text Button](#arna-text-button)
     - [Arna Linked Buttons](#arna-linked-buttons)
+    - [Arna Popup Menu Button](#arna-popup-menu-button)
     - [Arna Segmented Control](#arna-segmented-control)
     - [Arna CheckBox](#arna-checkbox)
     - [Arna CheckBox List Tile](#arna-checkbox-list-tile)
@@ -61,7 +62,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.2.8
+  arna: ^0.2.9
 ```
 
 And import it
@@ -211,6 +212,34 @@ ArnaLinkedButtons(
             tooltipMessage: "Add",
         ),
     ],
+);
+```
+
+### Arna Popup Menu Button
+
+```dart
+ArnaPopupMenuButton<String>(
+    itemBuilder: (context) => [
+        ArnaPopupMenuItem(
+            child: Text(
+                "First Item",
+                style: ArnaTheme.of(context).textTheme.textStyle,
+                ),
+                value: "First Item",
+            ),
+        const ArnaPopupMenuDivider(),
+        ArnaPopupMenuItem(
+            child: Text(
+                "Second Item",
+                style: ArnaTheme.of(context).textTheme.textStyle,
+                ),
+                value: "Second Item",
+            ),
+    ],
+    onSelected: (String value) => showArnaSnackbar(
+        context: context,
+        message: value,
+    ),
 );
 ```
 

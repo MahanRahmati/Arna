@@ -402,17 +402,20 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         : resolvable;
   }
 
-  /// Computes the luminance of given [Color] by calling [luminance].
-  static Color luminance(
-    Color backgroundColor,
-    ArnaDynamicColor foregroundColor,
-  ) {
-    return backgroundColor.computeLuminance() > 0.5
-        ? foregroundColor.color
-        : foregroundColor.darkColor;
+  /// Computes the inner color from [backgroundColor] by using
+  /// [computeLuminance].
+  static Color innerColor(Color backgroundColor, [bool state = true]) {
+    if (state == false) return ArnaColors.color36;
+    return backgroundColor.computeLuminance() > 0.8
+        ? ArnaColors.color01
+        : backgroundColor.computeLuminance() > 0.5
+            ? ArnaColors.color07
+            : backgroundColor.computeLuminance() > 0.2
+                ? ArnaColors.color34
+                : ArnaColors.color36;
   }
 
-  /// Blends the given [Color] by [percentage] and [luminance].
+  /// Blends the given [Color] by [percentage] and [computeLuminance].
   static Color colorBlender(
     Color color,
     int percentage, {

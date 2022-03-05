@@ -33,50 +33,81 @@ class _WidgetsState extends State<Widgets> {
                 title: "Buttons",
                 subtitle:
                     "Buttons allow users to take actions, and make choices, with a single tap.",
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ArnaIconButton(
-                      icon: Icons.add_outlined,
-                      onPressed: () => showArnaSnackbar(
-                        context: context,
-                        message: "Hello There!",
+                child: Center(
+                  child: Wrap(
+                    children: [
+                      ArnaIconButton(
+                        icon: Icons.add_outlined,
+                        onPressed: () => showArnaSnackbar(
+                          context: context,
+                          message: "Hello There!",
+                        ),
+                        tooltipMessage: "Add",
                       ),
-                      tooltipMessage: "Add",
-                    ),
-                    ArnaTextButton(
-                      label: "Add",
-                      onPressed: () => showArnaSnackbar(
-                        context: context,
-                        message: "Hello There!",
+                      ArnaTextButton(
+                        label: "Add",
+                        onPressed: () => showArnaSnackbar(
+                          context: context,
+                          message: "Hello There!",
+                        ),
+                        tooltipMessage: "Add",
                       ),
-                      tooltipMessage: "Add",
-                    ),
-                    ArnaButton(
-                      label: "Add",
-                      icon: Icons.add_outlined,
-                      onPressed: () => showArnaSnackbar(
-                        context: context,
-                        message: "Hello There!",
+                      ArnaButton(
+                        label: "Add",
+                        icon: Icons.add_outlined,
+                        onPressed: () => showArnaSnackbar(
+                          context: context,
+                          message: "Hello There!",
+                        ),
+                        tooltipMessage: "Add",
                       ),
-                      tooltipMessage: "Add",
-                    ),
-                    const ArnaButton(
-                      label: "Add",
-                      icon: Icons.add_outlined,
-                      onPressed: null,
-                      tooltipMessage: "Add",
-                    ),
-                    ArnaIconButton(
-                      icon: Icons.add_outlined,
-                      buttonType: ButtonType.suggested,
-                      onPressed: () => showArnaSnackbar(
-                        context: context,
-                        message: "Hello There!",
+                      const ArnaButton(
+                        label: "Add",
+                        icon: Icons.add_outlined,
+                        onPressed: null,
+                        tooltipMessage: "Add",
                       ),
-                      tooltipMessage: "Add",
-                    ),
-                  ],
+                      ArnaIconButton(
+                        icon: Icons.add_outlined,
+                        buttonType: ButtonType.suggested,
+                        onPressed: () => showArnaSnackbar(
+                          context: context,
+                          message: "Hello There!",
+                        ),
+                        tooltipMessage: "Add",
+                      ),
+                      ArnaPopupMenuButton<String>(
+                        itemBuilder: (context) => [
+                          ArnaPopupMenuItem(
+                            child: Text(
+                              "First Item",
+                              style: ArnaTheme.of(context).textTheme.textStyle,
+                            ),
+                            value: "First Item",
+                          ),
+                          ArnaPopupMenuItem(
+                            child: Text(
+                              "Second Item",
+                              style: ArnaTheme.of(context).textTheme.textStyle,
+                            ),
+                            value: "Second Item",
+                          ),
+                          const ArnaPopupMenuDivider(),
+                          ArnaPopupMenuItem(
+                            child: Text(
+                              "Third Item",
+                              style: ArnaTheme.of(context).textTheme.textStyle,
+                            ),
+                            value: "Third Item",
+                          ),
+                        ],
+                        onSelected: (String value) => showArnaSnackbar(
+                          context: context,
+                          message: value,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               ArnaExpansionPanel(
@@ -300,7 +331,7 @@ class _WidgetsState extends State<Widgets> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     ArnaProgressIndicator(),
-                    ArnaProgressIndicator(size: 140),
+                    ArnaProgressIndicator(size: 119),
                   ],
                 ),
               ),

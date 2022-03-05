@@ -293,27 +293,35 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return FocusableActionDetector(
-      enabled: isEnabled && widget.isFocusable,
-      focusNode: focusNode,
-      autofocus: !isEnabled ? false : widget.autofocus,
-      mouseCursor: widget.cursor,
-      onShowFocusHighlight: _handleFocus,
-      onFocusChange: _handleFocusChange,
-      actions: _actions,
-      shortcuts: _shortcuts,
-      child: _ArnaSliderRenderObjectWidget(
-        key: _renderObjectKey,
-        value: (widget.value - widget.min) / (widget.max - widget.min),
-        divisions: widget.divisions,
-        onChanged: isEnabled ? _handleChanged : null,
-        onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
-        onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
-        accent: widget.accentColor ?? ArnaTheme.of(context).accentColor,
-        borderColor: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
-        trackColor:
-            ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
-        vsync: this,
+    return Padding(
+      padding: Styles.small,
+      child: FocusableActionDetector(
+        enabled: isEnabled && widget.isFocusable,
+        focusNode: focusNode,
+        autofocus: !isEnabled ? false : widget.autofocus,
+        mouseCursor: widget.cursor,
+        onShowFocusHighlight: _handleFocus,
+        onFocusChange: _handleFocusChange,
+        actions: _actions,
+        shortcuts: _shortcuts,
+        child: _ArnaSliderRenderObjectWidget(
+          key: _renderObjectKey,
+          value: (widget.value - widget.min) / (widget.max - widget.min),
+          divisions: widget.divisions,
+          onChanged: isEnabled ? _handleChanged : null,
+          onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
+          onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
+          accent: widget.accentColor ?? ArnaTheme.of(context).accentColor,
+          borderColor: ArnaDynamicColor.resolve(
+            ArnaColors.borderColor,
+            context,
+          ),
+          trackColor: ArnaDynamicColor.resolve(
+            ArnaColors.backgroundColor,
+            context,
+          ),
+          vsync: this,
+        ),
       ),
     );
   }

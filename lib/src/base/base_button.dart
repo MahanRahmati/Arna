@@ -23,6 +23,7 @@ class ArnaBaseButton extends StatefulWidget {
     required this.builder,
     this.onPressed,
     this.tooltipMessage,
+    this.showAnimation = true,
     this.isFocusable = true,
     this.autofocus = false,
     this.cursor = MouseCursor.defer,
@@ -40,6 +41,9 @@ class ArnaBaseButton extends StatefulWidget {
 
   /// Whether this button is focusable or not.
   final bool isFocusable;
+
+  /// Whether to show animation or not.
+  final bool showAnimation;
 
   /// Whether this button should focus itself if nothing else is already
   /// focused.
@@ -76,14 +80,19 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Styles.basicDuration,
-      value: 1.0,
-      upperBound: 1.0,
-      lowerBound: 0.7,
-    );
-    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
+    if (widget.showAnimation) {
+      _controller = AnimationController(
+        vsync: this,
+        duration: Styles.basicDuration,
+        value: 1.0,
+        upperBound: 1.0,
+        lowerBound: 0.7,
+      );
+      _animation = CurvedAnimation(
+        parent: _controller,
+        curve: Styles.basicCurve,
+      );
+    }
     focusNode = FocusNode(canRequestFocus: isEnabled);
     if (widget.autofocus) focusNode!.requestFocus();
     _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
@@ -106,7 +115,7 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
   void dispose() {
     focusNode!.dispose();
     focusNode = null;
-    _controller.dispose();
+    if (widget.showAnimation) _controller.dispose();
     super.dispose();
   }
 
@@ -121,7 +130,9 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
     if (isEnabled) {
       setState(() => _pressed = true);
       widget.onPressed!();
-      _controller.reverse().then((_) => _controller.forward());
+      if (widget.showAnimation) {
+        _controller.reverse().then((_) => _controller.forward());
+      }
       await Future.delayed(Styles.basicDuration);
       if (mounted) setState(() => _pressed = false);
     }
@@ -129,20 +140,20 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
 
   void _handleTapDown(_) {
     if (!_pressed && mounted) {
-      _controller.reverse();
+      if (widget.showAnimation) _controller.reverse();
       setState(() => _pressed = true);
     }
   }
 
   void _handleTapUp(_) {
     if (_pressed && mounted) {
-      _controller.forward();
+      if (widget.showAnimation) _controller.forward();
       setState(() => _pressed = false);
     }
   }
 
   void _handleTapCancel() {
-    if (mounted) _controller.forward();
+    if (mounted && widget.showAnimation) _controller.forward();
   }
 
   void _handleHover(hover) {
@@ -188,17 +199,26 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
               onFocusChange: _handleFocusChange,
               actions: _actions,
               shortcuts: _shortcuts,
-              child: ScaleTransition(
-                scale: _animation,
-                child: widget.builder(
-                  context,
-                  isEnabled,
-                  _hover,
-                  _focused,
-                  _pressed,
-                  _selected,
-                ),
-              ),
+              child: widget.showAnimation
+                  ? ScaleTransition(
+                      scale: _animation,
+                      child: widget.builder(
+                        context,
+                        isEnabled,
+                        _hover,
+                        _focused,
+                        _pressed,
+                        _selected,
+                      ),
+                    )
+                  : widget.builder(
+                      context,
+                      isEnabled,
+                      _hover,
+                      _focused,
+                      _pressed,
+                      _selected,
+                    ),
             ),
           ),
         ),

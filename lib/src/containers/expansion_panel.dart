@@ -143,6 +143,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     children.add(
       Expanded(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (widget.title != null)
@@ -224,9 +225,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
           children: [
             Container(
               color: ArnaDynamicColor.resolve(
-                _focused
-                    ? ArnaColors.cardHoverColor
-                    : ArnaColors.cardHoverColor,
+                ArnaColors.cardHoverColor,
                 context,
               ),
               child: Padding(

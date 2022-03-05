@@ -29,7 +29,7 @@ class ArnaButton extends StatelessWidget {
   /// The callback that is called when a button is tapped.
   final VoidCallback? onPressed;
 
-  /// The tooltip message of the button.
+  /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
 
   /// The type of the button.
@@ -63,7 +63,7 @@ class ArnaButton extends StatelessWidget {
               ? ArnaColors.disabledColor
               : buttonType == ButtonType.normal
                   ? ArnaColors.iconColor
-                  : ArnaDynamicColor.luminance(accent, ArnaColors.iconColor),
+                  : ArnaDynamicColor.innerColor(accent),
           context,
         ),
       );
@@ -82,10 +82,7 @@ class ArnaButton extends StatelessWidget {
                       ? ArnaColors.disabledColor
                       : buttonType == ButtonType.normal
                           ? ArnaColors.primaryTextColor
-                          : ArnaDynamicColor.luminance(
-                              accent,
-                              ArnaColors.primaryTextColor,
-                            ),
+                          : ArnaDynamicColor.innerColor(accent),
                   context,
                 ),
               ),

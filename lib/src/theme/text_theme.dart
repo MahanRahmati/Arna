@@ -62,10 +62,14 @@ TextStyle? _resolveTextStyle(TextStyle? style, BuildContext context) {
   // This does not resolve the shadow color, foreground, background, etc.
   return style?.copyWith(
     color: ArnaDynamicColor.maybeResolve(style.color, context),
-    backgroundColor:
-        ArnaDynamicColor.maybeResolve(style.backgroundColor, context),
-    decorationColor:
-        ArnaDynamicColor.maybeResolve(style.decorationColor, context),
+    backgroundColor: ArnaDynamicColor.maybeResolve(
+      style.backgroundColor,
+      context,
+    ),
+    decorationColor: ArnaDynamicColor.maybeResolve(
+      style.decorationColor,
+      context,
+    ),
   );
 }
 

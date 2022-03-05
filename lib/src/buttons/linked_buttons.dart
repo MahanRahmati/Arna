@@ -165,7 +165,7 @@ class ArnaLinkedButton {
   /// The callback that is called when a button is tapped.
   final VoidCallback? onPressed;
 
-  /// The tooltip message of the button.
+  /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
 
   /// Whether this button is focusable or not.

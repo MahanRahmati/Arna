@@ -74,6 +74,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
     children.add(
       Expanded(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (widget.title != null)

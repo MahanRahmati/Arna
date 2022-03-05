@@ -126,7 +126,7 @@ class ArnaRadio<T> extends StatelessWidget {
                       focused
                           ? accent
                           : selected && enabled
-                              ? accent
+                              ? ArnaDynamicColor.borderColor(accent, context)
                               : hover && enabled
                                   ? accent
                                   : ArnaColors.borderColor,

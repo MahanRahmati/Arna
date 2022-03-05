@@ -66,7 +66,12 @@ class ArnaSideBarItem extends StatelessWidget {
                 icon,
                 size: Styles.iconSize,
                 color: ArnaDynamicColor.resolve(
-                  !enabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
+                  !enabled
+                      ? ArnaColors.disabledColor
+                      : selected
+                          ? ArnaDynamicColor.innerColor(
+                              accentColor ?? ArnaTheme.of(context).accentColor)
+                          : ArnaColors.iconColor,
                   context,
                 ),
               ),
@@ -78,7 +83,10 @@ class ArnaSideBarItem extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(
                       !enabled
                           ? ArnaColors.disabledColor
-                          : ArnaColors.primaryTextColor,
+                          : selected
+                              ? ArnaDynamicColor.innerColor(accentColor ??
+                                  ArnaTheme.of(context).accentColor)
+                              : ArnaColors.primaryTextColor,
                       context,
                     ),
                   ),
@@ -111,29 +119,43 @@ class ArnaSideBarItem extends StatelessWidget {
                     curve: Styles.basicCurve,
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
-                      borderRadius: Styles.borderRadius,
-                      border: Border.all(
+                        borderRadius: Styles.borderRadius,
+                        border: Border.all(
+                          color: ArnaDynamicColor.resolve(
+                            pressed
+                                ? ArnaDynamicColor.colorBlender(
+                                    accent,
+                                    28,
+                                    isBorder: true,
+                                  )
+                                : selected
+                                    ? ArnaDynamicColor.colorBlender(
+                                        accent,
+                                        42,
+                                        isBorder: true,
+                                      )
+                                    : ArnaColors.color00,
+                            context,
+                          ),
+                        ),
                         color: !enabled
-                            ? ArnaColors.color00
-                            : focused
+                            ? ArnaDynamicColor.resolve(
+                                ArnaColors.backgroundColor,
+                                context,
+                              )
+                            : pressed
                                 ? accent
-                                : ArnaColors.color00,
-                      ),
-                      color: !enabled
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundColor,
-                              context,
-                            )
-                          : accent.withAlpha(
-                              pressed
-                                  ? 77
-                                  : selected
-                                      ? 56
-                                      : hover
-                                          ? 35
-                                          : 0,
-                            ),
-                    ),
+                                : selected
+                                    ? ArnaDynamicColor.colorBlender(accent, 20)
+                                    : hover
+                                        ? ArnaDynamicColor.colorBlender(
+                                            accent,
+                                            60,
+                                          )
+                                        : ArnaDynamicColor.resolve(
+                                            ArnaColors.sideColor,
+                                            context,
+                                          )),
                     padding: Styles.horizontal,
                     child: _buildChild(context, enabled),
                   ),
@@ -150,7 +172,7 @@ class ArnaSideBarItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: accent,
+                  color: ArnaDynamicColor.colorBlender(accent, 75),
                 ),
               ),
             ],

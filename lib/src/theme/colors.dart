@@ -406,7 +406,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// [computeLuminance], state is used for handling Switch.
   static Color innerColor(Color backgroundColor, [int state = 2]) {
     double colorLuminance = backgroundColor.computeLuminance();
-    if (state == 2) return ArnaColors.color36;
     if (state < 2) {
       return (state == 0)
           ? ArnaColors.color36

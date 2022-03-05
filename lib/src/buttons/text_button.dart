@@ -10,6 +10,7 @@ class ArnaTextButton extends StatelessWidget {
     this.buttonType = ButtonType.normal,
     this.isFocusable = true,
     this.autofocus = false,
+    this.hasBorder = true,
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
@@ -34,6 +35,9 @@ class ArnaTextButton extends StatelessWidget {
   /// focused.
   final bool autofocus;
 
+  /// Whether this button has border or not.
+  final bool hasBorder;
+
   /// The color of the button's focused border.
   final Color? accentColor;
 
@@ -53,6 +57,7 @@ class ArnaTextButton extends StatelessWidget {
       buttonType: buttonType,
       isFocusable: isFocusable,
       autofocus: autofocus,
+      hasBorder: hasBorder,
       accentColor: accentColor,
       cursor: cursor,
       semanticLabel: semanticLabel,

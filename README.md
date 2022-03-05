@@ -12,8 +12,8 @@ This Framework is in active development. Any contribution, idea, criticism or fe
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-<img alt="Light" src="https://user-images.githubusercontent.com/16052180/156654600-b8be06db-1cb1-411b-adf9-0bba86dd9704.png">
-<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/156654550-cef8b2c8-b95a-41de-9d4e-903c6968637b.png">
+<img alt="Light" src="https://user-images.githubusercontent.com/16052180/156883237-4acd58f2-fad2-47a4-82c5-4e8ea0e54244.png">
+<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/156883228-684fec2c-b93f-4eec-a9e0-8e166417736f.png">
 
 ## Content
 

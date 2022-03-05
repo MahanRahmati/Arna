@@ -422,6 +422,36 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.color36;
   }
 
+  /// Computes the icon color from [backgroundColor] and [accentColor] by using
+  /// [computeLuminance], state is used for handling Switch.
+  static Color iconColor(
+      Color backgroundColor, Color accent, BuildContext context) {
+    double colorLuminance = backgroundColor.computeLuminance();
+    double accentLuminance = accent.computeLuminance();
+    double delta = (colorLuminance >= accentLuminance)
+        ? colorLuminance - accentLuminance
+        : accentLuminance - colorLuminance;
+    Brightness brightness =
+        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
+    bool isHighContrastEnabled =
+        MediaQuery.maybeOf(context)?.highContrast ?? false;
+
+    switch (brightness) {
+      case Brightness.light:
+        return isHighContrastEnabled
+            ? ArnaColors.color01
+            : delta < 0.2
+                ? ArnaColors.color07
+                : accent;
+      case Brightness.dark:
+        return isHighContrastEnabled
+            ? ArnaColors.color36
+            : delta < 0.2
+                ? ArnaColors.color30
+                : accent;
+    }
+  }
+
   /// Computes the border color from [accentColor] by using
   /// [computeLuminance], state is used for handling Switch and other states.
   static Color borderColor(Color accent, BuildContext context,

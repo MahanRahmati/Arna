@@ -161,28 +161,28 @@ class ArnaButton extends StatelessWidget {
                         ? ArnaColors.borderColor
                         : ArnaColors.color00,
               ),
-              color: hasBorder
-                  ? ArnaDynamicColor.resolve(
-                      !enabled
-                          ? ArnaColors.backgroundColor
-                          : buttonType == ButtonType.normal
-                              ? pressed
-                                  ? ArnaColors.buttonPressedColor
-                                  : hover
-                                      ? ArnaColors.buttonHoverColor
-                                      : ArnaColors.buttonColor
-                              : pressed
-                                  ? ArnaDynamicColor.colorBlender(accent, 42)
-                                  : hover
-                                      ? ArnaDynamicColor.colorBlender(
-                                          accent, 28)
-                                      : focused
-                                          ? ArnaDynamicColor.colorBlender(
-                                              accent, 28)
-                                          : accent,
-                      context,
-                    )
-                  : ArnaColors.color00,
+              color: ArnaDynamicColor.resolve(
+                !enabled
+                    ? ArnaColors.backgroundColor
+                    : buttonType == ButtonType.normal
+                        ? pressed
+                            ? ArnaColors.buttonPressedColor
+                            : hover
+                                ? ArnaColors.buttonHoverColor
+                                : hasBorder
+                                    ? ArnaColors.buttonColor
+                                    : ArnaColors.color00
+                        : pressed
+                            ? ArnaDynamicColor.colorBlender(accent, 42)
+                            : hover
+                                ? ArnaDynamicColor.colorBlender(accent, 28)
+                                : focused
+                                    ? ArnaDynamicColor.colorBlender(accent, 28)
+                                    : hasBorder
+                                        ? accent
+                                        : ArnaColors.color00,
+                context,
+              ),
             ),
             padding: icon != null
                 ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)

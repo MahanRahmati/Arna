@@ -73,27 +73,41 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
   }
 
   Widget _buildChild() {
-    return ListView.builder(
-      controller: ScrollController(),
-      itemCount: widget.items.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: Styles.small,
-          child: ArnaSideBarItem(
-            label: widget.items[index].title,
-            icon: widget.items[index].icon,
-            onPressed: () => onTap(index),
-            badge: widget.items[index].badge,
-            compact: tablet(context) ? true : false,
-            selected: index == _currentIndex,
-            isFocusable: widget.items[index].isFocusable,
-            autofocus: widget.items[index].autofocus,
-            accentColor: widget.items[index].accentColor,
-            cursor: widget.items[index].cursor,
-            semanticLabel: widget.items[index].semanticLabel,
+    return Column(
+      children: [
+        SizedBox(
+          height: Styles.sideBarIconHeight,
+          child: Container(
+            width: Styles.sideBarItemHeight,
+            decoration: const FlutterLogoDecoration(),
           ),
-        );
-      },
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height - Styles.sideBarIconHeight,
+          child: ListView.builder(
+            controller: ScrollController(),
+            itemCount: widget.items.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: Styles.small,
+                child: ArnaSideBarItem(
+                  label: widget.items[index].title,
+                  icon: widget.items[index].icon,
+                  onPressed: () => onTap(index),
+                  badge: widget.items[index].badge,
+                  compact: tablet(context) ? true : false,
+                  selected: index == _currentIndex,
+                  isFocusable: widget.items[index].isFocusable,
+                  autofocus: widget.items[index].autofocus,
+                  accentColor: widget.items[index].accentColor,
+                  cursor: widget.items[index].cursor,
+                  semanticLabel: widget.items[index].semanticLabel,
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -102,130 +116,107 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
     if (!phone(context) && showDrawer) _drawerOpenedCallback(false);
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (widget.items.length > 1) {
-          return Stack(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        return widget.items.length > 1
+            ? Stack(
                 children: [
-                  if (constraints.maxWidth > 644)
-                    AnimatedContainer(
-                      width: constraints.maxWidth > 960
-                          ? Styles.sideBarWidth
-                          : Styles.sideBarCompactWidth,
-                      duration: Styles.basicDuration,
-                      curve: Styles.basicCurve,
-                      clipBehavior: Clip.antiAlias,
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.sideColor,
-                        context,
-                      ),
-                      child: _buildChild(),
-                    ),
-                  if (constraints.maxWidth > 644) const ArnaVerticalDivider(),
-                  Expanded(
-                    child: ArnaScaffold(
-                      headerBarLeading: Row(
-                        children: [
-                          if (constraints.maxWidth < 644 &&
-                              widget.items.length > 3)
-                            ArnaIconButton(
-                              icon: Icons.menu_outlined,
-                              onPressed: () =>
-                                  _drawerOpenedCallback(!showDrawer),
-                            ),
-                          if (widget.headerBarLeading != null)
-                            widget.headerBarLeading!,
-                          if (widget.items[_currentIndex].headerBarLeading !=
-                              null)
-                            widget.items[_currentIndex].headerBarLeading!,
-                        ],
-                      ),
-                      title: widget.title,
-                      headerBarTrailing: Row(
-                        children: [
-                          if (widget.items[_currentIndex].headerBarTrailing !=
-                              null)
-                            widget.items[_currentIndex].headerBarTrailing!,
-                          if (widget.headerBarTrailing != null)
-                            widget.headerBarTrailing!,
-                        ],
-                      ),
-                      searchField: widget.items[_currentIndex].searchField,
-                      banner: widget.items[_currentIndex].banner,
-                      body: Column(
-                        children: [
-                          Expanded(
-                            child: FadeTransition(
-                              opacity: _animation,
-                              child:
-                                  widget.items[_currentIndex].builder(context),
-                            ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (constraints.maxWidth > 644)
+                        AnimatedContainer(
+                          width: constraints.maxWidth > 960
+                              ? Styles.sideBarWidth
+                              : Styles.sideBarCompactWidth,
+                          duration: Styles.basicDuration,
+                          curve: Styles.basicCurve,
+                          clipBehavior: Clip.antiAlias,
+                          color: ArnaDynamicColor.resolve(
+                            ArnaColors.sideColor,
+                            context,
                           ),
-                          if (constraints.maxWidth < 644 &&
-                              widget.items.length < 4)
-                            ArnaBottomBar(
-                              items: widget.items.map(
-                                (item) {
-                                  var index = widget.items.indexOf(item);
-                                  return Expanded(
-                                    child: Padding(
-                                      padding: Styles.small,
-                                      child: ArnaBottomBarItem(
-                                        label: item.title,
-                                        icon: item.icon,
-                                        onPressed: () => onTap(index),
-                                        badge: item.badge,
-                                        selected: index == _currentIndex,
-                                        isFocusable: item.isFocusable,
-                                        autofocus: item.autofocus,
-                                        accentColor: item.accentColor,
-                                        cursor: item.cursor,
-                                        semanticLabel: item.semanticLabel,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ).toList(),
-                            ),
-                        ],
+                          child: _buildChild(),
+                        ),
+                      if (constraints.maxWidth > 644)
+                        const ArnaVerticalDivider(),
+                      Expanded(
+                        child: ArnaScaffold(
+                          headerBarLeading: Row(
+                            children: [
+                              if (constraints.maxWidth < 644)
+                                ArnaIconButton(
+                                  icon: Icons.menu_outlined,
+                                  onPressed: () =>
+                                      _drawerOpenedCallback(!showDrawer),
+                                ),
+                              if (widget.headerBarLeading != null)
+                                widget.headerBarLeading!,
+                              if (widget
+                                      .items[_currentIndex].headerBarLeading !=
+                                  null)
+                                widget.items[_currentIndex].headerBarLeading!,
+                            ],
+                          ),
+                          title: widget.title,
+                          headerBarTrailing: Row(
+                            children: [
+                              if (widget
+                                      .items[_currentIndex].headerBarTrailing !=
+                                  null)
+                                widget.items[_currentIndex].headerBarTrailing!,
+                              if (widget.headerBarTrailing != null)
+                                widget.headerBarTrailing!,
+                            ],
+                          ),
+                          searchField: widget.items[_currentIndex].searchField,
+                          banner: widget.items[_currentIndex].banner,
+                          body: Column(
+                            children: [
+                              Expanded(
+                                child: FadeTransition(
+                                  opacity: _animation,
+                                  child: widget.items[_currentIndex]
+                                      .builder(context),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
+                  if (constraints.maxWidth < 644)
+                    ArnaDrawerController(
+                      drawerCallback: _drawerOpenedCallback,
+                      isDrawerOpen: showDrawer,
+                      drawer: ArnaDrawer(child: _buildChild()),
+                    ),
                 ],
-              ),
-              if (constraints.maxWidth < 644 && widget.items.length > 3)
-                ArnaDrawerController(
-                  drawerCallback: _drawerOpenedCallback,
-                  isDrawerOpen: showDrawer,
-                  drawer: ArnaDrawer(child: _buildChild()),
+              )
+            : ArnaScaffold(
+                headerBarLeading: Row(
+                  children: [
+                    if (widget.headerBarLeading != null)
+                      widget.headerBarLeading!,
+                    if (widget.items[_currentIndex].headerBarLeading != null)
+                      widget.items[_currentIndex].headerBarLeading!,
+                  ],
                 ),
-            ],
-          );
-        }
-        return ArnaScaffold(
-          headerBarLeading: Row(
-            children: [
-              if (widget.headerBarLeading != null) widget.headerBarLeading!,
-              if (widget.items[_currentIndex].headerBarLeading != null)
-                widget.items[_currentIndex].headerBarLeading!,
-            ],
-          ),
-          title: widget.title,
-          headerBarTrailing: Row(
-            children: [
-              if (widget.items[_currentIndex].headerBarTrailing != null)
-                widget.items[_currentIndex].headerBarTrailing!,
-              if (widget.headerBarTrailing != null) widget.headerBarTrailing!,
-            ],
-          ),
-          searchField: widget.items[_currentIndex].searchField,
-          banner: widget.items[_currentIndex].banner,
-          body: FadeTransition(
-            opacity: _animation,
-            child: widget.items[_currentIndex].builder(context),
-          ),
-        );
+                title: widget.title,
+                headerBarTrailing: Row(
+                  children: [
+                    if (widget.items[_currentIndex].headerBarTrailing != null)
+                      widget.items[_currentIndex].headerBarTrailing!,
+                    if (widget.headerBarTrailing != null)
+                      widget.headerBarTrailing!,
+                  ],
+                ),
+                searchField: widget.items[_currentIndex].searchField,
+                banner: widget.items[_currentIndex].banner,
+                body: FadeTransition(
+                  opacity: _animation,
+                  child: widget.items[_currentIndex].builder(context),
+                ),
+              );
       },
     );
   }

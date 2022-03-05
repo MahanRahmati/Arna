@@ -31,6 +31,7 @@ abstract class Styles {
   static const double headerBarHeight = base * 7;
   static const double sideBarItemHeight = base * 7;
   static const double sideBarCompactWidth = base * 9;
+  static const double sideBarIconHeight = base * 9;
   static const double menuMinWidth = base * 15;
   static const double searchWidth = base * 44;
   static const double sideBarWidth = base * 44;

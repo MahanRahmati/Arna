@@ -85,6 +85,7 @@ class _HomeState extends ConsumerState<Home> {
         subtitle: "Hello There!",
         trailing: ArnaIconButton(
           icon: Icons.close_outlined,
+          hasBorder: false,
           onPressed: () => setState(() => showBanner = false),
         ),
       ),

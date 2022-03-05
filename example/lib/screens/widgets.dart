@@ -263,6 +263,7 @@ class _WidgetsState extends State<Widgets> {
                       onChanged: (value) => setState(() => _switch2 = value),
                       trailingButton: ArnaIconButton(
                         icon: Icons.add_outlined,
+                        hasBorder: false,
                         onPressed: () {},
                       ),
                     ),
@@ -319,6 +320,7 @@ class _WidgetsState extends State<Widgets> {
                           setState(() => _sliderValue2 = newValue),
                       trailingButton: ArnaIconButton(
                         icon: Icons.add_outlined,
+                        hasBorder: false,
                         onPressed: () {},
                       ),
                     ),

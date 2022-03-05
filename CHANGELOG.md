@@ -1,3 +1,16 @@
+## 0.3.0
+
+- Fixing border in checkbox and radio [Thanks to @h1376h]
+- Update gitignore [Thanks to @h1376h]
+- Fixing switch colors [Thanks to @h1376h]
+- Fix side bar item color [Thanks to @h1376h]
+- Adding borderless button [Thanks to @h1376h]
+- Fix badge inner color [Thanks to @h1376h]
+- [Example] Update Widgets page
+- [Example] Update main page
+- Update ArnaSideScaffold
+- Refactor ArnaSideBarItem
+
 ## 0.2.9
 
 - Update ArnaExpansionPanel

@@ -53,7 +53,6 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
     required this.onValueChanged,
     this.groupValue,
     this.accentColor,
-    this.borderColor,
     this.cursor = MouseCursor.defer,
   }) : super(key: key);
 
@@ -82,9 +81,6 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   /// The color of the item's focused background color.
   final Color? accentColor;
 
-  /// The color of the item's focused border.
-  final Color? borderColor;
-
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// item.
   final MouseCursor cursor;
@@ -106,10 +102,9 @@ class _ArnaSegmentedControlState<T extends Object>
   Widget _buildChild() {
     List<Widget> children = [];
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    Color theme = (ArnaTheme.of(context).brightness == Brightness.light)
+    Color border = (ArnaTheme.of(context).brightness == Brightness.light)
         ? ArnaColors.color35
         : ArnaColors.color08;
-    Color border = widget.borderColor ?? theme;
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
     int index = 0;
     for (final T currentKey in widget.children.keys) {
@@ -123,9 +118,12 @@ class _ArnaSegmentedControlState<T extends Object>
           first: first,
           last: last,
           accentColor: accent,
-          borderColor: widget.borderColor ??
-              ArnaDynamicColor.matchingColor(border, accent, context,
-                  blend: true),
+          borderColor: ArnaDynamicColor.matchingColor(
+            border,
+            accent,
+            context,
+            blend: true,
+          ),
           cursor: widget.cursor,
         ),
       );

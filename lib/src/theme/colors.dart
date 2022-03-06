@@ -406,12 +406,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// [computeLuminance], state is used for handling Switch.
   static Color innerColor(Color backgroundColor, [int state = 2]) {
     double colorLuminance = backgroundColor.computeLuminance();
-    if (state < 2) {
-      return (state == 0)
-          ? ArnaColors.color36
-          : (colorLuminance > 0.7)
-              ? ArnaColors.color07
-              : ArnaColors.color36;
+    if (state == 0) {
+      return ArnaColors.color36;
     }
     return colorLuminance > 0.7
         ? ArnaColors.color01
@@ -518,6 +514,18 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                     ? accent
                     : ArnaColors.color30;
     }
+  }
+
+  /// Finds the [Color] for slider by it's [value] and [computeLuminance].
+  static Color sliderColor(Color accent, double value, double min) {
+    Color firstColor = ArnaColors.color36;
+    double accentLuminance = accent.computeLuminance();
+    Color secondColor =
+        accentLuminance > 0.5 ? ArnaColors.color01 : ArnaColors.color36;
+    if (value > min) {
+      return secondColor;
+    }
+    return firstColor;
   }
 
   /// Blends the given [Color] by [percentage] and [computeLuminance].

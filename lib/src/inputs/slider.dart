@@ -293,6 +293,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: FocusableActionDetector(
@@ -311,7 +312,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
           onChanged: isEnabled ? _handleChanged : null,
           onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
           onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
-          accent: widget.accentColor ?? ArnaTheme.of(context).accentColor,
+          accent: accent,
           borderColor: ArnaDynamicColor.resolve(
             ArnaColors.borderColor,
             context,
@@ -319,6 +320,11 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
           trackColor: ArnaDynamicColor.resolve(
             ArnaColors.backgroundColor,
             context,
+          ),
+          thumbColor: ArnaDynamicColor.sliderColor(
+            accent,
+            widget.value,
+            widget.min,
           ),
           vsync: this,
         ),
@@ -338,6 +344,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
     required this.accent,
     required this.borderColor,
     required this.trackColor,
+    required this.thumbColor,
     required this.vsync,
   }) : super(key: key);
 
@@ -349,6 +356,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
   final Color accent;
   final Color borderColor;
   final Color trackColor;
+  final Color thumbColor;
   final TickerProvider vsync;
 
   @override
@@ -362,6 +370,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
       accent: accent,
       borderColor: borderColor,
       trackColor: trackColor,
+      thumbColor: thumbColor,
       vsync: vsync,
       textDirection: Directionality.of(context),
     );
@@ -381,6 +390,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
       ..accent = accent
       ..borderColor = borderColor
       ..trackColor = trackColor
+      ..thumbColor = thumbColor
       ..textDirection = Directionality.of(context);
     // Ticker provider cannot change since there's a 1:1 relationship between
     // the _SliderRenderObjectWidget object and the _SliderState object.
@@ -397,6 +407,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
     required Color accent,
     required Color borderColor,
     required Color trackColor,
+    required Color thumbColor,
     required TickerProvider vsync,
     required TextDirection textDirection,
   })  : assert(value >= 0.0 && value <= 1.0),
@@ -406,6 +417,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
         _accent = accent,
         _borderColor = borderColor,
         _trackColor = trackColor,
+        _thumbColor = thumbColor,
         _textDirection = textDirection,
         super(
           additionalConstraints: const BoxConstraints.tightFor(
@@ -488,6 +500,14 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   set trackColor(Color value) {
     if (value == _trackColor) return;
     _trackColor = value;
+    markNeedsPaint();
+  }
+
+  Color get thumbColor => _thumbColor;
+  Color _thumbColor;
+  set thumbColor(Color value) {
+    if (value == _thumbColor) return;
+    _thumbColor = value;
     markNeedsPaint();
   }
 
@@ -716,7 +736,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
 
     canvas.drawRRect(
       rrect,
-      Paint()..color = isInteractive ? ArnaColors.color36 : trackColor,
+      Paint()..color = isInteractive ? thumbColor : trackColor,
     );
   }
 

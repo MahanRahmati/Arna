@@ -1,5 +1,8 @@
 import 'package:arna/arna.dart';
 
+/// Indicator color types.
+enum IndicatorColorType { normal, smart }
+
 /// A circular progress indicator, which spins to indicate that the application
 /// is busy.
 ///
@@ -20,6 +23,7 @@ class ArnaProgressIndicator extends StatefulWidget {
     this.value,
     this.size = Styles.indicatorSize,
     this.accentColor,
+    this.colorType = IndicatorColorType.normal,
   }) : super(key: key);
 
   /// If non-null, the value of this progress indicator.
@@ -37,6 +41,9 @@ class ArnaProgressIndicator extends StatefulWidget {
 
   /// The progress indicator's color.
   final Color? accentColor;
+
+  /// The progress indicator's color type.
+  final Enum colorType;
 
   @override
   _ArnaProgressIndicatorState createState() => _ArnaProgressIndicatorState();
@@ -77,6 +84,14 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
     final double? value = widget.value;
     const pi = 3.1415926535897932;
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    Color indicatorColor = widget.colorType == IndicatorColorType.smart
+        ? ArnaDynamicColor.matchingColor(
+            ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
+            accent,
+            context,
+            blend: true,
+          )
+        : accent;
     return SizedBox(
       height: widget.size,
       width: widget.size,
@@ -85,8 +100,9 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
         builder: (BuildContext context, Widget? child) {
           return CustomPaint(
             painter: _ProgressPainter(
-              color: accent,
-              borderColor: ArnaDynamicColor.borderColor(accent, context),
+              color: indicatorColor,
+              borderColor:
+                  ArnaDynamicColor.borderColor(indicatorColor, context),
               value: widget.value == null
                   ? _controller.value == 0
                       ? 0.001 * 2 * pi

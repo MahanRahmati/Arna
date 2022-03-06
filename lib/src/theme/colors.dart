@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 
 /// Border types.
-enum BorderColorType { normal, switchOff, switchOn, segmented, none }
+enum BorderColorType { normal, dark, none }
 
 /// A palette of [Color] constants that describe colors
 class ArnaColors {
@@ -479,8 +479,15 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     }
   }
 
+  /// Computes the switch background color from [accentColor] by using
+  /// [computeLuminance].
+  static Color switchBackgroundColor(Color accent, bool isOn) {
+    if (isOn) return accent;
+    return accent.computeLuminance() < 0.28 ? ArnaColors.color07 : accent;
+  }
+
   /// Computes the border color from [accentColor] by using
-  /// [computeLuminance], state is used for handling Switch and other states.
+  /// [computeLuminance] and [borderColorType].
   static Color borderColor(
     Color accent,
     BuildContext context, [
@@ -488,16 +495,13 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ]) {
     if (type == BorderColorType.none) return ArnaColors.color00;
     double accentLuminance = accent.computeLuminance();
-    if (type == BorderColorType.switchOff) {
-      return accentLuminance < 0.28 ? ArnaColors.color07 : accent;
-    }
-    if (type == BorderColorType.switchOn) return accent;
+
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
-    if (type == BorderColorType.segmented) {
+    if (type == BorderColorType.dark) {
       switch (brightness) {
         case Brightness.dark:
           return isHighContrastEnabled
@@ -527,15 +531,15 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         return isHighContrastEnabled
             ? ArnaColors.color01
             : accentLuminance > 0.7
-                ? ArnaColors.color30
+                ? ArnaColors.color03
                 : accentLuminance > 0.28
                     ? accent
-                    : ArnaColors.color03;
+                    : ArnaColors.color12;
       case Brightness.dark:
         return isHighContrastEnabled
             ? ArnaColors.color36
             : accentLuminance > 0.7
-                ? ArnaColors.color03
+                ? ArnaColors.color12
                 : accentLuminance > 0.28
                     ? accent
                     : ArnaColors.color30;

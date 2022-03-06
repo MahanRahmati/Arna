@@ -76,7 +76,7 @@ class ArnaButton extends StatelessWidget {
                           ),
                           accent,
                           context,
-                          0.2,
+                          blend: true,
                         ),
           context,
         ),

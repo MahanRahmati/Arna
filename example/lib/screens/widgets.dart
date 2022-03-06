@@ -69,7 +69,7 @@ class _WidgetsState extends State<Widgets> {
                       ),
                       ArnaIconButton(
                         icon: Icons.add_outlined,
-                        buttonType: ButtonType.suggested,
+                        buttonType: ButtonType.colored,
                         onPressed: () => showArnaSnackbar(
                           context: context,
                           message: "Hello There!",

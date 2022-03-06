@@ -2,10 +2,20 @@ import 'package:arna/arna.dart';
 
 typedef ArnaBaseButtonBuilder = Widget Function(
   BuildContext context,
+
+  /// The state when this widget is enabled and can be interacted with.
   bool enabled,
+
+  /// The state when the user drags their mouse cursor over the given widget.
   bool hover,
+
+  /// The state when the user navigates with the keyboard to a given widget.
   bool focused,
+
+  /// The state when the user is actively pressing down on the given widget.
   bool pressed,
+
+  /// The state when this item has been selected.
   bool selected,
 );
 

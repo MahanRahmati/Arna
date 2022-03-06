@@ -1,3 +1,11 @@
+## 0.3.2
+
+- Fixing innerColor function [Thanks to @h1376h]
+- Adding smart color mode to Indicator [Thanks to @h1376h]
+- Fixing borderless colored button's colors [Thanks to @h1376h]
+- Update ArnaBaseButton
+- Update ArnaProgressIndicator
+
 ## 0.3.1
 
 - Fixing icon colors [Thanks to @h1376h]

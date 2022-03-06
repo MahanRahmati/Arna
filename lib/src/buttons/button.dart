@@ -90,18 +90,20 @@ class ArnaButton extends StatelessWidget {
     }
     if (label != null) {
       Widget labelWidget = Flexible(
-        child: Text(
-          label!,
-          style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
-                color: ArnaDynamicColor.resolve(
-                  !enabled
-                      ? ArnaColors.disabledColor
-                      : buttonType == ButtonType.normal
-                          ? ArnaColors.primaryTextColor
-                          : ArnaDynamicColor.innerColor(accent),
-                  context,
+        child: Center(
+          child: Text(
+            label!,
+            style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+                  color: ArnaDynamicColor.resolve(
+                    !enabled
+                        ? ArnaColors.disabledColor
+                        : buttonType == ButtonType.normal
+                            ? ArnaColors.primaryTextColor
+                            : ArnaDynamicColor.innerColor(accent),
+                    context,
+                  ),
                 ),
-              ),
+          ),
         ),
       );
       children.add(labelWidget);

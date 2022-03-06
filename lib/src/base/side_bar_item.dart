@@ -137,27 +137,18 @@ class ArnaSideBarItem extends StatelessWidget {
                           context,
                         ),
                       ),
-                      color: !enabled
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundColor,
-                              context,
-                            )
-                          : pressed
-                              ? ArnaDynamicColor.resolve(
-                                  ArnaColors.buttonPressedColor,
-                                  context,
-                                )
-                              : selected
-                                  ? ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
-                                      context,
-                                    )
-                                  : hover
-                                      ? ArnaDynamicColor.resolve(
-                                          ArnaColors.buttonHoverColor,
-                                          context,
-                                        )
-                                      : ArnaColors.color00,
+                      color: ArnaDynamicColor.resolve(
+                        !enabled
+                            ? ArnaColors.backgroundColor
+                            : pressed
+                                ? ArnaColors.buttonPressedColor
+                                : hover
+                                    ? ArnaColors.buttonHoverColor
+                                    : selected
+                                        ? ArnaColors.buttonColor
+                                        : ArnaColors.sideColor,
+                        context,
+                      ),
                     ),
                     padding: Styles.horizontal,
                     child: _buildChild(context, enabled, selected, accent),

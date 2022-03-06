@@ -57,7 +57,7 @@ class ArnaDrawer extends StatelessWidget {
               curve: Styles.basicCurve,
               clipBehavior: Clip.antiAlias,
               color: ArnaDynamicColor.resolve(
-                ArnaColors.backgroundColor,
+                ArnaColors.sideColor,
                 context,
               ),
               child: child,
@@ -123,11 +123,11 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      value: widget.isDrawerOpen ? 1.0 : 0.0,
       duration: Styles.basicDuration,
       vsync: this,
     );
     _controller.addListener(_animationChanged);
+    if (widget.isDrawerOpen) open();
   }
 
   @override
@@ -143,7 +143,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
       switch (_controller.status) {
         case AnimationStatus.completed:
         case AnimationStatus.dismissed:
-          _controller.value = widget.isDrawerOpen ? 1.0 : 0.0;
+          widget.isDrawerOpen ? open() : close();
           break;
         case AnimationStatus.forward:
         case AnimationStatus.reverse:

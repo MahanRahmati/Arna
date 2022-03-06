@@ -11,6 +11,7 @@ class ArnaSideScaffold extends StatefulWidget {
     this.headerBarLeading,
     this.title,
     this.headerBarTrailing,
+    this.icon,
     required this.items,
     this.onItemSelected,
     this.currentIndex = 0,
@@ -24,6 +25,9 @@ class ArnaSideScaffold extends StatefulWidget {
 
   /// The trailing widget laid out within the header bar.
   final Widget? headerBarTrailing;
+
+  /// The icon widget laid out within the side bar.
+  final Widget? icon;
 
   /// The list of navigation items.
   final List<NavigationItem> items;
@@ -63,6 +67,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
   void onTap(int index) {
     showDrawer = false;
     if (widget.onItemSelected != null) widget.onItemSelected!(index);
+    _drawerOpenedCallback(false);
     setState(() => _currentIndex = index);
     _controller.value = 0;
     _controller.forward().then((value) => null);
@@ -75,15 +80,19 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
   Widget _buildChild() {
     return Column(
       children: [
-        SizedBox(
-          height: Styles.sideBarIconHeight,
-          child: Container(
-            width: Styles.sideBarItemHeight,
-            decoration: const FlutterLogoDecoration(),
+        if (widget.icon != null)
+          SizedBox(
+            height: Styles.sideBarIconHeight,
+            child: SizedBox(
+              height: Styles.sideBarItemHeight,
+              width: Styles.sideBarItemHeight,
+              child: widget.icon,
+            ),
           ),
-        ),
         SizedBox(
-          height: MediaQuery.of(context).size.height - Styles.sideBarIconHeight,
+          height: widget.icon != null
+              ? MediaQuery.of(context).size.height - Styles.sideBarIconHeight
+              : MediaQuery.of(context).size.height,
           child: ListView.builder(
             controller: ScrollController(),
             itemCount: widget.items.length,
@@ -145,8 +154,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                               if (constraints.maxWidth < 644)
                                 ArnaIconButton(
                                   icon: Icons.menu_outlined,
-                                  onPressed: () =>
-                                      _drawerOpenedCallback(!showDrawer),
+                                  onPressed: () => _drawerOpenedCallback(true),
                                 ),
                               if (widget.headerBarLeading != null)
                                 widget.headerBarLeading!,

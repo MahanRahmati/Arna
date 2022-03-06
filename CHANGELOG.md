@@ -10,6 +10,10 @@
 - [Example] Update main page
 - Update ArnaSideScaffold
 - Refactor ArnaSideBarItem
+- Fixing sidebar item color [Thanks to @h1376h]
+- Fixing borderless colored button [Thanks to @h1376h]
+- Update ArnaDrawer
+- Update ArnaPopupDialog
 
 ## 0.2.9
 

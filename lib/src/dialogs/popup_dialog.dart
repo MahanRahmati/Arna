@@ -74,8 +74,8 @@ class _ArnaPopupDialog extends StatelessWidget {
           context: context,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: deviceHeight(context) * 0.77,
-              maxWidth: deviceWidth(context) * 0.77,
+              maxHeight: deviceHeight(context) * 0.84,
+              maxWidth: deviceWidth(context) * 0.84,
             ),
             child: AnimatedContainer(
               duration: Styles.basicDuration,

@@ -112,6 +112,7 @@ class _HomeState extends ConsumerState<Home> {
           )
         : ArnaSideScaffold(
             title: "Arna Demo",
+            icon: Container(decoration: const FlutterLogoDecoration()),
             headerBarTrailing: Row(
               children: [
                 ArnaIconButton(

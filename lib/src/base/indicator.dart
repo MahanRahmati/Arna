@@ -83,7 +83,8 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
   Widget build(BuildContext context) {
     final double? value = widget.value;
     const pi = 3.1415926535897932;
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    Color accent = widget.accentColor ??
+        ArnaDynamicColor.resolve(ArnaTheme.of(context).accentColor, context);
     Color indicatorColor = widget.colorType == IndicatorColorType.smart
         ? ArnaDynamicColor.matchingColor(
             ArnaDynamicColor.resolve(ArnaColors.cardColor, context),

@@ -116,7 +116,8 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
             isFocusable: widget.items[index].isFocusable,
             autofocus: widget.items[index].autofocus,
             accentColor: widget.items[index].accentColor ??
-                ArnaTheme.of(context).accentColor,
+                ArnaDynamicColor.resolve(
+                    ArnaTheme.of(context).accentColor, context),
             cursor: widget.items[index].cursor,
             semanticLabel: widget.items[index].semanticLabel,
           ),

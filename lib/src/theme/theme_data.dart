@@ -3,7 +3,12 @@ import 'package:flutter/foundation.dart';
 
 const _ArnaThemeDefaults _kDefaultTheme = _ArnaThemeDefaults(
   null,
-  ArnaColors.accentColor,
+  ArnaDynamicColor(
+    color: ArnaColors.accentColor,
+    darkColor: ArnaColors.accentColor,
+    darkHighContrastColor: ArnaColors.accentColor,
+    highContrastColor: ArnaColors.accentColor,
+  ),
   _ArnaTextThemeDefaults(ArnaColors.primaryTextColor),
 );
 
@@ -23,7 +28,7 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
   /// Creates a [ArnaTheme] styling specification.
   const ArnaThemeData({
     Brightness? brightness,
-    Color? accentColor,
+    ArnaDynamicColor? accentColor,
     ArnaTextThemeData? textTheme,
   }) : this.raw(brightness, accentColor, textTheme);
 
@@ -34,7 +39,7 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
   @protected
   const ArnaThemeData.raw(
     Brightness? brightness,
-    Color? accentColor,
+    ArnaDynamicColor? accentColor,
     ArnaTextThemeData? textTheme,
   ) : this._rawWithDefaults(
           brightness,
@@ -45,7 +50,7 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
 
   const ArnaThemeData._rawWithDefaults(
     Brightness? brightness,
-    Color? accentColor,
+    ArnaDynamicColor? accentColor,
     ArnaTextThemeData? textTheme,
     this._defaults,
   ) : super(
@@ -57,7 +62,8 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
   final _ArnaThemeDefaults _defaults;
 
   @override
-  Color get accentColor => super.accentColor ?? _defaults.accentColor;
+  ArnaDynamicColor get accentColor =>
+      super.accentColor ?? _defaults.accentColor;
 
   @override
   ArnaTextThemeData get textTheme {
@@ -77,7 +83,8 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
   ArnaThemeData resolveFrom(BuildContext context) {
     return ArnaThemeData._rawWithDefaults(
       brightness,
-      ArnaDynamicColor.maybeResolve(super.accentColor, context),
+      //ArnaDynamicColor.maybeResolve(super.accentColor, context),
+      super.accentColor,
       super.textTheme?.resolveFrom(context),
       _defaults.resolveFrom(context, super.textTheme == null),
     );
@@ -86,7 +93,7 @@ class ArnaThemeData extends NoDefaultArnaThemeData with Diagnosticable {
   @override
   ArnaThemeData copyWith({
     Brightness? brightness,
-    Color? accentColor,
+    ArnaDynamicColor? accentColor,
     ArnaTextThemeData? textTheme,
   }) {
     return ArnaThemeData._rawWithDefaults(
@@ -149,11 +156,11 @@ class NoDefaultArnaThemeData {
   ///    [Brightness] from a [BuildContext], for Arna widgets.
   final Brightness? brightness;
 
-  /// A color used on interactive elements of the theme.
+  /// A color used on interactive elements of the light theme.
   ///
   /// This color is generally used on tappable elements.
   /// Defaults to [ArnaColors.accentColor].
-  final Color? accentColor;
+  final ArnaDynamicColor? accentColor;
 
   /// Text styles used by Arna widgets.
   final ArnaTextThemeData? textTheme;
@@ -171,10 +178,11 @@ class NoDefaultArnaThemeData {
   NoDefaultArnaThemeData resolveFrom(BuildContext context) {
     return NoDefaultArnaThemeData(
       brightness: brightness,
-      accentColor: ArnaDynamicColor.maybeResolve(
+      accentColor: accentColor,
+      /*ArnaDynamicColor.maybeResolve(
         accentColor,
         context,
-      ),
+      ),*/
       textTheme: textTheme?.resolveFrom(context),
     );
   }
@@ -187,7 +195,7 @@ class NoDefaultArnaThemeData {
   /// different [accentColor] will also change the copy's implied [textTheme].
   NoDefaultArnaThemeData copyWith({
     Brightness? brightness,
-    Color? accentColor,
+    ArnaDynamicColor? accentColor,
     ArnaTextThemeData? textTheme,
   }) {
     return NoDefaultArnaThemeData(
@@ -207,13 +215,13 @@ class _ArnaThemeDefaults {
   );
 
   final Brightness? brightness;
-  final Color accentColor;
+  final ArnaDynamicColor accentColor;
   final _ArnaTextThemeDefaults textThemeDefaults;
 
   _ArnaThemeDefaults resolveFrom(BuildContext context, bool resolveTextTheme) {
     return _ArnaThemeDefaults(
       brightness,
-      ArnaDynamicColor.resolve(accentColor, context),
+      accentColor, //ArnaDynamicColor.resolve(accentColor, context),
       resolveTextTheme
           ? textThemeDefaults.resolveFrom(context)
           : textThemeDefaults,

@@ -123,7 +123,9 @@ class ArnaButton extends StatelessWidget {
         accent = ArnaColors.accentColor;
         break;
       default:
-        accent = accentColor ?? ArnaTheme.of(context).accentColor;
+        accent = accentColor ??
+            ArnaDynamicColor.resolve(
+                ArnaTheme.of(context).accentColor, context);
     }
 
     return Padding(

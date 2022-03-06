@@ -248,7 +248,8 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    Color accent = widget.accentColor ??
+        ArnaDynamicColor.resolve(ArnaTheme.of(context).accentColor, context);
     return Padding(
       padding: Styles.normal,
       child: MergeSemantics(

@@ -293,7 +293,8 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    Color accent = widget.accentColor ??
+        ArnaDynamicColor.resolve(ArnaTheme.of(context).accentColor, context);
     return Padding(
       padding: Styles.small,
       child: FocusableActionDetector(

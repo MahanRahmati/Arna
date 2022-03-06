@@ -95,7 +95,9 @@ class _ArnaBannerState extends State<ArnaBanner>
         icon = Icons.check_circle;
         break;
       case BannerType.colored:
-        accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+        accent = widget.accentColor ??
+            ArnaDynamicColor.resolve(
+                ArnaTheme.of(context).accentColor, context);
         break;
       default:
         accent = ArnaColors.accentColor;

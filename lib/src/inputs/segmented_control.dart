@@ -101,7 +101,8 @@ class _ArnaSegmentedControlState<T extends Object>
 
   Widget _buildChild() {
     List<Widget> children = [];
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    Color accent = widget.accentColor ??
+        ArnaDynamicColor.resolve(ArnaTheme.of(context).accentColor, context);
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
     int index = 0;
     for (final T currentKey in widget.children.keys) {
@@ -132,7 +133,8 @@ class _ArnaSegmentedControlState<T extends Object>
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    Color accent = widget.accentColor ??
+        ArnaDynamicColor.resolve(ArnaTheme.of(context).accentColor, context);
     return Padding(
       padding: Styles.small,
       child: Container(

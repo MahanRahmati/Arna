@@ -28,7 +28,9 @@ class ArnaBadge extends StatelessWidget {
         curve: Styles.basicCurve,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: accentColor ?? ArnaTheme.of(context).accentColor,
+          color: accentColor ??
+              ArnaDynamicColor.resolve(
+                  ArnaTheme.of(context).accentColor, context),
         ),
         padding: Styles.horizontal,
         child: Row(
@@ -38,9 +40,9 @@ class ArnaBadge extends StatelessWidget {
               child: Text(
                 label,
                 style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
-                      color: ArnaDynamicColor.innerColor(
-                        accentColor ?? ArnaTheme.of(context).accentColor,
-                      ),
+                      color: ArnaDynamicColor.innerColor(accentColor ??
+                          ArnaDynamicColor.resolve(
+                              ArnaTheme.of(context).accentColor, context)),
                     ),
               ),
             ),

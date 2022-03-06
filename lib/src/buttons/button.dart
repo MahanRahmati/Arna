@@ -164,14 +164,17 @@ class ArnaButton extends StatelessWidget {
                       )
                     : focused
                         ? ArnaColors.borderColor
-                        : ArnaColors.color00,
+                        : ArnaDynamicColor.resolve(
+                            ArnaColors.buttonColor,
+                            context,
+                          ).withAlpha(0),
               ),
               color: !enabled
                   ? ArnaDynamicColor.resolve(
                       ArnaColors.backgroundColor,
                       context,
                     )
-                  : buttonType == ButtonType.normal
+                  : buttonType == ButtonType.normal || !hasBorder
                       ? pressed
                           ? ArnaDynamicColor.resolve(
                               ArnaColors.buttonPressedColor,
@@ -197,9 +200,7 @@ class ArnaButton extends StatelessWidget {
                               ? ArnaDynamicColor.colorBlender(accent, 28)
                               : focused
                                   ? ArnaDynamicColor.colorBlender(accent, 28)
-                                  : hasBorder
-                                      ? accent
-                                      : ArnaColors.color00,
+                                  : accent,
             ),
             padding: icon != null
                 ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)

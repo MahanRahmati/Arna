@@ -427,9 +427,10 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color iconColor(
     Color backgroundColor,
     Color accent,
-    BuildContext context, [
-    double maximumDelta = 0.15,
-  ]) {
+    BuildContext context, {
+    double maximumDelta = 0.2,
+    bool blend = false,
+  }) {
     double colorLuminance = backgroundColor.computeLuminance();
     double accentLuminance = accent.computeLuminance();
     double delta = (colorLuminance >= accentLuminance)
@@ -440,19 +441,43 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
-    switch (brightness) {
-      case Brightness.light:
-        return isHighContrastEnabled
-            ? ArnaColors.color01
-            : delta < maximumDelta
-                ? ArnaColors.color07
-                : accent;
-      case Brightness.dark:
-        return isHighContrastEnabled
-            ? ArnaColors.color36
-            : delta < maximumDelta
-                ? ArnaColors.color30
-                : accent;
+    if (!blend) {
+      switch (brightness) {
+        case Brightness.light:
+          return isHighContrastEnabled
+              ? ArnaColors.color01
+              : delta < maximumDelta
+                  ? ArnaColors.color07
+                  : accent;
+        case Brightness.dark:
+          return isHighContrastEnabled
+              ? ArnaColors.color36
+              : delta < maximumDelta
+                  ? ArnaColors.color30
+                  : accent;
+      }
+    } else {
+      int percentage = (100 - 100 * delta) ~/ 2;
+      switch (brightness) {
+        case Brightness.light:
+          Color secondColor = ArnaColors.color01;
+          int r =
+              accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
+          int g = accent.green +
+              percentage * (secondColor.green - accent.green) ~/ 100;
+          int b = accent.blue +
+              percentage * (secondColor.blue - accent.blue) ~/ 100;
+          return Color.fromRGBO(r, g, b, 1.0);
+        case Brightness.dark:
+          Color secondColor = ArnaColors.color36;
+          int r =
+              accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
+          int g = accent.green +
+              percentage * (secondColor.green - accent.green) ~/ 100;
+          int b = accent.blue +
+              percentage * (secondColor.blue - accent.blue) ~/ 100;
+          return Color.fromRGBO(r, g, b, 1.0);
+      }
     }
   }
 

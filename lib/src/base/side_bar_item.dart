@@ -80,7 +80,9 @@ class ArnaSideBarItem extends StatelessWidget {
                                 context,
                               ),
                               accent,
-                              context)
+                              context,
+                              blend: false,
+                            )
                           : ArnaColors.iconColor,
                   context,
                 ),
@@ -173,6 +175,7 @@ class ArnaSideBarItem extends StatelessWidget {
                     ),
                     accent,
                     context,
+                    blend: true,
                   ),
                 ),
               ),

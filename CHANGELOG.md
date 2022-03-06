@@ -5,6 +5,8 @@
 - Fixing borderless colored button's colors [Thanks to @h1376h]
 - Update ArnaBaseButton
 - Update ArnaProgressIndicator
+- Making indicator's border more visible [Thanks to @h1376h]
+- Update ArnaTextField
 
 ## 0.3.1
 

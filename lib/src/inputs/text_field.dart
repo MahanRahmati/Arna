@@ -114,6 +114,7 @@ class ArnaTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color accent = ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: Material(
@@ -157,7 +158,7 @@ class ArnaTextField extends StatelessWidget {
           enabled: enabled,
           cursorWidth: Styles.cursorWidth,
           cursorRadius: const Radius.circular(Styles.cursorRadius),
-          cursorColor: ArnaColors.accentColor,
+          cursorColor: accent,
           keyboardAppearance: keyboardAppearance,
           dragStartBehavior: dragStartBehavior,
           enableInteractiveSelection: enableInteractiveSelection,
@@ -226,7 +227,7 @@ class ArnaTextField extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,
-              borderSide: const BorderSide(color: ArnaColors.accentColor),
+              borderSide: BorderSide(color: accent),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: Styles.borderRadius,

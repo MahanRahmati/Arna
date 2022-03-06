@@ -1,3 +1,12 @@
+## 0.3.1
+
+- Fixing icon colors [Thanks to @h1376h]
+- Update ArnaDrawer
+- Update ArnaBanner
+- Fixing slider's thumb color [Thanks to @h1376h]
+- Update ArnaProgressIndicator
+- Fixing segmented control border color [Thanks to @h1376h]
+
 ## 0.3.0
 
 - Fixing border in checkbox and radio [Thanks to @h1376h]

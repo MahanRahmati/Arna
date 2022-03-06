@@ -152,6 +152,12 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
     }
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   // The animation controller's state is our build state, and it changed already.
   void _animationChanged() => setState(() {});
 

@@ -102,9 +102,6 @@ class _ArnaSegmentedControlState<T extends Object>
   Widget _buildChild() {
     List<Widget> children = [];
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    Color border = (ArnaTheme.of(context).brightness == Brightness.light)
-        ? ArnaColors.color35
-        : ArnaColors.color08;
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
     int index = 0;
     for (final T currentKey in widget.children.keys) {
@@ -119,7 +116,7 @@ class _ArnaSegmentedControlState<T extends Object>
           last: last,
           accentColor: accent,
           borderColor: ArnaDynamicColor.matchingColor(
-            border,
+            ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
             accent,
             context,
             blend: true,
@@ -144,7 +141,10 @@ class _ArnaSegmentedControlState<T extends Object>
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
           color: ArnaDynamicColor.borderColor(
-              accent, context, BorderColorType.segmented),
+            accent,
+            context,
+            BorderColorType.segmented,
+          ),
         ),
         child: _buildChild(),
       ),

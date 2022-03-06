@@ -36,7 +36,47 @@ class ArnaBanner extends StatefulWidget {
   _ArnaBannerState createState() => _ArnaBannerState();
 }
 
-class _ArnaBannerState extends State<ArnaBanner> {
+class _ArnaBannerState extends State<ArnaBanner>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _expandAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      vsync: this,
+    );
+    _expandAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: Styles.basicCurve,
+    );
+    if (widget.showBanner) _controller.forward();
+  }
+
+  @override
+  void didUpdateWidget(ArnaBanner oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.showBanner != oldWidget.showBanner) {
+      switch (_controller.status) {
+        case AnimationStatus.completed:
+        case AnimationStatus.dismissed:
+          widget.showBanner ? _controller.forward() : _controller.reverse();
+          break;
+        case AnimationStatus.forward:
+        case AnimationStatus.reverse:
+          break;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   Widget _buildChild() {
     final List<Widget> children = [];
     Color accent;
@@ -124,22 +164,24 @@ class _ArnaBannerState extends State<ArnaBanner> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.showBanner
-        ? Column(
-            children: [
-              AnimatedContainer(
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                color: ArnaDynamicColor.resolve(
-                  ArnaColors.headerColor,
-                  context,
-                ),
-                padding: Styles.tilePadding,
-                child: _buildChild(),
-              ),
-              if (widget.showBanner) const ArnaHorizontalDivider(),
-            ],
-          )
-        : const SizedBox.shrink();
+    return SizeTransition(
+      axisAlignment: 1,
+      sizeFactor: _expandAnimation,
+      child: Column(
+        children: [
+          AnimatedContainer(
+            duration: Styles.basicDuration,
+            curve: Styles.basicCurve,
+            color: ArnaDynamicColor.resolve(
+              ArnaColors.headerColor,
+              context,
+            ),
+            padding: Styles.tilePadding,
+            child: _buildChild(),
+          ),
+          if (widget.showBanner) const ArnaHorizontalDivider(),
+        ],
+      ),
+    );
   }
 }

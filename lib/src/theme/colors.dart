@@ -1,6 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
-import 'dart:math' as math;
 
 /// Border types.
 enum BorderColorType { normal, switchOff, switchOn, segmented, none }
@@ -409,14 +410,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// [computeLuminance], state is used for handling Switch.
   static Color innerColor(Color backgroundColor, [int state = 2]) {
     double colorLuminance = backgroundColor.computeLuminance();
-    if (state == 0) {
-      return ArnaColors.color36;
-    }
+    if (state == 0) return ArnaColors.color36;
     return colorLuminance > 0.7
         ? ArnaColors.color01
-        : colorLuminance > 0.5
+        : colorLuminance > 0.49
             ? ArnaColors.color07
-            : colorLuminance > 0.3
+            : colorLuminance > 0.28
                 ? ArnaColors.color34
                 : ArnaColors.color36;
   }
@@ -427,7 +426,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Color backgroundColor,
     Color accent,
     BuildContext context, {
-    double maximumDelta = 0.2,
+    double maximumDelta = 0.21,
     bool blend = false,
   }) {
     double colorLuminance = backgroundColor.computeLuminance();
@@ -456,7 +455,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                   : accent;
       }
     } else {
-      if (delta > 0.25) return accent;
+      if (delta > 0.28) return accent;
       int percentage = (100 - 100 * delta) ~/ 2;
       switch (brightness) {
         case Brightness.light:
@@ -483,15 +482,17 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 
   /// Computes the border color from [accentColor] by using
   /// [computeLuminance], state is used for handling Switch and other states.
-  static Color borderColor(Color accent, BuildContext context,
-      [Enum type = BorderColorType.normal]) {
+  static Color borderColor(
+    Color accent,
+    BuildContext context, [
+    Enum type = BorderColorType.normal,
+  ]) {
     if (type == BorderColorType.none) return ArnaColors.color00;
     double accentLuminance = accent.computeLuminance();
     if (type == BorderColorType.switchOff) {
-      return accentLuminance < 0.3 ? ArnaColors.color07 : accent;
+      return accentLuminance < 0.28 ? ArnaColors.color07 : accent;
     }
     if (type == BorderColorType.switchOn) return accent;
-
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
@@ -503,21 +504,21 @@ class ArnaDynamicColor extends Color with Diagnosticable {
           return isHighContrastEnabled
               ? ArnaColors.color01
               : accentLuminance > 0.7
-                  ? ArnaColors.color04 //36
-                  : accentLuminance > 0.5
-                      ? ArnaColors.color03 //34
-                      : accentLuminance > 0.3
-                          ? ArnaColors.color02 //07
+                  ? ArnaColors.color04
+                  : accentLuminance > 0.49
+                      ? ArnaColors.color03
+                      : accentLuminance > 0.28
+                          ? ArnaColors.color02
                           : ArnaColors.color05;
         case Brightness.light:
           return isHighContrastEnabled
               ? ArnaColors.color36
               : accentLuminance > 0.7
-                  ? ArnaColors.color26 //36
-                  : accentLuminance > 0.5
-                      ? ArnaColors.color28 //34
-                      : accentLuminance > 0.3
-                          ? ArnaColors.color30 //07
+                  ? ArnaColors.color26
+                  : accentLuminance > 0.49
+                      ? ArnaColors.color28
+                      : accentLuminance > 0.28
+                          ? ArnaColors.color30
                           : ArnaColors.color32;
       }
     }
@@ -528,7 +529,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             ? ArnaColors.color01
             : accentLuminance > 0.7
                 ? ArnaColors.color30
-                : accentLuminance > 0.3
+                : accentLuminance > 0.28
                     ? accent
                     : ArnaColors.color03;
       case Brightness.dark:
@@ -536,7 +537,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             ? ArnaColors.color36
             : accentLuminance > 0.7
                 ? ArnaColors.color03
-                : accentLuminance > 0.3
+                : accentLuminance > 0.28
                     ? accent
                     : ArnaColors.color30;
     }
@@ -547,10 +548,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Color firstColor = ArnaColors.color36;
     double accentLuminance = accent.computeLuminance();
     Color secondColor =
-        accentLuminance > 0.5 ? ArnaColors.color01 : ArnaColors.color36;
-    if (value > min) {
-      return secondColor;
-    }
+        accentLuminance > 0.49 ? ArnaColors.color01 : ArnaColors.color36;
+    if (value > min) return secondColor;
     return firstColor;
   }
 
@@ -560,7 +559,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     int percentage, {
     bool isBorder = false,
   }) {
-    Color secondColor = color.computeLuminance() > 0.5
+    Color secondColor = color.computeLuminance() > 0.49
         ? isBorder
             ? ArnaColors.color36
             : ArnaColors.color01

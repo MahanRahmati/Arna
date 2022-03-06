@@ -76,6 +76,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
   Widget build(BuildContext context) {
     final double? value = widget.value;
     const pi = 3.1415926535897932;
+    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return SizedBox(
       height: widget.size,
       width: widget.size,
@@ -84,7 +85,8 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
         builder: (BuildContext context, Widget? child) {
           return CustomPaint(
             painter: _ProgressPainter(
-              color: widget.accentColor ?? ArnaTheme.of(context).accentColor,
+              color: accent,
+              borderColor: ArnaDynamicColor.borderColor(accent, context),
               value: widget.value == null
                   ? _controller.value == 0
                       ? 0.001 * 2 * pi
@@ -101,11 +103,13 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
 
 class _ProgressPainter extends CustomPainter {
   final Color color;
+  final Color borderColor;
   final double value;
   final bool offset;
 
   _ProgressPainter({
     required this.color,
+    required this.borderColor,
     required this.value,
     required this.offset,
   });
@@ -113,6 +117,17 @@ class _ProgressPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: size.width / 4),
+      (3.1415926535897932) * 1.5 + (offset ? value : 0),
+      value,
+      false,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round
+        ..color = borderColor
+        ..strokeWidth = (size.width / 8) + 2,
+    );
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: size.width / 4),
       (3.1415926535897932) * 1.5 + (offset ? value : 0),

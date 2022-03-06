@@ -104,6 +104,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
               borderColor: ArnaDynamicColor.borderColor(
                 indicatorColor,
                 context,
+                BorderColorType.segmented,
               ),
               value: widget.value == null
                   ? _controller.value == 0

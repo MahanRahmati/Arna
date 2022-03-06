@@ -74,7 +74,7 @@ class ArnaSideBarItem extends StatelessWidget {
                   !enabled
                       ? ArnaColors.disabledColor
                       : selected
-                          ? ArnaDynamicColor.iconColor(
+                          ? ArnaDynamicColor.matchingColor(
                               ArnaDynamicColor.resolve(
                                 ArnaColors.buttonColor,
                                 context,
@@ -168,7 +168,7 @@ class ArnaSideBarItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: ArnaDynamicColor.iconColor(
+                  color: ArnaDynamicColor.matchingColor(
                     ArnaDynamicColor.resolve(
                       ArnaColors.buttonColor,
                       context,

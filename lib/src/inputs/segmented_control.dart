@@ -78,7 +78,7 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   /// widget rebuilds the segmented control with the new [groupValue].
   final ValueChanged<T> onValueChanged;
 
-  /// The color of the item's focused border.
+  /// The color of the item's focused background color.
   final Color? accentColor;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
@@ -101,6 +101,10 @@ class _ArnaSegmentedControlState<T extends Object>
 
   Widget _buildChild() {
     List<Widget> children = [];
+    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    Color border = (ArnaTheme.of(context).brightness == Brightness.light)
+        ? ArnaColors.color35
+        : ArnaColors.color08;
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
     int index = 0;
     for (final T currentKey in widget.children.keys) {
@@ -113,7 +117,13 @@ class _ArnaSegmentedControlState<T extends Object>
           onPressed: () => _onPressed(currentKey),
           first: first,
           last: last,
-          accentColor: widget.accentColor ?? ArnaTheme.of(context).accentColor,
+          accentColor: accent,
+          borderColor: ArnaDynamicColor.matchingColor(
+            border,
+            accent,
+            context,
+            blend: true,
+          ),
           cursor: widget.cursor,
         ),
       );
@@ -125,6 +135,7 @@ class _ArnaSegmentedControlState<T extends Object>
 
   @override
   Widget build(BuildContext context) {
+    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: Container(
@@ -132,7 +143,8 @@ class _ArnaSegmentedControlState<T extends Object>
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+          color: ArnaDynamicColor.borderColor(
+              accent, context, BorderColorType.segmented),
         ),
         child: _buildChild(),
       ),
@@ -149,6 +161,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
     required this.first,
     required this.last,
     required this.accentColor,
+    required this.borderColor,
     required this.cursor,
   }) : super(key: key);
 
@@ -158,6 +171,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   final bool first;
   final bool last;
   final Color accentColor;
+  final Color borderColor;
   final MouseCursor cursor;
 
   Widget _buildChild(BuildContext context, bool enabled, bool selected) {
@@ -202,9 +216,11 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                   ? const Radius.circular(Styles.borderRadiusSize - 1)
                   : const Radius.circular(0),
             ),
-            border: focused
-                ? Border.all(color: accentColor)
-                : Border.all(color: ArnaColors.color00),
+            border: selected
+                ? Border.all(color: borderColor)
+                : focused
+                    ? Border.all(color: accentColor)
+                    : Border.all(color: ArnaColors.color00),
             color: ArnaDynamicColor.resolve(
               selected
                   ? pressed

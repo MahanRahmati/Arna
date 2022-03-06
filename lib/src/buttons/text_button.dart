@@ -8,6 +8,7 @@ class ArnaTextButton extends StatelessWidget {
     required this.onPressed,
     this.tooltipMessage,
     this.buttonType = ButtonType.normal,
+    this.buttonSize = ButtonSize.normal,
     this.isFocusable = true,
     this.autofocus = false,
     this.hasBorder = true,
@@ -27,6 +28,9 @@ class ArnaTextButton extends StatelessWidget {
 
   /// The type of the button.
   final ButtonType buttonType;
+
+  /// The size of the button.
+  final ButtonSize buttonSize;
 
   /// Whether this button is focusable or not.
   final bool isFocusable;
@@ -55,6 +59,7 @@ class ArnaTextButton extends StatelessWidget {
       onPressed: onPressed,
       tooltipMessage: tooltipMessage,
       buttonType: buttonType,
+      buttonSize: buttonSize,
       isFocusable: isFocusable,
       autofocus: autofocus,
       hasBorder: hasBorder,

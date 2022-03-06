@@ -2,6 +2,9 @@ import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:math' as math;
 
+/// Border types.
+enum BorderColorType { normal, switchOff, switchOn, segmented, none }
+
 /// A palette of [Color] constants that describe colors
 class ArnaColors {
   // This class is not meant to be instantiated or extended; this constructor
@@ -418,9 +421,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.color36;
   }
 
-  /// Computes the icon color from [backgroundColor] and [accentColor] by using
-  /// [computeLuminance] and getting [maximumDelta].
-  static Color iconColor(
+  /// Computes the color that matches with [backgroundColor] and [accentColor]
+  /// by using [computeLuminance] and getting [maximumDelta].
+  static Color matchingColor(
     Color backgroundColor,
     Color accent,
     BuildContext context, {
@@ -453,6 +456,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                   : accent;
       }
     } else {
+      if (delta > 0.25) return accent;
       int percentage = (100 - 100 * delta) ~/ 2;
       switch (brightness) {
         case Brightness.light:
@@ -480,21 +484,43 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// Computes the border color from [accentColor] by using
   /// [computeLuminance], state is used for handling Switch and other states.
   static Color borderColor(Color accent, BuildContext context,
-      [int state = 2]) {
+      [Enum type = BorderColorType.normal]) {
+    if (type == BorderColorType.none) return ArnaColors.color00;
     double accentLuminance = accent.computeLuminance();
+    if (type == BorderColorType.switchOff) {
+      return accentLuminance < 0.3 ? ArnaColors.color07 : accent;
+    }
+    if (type == BorderColorType.switchOn) return accent;
+
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
-    if (state < 2) {
-      return (state == 0)
-          ? (accentLuminance < 0.3)
-              ? ArnaColors.color07
-              : accent
-          : accent;
+    if (type == BorderColorType.segmented) {
+      switch (brightness) {
+        case Brightness.dark:
+          return isHighContrastEnabled
+              ? ArnaColors.color01
+              : accentLuminance > 0.7
+                  ? ArnaColors.color04 //36
+                  : accentLuminance > 0.5
+                      ? ArnaColors.color03 //34
+                      : accentLuminance > 0.3
+                          ? ArnaColors.color02 //07
+                          : ArnaColors.color05;
+        case Brightness.light:
+          return isHighContrastEnabled
+              ? ArnaColors.color36
+              : accentLuminance > 0.7
+                  ? ArnaColors.color26 //36
+                  : accentLuminance > 0.5
+                      ? ArnaColors.color28 //34
+                      : accentLuminance > 0.3
+                          ? ArnaColors.color30 //07
+                          : ArnaColors.color32;
+      }
     }
-    if (state == 3) return ArnaColors.color00;
 
     switch (brightness) {
       case Brightness.light:

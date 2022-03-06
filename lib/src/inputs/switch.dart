@@ -125,7 +125,9 @@ class ArnaSwitch extends StatelessWidget {
                               ? ArnaDynamicColor.borderColor(
                                   accent,
                                   context,
-                                  value ? 1 : 0,
+                                  value
+                                      ? BorderColorType.switchOn
+                                      : BorderColorType.switchOff,
                                 )
                               : hover
                                   ? ArnaColors.buttonHoverColor
@@ -162,10 +164,7 @@ class ArnaSwitch extends StatelessWidget {
                                       context,
                                     )
                                   : ArnaDynamicColor.borderColor(
-                                      accent,
-                                      context,
-                                      3,
-                                    ),
+                                      accent, context, BorderColorType.none),
                     ),
                     color: ArnaDynamicColor.resolve(
                       !enabled

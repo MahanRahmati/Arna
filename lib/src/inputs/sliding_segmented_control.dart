@@ -1,15 +1,9 @@
-// Copyright 2014 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'dart:math' as math;
 import 'package:arna/arna.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
-
-// Extracted from https://developer.apple.com/design/resources/.
 
 // Minimum padding from edges of the segmented control to edges of
 // encompassing widget.
@@ -78,25 +72,13 @@ class _Segment<T> extends StatefulWidget {
     required this.child,
     required this.pressed,
     required this.highlighted,
-    required this.hovered,
-    this.isFocusable = true,
-    this.autoFocus = false,
-    this.mouseCursor = MouseCursor.defer,
+    this.mouseCursor = SystemMouseCursors.click,
     required this.isDragging,
   }) : super(key: key);
 
   final Widget child;
-
   final bool pressed;
   final bool highlighted;
-  final bool hovered;
-
-  /// Whether this segment is focusable or not.
-  final bool isFocusable;
-
-  /// Whether this segment should focus itself if nothing
-  /// else is already focused.
-  final bool autoFocus;
 
   /// The cursor for a mouse pointer when it enters or is hovering over
   /// the segment
@@ -115,7 +97,6 @@ class _Segment<T> extends StatefulWidget {
 
 class _SegmentState<T> extends State<_Segment<T>>
     with TickerProviderStateMixin<_Segment<T>> {
-  FocusNode? focusNode;
   late final AnimationController highlightPressScaleController;
   late Animation<double> highlightPressScaleAnimation;
 
@@ -127,9 +108,6 @@ class _SegmentState<T> extends State<_Segment<T>>
       value: widget.shouldScaleContent ? 1 : 0,
       vsync: this,
     );
-
-    focusNode = FocusNode(canRequestFocus: true);
-    if (widget.autoFocus) focusNode!.requestFocus();
 
     highlightPressScaleAnimation = highlightPressScaleController.drive(
       Tween<double>(begin: 1.0, end: _kMinThumbScale),
@@ -330,6 +308,9 @@ class ArnaSlidingSegmentedControl<T> extends StatefulWidget {
     required this.onValueChanged,
     required this.groupValue,
     this.thumbColor,
+    this.isFocusable = true,
+    this.autoFocus = false,
+    this.mouseCursor = SystemMouseCursors.click,
     this.padding = _kHorizontalItemPadding,
     this.backgroundColor =
         ArnaColors.backgroundColor, //TODO ArnaColors.tertiarySystemFill,
@@ -354,6 +335,17 @@ class ArnaSlidingSegmentedControl<T> extends StatefulWidget {
   /// This must be one of the keys in the [Map] of [children].
   /// If this attribute is null, no widget will be initially selected.
   final T? groupValue;
+
+  /// Whether this segment is focusable or not.
+  final bool isFocusable;
+
+  /// Whether this segment should focus itself if nothing
+  /// else is already focused.
+  final bool autoFocus;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over
+  /// the sliding segmented control
+  final MouseCursor mouseCursor;
 
   /// The callback that is called when a new option is tapped.
   ///
@@ -427,6 +419,7 @@ class ArnaSlidingSegmentedControl<T> extends StatefulWidget {
 
 class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
     with TickerProviderStateMixin<ArnaSlidingSegmentedControl<T>> {
+  FocusNode? focusNode;
   late final AnimationController thumbController = AnimationController(
       duration: _kSpringAnimationDuration, value: 0, vsync: this);
   Animatable<Rect?>? thumbAnimatable;
@@ -436,10 +429,24 @@ class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
   late Animation<double> thumbScaleAnimation =
       thumbScaleController.drive(Tween<double>(begin: 1, end: _kMinThumbScale));
 
+  final PointerDownEvent tesss = PointerDownEvent();
   final TapGestureRecognizer tap = TapGestureRecognizer();
   final HorizontalDragGestureRecognizer drag =
       HorizontalDragGestureRecognizer();
   final LongPressGestureRecognizer longPress = LongPressGestureRecognizer();
+  bool isHovered = false;
+  bool isFocused = false;
+
+  void _handleFocus(focus) {
+    if (focus != isFocused && mounted) setState(() => isFocused = focus);
+  }
+
+  void _handleFocusChange(bool hasFocus) {
+    setState(() {
+      isFocused = hasFocus;
+      //if (!hasFocus) _pressed = false; //TODO!
+    });
+  }
 
   @override
   void initState() {
@@ -459,6 +466,9 @@ class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
       ..onCancel = onCancel;
 
     tap.onTapUp = onTapUp;
+
+    focusNode = FocusNode(canRequestFocus: true);
+    if (widget.autoFocus) focusNode!.requestFocus();
 
     // Empty callback to enable the long press recognizer.
     longPress.onLongPress = () {};
@@ -567,7 +577,11 @@ class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
     thumbAnimatable = null;
   }
 
-  void onHoverChangedByGesture(T newValue) {
+  void onHoverChangedByGesture(bool i, T newValue) {
+    if (i != isHovered && mounted)
+      setState(() {
+        isHovered = i;
+      });
     if (hovered == newValue) return;
     setState(() {
       hovered = newValue;
@@ -586,6 +600,14 @@ class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
     if (pressed != newValue) {
       setState(() {
         pressed = newValue;
+      });
+    }
+  }
+
+  void onHoveredChangedByGesture(T? newValue) {
+    if (hovered != newValue) {
+      setState(() {
+        hovered = newValue;
       });
     }
   }
@@ -677,14 +699,15 @@ class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
     int? highlightedIndex;
     int? hoveredIndex;
     for (final MapEntry<T, String> entry in widget.children.entries) {
-      final bool isHighlighted = highlighted == entry.key;
-      final bool isPressed = pressed == entry.key;
-      final bool isHovered = hovered == entry.key;
-      if (isHighlighted) {
+      final bool segmentIsHighlighted = highlighted == entry.key;
+      final bool segmentIsPressed = pressed == entry.key;
+      final bool segmentIsHovered = hovered == entry.key;
+
+      if (segmentIsHighlighted) {
         highlightedIndex = index;
       }
-      if (isHovered) {
-        hoveredIndex = index;
+      if (segmentIsHovered) {
+        (isHovered) ? hoveredIndex = index : hoveredIndex = null;
       }
 
       if (index != 0) {
@@ -693,12 +716,14 @@ class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
             // Let separators be TextDirection-invariant. If the TextDirection
             // changes, the separators should mostly stay where they were.
             key: ValueKey<int>(index),
-            highlighted: isPreviousSegmentHighlighted || isHighlighted,
+            highlighted: isPreviousSegmentHighlighted || segmentIsHighlighted,
             hovered: isPreviousSegmentHovered || isHovered,
           ),
         );
       }
 
+      TextStyle baseButtonStyle =
+          ArnaTheme.of(context).textTheme.buttonTextStyle;
       children.add(
         Semantics(
           button: true,
@@ -707,49 +732,57 @@ class _SegmentedControlState<T> extends State<ArnaSlidingSegmentedControl<T>>
           },
           inMutuallyExclusiveGroup: true,
           selected: widget.groupValue == entry.key,
-          child: _Segment<T>(
-            key: ValueKey<T>(entry.key),
-            highlighted: isHighlighted,
-            hovered: isHovered,
-            pressed: isPressed,
-            isDragging: isThumbDragging,
-            child: (isHighlighted)
-                ? Text(
-                    entry.value,
-                    style: ArnaTheme.of(context)
-                        .textTheme
-                        .buttonTextStyle
-                        .copyWith(
-                          color: ArnaDynamicColor.resolve(
-                            ArnaDynamicColor.innerColor(
-                              widget.thumbColor ??
-                                  ArnaDynamicColor.resolve(
-                                      ArnaTheme.of(context).accentColor,
-                                      context),
-                            ),
-                            context,
+          child: FocusableActionDetector(
+            enabled: true,
+            focusNode: focusNode,
+            autofocus: widget.autoFocus,
+            mouseCursor: widget.mouseCursor,
+            onShowHoverHighlight: (bool i) => setState(() {
+              return onHoverChangedByGesture(i, entry.key);
+            }),
+            onShowFocusHighlight: _handleFocus,
+            onFocusChange: _handleFocusChange,
+            //actions: _actions,
+            //shortcuts: _shortcuts,
+            child: _Segment<T>(
+              key: ValueKey<T>(entry.key),
+              highlighted: segmentIsHighlighted,
+              pressed: segmentIsPressed,
+              isDragging: isThumbDragging,
+              child: (segmentIsHighlighted)
+                  ? Text(
+                      entry.value,
+                      style: baseButtonStyle.copyWith(
+                        color: ArnaDynamicColor.resolve(
+                          ArnaDynamicColor.innerColor(
+                            widget.thumbColor ??
+                                ArnaDynamicColor.resolve(
+                                    ArnaTheme.of(context).accentColor, context),
                           ),
+                          context,
                         ),
-                  )
-                : Text(
-                    entry.value,
-                    style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
-                          color: ArnaDynamicColor.resolve(
-                            ArnaColors.primaryTextColor,
-                            context,
-                          ),
+                      ),
+                    )
+                  : Text(
+                      entry.value,
+                      style: baseButtonStyle.copyWith(
+                        color: ArnaDynamicColor.resolve(
+                          ArnaColors.primaryTextColor,
+                          context,
                         ),
-                  ),
+                      ),
+                    ),
+            ),
           ),
         ),
       );
 
       index += 1;
-      isPreviousSegmentHighlighted = isHighlighted;
+      isPreviousSegmentHighlighted = segmentIsHighlighted;
       isPreviousSegmentHovered = isHovered;
     }
 
-    assert((hoveredIndex == null) == (hovered == null));
+    assert((hoveredIndex == null) == (isHovered == false));
     assert((highlightedIndex == null) == (highlighted == null));
 
     switch (Directionality.of(context)) {
@@ -928,7 +961,7 @@ class _RenderSegmentedControl<T> extends RenderBox
 
   set hoveredIndex(int? value) {
     if (_hoveredIndex == value) {
-      return;
+      _hoveredIndex = null; //return;
     }
 
     _hoveredIndex = value;
@@ -1142,6 +1175,7 @@ class _RenderSegmentedControl<T> extends RenderBox
     }
 
     final int? highlightedChildIndex = highlightedIndex;
+    final int? hoveredChildIndex = hoveredIndex;
     // Paint thumb if there's a highlighted segment.
     if (highlightedChildIndex != null) {
       final RenderBox selectedChild = children[highlightedChildIndex * 2];
@@ -1184,59 +1218,11 @@ class _RenderSegmentedControl<T> extends RenderBox
         height: unscaledThumbRect.height * thumbScale,
       );
 
-      _paintThumb(context, offset, thumbRect);
+      (highlightedChildIndex == hoveredChildIndex)
+          ? _paintThumb(context, offset, thumbRect, false)
+          : _paintThumb(context, offset, thumbRect, true);
     } else {
-      final int? hoveredChildIndex = hoveredIndex;
-      // Paint thumb if there's a hovered segment.
-      if (hoveredChildIndex != null) {
-        final RenderBox selectedChild = children[hoveredChildIndex * 2];
-
-        final _SegmentedControlContainerBoxParentData childParentData =
-            selectedChild.parentData!
-                as _SegmentedControlContainerBoxParentData;
-        final Rect newThumbRect = _kThumbInsets
-            .inflateRect(childParentData.offset & selectedChild.size);
-
-        // Update thumb animation's tween, in case the end rect changed (e.g., a
-        // new segment is added during the animation).
-        if (state.thumbController.isAnimating) {
-          final Animatable<Rect?>? thumbTween = state.thumbAnimatable;
-          if (thumbTween == null) {
-            // This is the first frame of the animation.
-            final Rect startingRect =
-                moveThumbRectInBound(currentThumbRect, children) ??
-                    newThumbRect;
-            state.thumbAnimatable =
-                RectTween(begin: startingRect, end: newThumbRect);
-          } else if (newThumbRect != thumbTween.transform(1)) {
-            // The thumbTween of the running sliding animation needs updating,
-            // without restarting the animation.
-            final Rect startingRect =
-                moveThumbRectInBound(currentThumbRect, children) ??
-                    newThumbRect;
-            state.thumbAnimatable =
-                RectTween(begin: startingRect, end: newThumbRect).chain(
-                    CurveTween(
-                        curve: Interval(state.thumbController.value, 1)));
-          }
-        } else {
-          state.thumbAnimatable = null;
-        }
-
-        final Rect unscaledThumbRect =
-            state.thumbAnimatable?.evaluate(state.thumbController) ??
-                newThumbRect;
-        currentThumbRect = unscaledThumbRect;
-        final Rect thumbRect = Rect.fromCenter(
-          center: unscaledThumbRect.center,
-          width: unscaledThumbRect.width * thumbScale,
-          height: unscaledThumbRect.height * thumbScale,
-        );
-
-        _paintThumb(context, offset, thumbRect);
-      } else {
-        currentThumbRect = null;
-      }
+      currentThumbRect = null;
     }
 
     for (int index = 0; index < children.length; index += 2) {
@@ -1259,7 +1245,12 @@ class _RenderSegmentedControl<T> extends RenderBox
     context.paintChild(child, childParentData.offset + offset);
   }
 
-  void _paintThumb(PaintingContext context, Offset offset, Rect thumbRect) {
+  void _paintThumb(
+    PaintingContext context,
+    Offset offset,
+    Rect thumbRect,
+    bool keep,
+  ) {
     // Colors extracted from https://developer.apple.com/design/resources/.
     const List<BoxShadow> thumbShadow = <BoxShadow>[
       BoxShadow(
@@ -1288,9 +1279,11 @@ class _RenderSegmentedControl<T> extends RenderBox
     );
 
     context.canvas.drawRRect(
-      thumbRRect,
-      Paint()..color = thumbColor,
-    );
+        thumbRRect,
+        Paint()
+          ..color = (keep)
+              ? thumbColor
+              : ArnaDynamicColor.colorBlender(thumbColor, 42));
   }
 
   @override

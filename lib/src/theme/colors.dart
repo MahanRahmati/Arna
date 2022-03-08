@@ -422,13 +422,23 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.color36;
   }
 
+  static double colorDistance(Color a, Color b) {
+    int rmean = (a.red + b.red) ~/ 2;
+    int rr = a.red - b.red;
+    int gg = b.green - b.green;
+    int bb = a.blue - b.blue;
+    return math.sqrt((((512 + rmean) * rr * rr) >> 8) +
+        4 * gg * gg +
+        (((767 - rmean) * bb * bb) >> 8));
+  }
+
   /// Computes the color that matches with [backgroundColor] and [accentColor]
   /// by using [computeLuminance] and getting [maximumDelta].
   static Color matchingColor(
     Color backgroundColor,
     Color accent,
     BuildContext context, {
-    double maximumDelta = 0.21,
+    double maximumDelta = 0.28,
     bool blend = false,
   }) {
     double colorLuminance = backgroundColor.computeLuminance();
@@ -436,6 +446,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     double delta = (colorLuminance >= accentLuminance)
         ? colorLuminance - accentLuminance
         : accentLuminance - colorLuminance;
+    double distance = colorDistance(backgroundColor, accent);
+
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
@@ -457,28 +469,24 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                   : accent;
       }
     } else {
-      if (delta > 0.28) return accent;
-      int percentage = (100 - 100 * delta) ~/ 2;
-      switch (brightness) {
-        case Brightness.light:
-          Color secondColor = ArnaColors.color01;
-          int r =
-              accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
-          int g = accent.green +
-              percentage * (secondColor.green - accent.green) ~/ 100;
-          int b = accent.blue +
-              percentage * (secondColor.blue - accent.blue) ~/ 100;
-          return Color.fromRGBO(r, g, b, 1.0);
-        case Brightness.dark:
-          Color secondColor = ArnaColors.color36;
-          int r =
-              accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
-          int g = accent.green +
-              percentage * (secondColor.green - accent.green) ~/ 100;
-          int b = accent.blue +
-              percentage * (secondColor.blue - accent.blue) ~/ 100;
-          return Color.fromRGBO(r, g, b, 1.0);
+      int percentage = (1000 - distance) ~/ 25;
+      Color secondColor = (brightness == Brightness.light)
+          ? ArnaColors.color01
+          : ArnaColors.color36;
+      if (colorDistance(accent, secondColor) < 200) {
+        secondColor = (brightness == Brightness.light)
+            ? ArnaColors.color36
+            : ArnaColors.color01;
+        distance = colorDistance(accent, secondColor);
+        percentage = (1000 - distance) ~/ 25;
       }
+
+      int r = accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
+      int g =
+          accent.green + percentage * (secondColor.green - accent.green) ~/ 100;
+      int b =
+          accent.blue + percentage * (secondColor.blue - accent.blue) ~/ 100;
+      return Color.fromRGBO(r, g, b, 1.0);
     }
   }
 

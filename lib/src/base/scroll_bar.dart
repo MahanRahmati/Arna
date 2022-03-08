@@ -81,16 +81,14 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   void updateScrollbarPainter() {
     scrollbarPainter
       ..color = widget.thumbColor ?? ArnaTheme.of(context).accentColor
-      ..trackBorderColor = _hoverIsActive
-          ? ArnaDynamicColor.resolve(ArnaColors.borderColor, context)
-          : ArnaColors.color00
+      ..trackBorderColor = ArnaColors.color00
       ..textDirection = Directionality.of(context)
       ..thickness = _hoverIsActive
           ? Styles.scrollBarHoverThickness
           : Styles.scrollBarThickness
       ..radius = const Radius.circular(Styles.borderRadiusSize)
-      ..crossAxisMargin = 0
-      ..mainAxisMargin = 0
+      ..crossAxisMargin = Styles.smallPadding
+      ..mainAxisMargin = Styles.smallPadding
       ..padding = MediaQuery.of(context).padding
       ..scrollbarOrientation = widget.scrollbarOrientation
       ..ignorePointer = !enableGestures;

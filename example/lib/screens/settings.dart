@@ -8,7 +8,7 @@ class Settings extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     Theme? themeMode = ref.watch(changeTheme).theme;
     return ArnaGroupedView(
-      title: "Theme mode",
+      title: "Theme",
       children: [
         ArnaRadioListTile(
           value: Theme.system,
@@ -35,8 +35,9 @@ class Settings extends ConsumerWidget {
 
 enum Theme { system, dark, light }
 
-final changeTheme =
-    ChangeNotifierProvider.autoDispose((ref) => ChangeThemeState());
+final changeTheme = ChangeNotifierProvider.autoDispose(
+  (ref) => ChangeThemeState(),
+);
 
 class ChangeThemeState extends ChangeNotifier {
   Theme? theme = Theme.system;

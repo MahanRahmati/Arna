@@ -203,13 +203,14 @@ Future<T?> showArnaDialog<T>({
   required ArnaAlertDialog dialog,
   bool barrierDismissible = false,
   Color barrierColor = ArnaColors.barrierColor,
-  String? barrierLabel = "label",
+  String? barrierLabel,
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
 }) {
   return showGeneralDialog(
     context: context,
-    barrierLabel: barrierLabel,
+    barrierLabel: barrierLabel ??
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: barrierColor,
     barrierDismissible: barrierDismissible,
     transitionDuration: Styles.basicDuration,

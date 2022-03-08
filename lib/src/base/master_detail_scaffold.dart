@@ -85,7 +85,10 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
               ArnaIconButton(
                 icon: Icons.arrow_back_outlined,
                 onPressed: () => _navigator.pop(context),
-                tooltipMessage: "Back",
+                tooltipMessage:
+                    MaterialLocalizations.of(context).backButtonTooltip,
+                semanticLabel:
+                    MaterialLocalizations.of(context).backButtonTooltip,
               ),
               if (page.headerBarLeading != null) page.headerBarLeading!,
             ],

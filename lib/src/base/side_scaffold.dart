@@ -155,6 +155,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                                 ArnaIconButton(
                                   icon: Icons.menu_outlined,
                                   onPressed: () => _drawerOpenedCallback(true),
+                                  tooltipMessage:
+                                      MaterialLocalizations.of(context)
+                                          .drawerLabel,
+                                  semanticLabel:
+                                      MaterialLocalizations.of(context)
+                                          .drawerLabel,
                                 ),
                               if (widget.headerBarLeading != null)
                                 widget.headerBarLeading!,

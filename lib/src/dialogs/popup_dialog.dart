@@ -190,6 +190,8 @@ class _ArnaPopupPage extends StatelessWidget {
           ArnaIconButton(
             icon: Icons.arrow_back_outlined,
             onPressed: () => Navigator.pop(context),
+            tooltipMessage: MaterialLocalizations.of(context).backButtonTooltip,
+            semanticLabel: MaterialLocalizations.of(context).backButtonTooltip,
           ),
           if (headerBarLeading != null) headerBarLeading!,
         ],
@@ -248,7 +250,7 @@ Future<T?> showArnaPopupDialog<T>({
   required Widget body,
   bool barrierDismissible = false,
   Color barrierColor = ArnaColors.barrierColor,
-  String? barrierLabel = "label",
+  String? barrierLabel,
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
 }) {
@@ -267,7 +269,8 @@ Future<T?> showArnaPopupDialog<T>({
         )
       : showGeneralDialog(
           context: context,
-          barrierLabel: barrierLabel,
+          barrierLabel: barrierLabel ??
+              MaterialLocalizations.of(context).modalBarrierDismissLabel,
           barrierColor: barrierColor,
           barrierDismissible: barrierDismissible,
           transitionDuration: Styles.basicDuration,

@@ -115,13 +115,11 @@ class _ArnaSegmentedControlState<T extends Object>
           first: first,
           last: last,
           accentColor: accent,
-          borderColor: ArnaDynamicColor.chooseColor(
-            ArnaDynamicColor.colorBlender(accent, 42),
+          borderColor: ArnaDynamicColor.matchingColor(
+            ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
             accent,
-            ArnaDynamicColor.resolve(
-              ArnaColors.cardColor,
-              context,
-            ),
+            context,
+            blend: true,
           ),
           cursor: widget.cursor,
         ),

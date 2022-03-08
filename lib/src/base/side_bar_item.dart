@@ -60,7 +60,6 @@ class ArnaSideBarItem extends StatelessWidget {
     BuildContext context,
     bool enabled,
     bool selected,
-    bool hovered,
     Color accent,
   ) {
     return ScrollConfiguration(
@@ -80,27 +79,15 @@ class ArnaSideBarItem extends StatelessWidget {
                       ? ArnaColors.disabledColor
                       : selected
                           ? (colorType == ColorType.smart)
-                              ? (hovered)
-                                  ? ArnaDynamicColor.chooseColor(
-                                      ArnaDynamicColor.innerColor(accent),
-                                      ArnaDynamicColor.innerColor(
-                                        ArnaColors.buttonColor,
-                                      ),
-                                      accent,
-                                    )
-                                  : ArnaDynamicColor.chooseColor(
-                                      ArnaDynamicColor.innerColor(
-                                        ArnaDynamicColor.resolve(
-                                          ArnaColors.buttonColor,
-                                          context,
-                                        ),
-                                      ),
-                                      accent,
-                                      ArnaDynamicColor.resolve(
-                                        ArnaColors.buttonColor,
-                                        context,
-                                      ),
-                                    )
+                              ? ArnaDynamicColor.matchingColor(
+                                  ArnaDynamicColor.resolve(
+                                    ArnaColors.buttonColor,
+                                    context,
+                                  ),
+                                  accent,
+                                  context,
+                                  blend: true,
+                                )
                               : accent
                           : ArnaColors.iconColor,
                   context,
@@ -162,28 +149,17 @@ class ArnaSideBarItem extends StatelessWidget {
                         !enabled
                             ? ArnaColors.backgroundColor
                             : pressed
-                                ? (selected)
-                                    ? ArnaDynamicColor.chooseColor(
-                                        ArnaDynamicColor.colorBlender(
-                                          accent,
-                                          14,
-                                        ),
-                                        ArnaColors.buttonHoverColor,
-                                        ArnaColors.sideColor,
-                                      )
-                                    : ArnaColors.buttonPressedColor
+                                ? ArnaColors.buttonPressedColor
                                 : hover
-                                    ? (selected)
-                                        ? (colorType == ColorType.smart)
-                                            ? ArnaDynamicColor.chooseColor(
-                                                ArnaDynamicColor.colorBlender(
-                                                  accent,
-                                                  28,
-                                                ),
-                                                ArnaColors.buttonHoverColor,
-                                                ArnaColors.sideColor,
-                                              )
-                                            : ArnaColors.buttonHoverColor //TODO
+                                    ? (colorType == ColorType.smart && selected)
+                                        ? ArnaDynamicColor.chooseColor(
+                                            ArnaColors.buttonHoverColor,
+                                            ArnaDynamicColor.colorBlender(
+                                              accent,
+                                              42,
+                                            ),
+                                            ArnaColors.buttonColor,
+                                          )
                                         : ArnaColors.buttonHoverColor
                                     : selected
                                         ? ArnaColors.buttonColor
@@ -192,8 +168,7 @@ class ArnaSideBarItem extends StatelessWidget {
                       ),
                     ),
                     padding: Styles.horizontal,
-                    child:
-                        _buildChild(context, enabled, selected, hover, accent),
+                    child: _buildChild(context, enabled, selected, accent),
                   ),
                   if (badge != null)
                     compact
@@ -209,27 +184,15 @@ class ArnaSideBarItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
                   color: (colorType == ColorType.smart)
-                      ? (hover)
-                          ? ArnaDynamicColor.chooseColor(
-                              ArnaDynamicColor.innerColor(accent),
-                              ArnaDynamicColor.innerColor(
-                                ArnaColors.buttonColor,
-                              ),
-                              accent,
-                            )
-                          : ArnaDynamicColor.chooseColor(
-                              ArnaDynamicColor.innerColor(
-                                ArnaDynamicColor.resolve(
-                                  ArnaColors.buttonColor,
-                                  context,
-                                ),
-                              ),
-                              accent,
-                              ArnaDynamicColor.resolve(
-                                ArnaColors.buttonColor,
-                                context,
-                              ),
-                            )
+                      ? ArnaDynamicColor.matchingColor(
+                          ArnaDynamicColor.resolve(
+                            ArnaColors.buttonColor,
+                            context,
+                          ),
+                          accent,
+                          context,
+                          blend: true,
+                        )
                       : accent,
                 ),
               ),

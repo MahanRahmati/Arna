@@ -469,16 +469,17 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                   : accent;
       }
     } else {
-      int percentage = (1000 - distance) ~/ 25;
+      int percentage = (1050 - distance) ~/ 49;
+      if (percentage < 7) return accent;
       Color secondColor = (brightness == Brightness.light)
           ? ArnaColors.color01
           : ArnaColors.color36;
-      if (colorDistance(accent, secondColor) < 200) {
+      if (colorDistance(accent, secondColor) < 210) {
         secondColor = (brightness == Brightness.light)
             ? ArnaColors.color36
             : ArnaColors.color01;
         distance = colorDistance(accent, secondColor);
-        percentage = (1000 - distance) ~/ 25;
+        percentage = (1050 - distance) ~/ 35;
       }
 
       int r = accent.red + percentage * (secondColor.red - accent.red) ~/ 100;

@@ -76,14 +76,15 @@ class ArnaButton extends StatelessWidget {
                   ? ArnaColors.iconColor
                   : hasBorder
                       ? ArnaDynamicColor.innerColor(accent)
-                      : ArnaDynamicColor.matchingColor(
+                      : ArnaDynamicColor.chooseColor(
+                          ArnaDynamicColor.colorBlender(accent, 21),
+                          accent,
                           ArnaDynamicColor.resolve(
                             ArnaColors.buttonColor,
                             context,
                           ),
-                          accent,
-                          context,
-                          blend: true,
+
+                          //true, TODO
                         ),
           context,
         ),

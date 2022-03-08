@@ -82,11 +82,16 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
     const pi = 3.1415926535897932;
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     Color indicatorColor = widget.colorType == ColorType.smart
-        ? ArnaDynamicColor.matchingColor(
-            ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
+        ? ArnaDynamicColor.chooseColor(
+            ArnaDynamicColor.colorBlender(
+              accent,
+              42,
+            ),
             accent,
-            context,
-            blend: true,
+            ArnaDynamicColor.resolve(
+              ArnaColors.cardColor,
+              context,
+            ),
           )
         : accent;
     return SizedBox(

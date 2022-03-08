@@ -422,66 +422,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.color36;
   }
 
-  /// Computes the color that matches with [backgroundColor] and [accentColor]
-  /// by using [computeLuminance] and getting [maximumDelta].
-  static Color matchingColor(
-    Color backgroundColor,
-    Color accent,
-    BuildContext context, {
-    double maximumDelta = 0.21,
-    bool blend = false,
-  }) {
-    double colorLuminance = backgroundColor.computeLuminance();
-    double accentLuminance = accent.computeLuminance();
-    double delta = (colorLuminance >= accentLuminance)
-        ? colorLuminance - accentLuminance
-        : accentLuminance - colorLuminance;
-    Brightness brightness =
-        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
-    bool isHighContrastEnabled =
-        MediaQuery.maybeOf(context)?.highContrast ?? false;
-
-    if (!blend) {
-      switch (brightness) {
-        case Brightness.light:
-          return isHighContrastEnabled
-              ? ArnaColors.color01
-              : delta < maximumDelta
-                  ? ArnaColors.color07
-                  : accent;
-        case Brightness.dark:
-          return isHighContrastEnabled
-              ? ArnaColors.color36
-              : delta < maximumDelta
-                  ? ArnaColors.color30
-                  : accent;
-      }
-    } else {
-      if (delta > 0.28) return accent;
-      int percentage = (100 - 100 * delta) ~/ 2;
-      switch (brightness) {
-        case Brightness.light:
-          Color secondColor = ArnaColors.color01;
-          int r =
-              accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
-          int g = accent.green +
-              percentage * (secondColor.green - accent.green) ~/ 100;
-          int b = accent.blue +
-              percentage * (secondColor.blue - accent.blue) ~/ 100;
-          return Color.fromRGBO(r, g, b, 1.0);
-        case Brightness.dark:
-          Color secondColor = ArnaColors.color36;
-          int r =
-              accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
-          int g = accent.green +
-              percentage * (secondColor.green - accent.green) ~/ 100;
-          int b = accent.blue +
-              percentage * (secondColor.blue - accent.blue) ~/ 100;
-          return Color.fromRGBO(r, g, b, 1.0);
-      }
-    }
-  }
-
   /// Computes the switch background color from [accentColor] by using
   /// [computeLuminance].
   static Color switchBackgroundColor(Color accent, bool isOn) {
@@ -490,19 +430,16 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// Chooses the more suitable color for [baseColor],
-  /// between first color and default color (prefers the [defaultColor])
+  /// using first color and default color (prefers the [defaultColor])
   static Color chooseColor(
-    Color firstColor,
-    Color defaultColor,
-    Color baseColor,
-  ) {
+      Color firstColor, Color defaultColor, Color baseColor) {
     double defaultLuminance = defaultColor.computeLuminance();
     double baseLuminance = baseColor.computeLuminance();
-    double deltaDefault = (defaultLuminance >= baseLuminance)
+    double delta = (defaultLuminance >= baseLuminance)
         ? defaultLuminance - baseLuminance
         : baseLuminance - defaultLuminance;
 
-    if (deltaDefault > 0.28) {
+    if (delta > 0.35) {
       return defaultColor;
     }
     return firstColor;

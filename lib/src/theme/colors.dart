@@ -489,25 +489,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return accent.computeLuminance() < 0.28 ? ArnaColors.color07 : accent;
   }
 
-  /// Chooses the more suitable color for [baseColor],
-  /// between first color and default color (prefers the [defaultColor])
-  static Color chooseColor(
-    Color firstColor,
-    Color defaultColor,
-    Color baseColor,
-  ) {
-    double defaultLuminance = defaultColor.computeLuminance();
-    double baseLuminance = baseColor.computeLuminance();
-    double deltaDefault = (defaultLuminance >= baseLuminance)
-        ? defaultLuminance - baseLuminance
-        : baseLuminance - defaultLuminance;
-
-    if (deltaDefault > 0.28) {
-      return defaultColor;
-    }
-    return firstColor;
-  }
-
   /// Computes the border color for color by using
   /// [computeLuminance] and [borderColorType].
   static Color borderColor(

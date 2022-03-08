@@ -1,8 +1,5 @@
 import 'package:arna/arna.dart';
 
-/// Indicator color types.
-enum IndicatorColorType { normal, smart }
-
 /// A circular progress indicator, which spins to indicate that the application
 /// is busy.
 ///
@@ -23,7 +20,7 @@ class ArnaProgressIndicator extends StatefulWidget {
     this.value,
     this.size = Styles.indicatorSize,
     this.accentColor,
-    this.colorType = IndicatorColorType.normal,
+    this.colorType = ColorType.normal,
   }) : super(key: key);
 
   /// If non-null, the value of this progress indicator.
@@ -84,7 +81,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
     final double? value = widget.value;
     const pi = 3.1415926535897932;
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    Color indicatorColor = widget.colorType == IndicatorColorType.smart
+    Color indicatorColor = widget.colorType == ColorType.smart
         ? ArnaDynamicColor.matchingColor(
             ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
             accent,

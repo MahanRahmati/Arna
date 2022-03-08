@@ -111,6 +111,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                   accentColor: widget.items[index].accentColor,
                   cursor: widget.items[index].cursor,
                   semanticLabel: widget.items[index].semanticLabel,
+                  colorType: ColorType.smart,
                 ),
               );
             },

@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/gestures.dart';
 
 /// An Arna-styled scrollbar.
 ///
@@ -58,6 +59,7 @@ class ArnaScrollbar extends RawScrollbar {
 
 class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   late AnimationController _hoverAnimationController;
+  bool _hoverIsActive = false;
 
   @override
   bool get showScrollbar => widget.isAlwaysShown ?? false;
@@ -79,16 +81,41 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   void updateScrollbarPainter() {
     scrollbarPainter
       ..color = widget.thumbColor ?? ArnaTheme.of(context).accentColor
-      ..trackBorderColor =
-          ArnaDynamicColor.resolve(ArnaColors.borderColor, context)
+      ..trackBorderColor = _hoverIsActive
+          ? ArnaDynamicColor.resolve(ArnaColors.borderColor, context)
+          : ArnaColors.color00
       ..textDirection = Directionality.of(context)
-      ..thickness = Styles.scrollBarThickness
+      ..thickness = _hoverIsActive
+          ? Styles.scrollBarHoverThickness
+          : Styles.scrollBarThickness
       ..radius = const Radius.circular(Styles.borderRadiusSize)
       ..crossAxisMargin = 0
       ..mainAxisMargin = 0
       ..padding = MediaQuery.of(context).padding
       ..scrollbarOrientation = widget.scrollbarOrientation
       ..ignorePointer = !enableGestures;
+  }
+
+  @override
+  void handleHover(PointerHoverEvent event) {
+    super.handleHover(event);
+    // Check if the position of the pointer falls over the painted scrollbar
+    if (isPointerOverScrollbar(event.position, event.kind, forHover: true)) {
+      // Pointer is hovering over the scrollbar
+      setState(() => _hoverIsActive = true);
+      _hoverAnimationController.forward();
+    } else if (_hoverIsActive) {
+      // Pointer was, but is no longer over painted scrollbar.
+      setState(() => _hoverIsActive = false);
+      _hoverAnimationController.reverse();
+    }
+  }
+
+  @override
+  void handleHoverExit(PointerExitEvent event) {
+    super.handleHoverExit(event);
+    setState(() => _hoverIsActive = false);
+    _hoverAnimationController.reverse();
   }
 
   @override

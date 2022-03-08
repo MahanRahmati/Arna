@@ -3,6 +3,9 @@ import 'package:arna/arna.dart';
 /// Button types.
 enum ButtonType { normal, colored, destructive, suggested }
 
+/// Button sizes.
+enum ButtonSize { normal, huge }
+
 /// An Arna-styled button.
 class ArnaButton extends StatelessWidget {
   /// Creates a button.
@@ -13,6 +16,7 @@ class ArnaButton extends StatelessWidget {
     required this.onPressed,
     this.tooltipMessage,
     this.buttonType = ButtonType.normal,
+    this.buttonSize = ButtonSize.normal,
     this.isFocusable = true,
     this.autofocus = false,
     this.hasBorder = true,
@@ -35,6 +39,9 @@ class ArnaButton extends StatelessWidget {
 
   /// The type of the button.
   final ButtonType buttonType;
+
+  /// The size of the button.
+  final ButtonSize buttonSize;
 
   /// Whether this button is focusable or not.
   final bool isFocusable;
@@ -89,21 +96,26 @@ class ArnaButton extends StatelessWidget {
       }
     }
     if (label != null) {
-      Widget labelWidget = Flexible(
-        child: Text(
-          label!,
-          style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
-                color: ArnaDynamicColor.resolve(
-                  !enabled
-                      ? ArnaColors.disabledColor
-                      : buttonType == ButtonType.normal
-                          ? ArnaColors.primaryTextColor
-                          : ArnaDynamicColor.innerColor(accent),
-                  context,
-                ),
+      Widget text = Text(
+        label!,
+        style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+              color: ArnaDynamicColor.resolve(
+                !enabled
+                    ? ArnaColors.disabledColor
+                    : buttonType == ButtonType.normal
+                        ? ArnaColors.primaryTextColor
+                        : ArnaDynamicColor.innerColor(accent),
+                context,
               ),
-        ),
+            ),
       );
+      Widget labelWidget = (buttonSize == ButtonSize.huge)
+          ? Flexible(
+              child: Center(
+                child: text,
+              ),
+            )
+          : Flexible(child: text);
       children.add(labelWidget);
       if (icon != null) {
         children.add(const SizedBox(width: Styles.padding));
@@ -131,7 +143,9 @@ class ArnaButton extends StatelessWidget {
       child: ArnaBaseButton(
         builder: (context, enabled, hover, focused, pressed, selected) {
           return AnimatedContainer(
-            height: Styles.buttonSize,
+            height: (buttonSize == ButtonSize.huge)
+                ? 1.4 * Styles.buttonSize
+                : Styles.buttonSize,
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,
             clipBehavior: Clip.antiAlias,

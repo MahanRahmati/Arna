@@ -15,6 +15,7 @@ class ArnaSideBarItem extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
+    this.colorType = ColorType.normal,
   }) : super(key: key);
 
   /// The text label of the item.
@@ -52,6 +53,9 @@ class ArnaSideBarItem extends StatelessWidget {
   /// The semantic label of the item.
   final String? semanticLabel;
 
+  /// Sidebar items's color type.
+  final Enum colorType;
+
   Widget _buildChild(
     BuildContext context,
     bool enabled,
@@ -74,15 +78,15 @@ class ArnaSideBarItem extends StatelessWidget {
                   !enabled
                       ? ArnaColors.disabledColor
                       : selected
-                          ? ArnaDynamicColor.matchingColor(
-                              ArnaDynamicColor.resolve(
-                                ArnaColors.buttonColor,
-                                context,
-                              ),
-                              accent,
-                              context,
-                              blend: true,
-                            )
+                          ? (colorType == ColorType.smart)
+                              ? ArnaDynamicColor.matchingColor(
+                                  ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor, context),
+                                  accent,
+                                  context,
+                                  blend: true,
+                                )
+                              : accent
                           : ArnaColors.iconColor,
                   context,
                 ),
@@ -168,15 +172,15 @@ class ArnaSideBarItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: ArnaDynamicColor.matchingColor(
-                    ArnaDynamicColor.resolve(
-                      ArnaColors.buttonColor,
-                      context,
-                    ),
-                    accent,
-                    context,
-                    blend: true,
-                  ),
+                  color: (colorType == ColorType.smart)
+                      ? ArnaDynamicColor.matchingColor(
+                          ArnaDynamicColor.resolve(
+                              ArnaColors.buttonColor, context),
+                          accent,
+                          context,
+                          blend: true,
+                        )
+                      : accent,
                 ),
               ),
             ],

@@ -6,6 +6,9 @@ import 'package:flutter/foundation.dart';
 /// Border types.
 enum BorderColorType { normal, dark, none }
 
+/// Color types.
+enum ColorType { normal, smart }
+
 /// A palette of [Color] constants that describe colors
 class ArnaColors {
   // This class is not meant to be instantiated or extended; this constructor

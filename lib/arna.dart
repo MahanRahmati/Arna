@@ -57,6 +57,6 @@ export 'package:arna/src/theme/icon_theme_data.dart';
 export 'package:arna/src/theme/text_theme.dart';
 export 'package:arna/src/theme/theme.dart';
 export 'package:arna/src/theme/theme_data.dart';
-export 'package:flutter/material.dart' show Icons;
+export 'package:flutter/material.dart' show Icons, MaterialLocalizations;
 export 'package:flutter/services.dart';
 export 'package:flutter/widgets.dart';

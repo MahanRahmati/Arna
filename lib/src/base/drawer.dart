@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// A panel that slides in horizontally from the edge of a screen to show
 /// navigation links in an application.

@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// Displays a menu when pressed and calls [onSelected] when the menu is dismissed
 /// because an item was selected. The value passed to [onSelected] is the value of

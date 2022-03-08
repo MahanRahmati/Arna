@@ -32,7 +32,12 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: ArnaThemeData(
         brightness: brightness,
-        accentColor: ArnaColors.accentColor,
+        accentColor: const ArnaDynamicColor(
+          color: ArnaColors.accentColor,
+          darkColor: ArnaColors.accentColor,
+          highContrastColor: ArnaColors.accentColor,
+          darkHighContrastColor: ArnaColors.accentColor,
+        ),
       ),
       home: const Home(),
     );

@@ -80,7 +80,12 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   @override
   void updateScrollbarPainter() {
     scrollbarPainter
-      ..color = widget.thumbColor ?? ArnaTheme.of(context).accentColor
+      ..color = ArnaDynamicColor.matchingColor(
+        ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+        widget.thumbColor ?? ArnaTheme.of(context).accentColor,
+        context,
+        blend: true,
+      )
       ..trackBorderColor = ArnaColors.color00
       ..textDirection = Directionality.of(context)
       ..thickness = _hoverIsActive

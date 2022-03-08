@@ -486,15 +486,18 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return accent.computeLuminance() < 0.28 ? ArnaColors.color07 : accent;
   }
 
-  /// Computes the border color from [accentColor] by using
+  /// Computes the border color for color by using
   /// [computeLuminance] and [borderColorType].
   static Color borderColor(
-    Color accent,
+    Color resolvable,
     BuildContext context, [
     Enum type = BorderColorType.normal,
   ]) {
     if (type == BorderColorType.none) return ArnaColors.color00;
-    double accentLuminance = accent.computeLuminance();
+    Color color = (resolvable is ArnaDynamicColor)
+        ? resolvable.resolveFrom(context)
+        : resolvable;
+    double colorLuminance = color.computeLuminance();
 
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
@@ -506,21 +509,21 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         case Brightness.dark:
           return isHighContrastEnabled
               ? ArnaColors.color01
-              : accentLuminance > 0.7
+              : colorLuminance > 0.7
                   ? ArnaColors.color04
-                  : accentLuminance > 0.49
+                  : colorLuminance > 0.49
                       ? ArnaColors.color03
-                      : accentLuminance > 0.28
+                      : colorLuminance > 0.28
                           ? ArnaColors.color02
                           : ArnaColors.color05;
         case Brightness.light:
           return isHighContrastEnabled
               ? ArnaColors.color36
-              : accentLuminance > 0.7
+              : colorLuminance > 0.7
                   ? ArnaColors.color26
-                  : accentLuminance > 0.49
+                  : colorLuminance > 0.49
                       ? ArnaColors.color28
-                      : accentLuminance > 0.28
+                      : colorLuminance > 0.28
                           ? ArnaColors.color30
                           : ArnaColors.color32;
       }
@@ -530,18 +533,18 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       case Brightness.light:
         return isHighContrastEnabled
             ? ArnaColors.color01
-            : accentLuminance > 0.7
+            : colorLuminance > 0.7
                 ? ArnaColors.color03
-                : accentLuminance > 0.28
-                    ? accent
+                : colorLuminance > 0.28
+                    ? color
                     : ArnaColors.color12;
       case Brightness.dark:
         return isHighContrastEnabled
             ? ArnaColors.color36
-            : accentLuminance > 0.7
+            : colorLuminance > 0.7
                 ? ArnaColors.color12
-                : accentLuminance > 0.28
-                    ? accent
+                : colorLuminance > 0.28
+                    ? color
                     : ArnaColors.color30;
     }
   }

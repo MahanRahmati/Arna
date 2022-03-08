@@ -81,7 +81,9 @@ class ArnaSideBarItem extends StatelessWidget {
                           ? (colorType == ColorType.smart)
                               ? ArnaDynamicColor.matchingColor(
                                   ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor, context),
+                                    ArnaColors.buttonColor,
+                                    context,
+                                  ),
                                   accent,
                                   context,
                                   blend: true,
@@ -175,7 +177,9 @@ class ArnaSideBarItem extends StatelessWidget {
                   color: (colorType == ColorType.smart)
                       ? ArnaDynamicColor.matchingColor(
                           ArnaDynamicColor.resolve(
-                              ArnaColors.buttonColor, context),
+                            ArnaColors.buttonColor,
+                            context,
+                          ),
                           accent,
                           context,
                           blend: true,

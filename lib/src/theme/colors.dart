@@ -478,14 +478,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       }
 
       int percentage = distance * 100 ~/ 1;
-      if (percentage < 5) return accent;
-
-      int r = accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
-      int g =
-          accent.green + percentage * (secondColor.green - accent.green) ~/ 100;
-      int b =
-          accent.blue + percentage * (secondColor.blue - accent.blue) ~/ 100;
-      return Color.fromRGBO(r, g, b, 1.0);
+      return _colorBlender(accent, secondColor, percentage);
     }
 
     double colorLuminance = backgroundColor.computeLuminance();
@@ -591,24 +584,28 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// Blends the given [Color] by [percentage] and [computeLuminance].
-  static Color colorBlender(
-    Color color,
-    int percentage, {
-    bool isBorder = false,
-  }) {
-    Color secondColor = color.computeLuminance() > 0.49
-        ? isBorder
+  static Color _colorBlender(
+    Color base,
+    Color des,
+    int percentage,
+  ) {
+    if (percentage < 4) return base;
+    if (percentage > 96) return des;
+    int r = base.red + percentage * (des.red - base.red) ~/ 100;
+    int g = base.green + percentage * (des.green - base.green) ~/ 100;
+    int b = base.blue + percentage * (des.blue - base.blue) ~/ 100;
+    return Color.fromRGBO(r, g, b, 1.0);
+  }
+
+  static Color blend(Color base, int percentage, [bool darken = false]) {
+    Color secondColor = base.computeLuminance() > 0.49
+        ? darken
             ? ArnaColors.color36
             : ArnaColors.color01
-        : isBorder
+        : darken
             ? ArnaColors.color01
             : ArnaColors.color36;
-    int r = color.red + percentage * (secondColor.red - color.red) ~/ 100;
-    int g = color.green + percentage * (secondColor.green - color.green) ~/ 100;
-    int b = color.blue + percentage * (secondColor.blue - color.blue) ~/ 100;
-    int upperBound = math.max(r, math.max(g, b));
-    int a = math.max(252, upperBound);
-    return Color.fromRGBO(r * 252 ~/ a, g * 252 ~/ a, b * 252 ~/ a, 1.0);
+    return _colorBlender(base, secondColor, percentage);
   }
 
   bool get _isPlatformBrightnessDependent =>

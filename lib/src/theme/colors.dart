@@ -613,16 +613,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     );
   }
 
-  /// Finds the [Color] for slider by it's [value] and [computeLuminance].
-  static Color sliderColor(Color accent, double value, double min) {
-    Color firstColor = ArnaColors.color36;
-    double accentLuminance = accent.computeLuminance();
-    Color secondColor =
-        accentLuminance > 0.49 ? ArnaColors.color01 : ArnaColors.color36;
-    if (value > min) return secondColor;
-    return firstColor;
-  }
-
   /// Blends the [base] color to [secondColor] by [percentage] and [computeLuminance].
   static Color _colorBlender(
     Color base,

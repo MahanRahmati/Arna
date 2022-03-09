@@ -53,6 +53,7 @@ class ArnaSliderListTile extends StatelessWidget {
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
+    this.colorType = ColorType.normal,
     this.cursor = MouseCursor.defer,
   })  : assert(value >= min && value <= max),
         super(key: key);
@@ -197,6 +198,9 @@ class ArnaSliderListTile extends StatelessWidget {
   /// The color of the slider's progress.
   final Color? accentColor;
 
+  /// The slider's color type.
+  final ColorType colorType;
+
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// slider.
   final MouseCursor cursor;
@@ -219,6 +223,7 @@ class ArnaSliderListTile extends StatelessWidget {
             isFocusable: isFocusable,
             autofocus: autofocus,
             accentColor: accentColor,
+            colorType: colorType,
             cursor: cursor,
           ),
           if (trailingButton != null) trailingButton!,

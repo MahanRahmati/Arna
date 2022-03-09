@@ -46,6 +46,7 @@ class ArnaSlider extends StatefulWidget {
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
+    this.colorType = ColorType.normal,
     this.cursor = MouseCursor.defer,
   })  : assert(value >= min && value <= max),
         super(key: key);
@@ -181,6 +182,9 @@ class ArnaSlider extends StatefulWidget {
   /// The color of the slider's progress.
   final Color? accentColor;
 
+  /// The slider's color type.
+  final ColorType colorType;
+
   /// The cursor for a mouse pointer when it enters or is hovering over the
   /// slider.
   final MouseCursor cursor;
@@ -312,7 +316,18 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
           onChanged: isEnabled ? _handleChanged : null,
           onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
           onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
-          accent: accent,
+          accent: widget.colorType == ColorType.smart
+              ? ArnaDynamicColor.matchingColor(
+                  ArnaDynamicColor.resolve(
+                    ArnaColors.backgroundColor,
+                    context,
+                  ),
+                  accent,
+                  context,
+                  blend: true,
+                )
+              : accent,
+          colorType: widget.colorType,
           borderColor: ArnaDynamicColor.resolve(
             ArnaColors.borderColor,
             context,
@@ -321,11 +336,19 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
             ArnaColors.backgroundColor,
             context,
           ),
-          thumbColor: ArnaDynamicColor.sliderColor(
-            accent,
-            widget.value,
-            widget.min,
-          ),
+          thumbColor: (widget.value <= widget.min)
+              ? ArnaColors.color36
+              : /*widget.colorType == ColorType.smart
+                  ? ArnaDynamicColor.matchingColor(
+                      ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
+                      accent,
+                      context,
+                      blend: true,
+                    )
+                  : */
+              accent.computeLuminance() > 0.49
+                  ? ArnaColors.color01
+                  : ArnaColors.color36,
           vsync: this,
         ),
       ),
@@ -342,6 +365,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
     this.onChangeStart,
     this.onChangeEnd,
     required this.accent,
+    required this.colorType,
     required this.borderColor,
     required this.trackColor,
     required this.thumbColor,
@@ -354,6 +378,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
   final ValueChanged<double>? onChangeStart;
   final ValueChanged<double>? onChangeEnd;
   final Color accent;
+  final ColorType colorType;
   final Color borderColor;
   final Color trackColor;
   final Color thumbColor;
@@ -368,6 +393,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
       onChangeStart: onChangeStart,
       onChangeEnd: onChangeEnd,
       accent: accent,
+      colorType: colorType,
       borderColor: borderColor,
       trackColor: trackColor,
       thumbColor: thumbColor,
@@ -388,6 +414,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
       ..onChangeStart = onChangeStart
       ..onChangeEnd = onChangeEnd
       ..accent = accent
+      .._sliderColorType = colorType
       ..borderColor = borderColor
       ..trackColor = trackColor
       ..thumbColor = thumbColor
@@ -405,6 +432,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
     this.onChangeStart,
     this.onChangeEnd,
     required Color accent,
+    required ColorType colorType,
     required Color borderColor,
     required Color trackColor,
     required Color thumbColor,
@@ -415,6 +443,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
         _divisions = divisions,
         _onChanged = onChanged,
         _accent = accent,
+        _sliderColorType = colorType,
         _borderColor = borderColor,
         _trackColor = trackColor,
         _thumbColor = thumbColor,
@@ -484,6 +513,14 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   set accent(Color value) {
     if (value == _accent) return;
     _accent = value;
+    markNeedsPaint();
+  }
+
+  ColorType get sliderColorType => _sliderColorType;
+  ColorType _sliderColorType;
+  set sliderColorType(ColorType value) {
+    if (value == _sliderColorType) return;
+    _sliderColorType = value;
     markNeedsPaint();
   }
 
@@ -637,16 +674,19 @@ class _RenderArnaSlider extends RenderConstrainedBox {
     double visualPosition;
     Color leftColor;
     Color rightColor;
+    ColorType colorType;
     switch (textDirection) {
       case TextDirection.rtl:
         visualPosition = 1.0 - _position.value;
         leftColor = trackColor;
         rightColor = accent;
+        colorType = sliderColorType;
         break;
       case TextDirection.ltr:
         visualPosition = _position.value;
         leftColor = accent;
         rightColor = trackColor;
+        colorType = sliderColorType;
         break;
     }
 
@@ -672,7 +712,12 @@ class _RenderArnaSlider extends RenderConstrainedBox {
         bottomLeft: const Radius.circular(Styles.sliderTrackSize),
         bottomRight: const Radius.circular(Styles.sliderTrackSize),
       ),
-      Paint()..color = borderColor,
+      Paint()
+        ..color = (colorType == ColorType.smart)
+            ? (visualPosition == 0)
+                ? borderColor
+                : ArnaDynamicColor.outerColor(accent)
+            : borderColor,
     );
 
     if (visualPosition > 0.0) {
@@ -732,7 +777,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
       ),
     );
 
-    canvas.drawRRect(rrect.inflate(1), Paint()..color = borderColor);
+    canvas.drawRRect(rrect.inflate(1), Paint()..color = borderColor); //TODO
 
     canvas.drawRRect(
       rrect,

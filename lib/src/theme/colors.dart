@@ -510,6 +510,45 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return accent.computeLuminance() < 0.28 ? ArnaColors.color07 : accent;
   }
 
+  static Color _findBorderColor(
+    Brightness brightness,
+    bool isHighContrastEnabled,
+    double colorLuminance,
+    bool isDark,
+    Color defaultColor,
+  ) {
+    switch (brightness) {
+      case Brightness.light:
+        return isHighContrastEnabled
+            ? ArnaColors.color01
+            : colorLuminance > 0.7
+                ? ArnaColors.color17
+                : colorLuminance > 0.49
+                    ? isDark
+                        ? ArnaColors.color09 //
+                        : defaultColor
+                    : colorLuminance > 0.28
+                        ? isDark
+                            ? ArnaColors.color05
+                            : defaultColor
+                        : ArnaColors.color03;
+      case Brightness.dark:
+        return isHighContrastEnabled
+            ? ArnaColors.color36
+            : colorLuminance > 0.7
+                ? ArnaColors.color17
+                : colorLuminance > 0.49
+                    ? isDark
+                        ? ArnaColors.color09
+                        : defaultColor
+                    : colorLuminance > 0.28
+                        ? isDark
+                            ? ArnaColors.color05
+                            : defaultColor
+                        : ArnaColors.color03;
+    }
+  }
+
   /// Computes the border color for color by using
   /// [computeLuminance] and [borderColorType].
   static Color borderColor(
@@ -529,48 +568,36 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
     if (type == BorderColorType.dark) {
-      switch (brightness) {
-        case Brightness.dark:
-          return isHighContrastEnabled
-              ? ArnaColors.color01
-              : colorLuminance > 0.7
-                  ? ArnaColors.color04
-                  : colorLuminance > 0.49
-                      ? ArnaColors.color03
-                      : colorLuminance > 0.28
-                          ? ArnaColors.color02
-                          : ArnaColors.color05;
-        case Brightness.light:
-          return isHighContrastEnabled
-              ? ArnaColors.color36
-              : colorLuminance > 0.7
-                  ? ArnaColors.color26
-                  : colorLuminance > 0.49
-                      ? ArnaColors.color28
-                      : colorLuminance > 0.28
-                          ? ArnaColors.color30
-                          : ArnaColors.color32;
-      }
+      return _findBorderColor(
+        brightness,
+        isHighContrastEnabled,
+        colorLuminance,
+        true,
+        matchingColor(
+          ArnaDynamicColor.resolve(
+            ArnaColors.backgroundColor,
+            context,
+          ),
+          color,
+          context,
+        ),
+      );
     }
 
-    switch (brightness) {
-      case Brightness.light:
-        return isHighContrastEnabled
-            ? ArnaColors.color01
-            : colorLuminance > 0.7
-                ? ArnaColors.color03
-                : colorLuminance > 0.28
-                    ? color
-                    : ArnaColors.color12;
-      case Brightness.dark:
-        return isHighContrastEnabled
-            ? ArnaColors.color36
-            : colorLuminance > 0.7
-                ? ArnaColors.color12
-                : colorLuminance > 0.28
-                    ? color
-                    : ArnaColors.color30;
-    }
+    return _findBorderColor(
+      brightness,
+      isHighContrastEnabled,
+      colorLuminance,
+      false,
+      matchingColor(
+        ArnaDynamicColor.resolve(
+          ArnaColors.backgroundColor,
+          context,
+        ),
+        color,
+        context,
+      ),
+    );
   }
 
   /// Finds the [Color] for slider by it's [value] and [computeLuminance].
@@ -583,17 +610,17 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return firstColor;
   }
 
-  /// Blends the given [Color] by [percentage] and [computeLuminance].
+  /// Blends the [base] color to [secondColor] by [percentage] and [computeLuminance].
   static Color _colorBlender(
     Color base,
-    Color des,
+    Color secondColor,
     int percentage,
   ) {
     if (percentage < 4) return base;
-    if (percentage > 96) return des;
-    int r = base.red + percentage * (des.red - base.red) ~/ 100;
-    int g = base.green + percentage * (des.green - base.green) ~/ 100;
-    int b = base.blue + percentage * (des.blue - base.blue) ~/ 100;
+    if (percentage > 96) return secondColor;
+    int r = base.red + percentage * (secondColor.red - base.red) ~/ 100;
+    int g = base.green + percentage * (secondColor.green - base.green) ~/ 100;
+    int b = base.blue + percentage * (secondColor.blue - base.blue) ~/ 100;
     return Color.fromRGBO(r, g, b, 1.0);
   }
 

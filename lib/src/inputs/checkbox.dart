@@ -147,9 +147,12 @@ class ArnaCheckBox extends StatelessWidget {
                       focused
                           ? accent
                           : selected && enabled
-                              ? ArnaDynamicColor.borderColor(accent, context)
+                              ? ArnaDynamicColor.innerColor(accent)
                               : hover && enabled
-                                  ? accent
+                                  ? ArnaDynamicColor.borderColor(
+                                      accent,
+                                      context,
+                                    )
                                   : ArnaColors.borderColor,
                       context,
                     ),

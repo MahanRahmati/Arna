@@ -446,48 +446,77 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     double delta = (colorLuminance >= accentLuminance)
         ? colorLuminance - accentLuminance
         : accentLuminance - colorLuminance;
-    double distance = colorDistance(backgroundColor, accent);
+    bool failed = false;
 
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
-    if (!blend) {
-      switch (brightness) {
-        case Brightness.light:
-          return isHighContrastEnabled
-              ? ArnaColors.color01
-              : delta < maximumDelta
-                  ? ArnaColors.color07
-                  : accent;
-        case Brightness.dark:
-          return isHighContrastEnabled
-              ? ArnaColors.color36
-              : delta < maximumDelta
-                  ? ArnaColors.color30
-                  : accent;
-      }
-    } else {
-      int percentage = (1050 - distance) ~/ 49;
-      if (percentage < 7) return accent;
-      Color secondColor = (brightness == Brightness.light)
+    if (blend) {
+      Color themeColor = (brightness == Brightness.light)
           ? ArnaColors.color01
           : ArnaColors.color36;
-      if (colorDistance(accent, secondColor) < 210) {
-        secondColor = (brightness == Brightness.light)
-            ? ArnaColors.color36
-            : ArnaColors.color01;
-        distance = colorDistance(accent, secondColor);
-        percentage = (1050 - distance) ~/ 35;
+      Color themeInverseColor = (brightness == Brightness.light)
+          ? ArnaColors.color36
+          : ArnaColors.color01;
+      Color secondColor = themeColor;
+      double backgroundDistance = colorDistance(accent, backgroundColor);
+      double themeDistance = colorDistance(backgroundColor, themeColor);
+      double themeInverseDistance =
+          colorDistance(backgroundColor, themeInverseColor);
+
+      if (themeDistance < themeInverseDistance) {
+        secondColor = themeInverseColor;
       }
+
+      if (backgroundDistance < 50) {
+        failed = true;
+      }
+      double delta = (themeDistance > themeInverseDistance)
+          ? (themeDistance - themeInverseDistance)
+          : (themeInverseDistance - themeDistance);
+
+      if (delta > 200 && !failed) {
+        delta = delta / 2;
+      } else {
+        themeDistance = colorDistance(accent, themeColor);
+        themeInverseDistance = colorDistance(accent, themeInverseColor);
+
+        secondColor = (themeDistance > themeInverseDistance)
+            ? themeInverseColor
+            : themeColor;
+      }
+
+      delta = colorDistance(accent, secondColor);
+      delta = (themeColor == secondColor) ? delta * 2 : delta * 4;
+      int percentage = (delta) ~/ 21;
+      if (percentage > 90 && !failed) return secondColor;
 
       int r = accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
       int g =
           accent.green + percentage * (secondColor.green - accent.green) ~/ 100;
       int b =
           accent.blue + percentage * (secondColor.blue - accent.blue) ~/ 100;
-      return Color.fromRGBO(r, g, b, 1.0);
+      if (!failed) return Color.fromRGBO(r, g, b, 1.0);
+    }
+    switch (brightness) {
+      case Brightness.light:
+        return isHighContrastEnabled
+            ? ArnaColors.color01
+            : delta < maximumDelta
+                ? ArnaColors.color07
+                : (failed)
+                    ? ArnaColors.color09
+                    : accent;
+      case Brightness.dark:
+        return isHighContrastEnabled
+            ? ArnaColors.color36
+            : delta < maximumDelta
+                ? ArnaColors.color30
+                : (failed)
+                    ? ArnaColors.color28
+                    : accent;
     }
   }
 

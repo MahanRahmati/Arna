@@ -432,6 +432,14 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         (((767 - rmean) * bb * bb) >> 8));
   }
 
+  static double calculateError(Color color, Color a, Color b) {
+    double da = colorDistance(color, a);
+    double db = colorDistance(color, b);
+    double x = (da > db) ? da - db : db - da;
+    int sign = (da > db) ? 1 : -1;
+    return sign * (x / (da + db));
+  }
+
   /// Computes the color that matches with [backgroundColor] and [accentColor]
   /// by using [computeLuminance] and getting [maximumDelta].
   static Color matchingColor(
@@ -441,13 +449,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     double maximumDelta = 0.28,
     bool blend = false,
   }) {
-    double colorLuminance = backgroundColor.computeLuminance();
-    double accentLuminance = accent.computeLuminance();
-    double delta = (colorLuminance >= accentLuminance)
-        ? colorLuminance - accentLuminance
-        : accentLuminance - colorLuminance;
-    bool failed = false;
-
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
@@ -460,63 +461,52 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       Color themeInverseColor = (brightness == Brightness.light)
           ? ArnaColors.color36
           : ArnaColors.color01;
+
+      double accentError =
+          calculateError(accent, themeColor, themeInverseColor);
+      double backgroundError =
+          calculateError(backgroundColor, themeColor, themeInverseColor);
+
+      double distance = (accentError +
+              backgroundError -
+              ((brightness == Brightness.light) ? 1 : 0.7)) /
+          2;
       Color secondColor = themeColor;
-      double backgroundDistance = colorDistance(accent, backgroundColor);
-      double themeDistance = colorDistance(backgroundColor, themeColor);
-      double themeInverseDistance =
-          colorDistance(backgroundColor, themeInverseColor);
-
-      if (themeDistance < themeInverseDistance) {
+      if (distance < 0) {
         secondColor = themeInverseColor;
+        distance -= distance;
       }
 
-      if (backgroundDistance < 50) {
-        failed = true;
-      }
-      double delta = (themeDistance > themeInverseDistance)
-          ? (themeDistance - themeInverseDistance)
-          : (themeInverseDistance - themeDistance);
-
-      if (delta > 200 && !failed) {
-        delta = delta / 2;
-      } else {
-        themeDistance = colorDistance(accent, themeColor);
-        themeInverseDistance = colorDistance(accent, themeInverseColor);
-
-        secondColor = (themeDistance > themeInverseDistance)
-            ? themeInverseColor
-            : themeColor;
-      }
-
-      delta = colorDistance(accent, secondColor);
-      delta = (themeColor == secondColor) ? delta * 2 : delta * 4;
-      int percentage = (delta) ~/ 21;
-      if (percentage > 90 && !failed) return secondColor;
+      int percentage = distance * 100 ~/ 1;
+      if (percentage < 5) return accent;
 
       int r = accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
       int g =
           accent.green + percentage * (secondColor.green - accent.green) ~/ 100;
       int b =
           accent.blue + percentage * (secondColor.blue - accent.blue) ~/ 100;
-      if (!failed) return Color.fromRGBO(r, g, b, 1.0);
+      return Color.fromRGBO(r, g, b, 1.0);
     }
+
+    double colorLuminance = backgroundColor.computeLuminance();
+    double accentLuminance = accent.computeLuminance();
+    double delta = (colorLuminance >= accentLuminance)
+        ? colorLuminance - accentLuminance
+        : accentLuminance - colorLuminance;
+
     switch (brightness) {
       case Brightness.light:
         return isHighContrastEnabled
             ? ArnaColors.color01
             : delta < maximumDelta
                 ? ArnaColors.color07
-                : (failed)
-                    ? ArnaColors.color09
-                    : accent;
+                : accent;
       case Brightness.dark:
         return isHighContrastEnabled
             ? ArnaColors.color36
             : delta < maximumDelta
                 ? ArnaColors.color30
-                : (failed)
-                    ? ArnaColors.color28
-                    : accent;
+                : accent;
     }
   }
 

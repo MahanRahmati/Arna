@@ -15,7 +15,9 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(changeTheme);
+    final accentColor = ref.watch(changeColor);
     Brightness? brightness;
+    Color? accent;
 
     switch (theme.theme) {
       case Theme.dark:
@@ -28,16 +30,25 @@ class MyApp extends ConsumerWidget {
         brightness = null;
     }
 
+    switch (accentColor.accent) {
+      case AccentColor.green:
+        accent = ArnaColors.successColor;
+        break;
+      case AccentColor.red:
+        accent = ArnaColors.errorColor;
+        break;
+      case AccentColor.orange:
+        accent = ArnaColors.warningColor;
+        break;
+      default:
+        accent = ArnaColors.accentColor;
+    }
+
     return ArnaApp(
       debugShowCheckedModeBanner: false,
       theme: ArnaThemeData(
         brightness: brightness,
-        accentColor: const ArnaDynamicColor(
-          color: ArnaColors.accentColor,
-          darkColor: ArnaColors.accentColor,
-          highContrastColor: ArnaColors.accentColor,
-          darkHighContrastColor: ArnaColors.accentColor,
-        ),
+        accentColor: accent,
       ),
       home: const Home(),
     );
@@ -152,11 +163,7 @@ class _HomeState extends ConsumerState<Home> {
                 ),
               ],
             ),
-            items: [
-              hello,
-              widgets,
-              typography,
-            ],
+            items: [hello, widgets, typography],
           );
   }
 }

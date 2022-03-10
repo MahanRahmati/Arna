@@ -352,7 +352,7 @@ class _WidgetsState extends State<Widgets> {
                 title: "Text Field",
                 subtitle: "Text fields let users enter and edit text.",
                 child: Padding(
-                  padding: Styles.large,
+                  padding: Styles.small,
                   child: ArnaTextField(),
                 ),
               ),

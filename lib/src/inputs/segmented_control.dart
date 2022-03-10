@@ -127,7 +127,7 @@ class _ArnaSegmentedControlState<T extends Object>
       index += 1;
     }
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
-    return Row(children: children);
+    return Row(mainAxisSize: MainAxisSize.min, children: children);
   }
 
   @override

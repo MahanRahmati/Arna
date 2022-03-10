@@ -15,7 +15,6 @@ class ArnaSideBarItem extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-    this.colorType = ColorType.normal,
   }) : super(key: key);
 
   /// The text label of the item.
@@ -53,9 +52,6 @@ class ArnaSideBarItem extends StatelessWidget {
   /// The semantic label of the item.
   final String? semanticLabel;
 
-  /// Sidebar items's color type.
-  final ColorType colorType;
-
   Widget _buildChild(
     BuildContext context,
     bool enabled,
@@ -79,22 +75,20 @@ class ArnaSideBarItem extends StatelessWidget {
                   !enabled
                       ? ArnaColors.disabledColor
                       : selected
-                          ? (colorType == ColorType.smart)
-                              ? ArnaDynamicColor.matchingColor(
-                                  hovered
-                                      ? ArnaDynamicColor.resolve(
-                                          ArnaColors.buttonHoverColor,
-                                          context,
-                                        )
-                                      : ArnaDynamicColor.resolve(
-                                          ArnaColors.sideColor,
-                                          context,
-                                        ),
-                                  accent,
-                                  context,
-                                  blend: true,
-                                )
-                              : accent
+                          ? ArnaDynamicColor.matchingColor(
+                              hovered
+                                  ? ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonHoverColor,
+                                      context,
+                                    )
+                                  : ArnaDynamicColor.resolve(
+                                      ArnaColors.sideColor,
+                                      context,
+                                    ),
+                              accent,
+                              context,
+                              blend: true,
+                            )
                           : ArnaColors.iconColor,
                   context,
                 ),
@@ -186,22 +180,20 @@ class ArnaSideBarItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: (colorType == ColorType.smart)
-                      ? ArnaDynamicColor.matchingColor(
-                          hover
-                              ? ArnaDynamicColor.resolve(
-                                  ArnaColors.buttonHoverColor,
-                                  context,
-                                )
-                              : ArnaDynamicColor.resolve(
-                                  ArnaColors.sideColor,
-                                  context,
-                                ),
-                          accent,
-                          context,
-                          blend: true,
-                        )
-                      : accent,
+                  color: ArnaDynamicColor.matchingColor(
+                    hover
+                        ? ArnaDynamicColor.resolve(
+                            ArnaColors.buttonHoverColor,
+                            context,
+                          )
+                        : ArnaDynamicColor.resolve(
+                            ArnaColors.sideColor,
+                            context,
+                          ),
+                    accent,
+                    context,
+                    blend: true,
+                  ),
                 ),
               ),
             ],

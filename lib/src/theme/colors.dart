@@ -422,6 +422,19 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.color36;
   }
 
+  /// Computes the outer color for [color] by using
+  /// [computeLuminance]
+  static Color outerColor(Color color) {
+    double colorLuminance = color.computeLuminance();
+    return colorLuminance > 0.7
+        ? ArnaColors.color03
+        : colorLuminance > 0.49
+            ? ArnaColors.color07
+            : colorLuminance > 0.28
+                ? color
+                : ArnaColors.color30;
+  }
+
   static double colorDistance(Color a, Color b) {
     int rmean = (a.red + b.red) ~/ 2;
     int rr = a.red - b.red;
@@ -430,6 +443,14 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return math.sqrt((((512 + rmean) * rr * rr) >> 8) +
         4 * gg * gg +
         (((767 - rmean) * bb * bb) >> 8));
+  }
+
+  static double calculateError(Color color, Color a, Color b) {
+    double da = colorDistance(color, a);
+    double db = colorDistance(color, b);
+    double x = (da > db) ? da - db : db - da;
+    int sign = (da > db) ? 1 : -1;
+    return sign * (x / (da + db));
   }
 
   /// Computes the color that matches with [backgroundColor] and [accentColor]
@@ -441,53 +462,70 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     double maximumDelta = 0.28,
     bool blend = false,
   }) {
+    Brightness brightness =
+        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
+    bool isHighContrastEnabled =
+        MediaQuery.maybeOf(context)?.highContrast ?? false;
+    int bias = 0;
+
+    if (blend) {
+      Color themeColor = (brightness == Brightness.light)
+          ? ArnaColors.color01
+          : ArnaColors.color36;
+      Color themeInverseColor = (brightness == Brightness.light)
+          ? ArnaColors.color36
+          : ArnaColors.color01;
+
+      double accentError = calculateError(
+        accent,
+        themeColor,
+        themeInverseColor,
+      );
+      double backgroundError = calculateError(
+        backgroundColor,
+        themeColor,
+        themeInverseColor,
+      );
+
+      double distance = (accentError +
+              backgroundError -
+              ((brightness == Brightness.light) ? 1 : 0.7)) /
+          2;
+
+      Color secondColor = themeColor;
+      if (distance < 0) {
+        secondColor = themeInverseColor;
+        distance -= distance;
+      }
+
+      if (colorDistance(accent, backgroundColor) < 200) {
+        bias = 14 + (colorDistance(accent, backgroundColor) ~/ 4);
+      }
+
+      int percentage = distance * 100 ~/ 1;
+      if (bias == 0) return _colorBlender(accent, secondColor, percentage);
+      return _colorBlender(secondColor, accent, bias);
+    }
+
     double colorLuminance = backgroundColor.computeLuminance();
     double accentLuminance = accent.computeLuminance();
     double delta = (colorLuminance >= accentLuminance)
         ? colorLuminance - accentLuminance
         : accentLuminance - colorLuminance;
-    double distance = colorDistance(backgroundColor, accent);
 
-    Brightness brightness =
-        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
-    bool isHighContrastEnabled =
-        MediaQuery.maybeOf(context)?.highContrast ?? false;
-
-    if (!blend) {
-      switch (brightness) {
-        case Brightness.light:
-          return isHighContrastEnabled
-              ? ArnaColors.color01
-              : delta < maximumDelta
-                  ? ArnaColors.color07
-                  : accent;
-        case Brightness.dark:
-          return isHighContrastEnabled
-              ? ArnaColors.color36
-              : delta < maximumDelta
-                  ? ArnaColors.color30
-                  : accent;
-      }
-    } else {
-      int percentage = (1050 - distance) ~/ 49;
-      if (percentage < 7) return accent;
-      Color secondColor = (brightness == Brightness.light)
-          ? ArnaColors.color01
-          : ArnaColors.color36;
-      if (colorDistance(accent, secondColor) < 210) {
-        secondColor = (brightness == Brightness.light)
+    switch (brightness) {
+      case Brightness.light:
+        return isHighContrastEnabled
+            ? ArnaColors.color01
+            : delta < maximumDelta
+                ? ArnaColors.color07
+                : accent;
+      case Brightness.dark:
+        return isHighContrastEnabled
             ? ArnaColors.color36
-            : ArnaColors.color01;
-        distance = colorDistance(accent, secondColor);
-        percentage = (1050 - distance) ~/ 35;
-      }
-
-      int r = accent.red + percentage * (secondColor.red - accent.red) ~/ 100;
-      int g =
-          accent.green + percentage * (secondColor.green - accent.green) ~/ 100;
-      int b =
-          accent.blue + percentage * (secondColor.blue - accent.blue) ~/ 100;
-      return Color.fromRGBO(r, g, b, 1.0);
+            : delta < maximumDelta
+                ? ArnaColors.color30
+                : accent;
     }
   }
 
@@ -496,6 +534,45 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color switchBackgroundColor(Color accent, bool isOn) {
     if (isOn) return accent;
     return accent.computeLuminance() < 0.28 ? ArnaColors.color07 : accent;
+  }
+
+  static Color _findBorderColor(
+    Brightness brightness,
+    bool isHighContrastEnabled,
+    double colorLuminance,
+    bool isDark,
+    Color defaultColor,
+  ) {
+    switch (brightness) {
+      case Brightness.light:
+        return isHighContrastEnabled
+            ? ArnaColors.color01
+            : colorLuminance > 0.7
+                ? ArnaColors.color17
+                : colorLuminance > 0.49
+                    ? isDark
+                        ? ArnaColors.color09
+                        : defaultColor
+                    : colorLuminance > 0.28
+                        ? isDark
+                            ? ArnaColors.color05
+                            : defaultColor
+                        : ArnaColors.color03;
+      case Brightness.dark:
+        return isHighContrastEnabled
+            ? ArnaColors.color36
+            : colorLuminance > 0.7
+                ? ArnaColors.color17
+                : colorLuminance > 0.49
+                    ? isDark
+                        ? ArnaColors.color09
+                        : defaultColor
+                    : colorLuminance > 0.28
+                        ? isDark
+                            ? ArnaColors.color05
+                            : defaultColor
+                        : ArnaColors.color03;
+    }
   }
 
   /// Computes the border color for color by using
@@ -517,79 +594,61 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
     if (type == BorderColorType.dark) {
-      switch (brightness) {
-        case Brightness.dark:
-          return isHighContrastEnabled
-              ? ArnaColors.color01
-              : colorLuminance > 0.7
-                  ? ArnaColors.color04
-                  : colorLuminance > 0.49
-                      ? ArnaColors.color03
-                      : colorLuminance > 0.28
-                          ? ArnaColors.color02
-                          : ArnaColors.color05;
-        case Brightness.light:
-          return isHighContrastEnabled
-              ? ArnaColors.color36
-              : colorLuminance > 0.7
-                  ? ArnaColors.color26
-                  : colorLuminance > 0.49
-                      ? ArnaColors.color28
-                      : colorLuminance > 0.28
-                          ? ArnaColors.color30
-                          : ArnaColors.color32;
-      }
+      return _findBorderColor(
+        brightness,
+        isHighContrastEnabled,
+        colorLuminance,
+        true,
+        matchingColor(
+          ArnaDynamicColor.resolve(
+            ArnaColors.backgroundColor,
+            context,
+          ),
+          color,
+          context,
+        ),
+      );
     }
 
-    switch (brightness) {
-      case Brightness.light:
-        return isHighContrastEnabled
-            ? ArnaColors.color01
-            : colorLuminance > 0.7
-                ? ArnaColors.color03
-                : colorLuminance > 0.28
-                    ? color
-                    : ArnaColors.color12;
-      case Brightness.dark:
-        return isHighContrastEnabled
-            ? ArnaColors.color36
-            : colorLuminance > 0.7
-                ? ArnaColors.color12
-                : colorLuminance > 0.28
-                    ? color
-                    : ArnaColors.color30;
-    }
+    return _findBorderColor(
+      brightness,
+      isHighContrastEnabled,
+      colorLuminance,
+      false,
+      matchingColor(
+        ArnaDynamicColor.resolve(
+          ArnaColors.backgroundColor,
+          context,
+        ),
+        color,
+        context,
+      ),
+    );
   }
 
-  /// Finds the [Color] for slider by it's [value] and [computeLuminance].
-  static Color sliderColor(Color accent, double value, double min) {
-    Color firstColor = ArnaColors.color36;
-    double accentLuminance = accent.computeLuminance();
-    Color secondColor =
-        accentLuminance > 0.49 ? ArnaColors.color01 : ArnaColors.color36;
-    if (value > min) return secondColor;
-    return firstColor;
+  /// Blends the [base] color to [secondColor] by [percentage] and [computeLuminance].
+  static Color _colorBlender(
+    Color base,
+    Color secondColor,
+    int percentage,
+  ) {
+    if (percentage < 4) return base;
+    if (percentage > 96) return secondColor;
+    int r = base.red + percentage * (secondColor.red - base.red) ~/ 100;
+    int g = base.green + percentage * (secondColor.green - base.green) ~/ 100;
+    int b = base.blue + percentage * (secondColor.blue - base.blue) ~/ 100;
+    return Color.fromRGBO(r, g, b, 1.0);
   }
 
-  /// Blends the given [Color] by [percentage] and [computeLuminance].
-  static Color colorBlender(
-    Color color,
-    int percentage, {
-    bool isBorder = false,
-  }) {
-    Color secondColor = color.computeLuminance() > 0.49
-        ? isBorder
+  static Color blend(Color base, int percentage, [bool darken = false]) {
+    Color secondColor = base.computeLuminance() > 0.49
+        ? darken
             ? ArnaColors.color36
             : ArnaColors.color01
-        : isBorder
+        : darken
             ? ArnaColors.color01
             : ArnaColors.color36;
-    int r = color.red + percentage * (secondColor.red - color.red) ~/ 100;
-    int g = color.green + percentage * (secondColor.green - color.green) ~/ 100;
-    int b = color.blue + percentage * (secondColor.blue - color.blue) ~/ 100;
-    int upperBound = math.max(r, math.max(g, b));
-    int a = math.max(252, upperBound);
-    return Color.fromRGBO(r * 252 ~/ a, g * 252 ~/ a, b * 252 ~/ a, 1.0);
+    return _colorBlender(base, secondColor, percentage);
   }
 
   bool get _isPlatformBrightnessDependent =>

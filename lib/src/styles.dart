@@ -4,6 +4,7 @@ abstract class Styles {
   static const double base = 7;
   // Doubles
   static const double cursorWidth = base / 4;
+  static const double smallerPadding = base / 4;
   static const double smallPadding = padding / 2;
   static const double cursorRadius = base / 2;
   static const double padding = base;
@@ -89,6 +90,12 @@ abstract class Styles {
   static const EdgeInsets tileTextPadding = EdgeInsets.symmetric(
     horizontal: padding,
     vertical: smallPadding,
+  );
+  static const EdgeInsets titleWithSubtitlePadding = EdgeInsets.fromLTRB(
+    Styles.padding,
+    Styles.smallPadding,
+    Styles.padding,
+    Styles.smallerPadding,
   );
   static const EdgeInsets tileSubtitleTextPadding = EdgeInsets.fromLTRB(
     padding,

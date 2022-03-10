@@ -113,7 +113,9 @@ class _ArnaBannerState extends State<ArnaBanner>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: Styles.tileTextPadding,
+              padding: (widget.subtitle != null)
+                  ? Styles.titleWithSubtitlePadding
+                  : Styles.tileTextPadding,
               child: Row(
                 children: [
                   Flexible(

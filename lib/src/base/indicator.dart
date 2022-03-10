@@ -40,7 +40,7 @@ class ArnaProgressIndicator extends StatefulWidget {
   final Color? accentColor;
 
   /// The progress indicator's color type.
-  final Enum colorType;
+  final ColorType colorType;
 
   @override
   _ArnaProgressIndicatorState createState() => _ArnaProgressIndicatorState();
@@ -101,7 +101,6 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
               borderColor: ArnaDynamicColor.borderColor(
                 indicatorColor,
                 context,
-                BorderColorType.dark,
               ),
               value: widget.value == null
                   ? _controller.value == 0

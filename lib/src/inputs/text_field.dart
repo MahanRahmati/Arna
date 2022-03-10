@@ -976,7 +976,11 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             cursorWidth: Styles.cursorWidth,
             cursorHeight: widget.cursorHeight,
             cursorRadius: const Radius.circular(Styles.cursorRadius),
-            cursorColor: accent,
+            cursorColor: ArnaDynamicColor.matchingColor(
+              ArnaColors.textFieldColor,
+              accent,
+              context,
+            ),
             cursorOpacityAnimates: true,
             cursorOffset: cursorOffset,
             paintCursorAboveText: false,
@@ -1032,7 +1036,11 @@ class _ArnaTextFieldState extends State<ArnaTextField>
               border: Border.all(
                 color: ArnaDynamicColor.resolve(
                   _effectiveFocusNode.hasFocus
-                      ? accent
+                      ? ArnaDynamicColor.matchingColor(
+                          ArnaColors.textFieldColor,
+                          accent,
+                          context,
+                        )
                       : ArnaColors.borderColor,
                   context,
                 ),

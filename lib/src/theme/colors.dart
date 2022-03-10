@@ -451,7 +451,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// Computes the color that matches with [backgroundColor] and [accentColor]
-  /// by using [computeLuminance] and getting [maximumDelta].
+  /// by using [computeLuminance] (and getting [bias]).
   static Color matchingColor(
     Color backgroundColor,
     Color accent,
@@ -463,7 +463,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
-    if (bias < 0) {
+    if (bias > 0) {
       Color themeColor = (brightness == Brightness.light)
           ? ArnaColors.color01
           : ArnaColors.color36;
@@ -493,7 +493,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         distance -= distance;
       }
 
-      bool ignore = (bias > 0) ? true : false;
+      bool ignore = false;
       int alternativePercentage = bias;
       if (_colorDistance(accent, backgroundColor) < 200) {
         ignore = true;
@@ -506,25 +506,14 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     }
 
     double colorLuminance = backgroundColor.computeLuminance();
-    double accentLuminance = accent.computeLuminance();
-    double delta = (colorLuminance >= accentLuminance)
-        ? colorLuminance - accentLuminance
-        : accentLuminance - colorLuminance;
 
-    switch (brightness) {
-      case Brightness.light:
-        return isHighContrastEnabled
-            ? ArnaColors.color01
-            : delta < (-bias / 100)
-                ? ArnaColors.color07
-                : accent;
-      case Brightness.dark:
-        return isHighContrastEnabled
-            ? ArnaColors.color36
-            : delta < (-bias / 100)
-                ? ArnaColors.color30
-                : accent;
-    }
+    return _findBorderColor(
+      brightness,
+      isHighContrastEnabled,
+      colorLuminance,
+      false,
+      ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+    );
   }
 
   /// Computes the switch background color from [accentColor] by using

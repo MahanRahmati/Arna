@@ -100,7 +100,9 @@ abstract class Styles {
     vertical: padding,
     horizontal: largePadding,
   );
-  static const EdgeInsets textFieldPadding = EdgeInsets.all(textFieldPaddingSize);
+  static const EdgeInsets textFieldPadding = EdgeInsets.all(
+    textFieldPaddingSize,
+  );
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 
   // BorderRadius

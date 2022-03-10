@@ -11,6 +11,7 @@ abstract class Styles {
   static const double scrollBarThickness = base;
   static const double sliderSize = base * 1.5;
   static const double scrollBarHoverThickness = base * 1.5;
+  static const double textFieldPaddingSize = base * 1.5;
   static const double radioIndicatorSize = base * 1.75;
   static const double largePadding = padding * 2;
   static const double checkBoxIconSize = base * 2.5;
@@ -98,6 +99,9 @@ abstract class Styles {
   static const EdgeInsets listPadding = EdgeInsets.symmetric(
     vertical: padding,
     horizontal: largePadding,
+  );
+  static const EdgeInsets textFieldPadding = EdgeInsets.all(
+    textFieldPaddingSize,
   );
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 

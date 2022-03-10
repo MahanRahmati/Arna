@@ -76,13 +76,15 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> {
                   context,
                 ),
                 child: Padding(
-                  padding: Styles.horizontal,
+                  padding: Styles.small,
                   child: Center(
                     child: SizedBox(
                       width: Styles.searchWidth,
                       child: ArnaTextField(
                         controller: widget.controller,
-                        hintText: widget.hint,
+                        placeholder: widget.hint,
+                        prefix: const Icon(Icons.search_outlined),
+                        clearButtonMode: ArnaOverlayVisibilityMode.editing,
                         onChanged: widget.onChanged,
                         onEditingComplete: widget.onEditingComplete,
                         onSubmitted: widget.onSubmitted,

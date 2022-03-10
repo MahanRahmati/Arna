@@ -89,10 +89,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
               child: widget.icon,
             ),
           ),
-        SizedBox(
-          height: widget.icon != null
-              ? MediaQuery.of(context).size.height - Styles.sideBarIconHeight
-              : MediaQuery.of(context).size.height,
+        Flexible(
           child: ListView.builder(
             controller: ScrollController(),
             itemCount: widget.items.length,

@@ -84,7 +84,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
                         Styles.padding,
                         Styles.smallPadding,
                         Styles.padding,
-                        Styles.cursorWidth,
+                        Styles.smallerPadding,
                       )
                     : Styles.tileTextPadding,
                 child: Row(

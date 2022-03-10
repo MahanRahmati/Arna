@@ -5,6 +5,7 @@ abstract class Styles {
   // Doubles
   static const double cursorWidth = base / 4;
   static const double smallPadding = padding / 2;
+  static const double smallerPadding = base / 4;
   static const double cursorRadius = base / 2;
   static const double padding = base;
   static const double borderRadiusSize = base;

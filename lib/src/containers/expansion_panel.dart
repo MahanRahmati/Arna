@@ -153,7 +153,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                         Styles.padding,
                         Styles.smallPadding,
                         Styles.padding,
-                        Styles.cursorWidth,
+                        Styles.smallerPadding,
                       )
                     : Styles.tileTextPadding,
                 child: Row(

@@ -81,7 +81,6 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
       ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
       accent,
       context,
-      blend: true,
     );
     return SizedBox(
       height: widget.size,

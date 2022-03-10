@@ -455,17 +455,15 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color matchingColor(
     Color backgroundColor,
     Color accent,
-    BuildContext context, {
-    double maximumDelta = 0.28,
-    bool blend = false,
-  }) {
+    BuildContext context, [
+    int bias = 28,
+  ]) {
     Brightness brightness =
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
-    int bias = 0;
 
-    if (blend) {
+    if (bias < 0) {
       Color themeColor = (brightness == Brightness.light)
           ? ArnaColors.color01
           : ArnaColors.color36;
@@ -495,13 +493,16 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         distance -= distance;
       }
 
+      bool ignore = (bias > 0) ? true : false;
+      int alternativePercentage = bias;
       if (_colorDistance(accent, backgroundColor) < 200) {
-        bias = 14 + (_colorDistance(accent, backgroundColor) ~/ 4);
+        ignore = true;
+        alternativePercentage += (_colorDistance(accent, backgroundColor) ~/ 4);
       }
 
       int percentage = distance * 100 ~/ 1;
-      if (bias == 0) return _colorBlender(accent, secondColor, percentage);
-      return _colorBlender(secondColor, accent, bias);
+      if (!ignore) return _colorBlender(accent, secondColor, percentage);
+      return _colorBlender(secondColor, accent, alternativePercentage);
     }
 
     double colorLuminance = backgroundColor.computeLuminance();
@@ -514,13 +515,13 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       case Brightness.light:
         return isHighContrastEnabled
             ? ArnaColors.color01
-            : delta < maximumDelta
+            : delta < (-bias / 100)
                 ? ArnaColors.color07
                 : accent;
       case Brightness.dark:
         return isHighContrastEnabled
             ? ArnaColors.color36
-            : delta < maximumDelta
+            : delta < (-bias / 100)
                 ? ArnaColors.color30
                 : accent;
     }

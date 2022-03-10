@@ -119,7 +119,7 @@ class _ArnaSegmentedControlState<T extends Object>
             ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
             accent,
             context,
-            blend: true,
+            -1,
           ),
           cursor: widget.cursor,
         ),

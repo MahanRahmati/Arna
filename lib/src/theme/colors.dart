@@ -499,7 +499,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       }
 
       if (colorDistance(accent, backgroundColor) < 200) {
-        bias = 10 + (colorDistance(accent, backgroundColor) ~/ 4);
+        bias = 14 + (colorDistance(accent, backgroundColor) ~/ 4);
       }
 
       int percentage = distance * 100 ~/ 1;

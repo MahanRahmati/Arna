@@ -466,6 +466,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
+    int bias = 0;
 
     if (blend) {
       Color themeColor = (brightness == Brightness.light)
@@ -484,14 +485,20 @@ class ArnaDynamicColor extends Color with Diagnosticable {
               backgroundError -
               ((brightness == Brightness.light) ? 1 : 0.7)) /
           2;
+
       Color secondColor = themeColor;
       if (distance < 0) {
         secondColor = themeInverseColor;
         distance -= distance;
       }
 
+      if (colorDistance(accent, backgroundColor) < 200) {
+        bias = 10 + (colorDistance(accent, backgroundColor) ~/ 4);
+      }
+
       int percentage = distance * 100 ~/ 1;
-      return _colorBlender(accent, secondColor, percentage);
+      if (bias == 0) return _colorBlender(accent, secondColor, percentage);
+      return _colorBlender(secondColor, accent, bias);
     }
 
     double colorLuminance = backgroundColor.computeLuminance();

@@ -118,7 +118,7 @@ class _ArnaBannerState extends State<ArnaBanner>
                       Styles.padding,
                       Styles.smallPadding,
                       Styles.padding,
-                      Styles.cursorWidth,
+                      Styles.smallerPadding,
                     )
                   : Styles.tileTextPadding,
               child: Row(

@@ -114,12 +114,7 @@ class _ArnaBannerState extends State<ArnaBanner>
           children: [
             Padding(
               padding: (widget.subtitle != null)
-                  ? const EdgeInsets.fromLTRB(
-                      Styles.padding,
-                      Styles.smallPadding,
-                      Styles.padding,
-                      Styles.smallerPadding,
-                    )
+                  ? Styles.titleWithSubtitlePadding
                   : Styles.tileTextPadding,
               child: Row(
                 children: [

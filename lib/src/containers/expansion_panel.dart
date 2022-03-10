@@ -149,12 +149,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
             if (widget.title != null)
               Padding(
                 padding: (widget.subtitle != null)
-                    ? const EdgeInsets.fromLTRB(
-                        Styles.padding,
-                        Styles.smallPadding,
-                        Styles.padding,
-                        Styles.smallerPadding,
-                      )
+                    ? Styles.titleWithSubtitlePadding
                     : Styles.tileTextPadding,
                 child: Row(
                   children: [

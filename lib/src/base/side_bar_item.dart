@@ -54,7 +54,7 @@ class ArnaSideBarItem extends StatelessWidget {
   final String? semanticLabel;
 
   /// Sidebar items's color type.
-  final ColorType colorType;
+  final Enum colorType;
 
   Widget _buildChild(
     BuildContext context,

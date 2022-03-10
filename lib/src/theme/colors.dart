@@ -435,7 +435,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.color30;
   }
 
-  static double colorDistance(Color a, Color b) {
+  static double _colorDistance(Color a, Color b) {
     int rmean = (a.red + b.red) ~/ 2;
     int rr = a.red - b.red;
     int gg = b.green - b.green;
@@ -445,9 +445,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         (((767 - rmean) * bb * bb) >> 8));
   }
 
-  static double calculateError(Color color, Color a, Color b) {
-    double da = colorDistance(color, a);
-    double db = colorDistance(color, b);
+  static double _calculateError(Color color, Color a, Color b) {
+    double da = _colorDistance(color, a);
+    double db = _colorDistance(color, b);
     double x = (da > db) ? da - db : db - da;
     int sign = (da > db) ? 1 : -1;
     return sign * (x / (da + db));
@@ -476,12 +476,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
           ? ArnaColors.color36
           : ArnaColors.color01;
 
-      double accentError = calculateError(
+      double accentError = _calculateError(
         accent,
         themeColor,
         themeInverseColor,
       );
-      double backgroundError = calculateError(
+      double backgroundError = _calculateError(
         backgroundColor,
         themeColor,
         themeInverseColor,
@@ -498,8 +498,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         distance -= distance;
       }
 
-      if (colorDistance(accent, backgroundColor) < 200) {
-        bias = 14 + (colorDistance(accent, backgroundColor) ~/ 4);
+      if (_colorDistance(accent, backgroundColor) < 200) {
+        bias = 14 + (_colorDistance(accent, backgroundColor) ~/ 4);
       }
 
       int percentage = distance * 100 ~/ 1;

@@ -40,7 +40,7 @@ class ArnaProgressIndicator extends StatefulWidget {
   final Color? accentColor;
 
   /// The progress indicator's color type.
-  final Enum colorType;
+  final ColorType colorType;
 
   @override
   _ArnaProgressIndicatorState createState() => _ArnaProgressIndicatorState();

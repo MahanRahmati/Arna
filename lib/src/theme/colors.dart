@@ -476,10 +476,16 @@ class ArnaDynamicColor extends Color with Diagnosticable {
           ? ArnaColors.color36
           : ArnaColors.color01;
 
-      double accentError =
-          calculateError(accent, themeColor, themeInverseColor);
-      double backgroundError =
-          calculateError(backgroundColor, themeColor, themeInverseColor);
+      double accentError = calculateError(
+        accent,
+        themeColor,
+        themeInverseColor,
+      );
+      double backgroundError = calculateError(
+        backgroundColor,
+        themeColor,
+        themeInverseColor,
+      );
 
       double distance = (accentError +
               backgroundError -
@@ -545,7 +551,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 ? ArnaColors.color17
                 : colorLuminance > 0.49
                     ? isDark
-                        ? ArnaColors.color09 //
+                        ? ArnaColors.color09
                         : defaultColor
                     : colorLuminance > 0.28
                         ? isDark

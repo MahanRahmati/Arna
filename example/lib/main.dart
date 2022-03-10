@@ -36,7 +36,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(changeTheme);
-    final accentColor = ref.watch(changeColor);
+    final testAccent = ref.watch(changeColor);
 
     Brightness? brightness;
 
@@ -55,7 +55,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: ArnaThemeData(
         brightness: brightness,
-        accentColor: accentColor.accent,
+        accentColor: testAccent.accent,
       ),
       home: const Home(),
     );

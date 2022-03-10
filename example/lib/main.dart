@@ -7,6 +7,27 @@ import '/screens/settings.dart';
 import '/screens/typography.dart';
 import '/screens/widgets.dart';
 
+class ThemeChange extends ChangeNotifier {
+  Color accentColor = ArnaColors.accentColor;
+  void changeColor(Color color) {
+    accentColor = color;
+    notifyListeners();
+  }
+}
+
+final changeColor = ChangeNotifierProvider.autoDispose(
+  (ref) => ChangeColorState(),
+);
+
+class ChangeColorState extends ChangeNotifier {
+  Color accent = ArnaColors.accentColor;
+
+  void changeColor(Color c) {
+    accent = c;
+    notifyListeners();
+  }
+}
+
 void main() => runApp(const ProviderScope(child: MyApp()));
 
 class MyApp extends ConsumerWidget {
@@ -15,6 +36,8 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(changeTheme);
+    final testAccent = ref.watch(changeColor);
+
     Brightness? brightness;
 
     switch (theme.theme) {
@@ -32,12 +55,7 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: ArnaThemeData(
         brightness: brightness,
-        accentColor: const ArnaDynamicColor(
-          color: ArnaColors.accentColor,
-          darkColor: ArnaColors.accentColor,
-          highContrastColor: ArnaColors.accentColor,
-          darkHighContrastColor: ArnaColors.accentColor,
-        ),
+        accentColor: testAccent.accent,
       ),
       home: const Home(),
     );
@@ -83,6 +101,10 @@ class _HomeState extends ConsumerState<Home> {
       searchField: ArnaSearchField(
         showSearch: showSearch,
         controller: controller,
+        onSubmitted: (i) {
+          Color color = HexColor.fromHex(i);
+          ref.read(changeColor.notifier).changeColor(color);
+        },
       ),
       banner: ArnaBanner(
         showBanner: showBanner,
@@ -152,11 +174,7 @@ class _HomeState extends ConsumerState<Home> {
                 ),
               ],
             ),
-            items: [
-              hello,
-              widgets,
-              typography,
-            ],
+            items: [hello, widgets, typography],
           );
   }
 }

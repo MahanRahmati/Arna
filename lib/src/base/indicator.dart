@@ -91,9 +91,9 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
           return CustomPaint(
             painter: _ProgressPainter(
               color: indicatorColor,
-              borderColor: ArnaDynamicColor.borderColor(
+              borderColor: ArnaDynamicColor.outerColor(
                 indicatorColor,
-                context,
+                true,
               ),
               value: widget.value == null
                   ? _controller.value == 0

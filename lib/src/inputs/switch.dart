@@ -100,18 +100,25 @@ class ArnaSwitch extends StatelessWidget {
                     border: Border.all(
                       color: ArnaDynamicColor.resolve(
                         focused
-                            ? ArnaDynamicColor.borderColor(
+                            ? ArnaDynamicColor.outerColor(
                                 accent,
-                                context,
+                                true,
                               )
-                            : hover && enabled
-                                ? ArnaDynamicColor.borderColor(
-                                    accent,
-                                    context,
-                                  )
-                                : value
-                                    ? ArnaDynamicColor.outerColor(accent)
-                                    : ArnaColors.borderColor,
+                            : !enabled
+                                ? ArnaColors.borderColor
+                                : hover
+                                    ? value
+                                        ? ArnaDynamicColor.innerColor(accent)
+                                        : ArnaDynamicColor.outerColor(
+                                            accent,
+                                            true,
+                                          )
+                                    : value
+                                        ? ArnaDynamicColor.outerColor(
+                                            accent,
+                                            true,
+                                          )
+                                        : ArnaColors.borderColor,
                         context,
                       ),
                     ),
@@ -153,12 +160,15 @@ class ArnaSwitch extends StatelessWidget {
                                   context,
                                 )
                               : hover
-                                  ? ArnaDynamicColor.borderColor(
+                                  ? ArnaDynamicColor.outerColor(
                                       accent,
-                                      context,
+                                      true,
                                     )
                                   : ArnaDynamicColor.borderColor(
-                                      accent, context, BorderColorType.none),
+                                      accent,
+                                      context,
+                                      true,
+                                    ),
                     ),
                     color: ArnaDynamicColor.resolve(
                       !enabled

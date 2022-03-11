@@ -91,7 +91,7 @@ class _ArnaLinked extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaBaseButton(
+    return ArnaBaseWidget(
       builder: (context, enabled, hover, focused, pressed, selected) {
         return AnimatedContainer(
           height: Styles.buttonSize - 2,

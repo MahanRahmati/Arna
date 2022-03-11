@@ -261,7 +261,7 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>>
   @override
   Widget build(BuildContext context) {
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    return ArnaBaseButton(
+    return ArnaBaseWidget(
       builder: (context, enabled, hover, focused, pressed, selected) {
         enabled = widget.enabled;
         selected = widget.selected;

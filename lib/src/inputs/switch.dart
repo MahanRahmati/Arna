@@ -103,13 +103,15 @@ class ArnaSwitch extends StatelessWidget {
                             ? ArnaDynamicColor.outerColor(
                                 accent,
                               )
-                            : hover && enabled
-                                ? ArnaDynamicColor.outerColor(
-                                    accent,
-                                  )
-                                : value
-                                    ? ArnaDynamicColor.outerColor(accent)
-                                    : ArnaColors.borderColor,
+                            : !enabled
+                                ? ArnaColors.borderColor
+                                : hover
+                                    ? value
+                                        ? ArnaDynamicColor.smartBorder(accent)
+                                        : ArnaDynamicColor.outerColor(accent)
+                                    : value && selected
+                                        ? accent
+                                        : ArnaColors.borderColor,
                         context,
                       ),
                     ),

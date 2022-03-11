@@ -41,7 +41,7 @@ class MyApp extends ConsumerWidget {
         accent = ArnaColors.warningColor;
         break;
       default:
-        accent = ArnaColors.color36;
+        accent = ArnaColors.accentColor;
     }
 
     return ArnaApp(

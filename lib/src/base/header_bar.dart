@@ -26,17 +26,6 @@ class ArnaHeaderBar extends StatelessWidget {
   /// The trailing widget laid out within the header bar.
   final Widget? trailing;
 
-  Widget _buildChild() {
-    final List<Widget> children = [];
-    children.add(leading ?? const SizedBox.expand());
-    children.add(Flexible(child: middle ?? const SizedBox.expand()));
-    children.add(trailing ?? const SizedBox.expand());
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: children,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Semantics(
@@ -54,8 +43,13 @@ class ArnaHeaderBar extends StatelessWidget {
                   context,
                 ),
                 child: Padding(
-                  padding: Styles.horizontal,
-                  child: _buildChild(),
+                  padding: Styles.smallHorizontal,
+                  child: NavigationToolbar(
+                    leading: leading,
+                    middle: middle,
+                    trailing: trailing,
+                    middleSpacing: Styles.smallPadding,
+                  ),
                 ),
               ),
               const ArnaHorizontalDivider(),

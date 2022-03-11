@@ -81,6 +81,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
         final page = widget.items[index];
         return ArnaScaffold(
           headerBarLeading: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               ArnaIconButton(
                 icon: Icons.arrow_back_outlined,

@@ -1,6 +1,8 @@
 import 'package:arna/arna.dart';
 
-typedef ArnaBaseButtonBuilder = Widget Function(
+/// The base widget builder which grants interactive states to widgets.
+typedef ArnaBaseWidgetBuilder = Widget Function(
+  /// A handle to the location of a widget in the widget tree.
   BuildContext context,
 
   /// The state when this widget is enabled and can be interacted with.
@@ -19,16 +21,23 @@ typedef ArnaBaseButtonBuilder = Widget Function(
   bool selected,
 );
 
-/// The base [StatefulWidget] class for buttons.
+/// The base [StatefulWidget] class for many other widgets.
 ///
 /// See also:
 ///
 ///  * [ArnaButton]
 ///  * [ArnaIconButton]
 ///  * [ArnaTextButton]
-class ArnaBaseButton extends StatefulWidget {
-  /// Creates a base button.
-  const ArnaBaseButton({
+///  * [ArnaBottomBarItem]
+///  * [ArnaMasterItem]
+///  * [ArnaSideBarItem]
+///  * [ArnaLinkedButtons]
+///  * [ArnaCheckBox]
+///  * [ArnaRadio]
+///  * [ArnaSwitch]
+class ArnaBaseWidget extends StatefulWidget {
+  /// Creates a base widget.
+  const ArnaBaseWidget({
     Key? key,
     required this.builder,
     this.onPressed,
@@ -40,37 +49,37 @@ class ArnaBaseButton extends StatefulWidget {
     this.semanticLabel,
   }) : super(key: key);
 
-  /// The base builder for buttons.
-  final ArnaBaseButtonBuilder builder;
+  /// The base builder for widgets.
+  final ArnaBaseWidgetBuilder builder;
 
-  /// The callback that is called when a button is tapped.
+  /// The callback that is called when a widget is tapped.
   final VoidCallback? onPressed;
 
-  /// The tooltip message of the button.
+  /// The tooltip message of the widget.
   final String? tooltipMessage;
 
-  /// Whether this button is focusable or not.
+  /// Whether this widget is focusable or not.
   final bool isFocusable;
 
   /// Whether to show animation or not.
   final bool showAnimation;
 
-  /// Whether this button should focus itself if nothing else is already
+  /// Whether this widget should focus itself if nothing else is already
   /// focused.
   final bool autofocus;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// button.
+  /// widget.
   final MouseCursor cursor;
 
-  /// The semantic label of the button.
+  /// The semantic label of the widget.
   final String? semanticLabel;
 
   @override
-  _ArnaBaseButtonState createState() => _ArnaBaseButtonState();
+  _ArnaBaseWidgetState createState() => _ArnaBaseWidgetState();
 }
 
-class _ArnaBaseButtonState extends State<ArnaBaseButton>
+class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
     with SingleTickerProviderStateMixin {
   FocusNode? focusNode;
   bool _hover = false;
@@ -83,8 +92,9 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
   late Map<Type, Action<Intent>> _actions;
   late Map<ShortcutActivator, Intent> _shortcuts;
 
-  /// Whether the button is enabled or disabled. Buttons are disabled by default.
-  /// To enable an item, set its [onPressed] property to a non-null value.
+  /// Whether the widget is enabled or disabled. Widgets are disabled by
+  /// default.
+  /// To enable a widget, set its [onPressed] property to a non-null value.
   bool get isEnabled => widget.onPressed != null;
 
   @override
@@ -113,7 +123,7 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
   }
 
   @override
-  void didUpdateWidget(ArnaBaseButton oldWidget) {
+  void didUpdateWidget(ArnaBaseWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.onPressed != oldWidget.onPressed) {
       focusNode!.canRequestFocus = isEnabled;
@@ -176,6 +186,17 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
 
   @override
   Widget build(BuildContext context) {
+    Widget child = widget.builder(
+      context,
+      isEnabled,
+      _hover,
+      _focused,
+      _pressed,
+      _selected,
+    );
+    if (widget.showAnimation) {
+      child = ScaleTransition(scale: _animation, child: child);
+    }
     return ArnaTooltip(
       message: widget.tooltipMessage,
       child: MergeSemantics(
@@ -209,26 +230,7 @@ class _ArnaBaseButtonState extends State<ArnaBaseButton>
               onFocusChange: _handleFocusChange,
               actions: _actions,
               shortcuts: _shortcuts,
-              child: widget.showAnimation
-                  ? ScaleTransition(
-                      scale: _animation,
-                      child: widget.builder(
-                        context,
-                        isEnabled,
-                        _hover,
-                        _focused,
-                        _pressed,
-                        _selected,
-                      ),
-                    )
-                  : widget.builder(
-                      context,
-                      isEnabled,
-                      _hover,
-                      _focused,
-                      _pressed,
-                      _selected,
-                    ),
+              child: child,
             ),
           ),
         ),

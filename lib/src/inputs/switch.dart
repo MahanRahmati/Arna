@@ -84,7 +84,7 @@ class ArnaSwitch extends StatelessWidget {
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
-      child: ArnaBaseButton(
+      child: ArnaBaseWidget(
         builder: (context, enabled, hover, focused, pressed, selected) {
           enabled = onChanged != null;
           return Stack(

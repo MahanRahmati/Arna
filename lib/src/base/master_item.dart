@@ -97,7 +97,7 @@ class ArnaMasterItem extends StatelessWidget {
     bool buttonSelected = selected;
     return Padding(
       padding: Styles.small,
-      child: ArnaBaseButton(
+      child: ArnaBaseWidget(
         builder: (context, enabled, hover, focused, pressed, selected) {
           selected = buttonSelected;
           return Stack(

@@ -139,7 +139,7 @@ class ArnaButton extends StatelessWidget {
 
     return Padding(
       padding: Styles.small,
-      child: ArnaBaseButton(
+      child: ArnaBaseWidget(
         builder: (context, enabled, hover, focused, pressed, selected) {
           return AnimatedContainer(
             height: (buttonSize == ButtonSize.huge)

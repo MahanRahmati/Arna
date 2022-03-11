@@ -3,7 +3,16 @@ import 'package:arna/arna.dart';
 /// Banner types.
 enum BannerType { information, warning, error, success, colored }
 
+/// A Arna-styled banner.
+///
+/// A banner displays an important, succinct message, and provides actions for
+/// users to address (or dismiss the banner). A user action is required for it
+/// to be dismissed.
+///
+/// They are persistent and non-modal, allowing the user to either ignore them or
+/// interact with them at any time.
 class ArnaBanner extends StatefulWidget {
+  /// Creates a banner in the Arna style.
   const ArnaBanner({
     Key? key,
     required this.showBanner,
@@ -77,22 +86,22 @@ class _ArnaBannerState extends State<ArnaBanner>
     super.dispose();
   }
 
-  Widget _buildChild() {
-    final List<Widget> children = [];
-    Color accent;
+  @override
+  Widget build(BuildContext context) {
     IconData icon = Icons.info;
+    Color accent;
     switch (widget.bannerType) {
       case BannerType.warning:
-        accent = ArnaColors.warningColor;
         icon = Icons.warning;
+        accent = ArnaColors.warningColor;
         break;
       case BannerType.error:
-        accent = ArnaColors.errorColor;
         icon = Icons.error;
+        accent = ArnaColors.errorColor;
         break;
       case BannerType.success:
-        accent = ArnaColors.successColor;
         icon = Icons.check_circle;
+        accent = ArnaColors.successColor;
         break;
       case BannerType.colored:
         accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
@@ -100,72 +109,6 @@ class _ArnaBannerState extends State<ArnaBanner>
       default:
         accent = ArnaColors.accentColor;
     }
-    children.add(
-      Icon(
-        icon,
-        color: ArnaDynamicColor.resolve(accent, context),
-      ),
-    );
-    children.add(const SizedBox(width: Styles.padding));
-    children.add(
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: (widget.subtitle != null)
-                  ? Styles.titleWithSubtitlePadding
-                  : Styles.tileTextPadding,
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      widget.title,
-                      style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
-                            color: ArnaDynamicColor.resolve(
-                              ArnaColors.primaryTextColor,
-                              context,
-                            ),
-                          ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            if (widget.subtitle != null)
-              Padding(
-                padding: Styles.tileSubtitleTextPadding,
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        widget.subtitle!,
-                        style: ArnaTheme.of(context)
-                            .textTheme
-                            .subtitleTextStyle
-                            .copyWith(
-                              color: ArnaDynamicColor.resolve(
-                                ArnaColors.secondaryTextColor,
-                                context,
-                              ),
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-    if (widget.trailing != null) {
-      children.add(Padding(padding: Styles.normal, child: widget.trailing));
-    }
-    return Row(children: children);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return SizeTransition(
       axisAlignment: 1,
       sizeFactor: _expandAnimation,
@@ -174,12 +117,17 @@ class _ArnaBannerState extends State<ArnaBanner>
           AnimatedContainer(
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,
-            color: ArnaDynamicColor.resolve(
-              ArnaColors.headerColor,
-              context,
+            color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+            child: ArnaListTile(
+              leading: Icon(
+                icon,
+                color: ArnaDynamicColor.resolve(accent, context),
+              ),
+              title: widget.title,
+              subtitle: widget.subtitle,
+              trailing: widget.trailing,
+              actionable: false,
             ),
-            padding: Styles.tilePadding,
-            child: _buildChild(),
           ),
           if (widget.showBanner) const ArnaHorizontalDivider(),
         ],

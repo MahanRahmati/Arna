@@ -54,7 +54,7 @@ class ArnaScaffold extends StatelessWidget {
               ),
             ),
             child: Column(
-              children: [
+              children: <Widget>[
                 ArnaHeaderBar(
                   leading: headerBarLeading,
                   middle: title != null

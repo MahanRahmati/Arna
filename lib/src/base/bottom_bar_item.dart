@@ -57,7 +57,7 @@ class ArnaBottomBarItem extends StatelessWidget {
   final String? semanticLabel;
 
   Widget _buildChild(BuildContext context, bool enabled) {
-    final List<Widget> children = [];
+    final List<Widget> children = <Widget>[];
     Widget iconWidget = Icon(
       icon,
       size: Styles.iconSize,
@@ -98,10 +98,10 @@ class ArnaBottomBarItem extends StatelessWidget {
           selected = buttonSelected;
           return Stack(
             alignment: Alignment.bottomCenter,
-            children: [
+            children: <Widget>[
               Stack(
                 alignment: Alignment.topRight,
-                children: [
+                children: <Widget>[
                   AnimatedContainer(
                     height: Styles.sideBarItemHeight,
                     duration: Styles.basicDuration,

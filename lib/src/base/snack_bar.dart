@@ -2,8 +2,8 @@ import 'package:arna/arna.dart';
 
 /// An Arna-styled snack bar.
 ///
-/// The ArnaSnackBar displays [title] and [trailing] widget.
-/// [title] is in the left, the [trailing] is in the right.
+/// The ArnaSnackBar displays [message] and [trailing] widget.
+/// [message] is in the left, the [trailing] is in the right.
 /// See also:
 ///
 ///  * [ArnaScaffold], which displays the [ArnaSnackBar].
@@ -46,7 +46,7 @@ class ArnaSnackBarState extends State<ArnaSnackBar>
   }
 
   Widget _buildChild(BuildContext context) {
-    final List<Widget> children = [];
+    final List<Widget> children = <Widget>[];
     children.add(
       Flexible(
         child: Text(

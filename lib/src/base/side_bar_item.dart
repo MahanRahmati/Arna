@@ -65,7 +65,7 @@ class ArnaSideBarItem extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),
         child: Row(
-          children: [
+          children: <Widget>[
             Padding(
               padding: Styles.normal,
               child: Icon(
@@ -122,10 +122,10 @@ class ArnaSideBarItem extends StatelessWidget {
           selected = buttonSelected;
           return Stack(
             alignment: Alignment.centerLeft,
-            children: [
+            children: <Widget>[
               Stack(
                 alignment: compact ? Alignment.topRight : Alignment.centerRight,
-                children: [
+                children: <Widget>[
                   AnimatedContainer(
                     height: Styles.sideBarItemHeight,
                     width: double.infinity,

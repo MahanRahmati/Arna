@@ -53,7 +53,7 @@ class ArnaMasterItem extends StatelessWidget {
   final String? semanticLabel;
 
   Widget _buildChild(BuildContext context) {
-    final List<Widget> children = [];
+    final List<Widget> children = <Widget>[];
     if (leading != null) {
       children.add(Padding(padding: Styles.normal, child: leading));
     }
@@ -61,7 +61,7 @@ class ArnaMasterItem extends StatelessWidget {
       Flexible(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             if (title != null)
               SizedBox(
                 width: Styles.sideBarWidth,
@@ -102,7 +102,7 @@ class ArnaMasterItem extends StatelessWidget {
           selected = buttonSelected;
           return Stack(
             alignment: Alignment.centerLeft,
-            children: [
+            children: <Widget>[
               AnimatedContainer(
                 constraints: const BoxConstraints(
                   minHeight: Styles.minMasterItemHeight,

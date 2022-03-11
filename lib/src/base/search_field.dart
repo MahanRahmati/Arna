@@ -66,7 +66,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> {
   Widget build(BuildContext context) {
     return widget.showSearch
         ? Column(
-            children: [
+            children: <Widget>[
               AnimatedContainer(
                 height: widget.showSearch ? Styles.headerBarHeight : 0,
                 duration: Styles.basicDuration,

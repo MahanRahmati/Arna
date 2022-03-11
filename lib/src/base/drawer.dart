@@ -44,7 +44,7 @@ class ArnaDrawer extends StatelessWidget {
       label: semanticLabel ?? MaterialLocalizations.of(context).drawerLabel,
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           ConstrainedBox(
             constraints: BoxConstraints.expand(
               width: Styles.sideBarWidth < (deviceWidth(context) * 0.7)
@@ -181,7 +181,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
         ? const SizedBox.shrink()
         : RepaintBoundary(
             child: Stack(
-              children: [
+              children: <Widget>[
                 BlockSemantics(
                   child: GestureDetector(
                     onTap: close,

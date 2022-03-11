@@ -113,7 +113,7 @@ class _ArnaBannerState extends State<ArnaBanner>
       axisAlignment: 1,
       sizeFactor: _expandAnimation,
       child: Column(
-        children: [
+        children: <Widget>[
           AnimatedContainer(
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,

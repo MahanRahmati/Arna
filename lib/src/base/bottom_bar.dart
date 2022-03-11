@@ -19,7 +19,7 @@ class ArnaBottomBar extends StatelessWidget {
         child: SafeArea(
           top: false,
           child: Column(
-            children: [
+            children: <Widget>[
               const ArnaHorizontalDivider(),
               Container(
                 color: ArnaDynamicColor.resolve(

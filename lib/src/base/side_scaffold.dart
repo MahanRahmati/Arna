@@ -79,7 +79,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
 
   Widget _buildChild() {
     return Column(
-      children: [
+      children: <Widget>[
         if (widget.icon != null)
           SizedBox(
             height: Styles.sideBarIconHeight,
@@ -124,10 +124,10 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
       builder: (context, constraints) {
         return widget.items.length > 1
             ? Stack(
-                children: [
+                children: <Widget>[
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       if (constraints.maxWidth > 644)
                         AnimatedContainer(
                           width: constraints.maxWidth > 960
@@ -148,7 +148,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                         child: ArnaScaffold(
                           headerBarLeading: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
+                            children: <Widget>[
                               if (constraints.maxWidth < 644)
                                 ArnaIconButton(
                                   icon: Icons.menu_outlined,
@@ -171,7 +171,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                           title: widget.title,
                           headerBarTrailing: Row(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
+                            children: <Widget>[
                               if (widget
                                       .items[_currentIndex].headerBarTrailing !=
                                   null)
@@ -183,7 +183,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                           searchField: widget.items[_currentIndex].searchField,
                           banner: widget.items[_currentIndex].banner,
                           body: Column(
-                            children: [
+                            children: <Widget>[
                               Expanded(
                                 child: FadeTransition(
                                   opacity: _animation,
@@ -207,7 +207,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
               )
             : ArnaScaffold(
                 headerBarLeading: Row(
-                  children: [
+                  children: <Widget>[
                     if (widget.headerBarLeading != null)
                       widget.headerBarLeading!,
                     if (widget.items[_currentIndex].headerBarLeading != null)
@@ -216,7 +216,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                 ),
                 title: widget.title,
                 headerBarTrailing: Row(
-                  children: [
+                  children: <Widget>[
                     if (widget.items[_currentIndex].headerBarTrailing != null)
                       widget.items[_currentIndex].headerBarTrailing!,
                     if (widget.headerBarTrailing != null)

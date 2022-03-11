@@ -35,7 +35,7 @@ class ArnaHeaderBar extends StatelessWidget {
         child: SafeArea(
           bottom: false,
           child: Column(
-            children: [
+            children: <Widget>[
               Container(
                 height: Styles.headerBarHeight,
                 color: ArnaDynamicColor.resolve(

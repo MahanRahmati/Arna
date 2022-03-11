@@ -538,11 +538,7 @@ class _ArnaTooltipOverlay extends StatelessWidget {
       ),
     ));
     if (onEnter != null || onExit != null) {
-      result = MouseRegion(
-        onEnter: onEnter,
-        onExit: onExit,
-        child: result,
-      );
+      result = MouseRegion(onEnter: onEnter, onExit: onExit, child: result);
     }
     return Positioned.fill(
       child: CustomSingleChildLayout(
@@ -572,14 +568,14 @@ class _ArnaTooltipVisibilityScope extends InheritedWidget {
   }
 }
 
-/// Overrides the visibility of descendant [Tooltip] widgets.
+/// Overrides the visibility of descendant [ArnaTooltip] widgets.
 ///
-/// If disabled, the descendant [Tooltip] widgets will not display a tooltip
+/// If disabled, the descendant [ArnaTooltip] widgets will not display a tooltip
 /// when tapped, long-pressed, hovered by the mouse, or when
 /// `ensureTooltipVisible` is called. This only visually disables tooltips but
 /// continues to provide any semantic information that is provided.
 class ArnaTooltipVisibility extends StatelessWidget {
-  /// Creates a widget that configures the visibility of [Tooltip].
+  /// Creates a widget that configures the visibility of [ArnaTooltip].
   ///
   /// Both arguments must not be null.
   const ArnaTooltipVisibility({
@@ -590,13 +586,13 @@ class ArnaTooltipVisibility extends StatelessWidget {
 
   /// The widget below this widget in the tree.
   ///
-  /// The entire app can be wrapped in this widget to globally control [Tooltip]
+  /// The entire app can be wrapped in this widget to globally control [ArnaTooltip]
   /// visibility.
   ///
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
 
-  /// Determines the visibility of [Tooltip] widgets that inherit from this widget.
+  /// Determines the visibility of [ArnaTooltip] widgets that inherit from this widget.
   final bool visible;
 
   /// The [visible] of the closest instance of this class that encloses the
@@ -609,9 +605,6 @@ class ArnaTooltipVisibility extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ArnaTooltipVisibilityScope(
-      visible: visible,
-      child: child,
-    );
+    return _ArnaTooltipVisibilityScope(visible: visible, child: child);
   }
 }

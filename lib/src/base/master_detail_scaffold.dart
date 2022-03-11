@@ -82,7 +82,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
         return ArnaScaffold(
           headerBarLeading: Row(
             mainAxisSize: MainAxisSize.min,
-            children: [
+            children: <Widget>[
               ArnaIconButton(
                 icon: Icons.arrow_back_outlined,
                 onPressed: () => _navigator.pop(context),
@@ -143,7 +143,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
         return constraints.maxWidth > 644
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: <Widget>[
                   SizedBox(
                     width: Styles.sideBarWidth,
                     child: listBuilder(false),
@@ -184,7 +184,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
                 child: Navigator(
                   key: _navigatorKey,
                   onGenerateInitialRoutes: (navigator, initialRoute) {
-                    return [
+                    return <Route<dynamic>>[
                       ArnaPageRoute(
                         builder: (context) => listBuilder(true),
                       ),

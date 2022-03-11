@@ -3,9 +3,6 @@ import 'dart:math' as math;
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 
-/// Border types.
-enum BorderColorType { normal, dark, none }
-
 /// A palette of [Color] constants that describe colors
 class ArnaColors {
   // This class is not meant to be instantiated or extended; this constructor
@@ -511,7 +508,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       brightness,
       isHighContrastEnabled,
       colorLuminance,
-      false,
       ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
     );
   }
@@ -527,7 +523,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Brightness brightness,
     bool isHighContrastEnabled,
     double colorLuminance,
-    bool noColor,
     Color defaultColor,
   ) {
     switch (brightness) {
@@ -537,13 +532,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             : colorLuminance > 0.7
                 ? ArnaColors.color25
                 : colorLuminance > 0.49
-                    ? noColor
-                        ? ArnaColors.color29
-                        : defaultColor
+                    ? ArnaColors.color29
                     : colorLuminance > 0.28
-                        ? noColor
-                            ? ArnaColors.color30
-                            : defaultColor
+                        ? ArnaColors.color30
                         : ArnaColors.color31;
       case Brightness.dark:
         return isHighContrastEnabled
@@ -551,13 +542,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             : colorLuminance > 0.7
                 ? ArnaColors.color02
                 : colorLuminance > 0.49
-                    ? noColor
-                        ? ArnaColors.color03
-                        : defaultColor
+                    ? ArnaColors.color03
                     : colorLuminance > 0.28
-                        ? noColor
-                            ? ArnaColors.color04
-                            : defaultColor
+                        ? ArnaColors.color04
                         : ArnaColors.color08;
     }
   }
@@ -567,9 +554,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color borderColor(
     Color resolvable,
     BuildContext context, [
-    Enum type = BorderColorType.normal,
+    bool hidden = false,
   ]) {
-    if (type == BorderColorType.none) return ArnaColors.color00;
+    if (hidden) return ArnaColors.color00;
     Color color = (resolvable is ArnaDynamicColor)
         ? resolvable.resolveFrom(context)
         : resolvable;
@@ -580,28 +567,10 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     bool isHighContrastEnabled =
         MediaQuery.maybeOf(context)?.highContrast ?? false;
 
-    if (type == BorderColorType.dark) {
-      return _findBorderColor(
-        brightness,
-        isHighContrastEnabled,
-        colorLuminance,
-        true,
-        matchingColor(
-          ArnaDynamicColor.resolve(
-            ArnaColors.backgroundColor,
-            context,
-          ),
-          color,
-          context,
-        ),
-      );
-    }
-
     return _findBorderColor(
       brightness,
       isHighContrastEnabled,
       colorLuminance,
-      false,
       matchingColor(
         ArnaDynamicColor.resolve(
           ArnaColors.backgroundColor,

@@ -143,7 +143,6 @@ class _ArnaSegmentedControlState<T extends Object>
           color: ArnaDynamicColor.borderColor(
             accent,
             context,
-            BorderColorType.dark,
           ),
         ),
         child: _buildChild(),

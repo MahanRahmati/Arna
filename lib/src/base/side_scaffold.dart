@@ -147,6 +147,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                       Expanded(
                         child: ArnaScaffold(
                           headerBarLeading: Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               if (constraints.maxWidth < 644)
                                 ArnaIconButton(
@@ -169,6 +170,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                           ),
                           title: widget.title,
                           headerBarTrailing: Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               if (widget
                                       .items[_currentIndex].headerBarTrailing !=

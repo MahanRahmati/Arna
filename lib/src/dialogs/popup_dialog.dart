@@ -100,6 +100,7 @@ class _ArnaPopupDialog extends StatelessWidget {
                   headerBarLeading: headerBarLeading,
                   title: title,
                   headerBarTrailing: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       if (headerBarTrailing != null) headerBarTrailing!,
                       ArnaTextButton(
@@ -186,6 +187,7 @@ class _ArnaPopupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ArnaScaffold(
       headerBarLeading: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           ArnaIconButton(
             icon: Icons.arrow_back_outlined,

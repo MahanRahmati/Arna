@@ -527,7 +527,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Brightness brightness,
     bool isHighContrastEnabled,
     double colorLuminance,
-    bool isDark,
+    bool noColor,
     Color defaultColor,
   ) {
     switch (brightness) {
@@ -535,30 +535,30 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         return isHighContrastEnabled
             ? ArnaColors.color01
             : colorLuminance > 0.7
-                ? ArnaColors.color17
+                ? ArnaColors.color25
                 : colorLuminance > 0.49
-                    ? isDark
-                        ? ArnaColors.color09
+                    ? noColor
+                        ? ArnaColors.color29
                         : defaultColor
                     : colorLuminance > 0.28
-                        ? isDark
-                            ? ArnaColors.color05
+                        ? noColor
+                            ? ArnaColors.color30
                             : defaultColor
-                        : ArnaColors.color03;
+                        : ArnaColors.color31;
       case Brightness.dark:
         return isHighContrastEnabled
             ? ArnaColors.color36
             : colorLuminance > 0.7
-                ? ArnaColors.color17
+                ? ArnaColors.color02
                 : colorLuminance > 0.49
-                    ? isDark
-                        ? ArnaColors.color09
+                    ? noColor
+                        ? ArnaColors.color03
                         : defaultColor
                     : colorLuminance > 0.28
-                        ? isDark
-                            ? ArnaColors.color05
+                        ? noColor
+                            ? ArnaColors.color04
                             : defaultColor
-                        : ArnaColors.color03;
+                        : ArnaColors.color08;
     }
   }
 

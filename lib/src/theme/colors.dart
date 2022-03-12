@@ -419,12 +419,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color outerColor(Color color, [bool biased = false]) {
     double colorLuminance = color.computeLuminance();
     int a = (1 - colorLuminance) * 100 ~/ 1;
-    int percentage = (colorLuminance > 0.5) ? (50 - a) ~/ 2 : (a - 50) ~/ 2;
+    int percentage = (colorLuminance > 0.49) ? (50 - a) ~/ 2 : (a - 50) ~/ 2;
     if (biased) {
       if (colorLuminance > 0.28 && colorLuminance < 0.49) return color;
       percentage = 70;
     }
-    return (colorLuminance > 0.5)
+    return (colorLuminance > 0.49)
         ? _colorBlender(color, ArnaColors.color01, percentage)
         : _colorBlender(color, ArnaColors.color36, percentage);
   }

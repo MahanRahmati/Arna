@@ -93,6 +93,34 @@ class Settings extends ConsumerWidget {
                   ),
                 ),
               ),
+              ArnaRadioListTile(
+                value: AccentColor.white,
+                groupValue: accentColor,
+                title: "White",
+                onChanged: (_) => ref.read(changeColor.notifier).white(),
+                trailing: Container(
+                  height: Styles.radioSize,
+                  width: Styles.radioSize,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.borderRadius,
+                    color: ArnaColors.color36,
+                  ),
+                ),
+              ),
+              ArnaRadioListTile(
+                value: AccentColor.black,
+                groupValue: accentColor,
+                title: "Black",
+                onChanged: (_) => ref.read(changeColor.notifier).black(),
+                trailing: Container(
+                  height: Styles.radioSize,
+                  width: Styles.radioSize,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.borderRadius,
+                    color: ArnaColors.color01,
+                  ),
+                ),
+              ),
             ],
           )
         ],
@@ -126,7 +154,7 @@ class ChangeThemeState extends ChangeNotifier {
   }
 }
 
-enum AccentColor { blue, green, red, orange }
+enum AccentColor { blue, green, red, orange, white, black }
 
 final changeColor = ChangeNotifierProvider.autoDispose(
   (ref) => ChangeColorState(),
@@ -152,6 +180,16 @@ class ChangeColorState extends ChangeNotifier {
 
   void orange() {
     accent = AccentColor.orange;
+    notifyListeners();
+  }
+
+  void white() {
+    accent = AccentColor.white;
+    notifyListeners();
+  }
+
+  void black() {
+    accent = AccentColor.black;
     notifyListeners();
   }
 }

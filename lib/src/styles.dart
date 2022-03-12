@@ -2,8 +2,8 @@ import 'package:arna/arna.dart';
 
 abstract class Styles {
   static const double base = 7;
-  static const double scaleSize = base / 8;
   // Doubles
+  static const double scaleSize = 0.9;
   static const double cursorWidth = base / 4;
   static const double smallerPadding = base / 4;
   static const double smallPadding = padding / 2;

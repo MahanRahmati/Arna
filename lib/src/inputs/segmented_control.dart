@@ -140,9 +140,9 @@ class _ArnaSegmentedControlState<T extends Object>
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: ArnaDynamicColor.borderColor(
+          color: ArnaDynamicColor.outerColor(
             accent,
-            context,
+            true,
           ),
         ),
         child: _buildChild(),

@@ -142,12 +142,8 @@ class ArnaSwitch extends StatelessWidget {
                 left:
                     value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
                 child: AnimatedContainer(
-                  height: hover && value
-                      ? Styles.switchThumbSize * Styles.scaleSize
-                      : Styles.switchThumbSize,
-                  width: hover && value
-                      ? Styles.switchThumbSize * Styles.scaleSize
-                      : Styles.switchThumbSize,
+                  height: Styles.switchThumbSize,
+                  width: Styles.switchThumbSize,
                   duration: Styles.basicDuration,
                   curve: Styles.basicCurve,
                   decoration: BoxDecoration(

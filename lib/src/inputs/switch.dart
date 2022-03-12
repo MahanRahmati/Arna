@@ -111,9 +111,10 @@ class ArnaSwitch extends StatelessWidget {
                                 : hover
                                     ? value
                                         ? ArnaDynamicColor.innerColor(accent)
-                                        : ArnaDynamicColor.outerColor(
+                                        : ArnaDynamicColor.matchingColor(
+                                            ArnaColors.cardColor,
                                             accent,
-                                            true,
+                                            context,
                                           )
                                     : value
                                         ? ArnaDynamicColor.outerColor(
@@ -144,8 +145,12 @@ class ArnaSwitch extends StatelessWidget {
                 left:
                     value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
                 child: AnimatedContainer(
-                  height: Styles.switchThumbSize,
-                  width: Styles.switchThumbSize,
+                  height: hover && value
+                      ? Styles.switchThumbSize * Styles.scaleSize
+                      : Styles.switchThumbSize,
+                  width: hover && value
+                      ? Styles.switchThumbSize * Styles.scaleSize
+                      : Styles.switchThumbSize,
                   duration: Styles.basicDuration,
                   curve: Styles.basicCurve,
                   decoration: BoxDecoration(
@@ -161,13 +166,11 @@ class ArnaSwitch extends StatelessWidget {
                                   ArnaColors.borderColor,
                                   context,
                                 )
-                              : hover
-                                  ? accent
-                                  : ArnaDynamicColor.matchingColor(
-                                      accent,
-                                      ArnaColors.color03,
-                                      context,
-                                    ),
+                              : ArnaDynamicColor.matchingColor(
+                                  accent,
+                                  ArnaColors.color03,
+                                  context,
+                                ),
                     ),
                     color: ArnaDynamicColor.resolve(
                       !enabled

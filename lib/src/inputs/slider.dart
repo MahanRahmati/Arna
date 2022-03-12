@@ -312,7 +312,14 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
           onChanged: isEnabled ? _handleChanged : null,
           onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
           onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
-          accent: accent,
+          accent: ArnaDynamicColor.matchingColor(
+            ArnaDynamicColor.resolve(
+              ArnaColors.backgroundColor,
+              context,
+            ),
+            accent,
+            context,
+          ),
           borderColor: ArnaDynamicColor.resolve(
             ArnaColors.borderColor,
             context,

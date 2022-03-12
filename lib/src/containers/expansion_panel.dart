@@ -145,14 +145,14 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             if (widget.title != null)
               Padding(
                 padding: (widget.subtitle != null)
                     ? Styles.titleWithSubtitlePadding
                     : Styles.tileTextPadding,
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Flexible(
                       child: Text(
                         widget.title!,
@@ -166,7 +166,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
               Padding(
                 padding: Styles.tileSubtitleTextPadding,
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Flexible(
                       child: Text(
                         widget.subtitle!,
@@ -193,7 +193,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     if (isEnabled) {
       children.add(
         Row(
-          children: [
+          children: <Widget>[
             if (widget.trailing != null) widget.trailing!,
             Padding(
               padding: Styles.horizontal,
@@ -217,34 +217,6 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
       );
     }
     children.add(const SizedBox(width: Styles.largePadding));
-    if (isEnabled && expanded) {
-      return AnimatedContainer(
-        duration: Styles.basicDuration,
-        curve: Styles.basicCurve,
-        clipBehavior: Clip.antiAlias,
-        color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
-        child: Column(
-          children: [
-            Container(
-              color: ArnaDynamicColor.resolve(
-                ArnaColors.cardHoverColor,
-                context,
-              ),
-              child: Padding(
-                padding: Styles.vertical,
-                child: Row(children: children),
-              ),
-            ),
-            const ArnaHorizontalDivider(),
-            SizeTransition(
-              axisAlignment: 1,
-              sizeFactor: _expandAnimation,
-              child: widget.child!,
-            ),
-          ],
-        ),
-      );
-    }
     return Padding(padding: Styles.vertical, child: Row(children: children));
   }
 
@@ -260,46 +232,97 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
           enabled: true,
           focusable: isEnabled,
           focused: _focused,
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: _handleTap,
-            child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
-              focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
-              mouseCursor: widget.cursor,
-              onShowHoverHighlight: _handleHover,
-              onShowFocusHighlight: _handleFocus,
-              onFocusChange: _handleFocusChange,
-              actions: _actions,
-              shortcuts: _shortcuts,
-              child: AnimatedContainer(
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: Styles.borderRadius,
-                  border: Border.all(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: _handleTap,
+                child: FocusableActionDetector(
+                  enabled: isEnabled && widget.isFocusable,
+                  focusNode: focusNode,
+                  autofocus: !isEnabled ? false : widget.autofocus,
+                  mouseCursor: widget.cursor,
+                  onShowHoverHighlight: _handleHover,
+                  onShowFocusHighlight: _handleFocus,
+                  onFocusChange: _handleFocusChange,
+                  actions: _actions,
+                  shortcuts: _shortcuts,
+                  child: AnimatedContainer(
+                    duration: Styles.basicDuration,
+                    curve: Styles.basicCurve,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        top: const Radius.circular(Styles.borderRadiusSize),
+                        bottom: expanded
+                            ? const Radius.circular(0)
+                            : const Radius.circular(Styles.borderRadiusSize),
+                      ),
+                      border: Border.all(
+                        color: ArnaDynamicColor.resolve(
+                          _focused ? accent : ArnaColors.borderColor,
+                          context,
+                        ),
+                      ),
+                      color: ArnaDynamicColor.resolve(
+                        !isEnabled
+                            ? ArnaColors.cardColor
+                            : expanded
+                                ? ArnaColors.cardHoverColor
+                                : _hover
+                                    ? ArnaColors.cardHoverColor
+                                    : ArnaColors.cardColor,
+                        context,
+                      ),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: Styles.listBorderRadius,
+                      child: _buildChild(),
+                    ),
+                  ),
+                ),
+              ),
+              if (expanded)
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.vertical(
+                      top: Radius.circular(0),
+                      bottom: Radius.circular(Styles.borderRadiusSize + 1),
+                    ),
                     color: ArnaDynamicColor.resolve(
-                      _focused ? accent : ArnaColors.borderColor,
+                      ArnaColors.borderColor,
                       context,
                     ),
                   ),
-                  color: ArnaDynamicColor.resolve(
-                    !isEnabled
-                        ? ArnaColors.cardColor
-                        : _hover
-                            ? ArnaColors.cardHoverColor
-                            : ArnaColors.cardColor,
-                    context,
+                  clipBehavior: Clip.antiAlias,
+                  child: AnimatedContainer(
+                    duration: Styles.basicDuration,
+                    curve: Styles.basicCurve,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(0),
+                        bottom: Radius.circular(Styles.borderRadiusSize),
+                      ),
+                      color: ArnaDynamicColor.resolve(
+                        ArnaColors.cardColor,
+                        context,
+                      ),
+                    ),
+                    margin: const EdgeInsetsDirectional.only(
+                      start: 1,
+                      end: 1,
+                      bottom: 1,
+                    ),
+                    child: SizeTransition(
+                      axisAlignment: 1,
+                      sizeFactor: _expandAnimation,
+                      child: widget.child!,
+                    ),
                   ),
                 ),
-                child: ClipRRect(
-                  borderRadius: Styles.listBorderRadius,
-                  child: _buildChild(),
-                ),
-              ),
-            ),
+            ],
           ),
         ),
       ),

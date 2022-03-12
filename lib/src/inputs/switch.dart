@@ -160,14 +160,11 @@ class ArnaSwitch extends StatelessWidget {
                                   context,
                                 )
                               : hover
-                                  ? ArnaDynamicColor.outerColor(
+                                  ? accent
+                                  : ArnaDynamicColor.matchingColor(
                                       accent,
-                                      true,
-                                    )
-                                  : ArnaDynamicColor.borderColor(
-                                      accent,
+                                      ArnaColors.color03,
                                       context,
-                                      true,
                                     ),
                     ),
                     color: ArnaDynamicColor.resolve(

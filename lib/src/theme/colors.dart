@@ -549,39 +549,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     }
   }
 
-  /// Computes the border color for color by using
-  /// [computeLuminance] and [borderColorType].
-  static Color borderColor(
-    Color resolvable,
-    BuildContext context, [
-    bool hidden = false,
-  ]) {
-    if (hidden) return ArnaColors.color00;
-    Color color = (resolvable is ArnaDynamicColor)
-        ? resolvable.resolveFrom(context)
-        : resolvable;
-    double colorLuminance = color.computeLuminance();
-
-    Brightness brightness =
-        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
-    bool isHighContrastEnabled =
-        MediaQuery.maybeOf(context)?.highContrast ?? false;
-
-    return _findBorderColor(
-      brightness,
-      isHighContrastEnabled,
-      colorLuminance,
-      matchingColor(
-        ArnaDynamicColor.resolve(
-          ArnaColors.backgroundColor,
-          context,
-        ),
-        color,
-        context,
-      ),
-    );
-  }
-
   /// Blends the [base] color to [secondColor] by [percentage] and [computeLuminance].
   static Color _colorBlender(
     Color base,

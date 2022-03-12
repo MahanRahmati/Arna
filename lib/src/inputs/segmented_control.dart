@@ -132,7 +132,6 @@ class _ArnaSegmentedControlState<T extends Object>
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: Container(
@@ -140,10 +139,7 @@ class _ArnaSegmentedControlState<T extends Object>
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: ArnaDynamicColor.borderColor(
-            accent,
-            context,
-          ),
+          color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
         ),
         child: _buildChild(),
       ),

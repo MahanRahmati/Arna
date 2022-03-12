@@ -40,6 +40,12 @@ class MyApp extends ConsumerWidget {
       case AccentColor.orange:
         accent = ArnaColors.warningColor;
         break;
+      case AccentColor.white:
+        accent = ArnaColors.color36;
+        break;
+      case AccentColor.black:
+        accent = ArnaColors.color01;
+        break;
       default:
         accent = ArnaColors.accentColor;
     }

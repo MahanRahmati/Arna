@@ -125,25 +125,34 @@ class ArnaRadio<T> extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(
                       focused
                           ? selected
-                              ? ArnaDynamicColor.matchingColor(
+                              ? ArnaDynamicColor.outerColor(
                                   accent,
-                                  ArnaDynamicColor.resolve(
-                                    ArnaColors.reverseBackgroundColor,
-                                    context,
-                                  ),
-                                  context,
+                                  ArnaTheme.brightnessOf(context),
+                                  true,
                                 )
                               : accent
                           : !enabled
                               ? ArnaColors.borderColor
                               : selected && hover
-                                  ? ArnaDynamicColor.outerColor(accent)
+                                  ? ArnaDynamicColor.outerColor(
+                                      accent,
+                                      ArnaTheme.brightnessOf(context),
+                                      true,
+                                    )
                                   : hover
-                                      ? accent
+                                      ? ArnaDynamicColor.matchingColor(
+                                          ArnaDynamicColor.resolve(
+                                            ArnaColors.buttonColor,
+                                            context,
+                                          ),
+                                          accent,
+                                          context,
+                                        )
                                       : selected
                                           ? ArnaDynamicColor.outerColor(
                                               accent,
-                                              true,
+                                              ArnaTheme.brightnessOf(context),
+                                              false,
                                             )
                                           : ArnaColors.borderColor,
                       context,

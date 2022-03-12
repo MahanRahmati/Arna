@@ -44,7 +44,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
     required this.onChanged,
     this.title,
     this.subtitle,
-    this.trailingButton,
+    this.trailing,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -95,8 +95,8 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   /// Additional content displayed below the title.
   final String? subtitle;
 
-  /// An ArnaIconButton to display after the title.
-  final ArnaIconButton? trailingButton;
+  /// A widget to display after the title.
+  final Widget? trailing;
 
   /// Whether this radio button is focusable or not.
   final bool isFocusable;
@@ -134,7 +134,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
       ),
       title: title,
       subtitle: subtitle,
-      trailing: trailingButton,
+      trailing: trailing,
       onTap: onChanged != null ? _handleTap : null,
       actionable: true,
       cursor: cursor,

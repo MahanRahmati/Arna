@@ -35,31 +35,63 @@ class Settings extends ConsumerWidget {
             ],
           ),
           ArnaGroupedView(
-            title: "Accent Color",
+            title: "Accent",
             children: [
               ArnaRadioListTile(
                 value: AccentColor.blue,
                 groupValue: accentColor,
                 title: "Blue",
                 onChanged: (_) => ref.read(changeColor.notifier).blue(),
+                trailing: Container(
+                  height: Styles.radioSize,
+                  width: Styles.radioSize,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.borderRadius,
+                    color: ArnaColors.accentColor,
+                  ),
+                ),
               ),
               ArnaRadioListTile(
                 value: AccentColor.green,
                 groupValue: accentColor,
                 title: "Green",
                 onChanged: (_) => ref.read(changeColor.notifier).green(),
+                trailing: Container(
+                  height: Styles.radioSize,
+                  width: Styles.radioSize,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.borderRadius,
+                    color: ArnaColors.successColor,
+                  ),
+                ),
               ),
               ArnaRadioListTile(
                 value: AccentColor.red,
                 groupValue: accentColor,
                 title: "Red",
                 onChanged: (_) => ref.read(changeColor.notifier).red(),
+                trailing: Container(
+                  height: Styles.radioSize,
+                  width: Styles.radioSize,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.borderRadius,
+                    color: ArnaColors.errorColor,
+                  ),
+                ),
               ),
               ArnaRadioListTile(
                 value: AccentColor.orange,
                 groupValue: accentColor,
                 title: "Orange",
                 onChanged: (_) => ref.read(changeColor.notifier).orange(),
+                trailing: Container(
+                  height: Styles.radioSize,
+                  width: Styles.radioSize,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.borderRadius,
+                    color: ArnaColors.warningColor,
+                  ),
+                ),
               ),
             ],
           )

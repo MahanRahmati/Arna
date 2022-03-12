@@ -43,7 +43,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
     required this.onChanged,
     this.title,
     this.subtitle,
-    this.trailingButton,
+    this.trailing,
     this.tristate = false,
     this.isFocusable = true,
     this.autofocus = false,
@@ -90,8 +90,8 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   /// Additional content displayed below the title.
   final String? subtitle;
 
-  /// An ArnaIconButton to display after the title.
-  final ArnaIconButton? trailingButton;
+  /// A widget to display after the title.
+  final Widget? trailing;
 
   /// If true the checkbox's [value] can be true, false, or null.
   ///
@@ -153,7 +153,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
       ),
       title: title,
       subtitle: subtitle,
-      trailing: trailingButton,
+      trailing: trailing,
       onTap: onChanged != null ? _handleTap : null,
       actionable: true,
       cursor: cursor,

@@ -196,7 +196,7 @@ class _WidgetsState extends State<Widgets> {
                       subtitle: "Subtitle 2",
                       tristate: true,
                       onChanged: (value) => setState(() => _checkBox2 = value),
-                      trailingButton: ArnaIconButton(
+                      trailing: ArnaIconButton(
                         icon: Icons.add_outlined,
                         onPressed: () {},
                       ),
@@ -230,7 +230,7 @@ class _WidgetsState extends State<Widgets> {
                       subtitle: "Subtitle 2",
                       onChanged: (value) =>
                           setState(() => _selectedType = value as String),
-                      trailingButton: ArnaIconButton(
+                      trailing: ArnaIconButton(
                         icon: Icons.add_outlined,
                         onPressed: () {},
                       ),
@@ -261,9 +261,8 @@ class _WidgetsState extends State<Widgets> {
                       subtitle: "Subtitle 2",
                       value: _switch2,
                       onChanged: (value) => setState(() => _switch2 = value),
-                      trailingButton: ArnaIconButton(
+                      trailing: ArnaIconButton(
                         icon: Icons.add_outlined,
-                        hasBorder: false,
                         onPressed: () {},
                       ),
                     ),
@@ -318,9 +317,8 @@ class _WidgetsState extends State<Widgets> {
                       max: 100,
                       onChanged: (double newValue) =>
                           setState(() => _sliderValue2 = newValue),
-                      trailingButton: ArnaIconButton(
+                      trailing: ArnaIconButton(
                         icon: Icons.add_outlined,
-                        hasBorder: false,
                         onPressed: () {},
                       ),
                     ),

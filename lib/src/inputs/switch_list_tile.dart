@@ -45,7 +45,7 @@ class ArnaSwitchListTile extends StatelessWidget {
     required this.onChanged,
     this.title,
     this.subtitle,
-    this.trailingButton,
+    this.trailing,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -86,8 +86,8 @@ class ArnaSwitchListTile extends StatelessWidget {
   /// Additional content displayed below the title.
   final String? subtitle;
 
-  /// An ArnaIconButton to display after the title.
-  final ArnaIconButton? trailingButton;
+  /// A widget to display after the switch.
+  final Widget? trailing;
 
   /// Whether this switch is focusable or not.
   final bool isFocusable;
@@ -126,7 +126,7 @@ class ArnaSwitchListTile extends StatelessWidget {
             cursor: cursor,
             semanticLabel: semanticLabel,
           ),
-          if (trailingButton != null) trailingButton!,
+          if (trailing != null) trailing!,
         ],
       ),
       onTap: onChanged != null ? _handleTap : null,

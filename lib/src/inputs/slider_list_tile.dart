@@ -44,7 +44,7 @@ class ArnaSliderListTile extends StatelessWidget {
     required this.onChanged,
     this.title,
     this.subtitle,
-    this.trailingButton,
+    this.trailing,
     this.onChangeStart,
     this.onChangeEnd,
     this.min = 0.0,
@@ -102,8 +102,8 @@ class ArnaSliderListTile extends StatelessWidget {
   /// Additional content displayed below the title.
   final String? subtitle;
 
-  /// An ArnaIconButton to display after the title.
-  final ArnaIconButton? trailingButton;
+  /// A widget to display after the slider.
+  final Widget? trailing;
 
   /// Called when the user starts selecting a new value for the slider.
   ///
@@ -221,7 +221,7 @@ class ArnaSliderListTile extends StatelessWidget {
             accentColor: accentColor,
             cursor: cursor,
           ),
-          if (trailingButton != null) trailingButton!,
+          if (trailing != null) trailing!,
         ],
       ),
       onTap: onChanged != null ? () {} : null,

@@ -3,8 +3,7 @@ import 'package:arna/arna.dart';
 abstract class Styles {
   static const double base = 7;
 
-  // Doubles, based on [base]
-  /// Used when focused
+  // Doubles
   static const double boldBorder = base / 5;
   static const double cursorWidth = base / 4;
   static const double smallerPadding = base / 4;

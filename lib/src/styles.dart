@@ -4,7 +4,7 @@ abstract class Styles {
   static const double base = 7;
 
   /// Used when focused
-  static const double boldBorder = 1.4;
+  static const double boldBorder = base / 5;
 
   // Doubles, based on [base]
   static const double cursorWidth = base / 4;

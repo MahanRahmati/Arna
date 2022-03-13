@@ -288,7 +288,6 @@ class _WidgetsState extends State<Widgets> {
                     ),
                     const ArnaListTile(
                       title: "Title 2",
-                      subtitle: "Subtitle 2",
                       trailing: ArnaBadge(label: "2"),
                     ),
                   ],

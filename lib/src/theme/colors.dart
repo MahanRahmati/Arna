@@ -216,7 +216,13 @@ class ArnaColors {
   );
 
   /// The color of disabled items.
-  static const Color disabledColor = color18;
+  static const ArnaDynamicColor disabledColor = ArnaDynamicColor(
+    debugLabel: 'secondaryTextColor',
+    color: color22,
+    darkColor: color14,
+    highContrastColor: color01,
+    darkHighContrastColor: color36,
+  );
 }
 
 /// A [Color] subclass that represents a family of colors, and the correct effective

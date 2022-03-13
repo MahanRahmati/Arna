@@ -157,6 +157,7 @@ class ArnaButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
+                width: focused ? Styles.boldBorder : 1,
                 color: hasBorder
                     ? ArnaDynamicColor.resolve(
                         buttonType == ButtonType.normal

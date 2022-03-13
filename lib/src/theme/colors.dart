@@ -428,23 +428,13 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     double colorLuminance = color.computeLuminance();
     int a = (1 - colorLuminance) * 100 ~/ 1;
     int percentage = (colorLuminance > 0.50) ? (50 - a) : (a - 50);
-    if (!hover) {
-      percentage += 15;
-      if (colorLuminance > 0.2 && colorLuminance < 0.4) return color;
-    }
     Color secondColor = (brightness == Brightness.dark)
         ? ArnaColors.color36
         : ArnaColors.color01;
     if (hover) {
-      if (colorLuminance > 0.2 && colorLuminance < 0.4) percentage = 60;
-      if (colorLuminance > 0.4 && colorLuminance < 0.6) percentage = 90;
-
-      if (colorLuminance < 0.2 || colorLuminance > 0.6) {
-        secondColor = (secondColor == ArnaColors.color36)
-            ? ArnaColors.color01
-            : ArnaColors.color36;
-        percentage += 50;
-      }
+      percentage += (brightness == Brightness.light) ? 50 : 75;
+      secondColor =
+          (colorLuminance < 0.2) ? ArnaColors.color36 : ArnaColors.color01;
     }
     return _colorBlender(color, secondColor, percentage);
   }

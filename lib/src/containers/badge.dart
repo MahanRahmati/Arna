@@ -30,7 +30,11 @@ class ArnaBadge extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
           border: Border.all(
-            color: ArnaDynamicColor.outerColor(accent, true),
+            color: ArnaDynamicColor.outerColor(
+              accent,
+              ArnaTheme.brightnessOf(context),
+              false,
+            ),
           ),
           color: accent,
         ),
@@ -44,6 +48,7 @@ class ArnaBadge extends StatelessWidget {
                 style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
                       color: ArnaDynamicColor.innerColor(
                         accentColor ?? ArnaTheme.of(context).accentColor,
+                        ArnaTheme.brightnessOf(context),
                       ),
                     ),
               ),

@@ -96,45 +96,65 @@ class ArnaSwitch extends StatelessWidget {
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
-                    borderRadius: Styles.switchBorderRadius,
-                    border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        focused
-                            ? value
-                                ? ArnaColors.borderColor
-                                : ArnaDynamicColor.outerColor(
-                                    accent,
-                                    true,
-                                  )
-                            : !enabled
-                                ? ArnaColors.borderColor
-                                : hover
-                                    ? value
-                                        ? ArnaDynamicColor.innerColor(accent)
-                                        : ArnaDynamicColor.matchingColor(
-                                            ArnaColors.cardColor,
-                                            accent,
-                                            context,
-                                          )
-                                    : value
-                                        ? ArnaDynamicColor.innerColor(accent)
-                                        : ArnaColors.borderColor,
-                        context,
-                      ),
-                    ),
+                  borderRadius: Styles.switchBorderRadius,
+                  border: Border.all(
+                    width: focused ? Styles.boldBorder : 1,
                     color: ArnaDynamicColor.resolve(
-                      !enabled
-                          ? ArnaColors.backgroundColor
-                          : value
-                              ? ArnaDynamicColor.switchBackgroundColor(
+                      focused
+                          ? value
+                              ? ArnaDynamicColor.outerColor(
                                   accent,
-                                  value,
+                                  ArnaTheme.brightnessOf(context),
+                                  true,
                                 )
+                              : ArnaDynamicColor.outerColor(
+                                  accent,
+                                  ArnaTheme.brightnessOf(context),
+                                  false,
+                                )
+                          : !enabled
+                              ? ArnaColors.borderColor
                               : hover
-                                  ? ArnaColors.buttonHoverColor
-                                  : ArnaColors.backgroundColor,
+                                  ? value
+                                      ? ArnaDynamicColor.outerColor(
+                                          accent,
+                                          ArnaTheme.brightnessOf(context),
+                                          true,
+                                        )
+                                      : ArnaDynamicColor.matchingColor(
+                                          ArnaDynamicColor.resolve(
+                                            selected
+                                                ? ArnaColors.cardColor
+                                                : ArnaColors.cardHoverColor,
+                                            context,
+                                          ),
+                                          accent,
+                                          context,
+                                        )
+                                  : value
+                                      ? ArnaDynamicColor.outerColor(
+                                          accent,
+                                          ArnaTheme.brightnessOf(context),
+                                          false,
+                                        )
+                                      : ArnaColors.borderColor,
                       context,
-                    )),
+                    ),
+                  ),
+                  color: ArnaDynamicColor.resolve(
+                    !enabled
+                        ? ArnaColors.backgroundColor
+                        : value
+                            ? ArnaDynamicColor.switchBackgroundColor(
+                                accent,
+                                value,
+                              )
+                            : hover
+                                ? ArnaColors.buttonHoverColor
+                                : ArnaColors.backgroundColor,
+                    context,
+                  ),
+                ),
               ),
               AnimatedPositioned(
                 duration: Styles.basicDuration,
@@ -169,7 +189,10 @@ class ArnaSwitch extends StatelessWidget {
                       !enabled
                           ? ArnaColors.backgroundColor
                           : value
-                              ? ArnaDynamicColor.innerColor(accent)
+                              ? ArnaDynamicColor.innerColor(
+                                  accent,
+                                  ArnaTheme.brightnessOf(context),
+                                )
                               : ArnaColors.color36,
                       context,
                     ),

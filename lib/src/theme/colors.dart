@@ -405,28 +405,36 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 
   /// Computes the inner color from [backgroundColor] by using
   /// [computeLuminance].
-  static Color innerColor(Color backgroundColor) {
+  static Color innerColor(Color backgroundColor, Brightness brightness) {
     double colorLuminance = backgroundColor.computeLuminance();
-    return colorLuminance > 0.7
-        ? ArnaColors.color01
-        : colorLuminance > 0.49
-            ? ArnaColors.color07
-            : colorLuminance > 0.28
-                ? ArnaColors.color34
+    return colorLuminance > 0.8
+        ? ArnaColors.color10
+        : colorLuminance > 0.6
+            ? ArnaColors.color01
+            : colorLuminance > 0.4
+                ? (brightness == Brightness.light)
+                    ? ArnaColors.color36
+                    : ArnaColors.color01
                 : ArnaColors.color36;
   }
 
-  static Color outerColor(Color color, [bool biased = false]) {
+  static Color outerColor(
+    Color color,
+    Brightness brightness,
+    bool hover,
+  ) {
     double colorLuminance = color.computeLuminance();
     int a = (1 - colorLuminance) * 100 ~/ 1;
-    int percentage = (colorLuminance > 0.50) ? (50 - a) ~/ 2 : (a - 50) ~/ 2;
-    if (biased) {
-      if (colorLuminance > 0.20 && colorLuminance < 0.50) return color;
-      percentage = 70;
+    int percentage = colorLuminance > 0.50 ? (50 - a) : (a - 50);
+    Color secondColor = (brightness == Brightness.dark)
+        ? ArnaColors.color36
+        : ArnaColors.color01;
+    if (hover) {
+      percentage += 75;
+      secondColor =
+          colorLuminance < 0.2 ? ArnaColors.color36 : ArnaColors.color01;
     }
-    return (colorLuminance > 0.50)
-        ? _colorBlender(color, ArnaColors.color01, percentage)
-        : _colorBlender(color, ArnaColors.color36, percentage);
+    return _colorBlender(color, secondColor, percentage);
   }
 
   static double _colorDistance(Color a, Color b) {
@@ -494,7 +502,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       int alternativePercentage = bias;
       if (_colorDistance(accent, backgroundColor) < 200) {
         ignore = true;
-        alternativePercentage += (_colorDistance(accent, backgroundColor) ~/ 4);
+        alternativePercentage += (200 -
+                _colorDistance(
+                  accent,
+                  backgroundColor,
+                )) ~/
+            4;
       }
 
       int percentage = distance * 100 ~/ 1;

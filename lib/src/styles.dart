@@ -2,8 +2,9 @@ import 'package:arna/arna.dart';
 
 abstract class Styles {
   static const double base = 7;
+
   // Doubles
-  static const double scaleSize = 0.9;
+  static const double boldBorder = base / 5;
   static const double cursorWidth = base / 4;
   static const double smallerPadding = base / 4;
   static const double smallPadding = padding / 2;
@@ -14,7 +15,7 @@ abstract class Styles {
   static const double sliderSize = base * 1.5;
   static const double scrollBarHoverThickness = base * 1.5;
   static const double textFieldPaddingSize = base * 1.5;
-  static const double radioIndicatorSize = base * 1.75;
+  static const double radioIndicatorSize = base * 1.5;
   static const double largePadding = padding * 2;
   static const double checkBoxIconSize = base * 2.5;
   static const double tooltipOffset = base * 2;

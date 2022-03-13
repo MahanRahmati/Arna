@@ -82,7 +82,7 @@ abstract class Styles {
   static const EdgeInsets right = EdgeInsets.only(right: padding);
   static const EdgeInsets bottom = EdgeInsets.only(bottom: padding);
   static const EdgeInsets tilePadding = EdgeInsets.symmetric(
-    horizontal: padding,
+    horizontal: largePadding,
     vertical: smallPadding,
   );
   static const EdgeInsets tooltipPadding = EdgeInsets.symmetric(

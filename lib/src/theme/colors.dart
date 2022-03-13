@@ -461,7 +461,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return sign * (x / (da + db));
   }
 
-  /// Computes the color that matches with [backgroundColor] and [accentColor]
+  /// Computes the color that matches with [backgroundColor] and [accent]
   /// by using [computeLuminance] (and getting [bias]).
   static Color matchingColor(
     Color backgroundColor,
@@ -531,7 +531,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     );
   }
 
-  /// Computes the switch background color from [accentColor] by using
+  /// Computes the switch background color from [accent] by using
   /// [computeLuminance].
   static Color switchBackgroundColor(Color accent, bool isOn) {
     if (isOn) return accent;

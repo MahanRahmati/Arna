@@ -142,7 +142,7 @@ class ArnaSideBarItem extends StatelessWidget {
                               : focused
                                   ? ArnaDynamicColor.matchingColor(
                                       ArnaDynamicColor.resolve(
-                                        ArnaColors.backgroundColor,
+                                        ArnaColors.sideColor,
                                         context,
                                       ),
                                       accent,

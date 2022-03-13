@@ -109,8 +109,15 @@ class _ArnaLinked extends StatelessWidget {
             ),
             border: focused
                 ? Border.all(
-                    color:
-                        button.accentColor ?? ArnaTheme.of(context).accentColor,
+                    color: ArnaDynamicColor.matchingColor(
+                      ArnaDynamicColor.resolve(
+                        ArnaColors.buttonColor,
+                        context,
+                      ),
+                      button.accentColor ?? ArnaTheme.of(context).accentColor,
+                      context,
+                    ),
+                    width: Styles.boldBorder,
                   )
                 : Border.all(color: ArnaColors.color00),
             color: ArnaDynamicColor.resolve(

@@ -215,9 +215,22 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                   : const Radius.circular(0),
             ),
             border: selected
-                ? Border.all(color: borderColor)
+                ? Border.all(
+                    color: borderColor,
+                    width: focused ? Styles.boldBorder : 1,
+                  )
                 : focused
-                    ? Border.all(color: accentColor)
+                    ? Border.all(
+                        color: ArnaDynamicColor.matchingColor(
+                          ArnaDynamicColor.resolve(
+                            ArnaColors.buttonColor,
+                            context,
+                          ),
+                          accentColor,
+                          context,
+                        ),
+                        width: Styles.boldBorder,
+                      )
                     : Border.all(color: ArnaColors.color00),
             color: ArnaDynamicColor.resolve(
               selected

@@ -415,9 +415,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 ? (brightness == Brightness.light)
                     ? ArnaColors.color36
                     : ArnaColors.color03
-                : colorLuminance > 0.2
-                    ? ArnaColors.color34
-                    : ArnaColors.color36;
+                : ArnaColors.color36;
   }
 
   static Color outerColor(

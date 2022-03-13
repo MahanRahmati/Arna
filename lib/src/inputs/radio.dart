@@ -122,6 +122,7 @@ class ArnaRadio<T> extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.radioBorderRadius,
                   border: Border.all(
+                    width: (focused || hover) ? Styles.boldBorder : 1,
                     color: ArnaDynamicColor.resolve(
                       focused
                           ? selected

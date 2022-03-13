@@ -75,7 +75,10 @@ class ArnaButton extends StatelessWidget {
               : buttonType == ButtonType.normal
                   ? ArnaColors.iconColor
                   : hasBorder
-                      ? ArnaDynamicColor.innerColor(accent)
+                      ? ArnaDynamicColor.innerColor(
+                          accent,
+                          ArnaTheme.brightnessOf(context),
+                        )
                       : ArnaDynamicColor.matchingColor(
                           ArnaDynamicColor.resolve(
                             ArnaColors.buttonColor,
@@ -103,7 +106,10 @@ class ArnaButton extends StatelessWidget {
                     ? ArnaColors.disabledColor
                     : buttonType == ButtonType.normal
                         ? ArnaColors.primaryTextColor
-                        : ArnaDynamicColor.innerColor(accent),
+                        : ArnaDynamicColor.innerColor(
+                            accent,
+                            ArnaTheme.brightnessOf(context),
+                          ),
                 context,
               ),
             ),
@@ -161,16 +167,25 @@ class ArnaButton extends StatelessWidget {
                                     : ArnaColors.borderColor
                             : !enabled
                                 ? ArnaDynamicColor.blend(
-                                    ArnaDynamicColor.innerColor(accent),
+                                    ArnaDynamicColor.innerColor(
+                                      accent,
+                                      ArnaTheme.brightnessOf(context),
+                                    ),
                                     42,
                                   )
                                 : focused
                                     ? ArnaDynamicColor.blend(
-                                        ArnaDynamicColor.innerColor(accent),
+                                        ArnaDynamicColor.innerColor(
+                                          accent,
+                                          ArnaTheme.brightnessOf(context),
+                                        ),
                                         28,
                                       )
                                     : ArnaDynamicColor.blend(
-                                        ArnaDynamicColor.innerColor(accent),
+                                        ArnaDynamicColor.innerColor(
+                                          accent,
+                                          ArnaTheme.brightnessOf(context),
+                                        ),
                                         42,
                                       ),
                         context,

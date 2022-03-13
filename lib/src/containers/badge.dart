@@ -48,6 +48,7 @@ class ArnaBadge extends StatelessWidget {
                 style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
                       color: ArnaDynamicColor.innerColor(
                         accentColor ?? ArnaTheme.of(context).accentColor,
+                        ArnaTheme.brightnessOf(context),
                       ),
                     ),
               ),

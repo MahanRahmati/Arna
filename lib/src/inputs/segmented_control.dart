@@ -180,7 +180,10 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                   !enabled
                       ? ArnaColors.disabledColor
                       : selected
-                          ? ArnaDynamicColor.innerColor(accentColor)
+                          ? ArnaDynamicColor.innerColor(
+                              accentColor,
+                              ArnaTheme.brightnessOf(context),
+                            )
                           : ArnaColors.primaryTextColor,
                   context,
                 ),

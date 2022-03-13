@@ -123,7 +123,7 @@ class ArnaSwitch extends StatelessWidget {
                                         )
                                       : ArnaDynamicColor.matchingColor(
                                           ArnaDynamicColor.resolve(
-                                            (selected)
+                                            selected
                                                 ? ArnaColors.cardColor
                                                 : ArnaColors.cardHoverColor,
                                             context,

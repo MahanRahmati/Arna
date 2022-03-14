@@ -108,7 +108,7 @@ class ArnaColors {
   /// The color of card's background.
   static const ArnaDynamicColor cardColor = ArnaDynamicColor(
     debugLabel: 'cardColor',
-    color: color36,
+    color: color37,
     darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -154,7 +154,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
     color: color38,
-    darkColor: color08,
+    darkColor: color07,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -163,7 +163,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
     color: color35,
-    darkColor: color11,
+    darkColor: color09,
     highContrastColor: color36,
     darkHighContrastColor: color13,
   );
@@ -172,7 +172,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
     color: color33,
-    darkColor: color13,
+    darkColor: color11,
     highContrastColor: color34,
     darkHighContrastColor: color15,
   );

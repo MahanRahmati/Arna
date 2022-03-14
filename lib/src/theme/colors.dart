@@ -100,7 +100,7 @@ class ArnaColors {
   /// The color of borders.
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',
-    color: color32,
+    color: color31,
     darkColor: color03,
     highContrastColor: color00,
     darkHighContrastColor: color40,
@@ -136,7 +136,7 @@ class ArnaColors {
   /// The color of text field's background.
   static const ArnaDynamicColor textFieldColor = ArnaDynamicColor(
     debugLabel: 'textFieldColor',
-    color: color40,
+    color: color39,
     darkColor: color08,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -155,7 +155,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
     color: color40,
-    darkColor: color08,
+    darkColor: color07,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -164,7 +164,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
     color: color36,
-    darkColor: color09,
+    darkColor: color08,
     highContrastColor: color36,
     darkHighContrastColor: color13,
   );
@@ -173,7 +173,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
     color: color34,
-    darkColor: color10,
+    darkColor: color09,
     highContrastColor: color34,
     darkHighContrastColor: color15,
   );

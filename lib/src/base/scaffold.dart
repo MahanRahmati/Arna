@@ -14,6 +14,7 @@ class ArnaScaffold extends StatelessWidget {
     this.searchField,
     this.banner,
     required this.body,
+    this.isDialog = false,
   }) : super(key: key);
 
   /// The leading widget laid out within the header bar.
@@ -34,6 +35,9 @@ class ArnaScaffold extends StatelessWidget {
   /// The body widget of the scaffold.
   final Widget body;
 
+  /// Whether the scaffold is inside dialog or not.
+  final bool isDialog;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -42,8 +46,8 @@ class ArnaScaffold extends StatelessWidget {
         return MediaQuery(
           data: metrics.copyWith(
             padding: metrics.padding.copyWith(
-              top: metrics.padding.top,
-              bottom: metrics.padding.top,
+              top: isDialog ? 0 : metrics.padding.top,
+              bottom: isDialog ? 0 : metrics.padding.bottom,
             ),
           ),
           child: DecoratedBox(

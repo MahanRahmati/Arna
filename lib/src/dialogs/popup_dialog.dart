@@ -112,6 +112,7 @@ class _ArnaPopupDialog extends StatelessWidget {
                   searchField: searchField,
                   banner: banner,
                   body: body,
+                  isDialog: true,
                 ),
               ),
             ),

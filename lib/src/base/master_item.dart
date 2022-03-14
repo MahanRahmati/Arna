@@ -52,10 +52,43 @@ class ArnaMasterItem extends StatelessWidget {
   /// The semantic label of the item.
   final String? semanticLabel;
 
-  Widget _buildChild(BuildContext context) {
+  Widget _buildChild(
+    BuildContext context,
+    bool enabled,
+    bool hovered,
+    Color accent,
+  ) {
     final List<Widget> children = <Widget>[];
     if (leading != null) {
-      children.add(Padding(padding: Styles.normal, child: leading));
+      children.add(
+        Padding(
+          padding: Styles.normal,
+          child: IconTheme(
+              data: IconThemeData(
+                color: ArnaDynamicColor.resolve(
+                  !enabled
+                      ? ArnaColors.disabledColor
+                      : selected
+                          ? ArnaDynamicColor.matchingColor(
+                              hovered
+                                  ? ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonHoverColor,
+                                      context,
+                                    )
+                                  : ArnaDynamicColor.resolve(
+                                      ArnaColors.sideColor,
+                                      context,
+                                    ),
+                              accent,
+                              context,
+                            )
+                          : ArnaColors.iconColor,
+                  context,
+                ),
+              ),
+              child: leading!),
+        ),
+      );
     }
     children.add(
       Flexible(
@@ -115,7 +148,7 @@ class ArnaMasterItem extends StatelessWidget {
                   borderRadius: Styles.borderRadius,
                   border: Border.all(
                     color: !enabled
-                        ? ArnaColors.color00
+                        ? ArnaColors.invisible
                         : focused
                             ? accent
                             : ArnaDynamicColor.resolve(
@@ -124,7 +157,7 @@ class ArnaMasterItem extends StatelessWidget {
                               ),
                   ),
                   color: !enabled
-                      ? ArnaColors.color00
+                      ? ArnaColors.invisible
                       : ArnaDynamicColor.resolve(
                           pressed
                               ? ArnaColors.buttonPressedColor
@@ -137,7 +170,7 @@ class ArnaMasterItem extends StatelessWidget {
                         ),
                 ),
                 padding: Styles.tilePadding,
-                child: _buildChild(context),
+                child: _buildChild(context, enabled, hover, accent),
               ),
               AnimatedContainer(
                 height: selected ? Styles.iconSize : 0,

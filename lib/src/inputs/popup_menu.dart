@@ -275,7 +275,7 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>>
             borderRadius: Styles.borderRadius,
             border: Border.all(
               color: ArnaDynamicColor.resolve(
-                selected ? accent : ArnaColors.color00,
+                selected ? accent : ArnaColors.invisible,
                 context,
               ),
             ),

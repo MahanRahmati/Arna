@@ -231,7 +231,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                         ),
                         width: Styles.boldBorder,
                       )
-                    : Border.all(color: ArnaColors.color00),
+                    : Border.all(color: ArnaColors.invisible),
             color: ArnaDynamicColor.resolve(
               selected
                   ? pressed

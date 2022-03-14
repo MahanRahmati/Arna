@@ -132,7 +132,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                                 if (constraints.maxWidth < 644)
                                   ArnaIconButton(
                                     icon: Icons.menu_outlined,
-                                    onPressed: () => _drawerOpenedCallback(true),
+                                    onPressed: () =>
+                                        _drawerOpenedCallback(true),
                                     tooltipMessage:
                                         MaterialLocalizations.of(context)
                                             .drawerLabel,
@@ -142,8 +143,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                                   ),
                                 if (widget.headerBarLeading != null)
                                   widget.headerBarLeading!,
-                                if (widget
-                                        .items[_currentIndex].headerBarLeading !=
+                                if (widget.items[_currentIndex]
+                                        .headerBarLeading !=
                                     null)
                                   widget.items[_currentIndex].headerBarLeading!,
                               ],
@@ -152,15 +153,17 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                             headerBarTrailing: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                if (widget
-                                        .items[_currentIndex].headerBarTrailing !=
+                                if (widget.items[_currentIndex]
+                                        .headerBarTrailing !=
                                     null)
-                                  widget.items[_currentIndex].headerBarTrailing!,
+                                  widget
+                                      .items[_currentIndex].headerBarTrailing!,
                                 if (widget.headerBarTrailing != null)
                                   widget.headerBarTrailing!,
                               ],
                             ),
-                            searchField: widget.items[_currentIndex].searchField,
+                            searchField:
+                                widget.items[_currentIndex].searchField,
                             banner: widget.items[_currentIndex].banner,
                             body: Column(
                               children: <Widget>[

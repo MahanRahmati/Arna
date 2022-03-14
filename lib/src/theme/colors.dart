@@ -81,7 +81,7 @@ class ArnaColors {
   /// The color of the side bar's background.
   static const ArnaDynamicColor sideColor = ArnaDynamicColor(
     debugLabel: 'sideColor',
-    color: color38,
+    color: color37,
     darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -90,7 +90,7 @@ class ArnaColors {
   /// The color of the header bar's background.
   static const ArnaDynamicColor headerColor = ArnaDynamicColor(
     debugLabel: 'headerColor',
-    color: color38,
+    color: color37,
     darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -108,7 +108,7 @@ class ArnaColors {
   /// The color of card's background.
   static const ArnaDynamicColor cardColor = ArnaDynamicColor(
     debugLabel: 'cardColor',
-    color: color37,
+    color: color38,
     darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -126,7 +126,7 @@ class ArnaColors {
   /// The color of card's background when it is pressed.
   static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
     debugLabel: 'cardPressedColor',
-    color: color32,
+    color: color30,
     darkColor: color10,
     highContrastColor: color33,
     darkHighContrastColor: color14,
@@ -153,7 +153,7 @@ class ArnaColors {
   /// The color of button's background.
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
-    color: color38,
+    color: color40,
     darkColor: color07,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -162,7 +162,7 @@ class ArnaColors {
   /// The color of button's background when it is hoverd.
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
-    color: color35,
+    color: color36,
     darkColor: color09,
     highContrastColor: color36,
     darkHighContrastColor: color13,
@@ -171,7 +171,7 @@ class ArnaColors {
   /// The color of button's background when it is pressed.
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
-    color: color33,
+    color: color32,
     darkColor: color11,
     highContrastColor: color34,
     darkHighContrastColor: color15,

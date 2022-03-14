@@ -4,6 +4,7 @@ import 'dart:ui' show lerpDouble;
 import 'package:arna/arna.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 /// An Arna-styled slider.
 ///

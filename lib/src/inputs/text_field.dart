@@ -1,10 +1,11 @@
 import 'dart:ui' as ui show BoxHeightStyle, BoxWidthStyle;
 
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show desktopTextSelectionControls;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart' show desktopTextSelectionControls;
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 /// Visibility of text field overlays based on the state of the current text entry.
 ///

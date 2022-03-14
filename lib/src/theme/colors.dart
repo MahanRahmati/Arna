@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 /// A palette of [Color] constants that describe colors
 class ArnaColors {

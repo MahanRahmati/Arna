@@ -140,7 +140,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return constraints.maxWidth > 960
+        return constraints.maxWidth > Styles.expanded
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[

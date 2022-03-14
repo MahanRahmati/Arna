@@ -13,7 +13,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     this.title,
     this.headerBarTrailing,
     required this.items,
-    required this.emptyBody,
+    this.emptyBody,
     this.onItemSelected,
     this.currentIndex,
   }) : super(key: key);
@@ -31,7 +31,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   final List<MasterNavigationItem> items;
 
   /// The widget to show when no item is selected.
-  final Widget emptyBody;
+  final Widget? emptyBody;
 
   /// Called when one of the [items] is tapped.
   final ValueChanged<int>? onItemSelected;
@@ -107,24 +107,23 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
 
   Widget _buildChild(bool isPhone) {
     return ListView.builder(
+      controller: ScrollController(),
       itemCount: widget.items.length,
+      padding: Styles.small,
       itemBuilder: (BuildContext context, int index) {
-        return Padding(
-          padding: Styles.small,
-          child: ArnaMasterItem(
-            leading: widget.items[index].leading,
-            title: widget.items[index].title,
-            subtitle: widget.items[index].subtitle,
-            trailing: widget.items[index].trailing,
-            onPressed: () => onTap(index, isPhone),
-            selected: isPhone ? false : index == _currentIndex,
-            isFocusable: widget.items[index].isFocusable,
-            autofocus: widget.items[index].autofocus,
-            accentColor: widget.items[index].accentColor ??
-                ArnaTheme.of(context).accentColor,
-            cursor: widget.items[index].cursor,
-            semanticLabel: widget.items[index].semanticLabel,
-          ),
+        return ArnaMasterItem(
+          leading: widget.items[index].leading,
+          title: widget.items[index].title,
+          subtitle: widget.items[index].subtitle,
+          trailing: widget.items[index].trailing,
+          onPressed: () => onTap(index, isPhone),
+          selected: isPhone ? false : index == _currentIndex,
+          isFocusable: widget.items[index].isFocusable,
+          autofocus: widget.items[index].autofocus,
+          accentColor: widget.items[index].accentColor ??
+              ArnaTheme.of(context).accentColor,
+          cursor: widget.items[index].cursor,
+          semanticLabel: widget.items[index].semanticLabel,
         );
       },
     );
@@ -141,12 +140,12 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return constraints.maxWidth > 644
+        return constraints.maxWidth > 960
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   SizedBox(
-                    width: Styles.sideBarWidth,
+                    width: Styles.masterSideMaxWidth,
                     child: listBuilder(false),
                   ),
                   const ArnaVerticalDivider(),
@@ -158,7 +157,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
                               ArnaColors.backgroundColor,
                               context,
                             ),
-                            child: widget.emptyBody,
+                            child: widget.emptyBody ?? const SizedBox.shrink(),
                           ),
                         )
                       : Expanded(
@@ -173,8 +172,9 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
                             banner: widget.items[_currentIndex].banner,
                             body: FadeTransition(
                               opacity: _animation,
-                              child:
-                                  widget.items[_currentIndex].builder(context),
+                              child: widget.items[_currentIndex].builder(
+                                context,
+                              ),
                             ),
                           ),
                         ),

@@ -105,7 +105,7 @@ class ArnaMasterItem extends StatelessWidget {
             children: <Widget>[
               AnimatedContainer(
                 constraints: const BoxConstraints(
-                  minHeight: Styles.minMasterItemHeight,
+                  minHeight: Styles.masterItemMinHeight,
                 ),
                 width: double.infinity,
                 duration: Styles.basicDuration,
@@ -127,12 +127,12 @@ class ArnaMasterItem extends StatelessWidget {
                       ? ArnaColors.color00
                       : ArnaDynamicColor.resolve(
                           pressed
-                              ? ArnaColors.cardPressedColor
+                              ? ArnaColors.buttonPressedColor
                               : selected
-                                  ? ArnaColors.cardHoverColor
+                                  ? ArnaColors.buttonHoverColor
                                   : hover
-                                      ? ArnaColors.cardHoverColor
-                                      : ArnaColors.cardColor,
+                                      ? ArnaColors.buttonHoverColor
+                                      : ArnaColors.buttonColor,
                           context,
                         ),
                 ),
@@ -146,7 +146,19 @@ class ArnaMasterItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: accent,
+                  color: ArnaDynamicColor.matchingColor(
+                    hover
+                        ? ArnaDynamicColor.resolve(
+                            ArnaColors.buttonHoverColor,
+                            context,
+                          )
+                        : ArnaDynamicColor.resolve(
+                            ArnaColors.sideColor,
+                            context,
+                          ),
+                    accent,
+                    context,
+                  ),
                 ),
               ),
             ],

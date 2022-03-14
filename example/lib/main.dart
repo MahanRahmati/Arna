@@ -74,7 +74,7 @@ class _HomeState extends ConsumerState<Home> {
   TextEditingController controller = TextEditingController();
   var showBanner = true;
   String url = "https://github.com/MahanRahmati/Arna";
-  bool showMaster = false;
+  bool showMaster = true;
 
   @override
   Widget build(BuildContext context) {
@@ -126,23 +126,82 @@ class _HomeState extends ConsumerState<Home> {
             title: "Arna Demo",
             items: [
               MasterNavigationItem(
-                builder: (context) => Container(),
-                title: "Title",
-                subtitle: "Subtitle",
+                title: "Hello World!",
+                leading: const Icon(Icons.emoji_emotions_outlined),
+                headerBarLeading: ArnaIconButton(
+                  icon: Icons.add_outlined,
+                  onPressed: () => ref.read(counterProvider.state).state++,
+                ),
+                builder: (_) => const HelloWorld(),
+              ),
+              MasterNavigationItem(
+                builder: (_) => const Widgets(),
+                title: "Widgets",
+                leading: const Icon(Icons.widgets_outlined),
+                headerBarLeading: ArnaIconButton(
+                  icon: Icons.search_outlined,
+                  onPressed: () => setState(() {
+                    showSearch = !showSearch;
+                    controller.text = "";
+                  }),
+                ),
+                searchField: ArnaSearchField(
+                  showSearch: showSearch,
+                  controller: controller,
+                ),
+                banner: ArnaBanner(
+                  showBanner: showBanner,
+                  title: "This is an information banner!",
+                  subtitle: "Hello There!",
+                  trailing: ArnaIconButton(
+                    icon: Icons.close_outlined,
+                    hasBorder: false,
+                    onPressed: () => setState(() => showBanner = false),
+                  ),
+                ),
+              ),
+              MasterNavigationItem(
+                title: "Typography",
+                leading: const Icon(Icons.font_download_outlined),
+                builder: (_) => const Typography(),
               ),
             ],
-            headerBarTrailing: ArnaIconButton(
-              icon: Icons.settings_outlined,
-              onPressed: () {
-                showArnaPopupDialog(
-                  context: context,
-                  title: "Settings",
-                  body: const Settings(),
-                );
-              },
+            headerBarTrailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ArnaIconButton(
+                  icon: Icons.info_outlined,
+                  onPressed: () => showArnaDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    dialog: ArnaAlertDialog(
+                      title: "Arna Framework",
+                      message:
+                          "A unique set of widgets for building applications with Flutter.",
+                      primary: ArnaTextButton(
+                        label: "Source code",
+                        onPressed: () async => await launch(url),
+                      ),
+                      secondary: ArnaTextButton(
+                        label: "OK",
+                        onPressed: Navigator.of(context).pop,
+                      ),
+                    ),
+                  ),
+                ),
+                ArnaIconButton(
+                  icon: Icons.settings_outlined,
+                  onPressed: () {
+                    showArnaPopupDialog(
+                      context: context,
+                      title: "Settings",
+                      body: const Settings(),
+                    );
+                  },
+                ),
+              ],
             ),
             currentIndex: 0,
-            emptyBody: Container(),
           )
         : ArnaSideScaffold(
             title: "Arna Demo",

@@ -47,6 +47,7 @@ class ArnaColors {
   static const Color color33 = Color(0xFFD9D9D9); // 217
   static const Color color34 = Color(0xFFE0E0E0); // 224
   static const Color color35 = Color(0xFFE7E7E7); // 231
+  static const Color color35_5 = Color(0xFFEAEAEA); //234
   static const Color color36 = Color(0xFFEEEEEE); // 238
   static const Color color37 = Color(0xFFF5F5F5); // 245
   static const Color color38 = Color(0xFFF8F8F8); // 248
@@ -62,7 +63,7 @@ class ArnaColors {
   /// The color of the background.
   static const ArnaDynamicColor backgroundColor = ArnaDynamicColor(
     debugLabel: 'backgroundColor',
-    color: color37,
+    color: color35_5,
     darkColor: color05,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -72,7 +73,7 @@ class ArnaColors {
   static const ArnaDynamicColor reverseBackgroundColor = ArnaDynamicColor(
     debugLabel: 'reverseBackgroundColor',
     color: color05,
-    darkColor: color37,
+    darkColor: color35_5,
     highContrastColor: color00,
     darkHighContrastColor: color40,
   );
@@ -81,7 +82,7 @@ class ArnaColors {
   static const ArnaDynamicColor sideColor = ArnaDynamicColor(
     debugLabel: 'sideColor',
     color: color38,
-    darkColor: color07,
+    darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -90,7 +91,7 @@ class ArnaColors {
   static const ArnaDynamicColor headerColor = ArnaDynamicColor(
     debugLabel: 'headerColor',
     color: color38,
-    darkColor: color07,
+    darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -98,7 +99,7 @@ class ArnaColors {
   /// The color of borders.
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',
-    color: color34,
+    color: color32,
     darkColor: color03,
     highContrastColor: color00,
     darkHighContrastColor: color40,
@@ -107,8 +108,8 @@ class ArnaColors {
   /// The color of card's background.
   static const ArnaDynamicColor cardColor = ArnaDynamicColor(
     debugLabel: 'cardColor',
-    color: color39,
-    darkColor: color07,
+    color: color36,
+    darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -116,8 +117,8 @@ class ArnaColors {
   /// The color of card's background when it is hoverd.
   static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
     debugLabel: 'cardHoverColor',
-    color: color36,
-    darkColor: color10,
+    color: color34,
+    darkColor: color08,
     highContrastColor: color35,
     darkHighContrastColor: color12,
   );
@@ -125,8 +126,8 @@ class ArnaColors {
   /// The color of card's background when it is pressed.
   static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
     debugLabel: 'cardPressedColor',
-    color: color33,
-    darkColor: color13,
+    color: color32,
+    darkColor: color10,
     highContrastColor: color33,
     darkHighContrastColor: color14,
   );
@@ -152,8 +153,8 @@ class ArnaColors {
   /// The color of button's background.
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
-    color: color40,
-    darkColor: color06,
+    color: color38,
+    darkColor: color08,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -161,8 +162,8 @@ class ArnaColors {
   /// The color of button's background when it is hoverd.
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
-    color: color36,
-    darkColor: color10,
+    color: color35,
+    darkColor: color11,
     highContrastColor: color36,
     darkHighContrastColor: color13,
   );
@@ -170,8 +171,8 @@ class ArnaColors {
   /// The color of button's background when it is pressed.
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
-    color: color34,
-    darkColor: color12,
+    color: color33,
+    darkColor: color13,
     highContrastColor: color34,
     darkHighContrastColor: color15,
   );

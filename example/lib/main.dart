@@ -122,6 +122,7 @@ class _HomeState extends ConsumerState<Home> {
 
     return showMaster
         ? ArnaMasterDetailScaffold(
+            title: "Arna Demo",
             items: [
               MasterNavigationItem(
                 builder: (context) => Container(),
@@ -129,12 +130,21 @@ class _HomeState extends ConsumerState<Home> {
                 subtitle: "Subtitle",
               ),
             ],
+            headerBarTrailing: ArnaIconButton(
+              icon: Icons.settings_outlined,
+              onPressed: () {
+                showArnaPopupDialog(
+                  context: context,
+                  title: "Settings",
+                  body: const Settings(),
+                );
+              },
+            ),
             currentIndex: 0,
             emptyBody: Container(),
           )
         : ArnaSideScaffold(
             title: "Arna Demo",
-            icon: Container(decoration: const FlutterLogoDecoration()),
             headerBarTrailing: Row(
               children: [
                 ArnaIconButton(

@@ -154,7 +154,7 @@ class ArnaColors {
   /// The color of button's background.
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
-    color: color40,
+    color: color39,
     darkColor: color07,
     highContrastColor: color40,
     darkHighContrastColor: color00,

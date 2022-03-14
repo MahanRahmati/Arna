@@ -48,8 +48,8 @@ class ArnaColors {
   static const Color color33 = Color(0xFFD9D9D9); // 217
   static const Color color34 = Color(0xFFE0E0E0); // 224
   static const Color color35 = Color(0xFFE7E7E7); // 231
-  static const Color color35_5 = Color(0xFFEBEBEB); //235
   static const Color color36 = Color(0xFFEEEEEE); // 238
+  static const Color color36_5 = Color(0xFFF1F1F1); //241
   static const Color color37 = Color(0xFFF5F5F5); // 245
   static const Color color38 = Color(0xFFF8F8F8); // 248
   static const Color color39 = Color(0xFFFCFCFC); // 252
@@ -64,7 +64,7 @@ class ArnaColors {
   /// The color of the background.
   static const ArnaDynamicColor backgroundColor = ArnaDynamicColor(
     debugLabel: 'backgroundColor',
-    color: color35_5,
+    color: color37,
     darkColor: color05_5,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -74,7 +74,7 @@ class ArnaColors {
   static const ArnaDynamicColor reverseBackgroundColor = ArnaDynamicColor(
     debugLabel: 'reverseBackgroundColor',
     color: color05_5,
-    darkColor: color35_5,
+    darkColor: color36_5,
     highContrastColor: color00,
     darkHighContrastColor: color40,
   );
@@ -82,7 +82,7 @@ class ArnaColors {
   /// The color of the side bar's background.
   static const ArnaDynamicColor sideColor = ArnaDynamicColor(
     debugLabel: 'sideColor',
-    color: color37,
+    color: color38,
     darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -91,7 +91,7 @@ class ArnaColors {
   /// The color of the header bar's background.
   static const ArnaDynamicColor headerColor = ArnaDynamicColor(
     debugLabel: 'headerColor',
-    color: color37,
+    color: color38,
     darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -100,7 +100,7 @@ class ArnaColors {
   /// The color of borders.
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',
-    color: color31,
+    color: color30,
     darkColor: color03,
     highContrastColor: color00,
     darkHighContrastColor: color40,
@@ -109,7 +109,7 @@ class ArnaColors {
   /// The color of card's background.
   static const ArnaDynamicColor cardColor = ArnaDynamicColor(
     debugLabel: 'cardColor',
-    color: color38,
+    color: color39,
     darkColor: color06,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -118,7 +118,7 @@ class ArnaColors {
   /// The color of card's background when it is hoverd.
   static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
     debugLabel: 'cardHoverColor',
-    color: color34,
+    color: color35,
     darkColor: color08,
     highContrastColor: color35,
     darkHighContrastColor: color12,
@@ -127,7 +127,7 @@ class ArnaColors {
   /// The color of card's background when it is pressed.
   static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
     debugLabel: 'cardPressedColor',
-    color: color30,
+    color: color33,
     darkColor: color09,
     highContrastColor: color33,
     darkHighContrastColor: color14,
@@ -154,7 +154,7 @@ class ArnaColors {
   /// The color of button's background.
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
-    color: color39,
+    color: color40,
     darkColor: color07,
     highContrastColor: color40,
     darkHighContrastColor: color00,
@@ -163,7 +163,7 @@ class ArnaColors {
   /// The color of button's background when it is hoverd.
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
-    color: color36,
+    color: color37,
     darkColor: color08,
     highContrastColor: color36,
     darkHighContrastColor: color13,
@@ -172,7 +172,7 @@ class ArnaColors {
   /// The color of button's background when it is pressed.
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
-    color: color34,
+    color: color35,
     darkColor: color10,
     highContrastColor: color34,
     darkHighContrastColor: color15,

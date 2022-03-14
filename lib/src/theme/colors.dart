@@ -48,7 +48,7 @@ class ArnaColors {
   static const Color color33 = Color(0xFFD9D9D9); // 217
   static const Color color34 = Color(0xFFE0E0E0); // 224
   static const Color color35 = Color(0xFFE7E7E7); // 231
-  static const Color color35_5 = Color(0xFFEAEAEA); //234
+  static const Color color35_5 = Color(0xFFEBEBEB); //235
   static const Color color36 = Color(0xFFEEEEEE); // 238
   static const Color color37 = Color(0xFFF5F5F5); // 245
   static const Color color38 = Color(0xFFF8F8F8); // 248

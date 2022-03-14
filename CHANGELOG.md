@@ -1,3 +1,20 @@
+## 0.3.3
+
+- Update exports
+- Update ArnaSideScaffold
+- Update ArnaScaffold
+- [Example] Update settings page
+- [Example] Update main page
+- Update ArnaListTile
+- Fix ArnaExpansionPanel
+- [BREAKING] Rename ArnaBaseButton to ArnaBaseWidget
+- Refactor ArnaBanner
+- Update ArnaHeaderBar
+- Refactor ArnaTextField
+- Update ArnaScrollbar
+- Update Localizations
+- Refactor colors [Thanks to @h1376h]
+
 ## 0.3.2
 
 - Fixing innerColor function [Thanks to @h1376h]

@@ -4,11 +4,11 @@ double deviceHeight(context) => MediaQuery.of(context).size.height;
 
 double deviceWidth(context) => MediaQuery.of(context).size.width;
 
-bool phone(context) => deviceWidth(context) < 644;
+bool compact(context) => deviceWidth(context) < Styles.compact;
 
-bool tablet(context) => !phone(context) && !desktop(context);
+bool medium(context) => !compact(context) && !expanded(context);
 
-bool desktop(context) => deviceWidth(context) > 960;
+bool expanded(context) => deviceWidth(context) > Styles.expanded;
 
 BorderRadius borderRadiusAll(double borderRadius) => BorderRadius.all(
       Radius.circular(borderRadius),

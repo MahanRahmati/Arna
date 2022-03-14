@@ -42,7 +42,9 @@ abstract class Styles {
   static const double sideBarWidth = base * 44;
   static const double menuMaxWidth = base * 45;
   static const double masterSideMaxWidth = base * 56;
+  static const double compact = base * 86;
   static const double dialogSize = base * 90;
+  static const double expanded = base * 120;
 
   // Durations
   static const Duration tooltipHoverShowDuration = Duration(milliseconds: 70);

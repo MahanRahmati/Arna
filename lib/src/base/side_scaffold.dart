@@ -85,7 +85,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
           icon: widget.items[index].icon,
           onPressed: () => onTap(index),
           badge: widget.items[index].badge,
-          compact: tablet(context) ? true : false,
+          compact: medium(context) ? true : false,
           selected: index == _currentIndex,
           isFocusable: widget.items[index].isFocusable,
           autofocus: widget.items[index].autofocus,
@@ -99,7 +99,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
 
   @override
   Widget build(BuildContext context) {
-    if (!phone(context) && showDrawer) _drawerOpenedCallback(false);
+    if (!compact(context) && showDrawer) _drawerOpenedCallback(false);
     return SafeArea(
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -109,9 +109,9 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        if (constraints.maxWidth > 644)
+                        if (constraints.maxWidth > Styles.compact)
                           AnimatedContainer(
-                            width: constraints.maxWidth > 960
+                            width: constraints.maxWidth > Styles.expanded
                                 ? Styles.sideBarWidth
                                 : Styles.sideBarCompactWidth,
                             duration: Styles.basicDuration,
@@ -123,14 +123,14 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                             ),
                             child: _buildChild(),
                           ),
-                        if (constraints.maxWidth > 644)
+                        if (constraints.maxWidth > Styles.compact)
                           const ArnaVerticalDivider(),
                         Expanded(
                           child: ArnaScaffold(
                             headerBarLeading: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                if (constraints.maxWidth < 644)
+                                if (constraints.maxWidth < Styles.compact)
                                   ArnaIconButton(
                                     icon: Icons.menu_outlined,
                                     onPressed: () =>
@@ -181,7 +181,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                         ),
                       ],
                     ),
-                    if (constraints.maxWidth < 644)
+                    if (constraints.maxWidth < Styles.compact)
                       ArnaDrawerController(
                         drawerCallback: _drawerOpenedCallback,
                         isDrawerOpen: showDrawer,

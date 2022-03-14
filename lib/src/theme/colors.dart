@@ -173,7 +173,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
     color: color34,
-    darkColor: color09,
+    darkColor: color10,
     highContrastColor: color34,
     darkHighContrastColor: color15,
   );

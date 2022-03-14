@@ -30,7 +30,7 @@ abstract class Styles {
   static const double tooltipHeight = base * 4;
   static const double buttonSize = base * 5;
   static const double indicatorSize = base * 5;
-  static const double minMasterItemHeight = base * 5;
+  static const double masterItemMinHeight = base * 5;
   static const double menuItemSize = base * 5;
   static const double switchWidth = base * 7;
   static const double headerBarHeight = base * 7;
@@ -41,6 +41,7 @@ abstract class Styles {
   static const double searchWidth = base * 44;
   static const double sideBarWidth = base * 44;
   static const double menuMaxWidth = base * 45;
+  static const double masterSideMaxWidth = base * 56;
   static const double dialogSize = base * 90;
 
   // Durations

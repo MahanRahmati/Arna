@@ -43,7 +43,7 @@ class ArnaHeaderBar extends StatelessWidget {
                   context,
                 ),
                 child: Padding(
-                  padding: Styles.smallHorizontal,
+                  padding: Styles.small,
                   child: NavigationToolbar(
                     leading: leading,
                     middle: middle,

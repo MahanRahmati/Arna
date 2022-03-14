@@ -135,8 +135,8 @@ class ArnaColors {
   /// The color of text field's background.
   static const ArnaDynamicColor textFieldColor = ArnaDynamicColor(
     debugLabel: 'textFieldColor',
-    color: color37,
-    darkColor: color06,
+    color: color40,
+    darkColor: color07,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -144,10 +144,10 @@ class ArnaColors {
   /// The color of text field's background when it is hoverd.
   static const ArnaDynamicColor textFieldHoverColor = ArnaDynamicColor(
     debugLabel: 'textFieldHoverColor',
-    color: color33,
-    darkColor: color10,
-    highContrastColor: color33,
-    darkHighContrastColor: color10,
+    color: color36,
+    darkColor: color09,
+    highContrastColor: color36,
+    darkHighContrastColor: color13,
   );
 
   /// The color of button's background.
@@ -171,7 +171,7 @@ class ArnaColors {
   /// The color of button's background when it is pressed.
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
-    color: color32,
+    color: color34,
     darkColor: color11,
     highContrastColor: color34,
     darkHighContrastColor: color15,

@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 /// Applies a visual styling theme to descendant Arna widgets.
 ///

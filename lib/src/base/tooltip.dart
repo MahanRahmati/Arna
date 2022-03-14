@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:arna/arna.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 /// The method of interaction that will trigger a tooltip.
 /// Used in [ArnaTooltip.triggerMode].

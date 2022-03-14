@@ -17,6 +17,7 @@ class ArnaColors {
   static const Color color03 = Color(0xFF0A0A0A); // 10
   static const Color color04 = Color(0xFF0E0E0E); // 14
   static const Color color05 = Color(0xFF151515); // 21
+  static const Color color05_5 = Color(0xFF181818); // 24
   static const Color color06 = Color(0xFF1C1C1C); // 28
   static const Color color07 = Color(0xFF232323); // 35
   static const Color color08 = Color(0xFF2A2A2A); // 42
@@ -82,7 +83,7 @@ class ArnaColors {
   static const ArnaDynamicColor sideColor = ArnaDynamicColor(
     debugLabel: 'sideColor',
     color: color37,
-    darkColor: color06,
+    darkColor: color05_5,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );
@@ -91,7 +92,7 @@ class ArnaColors {
   static const ArnaDynamicColor headerColor = ArnaDynamicColor(
     debugLabel: 'headerColor',
     color: color37,
-    darkColor: color06,
+    darkColor: color05_5,
     highContrastColor: color40,
     darkHighContrastColor: color00,
   );

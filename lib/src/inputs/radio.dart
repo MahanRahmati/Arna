@@ -128,12 +128,10 @@ class ArnaRadio<T> extends StatelessWidget {
                           ? selected
                               ? ArnaDynamicColor.outerColor(
                                   accent,
-                                  ArnaTheme.brightnessOf(context),
                                   true,
                                 )
                               : ArnaDynamicColor.outerColor(
                                   accent,
-                                  ArnaTheme.brightnessOf(context),
                                   false,
                                 )
                           : !enabled
@@ -141,7 +139,6 @@ class ArnaRadio<T> extends StatelessWidget {
                               : selected && hover
                                   ? ArnaDynamicColor.outerColor(
                                       accent,
-                                      ArnaTheme.brightnessOf(context),
                                       true,
                                     )
                                   : hover
@@ -158,7 +155,6 @@ class ArnaRadio<T> extends StatelessWidget {
                                       : selected
                                           ? ArnaDynamicColor.outerColor(
                                               accent,
-                                              ArnaTheme.brightnessOf(context),
                                               false,
                                             )
                                           : ArnaColors.borderColor,

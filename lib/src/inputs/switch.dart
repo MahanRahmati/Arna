@@ -104,12 +104,10 @@ class ArnaSwitch extends StatelessWidget {
                           ? value
                               ? ArnaDynamicColor.outerColor(
                                   accent,
-                                  ArnaTheme.brightnessOf(context),
                                   true,
                                 )
                               : ArnaDynamicColor.outerColor(
                                   accent,
-                                  ArnaTheme.brightnessOf(context),
                                   false,
                                 )
                           : !enabled
@@ -118,7 +116,6 @@ class ArnaSwitch extends StatelessWidget {
                                   ? value
                                       ? ArnaDynamicColor.outerColor(
                                           accent,
-                                          ArnaTheme.brightnessOf(context),
                                           true,
                                         )
                                       : ArnaDynamicColor.matchingColor(
@@ -134,7 +131,6 @@ class ArnaSwitch extends StatelessWidget {
                                   : value
                                       ? ArnaDynamicColor.outerColor(
                                           accent,
-                                          ArnaTheme.brightnessOf(context),
                                           false,
                                         )
                                       : ArnaColors.borderColor,

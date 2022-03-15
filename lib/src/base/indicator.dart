@@ -93,7 +93,6 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
               color: indicatorColor,
               borderColor: ArnaDynamicColor.outerColor(
                 indicatorColor,
-                ArnaTheme.brightnessOf(context),
                 false,
               ),
               value: widget.value == null

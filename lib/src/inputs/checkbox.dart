@@ -149,12 +149,10 @@ class ArnaCheckBox extends StatelessWidget {
                           ? selected
                               ? ArnaDynamicColor.outerColor(
                                   accent,
-                                  ArnaTheme.brightnessOf(context),
                                   true,
                                 )
                               : ArnaDynamicColor.outerColor(
                                   accent,
-                                  ArnaTheme.brightnessOf(context),
                                   false,
                                 )
                           : !enabled
@@ -162,7 +160,6 @@ class ArnaCheckBox extends StatelessWidget {
                               : selected && hover
                                   ? ArnaDynamicColor.outerColor(
                                       accent,
-                                      ArnaTheme.brightnessOf(context),
                                       true,
                                     )
                                   : hover
@@ -179,7 +176,6 @@ class ArnaCheckBox extends StatelessWidget {
                                       : selected
                                           ? ArnaDynamicColor.outerColor(
                                               accent,
-                                              ArnaTheme.brightnessOf(context),
                                               false,
                                             )
                                           : ArnaColors.borderColor,

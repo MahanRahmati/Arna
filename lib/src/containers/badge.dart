@@ -32,7 +32,6 @@ class ArnaBadge extends StatelessWidget {
           border: Border.all(
             color: ArnaDynamicColor.outerColor(
               accent,
-              ArnaTheme.brightnessOf(context),
               false,
             ),
           ),

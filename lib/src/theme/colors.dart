@@ -51,6 +51,7 @@ class ArnaColors {
   static const Color white249 = Color(0xFFF9F9F9); // x
   static const Color white251 = Color(0xFFFBFBFB); // x
   static const Color white253 = Color(0xFFFDFDFD); // x
+  static const Color lightHeader = Color.fromARGB(255, 246, 248, 250); // 249
 
   static const Color accentColor = Color(0xFF36AEF9);
   static const Color errorColor = Color(0xFFF44336);
@@ -79,7 +80,7 @@ class ArnaColors {
   /// The color of the side bar's background.
   static const ArnaDynamicColor sideColor = ArnaDynamicColor(
     debugLabel: 'sideColor',
-    color: white249,
+    color: lightHeader,
     darkColor: white035,
     highContrastColor: white251,
     darkHighContrastColor: black,
@@ -88,7 +89,7 @@ class ArnaColors {
   /// The color of the header bar's background.
   static const ArnaDynamicColor headerColor = ArnaDynamicColor(
     debugLabel: 'headerColor',
-    color: white249,
+    color: lightHeader,
     darkColor: white035,
     highContrastColor: white251,
     darkHighContrastColor: black,

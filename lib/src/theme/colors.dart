@@ -441,7 +441,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Color secondColor =
         (brightness == Brightness.dark) ? ArnaColors.white : ArnaColors.black;
     if (hover) {
-      percentage += percentage + 25;
+      percentage += percentage + 35;
       secondColor = colorLuminance < 0.2 ? ArnaColors.white : ArnaColors.black;
     }
     return _colorBlender(color, secondColor, percentage);

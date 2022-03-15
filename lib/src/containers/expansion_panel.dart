@@ -278,7 +278,10 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                             ? ArnaColors.backgroundColor
                             : _focused
                                 ? ArnaDynamicColor.blend(
-                                    ArnaColors.buttonColor,
+                                    ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor,
+                                      context,
+                                    ),
                                     3,
                                     ArnaTheme.brightnessOf(context),
                                   )

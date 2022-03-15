@@ -178,7 +178,7 @@ class ArnaMasterItem extends StatelessWidget {
                                           ArnaColors.buttonColor,
                                           context,
                                         ),
-                                  3,
+                                  4,
                                   ArnaTheme.brightnessOf(context),
                                 )
                               : pressed

@@ -282,7 +282,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    3,
+                                    4,
                                     ArnaTheme.brightnessOf(context),
                                   )
                                 : _hover

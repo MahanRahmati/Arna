@@ -98,7 +98,7 @@ class ArnaColors {
   /// The color of borders.
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',
-    color: white196,
+    color: white217,
     darkColor: white007,
     highContrastColor: black,
     darkHighContrastColor: white251,

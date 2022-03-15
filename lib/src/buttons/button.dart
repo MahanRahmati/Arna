@@ -181,7 +181,7 @@ class ArnaButton extends StatelessWidget {
                                       accent,
                                       brightness,
                                     ),
-                                    35,
+                                    21,
                                   )
                                 : focused
                                     ? ArnaDynamicColor.outerColor(
@@ -229,17 +229,17 @@ class ArnaButton extends StatelessWidget {
                       : pressed
                           ? ArnaDynamicColor.blend(
                               accent,
-                              35,
+                              21,
                             )
                           : hover
                               ? ArnaDynamicColor.blend(
                                   accent,
-                                  21,
+                                  14,
                                 )
                               : focused
                                   ? ArnaDynamicColor.blend(
                                       accent,
-                                      21,
+                                      18,
                                     )
                                   : accent,
             ),

@@ -172,7 +172,7 @@ class ArnaRadio<T> extends StatelessWidget {
                                       accent,
                                       context,
                                     ),
-                                    21,
+                                    14,
                                     ArnaTheme.brightnessOf(context),
                                   )
                                 : accent

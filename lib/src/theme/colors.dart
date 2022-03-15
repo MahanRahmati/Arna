@@ -581,11 +581,13 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     int percentage, [
     Brightness brightness = Brightness.dark,
   ]) {
-    Color secondColor = base.computeLuminance() > 0.45
+    double baseLuminance = base.computeLuminance();
+    Color secondColor = baseLuminance > 0.45
         ? base.computeLuminance() < 0.55 && brightness == Brightness.light
             ? ArnaColors.white
             : ArnaColors.black
         : ArnaColors.white;
+    if (baseLuminance > 0.2 && baseLuminance < 0.8) percentage *= 2;
     return _colorBlender(base, secondColor, percentage);
   }
 

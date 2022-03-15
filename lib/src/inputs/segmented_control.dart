@@ -242,7 +242,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                       : hover
                           ? ArnaDynamicColor.blend(
                               accentColor,
-                              14,
+                              12,
                             )
                           : focused
                               ? ArnaDynamicColor.blend(

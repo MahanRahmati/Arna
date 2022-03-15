@@ -148,7 +148,7 @@ class ArnaSwitch extends StatelessWidget {
                                       accent,
                                       context,
                                     ),
-                                    14,
+                                    12,
                                   )
                                 : accent
                             : hover

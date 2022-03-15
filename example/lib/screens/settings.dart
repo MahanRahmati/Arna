@@ -103,7 +103,7 @@ class Settings extends ConsumerWidget {
                   width: Styles.radioSize,
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
-                    color: ArnaColors.color36,
+                    color: ArnaColors.white,
                   ),
                 ),
               ),
@@ -117,7 +117,7 @@ class Settings extends ConsumerWidget {
                   width: Styles.radioSize,
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
-                    color: ArnaColors.color01,
+                    color: ArnaColors.black,
                   ),
                 ),
               ),

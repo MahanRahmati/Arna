@@ -7,7 +7,7 @@ class ArnaBadge extends StatelessWidget {
     Key? key,
     required this.label,
     this.accentColor,
-    this.textColor = ArnaColors.color34,
+    this.textColor = ArnaColors.white249,
   }) : super(key: key);
 
   /// The text label of the badge.

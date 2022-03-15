@@ -169,7 +169,16 @@ class ArnaRadio<T> extends StatelessWidget {
                     !enabled
                         ? ArnaColors.backgroundColor
                         : selected && enabled
-                            ? accent
+                            ? hover
+                                ? ArnaDynamicColor.blend(
+                                    ArnaDynamicColor.matchingColor(
+                                      ArnaColors.backgroundColor,
+                                      accent,
+                                      context,
+                                    ),
+                                    14,
+                                  )
+                                : accent
                             : hover
                                 ? ArnaColors.buttonHoverColor
                                 : ArnaColors.buttonColor,

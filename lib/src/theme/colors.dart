@@ -98,7 +98,7 @@ class ArnaColors {
   /// The color of borders.
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',
-    color: white203,
+    color: white196,
     darkColor: white007,
     highContrastColor: black,
     darkHighContrastColor: white251,
@@ -116,7 +116,7 @@ class ArnaColors {
   /// The color of card's background when it is hoverd.
   static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
     debugLabel: 'cardHoverColor',
-    color: white241,
+    color: white245,
     darkColor: white042,
     highContrastColor: white231,
     darkHighContrastColor: white070,
@@ -161,7 +161,7 @@ class ArnaColors {
   /// The color of button's background when it is hoverd.
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
-    color: white247,
+    color: white241,
     darkColor: white049,
     highContrastColor: white,
     darkHighContrastColor: white077,
@@ -170,7 +170,7 @@ class ArnaColors {
   /// The color of button's background when it is pressed.
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
-    color: white241,
+    color: white238,
     darkColor: white063,
     highContrastColor: white224,
     darkHighContrastColor: white091,
@@ -533,13 +533,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       colorLuminance,
       ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
     );
-  }
-
-  /// Computes the switch background color from [accent] by using
-  /// [computeLuminance].
-  static Color switchBackgroundColor(Color accent, bool isOn) {
-    if (isOn) return accent;
-    return accent.computeLuminance() < 0.28 ? ArnaColors.white035 : accent;
   }
 
   static Color _findBorderColor(

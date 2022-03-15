@@ -218,7 +218,10 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
       );
     }
     children.add(const SizedBox(width: Styles.largePadding));
-    return Padding(padding: Styles.vertical, child: Row(children: children));
+    return Padding(
+      padding: Styles.expansionPanelPadding,
+      child: Row(children: children),
+    );
   }
 
   @override

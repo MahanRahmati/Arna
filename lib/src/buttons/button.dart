@@ -189,13 +189,10 @@ class ArnaButton extends StatelessWidget {
                                         brightness,
                                         true,
                                       )
-                                    : ArnaDynamicColor.blend(
-                                        ArnaDynamicColor.outerColor(
-                                          accent,
-                                          brightness,
-                                          true,
-                                        ),
-                                        21,
+                                    : ArnaDynamicColor.outerColor(
+                                        accent,
+                                        brightness,
+                                        hover,
                                       ),
                         context,
                       )

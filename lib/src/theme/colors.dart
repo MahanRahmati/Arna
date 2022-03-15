@@ -421,9 +421,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     double colorLuminance = backgroundColor.computeLuminance();
     return colorLuminance > 0.8
         ? ArnaColors.white030
-        : colorLuminance > 0.6
+        : colorLuminance > 0.55
             ? ArnaColors.black
-            : colorLuminance > 0.4
+            : colorLuminance > 0.45
                 ? (brightness == Brightness.light)
                     ? ArnaColors.white
                     : ArnaColors.black

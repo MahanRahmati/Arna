@@ -147,10 +147,18 @@ class ArnaMasterItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
                   border: Border.all(
+                    width: focused ? Styles.boldBorder : 1,
                     color: !enabled
                         ? ArnaColors.invisible
                         : focused
-                            ? accent
+                            ? ArnaDynamicColor.matchingColor(
+                                ArnaDynamicColor.resolve(
+                                  ArnaColors.buttonColor,
+                                  context,
+                                ),
+                                accent,
+                                context,
+                              )
                             : ArnaDynamicColor.resolve(
                                 ArnaColors.borderColor,
                                 context,

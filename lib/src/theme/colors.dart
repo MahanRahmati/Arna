@@ -587,9 +587,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             ? ArnaColors.white
             : ArnaColors.black
         : ArnaColors.white;
-    double bias = baseLuminance > 0.5
-        ? 3.75 - 3 * baseLuminance
-        : 0.75 + 3 * baseLuminance;
+    double bias =
+        baseLuminance > 0.5 ? 3 - 2 * baseLuminance : 1 + 2 * baseLuminance;
     int x = (percentage * bias) ~/ 1;
     return _colorBlender(base, secondColor, x);
   }

@@ -207,25 +207,33 @@ class ArnaButton extends StatelessWidget {
                       context,
                     )
                   : buttonType == ButtonType.normal || !hasBorder
-                      ? pressed
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.buttonPressedColor,
-                              context,
+                      ? focused
+                          ? ArnaDynamicColor.blend(
+                              selected
+                                  ? ArnaColors.buttonHoverColor
+                                  : ArnaColors.buttonColor,
+                              3,
+                              ArnaTheme.brightnessOf(context),
                             )
-                          : hover
+                          : pressed
                               ? ArnaDynamicColor.resolve(
-                                  ArnaColors.buttonHoverColor,
+                                  ArnaColors.buttonPressedColor,
                                   context,
                                 )
-                              : hasBorder
+                              : hover
                                   ? ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
+                                      ArnaColors.buttonHoverColor,
                                       context,
                                     )
-                                  : ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
-                                      context,
-                                    ).withAlpha(0)
+                                  : hasBorder
+                                      ? ArnaDynamicColor.resolve(
+                                          ArnaColors.buttonColor,
+                                          context,
+                                        )
+                                      : ArnaDynamicColor.resolve(
+                                          ArnaColors.buttonColor,
+                                          context,
+                                        ).withAlpha(0)
                       : pressed
                           ? ArnaDynamicColor.blend(
                               accent,

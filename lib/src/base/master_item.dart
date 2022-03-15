@@ -167,13 +167,21 @@ class ArnaMasterItem extends StatelessWidget {
                   color: !enabled
                       ? ArnaColors.invisible
                       : ArnaDynamicColor.resolve(
-                          pressed
-                              ? ArnaColors.buttonPressedColor
-                              : selected
-                                  ? ArnaColors.buttonHoverColor
-                                  : hover
+                          focused
+                              ? ArnaDynamicColor.blend(
+                                  selected
                                       ? ArnaColors.buttonHoverColor
                                       : ArnaColors.buttonColor,
+                                  3,
+                                  ArnaTheme.brightnessOf(context),
+                                )
+                              : pressed
+                                  ? ArnaColors.buttonPressedColor
+                                  : selected
+                                      ? ArnaColors.buttonHoverColor
+                                      : hover
+                                          ? ArnaColors.buttonHoverColor
+                                          : ArnaColors.buttonColor,
                           context,
                         ),
                 ),

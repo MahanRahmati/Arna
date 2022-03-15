@@ -276,9 +276,15 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                       color: ArnaDynamicColor.resolve(
                         !isEnabled
                             ? ArnaColors.backgroundColor
-                            : _hover
-                                ? ArnaColors.buttonHoverColor
-                                : ArnaColors.buttonColor,
+                            : _focused
+                                ? ArnaDynamicColor.blend(
+                                    ArnaColors.buttonColor,
+                                    3,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
+                                : _hover
+                                    ? ArnaColors.buttonHoverColor
+                                    : ArnaColors.buttonColor,
                         context,
                       ),
                     ),

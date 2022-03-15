@@ -198,6 +198,7 @@ class ArnaCheckBox extends StatelessWidget {
                                       context,
                                     ),
                                     21,
+                                    ArnaTheme.brightnessOf(context),
                                   )
                                 : accent
                             : hover

@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/cupertino.dart';
 
 /// Button types.
 enum ButtonType { normal, colored, destructive, suggested }
@@ -132,6 +133,7 @@ class ArnaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color accent;
+    Brightness brightness = ArnaTheme.brightnessOf(context);
     switch (buttonType) {
       case ButtonType.destructive:
         accent = ArnaColors.errorColor;
@@ -177,24 +179,23 @@ class ArnaButton extends StatelessWidget {
                                 ? ArnaDynamicColor.blend(
                                     ArnaDynamicColor.innerColor(
                                       accent,
-                                      ArnaTheme.brightnessOf(context),
+                                      brightness,
                                     ),
-                                    42,
+                                    35,
                                   )
                                 : focused
-                                    ? ArnaDynamicColor.blend(
-                                        ArnaDynamicColor.innerColor(
-                                          accent,
-                                          ArnaTheme.brightnessOf(context),
-                                        ),
-                                        28,
+                                    ? ArnaDynamicColor.outerColor(
+                                        accent,
+                                        brightness,
+                                        true,
                                       )
                                     : ArnaDynamicColor.blend(
-                                        ArnaDynamicColor.innerColor(
+                                        ArnaDynamicColor.outerColor(
                                           accent,
-                                          ArnaTheme.brightnessOf(context),
+                                          brightness,
+                                          true,
                                         ),
-                                        42,
+                                        21,
                                       ),
                         context,
                       )
@@ -231,11 +232,20 @@ class ArnaButton extends StatelessWidget {
                                       context,
                                     ).withAlpha(0)
                       : pressed
-                          ? ArnaDynamicColor.blend(accent, 42)
+                          ? ArnaDynamicColor.blend(
+                              accent,
+                              35,
+                            )
                           : hover
-                              ? ArnaDynamicColor.blend(accent, 28)
+                              ? ArnaDynamicColor.blend(
+                                  accent,
+                                  21,
+                                )
                               : focused
-                                  ? ArnaDynamicColor.blend(accent, 28)
+                                  ? ArnaDynamicColor.blend(
+                                      accent,
+                                      21,
+                                    )
                                   : accent,
             ),
             padding: icon != null

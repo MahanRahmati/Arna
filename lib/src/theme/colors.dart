@@ -579,14 +579,16 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return Color.fromRGBO(r, g, b, 1.0);
   }
 
-  static Color blend(Color base, int percentage, [bool darken = false]) {
-    Color secondColor = base.computeLuminance() > 0.49
-        ? darken
+  static Color blend(
+    Color base,
+    int percentage, [
+    Brightness brightness = Brightness.dark,
+  ]) {
+    Color secondColor = base.computeLuminance() > 0.40
+        ? base.computeLuminance() < 0.6 && brightness == Brightness.light
             ? ArnaColors.white
             : ArnaColors.black
-        : darken
-            ? ArnaColors.black
-            : ArnaColors.white;
+        : ArnaColors.white;
     return _colorBlender(base, secondColor, percentage);
   }
 

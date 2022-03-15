@@ -80,7 +80,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
             if (widget.title != null)
               Padding(
                 padding: (widget.subtitle != null)
-                    ? Styles.titleWithSubtitlePadding
+                    ? Styles.tileWithSubtitlePadding
                     : Styles.tileTextPadding,
                 child: Row(
                   children: [

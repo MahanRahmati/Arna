@@ -19,7 +19,7 @@ abstract class Styles {
   static const double largePadding = padding * 2;
   static const double checkBoxIconSize = base * 2.5;
   static const double tooltipOffset = base * 2;
-  static const double arrowSize = base * 2.5;
+  static const double arrowSize = base * 4;
   static const double iconSize = base * 3;
   static const double badgeSize = base * 3;
   static const double checkBoxSize = base * 3;
@@ -96,7 +96,7 @@ abstract class Styles {
     horizontal: padding,
     vertical: smallPadding,
   );
-  static const EdgeInsets titleWithSubtitlePadding = EdgeInsets.fromLTRB(
+  static const EdgeInsets tileWithSubtitlePadding = EdgeInsets.fromLTRB(
     Styles.padding,
     Styles.smallPadding,
     Styles.padding,

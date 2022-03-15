@@ -150,7 +150,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
             if (widget.title != null)
               Padding(
                 padding: (widget.subtitle != null)
-                    ? Styles.titleWithSubtitlePadding
+                    ? Styles.tileWithSubtitlePadding
                     : Styles.tileTextPadding,
                 child: Row(
                   children: <Widget>[
@@ -200,15 +200,12 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
               padding: Styles.horizontal,
               child: RotationTransition(
                 turns: _rotateAnimation,
-                child: Transform.rotate(
-                  angle: -3.14 / 2,
-                  child: Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    size: Styles.arrowSize,
-                    color: ArnaDynamicColor.resolve(
-                      ArnaColors.iconColor,
-                      context,
-                    ),
+                child: Icon(
+                  Icons.keyboard_arrow_down,
+                  size: Styles.arrowSize,
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
                   ),
                 ),
               ),

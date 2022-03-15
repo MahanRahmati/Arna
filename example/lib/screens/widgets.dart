@@ -31,8 +31,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.adjust_outlined),
                 title: "Buttons",
-                subtitle:
-                    "Buttons allow users to take actions, and make choices, with a single tap.",
                 child: Center(
                   child: Wrap(
                     children: [
@@ -123,7 +121,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.more_horiz_outlined),
                 title: "Linked Buttons",
-                subtitle: "Buttons that are attached together.",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -164,8 +161,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.calendar_view_week_outlined),
                 title: "Segmented Control",
-                subtitle:
-                    "Segmented controls allow users to select one item from a set.",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -181,8 +176,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.check_box_outlined),
                 title: "CheckBox",
-                subtitle:
-                    "Checkboxes allow users to select one or more items from a set.",
                 child: ArnaColumn(
                   children: [
                     ArnaCheckBoxListTile(
@@ -212,8 +205,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.radio_button_checked_outlined),
                 title: "Radio",
-                subtitle:
-                    "Radio buttons allow users to select one option from a set.",
                 child: ArnaColumn(
                   children: [
                     ArnaRadioListTile(
@@ -247,8 +238,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.toggle_on_outlined),
                 title: "Switch",
-                subtitle:
-                    "Switches toggle the state of a single item on or off.",
                 child: ArnaColumn(
                   children: [
                     ArnaSwitchListTile(
@@ -277,7 +266,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.view_list_outlined),
                 title: "List Tile",
-                subtitle: "Arna-styled list tile.",
                 child: ArnaColumn(
                   children: [
                     ArnaListTile(
@@ -296,8 +284,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.linear_scale_outlined),
                 title: "Slider",
-                subtitle:
-                    "Sliders allow users to make selections from a range of values.",
                 child: ArnaColumn(
                   children: [
                     ArnaSliderListTile(
@@ -334,8 +320,6 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.refresh_outlined),
                 title: "Indicator",
-                subtitle:
-                    "Progress indicators express an unspecified wait time or display the length of a process.",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
@@ -347,7 +331,6 @@ class _WidgetsState extends State<Widgets> {
               const ArnaExpansionPanel(
                 leading: Icon(Icons.text_fields_outlined),
                 title: "Text Field",
-                subtitle: "Text fields let users enter and edit text.",
                 child: Padding(
                   padding: Styles.small,
                   child: ArnaTextField(),

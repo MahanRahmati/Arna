@@ -115,19 +115,18 @@ class ArnaButton extends StatelessWidget {
               ),
             ),
       );
-      Widget labelWidget = (buttonSize == ButtonSize.huge)
-          ? Flexible(
-              child: Center(
-                child: text,
-              ),
-            )
-          : Flexible(child: text);
+      Widget labelWidget = Flexible(child: text);
       children.add(labelWidget);
       if (icon != null) {
         children.add(const SizedBox(width: Styles.padding));
       }
     }
-    return Row(mainAxisSize: MainAxisSize.min, children: children);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize:
+          buttonSize == ButtonSize.huge ? MainAxisSize.max : MainAxisSize.min,
+      children: children,
+    );
   }
 
   @override
@@ -151,7 +150,7 @@ class ArnaButton extends StatelessWidget {
         builder: (context, enabled, hover, focused, pressed, selected) {
           return AnimatedContainer(
             height: (buttonSize == ButtonSize.huge)
-                ? 1.4 * Styles.buttonSize
+                ? Styles.hugeButtonSize
                 : Styles.buttonSize,
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,

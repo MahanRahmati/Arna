@@ -33,6 +33,7 @@ abstract class Styles {
   static const double indicatorSize = base * 5;
   static const double masterItemMinHeight = base * 5;
   static const double menuItemSize = base * 5;
+  static const double hugeButtonSize = base * 6.5;
   static const double switchWidth = base * 7;
   static const double headerBarHeight = base * 7;
   static const double sideBarItemHeight = base * 7;

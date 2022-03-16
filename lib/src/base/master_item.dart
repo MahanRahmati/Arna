@@ -115,7 +115,7 @@ class ArnaMasterItem extends StatelessWidget {
                   borderRadius: Styles.borderRadius,
                   border: Border.all(
                     color: !enabled
-                        ? ArnaColors.color00
+                        ? ArnaColors.transparent
                         : focused
                             ? accent
                             : ArnaDynamicColor.resolve(
@@ -124,7 +124,7 @@ class ArnaMasterItem extends StatelessWidget {
                               ),
                   ),
                   color: !enabled
-                      ? ArnaColors.color00
+                      ? ArnaColors.transparent
                       : ArnaDynamicColor.resolve(
                           pressed
                               ? ArnaColors.buttonPressedColor

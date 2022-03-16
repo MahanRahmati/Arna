@@ -157,7 +157,7 @@ class ArnaSideBarItem extends StatelessWidget {
                                       accent,
                                       context,
                                     )
-                                  : ArnaColors.color00,
+                                  : ArnaColors.transparent,
                           context,
                         ),
                       ),

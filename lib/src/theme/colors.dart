@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show Brightness;
 
 /// A palette of [Color] constants that describe colors
 class ArnaColors {
@@ -10,7 +10,7 @@ class ArnaColors {
   // prevents instantiation and extension.
   ArnaColors._();
 
-  static const Color color00 = Color(0x00000000); // 00
+  static const Color transparent = Color(0x00000000); // 00
   static const Color color01 = Color(0xFF070707); // 07
   static const Color color02 = Color(0xFF0E0E0E); // 14
   static const Color color03 = Color(0xFF151515); // 21

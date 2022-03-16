@@ -162,7 +162,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
   void _animationChanged() => setState(() {});
 
   ColorTween _buildScrimColorTween() =>
-      ColorTween(begin: ArnaColors.color00, end: ArnaColors.barrierColor);
+      ColorTween(begin: ArnaColors.transparent, end: ArnaColors.barrierColor);
 
   /// Starts an animation to open the drawer.
   void open() {

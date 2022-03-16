@@ -85,7 +85,7 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
         widget.thumbColor ?? ArnaTheme.of(context).accentColor,
         context,
       )
-      ..trackBorderColor = ArnaColors.color00
+      ..trackBorderColor = ArnaColors.transparent
       ..textDirection = Directionality.of(context)
       ..thickness = _hoverIsActive
           ? Styles.scrollBarHoverThickness

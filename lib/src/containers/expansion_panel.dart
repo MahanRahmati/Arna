@@ -1,5 +1,5 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show LogicalKeyboardKey;
 
 /// An Arna-styled expansion panel. The body of the panel is only visible when
 /// it is expanded.

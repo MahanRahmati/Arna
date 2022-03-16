@@ -1,5 +1,5 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show LogicalKeyboardKey;
 
 /// The base widget builder which grants interactive states to widgets.
 typedef ArnaBaseWidgetBuilder = Widget Function(

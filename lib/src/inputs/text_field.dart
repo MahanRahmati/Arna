@@ -933,7 +933,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     final Widget paddedEditable = Padding(
-      padding: Styles.textFieldPadding,
+      padding: Styles.normal,
       child: RepaintBoundary(
         child: UnmanagedRestorationScope(
           bucket: bucket,
@@ -1007,57 +1007,60 @@ class _ArnaTextFieldState extends State<ArnaTextField>
       ),
     );
 
-    return MouseRegion(
-      cursor: widget.cursor,
-      onEnter: (PointerEnterEvent event) => _handleHover(true),
-      onExit: (PointerExitEvent event) => _handleHover(false),
-      child: Semantics(
-        enabled: enabled,
-        onTap: !enabled || widget.readOnly
-            ? null
-            : () {
-                if (!controller.selection.isValid) {
-                  controller.selection = TextSelection.collapsed(
-                    offset: controller.text.length,
-                  );
-                }
-                _requestKeyboard();
-              },
-        onDidGainAccessibilityFocus: handleDidGainAccessibilityFocus,
-        child: IgnorePointer(
-          ignoring: !enabled,
-          child: Container(
-            decoration: BoxDecoration(
-              color: ArnaDynamicColor.resolve(
-                _isHovering
-                    ? ArnaColors.textFieldHoverColor
-                    : ArnaColors.textFieldColor,
-                context,
-              ),
-              border: Border.all(
+    return Padding(
+      padding: Styles.small,
+      child: MouseRegion(
+        cursor: widget.cursor,
+        onEnter: (PointerEnterEvent event) => _handleHover(true),
+        onExit: (PointerExitEvent event) => _handleHover(false),
+        child: Semantics(
+          enabled: enabled,
+          onTap: !enabled || widget.readOnly
+              ? null
+              : () {
+                  if (!controller.selection.isValid) {
+                    controller.selection = TextSelection.collapsed(
+                      offset: controller.text.length,
+                    );
+                  }
+                  _requestKeyboard();
+                },
+          onDidGainAccessibilityFocus: handleDidGainAccessibilityFocus,
+          child: IgnorePointer(
+            ignoring: !enabled,
+            child: Container(
+              decoration: BoxDecoration(
                 color: ArnaDynamicColor.resolve(
-                  _effectiveFocusNode.hasFocus
-                      ? ArnaDynamicColor.matchingColor(
-                          ArnaColors.textFieldColor,
-                          accent,
-                          context,
-                        )
-                      : ArnaColors.borderColor,
+                  _isHovering
+                      ? ArnaColors.textFieldHoverColor
+                      : ArnaColors.textFieldColor,
                   context,
                 ),
+                border: Border.all(
+                  color: ArnaDynamicColor.resolve(
+                    _effectiveFocusNode.hasFocus
+                        ? ArnaDynamicColor.matchingColor(
+                            ArnaColors.textFieldColor,
+                            accent,
+                            context,
+                          )
+                        : ArnaColors.borderColor,
+                    context,
+                  ),
+                ),
+                borderRadius: Styles.borderRadius,
               ),
-              borderRadius: Styles.borderRadius,
-            ),
-            color: !enabled
-                ? ArnaDynamicColor.resolve(ArnaColors.disabledColor, context)
-                : null,
-            child: _selectionGestureDetectorBuilder.buildGestureDetector(
-              behavior: HitTestBehavior.opaque,
-              child: Align(
-                alignment: Alignment(-1.0, _textAlignVertical.y),
-                widthFactor: 1.0,
-                heightFactor: 1.0,
-                child: _addTextDependentAttachments(paddedEditable),
+              color: !enabled
+                  ? ArnaDynamicColor.resolve(ArnaColors.disabledColor, context)
+                  : null,
+              child: _selectionGestureDetectorBuilder.buildGestureDetector(
+                behavior: HitTestBehavior.opaque,
+                child: Align(
+                  alignment: Alignment(-1.0, _textAlignVertical.y),
+                  widthFactor: 1.0,
+                  heightFactor: 1.0,
+                  child: _addTextDependentAttachments(paddedEditable),
+                ),
               ),
             ),
           ),

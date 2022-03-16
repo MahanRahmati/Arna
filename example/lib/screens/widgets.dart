@@ -331,10 +331,7 @@ class _WidgetsState extends State<Widgets> {
               const ArnaExpansionPanel(
                 leading: Icon(Icons.text_fields_outlined),
                 title: "Text Field",
-                child: Padding(
-                  padding: Styles.small,
-                  child: ArnaTextField(),
-                ),
+                child: ArnaTextField(),
               ),
             ],
           ),

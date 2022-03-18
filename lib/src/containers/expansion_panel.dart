@@ -264,7 +264,6 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                             : const Radius.circular(Styles.borderRadiusSize),
                       ),
                       border: Border.all(
-                        width: _focused ? Styles.boldBorder : 1,
                         color: ArnaDynamicColor.resolve(
                           _focused
                               ? ArnaDynamicColor.matchingColor(

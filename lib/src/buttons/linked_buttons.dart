@@ -117,7 +117,6 @@ class _ArnaLinked extends StatelessWidget {
                       button.accentColor ?? ArnaTheme.of(context).accentColor,
                       context,
                     ),
-                    width: Styles.boldBorder,
                   )
                 : Border.all(color: ArnaColors.transparent),
             color: ArnaDynamicColor.resolve(

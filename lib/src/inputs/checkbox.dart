@@ -143,7 +143,6 @@ class ArnaCheckBox extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.checkBoxBorderRadius,
                   border: Border.all(
-                    width: focused ? Styles.boldBorder : 1,
                     color: ArnaDynamicColor.resolve(
                       focused
                           ? selected

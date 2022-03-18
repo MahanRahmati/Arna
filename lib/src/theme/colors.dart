@@ -60,7 +60,7 @@ class ArnaColors {
   static const ArnaDynamicColor backgroundColor = ArnaDynamicColor(
     debugLabel: 'backgroundColor',
     color: color33,
-    darkColor: color06,
+    darkColor: color04,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -68,7 +68,7 @@ class ArnaColors {
   /// The reverse color of the background.
   static const ArnaDynamicColor reverseBackgroundColor = ArnaDynamicColor(
     debugLabel: 'reverseBackgroundColor',
-    color: color06,
+    color: color04,
     darkColor: color33,
     highContrastColor: black,
     darkHighContrastColor: white,
@@ -78,7 +78,7 @@ class ArnaColors {
   static const ArnaDynamicColor sideColor = ArnaDynamicColor(
     debugLabel: 'sideColor',
     color: color34,
-    darkColor: color07,
+    darkColor: color05,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -87,7 +87,7 @@ class ArnaColors {
   static const ArnaDynamicColor headerColor = ArnaDynamicColor(
     debugLabel: 'headerColor',
     color: color34,
-    darkColor: color07,
+    darkColor: color05,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -96,7 +96,7 @@ class ArnaColors {
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',
     color: color30,
-    darkColor: color03,
+    darkColor: color01,
     highContrastColor: black,
     darkHighContrastColor: white,
   );
@@ -105,7 +105,7 @@ class ArnaColors {
   static const ArnaDynamicColor cardColor = ArnaDynamicColor(
     debugLabel: 'cardColor',
     color: color35,
-    darkColor: color08,
+    darkColor: color06,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -113,70 +113,70 @@ class ArnaColors {
   /// The color of card's background when it is hoverd.
   static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
     debugLabel: 'cardHoverColor',
-    color: color31,
-    darkColor: color12,
-    highContrastColor: color31,
-    darkHighContrastColor: color12,
+    color: color32,
+    darkColor: color09,
+    highContrastColor: color32,
+    darkHighContrastColor: color09,
   );
 
   /// The color of card's background when it is pressed.
   static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
     debugLabel: 'cardPressedColor',
-    color: color29,
-    darkColor: color14,
-    highContrastColor: color29,
-    darkHighContrastColor: color14,
+    color: color30,
+    darkColor: color11,
+    highContrastColor: color30,
+    darkHighContrastColor: color11,
   );
 
   /// The color of text field's background.
   static const ArnaDynamicColor textFieldColor = ArnaDynamicColor(
     debugLabel: 'textFieldColor',
-    color: color33,
-    darkColor: color06,
-    highContrastColor: white,
+    color: color36,
+    darkColor: color07,
+    highContrastColor: color36,
     darkHighContrastColor: black,
   );
 
   /// The color of text field's background when it is hoverd.
   static const ArnaDynamicColor textFieldHoverColor = ArnaDynamicColor(
     debugLabel: 'textFieldHoverColor',
-    color: color29,
+    color: color33,
     darkColor: color10,
-    highContrastColor: color29,
+    highContrastColor: color33,
     darkHighContrastColor: color10,
   );
 
   /// The color of button's background.
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
-    color: white,
-    darkColor: color09,
-    highContrastColor: white,
-    darkHighContrastColor: color03,
+    color: color36,
+    darkColor: color07,
+    highContrastColor: color36,
+    darkHighContrastColor: black,
   );
 
   /// The color of button's background when it is hoverd.
   static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
     debugLabel: 'buttonHoverColor',
-    color: color32,
-    darkColor: color13,
-    highContrastColor: color32,
-    darkHighContrastColor: color13,
+    color: color33,
+    darkColor: color10,
+    highContrastColor: color33,
+    darkHighContrastColor: color10,
   );
 
   /// The color of button's background when it is pressed.
   static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
     debugLabel: 'buttonPressedColor',
-    color: color30,
-    darkColor: color15,
-    highContrastColor: color30,
-    darkHighContrastColor: color15,
+    color: color31,
+    darkColor: color12,
+    highContrastColor: color31,
+    darkHighContrastColor: color12,
   );
 
   /// The primary text color.
   static const ArnaDynamicColor primaryTextColor = ArnaDynamicColor(
     debugLabel: 'primaryTextColor',
-    color: color06,
+    color: color04,
     darkColor: color33,
     highContrastColor: black,
     darkHighContrastColor: white,
@@ -186,7 +186,7 @@ class ArnaColors {
   static const ArnaDynamicColor reversePrimaryTextColor = ArnaDynamicColor(
     debugLabel: 'reversePrimaryTextColor',
     color: color33,
-    darkColor: color06,
+    darkColor: color04,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -212,7 +212,7 @@ class ArnaColors {
   /// The color of icons.
   static const ArnaDynamicColor iconColor = ArnaDynamicColor(
     debugLabel: 'iconColor',
-    color: color06,
+    color: color04,
     darkColor: color33,
     highContrastColor: black,
     darkHighContrastColor: white,

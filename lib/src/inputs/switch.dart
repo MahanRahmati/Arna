@@ -102,23 +102,14 @@ class ArnaSwitch extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(
                       focused
                           ? value
-                              ? ArnaDynamicColor.outerColor(
-                                  accent,
-                                  ArnaTheme.brightnessOf(context),
-                                  true,
-                                )
-                              : ArnaDynamicColor.outerColor(
-                                  accent,
-                                  ArnaTheme.brightnessOf(context),
-                                  false,
-                                )
+                              ? ArnaDynamicColor.outerColor(accent, true)
+                              : ArnaDynamicColor.outerColor(accent, false)
                           : !enabled
                               ? ArnaColors.borderColor
                               : hover
                                   ? value
                                       ? ArnaDynamicColor.outerColor(
                                           accent,
-                                          ArnaTheme.brightnessOf(context),
                                           true,
                                         )
                                       : ArnaDynamicColor.matchingColor(
@@ -134,7 +125,6 @@ class ArnaSwitch extends StatelessWidget {
                                   : value
                                       ? ArnaDynamicColor.outerColor(
                                           accent,
-                                          ArnaTheme.brightnessOf(context),
                                           false,
                                         )
                                       : ArnaColors.borderColor,
@@ -145,10 +135,13 @@ class ArnaSwitch extends StatelessWidget {
                     !enabled
                         ? ArnaColors.backgroundColor
                         : value
-                            ? ArnaDynamicColor.switchBackgroundColor(
-                                accent,
-                                value,
-                              )
+                            ? hover || focused
+                                ? ArnaDynamicColor.blend(
+                                    accent,
+                                    14,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
+                                : accent
                             : hover
                                 ? ArnaColors.buttonHoverColor
                                 : ArnaColors.backgroundColor,

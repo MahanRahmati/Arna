@@ -186,7 +186,7 @@ class ArnaSwitch extends StatelessWidget {
                                   accent,
                                   ArnaTheme.brightnessOf(context),
                                 )
-                              : ArnaColors.color36,
+                              : ArnaColors.white,
                       context,
                     ),
                   ),

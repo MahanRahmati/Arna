@@ -136,7 +136,13 @@ class ArnaRadio<T> extends StatelessWidget {
                                           ArnaDynamicColor.resolve(
                                             selected
                                                 ? ArnaColors.cardColor
-                                                : ArnaColors.cardHoverColor,
+                                                : ArnaDynamicColor.blend(
+                                                    ArnaDynamicColor.resolve(
+                                                      ArnaColors.cardColor,
+                                                      context,
+                                                    ),
+                                                    7,
+                                                  ),
                                             context,
                                           ),
                                           accent,
@@ -163,7 +169,13 @@ class ArnaRadio<T> extends StatelessWidget {
                                   )
                                 : accent
                             : hover
-                                ? ArnaColors.buttonHoverColor
+                                ? ArnaDynamicColor.blend(
+                                    ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor,
+                                      context,
+                                    ),
+                                    7,
+                                  )
                                 : ArnaColors.buttonColor,
                     context,
                   ),
@@ -188,7 +200,13 @@ class ArnaRadio<T> extends StatelessWidget {
                             )
                           : ArnaDynamicColor.resolve(
                               hover
-                                  ? ArnaColors.buttonHoverColor
+                                  ? ArnaDynamicColor.blend(
+                                      ArnaDynamicColor.resolve(
+                                        ArnaColors.buttonColor,
+                                        context,
+                                      ),
+                                      7,
+                                    )
                                   : ArnaColors.backgroundColor,
                               context,
                             ),

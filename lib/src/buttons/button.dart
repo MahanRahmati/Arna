@@ -202,14 +202,20 @@ class ArnaButton extends StatelessWidget {
                     )
                   : buttonType == ButtonType.normal || !hasBorder
                       ? pressed
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.buttonPressedColor,
-                              context,
+                          ? ArnaDynamicColor.blend(
+                              ArnaDynamicColor.resolve(
+                                ArnaColors.buttonColor,
+                                context,
+                              ),
+                              7,
                             )
                           : hover
-                              ? ArnaDynamicColor.resolve(
-                                  ArnaColors.buttonHoverColor,
-                                  context,
+                              ? ArnaDynamicColor.blend(
+                                  ArnaDynamicColor.resolve(
+                                    ArnaColors.buttonColor,
+                                    context,
+                                  ),
+                                  7,
                                 )
                               : hasBorder
                                   ? ArnaDynamicColor.resolve(
@@ -223,19 +229,19 @@ class ArnaButton extends StatelessWidget {
                       : pressed
                           ? ArnaDynamicColor.blend(
                               accent,
-                              21,
+                              7,
                               brightness,
                             )
                           : hover
                               ? ArnaDynamicColor.blend(
                                   accent,
-                                  14,
+                                  7,
                                   brightness,
                                 )
                               : focused
                                   ? ArnaDynamicColor.blend(
                                       accent,
-                                      14,
+                                      7,
                                       brightness,
                                     )
                                   : accent,

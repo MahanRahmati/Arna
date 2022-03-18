@@ -157,7 +157,13 @@ class ArnaCheckBox extends StatelessWidget {
                                           ArnaDynamicColor.resolve(
                                             selected
                                                 ? ArnaColors.cardColor
-                                                : ArnaColors.cardHoverColor,
+                                                : ArnaDynamicColor.blend(
+                                                    ArnaDynamicColor.resolve(
+                                                      ArnaColors.cardColor,
+                                                      context,
+                                                    ),
+                                                    7,
+                                                  ),
                                             context,
                                           ),
                                           accent,
@@ -184,7 +190,13 @@ class ArnaCheckBox extends StatelessWidget {
                                   )
                                 : accent
                             : hover
-                                ? ArnaColors.buttonHoverColor
+                                ? ArnaDynamicColor.blend(
+                                    ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor,
+                                      context,
+                                    ),
+                                    7,
+                                  )
                                 : ArnaColors.buttonColor,
                     context,
                   ),

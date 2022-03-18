@@ -126,24 +126,12 @@ class ArnaRadio<T> extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(
                       focused
                           ? selected
-                              ? ArnaDynamicColor.outerColor(
-                                  accent,
-                                  ArnaTheme.brightnessOf(context),
-                                  true,
-                                )
-                              : ArnaDynamicColor.outerColor(
-                                  accent,
-                                  ArnaTheme.brightnessOf(context),
-                                  false,
-                                )
+                              ? ArnaDynamicColor.outerColor(accent, true)
+                              : ArnaDynamicColor.outerColor(accent, false)
                           : !enabled
                               ? ArnaColors.borderColor
                               : selected && hover
-                                  ? ArnaDynamicColor.outerColor(
-                                      accent,
-                                      ArnaTheme.brightnessOf(context),
-                                      true,
-                                    )
+                                  ? ArnaDynamicColor.outerColor(accent, true)
                                   : hover
                                       ? ArnaDynamicColor.matchingColor(
                                           ArnaDynamicColor.resolve(
@@ -158,7 +146,6 @@ class ArnaRadio<T> extends StatelessWidget {
                                       : selected
                                           ? ArnaDynamicColor.outerColor(
                                               accent,
-                                              ArnaTheme.brightnessOf(context),
                                               false,
                                             )
                                           : ArnaColors.borderColor,
@@ -169,7 +156,13 @@ class ArnaRadio<T> extends StatelessWidget {
                     !enabled
                         ? ArnaColors.backgroundColor
                         : selected && enabled
-                            ? accent
+                            ? hover || focused
+                                ? ArnaDynamicColor.blend(
+                                    accent,
+                                    14,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
+                                : accent
                             : hover
                                 ? ArnaColors.buttonHoverColor
                                 : ArnaColors.buttonColor,

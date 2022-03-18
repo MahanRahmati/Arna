@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/services.dart' show Brightness;
 
 /// Button types.
 enum ButtonType { normal, colored, destructive, suggested }
@@ -141,7 +142,7 @@ class ArnaButton extends StatelessWidget {
       default:
         accent = accentColor ?? ArnaTheme.of(context).accentColor;
     }
-
+    Brightness brightness = ArnaTheme.brightnessOf(context);
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
@@ -178,22 +179,13 @@ class ArnaButton extends StatelessWidget {
                                       accent,
                                       ArnaTheme.brightnessOf(context),
                                     ),
-                                    42,
+                                    21,
                                   )
                                 : focused
-                                    ? ArnaDynamicColor.blend(
-                                        ArnaDynamicColor.innerColor(
-                                          accent,
-                                          ArnaTheme.brightnessOf(context),
-                                        ),
-                                        28,
-                                      )
-                                    : ArnaDynamicColor.blend(
-                                        ArnaDynamicColor.innerColor(
-                                          accent,
-                                          ArnaTheme.brightnessOf(context),
-                                        ),
-                                        42,
+                                    ? ArnaDynamicColor.outerColor(accent, true)
+                                    : ArnaDynamicColor.outerColor(
+                                        accent,
+                                        hover,
                                       ),
                         context,
                       )
@@ -230,11 +222,23 @@ class ArnaButton extends StatelessWidget {
                                       context,
                                     ).withAlpha(0)
                       : pressed
-                          ? ArnaDynamicColor.blend(accent, 42)
+                          ? ArnaDynamicColor.blend(
+                              accent,
+                              21,
+                              brightness,
+                            )
                           : hover
-                              ? ArnaDynamicColor.blend(accent, 28)
+                              ? ArnaDynamicColor.blend(
+                                  accent,
+                                  14,
+                                  brightness,
+                                )
                               : focused
-                                  ? ArnaDynamicColor.blend(accent, 28)
+                                  ? ArnaDynamicColor.blend(
+                                      accent,
+                                      14,
+                                      brightness,
+                                    )
                                   : accent,
             ),
             padding: icon != null

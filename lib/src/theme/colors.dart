@@ -416,31 +416,22 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     double colorLuminance = backgroundColor.computeLuminance();
     return colorLuminance > 0.8
         ? ArnaColors.color10
-        : colorLuminance > 0.6
+        : colorLuminance > 0.55
             ? ArnaColors.color01
-            : colorLuminance > 0.4
+            : colorLuminance > 0.45
                 ? (brightness == Brightness.light)
                     ? ArnaColors.color36
                     : ArnaColors.color01
                 : ArnaColors.color36;
   }
 
-  static Color outerColor(
-    Color color,
-    Brightness brightness,
-    bool hover,
-  ) {
+  static Color outerColor(Color color, bool hover) {
     double colorLuminance = color.computeLuminance();
     int a = (1 - colorLuminance) * 100 ~/ 1;
-    int percentage = colorLuminance > 0.50 ? (50 - a) : (a - 50);
-    Color secondColor = (brightness == Brightness.dark)
-        ? ArnaColors.color36
-        : ArnaColors.color01;
-    if (hover) {
-      percentage += 75;
-      secondColor =
-          colorLuminance < 0.2 ? ArnaColors.color36 : ArnaColors.color01;
-    }
+    int percentage = colorLuminance > 0.50 ? (55 - a) : (a - 45);
+    Color secondColor =
+        colorLuminance < 0.2 ? ArnaColors.color36 : ArnaColors.color01;
+    if (hover) percentage += percentage + 30;
     return _colorBlender(color, secondColor, percentage);
   }
 
@@ -532,13 +523,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     );
   }
 
-  /// Computes the switch background color from [accent] by using
-  /// [computeLuminance].
-  static Color switchBackgroundColor(Color accent, bool isOn) {
-    if (isOn) return accent;
-    return accent.computeLuminance() < 0.28 ? ArnaColors.color07 : accent;
-  }
-
   static Color _findBorderColor(
     Brightness brightness,
     bool isHighContrastEnabled,
@@ -575,23 +559,28 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Color secondColor,
     int percentage,
   ) {
-    if (percentage < 4) return base;
-    if (percentage > 96) return secondColor;
+    if (percentage < 2) return base;
+    if (percentage > 98) return secondColor;
     int r = base.red + percentage * (secondColor.red - base.red) ~/ 100;
     int g = base.green + percentage * (secondColor.green - base.green) ~/ 100;
     int b = base.blue + percentage * (secondColor.blue - base.blue) ~/ 100;
     return Color.fromRGBO(r, g, b, 1.0);
   }
 
-  static Color blend(Color base, int percentage, [bool darken = false]) {
-    Color secondColor = base.computeLuminance() > 0.49
-        ? darken
+  static Color blend(
+    Color base,
+    int percentage, [
+    Brightness brightness = Brightness.light,
+  ]) {
+    double baseLuminance = base.computeLuminance();
+    Color secondColor = baseLuminance > 0.45
+        ? base.computeLuminance() < 0.55 && brightness == Brightness.light
             ? ArnaColors.color36
             : ArnaColors.color01
-        : darken
-            ? ArnaColors.color01
-            : ArnaColors.color36;
-    return _colorBlender(base, secondColor, percentage);
+        : ArnaColors.color36;
+    double bias =
+        baseLuminance > 0.5 ? 3 - 2 * baseLuminance : 1 + 2 * baseLuminance;
+    return _colorBlender(base, secondColor, (percentage * bias) ~/ 1);
   }
 
   bool get _isPlatformBrightnessDependent =>

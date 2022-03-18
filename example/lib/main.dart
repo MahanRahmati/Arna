@@ -74,7 +74,7 @@ class _HomeState extends ConsumerState<Home> {
   TextEditingController controller = TextEditingController();
   var showBanner = true;
   String url = "https://github.com/MahanRahmati/Arna";
-  bool showMaster = true;
+  bool showMaster = false;
 
   @override
   Widget build(BuildContext context) {

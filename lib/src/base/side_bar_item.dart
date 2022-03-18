@@ -77,9 +77,12 @@ class ArnaSideBarItem extends StatelessWidget {
                       : selected
                           ? ArnaDynamicColor.matchingColor(
                               hovered
-                                  ? ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonHoverColor,
-                                      context,
+                                  ? ArnaDynamicColor.blend(
+                                      ArnaDynamicColor.resolve(
+                                        ArnaColors.buttonColor,
+                                        context,
+                                      ),
+                                      7,
                                     )
                                   : ArnaDynamicColor.resolve(
                                       ArnaColors.sideColor,
@@ -164,9 +167,21 @@ class ArnaSideBarItem extends StatelessWidget {
                         !enabled
                             ? ArnaColors.backgroundColor
                             : pressed
-                                ? ArnaColors.buttonPressedColor
+                                ? ArnaDynamicColor.blend(
+                                    ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor,
+                                      context,
+                                    ),
+                                    7,
+                                  )
                                 : hover
-                                    ? ArnaColors.buttonHoverColor
+                                    ? ArnaDynamicColor.blend(
+                                        ArnaDynamicColor.resolve(
+                                          ArnaColors.buttonColor,
+                                          context,
+                                        ),
+                                        7,
+                                      )
                                     : selected
                                         ? ArnaColors.buttonColor
                                         : ArnaColors.sideColor,
@@ -197,9 +212,12 @@ class ArnaSideBarItem extends StatelessWidget {
                   borderRadius: Styles.borderRadius,
                   color: ArnaDynamicColor.matchingColor(
                     hover
-                        ? ArnaDynamicColor.resolve(
-                            ArnaColors.buttonHoverColor,
-                            context,
+                        ? ArnaDynamicColor.blend(
+                            ArnaDynamicColor.resolve(
+                              ArnaColors.buttonColor,
+                              context,
+                            ),
+                            7,
                           )
                         : ArnaDynamicColor.resolve(
                             ArnaColors.sideColor,

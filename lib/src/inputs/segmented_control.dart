@@ -252,9 +252,21 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                                 )
                               : accentColor
                   : pressed
-                      ? ArnaColors.buttonPressedColor
+                      ? ArnaDynamicColor.blend(
+                          ArnaDynamicColor.resolve(
+                            ArnaColors.buttonColor,
+                            context,
+                          ),
+                          7,
+                        )
                       : hover
-                          ? ArnaColors.buttonHoverColor
+                          ? ArnaDynamicColor.blend(
+                              ArnaDynamicColor.resolve(
+                                ArnaColors.buttonColor,
+                                context,
+                              ),
+                              7,
+                            )
                           : ArnaColors.buttonColor,
               context,
             ),

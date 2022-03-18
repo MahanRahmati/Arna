@@ -110,67 +110,22 @@ class ArnaColors {
     darkHighContrastColor: black,
   );
 
-  /// The color of card's background when it is hoverd.
-  static const ArnaDynamicColor cardHoverColor = ArnaDynamicColor(
-    debugLabel: 'cardHoverColor',
-    color: color32,
-    darkColor: color09,
-    highContrastColor: color32,
-    darkHighContrastColor: color09,
-  );
-
-  /// The color of card's background when it is pressed.
-  static const ArnaDynamicColor cardPressedColor = ArnaDynamicColor(
-    debugLabel: 'cardPressedColor',
-    color: color30,
-    darkColor: color11,
-    highContrastColor: color30,
-    darkHighContrastColor: color11,
-  );
-
   /// The color of text field's background.
   static const ArnaDynamicColor textFieldColor = ArnaDynamicColor(
     debugLabel: 'textFieldColor',
-    color: color36,
+    color: white,
     darkColor: color07,
-    highContrastColor: color36,
+    highContrastColor: white,
     darkHighContrastColor: black,
-  );
-
-  /// The color of text field's background when it is hoverd.
-  static const ArnaDynamicColor textFieldHoverColor = ArnaDynamicColor(
-    debugLabel: 'textFieldHoverColor',
-    color: color33,
-    darkColor: color10,
-    highContrastColor: color33,
-    darkHighContrastColor: color10,
   );
 
   /// The color of button's background.
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
-    color: color36,
+    color: white,
     darkColor: color07,
-    highContrastColor: color36,
+    highContrastColor: white,
     darkHighContrastColor: black,
-  );
-
-  /// The color of button's background when it is hoverd.
-  static const ArnaDynamicColor buttonHoverColor = ArnaDynamicColor(
-    debugLabel: 'buttonHoverColor',
-    color: color33,
-    darkColor: color10,
-    highContrastColor: color33,
-    darkHighContrastColor: color10,
-  );
-
-  /// The color of button's background when it is pressed.
-  static const ArnaDynamicColor buttonPressedColor = ArnaDynamicColor(
-    debugLabel: 'buttonPressedColor',
-    color: color31,
-    darkColor: color12,
-    highContrastColor: color31,
-    darkHighContrastColor: color12,
   );
 
   /// The primary text color.

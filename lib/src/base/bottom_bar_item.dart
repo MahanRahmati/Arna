@@ -123,9 +123,21 @@ class ArnaBottomBarItem extends StatelessWidget {
                         !enabled
                             ? ArnaColors.backgroundColor
                             : pressed
-                                ? ArnaColors.buttonPressedColor
+                                ? ArnaDynamicColor.blend(
+                                    ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor,
+                                      context,
+                                    ),
+                                    7,
+                                  )
                                 : hover
-                                    ? ArnaColors.buttonHoverColor
+                                    ? ArnaDynamicColor.blend(
+                                        ArnaDynamicColor.resolve(
+                                          ArnaColors.buttonColor,
+                                          context,
+                                        ),
+                                        7,
+                                      )
                                     : ArnaColors.buttonColor,
                         context,
                       ),

@@ -64,7 +64,12 @@ class ArnaButton extends StatelessWidget {
   /// The semantic label of the button.
   final String? semanticLabel;
 
-  Widget _buildChild(BuildContext context, bool enabled, Color accent) {
+  Widget _buildChild(
+    BuildContext context,
+    bool enabled,
+    bool hovered,
+    Color accent,
+  ) {
     final List<Widget> children = [];
     if (icon != null) {
       Widget iconWidget = Icon(
@@ -80,14 +85,16 @@ class ArnaButton extends StatelessWidget {
                           accent,
                           ArnaTheme.brightnessOf(context),
                         )
-                      : ArnaDynamicColor.matchingColor(
-                          ArnaDynamicColor.resolve(
-                            ArnaColors.buttonColor,
-                            context,
-                          ),
-                          accent,
-                          ArnaTheme.brightnessOf(context),
-                        ),
+                      : hovered
+                          ? ArnaColors.iconColor //TODO
+                          : ArnaDynamicColor.matchingColor(
+                              ArnaDynamicColor.resolve(
+                                ArnaColors.buttonColor,
+                                context,
+                              ),
+                              accent,
+                              ArnaTheme.brightnessOf(context),
+                            ),
           context,
         ),
       );
@@ -257,7 +264,7 @@ class ArnaButton extends StatelessWidget {
             padding: icon != null
                 ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
                 : Styles.largeHorizontal,
-            child: _buildChild(context, enabled, accent),
+            child: _buildChild(context, enabled, hover, accent),
           );
         },
         onPressed: onPressed,

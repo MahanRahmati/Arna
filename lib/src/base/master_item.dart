@@ -76,7 +76,7 @@ class ArnaMasterItem extends StatelessWidget {
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    7,
+                                    14,
                                   )
                                 : ArnaDynamicColor.resolve(
                                     ArnaColors.sideColor,
@@ -169,7 +169,7 @@ class ArnaMasterItem extends StatelessWidget {
                                     ArnaColors.buttonColor,
                                     context,
                                   ),
-                                  7,
+                                  14,
                                 )
                               : selected
                                   ? ArnaDynamicColor.blend(
@@ -177,7 +177,7 @@ class ArnaMasterItem extends StatelessWidget {
                                         ArnaColors.buttonColor,
                                         context,
                                       ),
-                                      7,
+                                      14,
                                     )
                                   : hover
                                       ? ArnaDynamicColor.blend(
@@ -185,7 +185,7 @@ class ArnaMasterItem extends StatelessWidget {
                                             ArnaColors.buttonColor,
                                             context,
                                           ),
-                                          7,
+                                          14,
                                         )
                                       : ArnaColors.buttonColor,
                           context,
@@ -208,7 +208,7 @@ class ArnaMasterItem extends StatelessWidget {
                               ArnaColors.buttonColor,
                               context,
                             ),
-                            7,
+                            14,
                           )
                         : ArnaDynamicColor.resolve(
                             ArnaColors.sideColor,

@@ -155,7 +155,7 @@ class ArnaRadio<T> extends StatelessWidget {
                                                       ArnaColors.cardColor,
                                                       context,
                                                     ),
-                                                    7,
+                                                    14,
                                                     brightness,
                                                   ),
                                             context,
@@ -190,7 +190,7 @@ class ArnaRadio<T> extends StatelessWidget {
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    7,
+                                    14,
                                     brightness,
                                   )
                                 : ArnaColors.buttonColor,
@@ -222,7 +222,7 @@ class ArnaRadio<T> extends StatelessWidget {
                                         ArnaColors.buttonColor,
                                         context,
                                       ),
-                                      7,
+                                      14,
                                       brightness,
                                     )
                                   : ArnaColors.backgroundColor,

@@ -1,3 +1,14 @@
+## 0.3.4
+
+- [Example] Refactor example
+- Update ArnaExpansionPanel
+- [Example] Remove subtitles from widgets page
+- Update ArnaTextField
+- Update ArnaButton
+- Update imports
+- Update colors [Thanks to @h1376h]
+- Update dark and light themes
+
 ## 0.3.3
 
 - Update exports

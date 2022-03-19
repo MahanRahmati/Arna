@@ -288,7 +288,7 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>>
                             ArnaColors.cardColor,
                             context,
                           ),
-                          7,
+                          14,
                         )
                       : hover
                           ? ArnaDynamicColor.blend(
@@ -296,7 +296,7 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>>
                                 ArnaColors.cardColor,
                                 context,
                               ),
-                              7,
+                              14,
                             )
                           : ArnaColors.cardColor,
               context,

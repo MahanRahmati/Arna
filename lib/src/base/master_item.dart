@@ -83,7 +83,7 @@ class ArnaMasterItem extends StatelessWidget {
                                     context,
                                   ),
                             accent,
-                            context,
+                            ArnaTheme.brightnessOf(context),
                           )
                         : ArnaColors.iconColor,
                 context,
@@ -215,7 +215,7 @@ class ArnaMasterItem extends StatelessWidget {
                             context,
                           ),
                     accent,
-                    context,
+                    ArnaTheme.brightnessOf(context),
                   ),
                 ),
               ),

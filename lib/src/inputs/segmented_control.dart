@@ -116,11 +116,9 @@ class _ArnaSegmentedControlState<T extends Object>
           first: first,
           last: last,
           accentColor: accent,
-          borderColor: ArnaDynamicColor.matchingColor(
-            ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
-            accent,
+          borderColor: ArnaDynamicColor.resolve(
+            ArnaColors.borderColor,
             context,
-            -1,
           ),
           cursor: widget.cursor,
         ),
@@ -226,7 +224,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                             context,
                           ),
                           accentColor,
-                          context,
+                          ArnaTheme.brightnessOf(context),
                         )
                       : ArnaColors.transparent,
             ),

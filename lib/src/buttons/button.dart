@@ -86,7 +86,7 @@ class ArnaButton extends StatelessWidget {
                             context,
                           ),
                           accent,
-                          context,
+                          ArnaTheme.brightnessOf(context),
                         ),
           context,
         ),
@@ -169,7 +169,7 @@ class ArnaButton extends StatelessWidget {
                                           context,
                                         ),
                                         accent,
-                                        context,
+                                        ArnaTheme.brightnessOf(context),
                                       )
                                     : ArnaColors.borderColor
                             : !enabled

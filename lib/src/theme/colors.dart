@@ -415,99 +415,53 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color matchingColor(
     Color backgroundColor,
     Color accent,
-    BuildContext context, [
-    int bias = 28,
+    Brightness brightness, [
+    int bias = 21,
   ]) {
-    Brightness brightness =
-        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
-    bool isHighContrastEnabled =
-        MediaQuery.maybeOf(context)?.highContrast ?? false;
+    assert(bias >= 0 && bias < 100);
 
-    if (bias > 0) {
-      Color themeColor = (brightness == Brightness.light)
-          ? ArnaColors.black
-          : ArnaColors.white;
-      Color themeInverseColor = (brightness == Brightness.light)
-          ? ArnaColors.white
-          : ArnaColors.black;
+    Color themeColor =
+        (brightness == Brightness.light) ? ArnaColors.black : ArnaColors.white;
+    Color themeInverseColor =
+        (brightness == Brightness.light) ? ArnaColors.white : ArnaColors.black;
 
-      double accentError = _calculateError(
-        accent,
-        themeColor,
-        themeInverseColor,
-      );
-      double backgroundError = _calculateError(
-        backgroundColor,
-        themeColor,
-        themeInverseColor,
-      );
-
-      double distance = (accentError +
-              backgroundError -
-              ((brightness == Brightness.light) ? 1 : 0.7)) /
-          2;
-
-      Color secondColor = themeColor;
-      if (distance < 0) {
-        secondColor = themeInverseColor;
-        distance -= distance;
-      }
-
-      bool ignore = false;
-      int alternativePercentage = bias;
-      if (_colorDistance(accent, backgroundColor) < 200) {
-        ignore = true;
-        alternativePercentage += (200 -
-                _colorDistance(
-                  accent,
-                  backgroundColor,
-                )) ~/
-            4;
-      }
-
-      int percentage = distance * 100 ~/ 1;
-      if (!ignore) return _colorBlender(accent, secondColor, percentage);
-      return _colorBlender(secondColor, accent, alternativePercentage);
-    }
-
-    double colorLuminance = backgroundColor.computeLuminance();
-
-    return _findBorderColor(
-      brightness,
-      isHighContrastEnabled,
-      colorLuminance,
-      ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+    double accentError = _calculateError(
+      accent,
+      themeColor,
+      themeInverseColor,
     );
-  }
+    double backgroundError = _calculateError(
+      backgroundColor,
+      themeColor,
+      themeInverseColor,
+    );
 
-  static Color _findBorderColor(
-    Brightness brightness,
-    bool isHighContrastEnabled,
-    double colorLuminance,
-    Color defaultColor,
-  ) {
-    switch (brightness) {
-      case Brightness.light:
-        return isHighContrastEnabled
-            ? ArnaColors.black
-            : colorLuminance > 0.7
-                ? ArnaColors.color20
-                : colorLuminance > 0.49
-                    ? ArnaColors.color29
-                    : colorLuminance > 0.28
-                        ? ArnaColors.color30
-                        : ArnaColors.color31;
-      case Brightness.dark:
-        return isHighContrastEnabled
-            ? ArnaColors.white
-            : colorLuminance > 0.7
-                ? ArnaColors.color02
-                : colorLuminance > 0.49
-                    ? ArnaColors.color03
-                    : colorLuminance > 0.28
-                        ? ArnaColors.color04
-                        : ArnaColors.color13;
+    double distance = (accentError +
+            backgroundError -
+            ((brightness == Brightness.light) ? 1 : 0.75)) /
+        2;
+
+    Color secondColor = themeColor;
+    if (distance < 0) {
+      secondColor = themeInverseColor;
+      distance -= distance;
     }
+
+    bool ignore = false;
+    int alternativePercentage = bias;
+    if (_colorDistance(accent, backgroundColor) < 200) {
+      ignore = true;
+      alternativePercentage += (200 -
+              _colorDistance(
+                accent,
+                backgroundColor,
+              )) ~/
+          4;
+    }
+
+    int percentage = distance * 100 ~/ 1;
+    if (!ignore) return _colorBlender(accent, secondColor, percentage);
+    return _colorBlender(accent, secondColor, alternativePercentage);
   }
 
   /// Blends the [base] color to [secondColor] by [percentage] and [computeLuminance].

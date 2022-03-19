@@ -167,7 +167,7 @@ class ArnaCheckBox extends StatelessWidget {
                                             context,
                                           ),
                                           accent,
-                                          context,
+                                          ArnaTheme.brightnessOf(context),
                                         )
                                       : selected
                                           ? ArnaDynamicColor.outerColor(

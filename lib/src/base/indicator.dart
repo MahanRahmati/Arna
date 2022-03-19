@@ -80,7 +80,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
     Color indicatorColor = ArnaDynamicColor.matchingColor(
       ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
       accent,
-      context,
+      ArnaTheme.brightnessOf(context),
     );
     return SizedBox(
       height: widget.size,
@@ -91,7 +91,6 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
           return CustomPaint(
             painter: _ProgressPainter(
               color: indicatorColor,
-              borderColor: ArnaDynamicColor.outerColor(indicatorColor, false),
               value: widget.value == null
                   ? _controller.value == 0
                       ? 0.001 * 2 * pi
@@ -108,13 +107,11 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
 
 class _ProgressPainter extends CustomPainter {
   final Color color;
-  final Color borderColor;
   final double value;
   final bool offset;
 
   _ProgressPainter({
     required this.color,
-    required this.borderColor,
     required this.value,
     required this.offset,
   });
@@ -130,19 +127,8 @@ class _ProgressPainter extends CustomPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
-        ..color = borderColor
-        ..strokeWidth = (size.width / 8) + 2,
-    );
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: size.width / 4),
-      (3.1415926535897932) * 1.5 + (offset ? value : 0),
-      value,
-      false,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeCap = StrokeCap.round
         ..color = color
-        ..strokeWidth = size.width / 8,
+        ..strokeWidth = size.width / 8 + 1,
     );
   }
 

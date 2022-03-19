@@ -89,7 +89,7 @@ class ArnaSideBarItem extends StatelessWidget {
                                       context,
                                     ),
                               accent,
-                              context,
+                              ArnaTheme.brightnessOf(context),
                             )
                           : ArnaColors.iconColor,
                   context,
@@ -147,7 +147,7 @@ class ArnaSideBarItem extends StatelessWidget {
                                         context,
                                       ),
                                       accent,
-                                      context,
+                                      ArnaTheme.brightnessOf(context),
                                     )
                                   : ArnaColors.borderColor
                               : focused
@@ -157,7 +157,7 @@ class ArnaSideBarItem extends StatelessWidget {
                                         context,
                                       ),
                                       accent,
-                                      context,
+                                      ArnaTheme.brightnessOf(context),
                                     )
                                   : ArnaColors.transparent,
                           context,
@@ -224,7 +224,7 @@ class ArnaSideBarItem extends StatelessWidget {
                             context,
                           ),
                     accent,
-                    context,
+                    ArnaTheme.brightnessOf(context),
                   ),
                 ),
               ),

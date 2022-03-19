@@ -146,7 +146,7 @@ class ArnaRadio<T> extends StatelessWidget {
                                             context,
                                           ),
                                           accent,
-                                          context,
+                                          ArnaTheme.brightnessOf(context),
                                         )
                                       : selected
                                           ? ArnaDynamicColor.outerColor(

@@ -284,12 +284,12 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                             : _hover
                                 ? ArnaDynamicColor.blend(
                                     ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
+                                      ArnaColors.cardColor,
                                       context,
                                     ),
                                     14,
                                   )
-                                : ArnaColors.buttonColor,
+                                : ArnaColors.cardColor,
                         context,
                       ),
                     ),

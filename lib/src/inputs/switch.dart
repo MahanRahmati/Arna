@@ -131,7 +131,7 @@ class ArnaSwitch extends StatelessWidget {
                                                       ArnaColors.cardColor,
                                                       context,
                                                     ),
-                                                    7,
+                                                    14,
                                                     brightness,
                                                   ),
                                             context,
@@ -166,7 +166,7 @@ class ArnaSwitch extends StatelessWidget {
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    7,
+                                    14,
                                     brightness,
                                   )
                                 : ArnaColors.backgroundColor,

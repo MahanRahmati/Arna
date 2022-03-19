@@ -18,32 +18,18 @@ class ArnaColors {
   static const Color successColor = Color(0xFF26A69A);
   static const Color warningColor = Color(0xFFFFA726);
 
-  static const Color color01 = Color(0xFF070707); // 07
-  static const Color color02 = Color(0xFF0E0E0E); // 14
-  static const Color color03 = Color(0xFF151515); // 21
-  static const Color color04 = Color(0xFF1C1C1C); // 28
-  static const Color color05 = Color(0xFF232323); // 35
-  static const Color color06 = Color(0xFF2A2A2A); // 42
-  static const Color color07 = Color(0xFF313131); // 49
-  static const Color color08 = Color(0xFF383838); // 56
-  static const Color color09 = Color(0xFF3F3F3F); // 63
-  static const Color color10 = Color(0xFF464646); // 70
-  static const Color color11 = Color(0xFF4D4D4D); // 77
-  static const Color color12 = Color(0xFF545454); // 84
-  static const Color color13 = Color(0xFF5B5B5B); // 91
+  static const Color black07 = Color(0xFF070707); // Border
+  static const Color black28 = Color(0xFF1C1C1C); // Bg Dark
+  static const Color black35 = Color(0xFF232323); // Side and Header Dark
+  static const Color black42 = Color(0xFF2A2A2A); // Card
+  static const Color black49 = Color(0xFF313131); // Button and Text Field
+  static const Color black56 = Color(0xFF383838); // 56
+
   static const Color color14 = Color(0xFF626262); // 98
   static const Color color15 = Color(0xFF696969); // 105
-  // static const Color color16 = Color(0xFF707070); // 112
-  // static const Color color17 = Color(0xFF777777); // 119
-  // static const Color color18 = Color(0xFF7E7E7E); // 126
-  // static const Color color19 = Color(0xFF858585); // 133
   static const Color color20 = Color(0xFF8C8C8C); // 140
   static const Color color21 = Color(0xFF939393); // 147
   static const Color color22 = Color(0xFF9A9A9A); // 154
-  // static const Color color23 = Color(0xFFA1A1A1); // 161
-  // static const Color color24 = Color(0xFFA8A8A8); // 168
-  // static const Color color25 = Color(0xFFAFAFAF); // 175
-  // static const Color color26 = Color(0xFFB6B6B6); // 182
   static const Color color27 = Color(0xFFBDBDBD); // 189
   static const Color color28 = Color(0xFFC4C4C4); // 196
   static const Color color29 = Color(0xFFCBCBCB); // 203
@@ -60,18 +46,14 @@ class ArnaColors {
 
   static const Color color242 = Color(0xFFF2F2F2); //Side and Header
   static const Color color249 = Color(0xFFF9F9F9); // Background
-  // static const Color color250 = Color(0xFFFAFAFA);
-  // static const Color color251 = Color(0xFFFBFBFB);
   static const Color color252 = Color(0xFFFCFCFC); // Card
-  // static const Color color253 = Color(0xFFFDFDFD);
-  // static const Color color254 = Color(0xFFFEFEFE);
   static const Color white = Color(0xFFFFFFFF); // Button and TextField
 
   /// The color of the background.
   static const ArnaDynamicColor backgroundColor = ArnaDynamicColor(
     debugLabel: 'backgroundColor',
     color: color249,
-    darkColor: color04,
+    darkColor: black28,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -79,7 +61,7 @@ class ArnaColors {
   /// The reverse color of the background.
   static const ArnaDynamicColor reverseBackgroundColor = ArnaDynamicColor(
     debugLabel: 'reverseBackgroundColor',
-    color: color04,
+    color: black28,
     darkColor: color249,
     highContrastColor: black,
     darkHighContrastColor: white,
@@ -89,7 +71,7 @@ class ArnaColors {
   static const ArnaDynamicColor sideColor = ArnaDynamicColor(
     debugLabel: 'sideColor',
     color: color242,
-    darkColor: color05,
+    darkColor: black35,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -98,7 +80,7 @@ class ArnaColors {
   static const ArnaDynamicColor headerColor = ArnaDynamicColor(
     debugLabel: 'headerColor',
     color: color242,
-    darkColor: color05,
+    darkColor: black35,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -107,7 +89,7 @@ class ArnaColors {
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',
     color: color210,
-    darkColor: color01,
+    darkColor: black07,
     highContrastColor: black,
     darkHighContrastColor: white,
   );
@@ -116,7 +98,7 @@ class ArnaColors {
   static const ArnaDynamicColor cardColor = ArnaDynamicColor(
     debugLabel: 'cardColor',
     color: color252,
-    darkColor: color06,
+    darkColor: black42,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -125,7 +107,7 @@ class ArnaColors {
   static const ArnaDynamicColor textFieldColor = ArnaDynamicColor(
     debugLabel: 'textFieldColor',
     color: white,
-    darkColor: color07,
+    darkColor: black49,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -134,7 +116,7 @@ class ArnaColors {
   static const ArnaDynamicColor buttonColor = ArnaDynamicColor(
     debugLabel: 'buttonColor',
     color: white,
-    darkColor: color07,
+    darkColor: black49,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -142,7 +124,7 @@ class ArnaColors {
   /// The primary text color.
   static const ArnaDynamicColor primaryTextColor = ArnaDynamicColor(
     debugLabel: 'primaryTextColor',
-    color: color04,
+    color: black28,
     darkColor: color33,
     highContrastColor: black,
     darkHighContrastColor: white,
@@ -152,7 +134,7 @@ class ArnaColors {
   static const ArnaDynamicColor reversePrimaryTextColor = ArnaDynamicColor(
     debugLabel: 'reversePrimaryTextColor',
     color: color33,
-    darkColor: color04,
+    darkColor: black28,
     highContrastColor: white,
     darkHighContrastColor: black,
   );
@@ -178,7 +160,7 @@ class ArnaColors {
   /// The color of icons.
   static const ArnaDynamicColor iconColor = ArnaDynamicColor(
     debugLabel: 'iconColor',
-    color: color04,
+    color: black28,
     darkColor: color33,
     highContrastColor: black,
     darkHighContrastColor: white,
@@ -383,7 +365,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color innerColor(Color backgroundColor, Brightness brightness) {
     double colorLuminance = backgroundColor.computeLuminance();
     return colorLuminance > 0.8
-        ? ArnaColors.color08
+        ? ArnaColors.black56
         : colorLuminance > 0.55
             ? ArnaColors.black
             : colorLuminance > 0.45

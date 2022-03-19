@@ -22,25 +22,31 @@ class ArnaList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: Styles.listPadding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (title != null)
-            Padding(
-              padding: Styles.normal,
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      title!,
-                      style: ArnaTheme.of(context).textTheme.titleTextStyle,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth:
+              expanded(context) ? deviceWidth(context) * 0.56 : double.infinity,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (title != null)
+              Padding(
+                padding: Styles.normal,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        title!,
+                        style: ArnaTheme.of(context).textTheme.textStyle,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          _buildChild(context),
-        ],
+            _buildChild(context),
+          ],
+        ),
       ),
     );
   }

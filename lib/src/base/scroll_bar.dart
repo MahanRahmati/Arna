@@ -83,7 +83,7 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
       ..color = ArnaDynamicColor.matchingColor(
         ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
         widget.thumbColor ?? ArnaTheme.of(context).accentColor,
-        context,
+        ArnaTheme.brightnessOf(context),
       )
       ..trackBorderColor = ArnaColors.transparent
       ..textDirection = Directionality.of(context)

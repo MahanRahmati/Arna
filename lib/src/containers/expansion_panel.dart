@@ -272,7 +272,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                                     context,
                                   ),
                                   accent,
-                                  context,
+                                  ArnaTheme.brightnessOf(context),
                                 )
                               : ArnaColors.borderColor,
                           context,
@@ -287,7 +287,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    7,
+                                    14,
                                   )
                                 : ArnaColors.buttonColor,
                         context,

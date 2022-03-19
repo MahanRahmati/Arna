@@ -990,7 +990,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             cursorColor: ArnaDynamicColor.matchingColor(
               ArnaColors.textFieldColor,
               accent,
-              context,
+              ArnaTheme.brightnessOf(context),
             ),
             cursorOpacityAnimates: true,
             cursorOffset: cursorOffset,
@@ -1047,7 +1047,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                             ArnaColors.textFieldColor,
                             context,
                           ),
-                          7,
+                          14,
                         )
                       : ArnaColors.textFieldColor,
                   context,
@@ -1058,7 +1058,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                         ? ArnaDynamicColor.matchingColor(
                             ArnaColors.textFieldColor,
                             accent,
-                            context,
+                            ArnaTheme.brightnessOf(context),
                           )
                         : ArnaColors.borderColor,
                     context,

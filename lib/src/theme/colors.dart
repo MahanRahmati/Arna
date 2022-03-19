@@ -372,7 +372,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color innerColor(Color backgroundColor, Brightness brightness) {
     double colorLuminance = backgroundColor.computeLuminance();
     return colorLuminance > 0.8
-        ? ArnaColors.color10
+        ? ArnaColors.color08
         : colorLuminance > 0.55
             ? ArnaColors.black
             : colorLuminance > 0.45
@@ -382,13 +382,26 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.white;
   }
 
-  static Color outerColor(Color color, bool hover) {
+  static Color outerColor(
+    Color color,
+    bool hover, [
+    Brightness brightness = Brightness.light,
+  ]) {
     double colorLuminance = color.computeLuminance();
-    int a = (1 - colorLuminance) * 100 ~/ 1;
-    int percentage = colorLuminance > 0.50 ? (55 - a) : (a - 45);
-    Color secondColor =
-        colorLuminance < 0.2 ? ArnaColors.white : ArnaColors.black;
-    if (hover) percentage += percentage + 30;
+    double percentage = colorLuminance > 0.50
+        ? 55 - ((1 - colorLuminance) * 100)
+        : ((1 - colorLuminance) * 100) - 45;
+    Color secondColor = colorLuminance < 0.2 && brightness == Brightness.dark
+        ? ArnaColors.white
+        : ArnaColors.black;
+
+    if (hover) {
+      if (colorLuminance < 0.2 && brightness == Brightness.light) {
+        return ArnaColors.color20;
+      }
+      if (brightness == Brightness.dark) secondColor = ArnaColors.white;
+      percentage += percentage + 20;
+    }
     return _colorBlender(color, secondColor, percentage);
   }
 
@@ -415,112 +428,66 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color matchingColor(
     Color backgroundColor,
     Color accent,
-    BuildContext context, [
-    int bias = 28,
+    Brightness brightness, [
+    double bias = 21,
   ]) {
-    Brightness brightness =
-        ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
-    bool isHighContrastEnabled =
-        MediaQuery.maybeOf(context)?.highContrast ?? false;
+    assert(bias >= 0 && bias < 100);
 
-    if (bias > 0) {
-      Color themeColor = (brightness == Brightness.light)
-          ? ArnaColors.black
-          : ArnaColors.white;
-      Color themeInverseColor = (brightness == Brightness.light)
-          ? ArnaColors.white
-          : ArnaColors.black;
+    Color themeColor =
+        (brightness == Brightness.light) ? ArnaColors.black : ArnaColors.white;
+    Color themeInverseColor =
+        (brightness == Brightness.light) ? ArnaColors.white : ArnaColors.black;
 
-      double accentError = _calculateError(
-        accent,
-        themeColor,
-        themeInverseColor,
-      );
-      double backgroundError = _calculateError(
-        backgroundColor,
-        themeColor,
-        themeInverseColor,
-      );
-
-      double distance = (accentError +
-              backgroundError -
-              ((brightness == Brightness.light) ? 1 : 0.7)) /
-          2;
-
-      Color secondColor = themeColor;
-      if (distance < 0) {
-        secondColor = themeInverseColor;
-        distance -= distance;
-      }
-
-      bool ignore = false;
-      int alternativePercentage = bias;
-      if (_colorDistance(accent, backgroundColor) < 200) {
-        ignore = true;
-        alternativePercentage += (200 -
-                _colorDistance(
-                  accent,
-                  backgroundColor,
-                )) ~/
-            4;
-      }
-
-      int percentage = distance * 100 ~/ 1;
-      if (!ignore) return _colorBlender(accent, secondColor, percentage);
-      return _colorBlender(secondColor, accent, alternativePercentage);
-    }
-
-    double colorLuminance = backgroundColor.computeLuminance();
-
-    return _findBorderColor(
-      brightness,
-      isHighContrastEnabled,
-      colorLuminance,
-      ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+    double accentError = _calculateError(
+      accent,
+      themeColor,
+      themeInverseColor,
     );
-  }
+    double backgroundError = _calculateError(
+      backgroundColor,
+      themeColor,
+      themeInverseColor,
+    );
 
-  static Color _findBorderColor(
-    Brightness brightness,
-    bool isHighContrastEnabled,
-    double colorLuminance,
-    Color defaultColor,
-  ) {
-    switch (brightness) {
-      case Brightness.light:
-        return isHighContrastEnabled
-            ? ArnaColors.black
-            : colorLuminance > 0.7
-                ? ArnaColors.color20
-                : colorLuminance > 0.49
-                    ? ArnaColors.color29
-                    : colorLuminance > 0.28
-                        ? ArnaColors.color30
-                        : ArnaColors.color31;
-      case Brightness.dark:
-        return isHighContrastEnabled
-            ? ArnaColors.white
-            : colorLuminance > 0.7
-                ? ArnaColors.color02
-                : colorLuminance > 0.49
-                    ? ArnaColors.color03
-                    : colorLuminance > 0.28
-                        ? ArnaColors.color04
-                        : ArnaColors.color13;
+    double distance = (accentError +
+            backgroundError -
+            ((brightness == Brightness.light) ? 1 : 0.75)) /
+        2;
+
+    Color secondColor = themeColor;
+    if (distance < 0) {
+      secondColor = themeInverseColor;
+      distance -= distance;
     }
+
+    bool ignore = false;
+    double alternativePercentage = bias;
+    if (_colorDistance(accent, backgroundColor) < 200) {
+      ignore = true;
+      alternativePercentage += (200 -
+              _colorDistance(
+                accent,
+                backgroundColor,
+              )) /
+          4;
+    }
+
+    double percentage = distance * 100;
+    if (!ignore) return _colorBlender(accent, secondColor, percentage);
+    return _colorBlender(accent, secondColor, alternativePercentage);
   }
 
   /// Blends the [base] color to [secondColor] by [percentage] and [computeLuminance].
   static Color _colorBlender(
     Color base,
     Color secondColor,
-    int percentage,
+    double percentage,
   ) {
-    if (percentage < 2) return base;
-    if (percentage > 98) return secondColor;
-    int r = base.red + percentage * (secondColor.red - base.red) ~/ 100;
-    int g = base.green + percentage * (secondColor.green - base.green) ~/ 100;
-    int b = base.blue + percentage * (secondColor.blue - base.blue) ~/ 100;
+    if (percentage < 1) return base;
+    if (percentage > 99) return secondColor;
+    int r = base.red + (percentage * (secondColor.red - base.red)) ~/ 100;
+    int g = base.green + (percentage * (secondColor.green - base.green)) ~/ 100;
+    int b = base.blue + (percentage * (secondColor.blue - base.blue)) ~/ 100;
     return Color.fromRGBO(r, g, b, 1.0);
   }
 
@@ -536,8 +503,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             : ArnaColors.black
         : ArnaColors.white;
     double bias =
-        baseLuminance > 0.5 ? 3 - 2 * baseLuminance : 1 + 2 * baseLuminance;
-    return _colorBlender(base, secondColor, (percentage * bias) ~/ 1);
+        baseLuminance > 0.5 ? 2.5 - 2 * baseLuminance : 0.5 + 2 * baseLuminance;
+    return _colorBlender(base, secondColor, percentage * bias);
   }
 
   bool get _isPlatformBrightnessDependent =>

@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/services.dart' show Brightness;
 
 /// An Arna-styled checkbox.
 ///
@@ -126,6 +127,7 @@ class ArnaCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    Brightness brightness = ArnaTheme.brightnessOf(context);
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
@@ -146,12 +148,24 @@ class ArnaCheckBox extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(
                       focused
                           ? selected
-                              ? ArnaDynamicColor.outerColor(accent, true)
-                              : ArnaDynamicColor.outerColor(accent, false)
+                              ? ArnaDynamicColor.outerColor(
+                                  accent,
+                                  true,
+                                  brightness,
+                                )
+                              : ArnaDynamicColor.outerColor(
+                                  accent,
+                                  false,
+                                  brightness,
+                                )
                           : !enabled
                               ? ArnaColors.borderColor
                               : selected && hover
-                                  ? ArnaDynamicColor.outerColor(accent, true)
+                                  ? ArnaDynamicColor.outerColor(
+                                      accent,
+                                      true,
+                                      brightness,
+                                    )
                                   : hover
                                       ? ArnaDynamicColor.matchingColor(
                                           ArnaDynamicColor.resolve(
@@ -162,17 +176,19 @@ class ArnaCheckBox extends StatelessWidget {
                                                       ArnaColors.cardColor,
                                                       context,
                                                     ),
-                                                    7,
+                                                    14,
+                                                    brightness,
                                                   ),
                                             context,
                                           ),
                                           accent,
-                                          context,
+                                          brightness,
                                         )
                                       : selected
                                           ? ArnaDynamicColor.outerColor(
                                               accent,
                                               false,
+                                              brightness,
                                             )
                                           : ArnaColors.borderColor,
                       context,
@@ -186,7 +202,7 @@ class ArnaCheckBox extends StatelessWidget {
                                 ? ArnaDynamicColor.blend(
                                     accent,
                                     14,
-                                    ArnaTheme.brightnessOf(context),
+                                    brightness,
                                   )
                                 : accent
                             : hover
@@ -195,7 +211,8 @@ class ArnaCheckBox extends StatelessWidget {
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    7,
+                                    14,
+                                    brightness,
                                   )
                                 : ArnaColors.buttonColor,
                     context,
@@ -216,7 +233,7 @@ class ArnaCheckBox extends StatelessWidget {
                     size: Styles.checkBoxIconSize,
                     color: ArnaDynamicColor.innerColor(
                       accent,
-                      ArnaTheme.brightnessOf(context),
+                      brightness,
                     ),
                   ),
                 ),

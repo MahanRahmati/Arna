@@ -116,11 +116,10 @@ class _ArnaSegmentedControlState<T extends Object>
           first: first,
           last: last,
           accentColor: accent,
-          borderColor: ArnaDynamicColor.matchingColor(
-            ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
+          borderColor: ArnaDynamicColor.outerColor(
             accent,
-            context,
-            -1,
+            false,
+            ArnaTheme.brightnessOf(context),
           ),
           cursor: widget.cursor,
         ),
@@ -226,7 +225,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                             context,
                           ),
                           accentColor,
-                          context,
+                          ArnaTheme.brightnessOf(context),
                         )
                       : ArnaColors.transparent,
             ),
@@ -257,7 +256,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                             ArnaColors.buttonColor,
                             context,
                           ),
-                          7,
+                          14,
                         )
                       : hover
                           ? ArnaDynamicColor.blend(
@@ -265,7 +264,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                                 ArnaColors.buttonColor,
                                 context,
                               ),
-                              7,
+                              14,
                             )
                           : ArnaColors.buttonColor,
               context,

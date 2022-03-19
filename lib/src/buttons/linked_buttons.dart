@@ -115,7 +115,7 @@ class _ArnaLinked extends StatelessWidget {
                         context,
                       ),
                       button.accentColor ?? ArnaTheme.of(context).accentColor,
-                      context,
+                      ArnaTheme.brightnessOf(context),
                     ),
                   )
                 : Border.all(color: ArnaColors.transparent),
@@ -128,7 +128,7 @@ class _ArnaLinked extends StatelessWidget {
                             ArnaColors.buttonColor,
                             context,
                           ),
-                          7,
+                          14,
                         )
                       : hover
                           ? ArnaDynamicColor.blend(
@@ -136,7 +136,7 @@ class _ArnaLinked extends StatelessWidget {
                                 ArnaColors.buttonColor,
                                 context,
                               ),
-                              7,
+                              14,
                             )
                           : ArnaColors.buttonColor,
               context,

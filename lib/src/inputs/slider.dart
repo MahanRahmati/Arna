@@ -319,7 +319,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
               context,
             ),
             accent,
-            context,
+            ArnaTheme.brightnessOf(context),
           ),
           borderColor: ArnaDynamicColor.resolve(
             ArnaColors.borderColor,

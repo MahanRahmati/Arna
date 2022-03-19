@@ -119,6 +119,7 @@ class _ArnaSegmentedControlState<T extends Object>
           borderColor: ArnaDynamicColor.outerColor(
             accent,
             false,
+            ArnaTheme.brightnessOf(context),
           ),
           cursor: widget.cursor,
         ),

@@ -372,7 +372,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color innerColor(Color backgroundColor, Brightness brightness) {
     double colorLuminance = backgroundColor.computeLuminance();
     return colorLuminance > 0.8
-        ? ArnaColors.color10
+        ? ArnaColors.color08
         : colorLuminance > 0.55
             ? ArnaColors.black
             : colorLuminance > 0.45
@@ -382,12 +382,19 @@ class ArnaDynamicColor extends Color with Diagnosticable {
                 : ArnaColors.white;
   }
 
-  static Color outerColor(Color color, bool hover) {
+  static Color outerColor(
+    Color color,
+    bool hover, [
+    Brightness brightness = Brightness.light,
+  ]) {
     double colorLuminance = color.computeLuminance();
     int a = (1 - colorLuminance) * 100 ~/ 1;
     int percentage = colorLuminance > 0.50 ? (55 - a) : (a - 45);
-    Color secondColor =
-        colorLuminance < 0.2 ? ArnaColors.white : ArnaColors.black;
+    Color secondColor = colorLuminance < 0.2 && brightness == Brightness.dark
+        ? ArnaColors.white
+        : colorLuminance > 0.8 && brightness == Brightness.dark
+            ? ArnaColors.white
+            : ArnaColors.black;
     if (hover) percentage += percentage + 30;
     return _colorBlender(color, secondColor, percentage);
   }

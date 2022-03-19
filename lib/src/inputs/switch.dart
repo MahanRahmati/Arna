@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/cupertino.dart';
 
 /// An Arna-styled switch.
 ///
@@ -82,6 +83,7 @@ class ArnaSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    Brightness brightness = ArnaTheme.brightnessOf(context);
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
@@ -101,8 +103,16 @@ class ArnaSwitch extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(
                       focused
                           ? value
-                              ? ArnaDynamicColor.outerColor(accent, true)
-                              : ArnaDynamicColor.outerColor(accent, false)
+                              ? ArnaDynamicColor.outerColor(
+                                  accent,
+                                  true,
+                                  brightness,
+                                )
+                              : ArnaDynamicColor.outerColor(
+                                  accent,
+                                  false,
+                                  brightness,
+                                )
                           : !enabled
                               ? ArnaColors.borderColor
                               : hover
@@ -110,6 +120,7 @@ class ArnaSwitch extends StatelessWidget {
                                       ? ArnaDynamicColor.outerColor(
                                           accent,
                                           true,
+                                          brightness,
                                         )
                                       : ArnaDynamicColor.matchingColor(
                                           ArnaDynamicColor.resolve(
@@ -121,16 +132,18 @@ class ArnaSwitch extends StatelessWidget {
                                                       context,
                                                     ),
                                                     7,
+                                                    brightness,
                                                   ),
                                             context,
                                           ),
                                           accent,
-                                          ArnaTheme.brightnessOf(context),
+                                          brightness,
                                         )
                                   : value
                                       ? ArnaDynamicColor.outerColor(
                                           accent,
                                           false,
+                                          brightness,
                                         )
                                       : ArnaColors.borderColor,
                       context,
@@ -144,7 +157,7 @@ class ArnaSwitch extends StatelessWidget {
                                 ? ArnaDynamicColor.blend(
                                     accent,
                                     14,
-                                    ArnaTheme.brightnessOf(context),
+                                    brightness,
                                   )
                                 : accent
                             : hover
@@ -154,6 +167,7 @@ class ArnaSwitch extends StatelessWidget {
                                       context,
                                     ),
                                     7,
+                                    brightness,
                                   )
                                 : ArnaColors.backgroundColor,
                     context,

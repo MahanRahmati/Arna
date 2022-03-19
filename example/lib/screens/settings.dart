@@ -48,9 +48,9 @@ class Settings extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.borderColor,
-                        context,
+                      color: ArnaDynamicColor.outerColor(
+                        ArnaColors.accentColor,
+                        false,
                       ),
                     ),
                     color: ArnaColors.accentColor,
@@ -68,9 +68,9 @@ class Settings extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.borderColor,
-                        context,
+                      color: ArnaDynamicColor.outerColor(
+                        ArnaColors.successColor,
+                        false,
                       ),
                     ),
                     color: ArnaColors.successColor,
@@ -88,9 +88,9 @@ class Settings extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.borderColor,
-                        context,
+                      color: ArnaDynamicColor.outerColor(
+                        ArnaColors.errorColor,
+                        false,
                       ),
                     ),
                     color: ArnaColors.errorColor,
@@ -108,9 +108,9 @@ class Settings extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.borderColor,
-                        context,
+                      color: ArnaDynamicColor.outerColor(
+                        ArnaColors.warningColor,
+                        false,
                       ),
                     ),
                     color: ArnaColors.warningColor,
@@ -128,9 +128,9 @@ class Settings extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.borderColor,
-                        context,
+                      color: ArnaDynamicColor.outerColor(
+                        ArnaColors.white,
+                        false,
                       ),
                     ),
                     color: ArnaColors.white,
@@ -148,9 +148,10 @@ class Settings extends ConsumerWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.borderColor,
-                        context,
+                      color: ArnaDynamicColor.outerColor(
+                        ArnaColors.black,
+                        false,
+                        ArnaTheme.brightnessOf(context),
                       ),
                     ),
                     color: ArnaColors.black,

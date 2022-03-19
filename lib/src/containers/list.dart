@@ -12,9 +12,15 @@ class ArnaList extends StatelessWidget {
   final List<Widget> items;
 
   Widget _buildChild(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: items,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth:
+            expanded(context) ? deviceWidth(context) * 0.56 : double.infinity,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: items,
+      ),
     );
   }
 
@@ -22,31 +28,34 @@ class ArnaList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: Styles.listPadding,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth:
-              expanded(context) ? deviceWidth(context) * 0.56 : double.infinity,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (title != null)
-              Padding(
-                padding: Styles.normal,
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: Text(
-                        title!,
-                        style: ArnaTheme.of(context).textTheme.textStyle,
-                      ),
-                    ),
-                  ],
-                ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (title != null)
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                expanded(context)
+                    ? deviceWidth(context) * 0.12 + Styles.padding
+                    : Styles.padding,
+                Styles.padding,
+                expanded(context)
+                    ? deviceWidth(context) * 0.12 + Styles.padding
+                    : Styles.padding,
+                Styles.padding,
               ),
-            _buildChild(context),
-          ],
-        ),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      title!,
+                      style: ArnaTheme.of(context).textTheme.textStyle,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          _buildChild(context),
+        ],
       ),
     );
   }

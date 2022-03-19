@@ -1047,7 +1047,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                             ArnaColors.textFieldColor,
                             context,
                           ),
-                          7,
+                          14,
                         )
                       : ArnaColors.textFieldColor,
                   context,

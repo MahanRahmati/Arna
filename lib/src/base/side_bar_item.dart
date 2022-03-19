@@ -82,7 +82,7 @@ class ArnaSideBarItem extends StatelessWidget {
                                         ArnaColors.buttonColor,
                                         context,
                                       ),
-                                      7,
+                                      14,
                                     )
                                   : ArnaDynamicColor.resolve(
                                       ArnaColors.sideColor,
@@ -172,7 +172,7 @@ class ArnaSideBarItem extends StatelessWidget {
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    7,
+                                    14,
                                   )
                                 : hover
                                     ? ArnaDynamicColor.blend(
@@ -180,7 +180,7 @@ class ArnaSideBarItem extends StatelessWidget {
                                           ArnaColors.buttonColor,
                                           context,
                                         ),
-                                        7,
+                                        14,
                                       )
                                     : selected
                                         ? ArnaColors.buttonColor
@@ -217,7 +217,7 @@ class ArnaSideBarItem extends StatelessWidget {
                               ArnaColors.buttonColor,
                               context,
                             ),
-                            7,
+                            14,
                           )
                         : ArnaDynamicColor.resolve(
                             ArnaColors.sideColor,

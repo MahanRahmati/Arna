@@ -89,25 +89,31 @@ class ArnaButton extends StatelessWidget {
                       : hovered
                           ? ArnaDynamicColor.matchingColor(
                               ArnaDynamicColor.blend(
-                                ArnaDynamicColor.resolve(
-                                  ArnaColors.buttonColor,
-                                  context,
-                                ),
                                 hasBorder
-                                    ? 14
-                                    : buttonType == ButtonType.normal
-                                        ? 28
-                                        : 14,
+                                    ? ArnaDynamicColor.resolve(
+                                        ArnaColors.buttonColor,
+                                        context,
+                                      )
+                                    : ArnaDynamicColor.resolve(
+                                        ArnaColors.headerColor,
+                                        context,
+                                      ),
+                                14,
                                 brightness,
                               ),
                               accent,
                               brightness,
                             )
                           : ArnaDynamicColor.matchingColor(
-                              ArnaDynamicColor.resolve(
-                                ArnaColors.buttonColor,
-                                context,
-                              ),
+                              hasBorder
+                                  ? ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor,
+                                      context,
+                                    )
+                                  : ArnaDynamicColor.resolve(
+                                      ArnaColors.headerColor,
+                                      context,
+                                    ),
                               accent,
                               brightness,
                             ),
@@ -241,15 +247,16 @@ class ArnaButton extends StatelessWidget {
                             )
                           : hover
                               ? ArnaDynamicColor.blend(
-                                  ArnaDynamicColor.resolve(
-                                    ArnaColors.buttonColor,
-                                    context,
-                                  ),
                                   hasBorder
-                                      ? 14
-                                      : buttonType == ButtonType.normal
-                                          ? 28
-                                          : 14,
+                                      ? ArnaDynamicColor.resolve(
+                                          ArnaColors.buttonColor,
+                                          context,
+                                        )
+                                      : ArnaDynamicColor.resolve(
+                                          ArnaColors.headerColor,
+                                          context,
+                                        ),
+                                  14,
                                   brightness,
                                 )
                               : hasBorder

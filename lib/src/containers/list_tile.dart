@@ -163,7 +163,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
                               ArnaColors.cardColor,
                               context,
                             ),
-                            7,
+                            14,
                           )
                         : ArnaColors.cardColor,
                 context,

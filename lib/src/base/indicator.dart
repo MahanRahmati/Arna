@@ -128,7 +128,7 @@ class _ProgressPainter extends CustomPainter {
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round
         ..color = color
-        ..strokeWidth = size.width / 6,
+        ..strokeWidth = size.width / 8,
     );
   }
 

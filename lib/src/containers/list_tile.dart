@@ -155,7 +155,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
               color: ArnaDynamicColor.resolve(
                 !isEnabled
                     ? widget.actionable
-                        ? ArnaColors.cardColor
+                        ? ArnaColors.backgroundColor
                         : ArnaColors.transparent
                     : _hover
                         ? ArnaDynamicColor.blend(

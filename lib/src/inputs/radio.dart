@@ -1,5 +1,5 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart' show Brightness;
 
 /// An Arna-styled radio button.
 ///

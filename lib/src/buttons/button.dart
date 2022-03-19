@@ -222,7 +222,7 @@ class ArnaButton extends StatelessWidget {
                                     ArnaColors.buttonColor,
                                     context,
                                   ),
-                                  14,
+                                  hasBorder ? 14 : 28,
                                   brightness,
                                 )
                               : hasBorder

@@ -388,8 +388,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Brightness brightness = Brightness.light,
   ]) {
     double colorLuminance = color.computeLuminance();
-    int a = (1 - colorLuminance) * 100 ~/ 1;
-    int percentage = colorLuminance > 0.50 ? (55 - a) : (a - 45);
+    double percentage = colorLuminance > 0.50
+        ? 55 - ((1 - colorLuminance) * 100)
+        : ((1 - colorLuminance) * 100) - 45;
     Color secondColor = colorLuminance < 0.2 && brightness == Brightness.dark
         ? ArnaColors.white
         : ArnaColors.black;
@@ -399,7 +400,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         return ArnaColors.color20;
       }
       if (brightness == Brightness.dark) secondColor = ArnaColors.white;
-      percentage += percentage + 25;
+      percentage += percentage + 20;
     }
     return _colorBlender(color, secondColor, percentage);
   }
@@ -428,7 +429,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     Color backgroundColor,
     Color accent,
     Brightness brightness, [
-    int bias = 21,
+    double bias = 21,
   ]) {
     assert(bias >= 0 && bias < 100);
 
@@ -460,18 +461,18 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     }
 
     bool ignore = false;
-    int alternativePercentage = bias;
+    double alternativePercentage = bias;
     if (_colorDistance(accent, backgroundColor) < 200) {
       ignore = true;
       alternativePercentage += (200 -
               _colorDistance(
                 accent,
                 backgroundColor,
-              )) ~/
+              )) /
           4;
     }
 
-    int percentage = distance * 100 ~/ 1;
+    double percentage = distance * 100;
     if (!ignore) return _colorBlender(accent, secondColor, percentage);
     return _colorBlender(accent, secondColor, alternativePercentage);
   }
@@ -480,13 +481,13 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   static Color _colorBlender(
     Color base,
     Color secondColor,
-    int percentage,
+    double percentage,
   ) {
-    if (percentage < 2) return base;
-    if (percentage > 98) return secondColor;
-    int r = base.red + percentage * (secondColor.red - base.red) ~/ 100;
-    int g = base.green + percentage * (secondColor.green - base.green) ~/ 100;
-    int b = base.blue + percentage * (secondColor.blue - base.blue) ~/ 100;
+    if (percentage < 1) return base;
+    if (percentage > 99) return secondColor;
+    int r = base.red + (percentage * (secondColor.red - base.red)) ~/ 100;
+    int g = base.green + (percentage * (secondColor.green - base.green)) ~/ 100;
+    int b = base.blue + (percentage * (secondColor.blue - base.blue)) ~/ 100;
     return Color.fromRGBO(r, g, b, 1.0);
   }
 
@@ -502,8 +503,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             : ArnaColors.black
         : ArnaColors.white;
     double bias =
-        baseLuminance > 0.5 ? 3 - 2 * baseLuminance : 1 + 2 * baseLuminance;
-    return _colorBlender(base, secondColor, (percentage * bias) ~/ 1);
+        baseLuminance > 0.5 ? 2.5 - 2 * baseLuminance : 0.5 + 2 * baseLuminance;
+    return _colorBlender(base, secondColor, (percentage * bias));
   }
 
   bool get _isPlatformBrightnessDependent =>

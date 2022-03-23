@@ -3,7 +3,7 @@ import 'package:arna/arna.dart';
 /// Banner types.
 enum BannerType { information, warning, error, success, colored }
 
-/// A Arna-styled banner.
+/// An Arna-styled banner.
 ///
 /// A banner displays an important, succinct message, and provides actions for
 /// users to address (or dismiss the banner). A user action is required for it

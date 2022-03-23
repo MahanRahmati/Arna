@@ -102,7 +102,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
     if (!compact(context) && showDrawer) _drawerOpenedCallback(false);
     return SafeArea(
       child: LayoutBuilder(
-        builder: (context, constraints) {
+        builder: (BuildContext context, BoxConstraints constraints) {
           return widget.items.length > 1
               ? Stack(
                   children: <Widget>[

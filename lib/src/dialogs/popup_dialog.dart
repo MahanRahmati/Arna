@@ -30,7 +30,7 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 ///
 ///  * [ArnaAlertDialog]
 ///  * [showArnaPopupDialog]
-class _ArnaPopupDialog extends StatefulWidget {
+class _ArnaPopupDialog extends StatelessWidget {
   /// Creates a popup dialog.
   ///
   /// Typically used in conjunction with [showArnaPopupDialog].
@@ -62,11 +62,6 @@ class _ArnaPopupDialog extends StatefulWidget {
   /// The body widget of the popup dialog.
   final Widget body;
 
-  @override
-  State<_ArnaPopupDialog> createState() => _ArnaPopupDialogState();
-}
-
-class _ArnaPopupDialogState extends State<_ArnaPopupDialog> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -103,22 +98,21 @@ class _ArnaPopupDialogState extends State<_ArnaPopupDialog> {
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,
                 child: ArnaScaffold(
-                  headerBarLeading: widget.headerBarLeading,
-                  title: widget.title,
+                  headerBarLeading: headerBarLeading,
+                  title: title,
                   headerBarTrailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      if (widget.headerBarTrailing != null)
-                        widget.headerBarTrailing!,
+                      if (headerBarTrailing != null) headerBarTrailing!,
                       ArnaTextButton(
                         label: "Close",
                         onPressed: Navigator.of(context).pop,
                       ),
                     ],
                   ),
-                  searchField: widget.searchField,
-                  banner: widget.banner,
-                  body: widget.body,
+                  searchField: searchField,
+                  banner: banner,
+                  body: body,
                   isDialog: true,
                 ),
               ),

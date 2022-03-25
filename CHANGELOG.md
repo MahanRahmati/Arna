@@ -1,6 +1,5 @@
 ## 0.3.5
 
-- Update ArnaPopupDialog
 - Update ArnaExpansionPanel
 - Fix ArnaButton
 - Fix ArnaTextField

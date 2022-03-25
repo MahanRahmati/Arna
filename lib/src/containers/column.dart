@@ -100,7 +100,7 @@ class ArnaColumn extends StatelessWidget {
   final TextBaseline? textBaseline;
 
   Widget _buildChild() {
-    final List<Widget> items = [];
+    final List<Widget> items = <Widget>[];
     if (children.isNotEmpty) {
       for (int i = 0; i < children.length; i++) {
         items.add(children[i]);

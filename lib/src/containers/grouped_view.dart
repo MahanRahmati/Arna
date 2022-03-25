@@ -110,7 +110,7 @@ class ArnaGroupedView extends StatelessWidget {
   final TextBaseline? textBaseline;
 
   Widget _buildChild() {
-    final List<Widget> items = [];
+    final List<Widget> items = <Widget>[];
     if (children.isNotEmpty) {
       for (int i = 0; i < children.length; i++) {
         items.add(children[i]);
@@ -150,7 +150,7 @@ class ArnaGroupedView extends StatelessWidget {
       padding: Styles.listPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           if (title != null)
             Padding(
               padding: const EdgeInsets.fromLTRB(
@@ -160,7 +160,7 @@ class ArnaGroupedView extends StatelessWidget {
                 Styles.largePadding,
               ),
               child: Row(
-                children: [
+                children: <Widget>[
                   Flexible(
                     child: Text(
                       title!,

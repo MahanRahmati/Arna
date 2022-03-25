@@ -30,7 +30,7 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 ///
 ///  * [ArnaAlertDialog]
 ///  * [showArnaPopupDialog]
-class _ArnaPopupDialog extends StatelessWidget {
+class _ArnaPopupDialog extends StatefulWidget {
   /// Creates a popup dialog.
   ///
   /// Typically used in conjunction with [showArnaPopupDialog].
@@ -62,6 +62,11 @@ class _ArnaPopupDialog extends StatelessWidget {
   /// The body widget of the popup dialog.
   final Widget body;
 
+  @override
+  State<_ArnaPopupDialog> createState() => _ArnaPopupDialogState();
+}
+
+class _ArnaPopupDialogState extends State<_ArnaPopupDialog> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -98,21 +103,22 @@ class _ArnaPopupDialog extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,
                 child: ArnaScaffold(
-                  headerBarLeading: headerBarLeading,
-                  title: title,
+                  headerBarLeading: widget.headerBarLeading,
+                  title: widget.title,
                   headerBarTrailing: Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (headerBarTrailing != null) headerBarTrailing!,
+                    children: <Widget>[
+                      if (widget.headerBarTrailing != null)
+                        widget.headerBarTrailing!,
                       ArnaTextButton(
                         label: "Close",
                         onPressed: Navigator.of(context).pop,
                       ),
                     ],
                   ),
-                  searchField: searchField,
-                  banner: banner,
-                  body: body,
+                  searchField: widget.searchField,
+                  banner: widget.banner,
+                  body: widget.body,
                   isDialog: true,
                 ),
               ),
@@ -190,7 +196,7 @@ class _ArnaPopupPage extends StatelessWidget {
     return ArnaScaffold(
       headerBarLeading: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: <Widget>[
           ArnaIconButton(
             icon: Icons.arrow_back_outlined,
             onPressed: () => Navigator.pop(context),

@@ -8,7 +8,7 @@ class ArnaLinkedButtons extends StatelessWidget {
   final List<ArnaLinkedButton> buttons;
 
   Widget _buildChild() {
-    List<Widget> children = [];
+    List<Widget> children = <Widget>[];
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
     children.addAll(
       buttons.map((button) {
@@ -52,7 +52,7 @@ class _ArnaLinked extends StatelessWidget {
   }) : super(key: key);
 
   Widget _buildChild(BuildContext context, bool enabled) {
-    final List<Widget> children = [];
+    final List<Widget> children = <Widget>[];
     if (button.icon != null) {
       Widget iconWidget = Icon(
         button.icon,

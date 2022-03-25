@@ -1,3 +1,12 @@
+## 0.3.5
+
+- Update ArnaPopupDialog
+- Update ArnaExpansionPanel
+- Fix ArnaButton
+- Fix ArnaTextField
+- [BREAKING] Remove ArnaRow
+- Add more types
+
 ## 0.3.4
 
 - [Example] Refactor example

@@ -108,11 +108,11 @@ class ArnaAlertDialog extends StatelessWidget {
                 borderRadius: Styles.borderRadius,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: <Widget>[
                     Padding(
                       padding: Styles.normal,
                       child: Column(
-                        children: [
+                        children: <Widget>[
                           if (title != null)
                             Padding(
                               padding: Styles.normal,

@@ -136,7 +136,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
   }
 
   Widget _buildChild() {
-    final List<Widget> children = [];
+    final List<Widget> children = <Widget>[];
     children.add(const SizedBox(width: Styles.largePadding));
     if (widget.leading != null) {
       children.add(Padding(padding: Styles.normal, child: widget.leading));
@@ -150,7 +150,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
             if (widget.title != null)
               Padding(
                 padding: (widget.subtitle != null)
-                    ? Styles.titleWithSubtitlePadding
+                    ? Styles.tileWithSubtitlePadding
                     : Styles.tileTextPadding,
                 child: Row(
                   children: <Widget>[
@@ -191,32 +191,30 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
         ),
       ),
     );
-    if (isEnabled) {
-      children.add(
-        Row(
-          children: <Widget>[
-            if (widget.trailing != null) widget.trailing!,
-            Padding(
-              padding: Styles.horizontal,
-              child: RotationTransition(
-                turns: _rotateAnimation,
-                child: Transform.rotate(
-                  angle: -3.14 / 2,
-                  child: Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    size: Styles.arrowSize,
-                    color: ArnaDynamicColor.resolve(
-                      ArnaColors.iconColor,
-                      context,
-                    ),
+    children.add(
+      Row(
+        children: <Widget>[
+          if (widget.trailing != null) widget.trailing!,
+          Padding(
+            padding: Styles.horizontal,
+            child: RotationTransition(
+              turns: _rotateAnimation,
+              child: Transform.rotate(
+                angle: -3.14 / 2,
+                child: Icon(
+                  Icons.arrow_back_ios_new_outlined,
+                  size: Styles.arrowSize,
+                  color: ArnaDynamicColor.resolve(
+                    isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
+                    context,
                   ),
                 ),
               ),
             ),
-          ],
-        ),
-      );
-    }
+          ),
+        ],
+      ),
+    );
     children.add(const SizedBox(width: Styles.largePadding));
     return Padding(
       padding: Styles.vertical,
@@ -253,6 +251,9 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                   actions: _actions,
                   shortcuts: _shortcuts,
                   child: AnimatedContainer(
+                    constraints: const BoxConstraints(
+                      minHeight: Styles.expansionPanelMinHeight,
+                    ),
                     duration: Styles.basicDuration,
                     curve: Styles.basicCurve,
                     clipBehavior: Clip.antiAlias,

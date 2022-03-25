@@ -207,7 +207,7 @@ class ArnaSliderListTile extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       trailing: Row(
-        children: [
+        children: <Widget>[
           ArnaSlider(
             value: value,
             onChanged: onChanged,

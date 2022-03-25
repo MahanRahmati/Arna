@@ -24,16 +24,16 @@ class _WidgetsState extends State<Widgets> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: [
+        children: <Widget>[
           ArnaList(
             title: "Widgets",
-            items: [
+            items: <Widget>[
               ArnaExpansionPanel(
                 leading: const Icon(Icons.adjust_outlined),
                 title: "Buttons",
                 child: Center(
                   child: Wrap(
-                    children: [
+                    children: <Widget>[
                       ArnaIconButton(
                         icon: Icons.add_outlined,
                         onPressed: () => showArnaSnackbar(
@@ -85,7 +85,7 @@ class _WidgetsState extends State<Widgets> {
                         tooltipMessage: "Add",
                       ),
                       ArnaPopupMenuButton<String>(
-                        itemBuilder: (context) => [
+                        itemBuilder: (context) => <ArnaPopupMenuEntry<String>>[
                           ArnaPopupMenuItem(
                             child: Text(
                               "First Item",
@@ -123,9 +123,9 @@ class _WidgetsState extends State<Widgets> {
                 title: "Linked Buttons",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     ArnaLinkedButtons(
-                      buttons: [
+                      buttons: <ArnaLinkedButton>[
                         ArnaLinkedButton(
                           icon: Icons.add_outlined,
                           onPressed: () => showArnaSnackbar(
@@ -163,7 +163,7 @@ class _WidgetsState extends State<Widgets> {
                 title: "Segmented Control",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     ArnaSegmentedControl(
                       groupValue: segmentedControlGroupValue,
                       children: const {0: "Item 1", 1: "Item 2", 2: "Item 3"},
@@ -177,7 +177,7 @@ class _WidgetsState extends State<Widgets> {
                 leading: const Icon(Icons.check_box_outlined),
                 title: "CheckBox",
                 child: ArnaColumn(
-                  children: [
+                  children: <Widget>[
                     ArnaCheckBoxListTile(
                       value: _checkBox1,
                       title: "CheckBox 1",
@@ -206,7 +206,7 @@ class _WidgetsState extends State<Widgets> {
                 leading: const Icon(Icons.radio_button_checked_outlined),
                 title: "Radio",
                 child: ArnaColumn(
-                  children: [
+                  children: <Widget>[
                     ArnaRadioListTile(
                       value: "1",
                       groupValue: _selectedType,
@@ -239,7 +239,7 @@ class _WidgetsState extends State<Widgets> {
                 leading: const Icon(Icons.toggle_on_outlined),
                 title: "Switch",
                 child: ArnaColumn(
-                  children: [
+                  children: <Widget>[
                     ArnaSwitchListTile(
                       title: "Switch 1",
                       value: _switch1,
@@ -267,7 +267,7 @@ class _WidgetsState extends State<Widgets> {
                 leading: const Icon(Icons.view_list_outlined),
                 title: "List Tile",
                 child: ArnaColumn(
-                  children: [
+                  children: <Widget>[
                     ArnaListTile(
                       title: "Title 1",
                       subtitle: "Subtitle 1",
@@ -285,7 +285,7 @@ class _WidgetsState extends State<Widgets> {
                 leading: const Icon(Icons.linear_scale_outlined),
                 title: "Slider",
                 child: ArnaColumn(
-                  children: [
+                  children: <Widget>[
                     ArnaSliderListTile(
                       title: "Title 1",
                       value: _sliderValue1,
@@ -322,7 +322,7 @@ class _WidgetsState extends State<Widgets> {
                 title: "Indicator",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: const <Widget>[
                     ArnaProgressIndicator(),
                     ArnaProgressIndicator(size: 119),
                   ],

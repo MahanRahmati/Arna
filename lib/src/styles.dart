@@ -34,6 +34,7 @@ abstract class Styles {
   static const double switchWidth = base * 7;
   static const double headerBarHeight = base * 7;
   static const double sideBarItemHeight = base * 7;
+  static const double expansionPanelMinHeight = base * 7;
   static const double sideBarCompactWidth = base * 9;
   static const double sideBarIconHeight = base * 9;
   static const double menuMinWidth = base * 15;
@@ -95,7 +96,11 @@ abstract class Styles {
     horizontal: padding,
     vertical: smallPadding,
   );
-  static const EdgeInsets titleWithSubtitlePadding = EdgeInsets.fromLTRB(
+  static const EdgeInsets textFieldPadding = EdgeInsets.symmetric(
+    horizontal: smallPadding,
+    vertical: padding,
+  );
+  static const EdgeInsets tileWithSubtitlePadding = EdgeInsets.fromLTRB(
     Styles.padding,
     Styles.smallPadding,
     Styles.padding,

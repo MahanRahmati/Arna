@@ -795,7 +795,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
       child: editableText,
       builder: (BuildContext context, TextEditingValue? text, Widget? child) {
         return Row(
-          children: [
+          children: <Widget>[
             // Insert a prefix at the front if the prefix visibility mode matches
             // the current text state.
             if (_showPrefixWidget(text!))
@@ -807,12 +807,12 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             // if needed.
             Expanded(
               child: Stack(
-                children: [
+                children: <Widget>[
                   if (widget.placeholder != null && text.text.isEmpty)
                     SizedBox(
                       width: double.infinity,
                       child: Padding(
-                        padding: Styles.small,
+                        padding: Styles.textFieldPadding,
                         child: Text(
                           widget.placeholder!,
                           maxLines: widget.maxLines,

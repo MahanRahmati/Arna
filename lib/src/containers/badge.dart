@@ -41,7 +41,7 @@ class ArnaBadge extends StatelessWidget {
         padding: Styles.horizontal,
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             Flexible(
               child: Text(
                 label,

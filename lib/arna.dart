@@ -34,7 +34,6 @@ export 'package:arna/src/containers/expansion_panel.dart';
 export 'package:arna/src/containers/grouped_view.dart';
 export 'package:arna/src/containers/list.dart';
 export 'package:arna/src/containers/list_tile.dart';
-export 'package:arna/src/containers/row.dart';
 export 'package:arna/src/dialogs/dialog.dart';
 export 'package:arna/src/dialogs/popup_dialog.dart';
 export 'package:arna/src/dividers/divider.dart';

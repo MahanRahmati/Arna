@@ -10,10 +10,10 @@ class Settings extends ConsumerWidget {
     AccentColor? accentColor = ref.watch(changeColor).accent;
     return SingleChildScrollView(
       child: Column(
-        children: [
+        children: <Widget>[
           ArnaGroupedView(
             title: "Theme",
-            children: [
+            children: <Widget>[
               ArnaRadioListTile(
                 value: Theme.system,
                 groupValue: themeMode,
@@ -36,7 +36,7 @@ class Settings extends ConsumerWidget {
           ),
           ArnaGroupedView(
             title: "Accent",
-            children: [
+            children: <Widget>[
               ArnaRadioListTile(
                 value: AccentColor.blue,
                 groupValue: accentColor,

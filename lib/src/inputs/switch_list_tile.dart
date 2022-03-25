@@ -116,7 +116,7 @@ class ArnaSwitchListTile extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       trailing: Row(
-        children: [
+        children: <Widget>[
           ArnaSwitch(
             value: value,
             onChanged: onChanged,

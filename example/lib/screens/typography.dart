@@ -12,7 +12,7 @@ class Typography extends StatelessWidget {
           width: deviceWidth(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               Padding(
                 padding: Styles.normal,
                 child: Text(

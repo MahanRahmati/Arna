@@ -124,7 +124,7 @@ class _HomeState extends ConsumerState<Home> {
     return showMaster
         ? ArnaMasterDetailScaffold(
             title: "Arna Demo",
-            items: [
+            items: <MasterNavigationItem>[
               MasterNavigationItem(
                 title: "Hello World!",
                 leading: const Icon(Icons.emoji_emotions_outlined),
@@ -168,7 +168,7 @@ class _HomeState extends ConsumerState<Home> {
             ],
             headerBarTrailing: Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: <Widget>[
                 ArnaIconButton(
                   icon: Icons.info_outlined,
                   onPressed: () => showArnaDialog(
@@ -206,7 +206,7 @@ class _HomeState extends ConsumerState<Home> {
         : ArnaSideScaffold(
             title: "Arna Demo",
             headerBarTrailing: Row(
-              children: [
+              children: <Widget>[
                 ArnaIconButton(
                   icon: Icons.info_outlined,
                   onPressed: () => showArnaDialog(
@@ -239,7 +239,7 @@ class _HomeState extends ConsumerState<Home> {
                 ),
               ],
             ),
-            items: [hello, widgets, typography],
+            items: <NavigationItem>[hello, widgets, typography],
           );
   }
 }

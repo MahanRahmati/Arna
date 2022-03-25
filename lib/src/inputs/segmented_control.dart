@@ -101,7 +101,7 @@ class _ArnaSegmentedControlState<T extends Object>
   }
 
   Widget _buildChild() {
-    List<Widget> children = [];
+    List<Widget> children = <Widget>[];
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
     int index = 0;
@@ -170,7 +170,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   final MouseCursor cursor;
 
   Widget _buildChild(BuildContext context, bool enabled, bool selected) {
-    final List<Widget> children = [];
+    final List<Widget> children = <Widget>[];
     if (label != null) {
       Widget labelWidget = Flexible(
         child: Text(

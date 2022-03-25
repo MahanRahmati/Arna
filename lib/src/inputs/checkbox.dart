@@ -136,7 +136,7 @@ class ArnaCheckBox extends StatelessWidget {
           enabled = onChanged != null;
           return Stack(
             alignment: Alignment.center,
-            children: [
+            children: <Widget>[
               AnimatedContainer(
                 height: Styles.checkBoxSize,
                 width: Styles.checkBoxSize,

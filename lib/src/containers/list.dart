@@ -30,7 +30,7 @@ class ArnaList extends StatelessWidget {
       padding: Styles.listPadding,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           if (title != null)
             Padding(
               padding: EdgeInsets.fromLTRB(
@@ -44,7 +44,7 @@ class ArnaList extends StatelessWidget {
                 Styles.padding,
               ),
               child: Row(
-                children: [
+                children: <Widget>[
                   Flexible(
                     child: Text(
                       title!,

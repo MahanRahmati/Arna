@@ -15,7 +15,7 @@ class HelloWorld extends ConsumerWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: <Widget>[
           Text(
             "You have pushed the button this many times:",
             style: ArnaTheme.of(context).textTheme.textStyle,

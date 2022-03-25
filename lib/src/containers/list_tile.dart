@@ -67,7 +67,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
   }
 
   Widget _buildChild() {
-    final List<Widget> children = [];
+    final List<Widget> children = <Widget>[];
     if (widget.leading != null) {
       children.add(Padding(padding: Styles.normal, child: widget.leading));
     }
@@ -76,14 +76,14 @@ class _ArnaListTileState extends State<ArnaListTile> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             if (widget.title != null)
               Padding(
                 padding: (widget.subtitle != null)
-                    ? Styles.titleWithSubtitlePadding
+                    ? Styles.tileWithSubtitlePadding
                     : Styles.tileTextPadding,
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Flexible(
                       child: Text(
                         widget.title!,
@@ -105,7 +105,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
               Padding(
                 padding: Styles.tileSubtitleTextPadding,
                 child: Row(
-                  children: [
+                  children: <Widget>[
                     Flexible(
                       child: Text(
                         widget.subtitle!,

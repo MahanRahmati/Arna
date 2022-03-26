@@ -149,12 +149,13 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
 
   Future<void> _handleTap() async {
     if (isEnabled) {
-      setState(() => _pressed = true);
+      if (mounted) setState(() => _pressed = true);
       widget.onPressed!();
       if (widget.showAnimation) {
-        _controller.reverse().then((_) => _controller.forward());
+        _controller.reverse().then((_) {
+          if (mounted) _controller.forward();
+        });
       }
-      await Future.delayed(Styles.basicDuration);
       if (mounted) setState(() => _pressed = false);
     }
   }

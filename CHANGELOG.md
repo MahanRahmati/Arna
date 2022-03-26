@@ -5,6 +5,7 @@
 - Update ArnaList
 - Fix ArnaButton
 - Fix ArnaTextField
+- Fix ArnaBaseWidget
 - [BREAKING] Remove ArnaRow
 - Add more types
 

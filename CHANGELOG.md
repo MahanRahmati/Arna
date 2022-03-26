@@ -7,6 +7,9 @@
 - Fix ArnaTextField
 - Fix ArnaBaseWidget
 - [BREAKING] Remove ArnaRow
+- [BREAKING] Rename compact to isCompact
+- [BREAKING] Rename medium to isMedium
+- [BREAKING] Rename expanded to isExpanded
 - Add more types
 
 ## 0.3.4

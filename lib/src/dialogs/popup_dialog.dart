@@ -258,7 +258,7 @@ Future<T?> showArnaPopupDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
 }) {
-  return compact(context)
+  return isCompact(context)
       ? Navigator.of(context).push(
           ArnaPageRoute(
             builder: (context) => _ArnaPopupPage(

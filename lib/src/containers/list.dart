@@ -22,7 +22,7 @@ class ArnaList extends StatelessWidget {
             builder: (BuildContext context, BoxConstraints constraints) {
               return ConstrainedBox(
                 constraints: BoxConstraints(
-                  maxWidth: expanded(context)
+                  maxWidth: isExpanded(context)
                       ? constraints.maxWidth > Styles.expanded
                           ? constraints.maxWidth * 0.7
                           : double.infinity

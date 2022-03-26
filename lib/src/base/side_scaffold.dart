@@ -85,7 +85,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
           icon: widget.items[index].icon,
           onPressed: () => onTap(index),
           badge: widget.items[index].badge,
-          compact: medium(context) ? true : false,
+          compact: isMedium(context) ? true : false,
           selected: index == _currentIndex,
           isFocusable: widget.items[index].isFocusable,
           autofocus: widget.items[index].autofocus,
@@ -99,7 +99,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
 
   @override
   Widget build(BuildContext context) {
-    if (!compact(context) && showDrawer) _drawerOpenedCallback(false);
+    if (!isCompact(context) && showDrawer) _drawerOpenedCallback(false);
     return SafeArea(
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {

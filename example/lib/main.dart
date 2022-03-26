@@ -201,7 +201,7 @@ class _HomeState extends ConsumerState<Home> {
                 ),
               ],
             ),
-            currentIndex: expanded(context) ? 0 : null,
+            currentIndex: isExpanded(context) ? 0 : null,
           )
         : ArnaSideScaffold(
             title: "Arna Demo",

@@ -12,6 +12,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     this.headerBarLeading,
     this.title,
     this.headerBarTrailing,
+    this.searchField,
     required this.items,
     this.emptyBody,
     this.onItemSelected,
@@ -26,6 +27,9 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
 
   /// The trailing widget laid out within the header bar.
   final Widget? headerBarTrailing;
+
+  /// The [ArnaSearchField] of the scaffold.
+  final ArnaSearchField? searchField;
 
   /// The list of navigation items.
   final List<MasterNavigationItem> items;
@@ -133,6 +137,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
         headerBarLeading: widget.headerBarLeading,
         title: widget.title,
         headerBarTrailing: widget.headerBarTrailing,
+        searchField: widget.searchField,
         body: _buildChild(isPhone),
       );
 

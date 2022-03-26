@@ -1,5 +1,6 @@
 ## 0.3.5
 
+- Add ArnaSearchField to ArnaMasterDetailScaffold
 - Update ArnaExpansionPanel
 - Update ArnaList
 - Fix ArnaButton

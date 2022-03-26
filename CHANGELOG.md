@@ -1,6 +1,7 @@
 ## 0.3.5
 
 - Update ArnaExpansionPanel
+- Update ArnaList
 - Fix ArnaButton
 - Fix ArnaTextField
 - [BREAKING] Remove ArnaRow

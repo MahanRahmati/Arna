@@ -745,6 +745,18 @@ class _RenderArnaSlider extends RenderConstrainedBox {
 
     canvas.drawRRect(
       rrect,
+      Paint()..color = isInteractive ? accent : trackColor,
+    );
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2),
+        Radius.circular(
+          Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2)
+                  .shortestSide /
+              2.0,
+        ),
+      ),
       Paint()..color = isInteractive ? thumbColor : trackColor,
     );
   }

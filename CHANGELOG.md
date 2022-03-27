@@ -8,6 +8,7 @@
 - Fix ArnaBaseWidget
 - Add ArnaColorButton
 - Update some tooltipMessages
+- Update ArnaSlider
 - [BREAKING] Remove ArnaRow
 - [BREAKING] Rename compact to isCompact
 - [BREAKING] Rename medium to isMedium

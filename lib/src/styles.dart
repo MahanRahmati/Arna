@@ -11,6 +11,7 @@ abstract class Styles {
   static const double padding = base;
   static const double borderRadiusSize = base;
   static const double scrollBarThickness = base;
+  static const double sliderTrackSize = base * 1.25;
   static const double sliderSize = base * 1.5;
   static const double scrollBarHoverThickness = base * 1.5;
   static const double radioIndicatorSize = base * 1.5;
@@ -22,7 +23,6 @@ abstract class Styles {
   static const double badgeSize = base * 3;
   static const double checkBoxSize = base * 3;
   static const double radioSize = base * 3;
-  static const double sliderTrackSize = base * 3;
   static const double switchThumbSize = base * 3;
   static const double switchHeight = base * 4;
   static const double tooltipHeight = base * 4;

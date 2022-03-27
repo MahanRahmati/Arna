@@ -124,4 +124,5 @@ abstract class Styles {
   static BorderRadius checkBoxBorderRadius = borderRadiusAll(smallPadding);
   static BorderRadius radioBorderRadius = borderRadiusAll(radioSize);
   static BorderRadius switchBorderRadius = borderRadiusAll(switchHeight);
+  static BorderRadius buttonBorderRadius = borderRadiusAll(buttonSize);
 }

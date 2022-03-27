@@ -23,6 +23,7 @@ export 'package:arna/src/base/side_scaffold.dart';
 export 'package:arna/src/base/snack_bar.dart';
 export 'package:arna/src/base/tooltip.dart';
 export 'package:arna/src/buttons/button.dart';
+export 'package:arna/src/buttons/color_button.dart';
 export 'package:arna/src/buttons/icon_button.dart';
 export 'package:arna/src/buttons/linked_buttons.dart';
 export 'package:arna/src/buttons/popup_menu_button.dart';

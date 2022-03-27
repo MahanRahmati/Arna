@@ -36,130 +36,47 @@ class Settings extends ConsumerWidget {
           ),
           ArnaGroupedView(
             title: "Accent",
+            direction: Axis.horizontal,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              ArnaRadioListTile(
+              ArnaColorButton(
                 value: AccentColor.blue,
                 groupValue: accentColor,
-                title: "Blue",
-                onChanged: (_) => ref.read(changeColor.notifier).blue(),
-                trailing: Container(
-                  height: Styles.radioSize,
-                  width: Styles.radioSize,
-                  decoration: BoxDecoration(
-                    borderRadius: Styles.borderRadius,
-                    border: Border.all(
-                      color: ArnaDynamicColor.outerColor(
-                        ArnaColors.accentColor,
-                        false,
-                      ),
-                    ),
-                    color: ArnaColors.accentColor,
-                  ),
-                ),
+                onPressed: () => ref.read(changeColor.notifier).blue(),
+                color: ArnaColors.accentColor,
               ),
-              ArnaRadioListTile(
+              ArnaColorButton(
                 value: AccentColor.green,
                 groupValue: accentColor,
-                title: "Green",
-                onChanged: (_) => ref.read(changeColor.notifier).green(),
-                trailing: Container(
-                  height: Styles.radioSize,
-                  width: Styles.radioSize,
-                  decoration: BoxDecoration(
-                    borderRadius: Styles.borderRadius,
-                    border: Border.all(
-                      color: ArnaDynamicColor.outerColor(
-                        ArnaColors.successColor,
-                        false,
-                      ),
-                    ),
-                    color: ArnaColors.successColor,
-                  ),
-                ),
+                onPressed: () => ref.read(changeColor.notifier).green(),
+                color: ArnaColors.successColor,
               ),
-              ArnaRadioListTile(
+              ArnaColorButton(
                 value: AccentColor.red,
                 groupValue: accentColor,
-                title: "Red",
-                onChanged: (_) => ref.read(changeColor.notifier).red(),
-                trailing: Container(
-                  height: Styles.radioSize,
-                  width: Styles.radioSize,
-                  decoration: BoxDecoration(
-                    borderRadius: Styles.borderRadius,
-                    border: Border.all(
-                      color: ArnaDynamicColor.outerColor(
-                        ArnaColors.errorColor,
-                        false,
-                      ),
-                    ),
-                    color: ArnaColors.errorColor,
-                  ),
-                ),
+                onPressed: () => ref.read(changeColor.notifier).red(),
+                color: ArnaColors.errorColor,
               ),
-              ArnaRadioListTile(
+              ArnaColorButton(
                 value: AccentColor.orange,
                 groupValue: accentColor,
-                title: "Orange",
-                onChanged: (_) => ref.read(changeColor.notifier).orange(),
-                trailing: Container(
-                  height: Styles.radioSize,
-                  width: Styles.radioSize,
-                  decoration: BoxDecoration(
-                    borderRadius: Styles.borderRadius,
-                    border: Border.all(
-                      color: ArnaDynamicColor.outerColor(
-                        ArnaColors.warningColor,
-                        false,
-                      ),
-                    ),
-                    color: ArnaColors.warningColor,
-                  ),
-                ),
+                onPressed: () => ref.read(changeColor.notifier).orange(),
+                color: ArnaColors.warningColor,
               ),
-              ArnaRadioListTile(
+              ArnaColorButton(
                 value: AccentColor.white,
                 groupValue: accentColor,
-                title: "White",
-                onChanged: (_) => ref.read(changeColor.notifier).white(),
-                trailing: Container(
-                  height: Styles.radioSize,
-                  width: Styles.radioSize,
-                  decoration: BoxDecoration(
-                    borderRadius: Styles.borderRadius,
-                    border: Border.all(
-                      color: ArnaDynamicColor.outerColor(
-                        ArnaColors.white,
-                        false,
-                      ),
-                    ),
-                    color: ArnaColors.white,
-                  ),
-                ),
+                onPressed: () => ref.read(changeColor.notifier).white(),
+                color: ArnaColors.white,
               ),
-              ArnaRadioListTile(
+              ArnaColorButton(
                 value: AccentColor.black,
                 groupValue: accentColor,
-                title: "Black",
-                onChanged: (_) => ref.read(changeColor.notifier).black(),
-                trailing: Container(
-                  height: Styles.radioSize,
-                  width: Styles.radioSize,
-                  decoration: BoxDecoration(
-                    borderRadius: Styles.borderRadius,
-                    border: Border.all(
-                      color: ArnaDynamicColor.outerColor(
-                        ArnaColors.black,
-                        false,
-                        ArnaTheme.brightnessOf(context),
-                      ),
-                    ),
-                    color: ArnaColors.black,
-                  ),
-                ),
+                onPressed: () => ref.read(changeColor.notifier).black(),
+                color: ArnaColors.black,
               ),
             ],
-          )
+          ),
         ],
       ),
     );

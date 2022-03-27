@@ -6,6 +6,7 @@
 - Fix ArnaButton
 - Fix ArnaTextField
 - Fix ArnaBaseWidget
+- Add ArnaColorButton
 - [BREAKING] Remove ArnaRow
 - [BREAKING] Rename compact to isCompact
 - [BREAKING] Rename medium to isMedium

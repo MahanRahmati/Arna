@@ -268,7 +268,6 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
         );
       },
       onPressed: onPressed,
-      tooltipMessage: label,
       cursor: cursor,
     );
   }

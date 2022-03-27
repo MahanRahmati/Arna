@@ -48,7 +48,6 @@ class _WidgetsState extends State<Widgets> {
                           context: context,
                           message: "Hello There!",
                         ),
-                        tooltipMessage: "Add",
                       ),
                       ArnaButton(
                         label: "Add",
@@ -57,7 +56,6 @@ class _WidgetsState extends State<Widgets> {
                           context: context,
                           message: "Hello There!",
                         ),
-                        tooltipMessage: "Add",
                       ),
                       const ArnaButton(
                         label: "Add",
@@ -132,6 +130,7 @@ class _WidgetsState extends State<Widgets> {
                             context: context,
                             message: "Hello There!",
                           ),
+                          tooltipMessage: "Add",
                         ),
                         ArnaLinkedButton(
                           label: "Add",

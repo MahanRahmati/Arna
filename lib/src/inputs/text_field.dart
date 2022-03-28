@@ -812,14 +812,14 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                     SizedBox(
                       width: double.infinity,
                       child: Padding(
-                        padding: Styles.textFieldPadding,
+                        padding: Styles.normal,
                         child: Text(
                           widget.placeholder!,
                           maxLines: widget.maxLines,
                           overflow: TextOverflow.ellipsis,
                           style: ArnaTheme.of(context)
                               .textTheme
-                              .subtitleTextStyle
+                              .textStyle
                               .copyWith(
                                 color: ArnaDynamicColor.resolve(
                                   ArnaColors.secondaryTextColor,

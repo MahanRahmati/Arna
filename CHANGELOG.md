@@ -9,6 +9,8 @@
 - Add ArnaColorButton
 - Update some tooltipMessages
 - Update ArnaSlider
+- Update ArnaTextField
+- [BREAKING] Update ArnaSearchField and rename hint to placeholder
 - [BREAKING] Remove ArnaRow
 - [BREAKING] Rename compact to isCompact
 - [BREAKING] Rename medium to isMedium

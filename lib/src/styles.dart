@@ -96,10 +96,6 @@ abstract class Styles {
     horizontal: padding,
     vertical: smallPadding,
   );
-  static const EdgeInsets textFieldPadding = EdgeInsets.symmetric(
-    horizontal: smallPadding,
-    vertical: padding,
-  );
   static const EdgeInsets tileWithSubtitlePadding = EdgeInsets.fromLTRB(
     Styles.padding,
     Styles.smallPadding,

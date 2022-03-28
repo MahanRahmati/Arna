@@ -15,7 +15,7 @@ class ArnaSearchField extends StatefulWidget {
     this.onChanged,
     this.onEditingComplete,
     this.onSubmitted,
-    this.hint,
+    this.placeholder,
   }) : super(key: key);
 
   /// Whether to show search or not.
@@ -39,7 +39,7 @@ class ArnaSearchField extends StatefulWidget {
   final ValueChanged<String>? onSubmitted;
 
   /// The hint text of the search field.
-  final String? hint;
+  final String? placeholder;
 
   @override
   State<ArnaSearchField> createState() => _ArnaSearchFieldState();
@@ -82,7 +82,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> {
                       width: Styles.searchWidth,
                       child: ArnaTextField(
                         controller: widget.controller,
-                        placeholder: widget.hint,
+                        placeholder: widget.placeholder,
                         prefix: const Icon(Icons.search_outlined),
                         clearButtonMode: ArnaOverlayVisibilityMode.editing,
                         onChanged: widget.onChanged,

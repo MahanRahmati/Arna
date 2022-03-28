@@ -329,12 +329,10 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
             ArnaColors.backgroundColor,
             context,
           ),
-          thumbColor: (widget.value <= widget.min)
-              ? ArnaColors.white
-              : ArnaDynamicColor.innerColor(
-                  accent,
-                  ArnaTheme.brightnessOf(context),
-                ),
+          thumbColor: ArnaDynamicColor.innerColor(
+            accent,
+            ArnaTheme.brightnessOf(context),
+          ),
           vsync: this,
         ),
       ),

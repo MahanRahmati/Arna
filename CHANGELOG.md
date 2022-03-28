@@ -1,3 +1,7 @@
+## 0.3.6
+
+- Update ArnaSlider
+
 ## 0.3.5
 
 - Add ArnaSearchField to ArnaMasterDetailScaffold

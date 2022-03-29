@@ -10,7 +10,7 @@ class ArnaScaffold extends StatelessWidget {
     Key? key,
     this.headerBarLeading,
     this.title,
-    this.headerBarTrailing,
+    this.actions,
     this.searchField,
     this.banner,
     required this.body,
@@ -23,8 +23,16 @@ class ArnaScaffold extends StatelessWidget {
   /// The title displayed in the header bar.
   final String? title;
 
-  /// The trailing widget laid out within the header bar.
-  final Widget? headerBarTrailing;
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar] built
+  /// by this widget. The height of each action is constrained to be no bigger
+  /// than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the scaffold.
   final ArnaSearchField? searchField;
@@ -67,7 +75,7 @@ class ArnaScaffold extends StatelessWidget {
                           style: ArnaTheme.of(context).textTheme.titleTextStyle,
                         )
                       : null,
-                  trailing: headerBarTrailing,
+                  actions: actions,
                 ),
                 if (searchField != null) searchField!,
                 if (banner != null) banner!,

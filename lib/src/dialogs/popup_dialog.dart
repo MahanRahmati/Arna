@@ -38,7 +38,7 @@ class _ArnaPopupDialog extends StatelessWidget {
     Key? key,
     this.headerBarLeading,
     this.title,
-    this.headerBarTrailing,
+    this.actions,
     this.searchField,
     this.banner,
     required this.body,
@@ -50,8 +50,16 @@ class _ArnaPopupDialog extends StatelessWidget {
   /// The title displayed in the header bar.
   final String? title;
 
-  /// The trailing widget laid out within the header bar.
-  final Widget? headerBarTrailing;
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar] built
+  /// by this widget. The height of each action is constrained to be no bigger
+  /// than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the popup dialog.
   final ArnaSearchField? searchField;
@@ -100,16 +108,13 @@ class _ArnaPopupDialog extends StatelessWidget {
                 child: ArnaScaffold(
                   headerBarLeading: headerBarLeading,
                   title: title,
-                  headerBarTrailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      if (headerBarTrailing != null) headerBarTrailing!,
-                      ArnaTextButton(
-                        label: "Close",
-                        onPressed: Navigator.of(context).pop,
-                      ),
-                    ],
-                  ),
+                  actions: <Widget>[
+                    if (actions != null) ...actions!,
+                    ArnaTextButton(
+                      label: "Close",
+                      onPressed: Navigator.of(context).pop,
+                    ),
+                  ],
                   searchField: searchField,
                   banner: banner,
                   body: body,
@@ -161,7 +166,7 @@ class _ArnaPopupPage extends StatelessWidget {
     Key? key,
     this.headerBarLeading,
     this.title,
-    this.headerBarTrailing,
+    this.actions,
     this.searchField,
     this.banner,
     required this.body,
@@ -173,8 +178,16 @@ class _ArnaPopupPage extends StatelessWidget {
   /// The title displayed in the header bar.
   final String? title;
 
-  /// The trailing widget laid out within the header bar.
-  final Widget? headerBarTrailing;
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar] built
+  /// by this widget. The height of each action is constrained to be no bigger
+  /// than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the popup dialog page.
   final ArnaSearchField? searchField;
@@ -201,7 +214,7 @@ class _ArnaPopupPage extends StatelessWidget {
         ],
       ),
       title: title,
-      headerBarTrailing: headerBarTrailing,
+      actions: actions,
       searchField: searchField,
       banner: banner,
       body: body,
@@ -248,7 +261,7 @@ Future<T?> showArnaPopupDialog<T>({
   required BuildContext context,
   Widget? headerBarLeading,
   String? title,
-  Widget? headerBarTrailing,
+  List<Widget>? actions,
   ArnaSearchField? searchField,
   ArnaBanner? banner,
   required Widget body,
@@ -264,7 +277,7 @@ Future<T?> showArnaPopupDialog<T>({
             builder: (context) => _ArnaPopupPage(
               headerBarLeading: headerBarLeading,
               title: title,
-              headerBarTrailing: headerBarTrailing,
+              actions: actions,
               searchField: searchField,
               banner: banner,
               body: body,
@@ -283,7 +296,7 @@ Future<T?> showArnaPopupDialog<T>({
             return _ArnaPopupDialog(
               headerBarLeading: headerBarLeading,
               title: title,
-              headerBarTrailing: headerBarTrailing,
+              actions: actions,
               searchField: searchField,
               banner: banner,
               body: body,

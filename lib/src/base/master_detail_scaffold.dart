@@ -11,7 +11,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     Key? key,
     this.headerBarLeading,
     this.title,
-    this.headerBarTrailing,
+    this.actions,
     this.searchField,
     required this.items,
     this.emptyBody,
@@ -25,8 +25,16 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   /// The title displayed in the header bar.
   final String? title;
 
-  /// The trailing widget laid out within the header bar.
-  final Widget? headerBarTrailing;
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar] built
+  /// by this widget. The height of each action is constrained to be no bigger
+  /// than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the scaffold.
   final ArnaSearchField? searchField;
@@ -100,7 +108,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
             ],
           ),
           title: page.title,
-          headerBarTrailing: page.headerBarTrailing,
+          actions: page.actions,
           searchField: page.searchField,
           banner: page.banner,
           body: page.builder(context),
@@ -136,7 +144,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
   Widget listBuilder(bool isPhone) => ArnaScaffold(
         headerBarLeading: widget.headerBarLeading,
         title: widget.title,
-        headerBarTrailing: widget.headerBarTrailing,
+        actions: widget.actions,
         searchField: widget.searchField,
         body: _buildChild(isPhone),
       );
@@ -170,8 +178,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
                             headerBarLeading:
                                 widget.items[_currentIndex].headerBarLeading,
                             title: widget.items[_currentIndex].title,
-                            headerBarTrailing:
-                                widget.items[_currentIndex].headerBarTrailing,
+                            actions: widget.items[_currentIndex].actions,
                             searchField:
                                 widget.items[_currentIndex].searchField,
                             banner: widget.items[_currentIndex].banner,
@@ -204,6 +211,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
   }
 }
 
+/// a navigation item used inside [ArnaMasterDetailScaffold].
 class MasterNavigationItem {
   /// Creates a master navigation item.
   const MasterNavigationItem({
@@ -213,7 +221,7 @@ class MasterNavigationItem {
     this.trailing,
     required this.builder,
     this.headerBarLeading,
-    this.headerBarTrailing,
+    this.actions,
     this.searchField,
     this.banner,
     this.badge,
@@ -242,8 +250,16 @@ class MasterNavigationItem {
   /// The leading widget laid out within the detailed page's header bar.
   final Widget? headerBarLeading;
 
-  /// The trailing widget laid out within the detailed page's header bar.
-  final Widget? headerBarTrailing;
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar] built
+  /// by this widget. The height of each action is constrained to be no bigger
+  /// than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the item.
   final ArnaSearchField? searchField;

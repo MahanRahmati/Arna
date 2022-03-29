@@ -11,7 +11,7 @@ class ArnaSideScaffold extends StatefulWidget {
     Key? key,
     this.headerBarLeading,
     this.title,
-    this.headerBarTrailing,
+    this.actions,
     required this.items,
     this.onItemSelected,
     this.currentIndex = 0,
@@ -23,8 +23,16 @@ class ArnaSideScaffold extends StatefulWidget {
   /// The title displayed in the header bar.
   final String? title;
 
-  /// The trailing widget laid out within the header bar.
-  final Widget? headerBarTrailing;
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar] built
+  /// by this widget. The height of each action is constrained to be no bigger
+  /// than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
 
   /// The list of navigation items.
   final List<NavigationItem> items;
@@ -151,18 +159,11 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                               ],
                             ),
                             title: widget.title,
-                            headerBarTrailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                if (widget.items[_currentIndex]
-                                        .headerBarTrailing !=
-                                    null)
-                                  widget
-                                      .items[_currentIndex].headerBarTrailing!,
-                                if (widget.headerBarTrailing != null)
-                                  widget.headerBarTrailing!,
-                              ],
-                            ),
+                            actions: <Widget>[
+                              if (widget.items[_currentIndex].actions != null)
+                                ...widget.items[_currentIndex].actions!,
+                              if (widget.actions != null) ...widget.actions!,
+                            ],
                             searchField:
                                 widget.items[_currentIndex].searchField,
                             banner: widget.items[_currentIndex].banner,
@@ -199,14 +200,11 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                     ],
                   ),
                   title: widget.title,
-                  headerBarTrailing: Row(
-                    children: <Widget>[
-                      if (widget.items[_currentIndex].headerBarTrailing != null)
-                        widget.items[_currentIndex].headerBarTrailing!,
-                      if (widget.headerBarTrailing != null)
-                        widget.headerBarTrailing!,
-                    ],
-                  ),
+                  actions: <Widget>[
+                    if (widget.items[_currentIndex].actions != null)
+                      ...widget.items[_currentIndex].actions!,
+                    if (widget.actions != null) ...widget.actions!,
+                  ],
                   searchField: widget.items[_currentIndex].searchField,
                   banner: widget.items[_currentIndex].banner,
                   body: FadeTransition(
@@ -220,6 +218,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
   }
 }
 
+/// a navigation item used inside [ArnaSideScaffold].
 class NavigationItem {
   /// Creates a navigation item.
   const NavigationItem({
@@ -227,7 +226,7 @@ class NavigationItem {
     required this.icon,
     required this.builder,
     this.headerBarLeading,
-    this.headerBarTrailing,
+    this.actions,
     this.searchField,
     this.banner,
     this.badge,
@@ -250,8 +249,16 @@ class NavigationItem {
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;
 
-  /// The trailing widget laid out within the header bar.
-  final Widget? headerBarTrailing;
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar] built
+  /// by this widget. The height of each action is constrained to be no bigger
+  /// than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the item.
   final ArnaSearchField? searchField;

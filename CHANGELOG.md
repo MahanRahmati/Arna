@@ -1,6 +1,7 @@
 ## 0.3.6
 
 - Update ArnaSlider
+- [BREAKING] Update ArnaHeaderBar and rename trailing to actions
 
 ## 0.3.5
 

@@ -71,3 +71,5 @@ example/windows/runner/utils.cpp
 example/windows/runner/utils.h
 example/windows/runner/win32_window.cpp
 example/windows/runner/win32_window.h
+.vscode/ltex.dictionary.en-US.txt
+.vscode/ltex.hiddenFalsePositives.en-US.txt

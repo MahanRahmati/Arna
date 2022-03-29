@@ -2,6 +2,7 @@
 
 - Update ArnaSlider
 - [BREAKING] Update ArnaHeaderBar and rename trailing to actions
+- Fix CHANGELOG
 
 ## 0.3.5
 
@@ -74,7 +75,7 @@
 - Fixing border in checkbox and radio [Thanks to @h1376h]
 - Update gitignore [Thanks to @h1376h]
 - Fixing switch colors [Thanks to @h1376h]
-- Fix side bar item color [Thanks to @h1376h]
+- Fix sidebar item color [Thanks to @h1376h]
 - Adding borderless button [Thanks to @h1376h]
 - Fix badge inner color [Thanks to @h1376h]
 - [Example] Update Widgets page
@@ -107,7 +108,7 @@
 - Update ArnaTextButton
 - [Example] Update Widgets page
 - [Example] Update main page
-- Update Readme
+- Update README
 
 ## 0.2.8
 
@@ -148,7 +149,7 @@
 - Add documentation to ArnaSlider
 - Refactor ArnaTooltip
 - Add ArnaSliderListTile
-- Update Readme
+- Update README
 
 ## 0.2.6
 
@@ -161,7 +162,7 @@
 - Update ArnaSnackBar
 - Update ArnaBadge
 - Update ArnaPopupDialog
-- Update Readme
+- Update README
 
 ## 0.2.5
 
@@ -186,7 +187,7 @@
 - Fix ArnaAlertDialog
 - Fix ArnaPopupDialo
 - Fix ArnaProgressIndicator
-- Update Readme
+- Update README
 
 ## 0.2.2
 
@@ -252,7 +253,7 @@
 ## 0.1.7
 
 - Cleanup colors
-- Update Readme
+- Update README
 
 ## 0.1.6
 
@@ -265,7 +266,7 @@
 - Add documentation to ArnaExpansionPanel
 - Cleanup more colors
 - Cleanup helpers
-- Fix Changelog
+- Fix CHANGELOG
 
 ## 0.1.5
 
@@ -312,7 +313,7 @@
 - Refactor ArnaDrawer
 - Add documentation to ArnaDrawer
 - Convert Styles.accentColor to ArnaColors.accentColor
-- Update Readme
+- Update README
 
 ## 0.1.1
 
@@ -366,7 +367,7 @@
 - Update ArnaSwitchListTile
 - Update ArnaSwitch
 - Update ArnaTextField
-- Update Readme
+- Update README
 
 ## 0.0.6
 
@@ -375,7 +376,7 @@
 - Update ArnaButton
 - Update ArnaLinkedButtons
 - Update ArnaCheckBox
-- Update Readme
+- Update README
 
 ## 0.0.5
 
@@ -384,11 +385,11 @@
 - Add ArnaMasterItem
 - Update ArnaLinkedButtons
 - Update ArnaListTile
-- Update Readme
+- Update README
 
 ## 0.0.4
 
-- Update Readme
+- Update README
 - Add Typography to Example
 - Update ArnaBottomBarItem
 - Update ArnaSideBarItem

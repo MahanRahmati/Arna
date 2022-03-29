@@ -219,23 +219,34 @@ Future<T?> showArnaDialog<T>({
     pageBuilder: (context, animation, secondaryAnimation) {
       return dialog;
     },
-    transitionBuilder: (_, anim, __, child) => isCompact(context)
-        ? SlideTransition(
-            position: Tween(
-              begin: const Offset(0, 1),
-              end: Offset.zero,
-            ).animate(anim),
-            child: FadeTransition(
-              opacity: CurvedAnimation(parent: anim, curve: Styles.basicCurve),
-              child: child,
-            ),
-          )
-        : ScaleTransition(
-            scale: CurvedAnimation(parent: anim, curve: Styles.basicCurve),
-            child: FadeTransition(
-              opacity: CurvedAnimation(parent: anim, curve: Styles.basicCurve),
-              child: child,
-            ),
-          ),
+    transitionBuilder: (context, animation, secondaryAnimation, child) {
+      return isCompact(context)
+          ? SlideTransition(
+              position: Tween(
+                begin: const Offset(0, 1),
+                end: Offset.zero,
+              ).animate(animation),
+              child: FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Styles.basicCurve,
+                ),
+                child: child,
+              ),
+            )
+          : ScaleTransition(
+              scale: CurvedAnimation(
+                parent: animation,
+                curve: Styles.basicCurve,
+              ),
+              child: FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Styles.basicCurve,
+                ),
+                child: child,
+              ),
+            );
+    },
   );
 }

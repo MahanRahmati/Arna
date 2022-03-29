@@ -1,6 +1,8 @@
 ## 0.3.6
 
 - Update ArnaSlider
+- Update ArnaAlertDialog
+- Update ArnaPopupDialog
 - [BREAKING] Update ArnaHeaderBar and rename trailing to actions
 - Fix CHANGELOG
 

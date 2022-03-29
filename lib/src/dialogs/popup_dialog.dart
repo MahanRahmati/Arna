@@ -302,12 +302,20 @@ Future<T?> showArnaPopupDialog<T>({
               body: body,
             );
           },
-          transitionBuilder: (_, anim, __, child) => ScaleTransition(
-            scale: CurvedAnimation(parent: anim, curve: Styles.basicCurve),
-            child: FadeTransition(
-              opacity: CurvedAnimation(parent: anim, curve: Styles.basicCurve),
-              child: child,
-            ),
-          ),
+          transitionBuilder: (context, animation, secondaryAnimation, child) {
+            return ScaleTransition(
+              scale: CurvedAnimation(
+                parent: animation,
+                curve: Styles.basicCurve,
+              ),
+              child: FadeTransition(
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Styles.basicCurve,
+                ),
+                child: child,
+              ),
+            );
+          },
         );
 }

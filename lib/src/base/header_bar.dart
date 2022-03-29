@@ -36,6 +36,14 @@ class ArnaHeaderBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget? trailing;
+    if (actions != null) {
+      trailing = Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: actions!,
+      );
+    }
     return Semantics(
       container: true,
       child: Align(
@@ -55,11 +63,7 @@ class ArnaHeaderBar extends StatelessWidget {
                   child: NavigationToolbar(
                     leading: leading,
                     middle: middle,
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: actions!,
-                    ),
+                    trailing: trailing,
                     middleSpacing: Styles.smallPadding,
                   ),
                 ),

@@ -8,6 +8,8 @@
 - [BREAKING] Update ArnaBanner
 - Update ArnaBaseWidget
 - [BREAKING] Update ArnaHeaderBar and rename trailing to actions
+- [BREAKING] Remove ArnaBottomBarItem
+- [BREAKING] Remove ArnaBottomBar
 - Fix CHANGELOG
 - Add ROADMAP.md
 

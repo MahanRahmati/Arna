@@ -5,8 +5,10 @@
 - Update ArnaPopupDialog
 - Update ArnaColumn
 - Update ArnaGroupedView
+- Update ArnaBanner
 - [BREAKING] Update ArnaHeaderBar and rename trailing to actions
 - Fix CHANGELOG
+- Add ROADMAP.md
 
 ## 0.3.5
 

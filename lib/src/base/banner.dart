@@ -47,8 +47,10 @@ class ArnaBanner extends StatefulWidget {
 
 class _ArnaBannerState extends State<ArnaBanner>
     with SingleTickerProviderStateMixin {
+  late IconData icon;
+  late Color accent;
   late AnimationController _controller;
-  late Animation<double> _expandAnimation;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -57,10 +59,7 @@ class _ArnaBannerState extends State<ArnaBanner>
       duration: Styles.basicDuration,
       vsync: this,
     );
-    _expandAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: Styles.basicCurve,
-    );
+    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     if (widget.showBanner) _controller.forward();
   }
 
@@ -88,9 +87,11 @@ class _ArnaBannerState extends State<ArnaBanner>
 
   @override
   Widget build(BuildContext context) {
-    IconData icon = Icons.info;
-    Color accent;
     switch (widget.bannerType) {
+      case BannerType.information:
+        icon = Icons.info;
+        accent = ArnaColors.accentColor;
+        break;
       case BannerType.warning:
         icon = Icons.warning;
         accent = ArnaColors.warningColor;
@@ -104,14 +105,14 @@ class _ArnaBannerState extends State<ArnaBanner>
         accent = ArnaColors.successColor;
         break;
       case BannerType.colored:
+        icon = Icons.info;
         accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
         break;
-      default:
-        accent = ArnaColors.accentColor;
     }
+
     return SizeTransition(
       axisAlignment: 1,
-      sizeFactor: _expandAnimation,
+      sizeFactor: _animation,
       child: Column(
         children: <Widget>[
           AnimatedContainer(

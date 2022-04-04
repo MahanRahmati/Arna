@@ -7,6 +7,7 @@
 - Update ArnaGroupedView
 - [BREAKING] Update ArnaBanner
 - Update ArnaBaseWidget
+- Update ArnaDrawer
 - [BREAKING] Update ArnaHeaderBar and rename trailing to actions
 - [BREAKING] Remove ArnaBottomBarItem
 - [BREAKING] Remove ArnaBottomBar

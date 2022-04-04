@@ -4,8 +4,6 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 /// A panel that slides in horizontally from the edge of a screen to show
 /// navigation links in an application.
 ///
-/// [ArnaDrawer] is used when there are more than 3 [NavigationItem] inside
-/// [ArnaSideScaffold]
 /// The [ArnaSideScaffold] handles when to show the drawer.
 ///
 /// See also:
@@ -56,10 +54,7 @@ class ArnaDrawer extends StatelessWidget {
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
               clipBehavior: Clip.antiAlias,
-              color: ArnaDynamicColor.resolve(
-                ArnaColors.sideColor,
-                context,
-              ),
+              color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
               child: child,
             ),
           ),
@@ -124,6 +119,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
     super.initState();
     _controller = AnimationController(
       duration: Styles.basicDuration,
+      debugLabel: 'ArnaDrawerController',
       vsync: this,
     );
     _controller.addListener(_animationChanged);
@@ -161,8 +157,10 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController>
   // The animation controller's state is our build state, and it changed already.
   void _animationChanged() => setState(() {});
 
-  ColorTween _buildScrimColorTween() =>
-      ColorTween(begin: ArnaColors.transparent, end: ArnaColors.barrierColor);
+  ColorTween _buildScrimColorTween() => ColorTween(
+        begin: ArnaColors.transparent,
+        end: ArnaColors.barrierColor,
+      );
 
   /// Starts an animation to open the drawer.
   void open() {

@@ -184,9 +184,9 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                     ),
                     if (constraints.maxWidth < Styles.compact)
                       ArnaDrawerController(
+                        drawer: ArnaDrawer(child: _buildChild()),
                         drawerCallback: _drawerOpenedCallback,
                         isDrawerOpen: showDrawer,
-                        drawer: ArnaDrawer(child: _buildChild()),
                       ),
                   ],
                 )

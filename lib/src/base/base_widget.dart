@@ -80,6 +80,7 @@ class ArnaBaseWidget extends StatefulWidget {
   _ArnaBaseWidgetState createState() => _ArnaBaseWidgetState();
 }
 
+/// State of [ArnaBaseWidget].
 class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
     with SingleTickerProviderStateMixin {
   FocusNode? focusNode;

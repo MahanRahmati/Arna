@@ -9,8 +9,8 @@ enum BannerType { information, warning, error, success, colored }
 /// users to address (or dismiss the banner). A user action is required for it
 /// to be dismissed.
 ///
-/// They are persistent and non-modal, allowing the user to either ignore them or
-/// interact with them at any time.
+/// They are persistent and non-modal, allowing the user to either ignore them
+/// or interact with them at any time.
 class ArnaBanner extends StatefulWidget {
   /// Creates a banner in the Arna style.
   const ArnaBanner({

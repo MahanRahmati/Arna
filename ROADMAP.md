@@ -7,3 +7,4 @@
 - [x] ArnaBanner
 - [x] ArnaBaseWidget
 - [x] ArnaDrawer
+- [x] ArnaHeaderBar

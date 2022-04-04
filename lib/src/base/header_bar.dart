@@ -2,8 +2,8 @@ import 'package:arna/arna.dart';
 
 /// An Arna-styled header bar.
 ///
-/// The HeaderBar displays [leading], [middle], and [trailing] widgets.
-/// [leading] widget is in the top left, the [trailing] is in the top right,
+/// The HeaderBar displays [leading], [middle], and [actions] widgets.
+/// [leading] widget is in the top left, the [actions] are in the top right,
 /// the [middle] is between them.
 /// See also:
 ///
@@ -29,9 +29,8 @@ class ArnaHeaderBar extends StatelessWidget {
   /// operations. For less common operations, consider using a
   /// [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built
-  /// by this widget. The height of each action is constrained to be no bigger
-  /// than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar]
+  /// built by this widget.
   final List<Widget>? actions;
 
   @override

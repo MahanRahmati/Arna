@@ -99,7 +99,8 @@ class ArnaColumn extends StatelessWidget {
   /// way for the framework to know the correct baseline _a priori_.
   final TextBaseline? textBaseline;
 
-  Widget _buildChild() {
+  @override
+  Widget build(BuildContext context) {
     final List<Widget> items = <Widget>[];
     if (children.isNotEmpty) {
       for (int i = 0; i < children.length; i++) {
@@ -118,10 +119,5 @@ class ArnaColumn extends StatelessWidget {
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildChild();
   }
 }

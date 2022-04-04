@@ -3,6 +3,8 @@
 - Update ArnaSlider
 - Update ArnaAlertDialog
 - Update ArnaPopupDialog
+- Update ArnaColumn
+- Update ArnaGroupedView
 - [BREAKING] Update ArnaHeaderBar and rename trailing to actions
 - Fix CHANGELOG
 

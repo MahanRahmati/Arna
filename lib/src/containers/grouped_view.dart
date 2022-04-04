@@ -164,7 +164,7 @@ class ArnaGroupedView extends StatelessWidget {
                   Flexible(
                     child: Text(
                       title!,
-                      style: ArnaTheme.of(context).textTheme.titleTextStyle,
+                      style: ArnaTheme.of(context).textTheme.textStyle,
                     ),
                   ),
                 ],

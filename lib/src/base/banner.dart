@@ -18,7 +18,7 @@ class ArnaBanner extends StatefulWidget {
     required this.showBanner,
     required this.title,
     this.subtitle,
-    this.trailing,
+    this.actions,
     this.accentColor,
     this.bannerType = BannerType.information,
   }) : super(key: key);
@@ -32,8 +32,8 @@ class ArnaBanner extends StatefulWidget {
   /// Additional content displayed below the title.
   final String? subtitle;
 
-  /// The trailing widget laid out within the banner.
-  final Widget? trailing;
+  /// The set of actions that are displayed at the trailing side of the banner.
+  final List<Widget>? actions;
 
   /// The indicator color of the banner.
   final Color? accentColor;
@@ -57,6 +57,7 @@ class _ArnaBannerState extends State<ArnaBanner>
     super.initState();
     _controller = AnimationController(
       duration: Styles.basicDuration,
+      debugLabel: 'ArnaBanner',
       vsync: this,
     );
     _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
@@ -87,6 +88,14 @@ class _ArnaBannerState extends State<ArnaBanner>
 
   @override
   Widget build(BuildContext context) {
+    Widget? trailing;
+    if (widget.actions != null) {
+      trailing = Row(
+        mainAxisSize: MainAxisSize.min,
+        children: widget.actions!,
+      );
+    }
+
     switch (widget.bannerType) {
       case BannerType.information:
         icon = Icons.info;
@@ -126,7 +135,7 @@ class _ArnaBannerState extends State<ArnaBanner>
               ),
               title: widget.title,
               subtitle: widget.subtitle,
-              trailing: widget.trailing,
+              trailing: trailing,
               actionable: false,
             ),
           ),

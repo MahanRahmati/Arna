@@ -103,11 +103,12 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
     super.initState();
     if (widget.showAnimation) {
       _controller = AnimationController(
-        vsync: this,
-        duration: Styles.basicDuration,
         value: 1.0,
-        upperBound: 1.0,
+        duration: Styles.basicDuration,
+        debugLabel: 'ArnaBaseWidget',
         lowerBound: 0.7,
+        upperBound: 1.0,
+        vsync: this,
       );
       _animation = CurvedAnimation(
         parent: _controller,

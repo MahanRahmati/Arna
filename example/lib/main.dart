@@ -106,11 +106,13 @@ class _HomeState extends ConsumerState<Home> {
         showBanner: showBanner,
         title: "This is an information banner!",
         subtitle: "Hello There!",
-        trailing: ArnaIconButton(
-          icon: Icons.close_outlined,
-          hasBorder: false,
-          onPressed: () => setState(() => showBanner = false),
-        ),
+        actions: [
+          ArnaIconButton(
+            icon: Icons.close_outlined,
+            hasBorder: false,
+            onPressed: () => setState(() => showBanner = false),
+          ),
+        ],
       ),
       builder: (_) => const Widgets(),
     );
@@ -153,11 +155,13 @@ class _HomeState extends ConsumerState<Home> {
                   showBanner: showBanner,
                   title: "This is an information banner!",
                   subtitle: "Hello There!",
-                  trailing: ArnaIconButton(
-                    icon: Icons.close_outlined,
-                    hasBorder: false,
-                    onPressed: () => setState(() => showBanner = false),
-                  ),
+                  actions: [
+                    ArnaIconButton(
+                      icon: Icons.close_outlined,
+                      hasBorder: false,
+                      onPressed: () => setState(() => showBanner = false),
+                    ),
+                  ],
                 ),
               ),
               MasterNavigationItem(

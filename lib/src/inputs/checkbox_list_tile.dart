@@ -11,7 +11,7 @@ import 'package:arna/arna.dart';
 /// The [title] and [subtitle] properties are like  those of the same name on
 /// [ArnaListTile].
 ///
-/// To show the [ArnaCheckBoxListTile] as disabled, pass null as the 
+/// To show the [ArnaCheckBoxListTile] as disabled, pass null as the
 /// [onChanged] callback.
 ///
 /// See also:

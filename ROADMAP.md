@@ -3,8 +3,52 @@
 ## 1.0.0
 
 - Finalizing the current set of widgets.
-- [ ] ArnaApp
-- [x] ArnaBanner
-- [x] ArnaBaseWidget
-- [x] ArnaDrawer
-- [x] ArnaHeaderBar
+  - [ ] ArnaApp
+  - [x] ArnaBanner
+  - [x] ArnaBaseWidget
+  - [x] ArnaDrawer
+  - [x] ArnaHeaderBar
+  - [ ] ArnaProgressIndicator
+  - [ ] ArnaMasterItem
+  - [ ] ArnaPageRoute
+  - [ ] ArnaScaffold
+  - [ ] ArnaScrollbar
+  - [ ] ArnaSearchField
+  - [ ] ArnaSideBarItem
+  - [ ] ArnaSideScaffold
+  - [ ] ArnaSnackBar
+  - [ ] ArnaTooltip
+  - [ ] ArnaButton
+  - [ ] ArnaColorButton
+  - [ ] ArnaIconButton
+  - [ ] ArnaLinkedButtons
+  - [ ] ArnaPopupMenuButton
+  - [ ] ArnaTextButton
+  - [ ] ArnaBadge
+  - [ ] ArnaCard
+  - [ ] ArnaColumn
+  - [ ] ArnaExpansionPanel
+  - [ ] ArnaGroupedView
+  - [ ] ArnaListTile
+  - [ ] ArnaList
+  - [ ] ArnaAlertDialog
+  - [ ] ArnaPopupDialog
+  - [ ] ArnaHorizontalDivider
+  - [ ] ArnaVerticalDivider
+  - [ ] ArnaHorizontalSeparator
+  - [ ] ArnaVerticalSeparator
+  - [ ] ArnaCheckBoxListTile
+  - [ ] ArnaCheckBox
+  - [ ] ArnaPopupMenu
+  - [ ] ArnaRadio
+  - [ ] ArnaSegmentedControl
+  - [ ] ArnaSliderListTile
+  - [ ] ArnaSlider
+  - [ ] ArnaSwitchListTile
+  - [ ] ArnaSwitch
+  - [ ] ArnaTextField
+  - [ ] ArnaColors
+  - [ ] ArnaIconThemeData
+  - [ ] ArnaTextThemeData
+  - [ ] ArnaThemeData
+  - [ ] ArnaTheme

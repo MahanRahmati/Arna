@@ -1,3 +1,7 @@
+## 0.3.7
+
+- Update ArnaProgressIndicator
+
 ## 0.3.6
 
 - Update ArnaSlider

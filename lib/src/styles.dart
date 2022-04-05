@@ -53,7 +53,6 @@ abstract class Styles {
   static const Duration routeDuration = Duration(milliseconds: 210);
   static const Duration tooltipWaitDuration = Duration(milliseconds: 350);
   static const Duration scaffoldDuration = Duration(milliseconds: 770);
-  static const Duration indicatorDuration = Duration(milliseconds: 2100);
   static const Duration tooltipDuration = Duration(milliseconds: 2100);
   static const Duration snackbarDuration = Duration(milliseconds: 3500);
 

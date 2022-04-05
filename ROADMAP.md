@@ -8,7 +8,7 @@
   - [x] ArnaBaseWidget
   - [x] ArnaDrawer
   - [x] ArnaHeaderBar
-  - [ ] ArnaProgressIndicator
+  - [x] ArnaProgressIndicator
   - [ ] ArnaMasterItem
   - [ ] ArnaPageRoute
   - [ ] ArnaScaffold

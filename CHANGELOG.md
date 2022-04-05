@@ -1,6 +1,7 @@
 ## 0.3.7
 
 - Update ArnaProgressIndicator
+- Update ArnaPageRoute
 
 ## 0.3.6
 

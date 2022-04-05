@@ -10,7 +10,7 @@
   - [x] ArnaHeaderBar
   - [x] ArnaProgressIndicator
   - [ ] ArnaMasterItem
-  - [ ] ArnaPageRoute
+  - [x] ArnaPageRoute
   - [ ] ArnaScaffold
   - [ ] ArnaScrollbar
   - [ ] ArnaSearchField

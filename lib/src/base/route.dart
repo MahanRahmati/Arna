@@ -4,14 +4,14 @@ import 'package:flutter/cupertino.dart' show CupertinoRouteTransitionMixin;
 /// A modal route that replaces the entire screen with a transition.
 ///
 /// By default, when a modal route is replaced by another, the previous route
-/// remains in memory. To free all the resources when this is not necessary, set
-/// [maintainState] to false.
+/// remains in memory. To free all the resources when this is not necessary,
+/// set [maintainState] to false.
 ///
 /// The `fullscreenDialog` property specifies whether the incoming route is a
 /// fullscreen modal dialog.
 ///
-/// The type `T` specifies the return type of the route which can be supplied as
-/// the route is popped from the stack via [Navigator.pop] by providing the
+/// The type `T` specifies the return type of the route which can be supplied
+/// as the route is popped from the stack via [Navigator.pop] by providing the
 /// optional `result` argument.
 ///
 /// See also:
@@ -21,8 +21,8 @@ import 'package:flutter/cupertino.dart' show CupertinoRouteTransitionMixin;
 class ArnaPageRoute<T> extends PageRoute<T> with ArnaRouteTransitionMixin<T> {
   /// Construct a MaterialPageRoute whose contents are defined by [builder].
   ///
-  /// The values of [builder], [maintainState], and [PageRoute.fullscreenDialog]
-  /// must not be null.
+  /// The values of [builder], [maintainState], and
+  /// [PageRoute.fullscreenDialog] must not be null.
   ArnaPageRoute({
     required this.builder,
     RouteSettings? settings,
@@ -62,7 +62,8 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
 
   @override
   bool canTransitionTo(TransitionRoute<dynamic> nextRoute) {
-    // Don't perform outgoing animation if the next route is a fullscreen dialog.
+    // Don't perform outgoing animation if the next route is a fullscreen
+    // dialog.
     return (nextRoute is ArnaRouteTransitionMixin &&
         !nextRoute.fullscreenDialog);
   }

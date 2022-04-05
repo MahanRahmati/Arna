@@ -50,8 +50,8 @@ abstract class Styles {
   static const Duration tooltipHoverShowDuration = Duration(milliseconds: 70);
   static const Duration tooltipReverseDuration = Duration(milliseconds: 105);
   static const Duration basicDuration = Duration(milliseconds: 210);
-  static const Duration routeDuration = Duration(milliseconds: 210);
   static const Duration tooltipWaitDuration = Duration(milliseconds: 350);
+  static const Duration routeDuration = Duration(milliseconds: 350);
   static const Duration scaffoldDuration = Duration(milliseconds: 770);
   static const Duration tooltipDuration = Duration(milliseconds: 2100);
   static const Duration snackbarDuration = Duration(milliseconds: 3500);

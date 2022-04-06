@@ -117,7 +117,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
                     onEditingComplete: widget.onEditingComplete,
                     onSubmitted: widget.onSubmitted,
                     focusNode: focusNode,
-                    autofocus: true,
+                    autofocus: widget.showSearch,
                   ),
                 ),
               ),

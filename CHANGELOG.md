@@ -1,3 +1,7 @@
+## 0.3.7+1
+
+- Fix ArnaSearchField
+
 ## 0.3.7
 
 - Update ArnaProgressIndicator

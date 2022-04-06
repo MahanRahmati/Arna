@@ -140,7 +140,7 @@ class _ArnaBannerState extends State<ArnaBanner>
               actionable: false,
             ),
           ),
-          if (widget.showBanner) const ArnaHorizontalDivider(),
+          const ArnaHorizontalDivider(),
         ],
       ),
     );

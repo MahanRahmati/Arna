@@ -231,7 +231,7 @@ class ArnaTextField extends StatefulWidget {
     Key? key,
     this.controller,
     this.focusNode,
-    this.placeholder,
+    this.hintText,
     this.prefix,
     this.prefixMode = ArnaOverlayVisibilityMode.always,
     this.suffix,
@@ -332,8 +332,8 @@ class ArnaTextField extends StatefulWidget {
   /// A lighter colored hint that appears on the first line of the
   /// text field when the text entry is empty.
   ///
-  /// Defaults to having no placeholder text.
-  final String? placeholder;
+  /// Defaults to having no text.
+  final String? hintText;
 
   /// An optional [Widget] to display before the text.
   final Widget? prefix;
@@ -768,7 +768,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
 
 // True if any surrounding decoration widgets will be shown.
   bool get _hasDecoration {
-    return widget.placeholder != null ||
+    return widget.hintText != null ||
         widget.clearButtonMode != ArnaOverlayVisibilityMode.never ||
         widget.prefix != null ||
         widget.suffix != null;
@@ -803,18 +803,18 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                 padding: Styles.horizontal,
                 child: widget.prefix!,
               ),
-            // In the middle part, stack the placeholder on top of the main EditableText
+            // In the middle part, stack the hintText on top of the main EditableText
             // if needed.
             Expanded(
               child: Stack(
                 children: <Widget>[
-                  if (widget.placeholder != null && text.text.isEmpty)
+                  if (widget.hintText != null && text.text.isEmpty)
                     SizedBox(
                       width: double.infinity,
                       child: Padding(
                         padding: Styles.normal,
                         child: Text(
-                          widget.placeholder!,
+                          widget.hintText!,
                           maxLines: widget.maxLines,
                           overflow: TextOverflow.ellipsis,
                           style: ArnaTheme.of(context)
@@ -886,7 +886,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             uniqueIdentifier: autofillId,
             autofillHints: autofillHints,
             currentEditingValue: _effectiveController.value,
-            hintText: widget.placeholder,
+            hintText: widget.hintText,
           )
         : AutofillConfiguration.disabled;
 

@@ -2,6 +2,9 @@
 
 - Update ArnaProgressIndicator
 - Update ArnaPageRoute
+- Update ArnaSearchField
+- Update ArnaBanner
+- [BREAKING] Update ArnaTextField
 
 ## 0.3.6
 

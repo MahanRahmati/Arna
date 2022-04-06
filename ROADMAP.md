@@ -13,7 +13,7 @@
   - [x] ArnaPageRoute
   - [ ] ArnaScaffold
   - [ ] ArnaScrollbar
-  - [ ] ArnaSearchField
+  - [x] ArnaSearchField
   - [ ] ArnaSideBarItem
   - [ ] ArnaSideScaffold
   - [ ] ArnaSnackBar

@@ -15,7 +15,7 @@ class ArnaSearchField extends StatefulWidget {
     this.onChanged,
     this.onEditingComplete,
     this.onSubmitted,
-    this.placeholder,
+    this.hintText,
   }) : super(key: key);
 
   /// Whether to show search or not.
@@ -39,65 +39,93 @@ class ArnaSearchField extends StatefulWidget {
   final ValueChanged<String>? onSubmitted;
 
   /// The hint text of the search field.
-  final String? placeholder;
+  final String? hintText;
 
   @override
   State<ArnaSearchField> createState() => _ArnaSearchFieldState();
 }
 
-class _ArnaSearchFieldState extends State<ArnaSearchField> {
+/// State of [ArnaSearchField].
+class _ArnaSearchFieldState extends State<ArnaSearchField>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
   FocusNode? focusNode;
 
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      debugLabel: 'ArnaSearchField',
+      vsync: this,
+    );
+    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
+    if (widget.showSearch) _controller.forward();
     focusNode = FocusNode(canRequestFocus: widget.showSearch);
-    if (widget.showSearch) focusNode!.requestFocus();
+  }
+
+  @override
+  void didUpdateWidget(ArnaSearchField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.showSearch != oldWidget.showSearch) {
+      switch (_controller.status) {
+        case AnimationStatus.completed:
+        case AnimationStatus.dismissed:
+          widget.showSearch
+              ? _controller.forward().then((_) => focusNode!.requestFocus())
+              : _controller.reverse().then((_) => focusNode!.unfocus());
+          break;
+        case AnimationStatus.forward:
+        case AnimationStatus.reverse:
+          break;
+      }
+    }
   }
 
   @override
   void dispose() {
     focusNode!.dispose();
     focusNode = null;
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.showSearch
-        ? Column(
-            children: <Widget>[
-              AnimatedContainer(
-                height: widget.showSearch ? Styles.headerBarHeight : 0,
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                color: ArnaDynamicColor.resolve(
-                  ArnaColors.headerColor,
-                  context,
-                ),
-                child: Padding(
-                  padding: Styles.small,
-                  child: Center(
-                    child: SizedBox(
-                      width: Styles.searchWidth,
-                      child: ArnaTextField(
-                        controller: widget.controller,
-                        placeholder: widget.placeholder,
-                        prefix: const Icon(Icons.search_outlined),
-                        clearButtonMode: ArnaOverlayVisibilityMode.editing,
-                        onChanged: widget.onChanged,
-                        onEditingComplete: widget.onEditingComplete,
-                        onSubmitted: widget.onSubmitted,
-                        focusNode: focusNode,
-                        autofocus: true,
-                      ),
-                    ),
+    return SizeTransition(
+      axisAlignment: 1,
+      sizeFactor: _animation,
+      child: Column(
+        children: <Widget>[
+          AnimatedContainer(
+            duration: Styles.basicDuration,
+            curve: Styles.basicCurve,
+            color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+            child: Padding(
+              padding: Styles.small,
+              child: Center(
+                child: SizedBox(
+                  width: Styles.searchWidth,
+                  child: ArnaTextField(
+                    controller: widget.controller,
+                    hintText: widget.hintText,
+                    prefix: const Icon(Icons.search_outlined),
+                    clearButtonMode: ArnaOverlayVisibilityMode.editing,
+                    onChanged: widget.onChanged,
+                    onEditingComplete: widget.onEditingComplete,
+                    onSubmitted: widget.onSubmitted,
+                    focusNode: focusNode,
+                    autofocus: true,
                   ),
                 ),
               ),
-              if (widget.showSearch) const ArnaHorizontalDivider(),
-            ],
-          )
-        : const SizedBox.shrink();
+            ),
+          ),
+          const ArnaHorizontalDivider(),
+        ],
+      ),
+    );
   }
 }

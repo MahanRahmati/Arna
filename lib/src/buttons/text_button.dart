@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled text button.
 class ArnaTextButton extends StatelessWidget {
   /// Creates a text button.
   const ArnaTextButton({
@@ -21,9 +22,12 @@ class ArnaTextButton extends StatelessWidget {
   final String? label;
 
   /// The callback that is called when a button is tapped.
+  ///
+  /// If this callback is null, then the button will be disabled.
   final VoidCallback? onPressed;
 
-  /// Text that describes the action that will occur when the button is pressed.
+  /// Text that describes the action that will occur when the button is
+  /// pressed.
   final String? tooltipMessage;
 
   /// The type of the button.

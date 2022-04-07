@@ -20,10 +20,10 @@
   - [ ] ArnaTooltip
   - [ ] ArnaButton
   - [ ] ArnaColorButton
-  - [ ] ArnaIconButton
+  - [x] ArnaIconButton
   - [ ] ArnaLinkedButtons
   - [ ] ArnaPopupMenuButton
-  - [ ] ArnaTextButton
+  - [x] ArnaTextButton
   - [ ] ArnaBadge
   - [ ] ArnaCard
   - [ ] ArnaColumn

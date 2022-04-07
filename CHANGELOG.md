@@ -1,3 +1,8 @@
+## 0.3.8
+
+- Update ArnaIconButton
+- Update ArnaTextButton
+
 ## 0.3.7+1
 
 - Fix ArnaSearchField

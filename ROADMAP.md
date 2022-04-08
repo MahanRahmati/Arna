@@ -3,51 +3,58 @@
 ## 1.0.0
 
 - Finalizing the current set of widgets.
-  - [ ] ArnaApp
-  - [x] ArnaBanner
-  - [x] ArnaBaseWidget
-  - [x] ArnaDrawer
-  - [x] ArnaHeaderBar
-  - [x] ArnaProgressIndicator
-  - [ ] ArnaMasterItem
-  - [x] ArnaPageRoute
-  - [ ] ArnaScaffold
-  - [ ] ArnaScrollbar
-  - [x] ArnaSearchField
-  - [ ] ArnaSideBarItem
-  - [ ] ArnaSideScaffold
-  - [ ] ArnaSnackBar
-  - [ ] ArnaTooltip
-  - [ ] ArnaButton
-  - [ ] ArnaColorButton
-  - [x] ArnaIconButton
-  - [ ] ArnaLinkedButtons
-  - [ ] ArnaPopupMenuButton
-  - [x] ArnaTextButton
-  - [x] ArnaBadge
-  - [x] ArnaCard
-  - [x] ArnaColumn
-  - [x] ArnaExpansionPanel
-  - [x] ArnaListTile
-  - [x] ArnaList
-  - [ ] ArnaAlertDialog
-  - [ ] ArnaPopupDialog
-  - [x] ArnaHorizontalDivider
-  - [x] ArnaVerticalDivider
-  - [x] ArnaHorizontalSeparator
-  - [x] ArnaVerticalSeparator
-  - [x] ArnaCheckBoxListTile
-  - [ ] ArnaCheckBox
-  - [ ] ArnaPopupMenu
-  - [ ] ArnaRadio
-  - [ ] ArnaSegmentedControl
-  - [ ] ArnaSliderListTile
-  - [ ] ArnaSlider
-  - [ ] ArnaSwitchListTile
-  - [ ] ArnaSwitch
-  - [ ] ArnaTextField
-  - [ ] ArnaColors
-  - [ ] ArnaIconThemeData
-  - [ ] ArnaTextThemeData
-  - [ ] ArnaThemeData
-  - [ ] ArnaTheme
+  - Base (7/16)
+    - [ ] ArnaApp
+    - [x] ArnaBanner
+    - [x] ArnaBaseWidget
+    - [x] ArnaDrawer
+    - [x] ArnaHeaderBar
+    - [x] ArnaProgressIndicator
+    - [ ] ArnaMasterItem
+    - [x] ArnaPageRoute
+    - [ ] ArnaScaffold
+    - [ ] ArnaScrollbar
+    - [x] ArnaSearchField
+    - [ ] ArnaSideBarItem
+    - [ ] ArnaSideScaffold
+    - [ ] ArnaSnackBar
+    - [ ] ArnaTooltip
+  - Buttons (2/6)
+    - [ ] ArnaButton
+    - [ ] ArnaColorButton
+    - [x] ArnaIconButton
+    - [ ] ArnaLinkedButtons
+    - [ ] ArnaPopupMenuButton
+    - [x] ArnaTextButton
+  - Containers (6/6)
+    - [x] ArnaBadge
+    - [x] ArnaCard
+    - [x] ArnaColumn
+    - [x] ArnaExpansionPanel
+    - [x] ArnaListTile
+    - [x] ArnaList
+  - Dialogs (0/2)
+    - [ ] ArnaAlertDialog
+    - [ ] ArnaPopupDialog
+  - Dividers (4/4)
+    - [x] ArnaHorizontalDivider
+    - [x] ArnaVerticalDivider
+    - [x] ArnaHorizontalSeparator
+    - [x] ArnaVerticalSeparator
+  - Inputs (1/11)
+    - [x] ArnaCheckBoxListTile
+    - [ ] ArnaCheckBox
+    - [ ] ArnaPopupMenu
+    - [ ] ArnaRadio
+    - [ ] ArnaSegmentedControl
+    - [ ] ArnaSliderListTile
+    - [ ] ArnaSlider
+    - [ ] ArnaSwitchListTile
+    - [ ] ArnaSwitch
+    - [ ] ArnaTextField
+  - Theme (0/5)
+    - [ ] ArnaColors
+    - [ ] ArnaIconThemeData
+    - [ ] ArnaTextThemeData
+    - [ ] ArnaThemeData
+    - [ ] ArnaTheme

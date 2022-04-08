@@ -1,3 +1,7 @@
+## 0.3.9
+
+- Update ROADMAP.md
+
 ## 0.3.8
 
 - Update ArnaIconButton

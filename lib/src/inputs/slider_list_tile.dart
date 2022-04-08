@@ -1,6 +1,7 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaSlider]. In other words, a slider with a label.
+/// A [ArnaListTile] with a [ArnaSlider]. In other words, a slider with a
+/// label.
 ///
 ///
 /// To ensure that [onChanged] correctly triggers, the state passed
@@ -23,19 +24,21 @@ import 'package:arna/arna.dart';
 ///  * [ArnaCheckBoxListTile], a similar widget for checkboxes.
 ///  * [ArnaRadioListTile], a similar widget for radio buttons.
 ///  * [ArnaSwitchListTile], a similar widget for switches.
-///  * [ArnaListTile] and [ArnaSwitch], the widgets from which this widget is made.
+///  * [ArnaListTile] and [ArnaSwitch], the widgets from which this widget is
+///    made.
 class ArnaSliderListTile extends StatelessWidget {
   /// Creates a combination of a list tile and a slider.
   ///
   /// The slider itself does not maintain any state. Instead, when the state of
-  /// the slider changes, the widget calls the [onChanged] callback. Most widgets
-  /// that use a slider will listen for the [onChanged] callback and rebuild the
-  /// slider with a new [value] to update the visual appearance of the slider.
+  /// the slider changes, the widget calls the [onChanged] callback. Most
+  /// widgets that use a slider will listen for the [onChanged] callback and
+  /// rebuild the slider with a new [value] to update the visual appearance of
+  /// the slider.
   ///
   /// * [value] determines currently selected value for this slider.
   /// * [onChanged] is called when the user selects a new value for the slider.
-  /// * [onChangeStart] is called when the user starts to select a new value for
-  ///   the slider.
+  /// * [onChangeStart] is called when the user starts to select a new value
+  ///   for the slider.
   /// * [onChangeEnd] is called when the user is done selecting a new value for
   ///   the slider.
   const ArnaSliderListTile({
@@ -108,8 +111,8 @@ class ArnaSliderListTile extends StatelessWidget {
   /// Called when the user starts selecting a new value for the slider.
   ///
   /// This callback shouldn't be used to update the slider [value] (use
-  /// [onChanged] for that), but rather to be notified when the user has started
-  /// selecting a new value by starting a drag.
+  /// [onChanged] for that), but rather to be notified when the user has
+  /// started selecting a new value by starting a drag.
   ///
   /// The value passed will be the last [value] that the slider had before the
   /// change began.

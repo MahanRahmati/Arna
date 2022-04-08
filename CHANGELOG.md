@@ -1,6 +1,9 @@
 ## 0.3.9
 
 - Update ROADMAP.md
+- Update ArnaRadioListTile
+- Update ArnaSliderListTile
+- Update ArnaSwitchListTile
 
 ## 0.3.8
 

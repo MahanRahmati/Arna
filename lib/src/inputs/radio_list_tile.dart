@@ -1,6 +1,7 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaRadio]. In other words, a radio button with a label.
+/// A [ArnaListTile] with a [ArnaRadio]. In other words, a radio button with a
+/// label.
 ///
 /// The entire list tile is interactive: tapping anywhere in the tile selects
 /// the radio button.
@@ -22,12 +23,13 @@ import 'package:arna/arna.dart';
 ///  * [ArnaCheckBoxListTile], a similar widget for checkboxes.
 ///  * [ArnaSwitchListTile], a similar widget for switches.
 ///  * [ArnaSliderListTile], a similar widget for sliders.
-///  * [ArnaListTile] and [ArnaRadio], the widgets from which this widget is made.
+///  * [ArnaListTile] and [ArnaRadio], the widgets from which this widget is
+///    made.
 class ArnaRadioListTile<T> extends StatelessWidget {
   /// Creates a combination of a list tile and a radio button.
   ///
-  /// The radio tile itself does not maintain any state. Instead, when the radio
-  /// button is selected, the widget calls the [onChanged] callback. Most
+  /// The radio tile itself does not maintain any state. Instead, when the
+  /// radio button is selected, the widget calls the [onChanged] callback. Most
   /// widgets that use a radio button will listen for the [onChanged] callback
   /// and rebuild the radio tile with a new [groupValue] to update the visual
   /// appearance of the radio button.
@@ -63,18 +65,18 @@ class ArnaRadioListTile<T> extends StatelessWidget {
 
   /// Called when the user selects this radio button.
   ///
-  /// The radio button passes [value] as a parameter to this callback. The radio
-  /// button does not actually change state until the parent widget rebuilds the
-  /// radio button with the new [groupValue].
+  /// The radio button passes [value] as a parameter to this callback.
+  /// The radio button does not actually change state until the parent widget
+  /// rebuilds the radio button with the new [groupValue].
   ///
   /// If null, the radio button will be displayed as disabled.
   ///
   /// The provided callback will not be invoked if this radio button is already
   /// selected.
   ///
-  /// The callback provided to [onChanged] should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
+  /// The callback provided to [onChanged] should update the state of the
+  /// parent [StatefulWidget] using the [State.setState] method, so that the
+  /// parent gets rebuilt; for example:
   ///
   /// ```dart
   /// ArnaRadioListTile<SingingCharacter>(

@@ -1,6 +1,7 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaSwitch]. In other words, a switch with a label.
+/// A [ArnaListTile] with a [ArnaSwitch]. In other words, a switch with a
+/// label.
 ///
 /// The entire list tile is interactive: tapping anywhere in the tile toggles
 /// the switch. Tapping and dragging the [ArnaSwitch] also triggers the
@@ -25,7 +26,8 @@ import 'package:arna/arna.dart';
 ///  * [ArnaCheckBoxListTile], a similar widget for checkboxes.
 ///  * [ArnaRadioListTile], a similar widget for radio buttons.
 ///  * [ArnaSliderListTile], a similar widget for sliders.
-///  * [ArnaListTile] and [ArnaSwitch], the widgets from which this widget is made.
+///  * [ArnaListTile] and [ArnaSwitch], the widgets from which this widget is
+///    made.
 class ArnaSwitchListTile extends StatelessWidget {
   /// Creates a combination of a list tile and a switch.
   ///
@@ -64,9 +66,9 @@ class ArnaSwitchListTile extends StatelessWidget {
   ///
   /// If null, the switch will be displayed as disabled.
   ///
-  /// The callback provided to [onChanged] should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
+  /// The callback provided to [onChanged] should update the state of the
+  /// parent [StatefulWidget] using the [State.setState] method, so that the
+  /// parent gets rebuilt; for example:
   ///
   /// ```dart
   /// ArnaSwitch(

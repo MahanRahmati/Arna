@@ -20,8 +20,8 @@ class ArnaColumn extends StatelessWidget {
   /// How the children should be placed along the main axis.
   ///
   /// For example, [MainAxisAlignment.start], the default, places the children
-  /// at the start (i.e., the left for a [Row] or the top for a [Column]) of the
-  /// main axis.
+  /// at the start (i.e., the left for a [Row] or the top for a [Column]) of
+  /// the main axis.
   final MainAxisAlignment mainAxisAlignment;
 
   /// How much space should be occupied in the main axis.
@@ -32,8 +32,8 @@ class ArnaColumn extends StatelessWidget {
   ///
   /// If some children have a non-zero flex factors (and none have a fit of
   /// [FlexFit.loose]), they will expand to consume all the available space and
-  /// there will be no remaining free space to maximize or minimize, making this
-  /// value irrelevant to the final layout.
+  /// there will be no remaining free space to maximize or minimize, making
+  /// this value irrelevant to the final layout.
   final MainAxisSize mainAxisSize;
 
   /// How the children should be placed along the cross axis.
@@ -42,8 +42,8 @@ class ArnaColumn extends StatelessWidget {
   /// children in the cross axis (e.g., horizontally for a [Column]).
   final CrossAxisAlignment crossAxisAlignment;
 
-  /// Determines the order to lay children out horizontally and how to interpret
-  /// `start` and `end` in the horizontal direction.
+  /// Determines the order to lay children out horizontally and how to
+  /// interpret `start` and `end` in the horizontal direction.
   ///
   /// Defaults to the ambient [Directionality].
   ///
@@ -54,8 +54,8 @@ class ArnaColumn extends StatelessWidget {
   ///
   /// If the [direction] is [Axis.horizontal], this controls the order in which
   /// the children are positioned (left-to-right or right-to-left), and the
-  /// meaning of the [mainAxisAlignment] property's [MainAxisAlignment.start] and
-  /// [MainAxisAlignment.end] values.
+  /// meaning of the [mainAxisAlignment] property's [MainAxisAlignment.start]
+  /// and [MainAxisAlignment.end] values.
   ///
   /// If the [direction] is [Axis.horizontal], and either the
   /// [mainAxisAlignment] is either [MainAxisAlignment.start] or
@@ -81,8 +81,9 @@ class ArnaColumn extends StatelessWidget {
   /// property's [MainAxisAlignment.start] and [MainAxisAlignment.end] values.
   ///
   /// If the [direction] is [Axis.vertical], and either the [mainAxisAlignment]
-  /// is either [MainAxisAlignment.start] or [MainAxisAlignment.end], or there's
-  /// more than one child, then the [verticalDirection] must not be null.
+  /// is either [MainAxisAlignment.start] or [MainAxisAlignment.end], or
+  /// there's more than one child, then the [verticalDirection] must not be
+  /// null.
   ///
   /// If the [direction] is [Axis.horizontal], this controls the meaning of the
   /// [crossAxisAlignment] property's [CrossAxisAlignment.start] and
@@ -95,8 +96,8 @@ class ArnaColumn extends StatelessWidget {
 
   /// If aligning items according to their baseline, which baseline to use.
   ///
-  /// This must be set if using baseline alignment. There is no default because there is no
-  /// way for the framework to know the correct baseline _a priori_.
+  /// This must be set if using baseline alignment. There is no default because
+  /// there is no way for the framework to know the correct baseline.
   final TextBaseline? textBaseline;
 
   @override

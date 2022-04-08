@@ -8,6 +8,7 @@
 - Update ArnaColumn
 - [BREAKING] Remove ArnaGroupedView
 - [BREAKING] Update ArnaList
+- Update ArnaListTile
 
 ## 0.3.7+1
 

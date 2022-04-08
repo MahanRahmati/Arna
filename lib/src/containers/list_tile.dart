@@ -4,8 +4,8 @@ import 'package:arna/arna.dart';
 /// a leading or trailing icon.
 /// List tiles are typically used in [ListView]s, or arranged in [Column]s.
 /// See also:
-///  * [ArnaCheckBoxListTile], [ArnaRadioListTile], and [ArnaSwitchListTile], widgets
-///    that combine [ListTile] with other controls.
+///  * [ArnaCheckBoxListTile], [ArnaRadioListTile], and [ArnaSwitchListTile],
+///    widgets that combine [ArnaListTile] with other controls.
 class ArnaListTile extends StatefulWidget {
   /// Creates a list tile.
   const ArnaListTile({
@@ -59,80 +59,11 @@ class _ArnaListTileState extends State<ArnaListTile> {
   }
 
   void _handleEnter(event) {
-    if (mounted) setState(() => _hover = true);
+    if (!_hover && mounted) setState(() => _hover = true);
   }
 
   void _handleExit(event) {
-    if (mounted) setState(() => _hover = false);
-  }
-
-  Widget _buildChild() {
-    final List<Widget> children = <Widget>[];
-    if (widget.leading != null) {
-      children.add(Padding(padding: Styles.normal, child: widget.leading));
-    }
-    children.add(
-      Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (widget.title != null)
-              Padding(
-                padding: (widget.subtitle != null)
-                    ? Styles.tileWithSubtitlePadding
-                    : Styles.tileTextPadding,
-                child: Row(
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        widget.title!,
-                        style:
-                            ArnaTheme.of(context).textTheme.textStyle.copyWith(
-                                  color: ArnaDynamicColor.resolve(
-                                    !isEnabled && widget.actionable
-                                        ? ArnaColors.disabledColor
-                                        : ArnaColors.primaryTextColor,
-                                    context,
-                                  ),
-                                ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            if (widget.subtitle != null)
-              Padding(
-                padding: Styles.tileSubtitleTextPadding,
-                child: Row(
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        widget.subtitle!,
-                        style: ArnaTheme.of(context)
-                            .textTheme
-                            .subtitleTextStyle
-                            .copyWith(
-                              color: ArnaDynamicColor.resolve(
-                                !isEnabled && widget.actionable
-                                    ? ArnaColors.disabledColor
-                                    : ArnaColors.secondaryTextColor,
-                                context,
-                              ),
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-    if (widget.trailing != null) {
-      children.add(Padding(padding: Styles.normal, child: widget.trailing));
-    }
-    return Row(children: children);
+    if (_hover && mounted) setState(() => _hover = false);
   }
 
   @override
@@ -169,7 +100,72 @@ class _ArnaListTileState extends State<ArnaListTile> {
                 context,
               ),
               padding: Styles.tilePadding,
-              child: _buildChild(),
+              child: Row(
+                children: <Widget>[
+                  if (widget.leading != null)
+                    Padding(padding: Styles.normal, child: widget.leading),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        if (widget.title != null)
+                          Padding(
+                            padding: (widget.subtitle != null)
+                                ? Styles.tileWithSubtitlePadding
+                                : Styles.tileTextPadding,
+                            child: Row(
+                              children: <Widget>[
+                                Flexible(
+                                  child: Text(
+                                    widget.title!,
+                                    style: ArnaTheme.of(context)
+                                        .textTheme
+                                        .textStyle
+                                        .copyWith(
+                                          color: ArnaDynamicColor.resolve(
+                                            !isEnabled && widget.actionable
+                                                ? ArnaColors.disabledColor
+                                                : ArnaColors.primaryTextColor,
+                                            context,
+                                          ),
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        if (widget.subtitle != null)
+                          Padding(
+                            padding: Styles.tileSubtitleTextPadding,
+                            child: Row(
+                              children: <Widget>[
+                                Flexible(
+                                  child: Text(
+                                    widget.subtitle!,
+                                    style: ArnaTheme.of(context)
+                                        .textTheme
+                                        .subtitleTextStyle
+                                        .copyWith(
+                                          color: ArnaDynamicColor.resolve(
+                                            !isEnabled && widget.actionable
+                                                ? ArnaColors.disabledColor
+                                                : ArnaColors.secondaryTextColor,
+                                            context,
+                                          ),
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  if (widget.trailing != null)
+                    Padding(padding: Styles.normal, child: widget.trailing),
+                ],
+              ),
             ),
           ),
         ),

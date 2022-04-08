@@ -11,6 +11,7 @@
 - Update ArnaListTile
 - Update ArnaHorizontalSeparator
 - Update ArnaVerticalSeparator
+- Update ArnaExpansionPanel
 
 ## 0.3.7+1
 

@@ -27,7 +27,7 @@
   - [x] ArnaBadge
   - [x] ArnaCard
   - [x] ArnaColumn
-  - [ ] ArnaExpansionPanel
+  - [x] ArnaExpansionPanel
   - [x] ArnaListTile
   - [x] ArnaList
   - [ ] ArnaAlertDialog

@@ -5,6 +5,8 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey;
 /// it is expanded.
 class ArnaExpansionPanel extends StatefulWidget {
   /// Creates an expansion panel in the Arna style.
+  ///
+  /// If child is null, then the expansion panel will be disabled.
   const ArnaExpansionPanel({
     Key? key,
     this.leading,
@@ -65,10 +67,9 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     with SingleTickerProviderStateMixin {
   FocusNode? focusNode;
   late bool expanded;
-  bool _hover = false;
   bool _focused = false;
   late AnimationController _controller;
-  late Animation<double> _expandAnimation;
+  late Animation<double> _animation;
   late Animation<double> _rotateAnimation;
   late Map<Type, Action<Intent>> _actions;
   late Map<ShortcutActivator, Intent> _shortcuts;
@@ -80,17 +81,12 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     super.initState();
     _controller = AnimationController(
       duration: Styles.basicDuration,
+      debugLabel: 'ArnaExpansionPanel',
       vsync: this,
     );
-    _expandAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: Styles.basicCurve,
-    );
+    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Styles.basicCurve,
-      ),
+      CurvedAnimation(parent: _controller, curve: Styles.basicCurve),
     );
     focusNode = FocusNode(canRequestFocus: isEnabled);
     if (widget.autofocus) focusNode!.requestFocus();
@@ -101,6 +97,22 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     };
     expanded = widget.isExpanded;
     if (expanded) _controller.forward();
+  }
+
+  @override
+  void didUpdateWidget(ArnaExpansionPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isExpanded != oldWidget.isExpanded) {
+      switch (_controller.status) {
+        case AnimationStatus.completed:
+        case AnimationStatus.dismissed:
+          expanded ? _controller.forward() : _controller.reverse();
+          break;
+        case AnimationStatus.forward:
+        case AnimationStatus.reverse:
+          break;
+      }
+    }
   }
 
   @override
@@ -127,99 +139,8 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     }
   }
 
-  void _handleHover(hover) {
-    if (hover != _hover && mounted) setState(() => _hover = hover);
-  }
-
   void _handleFocus(focus) {
     if (focus != _focused && mounted) setState(() => _focused = focus);
-  }
-
-  Widget _buildChild() {
-    final List<Widget> children = <Widget>[];
-    children.add(const SizedBox(width: Styles.largePadding));
-    if (widget.leading != null) {
-      children.add(Padding(padding: Styles.normal, child: widget.leading));
-    }
-    children.add(
-      Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (widget.title != null)
-              Padding(
-                padding: (widget.subtitle != null)
-                    ? Styles.tileWithSubtitlePadding
-                    : Styles.tileTextPadding,
-                child: Row(
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        widget.title!,
-                        style: ArnaTheme.of(context).textTheme.textStyle,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            if (widget.subtitle != null)
-              Padding(
-                padding: Styles.tileSubtitleTextPadding,
-                child: Row(
-                  children: <Widget>[
-                    Flexible(
-                      child: Text(
-                        widget.subtitle!,
-                        style: ArnaTheme.of(context)
-                            .textTheme
-                            .subtitleTextStyle
-                            .copyWith(
-                              color: ArnaDynamicColor.resolve(
-                                !isEnabled
-                                    ? ArnaColors.disabledColor
-                                    : ArnaColors.secondaryTextColor,
-                                context,
-                              ),
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-    children.add(
-      Row(
-        children: <Widget>[
-          if (widget.trailing != null) widget.trailing!,
-          Padding(
-            padding: Styles.horizontal,
-            child: RotationTransition(
-              turns: _rotateAnimation,
-              child: Transform.rotate(
-                angle: -3.14 / 2,
-                child: Icon(
-                  Icons.arrow_back_ios_new_outlined,
-                  size: Styles.arrowSize,
-                  color: ArnaDynamicColor.resolve(
-                    isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
-                    context,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-    children.add(const SizedBox(width: Styles.largePadding));
-    return Padding(
-      padding: Styles.vertical,
-      child: Row(children: children),
-    );
   }
 
   @override
@@ -237,66 +158,83 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: _handleTap,
-                child: FocusableActionDetector(
-                  enabled: isEnabled && widget.isFocusable,
-                  focusNode: focusNode,
-                  autofocus: !isEnabled ? false : widget.autofocus,
-                  mouseCursor: widget.cursor,
-                  onShowHoverHighlight: _handleHover,
-                  onShowFocusHighlight: _handleFocus,
-                  onFocusChange: _handleFocusChange,
-                  actions: _actions,
-                  shortcuts: _shortcuts,
-                  child: AnimatedContainer(
-                    constraints: const BoxConstraints(
-                      minHeight: Styles.expansionPanelMinHeight,
+              FocusableActionDetector(
+                enabled: isEnabled && widget.isFocusable,
+                focusNode: focusNode,
+                autofocus: !isEnabled ? false : widget.autofocus,
+                onShowFocusHighlight: _handleFocus,
+                onFocusChange: _handleFocusChange,
+                actions: _actions,
+                shortcuts: _shortcuts,
+                child: AnimatedContainer(
+                  constraints: const BoxConstraints(
+                    minHeight: Styles.expansionPanelMinHeight,
+                  ),
+                  duration: Styles.basicDuration,
+                  curve: Styles.basicCurve,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.vertical(
+                      top: const Radius.circular(Styles.borderRadiusSize),
+                      bottom: expanded
+                          ? const Radius.circular(0)
+                          : const Radius.circular(Styles.borderRadiusSize),
                     ),
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: const Radius.circular(Styles.borderRadiusSize),
-                        bottom: expanded
-                            ? const Radius.circular(0)
-                            : const Radius.circular(Styles.borderRadiusSize),
-                      ),
-                      border: Border.all(
-                        color: ArnaDynamicColor.resolve(
-                          _focused
-                              ? ArnaDynamicColor.matchingColor(
-                                  ArnaDynamicColor.resolve(
-                                    ArnaColors.cardColor,
-                                    context,
-                                  ),
-                                  accent,
-                                  ArnaTheme.brightnessOf(context),
-                                )
-                              : ArnaColors.borderColor,
-                          context,
-                        ),
-                      ),
+                    border: Border.all(
                       color: ArnaDynamicColor.resolve(
-                        !isEnabled
-                            ? ArnaColors.backgroundColor
-                            : _hover
-                                ? ArnaDynamicColor.blend(
-                                    ArnaDynamicColor.resolve(
-                                      ArnaColors.cardColor,
-                                      context,
-                                    ),
-                                    14,
-                                  )
-                                : ArnaColors.cardColor,
+                        _focused
+                            ? ArnaDynamicColor.matchingColor(
+                                ArnaDynamicColor.resolve(
+                                  ArnaColors.cardColor,
+                                  context,
+                                ),
+                                accent,
+                                ArnaTheme.brightnessOf(context),
+                              )
+                            : ArnaColors.borderColor,
                         context,
                       ),
                     ),
-                    child: ClipRRect(
-                      borderRadius: Styles.listBorderRadius,
-                      child: _buildChild(),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: const Radius.circular(Styles.borderRadiusSize - 1),
+                      bottom: expanded
+                          ? const Radius.circular(0)
+                          : const Radius.circular(Styles.borderRadiusSize - 1),
+                    ),
+                    child: ArnaListTile(
+                      leading: widget.leading,
+                      title: widget.title,
+                      subtitle: widget.subtitle,
+                      trailing: Row(
+                        children: <Widget>[
+                          if (widget.trailing != null) widget.trailing!,
+                          Padding(
+                            padding: Styles.horizontal,
+                            child: RotationTransition(
+                              turns: _rotateAnimation,
+                              child: Transform.rotate(
+                                angle: -3.14 / 2,
+                                child: Icon(
+                                  Icons.arrow_back_ios_new_outlined,
+                                  size: Styles.arrowSize,
+                                  color: ArnaDynamicColor.resolve(
+                                    isEnabled
+                                        ? ArnaColors.iconColor
+                                        : ArnaColors.disabledColor,
+                                    context,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap:
+                          isEnabled && widget.isFocusable ? _handleTap : null,
+                      actionable: isEnabled && widget.isFocusable,
+                      cursor: widget.cursor,
                     ),
                   ),
                 ),
@@ -335,7 +273,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                     ),
                     child: SizeTransition(
                       axisAlignment: 1,
-                      sizeFactor: _expandAnimation,
+                      sizeFactor: _animation,
                       child: widget.child!,
                     ),
                   ),

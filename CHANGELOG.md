@@ -6,6 +6,7 @@
 - Update ArnaSwitchListTile
 - Update ArnaExpansionPanel
 - Update ArnaListTile
+- Update Styles and helpers
 
 ## 0.3.8
 

@@ -110,10 +110,22 @@ abstract class Styles {
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 
   // BorderRadius
-  static BorderRadius borderRadius = borderRadiusAll(borderRadiusSize);
-  static BorderRadius listBorderRadius = borderRadiusAll(borderRadiusSize - 1);
-  static BorderRadius checkBoxBorderRadius = borderRadiusAll(smallPadding);
-  static BorderRadius radioBorderRadius = borderRadiusAll(radioSize);
-  static BorderRadius switchBorderRadius = borderRadiusAll(switchHeight);
-  static BorderRadius buttonBorderRadius = borderRadiusAll(buttonSize);
+  static BorderRadius borderRadius = const BorderRadius.all(
+    Radius.circular(borderRadiusSize),
+  );
+  static BorderRadius listBorderRadius = const BorderRadius.all(
+    Radius.circular(borderRadiusSize - 1),
+  );
+  static BorderRadius checkBoxBorderRadius = const BorderRadius.all(
+    Radius.circular(smallPadding),
+  );
+  static BorderRadius radioBorderRadius = const BorderRadius.all(
+    Radius.circular(radioSize),
+  );
+  static BorderRadius switchBorderRadius = const BorderRadius.all(
+    Radius.circular(switchHeight),
+  );
+  static BorderRadius buttonBorderRadius = const BorderRadius.all(
+    Radius.circular(buttonSize),
+  );
 }

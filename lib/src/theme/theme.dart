@@ -1,6 +1,5 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart' show Brightness;
 
 /// Applies a visual styling theme to descendant Arna widgets.
 ///

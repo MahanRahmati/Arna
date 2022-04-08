@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/services.dart' show Brightness;
 
 /// Button types.
 enum ButtonType { normal, colored, destructive, suggested }

@@ -18,9 +18,11 @@ class ArnaBadge extends StatelessWidget {
 
   /// The label color of the badge.
   final Color textColor;
+
   @override
   Widget build(BuildContext context) {
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    Brightness brightness = ArnaTheme.brightnessOf(context);
     return Padding(
       padding: Styles.small,
       child: AnimatedContainer(
@@ -30,11 +32,7 @@ class ArnaBadge extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
           border: Border.all(
-            color: ArnaDynamicColor.outerColor(
-              accent,
-              false,
-              ArnaTheme.brightnessOf(context),
-            ),
+            color: ArnaDynamicColor.outerColor(accent, false, brightness),
           ),
           color: accent,
         ),
@@ -46,10 +44,7 @@ class ArnaBadge extends StatelessWidget {
               child: Text(
                 label,
                 style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
-                      color: ArnaDynamicColor.innerColor(
-                        accentColor ?? ArnaTheme.of(context).accentColor,
-                        ArnaTheme.brightnessOf(context),
-                      ),
+                      color: ArnaDynamicColor.innerColor(accent, brightness),
                     ),
               ),
             ),

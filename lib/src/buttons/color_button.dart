@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/services.dart' show Brightness;
 
 /// An Arna-styled color button.
 class ArnaColorButton<T> extends StatelessWidget {

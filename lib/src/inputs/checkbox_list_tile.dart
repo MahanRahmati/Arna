@@ -1,6 +1,7 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaCheckBox]. In other words, a checkbox with a label.
+/// A [ArnaListTile] with a [ArnaCheckBox]. In other words, a checkbox with a
+/// label.
 ///
 /// The entire list tile is interactive: tapping anywhere in the tile toggles
 /// the checkbox.
@@ -61,16 +62,16 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   /// change state until the parent widget rebuilds the checkbox with the new
   /// value.
   ///
-  /// If this callback is null, the checkbox will be displayed as disabled
-  /// and will not respond to input gestures.
+  /// If this callback is null, the checkbox will be displayed as disabled and
+  /// will not respond to input gestures.
   ///
   /// When the checkbox is tapped, if [tristate] is false (the default) then
   /// the [onChanged] callback will be applied to `!value`. If [tristate] is
   /// true this callback cycle from false to true to null.
   ///
-  /// The callback provided to [onChanged] should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
+  /// The callback provided to [onChanged] should update the state of the
+  /// parent [StatefulWidget] using the [State.setState] method, so that the
+  /// parent gets rebuilt; for example:
   ///
   /// ```dart
   /// ArnaCheckBoxListTile(
@@ -98,9 +99,9 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   /// Checkbox displays a dash when its value is null.
   ///
   /// When a tri-state checkbox ([tristate] is true) is tapped, its [onChanged]
-  /// callback will be applied to true if the current value is false, to null if
-  /// value is true, and to false if value is null (i.e. it cycles through false
-  /// => true => null => false when tapped).
+  /// callback will be applied to true if the current value is false, to null
+  /// if value is true, and to false if value is null (i.e. it cycles through
+  /// false => true => null => false when tapped).
   ///
   /// If tristate is false (the default), [value] must not be null.
   final bool tristate;

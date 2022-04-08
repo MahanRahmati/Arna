@@ -14,19 +14,19 @@ import 'package:arna/arna.dart';
 ///
 /// See also:
 ///
-///  * [ArnaCheckBoxListTile], which combines this widget with a [ArnaListTile] so that
-///    you can give the checkbox a label.
+///  * [ArnaCheckBoxListTile], which combines this widget with a [ArnaListTile]
+///    so that you can give the checkbox a label.
 ///  * [ArnaSwitch], a widget with semantics similar to [ArnaCheckBox].
 ///  * [ArnaRadio], for selecting among a set of explicit values.
 ///  * [ArnaSlider], for selecting a value in a range.
 class ArnaCheckBox extends StatelessWidget {
   /// Creates An Arna-styled checkbox.
   ///
-  /// The checkbox itself does not maintain any state. Instead, when the state of
-  /// the checkbox changes, the widget calls the [onChanged] callback. Most
+  /// The checkbox itself does not maintain any state. Instead, when the state
+  /// of the checkbox changes, the widget calls the [onChanged] callback. Most
   /// widgets that use a checkbox will listen for the [onChanged] callback and
-  /// rebuild the checkbox with a new [value] to update the visual appearance of
-  /// the checkbox.
+  /// rebuild the checkbox with a new [value] to update the visual appearance
+  /// of the checkbox.
   ///
   /// The following arguments are required:
   ///
@@ -62,9 +62,9 @@ class ArnaCheckBox extends StatelessWidget {
   /// the [onChanged] callback will be applied to `!value`. If [tristate] is
   /// true this callback cycle from false to true to null.
   ///
-  /// The callback provided to [onChanged] should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
+  /// The callback provided to [onChanged] should update the state of the
+  /// parent [StatefulWidget] using the [State.setState] method, so that the
+  /// parent gets rebuilt; for example:
   ///
   /// ```dart
   /// ArnaCheckBox(
@@ -83,9 +83,9 @@ class ArnaCheckBox extends StatelessWidget {
   /// Checkbox displays a dash when its value is null.
   ///
   /// When a tri-state checkbox ([tristate] is true) is tapped, its [onChanged]
-  /// callback will be applied to true if the current value is false, to null if
-  /// value is true, and to false if value is null (i.e. it cycles through false
-  /// => true => null => false when tapped).
+  /// callback will be applied to true if the current value is false, to null
+  /// if value is true, and to false if value is null (i.e. it cycles through
+  /// false => true => null => false when tapped).
   ///
   /// If tristate is false (the default), [value] must not be null.
   final bool tristate;
@@ -230,10 +230,7 @@ class ArnaCheckBox extends StatelessWidget {
                         ? Icons.check_outlined
                         : Icons.remove_outlined,
                     size: Styles.checkBoxIconSize,
-                    color: ArnaDynamicColor.innerColor(
-                      accent,
-                      brightness,
-                    ),
+                    color: ArnaDynamicColor.innerColor(accent, brightness),
                   ),
                 ),
               ),

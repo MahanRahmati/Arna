@@ -36,7 +36,7 @@
   - [x] ArnaVerticalDivider
   - [x] ArnaHorizontalSeparator
   - [x] ArnaVerticalSeparator
-  - [ ] ArnaCheckBoxListTile
+  - [x] ArnaCheckBoxListTile
   - [ ] ArnaCheckBox
   - [ ] ArnaPopupMenu
   - [ ] ArnaRadio

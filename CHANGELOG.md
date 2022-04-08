@@ -12,6 +12,8 @@
 - Update ArnaHorizontalSeparator
 - Update ArnaVerticalSeparator
 - Update ArnaExpansionPanel
+- Update ArnaCheckBoxListTile
+- Update ArnaCheckBox
 
 ## 0.3.7+1
 

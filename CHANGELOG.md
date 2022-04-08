@@ -9,6 +9,8 @@
 - [BREAKING] Remove ArnaGroupedView
 - [BREAKING] Update ArnaList
 - Update ArnaListTile
+- Update ArnaHorizontalSeparator
+- Update ArnaVerticalSeparator
 
 ## 0.3.7+1
 

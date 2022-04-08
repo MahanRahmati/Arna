@@ -32,10 +32,10 @@
   - [x] ArnaList
   - [ ] ArnaAlertDialog
   - [ ] ArnaPopupDialog
-  - [ ] ArnaHorizontalDivider
-  - [ ] ArnaVerticalDivider
-  - [ ] ArnaHorizontalSeparator
-  - [ ] ArnaVerticalSeparator
+  - [x] ArnaHorizontalDivider
+  - [x] ArnaVerticalDivider
+  - [x] ArnaHorizontalSeparator
+  - [x] ArnaVerticalSeparator
   - [ ] ArnaCheckBoxListTile
   - [ ] ArnaCheckBox
   - [ ] ArnaPopupMenu

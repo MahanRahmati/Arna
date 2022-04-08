@@ -175,7 +175,7 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.check_box_outlined),
                 title: "CheckBox",
-                child: ArnaGroupedView(
+                child: ArnaColumn(
                   children: <Widget>[
                     ArnaCheckBoxListTile(
                       value: _checkBox1,
@@ -204,7 +204,7 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.radio_button_checked_outlined),
                 title: "Radio",
-                child: ArnaGroupedView(
+                child: ArnaColumn(
                   children: <Widget>[
                     ArnaRadioListTile(
                       value: "1",
@@ -237,7 +237,7 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.toggle_on_outlined),
                 title: "Switch",
-                child: ArnaGroupedView(
+                child: ArnaColumn(
                   children: <Widget>[
                     ArnaSwitchListTile(
                       title: "Switch 1",
@@ -265,7 +265,7 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.view_list_outlined),
                 title: "List Tile",
-                child: ArnaGroupedView(
+                child: ArnaColumn(
                   children: <Widget>[
                     ArnaListTile(
                       title: "Title 1",
@@ -283,7 +283,7 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: const Icon(Icons.linear_scale_outlined),
                 title: "Slider",
-                child: ArnaGroupedView(
+                child: ArnaColumn(
                   children: <Widget>[
                     ArnaSliderListTile(
                       title: "Title 1",

@@ -5,7 +5,6 @@
 - Update ArnaBadge
 - Add Brightness to exports
 - Update ArnaCard
-- [BREAKING] Remove ArnaColumn
 
 ## 0.3.7+1
 

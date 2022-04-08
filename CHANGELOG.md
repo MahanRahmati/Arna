@@ -6,6 +6,8 @@
 - Add Brightness to exports
 - Update ArnaCard
 - Update ArnaColumn
+- [BREAKING] Remove ArnaGroupedView
+- [BREAKING] Update ArnaList
 
 ## 0.3.7+1
 

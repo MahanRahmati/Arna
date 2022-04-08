@@ -107,10 +107,6 @@ abstract class Styles {
     padding,
     smallPadding,
   );
-  static const EdgeInsets listPadding = EdgeInsets.symmetric(
-    vertical: padding,
-    horizontal: largePadding,
-  );
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 
   // BorderRadius

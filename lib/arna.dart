@@ -30,7 +30,6 @@ export 'package:arna/src/containers/badge.dart';
 export 'package:arna/src/containers/card.dart';
 export 'package:arna/src/containers/column.dart';
 export 'package:arna/src/containers/expansion_panel.dart';
-export 'package:arna/src/containers/grouped_view.dart';
 export 'package:arna/src/containers/list.dart';
 export 'package:arna/src/containers/list_tile.dart';
 export 'package:arna/src/dialogs/dialog.dart';

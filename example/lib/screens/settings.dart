@@ -11,8 +11,10 @@ class Settings extends ConsumerWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          ArnaGroupedView(
+          ArnaList(
             title: "Theme",
+            addDivider: true,
+            addBackground: true,
             children: <Widget>[
               ArnaRadioListTile(
                 value: Theme.system,
@@ -34,10 +36,11 @@ class Settings extends ConsumerWidget {
               ),
             ],
           ),
-          ArnaGroupedView(
+          ArnaList(
             title: "Accent",
             direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
+            addBackground: true,
             children: <Widget>[
               ArnaColorButton(
                 value: AccentColor.blue,

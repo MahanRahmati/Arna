@@ -27,7 +27,7 @@ class _WidgetsState extends State<Widgets> {
         children: <Widget>[
           ArnaList(
             title: "Widgets",
-            items: <Widget>[
+            children: <Widget>[
               ArnaExpansionPanel(
                 leading: const Icon(Icons.adjust_outlined),
                 title: "Buttons",

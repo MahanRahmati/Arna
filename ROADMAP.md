@@ -28,9 +28,8 @@
   - [x] ArnaCard
   - [x] ArnaColumn
   - [ ] ArnaExpansionPanel
-  - [ ] ArnaGroupedView
   - [ ] ArnaListTile
-  - [ ] ArnaList
+  - [x] ArnaList
   - [ ] ArnaAlertDialog
   - [ ] ArnaPopupDialog
   - [ ] ArnaHorizontalDivider

@@ -4,6 +4,8 @@
 - Update ArnaRadioListTile
 - Update ArnaSliderListTile
 - Update ArnaSwitchListTile
+- Update ArnaExpansionPanel
+- Update ArnaListTile
 
 ## 0.3.8
 

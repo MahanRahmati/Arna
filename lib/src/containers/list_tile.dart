@@ -49,6 +49,7 @@ class ArnaListTile extends StatefulWidget {
   State<ArnaListTile> createState() => _ArnaListTileState();
 }
 
+/// State of [ArnaListTile].
 class _ArnaListTileState extends State<ArnaListTile> {
   bool _hover = false;
 

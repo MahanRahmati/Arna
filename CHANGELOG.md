@@ -4,6 +4,7 @@
 - Update ArnaTextButton
 - Update ArnaBadge
 - Add Brightness to exports
+- Update ArnaCard
 
 ## 0.3.7+1
 

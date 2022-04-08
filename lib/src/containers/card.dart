@@ -24,7 +24,7 @@ class ArnaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: Styles.large,
+      padding: Styles.normal,
       child: AnimatedContainer(
         height: height,
         width: width,

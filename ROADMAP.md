@@ -25,7 +25,7 @@
   - [ ] ArnaPopupMenuButton
   - [x] ArnaTextButton
   - [x] ArnaBadge
-  - [ ] ArnaCard
+  - [x] ArnaCard
   - [ ] ArnaColumn
   - [ ] ArnaExpansionPanel
   - [ ] ArnaGroupedView

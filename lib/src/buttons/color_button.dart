@@ -72,11 +72,12 @@ class ArnaColorButton<T> extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.buttonBorderRadius,
               border: Border.all(
+                width: 2,
                 color: selected
                     ? ArnaDynamicColor.matchingColor(
                         ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
                         color,
-                        ArnaTheme.brightnessOf(context),
+                        brightness,
                       )
                     : ArnaColors.transparent,
               ),
@@ -96,27 +97,17 @@ class ArnaColorButton<T> extends StatelessWidget {
                             21,
                             brightness,
                           )
-                        : focused
-                            ? ArnaDynamicColor.outerColor(
-                                color,
-                                true,
-                                brightness,
-                              )
-                            : ArnaDynamicColor.outerColor(
-                                color,
-                                hover,
-                                brightness,
-                              ),
+                        : ArnaDynamicColor.outerColor(
+                            color,
+                            focused ? true : hover,
+                            brightness,
+                          ),
                     context,
                   ),
                 ),
-                color: pressed
+                color: pressed || hover || focused
                     ? ArnaDynamicColor.blend(color, 14, brightness)
-                    : hover
-                        ? ArnaDynamicColor.blend(color, 14, brightness)
-                        : focused
-                            ? ArnaDynamicColor.blend(color, 14, brightness)
-                            : color,
+                    : color,
               ),
             ),
           );

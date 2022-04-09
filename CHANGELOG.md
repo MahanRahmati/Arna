@@ -7,6 +7,7 @@
 - Update ArnaExpansionPanel
 - Update ArnaListTile
 - Update Styles and helpers
+- Update ArnaColorButton
 
 ## 0.3.8
 

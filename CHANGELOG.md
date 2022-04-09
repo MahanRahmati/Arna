@@ -8,6 +8,7 @@
 - Update ArnaListTile
 - Update Styles and helpers
 - Update ArnaColorButton
+- Update ArnaButton
 
 ## 0.3.8
 

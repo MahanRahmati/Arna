@@ -9,6 +9,7 @@
 - Update Styles and helpers
 - Update ArnaColorButton
 - Update ArnaButton
+- Update ArnaTheme
 
 ## 0.3.8
 

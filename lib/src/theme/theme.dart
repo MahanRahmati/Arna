@@ -42,7 +42,6 @@ class ArnaTheme extends StatelessWidget {
   static ArnaThemeData of(BuildContext context) {
     final _InheritedArnaTheme? inheritedTheme =
         context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-
     return (inheritedTheme?.theme.data ?? const ArnaThemeData())
         .resolveFrom(context);
   }
@@ -50,8 +49,9 @@ class ArnaTheme extends StatelessWidget {
   /// Retrieves the [Brightness] to use for descendant Arna widgets, based
   /// on the value of [ArnaThemeData.brightness] in the given [context].
   ///
-  /// If no [ArnaTheme] can be found in the given [context], or its `brightness`
-  /// is null, it will fall back to [MediaQueryData.platformBrightness].
+  /// If no [ArnaTheme] can be found in the given [context], or its
+  /// `brightness` is null, it will fall back to
+  /// [MediaQueryData.platformBrightness].
   ///
   /// Throws an exception if no valid [ArnaTheme] or [MediaQuery] widgets
   /// exist in the ancestry tree.

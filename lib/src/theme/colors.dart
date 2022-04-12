@@ -393,25 +393,27 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         : resolvable;
   }
 
+  /// Determines whether the given [Color] is [Brightness.light] or
+  /// [Brightness.dark].
+  static Brightness estimateBrightnessForColor(Color color) {
+    final double relativeLuminance = color.computeLuminance();
+    const double kThreshold = 0.07;
+    return ((relativeLuminance + 0.05) * (relativeLuminance + 0.05) >
+            kThreshold)
+        ? Brightness.light
+        : Brightness.dark;
+  }
+
   /// A color that's clearly legible when drawn on [backgroundColor].
   static Color onBackgroundColor(Color backgroundColor) {
-    final double colorLuminance = backgroundColor.computeLuminance();
-    const double kThreshold = 0.07;
-    return ((colorLuminance + 0.05) * (colorLuminance + 0.05) > kThreshold)
+    return estimateBrightnessForColor(backgroundColor) == Brightness.light
         ? ArnaColors.shade32
         : ArnaColors.shade243;
   }
 
   /// Applies an overlay color to a [backgroundColor].
   static Color applyOverlay(Color backgroundColor) {
-    final double colorLuminance = backgroundColor.computeLuminance();
-
-    const double kThreshold = 0.07;
-    Color foregroundColor =
-        ((colorLuminance + 0.05) * (colorLuminance + 0.05) > kThreshold)
-            ? ArnaColors.shade32
-            : ArnaColors.shade243;
-
+    Color foregroundColor = onBackgroundColor(backgroundColor);
     return Color.alphaBlend(foregroundColor.withOpacity(0.14), backgroundColor);
   }
 

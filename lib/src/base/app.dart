@@ -551,8 +551,12 @@ class _ArnaAppState extends State<ArnaApp> {
     if (widget.theme != null) {
       if (widget.theme!.brightness == null) {
         theme = MediaQuery.platformBrightnessOf(context) == Brightness.dark
-            ? ArnaThemeData.dark()
-            : ArnaThemeData.light();
+            ? ArnaThemeData.dark().copyWith(
+                accentColor: widget.theme!.accentColor,
+              )
+            : ArnaThemeData.light().copyWith(
+                accentColor: widget.theme!.accentColor,
+              );
       }
     }
 

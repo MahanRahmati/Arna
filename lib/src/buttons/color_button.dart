@@ -93,7 +93,7 @@ class ArnaColorButton<T> extends StatelessWidget {
                   color: ArnaDynamicColor.resolve(
                     !enabled
                         ? ArnaDynamicColor.blend(
-                            ArnaDynamicColor.innerColor(color, brightness),
+                            ArnaDynamicColor.onBackgroundColor(color),
                             21,
                             brightness,
                           )

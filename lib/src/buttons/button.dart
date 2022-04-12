@@ -133,10 +133,7 @@ class ArnaButton extends StatelessWidget {
                           ? ArnaColors.disabledColor
                           : buttonType == ButtonType.normal
                               ? ArnaColors.iconColor
-                              : ArnaDynamicColor.innerColor(
-                                  accent,
-                                  ArnaTheme.brightnessOf(context),
-                                ),
+                              : ArnaDynamicColor.onBackgroundColor(accent),
                       context,
                     ),
                   ),
@@ -152,9 +149,8 @@ class ArnaButton extends StatelessWidget {
                                   ? ArnaColors.disabledColor
                                   : buttonType == ButtonType.normal
                                       ? ArnaColors.primaryTextColor
-                                      : ArnaDynamicColor.innerColor(
+                                      : ArnaDynamicColor.onBackgroundColor(
                                           accent,
-                                          brightness,
                                         ),
                               context,
                             ),

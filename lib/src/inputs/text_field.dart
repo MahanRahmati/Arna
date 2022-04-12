@@ -817,10 +817,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                           widget.hintText!,
                           maxLines: widget.maxLines,
                           overflow: TextOverflow.ellipsis,
-                          style: ArnaTheme.of(context)
-                              .textTheme
-                              .textStyle
-                              .copyWith(
+                          style: ArnaTheme.of(context).textTheme.body!.copyWith(
                                 color: ArnaDynamicColor.resolve(
                                   ArnaColors.secondaryTextColor,
                                   context,
@@ -958,7 +955,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             keyboardType: widget.keyboardType,
             textInputAction: widget.textInputAction,
             textCapitalization: widget.textCapitalization,
-            style: ArnaTheme.of(context).textTheme.textStyle,
+            style: ArnaTheme.of(context).textTheme.body!,
             strutStyle: widget.strutStyle,
             textAlign: widget.textAlign,
             textDirection: widget.textDirection,

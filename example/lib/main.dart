@@ -32,22 +32,22 @@ class MyApp extends ConsumerWidget {
 
     switch (accentColor.accent) {
       case AccentColor.green:
-        accent = ArnaColors.successColor;
+        accent = ArnaColors.green;
         break;
       case AccentColor.red:
-        accent = ArnaColors.errorColor;
+        accent = ArnaColors.red;
         break;
       case AccentColor.orange:
-        accent = ArnaColors.warningColor;
+        accent = ArnaColors.orange;
         break;
       case AccentColor.white:
-        accent = ArnaColors.white;
+        accent = ArnaColors.shade255;
         break;
       case AccentColor.black:
-        accent = ArnaColors.black;
+        accent = ArnaColors.shade00;
         break;
       default:
-        accent = ArnaColors.accentColor;
+        accent = ArnaColors.blue;
     }
 
     return ArnaApp(
@@ -108,7 +108,6 @@ class _HomeState extends ConsumerState<Home> {
         actions: [
           ArnaIconButton(
             icon: Icons.close_outlined,
-            hasBorder: false,
             onPressed: () => setState(() => showBanner = false),
           ),
         ],
@@ -157,7 +156,6 @@ class _HomeState extends ConsumerState<Home> {
                   actions: [
                     ArnaIconButton(
                       icon: Icons.close_outlined,
-                      hasBorder: false,
                       onPressed: () => setState(() => showBanner = false),
                     ),
                   ],

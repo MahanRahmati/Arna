@@ -190,8 +190,7 @@ class ArnaList extends StatelessWidget {
                             Flexible(
                               child: Text(
                                 title!,
-                                style:
-                                    ArnaTheme.of(context).textTheme.textStyle,
+                                style: ArnaTheme.of(context).textTheme.body,
                               ),
                             ),
                           ],

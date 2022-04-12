@@ -545,6 +545,42 @@ class _ArnaAppState extends State<ArnaApp> {
   ) =>
       ArnaIconButton(icon: Icons.search, onPressed: onPressed);
 
+  Widget _arnaBuilder(BuildContext context, Widget? child) {
+    ArnaThemeData? theme;
+
+    if (widget.theme != null) {
+      if (widget.theme!.brightness == null) {
+        theme = MediaQuery.platformBrightnessOf(context) == Brightness.dark
+            ? ArnaThemeData.dark()
+            : ArnaThemeData.light();
+      }
+    }
+
+    theme ??= widget.theme ?? ArnaThemeData.light();
+
+    return AnimatedArnaTheme(
+      data: theme,
+      child: widget.builder != null
+          ? Builder(
+              builder: (BuildContext context) {
+                // Why are we surrounding a builder with a builder?
+                //
+                // The widget.builder may contain code that invokes
+                // Theme.of(), which should return the theme we selected
+                // above in AnimatedTheme. However, if we invoke
+                // widget.builder() directly as the child of AnimatedTheme
+                // then there is no Context separating them, and the
+                // widget.builder() will not find the theme. Therefore, we
+                // surround widget.builder with yet another builder so that
+                // a context separates them and Theme.of() correctly
+                // resolves to the theme we passed to AnimatedTheme.
+                return widget.builder!(context, child);
+              },
+            )
+          : child ?? const SizedBox.shrink(),
+    );
+  }
+
   WidgetsApp _buildWidgetApp(BuildContext context) {
     final ArnaThemeData effectiveThemeData = ArnaTheme.of(context);
     final Color color = ArnaDynamicColor.resolve(
@@ -559,10 +595,10 @@ class _ArnaAppState extends State<ArnaApp> {
         routeInformationParser: widget.routeInformationParser!,
         routerDelegate: widget.routerDelegate!,
         backButtonDispatcher: widget.backButtonDispatcher,
-        builder: widget.builder,
+        builder: _arnaBuilder,
         title: widget.title,
         onGenerateTitle: widget.onGenerateTitle,
-        textStyle: effectiveThemeData.textTheme.textStyle,
+        textStyle: effectiveThemeData.textTheme.body,
         color: color,
         locale: widget.locale,
         localizationsDelegates: _localizationsDelegates,
@@ -594,10 +630,10 @@ class _ArnaAppState extends State<ArnaApp> {
       onGenerateRoute: widget.onGenerateRoute,
       onGenerateInitialRoutes: widget.onGenerateInitialRoutes,
       onUnknownRoute: widget.onUnknownRoute,
-      builder: widget.builder,
+      builder: _arnaBuilder,
       title: widget.title,
       onGenerateTitle: widget.onGenerateTitle,
-      textStyle: effectiveThemeData.textTheme.textStyle,
+      textStyle: effectiveThemeData.textTheme.body,
       color: color,
       locale: widget.locale,
       localizationsDelegates: _localizationsDelegates,
@@ -621,23 +657,20 @@ class _ArnaAppState extends State<ArnaApp> {
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: widget.scrollBehavior ?? const ArnaScrollBehavior(),
-      child: ArnaTheme(
-        data: widget.theme ?? const ArnaThemeData(),
-        child: HeroControllerScope(
-          controller: _heroController,
-          child: Focus(
-            canRequestFocus: false,
-            onKey: (FocusNode node, RawKeyEvent event) {
-              if (event is! RawKeyDownEvent ||
-                  event.logicalKey != LogicalKeyboardKey.escape) {
-                return KeyEventResult.ignored;
-              }
-              return ArnaTooltip.dismissAllToolTips()
-                  ? KeyEventResult.handled
-                  : KeyEventResult.ignored;
-            },
-            child: _buildWidgetApp(context),
-          ),
+      child: HeroControllerScope(
+        controller: _heroController,
+        child: Focus(
+          canRequestFocus: false,
+          onKey: (FocusNode node, RawKeyEvent event) {
+            if (event is! RawKeyDownEvent ||
+                event.logicalKey != LogicalKeyboardKey.escape) {
+              return KeyEventResult.ignored;
+            }
+            return ArnaTooltip.dismissAllToolTips()
+                ? KeyEventResult.handled
+                : KeyEventResult.ignored;
+          },
+          child: _buildWidgetApp(context),
         ),
       ),
     );

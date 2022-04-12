@@ -17,42 +17,42 @@ class Typography extends StatelessWidget {
                 padding: Styles.normal,
                 child: Text(
                   "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.largeTitleTextStyle,
+                  style: ArnaTheme.of(context).textTheme.titleLarge,
                 ),
               ),
               Padding(
                 padding: Styles.normal,
                 child: Text(
                   "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.titleTextStyle,
+                  style: ArnaTheme.of(context).textTheme.title,
                 ),
               ),
               Padding(
                 padding: Styles.normal,
                 child: Text(
                   "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.textStyle,
+                  style: ArnaTheme.of(context).textTheme.body,
                 ),
               ),
               Padding(
                 padding: Styles.normal,
                 child: Text(
                   "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.buttonTextStyle,
+                  style: ArnaTheme.of(context).textTheme.button,
                 ),
               ),
               Padding(
                 padding: Styles.normal,
                 child: Text(
                   "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.subtitleTextStyle,
+                  style: ArnaTheme.of(context).textTheme.subtitle,
                 ),
               ),
               Padding(
                 padding: Styles.normal,
                 child: Text(
                   "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.captionTextStyle,
+                  style: ArnaTheme.of(context).textTheme.caption,
                 ),
               ),
             ],

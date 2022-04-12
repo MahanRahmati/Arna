@@ -18,13 +18,13 @@ class HelloWorld extends ConsumerWidget {
         children: <Widget>[
           Text(
             "You have pushed the button this many times:",
-            style: ArnaTheme.of(context).textTheme.textStyle,
+            style: ArnaTheme.of(context).textTheme.body,
           ),
           const SizedBox(height: Styles.padding),
           Consumer(
             builder: (context, ref, _) => Text(
               "${ref.watch(counterProvider.state).state}",
-              style: ArnaTheme.of(context).textTheme.titleTextStyle,
+              style: ArnaTheme.of(context).textTheme.title,
             ),
           ),
         ],

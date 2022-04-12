@@ -19,8 +19,8 @@
     - [ ] ArnaSideScaffold
     - [ ] ArnaSnackBar
     - [ ] ArnaTooltip
-  - Buttons (2/6)
-    - [ ] ArnaButton
+  - Buttons (3/6)
+    - [x] ArnaButton
     - [ ] ArnaColorButton
     - [x] ArnaIconButton
     - [ ] ArnaLinkedButtons
@@ -53,9 +53,9 @@
     - [x] ArnaSwitchListTile
     - [ ] ArnaSwitch
     - [ ] ArnaTextField
-  - Theme (1/5)
+  - Theme (4/5)
     - [ ] ArnaColors
-    - [ ] ArnaIconThemeData
-    - [ ] ArnaTextThemeData
-    - [ ] ArnaThemeData
+    - [x] ArnaTextTheme
+    - [x] ArnaThemeData
     - [x] ArnaTheme
+    - [x] ArnaTypography

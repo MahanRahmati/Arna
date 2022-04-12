@@ -122,7 +122,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
                                     widget.title!,
                                     style: ArnaTheme.of(context)
                                         .textTheme
-                                        .textStyle
+                                        .body!
                                         .copyWith(
                                           color: ArnaDynamicColor.resolve(
                                             !isEnabled && widget.actionable
@@ -146,7 +146,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
                                     widget.subtitle!,
                                     style: ArnaTheme.of(context)
                                         .textTheme
-                                        .subtitleTextStyle
+                                        .subtitle!
                                         .copyWith(
                                           color: ArnaDynamicColor.resolve(
                                             !isEnabled && widget.actionable

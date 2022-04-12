@@ -10,6 +10,16 @@
 - Update ArnaColorButton
 - Update ArnaButton
 - Update ArnaTheme
+- Add ArnaTypography
+- Refactor ArnaThemeData
+- [BREAKING] Refactor ArnaTextTheme
+- [BREAKING] Refactor ArnaButton
+- [BREAKING] Refactor ArnaIconButton
+- [BREAKING] Refactor ArnaTextButton
+- Remove ArnaIconThemeData
+- Update ArnaProgressIndicator
+- Update ArnaScrollbar
+- Update ArnaApp
 
 ## 0.3.8
 

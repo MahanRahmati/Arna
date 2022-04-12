@@ -118,9 +118,7 @@ class ArnaAlertDialog extends StatelessWidget {
                               padding: Styles.normal,
                               child: Text(
                                 title!,
-                                style: ArnaTheme.of(context)
-                                    .textTheme
-                                    .titleTextStyle,
+                                style: ArnaTheme.of(context).textTheme.title,
                                 textAlign: TextAlign.center,
                               ),
                             ),
@@ -130,8 +128,7 @@ class ArnaAlertDialog extends StatelessWidget {
                               child: Text(
                                 message!,
                                 maxLines: 5,
-                                style:
-                                    ArnaTheme.of(context).textTheme.textStyle,
+                                style: ArnaTheme.of(context).textTheme.body,
                                 textAlign: TextAlign.left,
                               ),
                             ),

@@ -29,7 +29,11 @@ class _WidgetsState extends State<Widgets> {
             title: "Widgets",
             children: <Widget>[
               ArnaExpansionPanel(
-                leading: const Icon(Icons.adjust_outlined),
+                leading: Icon(
+                  Icons.adjust_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Buttons",
                 child: Center(
                   child: Wrap(
@@ -72,29 +76,19 @@ class _WidgetsState extends State<Widgets> {
                         ),
                         tooltipMessage: "Add",
                       ),
-                      ArnaIconButton(
-                        icon: Icons.add_outlined,
-                        hasBorder: false,
-                        buttonType: ButtonType.normal,
-                        onPressed: () => showArnaSnackbar(
-                          context: context,
-                          message: "Hello There!",
-                        ),
-                        tooltipMessage: "Add",
-                      ),
                       ArnaPopupMenuButton<String>(
                         itemBuilder: (context) => <ArnaPopupMenuEntry<String>>[
                           ArnaPopupMenuItem(
                             child: Text(
                               "First Item",
-                              style: ArnaTheme.of(context).textTheme.textStyle,
+                              style: ArnaTheme.of(context).textTheme.body,
                             ),
                             value: "First Item",
                           ),
                           ArnaPopupMenuItem(
                             child: Text(
                               "Second Item",
-                              style: ArnaTheme.of(context).textTheme.textStyle,
+                              style: ArnaTheme.of(context).textTheme.body,
                             ),
                             value: "Second Item",
                           ),
@@ -102,7 +96,7 @@ class _WidgetsState extends State<Widgets> {
                           ArnaPopupMenuItem(
                             child: Text(
                               "Third Item",
-                              style: ArnaTheme.of(context).textTheme.textStyle,
+                              style: ArnaTheme.of(context).textTheme.body,
                             ),
                             value: "Third Item",
                           ),
@@ -117,7 +111,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.more_horiz_outlined),
+                leading: Icon(
+                  Icons.more_horiz_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Linked Buttons",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -158,7 +156,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.calendar_view_week_outlined),
+                leading: Icon(
+                  Icons.calendar_view_week_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Segmented Control",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -173,7 +175,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.check_box_outlined),
+                leading: Icon(
+                  Icons.check_box_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "CheckBox",
                 child: ArnaColumn(
                   children: <Widget>[
@@ -202,7 +208,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.radio_button_checked_outlined),
+                leading: Icon(
+                  Icons.radio_button_checked_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Radio",
                 child: ArnaColumn(
                   children: <Widget>[
@@ -235,7 +245,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.toggle_on_outlined),
+                leading: Icon(
+                  Icons.toggle_on_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Switch",
                 child: ArnaColumn(
                   children: <Widget>[
@@ -263,7 +277,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.view_list_outlined),
+                leading: Icon(
+                  Icons.view_list_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "List Tile",
                 child: ArnaColumn(
                   children: <Widget>[
@@ -281,7 +299,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.linear_scale_outlined),
+                leading: Icon(
+                  Icons.linear_scale_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Slider",
                 child: ArnaColumn(
                   children: <Widget>[
@@ -317,7 +339,11 @@ class _WidgetsState extends State<Widgets> {
                 ),
               ),
               ArnaExpansionPanel(
-                leading: const Icon(Icons.refresh_outlined),
+                leading: Icon(
+                  Icons.refresh_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Indicator",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -327,10 +353,14 @@ class _WidgetsState extends State<Widgets> {
                   ],
                 ),
               ),
-              const ArnaExpansionPanel(
-                leading: Icon(Icons.text_fields_outlined),
+              ArnaExpansionPanel(
+                leading: Icon(
+                  Icons.text_fields_outlined,
+                  color:
+                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                ),
                 title: "Text Field",
-                child: ArnaTextField(),
+                child: const ArnaTextField(),
               ),
             ],
           ),

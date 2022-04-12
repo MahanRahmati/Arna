@@ -106,7 +106,7 @@ class ArnaMasterItem extends StatelessWidget {
                   padding: Styles.tileTextPadding,
                   child: Text(
                     title!,
-                    style: ArnaTheme.of(context).textTheme.textStyle,
+                    style: ArnaTheme.of(context).textTheme.button,
                   ),
                 ),
               ),
@@ -115,7 +115,7 @@ class ArnaMasterItem extends StatelessWidget {
                 padding: Styles.tileTextPadding,
                 child: Text(
                   subtitle!,
-                  style: ArnaTheme.of(context).textTheme.subtitleTextStyle,
+                  style: ArnaTheme.of(context).textTheme.subtitle,
                 ),
               ),
           ],

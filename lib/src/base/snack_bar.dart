@@ -51,9 +51,9 @@ class ArnaSnackBarState extends State<ArnaSnackBar>
       Flexible(
         child: Text(
           widget.message,
-          style: ArnaTheme.of(context).textTheme.textStyle.copyWith(
+          style: ArnaTheme.of(context).textTheme.body!.copyWith(
                 color: ArnaDynamicColor.resolve(
-                  ArnaColors.reversePrimaryTextColor,
+                  ArnaColors.primaryTextColorDark,
                   context,
                 ),
               ),

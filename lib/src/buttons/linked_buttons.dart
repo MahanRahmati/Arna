@@ -71,7 +71,7 @@ class _ArnaLinked extends StatelessWidget {
       Widget labelWidget = Flexible(
         child: Text(
           button.label!,
-          style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+          style: ArnaTheme.of(context).textTheme.button!.copyWith(
                 color: ArnaDynamicColor.resolve(
                   !enabled
                       ? ArnaColors.disabledColor

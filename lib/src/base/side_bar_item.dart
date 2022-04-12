@@ -99,7 +99,7 @@ class ArnaSideBarItem extends StatelessWidget {
             const SizedBox(width: Styles.padding),
             Text(
               label,
-              style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
+              style: ArnaTheme.of(context).textTheme.button!.copyWith(
                     color: ArnaDynamicColor.resolve(
                       !enabled
                           ? ArnaColors.disabledColor

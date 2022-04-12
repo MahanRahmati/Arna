@@ -19,7 +19,6 @@ class ArnaButton extends StatelessWidget {
     this.buttonSize = ButtonSize.normal,
     this.isFocusable = true,
     this.autofocus = false,
-    this.hasBorder = true,
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
@@ -53,9 +52,6 @@ class ArnaButton extends StatelessWidget {
   /// focused.
   final bool autofocus;
 
-  /// Whether this button has border or not.
-  final bool hasBorder;
-
   /// The color of the button's focused border.
   final Color? accentColor;
 
@@ -66,111 +62,24 @@ class ArnaButton extends StatelessWidget {
   /// The semantic label of the button.
   final String? semanticLabel;
 
-  Widget _buildChild(
-    BuildContext context,
-    bool enabled,
-    bool hovered,
-    Color accent,
-    Brightness brightness,
-  ) {
-    final List<Widget> children = <Widget>[];
-    if (icon != null) {
-      Widget iconWidget = Icon(
-        icon!,
-        size: Styles.iconSize,
-        color: ArnaDynamicColor.resolve(
-          !enabled
-              ? ArnaColors.disabledColor
-              : buttonType == ButtonType.normal
-                  ? ArnaColors.iconColor
-                  : hasBorder
-                      ? ArnaDynamicColor.innerColor(
-                          accent,
-                          ArnaTheme.brightnessOf(context),
-                        )
-                      : hovered
-                          ? ArnaDynamicColor.matchingColor(
-                              ArnaDynamicColor.blend(
-                                hasBorder
-                                    ? ArnaDynamicColor.resolve(
-                                        ArnaColors.buttonColor,
-                                        context,
-                                      )
-                                    : ArnaDynamicColor.resolve(
-                                        ArnaColors.headerColor,
-                                        context,
-                                      ),
-                                14,
-                                brightness,
-                              ),
-                              accent,
-                              brightness,
-                            )
-                          : ArnaDynamicColor.matchingColor(
-                              hasBorder
-                                  ? ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
-                                      context,
-                                    )
-                                  : ArnaDynamicColor.resolve(
-                                      ArnaColors.headerColor,
-                                      context,
-                                    ),
-                              accent,
-                              brightness,
-                            ),
-          context,
-        ),
-      );
-      children.add(iconWidget);
-      if (label != null) {
-        children.add(
-          const SizedBox(width: Styles.padding),
-        );
-      }
-    }
-    if (label != null) {
-      Widget text = Text(
-        label!,
-        style: ArnaTheme.of(context).textTheme.buttonTextStyle.copyWith(
-              color: ArnaDynamicColor.resolve(
-                !enabled
-                    ? ArnaColors.disabledColor
-                    : buttonType == ButtonType.normal
-                        ? ArnaColors.primaryTextColor
-                        : ArnaDynamicColor.innerColor(accent, brightness),
-                context,
-              ),
-            ),
-      );
-      Widget labelWidget = Flexible(child: text);
-      children.add(labelWidget);
-      if (icon != null) {
-        children.add(const SizedBox(width: Styles.padding));
-      }
-    }
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize:
-          buttonSize == ButtonSize.huge ? MainAxisSize.max : MainAxisSize.min,
-      children: children,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    Color buttonColor = ArnaDynamicColor.resolve(
+      ArnaColors.buttonColor,
+      context,
+    );
+    Brightness brightness = ArnaTheme.brightnessOf(context);
     Color accent;
     switch (buttonType) {
       case ButtonType.destructive:
-        accent = ArnaColors.errorColor;
+        accent = ArnaColors.red;
         break;
       case ButtonType.suggested:
-        accent = ArnaColors.accentColor;
+        accent = ArnaColors.blue;
         break;
       default:
         accent = accentColor ?? ArnaTheme.of(context).accentColor;
     }
-    Brightness brightness = ArnaTheme.brightnessOf(context);
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
@@ -185,68 +94,23 @@ class ArnaButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
-                color: hasBorder
-                    ? ArnaDynamicColor.resolve(
-                        buttonType == ButtonType.normal
-                            ? !enabled
-                                ? ArnaColors.borderColor
-                                : focused
-                                    ? ArnaDynamicColor.matchingColor(
-                                        ArnaDynamicColor.resolve(
-                                          ArnaColors.buttonColor,
-                                          context,
-                                        ),
-                                        accent,
-                                        brightness,
-                                      )
-                                    : ArnaColors.borderColor
-                            : !enabled
-                                ? ArnaDynamicColor.blend(
-                                    ArnaDynamicColor.innerColor(
-                                      accent,
-                                      brightness,
-                                    ),
-                                    21,
-                                    brightness,
-                                  )
-                                : ArnaDynamicColor.outerColor(
-                                    accent,
-                                    focused ? true : hover,
-                                    brightness,
-                                  ),
-                        context,
-                      )
-                    : focused
-                        ? ArnaColors.borderColor
-                        : ArnaDynamicColor.resolve(
-                            ArnaColors.buttonColor,
-                            context,
-                          ).withAlpha(0),
+                color: focused
+                    ? accent
+                    : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
               ),
               color: !enabled
                   ? ArnaDynamicColor.resolve(
                       ArnaColors.backgroundColor,
                       context,
                     )
-                  : buttonType == ButtonType.normal || !hasBorder
+                  : buttonType == ButtonType.normal
                       ? pressed || hover
                           ? ArnaDynamicColor.blend(
-                              hasBorder
-                                  ? ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
-                                      context,
-                                    )
-                                  : ArnaDynamicColor.resolve(
-                                      ArnaColors.headerColor,
-                                      context,
-                                    ),
+                              buttonColor,
                               14,
                               brightness,
                             )
-                          : ArnaDynamicColor.resolve(
-                              ArnaColors.buttonColor,
-                              context,
-                            ).withAlpha(hasBorder ? 255 : 0)
+                          : buttonColor
                       : pressed || hover || focused
                           ? ArnaDynamicColor.blend(accent, 14, brightness)
                           : accent,
@@ -254,7 +118,53 @@ class ArnaButton extends StatelessWidget {
             padding: icon != null
                 ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
                 : Styles.largeHorizontal,
-            child: _buildChild(context, enabled, hover, accent, brightness),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: buttonSize == ButtonSize.huge
+                  ? MainAxisSize.max
+                  : MainAxisSize.min,
+              children: <Widget>[
+                if (icon != null)
+                  Icon(
+                    icon!,
+                    size: Styles.iconSize,
+                    color: ArnaDynamicColor.resolve(
+                      !enabled
+                          ? ArnaColors.disabledColor
+                          : buttonType == ButtonType.normal
+                              ? ArnaColors.iconColor
+                              : ArnaDynamicColor.innerColor(
+                                  accent,
+                                  ArnaTheme.brightnessOf(context),
+                                ),
+                      context,
+                    ),
+                  ),
+                if (icon != null && label != null)
+                  const SizedBox(width: Styles.padding),
+                if (label != null)
+                  Flexible(
+                    child: Text(
+                      label!,
+                      style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                            color: ArnaDynamicColor.resolve(
+                              !enabled
+                                  ? ArnaColors.disabledColor
+                                  : buttonType == ButtonType.normal
+                                      ? ArnaColors.primaryTextColor
+                                      : ArnaDynamicColor.innerColor(
+                                          accent,
+                                          brightness,
+                                        ),
+                              context,
+                            ),
+                          ),
+                    ),
+                  ),
+                if (icon != null && label != null)
+                  const SizedBox(width: Styles.padding),
+              ],
+            ),
           );
         },
         onPressed: onPressed,

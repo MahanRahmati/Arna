@@ -72,7 +72,7 @@ class ArnaScaffold extends StatelessWidget {
                   middle: title != null
                       ? Text(
                           title!,
-                          style: ArnaTheme.of(context).textTheme.titleTextStyle,
+                          style: ArnaTheme.of(context).textTheme.title,
                         )
                       : null,
                   actions: actions,

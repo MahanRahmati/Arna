@@ -100,19 +100,19 @@ class _ArnaBannerState extends State<ArnaBanner>
     switch (widget.bannerType) {
       case BannerType.information:
         icon = Icons.info;
-        accent = ArnaColors.accentColor;
+        accent = ArnaColors.blue;
         break;
       case BannerType.warning:
         icon = Icons.warning;
-        accent = ArnaColors.warningColor;
+        accent = ArnaColors.orange;
         break;
       case BannerType.error:
         icon = Icons.error;
-        accent = ArnaColors.errorColor;
+        accent = ArnaColors.red;
         break;
       case BannerType.success:
         icon = Icons.check_circle;
-        accent = ArnaColors.successColor;
+        accent = ArnaColors.green;
         break;
       case BannerType.colored:
         icon = Icons.info;

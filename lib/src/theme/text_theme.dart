@@ -1,280 +1,323 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 
-const TextStyle _kDefaultLargeTitleTextStyle = TextStyle(
-  inherit: false,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w300,
-  fontSize: 32,
-  color: ArnaColors.primaryTextColor,
-  decoration: TextDecoration.none,
-  overflow: TextOverflow.ellipsis,
-);
-
-const TextStyle _kDefaultTitleTextStyle = TextStyle(
-  inherit: false,
-  fontFamily: 'Inter',
-  fontSize: 21,
-  color: ArnaColors.primaryTextColor,
-  decoration: TextDecoration.none,
-  overflow: TextOverflow.ellipsis,
-);
-
-const TextStyle _kDefaultBodyTextStyle = TextStyle(
-  inherit: false,
-  fontFamily: 'Inter',
-  fontSize: 17,
-  color: ArnaColors.primaryTextColor,
-  decoration: TextDecoration.none,
-  overflow: TextOverflow.ellipsis,
-);
-
-const TextStyle _kDefaultSubtitleTextStyle = TextStyle(
-  inherit: false,
-  fontFamily: 'Inter',
-  fontSize: 14,
-  color: ArnaColors.secondaryTextColor,
-  decoration: TextDecoration.none,
-  overflow: TextOverflow.ellipsis,
-);
-
-const TextStyle _kDefaultButtonTextStyle = TextStyle(
-  inherit: false,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w500,
-  fontSize: 16,
-  color: ArnaColors.primaryTextColor,
-  decoration: TextDecoration.none,
-  overflow: TextOverflow.ellipsis,
-);
-
-const TextStyle _kDefaultCaptionTextStyle = TextStyle(
-  inherit: false,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w700,
-  fontSize: 12,
-  color: ArnaColors.primaryTextColor,
-  decoration: TextDecoration.none,
-  overflow: TextOverflow.ellipsis,
-);
-
-TextStyle? _resolveTextStyle(TextStyle? style, BuildContext context) {
-  // This does not resolve the shadow color, foreground, background, etc.
-  return style?.copyWith(
-    color: ArnaDynamicColor.maybeResolve(style.color, context),
-    backgroundColor: ArnaDynamicColor.maybeResolve(
-      style.backgroundColor,
-      context,
-    ),
-    decorationColor: ArnaDynamicColor.maybeResolve(
-      style.decorationColor,
-      context,
-    ),
-  );
-}
-
-/// Arna typography theme in a [ArnaThemeData].
+/// Arna text theme.
+///
+/// To obtain the current text theme, call [ArnaTheme.of] with the current
+/// [BuildContext] and read the [ArnaThemeData.textTheme] property.
 @immutable
-class ArnaTextThemeData with Diagnosticable {
-  /// Create a [ArnaTextThemeData].
-  const ArnaTextThemeData({
-    TextStyle? largeTitleTextStyle,
+class ArnaTextTheme with Diagnosticable {
+  /// Creates a text theme that uses the given values.
+  ///
+  /// Rather than creating a new text theme, consider using
+  /// [ArnaTypography.light] or [ArnaTypography.dark].
+  /// If you do decide to create your own text theme, consider using one of
+  /// those predefined themes as a starting point for [copyWith] or [apply].
+  const ArnaTextTheme({
+    TextStyle? titleLargeTextStyle,
     TextStyle? titleTextStyle,
-    TextStyle? textStyle,
+    TextStyle? bodyTextStyle,
     TextStyle? subtitleTextStyle,
     TextStyle? buttonTextStyle,
     TextStyle? captionTextStyle,
   }) : this._raw(
-          const _TextThemeDefaultsBuilder(ArnaColors.primaryTextColor),
-          largeTitleTextStyle,
+          titleLargeTextStyle,
           titleTextStyle,
-          textStyle,
+          bodyTextStyle,
           subtitleTextStyle,
           buttonTextStyle,
           captionTextStyle,
         );
 
-  const ArnaTextThemeData._raw(
-    this._defaults,
-    this._largeTitleTextStyle,
+  const ArnaTextTheme._raw(
+    this._titleLargeTextStyle,
     this._titleTextStyle,
-    this._textStyle,
+    this._bodyTextStyle,
     this._subtitleTextStyle,
     this._buttonTextStyle,
     this._captionTextStyle,
   );
 
-  final _TextThemeDefaultsBuilder _defaults;
-
-  final TextStyle? _largeTitleTextStyle;
-
   /// The [TextStyle] of large titles.
-  TextStyle get largeTitleTextStyle =>
-      _largeTitleTextStyle ?? _defaults.largeTitleTextStyle;
-
-  final TextStyle? _titleTextStyle;
+  final TextStyle? _titleLargeTextStyle;
 
   /// The [TextStyle] of titles.
-  TextStyle get titleTextStyle => _titleTextStyle ?? _defaults.titleTextStyle;
-
-  final TextStyle? _textStyle;
+  final TextStyle? _titleTextStyle;
 
   /// The [TextStyle] of general text content for Arna widgets.
-  TextStyle get textStyle => _textStyle ?? _defaults.textStyle;
-
-  final TextStyle? _subtitleTextStyle;
+  final TextStyle? _bodyTextStyle;
 
   /// The [TextStyle] of subtitles.
-  TextStyle get subtitleTextStyle =>
-      _subtitleTextStyle ?? _defaults.subtitleTextStyle;
-  final TextStyle? _buttonTextStyle;
+  final TextStyle? _subtitleTextStyle;
 
   /// The [TextStyle] of buttons.
-  TextStyle get buttonTextStyle =>
-      _buttonTextStyle ?? _defaults.buttonTextStyle;
-  final TextStyle? _captionTextStyle;
+  final TextStyle? _buttonTextStyle;
 
   /// The [TextStyle] of captions.
-  TextStyle get captionTextStyle =>
-      _captionTextStyle ?? _defaults.captionTextStyle;
+  final TextStyle? _captionTextStyle;
 
-  /// Returns a copy of the current [ArnaTextThemeData] with all the colors
-  /// resolved against the given [BuildContext].
+  /// The [TextStyle] of large titles.
+  TextStyle? get titleLarge => _titleLargeTextStyle;
+
+  /// The [TextStyle] of titles.
+  TextStyle? get title => _titleTextStyle;
+
+  /// The [TextStyle] of general text content for Arna widgets.
+  TextStyle? get body => _bodyTextStyle;
+
+  /// The [TextStyle] of subtitles.
+  TextStyle? get subtitle => _subtitleTextStyle;
+
+  /// The [TextStyle] of buttons.
+  TextStyle? get button => _buttonTextStyle;
+
+  /// The [TextStyle] of captions.
+  TextStyle? get caption => _captionTextStyle;
+
+  /// Creates a copy of this text theme but with the given fields replaced with
+  /// the new values.
   ///
-  /// If any of the [InheritedWidget]s required to resolve this
-  /// [ArnaTextThemeData] is not found in [context], any unresolved
-  /// [ArnaDynamicColor]s will use the default trait value
-  /// ([Brightness.light] platform brightness and normal contrast).
-  ArnaTextThemeData resolveFrom(BuildContext context) {
-    return ArnaTextThemeData._raw(
-      _defaults.resolveFrom(context),
-      _resolveTextStyle(_largeTitleTextStyle, context),
-      _resolveTextStyle(_titleTextStyle, context),
-      _resolveTextStyle(_textStyle, context),
-      _resolveTextStyle(_subtitleTextStyle, context),
-      _resolveTextStyle(_buttonTextStyle, context),
-      _resolveTextStyle(_captionTextStyle, context),
-    );
-  }
-
-  /// Returns a copy of the current [ArnaTextThemeData] instance with
-  /// specified overrides.
-  ArnaTextThemeData copyWith({
-    TextStyle? largeTitleTextStyle,
+  /// Consider using [ArnaTypography.light] or [ArnaTypography.dark] as
+  /// a starting point.
+  ///
+  /// See also:
+  ///
+  ///  * [merge] is used instead of [copyWith] when you want to merge all
+  ///    of the fields of a TextTheme instead of individual fields.
+  ArnaTextTheme copyWith({
+    TextStyle? titleLargeTextStyle,
     TextStyle? titleTextStyle,
-    TextStyle? textStyle,
+    TextStyle? bodyTextStyle,
     TextStyle? subtitleTextStyle,
     TextStyle? buttonTextStyle,
     TextStyle? captionTextStyle,
-    TextStyle? statusBarTextStyle,
   }) {
-    return ArnaTextThemeData._raw(
-      _defaults,
-      largeTitleTextStyle ?? _largeTitleTextStyle,
-      titleTextStyle ?? _titleTextStyle,
-      textStyle ?? _textStyle,
-      subtitleTextStyle ?? _subtitleTextStyle,
-      buttonTextStyle ?? _buttonTextStyle,
-      captionTextStyle ?? _captionTextStyle,
+    return ArnaTextTheme(
+      titleLargeTextStyle: titleLargeTextStyle ?? _titleLargeTextStyle,
+      titleTextStyle: titleTextStyle ?? _titleTextStyle,
+      bodyTextStyle: bodyTextStyle ?? _bodyTextStyle,
+      subtitleTextStyle: subtitleTextStyle ?? _subtitleTextStyle,
+      buttonTextStyle: buttonTextStyle ?? _buttonTextStyle,
+      captionTextStyle: captionTextStyle ?? _captionTextStyle,
+    );
+  }
+
+  /// Creates a new [ArnaTextTheme] where each text style from this object has
+  /// been merged with the matching text style from the `other` object.
+  ///
+  /// The merging is done by calling [TextStyle.merge] on each respective pair
+  /// of text styles from this and the [other] text themes and is subject to
+  /// the value of [TextStyle.inherit] flag. For more details, see the
+  /// documentation on [TextStyle.merge] and [TextStyle.inherit].
+  ///
+  /// If this theme, or the `other` theme has members that are null, then the
+  /// non-null one (if any) is used. If the `other` theme is itself null, then
+  /// this [ArnaTextTheme] is returned unchanged. If values in both are set,
+  /// then the values are merged using [TextStyle.merge].
+  ///
+  /// This is particularly useful if one [ArnaTextTheme] defines one set of
+  /// properties and another defines a different set, e.g. having colors
+  /// defined in one text theme and font sizes in another, or when one
+  /// [ArnaTextTheme] has only some fields defined, and you want to define the
+  /// rest by merging it with a default theme.
+  ///
+  /// See also:
+  ///
+  ///  * [copyWith] is used instead of [merge] when you wish to override
+  ///    individual fields in the [ArnaTextTheme] instead of merging all of the
+  ///    fields of two [ArnaTextTheme]s.
+  ArnaTextTheme merge(ArnaTextTheme? other) {
+    if (other == null) return this;
+    return copyWith(
+      titleLargeTextStyle:
+          _titleLargeTextStyle?.merge(other._titleLargeTextStyle) ??
+              other._titleLargeTextStyle,
+      titleTextStyle: _titleTextStyle?.merge(other._titleTextStyle) ??
+          other._titleTextStyle,
+      bodyTextStyle:
+          _bodyTextStyle?.merge(other._bodyTextStyle) ?? other._bodyTextStyle,
+      subtitleTextStyle: _subtitleTextStyle?.merge(other._subtitleTextStyle) ??
+          other._subtitleTextStyle,
+      buttonTextStyle: _buttonTextStyle?.merge(other._buttonTextStyle) ??
+          other._buttonTextStyle,
+      captionTextStyle: _captionTextStyle?.merge(other._captionTextStyle) ??
+          other._captionTextStyle,
+    );
+  }
+
+  /// Creates a copy of this text theme but with the given field replaced in
+  /// each of the individual text styles.
+  ///
+  /// Consider using [ArnaTypography.light] or [ArnaTypography.dark], which
+  /// implement the typography styles in the material design specification,
+  /// as a starting point.
+  ArnaTextTheme apply({
+    String? fontFamily,
+    double fontSizeFactor = 1.0,
+    double fontSizeDelta = 0.0,
+    Color? bodyColor,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    TextDecorationStyle? decorationStyle,
+  }) {
+    return ArnaTextTheme(
+      titleLargeTextStyle: _titleLargeTextStyle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      titleTextStyle: _titleTextStyle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      bodyTextStyle: _bodyTextStyle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      subtitleTextStyle: _subtitleTextStyle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      buttonTextStyle: _buttonTextStyle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      captionTextStyle: _captionTextStyle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+    );
+  }
+
+  /// Linearly interpolate between two text themes.
+  ///
+  /// {@macro dart.ui.shadow.lerp}
+  static ArnaTextTheme lerp(ArnaTextTheme? a, ArnaTextTheme? b, double t) {
+    return ArnaTextTheme(
+      titleLargeTextStyle: TextStyle.lerp(
+        a?._titleLargeTextStyle,
+        b?._titleLargeTextStyle,
+        t,
+      ),
+      titleTextStyle: TextStyle.lerp(a?._titleTextStyle, b?._titleTextStyle, t),
+      bodyTextStyle: TextStyle.lerp(a?._bodyTextStyle, b?._bodyTextStyle, t),
+      subtitleTextStyle: TextStyle.lerp(
+        a?._subtitleTextStyle,
+        b?._subtitleTextStyle,
+        t,
+      ),
+      buttonTextStyle: TextStyle.lerp(
+        a?._buttonTextStyle,
+        b?._buttonTextStyle,
+        t,
+      ),
+      captionTextStyle: TextStyle.lerp(
+        a?._captionTextStyle,
+        b?._captionTextStyle,
+        t,
+      ),
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other.runtimeType != runtimeType) return false;
+    return other is ArnaTextTheme &&
+        _titleLargeTextStyle == other._titleLargeTextStyle &&
+        _titleTextStyle == other._titleTextStyle &&
+        _bodyTextStyle == other._bodyTextStyle &&
+        _subtitleTextStyle == other._subtitleTextStyle &&
+        _buttonTextStyle == other._buttonTextStyle &&
+        _captionTextStyle == other._captionTextStyle;
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      _titleLargeTextStyle,
+      _titleTextStyle,
+      _bodyTextStyle,
+      _subtitleTextStyle,
+      _buttonTextStyle,
+      _captionTextStyle,
     );
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    const ArnaTextThemeData defaultData = ArnaTextThemeData();
+    const ArnaTextTheme defaultTheme = ArnaTypography.light;
     properties.add(
       DiagnosticsProperty<TextStyle>(
-        'largeTitleTextStyle',
-        largeTitleTextStyle,
-        defaultValue: defaultData.largeTitleTextStyle,
+        'titleLargeTextStyle',
+        _titleLargeTextStyle,
+        defaultValue: defaultTheme._titleLargeTextStyle,
       ),
     );
     properties.add(
       DiagnosticsProperty<TextStyle>(
         'titleTextStyle',
-        titleTextStyle,
-        defaultValue: defaultData.titleTextStyle,
+        _titleTextStyle,
+        defaultValue: defaultTheme._titleTextStyle,
       ),
     );
     properties.add(
       DiagnosticsProperty<TextStyle>(
-        'textStyle',
-        textStyle,
-        defaultValue: defaultData.textStyle,
+        'bodyTextStyle',
+        _bodyTextStyle,
+        defaultValue: defaultTheme._bodyTextStyle,
       ),
     );
     properties.add(
       DiagnosticsProperty<TextStyle>(
         'subtitleTextStyle',
-        subtitleTextStyle,
-        defaultValue: defaultData.subtitleTextStyle,
+        _subtitleTextStyle,
+        defaultValue: defaultTheme._subtitleTextStyle,
       ),
     );
     properties.add(
       DiagnosticsProperty<TextStyle>(
         'buttonTextStyle',
-        buttonTextStyle,
-        defaultValue: defaultData.buttonTextStyle,
+        _buttonTextStyle,
+        defaultValue: defaultTheme._buttonTextStyle,
       ),
     );
     properties.add(
       DiagnosticsProperty<TextStyle>(
         'captionTextStyle',
-        captionTextStyle,
-        defaultValue: defaultData.captionTextStyle,
+        _captionTextStyle,
+        defaultValue: defaultTheme._captionTextStyle,
       ),
     );
-  }
-}
-
-@immutable
-class _TextThemeDefaultsBuilder {
-  final Color labelColor;
-
-  const _TextThemeDefaultsBuilder(this.labelColor);
-
-  static TextStyle _applyLabelColor(TextStyle original, Color color) =>
-      original.color == color ? original : original.copyWith(color: color);
-
-  TextStyle get largeTitleTextStyle => _applyLabelColor(
-        _kDefaultLargeTitleTextStyle,
-        labelColor,
-      );
-
-  TextStyle get titleTextStyle => _applyLabelColor(
-        _kDefaultTitleTextStyle,
-        labelColor,
-      );
-
-  TextStyle get textStyle => _applyLabelColor(
-        _kDefaultBodyTextStyle,
-        labelColor,
-      );
-
-  TextStyle get subtitleTextStyle => _applyLabelColor(
-        _kDefaultSubtitleTextStyle,
-        labelColor,
-      );
-
-  TextStyle get buttonTextStyle => _applyLabelColor(
-        _kDefaultButtonTextStyle,
-        labelColor,
-      );
-
-  TextStyle get captionTextStyle => _applyLabelColor(
-        _kDefaultCaptionTextStyle,
-        labelColor,
-      );
-
-  _TextThemeDefaultsBuilder resolveFrom(BuildContext context) {
-    final Color resolvedLabelColor = ArnaDynamicColor.resolve(
-      labelColor,
-      context,
-    );
-
-    return resolvedLabelColor == labelColor
-        ? this
-        : _TextThemeDefaultsBuilder(resolvedLabelColor);
   }
 }

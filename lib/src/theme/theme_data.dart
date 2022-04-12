@@ -25,16 +25,14 @@ class ArnaThemeData with Diagnosticable {
     Color? accentColor,
     ArnaTextTheme? textTheme,
   }) {
-    final Brightness? effectiveBrightness = brightness;
-    final bool isDark = effectiveBrightness == Brightness.dark;
-    final Color effectiveAccentColor = accentColor ?? ArnaColors.blue;
-    ArnaTextTheme defaultTextTheme =
-        isDark ? ArnaTypography.dark : ArnaTypography.light;
+    ArnaTextTheme defaultTextTheme = brightness == Brightness.dark
+        ? ArnaTypography.dark
+        : ArnaTypography.light;
     final ArnaTextTheme effectiveTextTheme = textTheme ?? defaultTextTheme;
 
     return ArnaThemeData.raw(
-      brightness: effectiveBrightness,
-      accentColor: effectiveAccentColor,
+      brightness: brightness,
+      accentColor: accentColor ?? ArnaColors.blue,
       textTheme: effectiveTextTheme,
     );
   }
@@ -61,7 +59,7 @@ class ArnaThemeData with Diagnosticable {
   /// A color used on interactive elements of the theme.
   ///
   /// This color is generally used on tappable elements.
-  /// Defaults to [ArnaColors.accentColor].
+  /// Defaults to [ArnaColors.blue].
   final Color accentColor;
 
   /// Text styles used by Arna widgets.

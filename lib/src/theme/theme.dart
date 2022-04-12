@@ -92,10 +92,7 @@ class ArnaTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedArnaTheme(
-      theme: this,
-      child: child,
-    );
+    return _InheritedArnaTheme(theme: this, child: child);
   }
 
   @override

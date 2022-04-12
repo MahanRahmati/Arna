@@ -90,12 +90,11 @@ class _ArnaListTileState extends State<ArnaListTile> {
                         ? ArnaColors.backgroundColor
                         : ArnaColors.transparent
                     : _hover
-                        ? ArnaDynamicColor.blend(
+                        ? ArnaDynamicColor.applyOverlay(
                             ArnaDynamicColor.resolve(
                               ArnaColors.cardColor,
                               context,
                             ),
-                            14,
                           )
                         : ArnaColors.cardColor,
                 context,

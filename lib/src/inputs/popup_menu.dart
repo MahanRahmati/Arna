@@ -283,20 +283,18 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>>
               !enabled
                   ? ArnaColors.backgroundColor
                   : pressed
-                      ? ArnaDynamicColor.blend(
+                      ? ArnaDynamicColor.applyOverlay(
                           ArnaDynamicColor.resolve(
                             ArnaColors.cardColor,
                             context,
                           ),
-                          14,
                         )
                       : hover
-                          ? ArnaDynamicColor.blend(
+                          ? ArnaDynamicColor.applyOverlay(
                               ArnaDynamicColor.resolve(
                                 ArnaColors.cardColor,
                                 context,
                               ),
-                              14,
                             )
                           : ArnaColors.cardColor,
               context,

@@ -402,6 +402,19 @@ class ArnaDynamicColor extends Color with Diagnosticable {
         : ArnaColors.shade243;
   }
 
+  /// Applies an overlay color to a [backgroundColor].
+  static Color applyOverlay(Color backgroundColor) {
+    final double colorLuminance = backgroundColor.computeLuminance();
+
+    const double kThreshold = 0.07;
+    Color foregroundColor =
+        ((colorLuminance + 0.05) * (colorLuminance + 0.05) > kThreshold)
+            ? ArnaColors.shade32
+            : ArnaColors.shade243;
+
+    return Color.alphaBlend(foregroundColor.withOpacity(0.14), backgroundColor);
+  }
+
   static Color outerColor(
     Color color,
     bool hover, [
@@ -512,22 +525,6 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     int g = base.green + (percentage * (secondColor.green - base.green)) ~/ 100;
     int b = base.blue + (percentage * (secondColor.blue - base.blue)) ~/ 100;
     return Color.fromRGBO(r, g, b, 1.0);
-  }
-
-  static Color blend(
-    Color base,
-    int percentage, [
-    Brightness brightness = Brightness.light,
-  ]) {
-    double baseLuminance = base.computeLuminance();
-    Color secondColor = baseLuminance > 0.45
-        ? base.computeLuminance() < 0.55 && brightness == Brightness.light
-            ? ArnaColors.shade255
-            : ArnaColors.shade00
-        : ArnaColors.shade255;
-    double bias =
-        baseLuminance > 0.5 ? 2.5 - 2 * baseLuminance : 0.5 + 2 * baseLuminance;
-    return _colorBlender(base, secondColor, percentage * bias);
   }
 
   bool get _isPlatformBrightnessDependent =>

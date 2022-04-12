@@ -193,7 +193,6 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Brightness brightness = ArnaTheme.brightnessOf(context);
     return ArnaBaseWidget(
       builder: (context, enabled, hover, focused, pressed, selected) {
         selected = buttonSelected;
@@ -227,34 +226,17 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
             ),
             color: ArnaDynamicColor.resolve(
               selected
-                  ? pressed
-                      ? ArnaDynamicColor.blend(accentColor, 14, brightness)
-                      : hover
-                          ? ArnaDynamicColor.blend(accentColor, 14, brightness)
-                          : focused
-                              ? ArnaDynamicColor.blend(
-                                  accentColor,
-                                  14,
-                                  brightness,
-                                )
-                              : accentColor
-                  : pressed
-                      ? ArnaDynamicColor.blend(
+                  ? pressed || hover || focused
+                      ? ArnaDynamicColor.applyOverlay(accentColor)
+                      : accentColor
+                  : pressed || hover
+                      ? ArnaDynamicColor.applyOverlay(
                           ArnaDynamicColor.resolve(
                             ArnaColors.buttonColor,
                             context,
                           ),
-                          14,
                         )
-                      : hover
-                          ? ArnaDynamicColor.blend(
-                              ArnaDynamicColor.resolve(
-                                ArnaColors.buttonColor,
-                                context,
-                              ),
-                              14,
-                            )
-                          : ArnaColors.buttonColor,
+                      : ArnaColors.buttonColor,
               context,
             ),
           ),

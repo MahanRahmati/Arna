@@ -31,8 +31,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.adjust_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Buttons",
                 child: Center(
@@ -113,8 +115,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.more_horiz_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Linked Buttons",
                 child: Row(
@@ -158,8 +162,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.calendar_view_week_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Segmented Control",
                 child: Row(
@@ -177,8 +183,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.check_box_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "CheckBox",
                 child: ArnaColumn(
@@ -210,8 +218,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.radio_button_checked_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Radio",
                 child: ArnaColumn(
@@ -247,8 +257,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.toggle_on_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Switch",
                 child: ArnaColumn(
@@ -279,8 +291,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.view_list_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "List Tile",
                 child: ArnaColumn(
@@ -301,8 +315,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.linear_scale_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Slider",
                 child: ArnaColumn(
@@ -341,8 +357,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.refresh_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Indicator",
                 child: Row(
@@ -356,8 +374,10 @@ class _WidgetsState extends State<Widgets> {
               ArnaExpansionPanel(
                 leading: Icon(
                   Icons.text_fields_outlined,
-                  color:
-                      ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
                 ),
                 title: "Text Field",
                 child: const ArnaTextField(),

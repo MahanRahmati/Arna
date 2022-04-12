@@ -1039,12 +1039,11 @@ class _ArnaTextFieldState extends State<ArnaTextField>
               decoration: BoxDecoration(
                 color: ArnaDynamicColor.resolve(
                   _isHovering
-                      ? ArnaDynamicColor.blend(
+                      ? ArnaDynamicColor.applyOverlay(
                           ArnaDynamicColor.resolve(
                             ArnaColors.textFieldColor,
                             context,
                           ),
-                          14,
                         )
                       : ArnaColors.textFieldColor,
                   context,

@@ -92,10 +92,8 @@ class ArnaColorButton<T> extends StatelessWidget {
                 border: Border.all(
                   color: ArnaDynamicColor.resolve(
                     !enabled
-                        ? ArnaDynamicColor.blend(
+                        ? ArnaDynamicColor.applyOverlay(
                             ArnaDynamicColor.onBackgroundColor(color),
-                            21,
-                            brightness,
                           )
                         : ArnaDynamicColor.outerColor(
                             color,
@@ -106,7 +104,7 @@ class ArnaColorButton<T> extends StatelessWidget {
                   ),
                 ),
                 color: pressed || hover || focused
-                    ? ArnaDynamicColor.blend(color, 14, brightness)
+                    ? ArnaDynamicColor.applyOverlay(color)
                     : color,
               ),
             ),

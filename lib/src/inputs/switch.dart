@@ -125,13 +125,11 @@ class ArnaSwitch extends StatelessWidget {
                                           ArnaDynamicColor.resolve(
                                             selected
                                                 ? ArnaColors.cardColor
-                                                : ArnaDynamicColor.blend(
+                                                : ArnaDynamicColor.applyOverlay(
                                                     ArnaDynamicColor.resolve(
                                                       ArnaColors.cardColor,
                                                       context,
                                                     ),
-                                                    14,
-                                                    brightness,
                                                   ),
                                             context,
                                           ),
@@ -153,16 +151,14 @@ class ArnaSwitch extends StatelessWidget {
                         ? ArnaColors.backgroundColor
                         : value
                             ? hover || focused
-                                ? ArnaDynamicColor.blend(accent, 14, brightness)
+                                ? ArnaDynamicColor.applyOverlay(accent)
                                 : accent
                             : hover
-                                ? ArnaDynamicColor.blend(
+                                ? ArnaDynamicColor.applyOverlay(
                                     ArnaDynamicColor.resolve(
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    14,
-                                    brightness,
                                   )
                                 : ArnaColors.backgroundColor,
                     context,

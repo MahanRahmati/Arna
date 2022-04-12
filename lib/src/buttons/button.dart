@@ -68,7 +68,6 @@ class ArnaButton extends StatelessWidget {
       ArnaColors.buttonColor,
       context,
     );
-    Brightness brightness = ArnaTheme.brightnessOf(context);
     Color accent;
     switch (buttonType) {
       case ButtonType.destructive:
@@ -105,14 +104,10 @@ class ArnaButton extends StatelessWidget {
                     )
                   : buttonType == ButtonType.normal
                       ? pressed || hover
-                          ? ArnaDynamicColor.blend(
-                              buttonColor,
-                              14,
-                              brightness,
-                            )
+                          ? ArnaDynamicColor.applyOverlay(buttonColor)
                           : buttonColor
                       : pressed || hover || focused
-                          ? ArnaDynamicColor.blend(accent, 14, brightness)
+                          ? ArnaDynamicColor.applyOverlay(accent)
                           : accent,
             ),
             padding: icon != null

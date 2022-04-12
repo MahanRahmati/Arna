@@ -122,23 +122,14 @@ class _ArnaLinked extends StatelessWidget {
             color: ArnaDynamicColor.resolve(
               !enabled
                   ? ArnaColors.backgroundColor
-                  : pressed
-                      ? ArnaDynamicColor.blend(
+                  : pressed || hover
+                      ? ArnaDynamicColor.applyOverlay(
                           ArnaDynamicColor.resolve(
                             ArnaColors.buttonColor,
                             context,
                           ),
-                          14,
                         )
-                      : hover
-                          ? ArnaDynamicColor.blend(
-                              ArnaDynamicColor.resolve(
-                                ArnaColors.buttonColor,
-                                context,
-                              ),
-                              14,
-                            )
-                          : ArnaColors.buttonColor,
+                      : ArnaColors.buttonColor,
               context,
             ),
           ),

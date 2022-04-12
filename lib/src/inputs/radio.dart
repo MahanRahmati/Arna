@@ -149,13 +149,11 @@ class ArnaRadio<T> extends StatelessWidget {
                                           ArnaDynamicColor.resolve(
                                             selected
                                                 ? ArnaColors.cardColor
-                                                : ArnaDynamicColor.blend(
+                                                : ArnaDynamicColor.applyOverlay(
                                                     ArnaDynamicColor.resolve(
                                                       ArnaColors.cardColor,
                                                       context,
                                                     ),
-                                                    14,
-                                                    brightness,
                                                   ),
                                             context,
                                           ),
@@ -177,20 +175,14 @@ class ArnaRadio<T> extends StatelessWidget {
                         ? ArnaColors.backgroundColor
                         : selected && enabled
                             ? hover || focused
-                                ? ArnaDynamicColor.blend(
-                                    accent,
-                                    14,
-                                    brightness,
-                                  )
+                                ? ArnaDynamicColor.applyOverlay(accent)
                                 : accent
                             : hover
-                                ? ArnaDynamicColor.blend(
+                                ? ArnaDynamicColor.applyOverlay(
                                     ArnaDynamicColor.resolve(
                                       ArnaColors.buttonColor,
                                       context,
                                     ),
-                                    14,
-                                    brightness,
                                   )
                                 : ArnaColors.buttonColor,
                     context,
@@ -213,13 +205,11 @@ class ArnaRadio<T> extends StatelessWidget {
                           ? ArnaDynamicColor.onBackgroundColor(accent)
                           : ArnaDynamicColor.resolve(
                               hover
-                                  ? ArnaDynamicColor.blend(
+                                  ? ArnaDynamicColor.applyOverlay(
                                       ArnaDynamicColor.resolve(
                                         ArnaColors.buttonColor,
                                         context,
                                       ),
-                                      14,
-                                      brightness,
                                     )
                                   : ArnaColors.backgroundColor,
                               context,

@@ -281,6 +281,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
           debugLabel,
         );
 
+  /// Creates an adaptive [Color] that changes its effective color based on the
+  /// [BuildContext] given. The default effective color is [color].
   const ArnaDynamicColor._(
     this._effectiveColor,
     this.color,
@@ -304,8 +306,10 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   @override
   int get value => _effectiveColor.value;
 
+  /// Debug label.
   final String? _debugLabel;
 
+  /// Debug resolve context.
   final Element? _debugResolveContext;
 
   /// The color to use when the [BuildContext] implies a combination of light
@@ -439,9 +443,11 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return Color.alphaBlend(foregroundColor, color);
   }
 
+  /// Is platform brightness dependent?
   bool get _isPlatformBrightnessDependent =>
       color != darkColor || highContrastColor != darkHighContrastColor;
 
+  /// Is high contrast dependent?
   bool get _isHighContrastDependent =>
       color != highContrastColor || darkColor != darkHighContrastColor;
 

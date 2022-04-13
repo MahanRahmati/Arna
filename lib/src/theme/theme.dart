@@ -102,6 +102,7 @@ class ArnaTheme extends StatelessWidget {
   }
 }
 
+/// _InheritedArnaTheme which extends InheritedWidget
 class _InheritedArnaTheme extends InheritedWidget {
   const _InheritedArnaTheme({
     Key? key,
@@ -128,8 +129,10 @@ class ArnaThemeDataTween extends Tween<ArnaThemeData> {
   /// The [begin] and [end] properties must be non-null before the tween is
   /// first used, but the arguments can be null if the values are going to be
   /// filled in later.
-  ArnaThemeDataTween({ArnaThemeData? begin, ArnaThemeData? end})
-      : super(begin: begin, end: end);
+  ArnaThemeDataTween({
+    ArnaThemeData? begin,
+    ArnaThemeData? end,
+  }) : super(begin: begin, end: end);
 
   @override
   ArnaThemeData lerp(double t) => ArnaThemeData.lerp(begin!, end!, t);
@@ -171,15 +174,18 @@ class AnimatedArnaTheme extends ImplicitlyAnimatedWidget {
       _AnimatedArnaThemeState();
 }
 
+/// State of [AnimatedArnaTheme].
 class _AnimatedArnaThemeState
     extends AnimatedWidgetBaseState<AnimatedArnaTheme> {
   ArnaThemeDataTween? _data;
 
   @override
   void forEachTween(TweenVisitor<dynamic> visitor) {
-    _data = visitor(_data, widget.data, (dynamic value) {
-      return ArnaThemeDataTween(begin: value as ArnaThemeData);
-    })! as ArnaThemeDataTween;
+    _data = visitor(
+      _data,
+      widget.data,
+      (dynamic value) => ArnaThemeDataTween(begin: value as ArnaThemeData),
+    )! as ArnaThemeDataTween;
   }
 
   @override

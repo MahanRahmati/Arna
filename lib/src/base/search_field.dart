@@ -111,7 +111,13 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
                   child: ArnaTextField(
                     controller: widget.controller,
                     hintText: widget.hintText,
-                    prefix: const Icon(Icons.search_outlined),
+                    prefix: Icon(
+                      Icons.search_outlined,
+                      color: ArnaDynamicColor.resolve(
+                        ArnaColors.iconColor,
+                        context,
+                      ),
+                    ),
                     clearButtonMode: ArnaOverlayVisibilityMode.editing,
                     onChanged: widget.onChanged,
                     onEditingComplete: widget.onEditingComplete,

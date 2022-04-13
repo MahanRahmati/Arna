@@ -53,7 +53,7 @@
     - [x] ArnaSwitchListTile
     - [ ] ArnaSwitch
     - [ ] ArnaTextField
-  - Theme (4/5)
+  - Theme (5/5)
     - [x] ArnaColors
     - [x] ArnaTextTheme
     - [x] ArnaThemeData

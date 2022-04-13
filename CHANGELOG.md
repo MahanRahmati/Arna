@@ -20,6 +20,7 @@
 - Update ArnaProgressIndicator
 - Update ArnaScrollbar
 - Update ArnaApp
+- Update ArnaDynamicColor
 
 ## 0.3.8
 

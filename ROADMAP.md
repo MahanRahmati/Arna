@@ -54,7 +54,7 @@
     - [ ] ArnaSwitch
     - [ ] ArnaTextField
   - Theme (4/5)
-    - [ ] ArnaColors
+    - [x] ArnaColors
     - [x] ArnaTextTheme
     - [x] ArnaThemeData
     - [x] ArnaTheme

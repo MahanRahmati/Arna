@@ -118,7 +118,7 @@ abstract class Styles {
   /// Master side maximum width
   static const double masterSideMaxWidth = base * 56;
 
-  /// compact
+  /// Compact
   static const double compact = base * 86;
 
   /// Dialog size

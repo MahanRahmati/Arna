@@ -125,25 +125,11 @@ class ArnaRadio<T> extends StatelessWidget {
                   border: Border.all(
                     color: ArnaDynamicColor.resolve(
                       focused
-                          ? selected
-                              ? ArnaDynamicColor.outerColor(
-                                  accent,
-                                  true,
-                                  brightness,
-                                )
-                              : ArnaDynamicColor.outerColor(
-                                  accent,
-                                  false,
-                                  brightness,
-                                )
+                          ? ArnaDynamicColor.outerColor(accent)
                           : !enabled
                               ? ArnaColors.borderColor
                               : selected && hover
-                                  ? ArnaDynamicColor.outerColor(
-                                      accent,
-                                      true,
-                                      brightness,
-                                    )
+                                  ? ArnaDynamicColor.outerColor(accent)
                                   : hover
                                       ? ArnaDynamicColor.matchingColor(
                                           ArnaDynamicColor.resolve(
@@ -161,11 +147,7 @@ class ArnaRadio<T> extends StatelessWidget {
                                           brightness,
                                         )
                                       : selected
-                                          ? ArnaDynamicColor.outerColor(
-                                              accent,
-                                              false,
-                                              brightness,
-                                            )
+                                          ? ArnaDynamicColor.outerColor(accent)
                                           : ArnaColors.borderColor,
                       context,
                     ),

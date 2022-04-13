@@ -101,26 +101,12 @@ class ArnaSwitch extends StatelessWidget {
                   border: Border.all(
                     color: ArnaDynamicColor.resolve(
                       focused
-                          ? value
-                              ? ArnaDynamicColor.outerColor(
-                                  accent,
-                                  true,
-                                  brightness,
-                                )
-                              : ArnaDynamicColor.outerColor(
-                                  accent,
-                                  false,
-                                  brightness,
-                                )
+                          ? ArnaDynamicColor.outerColor(accent)
                           : !enabled
                               ? ArnaColors.borderColor
                               : hover
                                   ? value
-                                      ? ArnaDynamicColor.outerColor(
-                                          accent,
-                                          true,
-                                          brightness,
-                                        )
+                                      ? ArnaDynamicColor.outerColor(accent)
                                       : ArnaDynamicColor.matchingColor(
                                           ArnaDynamicColor.resolve(
                                             selected
@@ -137,11 +123,7 @@ class ArnaSwitch extends StatelessWidget {
                                           brightness,
                                         )
                                   : value
-                                      ? ArnaDynamicColor.outerColor(
-                                          accent,
-                                          false,
-                                          brightness,
-                                        )
+                                      ? ArnaDynamicColor.outerColor(accent)
                                       : ArnaColors.borderColor,
                       context,
                     ),

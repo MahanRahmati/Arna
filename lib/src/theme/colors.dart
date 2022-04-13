@@ -417,27 +417,13 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return Color.alphaBlend(foregroundColor.withOpacity(0.14), backgroundColor);
   }
 
-  static Color outerColor(
-    Color color,
-    bool hover, [
-    Brightness brightness = Brightness.light,
-  ]) {
+  /// The color to use when drawn outside of [color].
+  static Color outerColor(Color color) {
     double colorLuminance = color.computeLuminance();
-    double percentage = colorLuminance > 0.50
-        ? 55 - ((1 - colorLuminance) * 100)
-        : ((1 - colorLuminance) * 100) - 45;
-    Color secondColor = colorLuminance < 0.2 && brightness == Brightness.dark
-        ? ArnaColors.shade255
-        : ArnaColors.shade00;
-
-    if (hover) {
-      if (colorLuminance < 0.2 && brightness == Brightness.light) {
-        return ArnaColors.shade147;
-      }
-      if (brightness == Brightness.dark) secondColor = ArnaColors.shade255;
-      percentage += percentage + 20;
-    }
-    return _colorBlender(color, secondColor, percentage);
+    Color foregroundColor = colorLuminance < 0.2 || colorLuminance > 0.8
+        ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.49), color)
+        : color;
+    return Color.alphaBlend(foregroundColor, color);
   }
 
   static double _colorDistance(Color a, Color b) {

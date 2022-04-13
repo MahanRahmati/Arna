@@ -95,11 +95,7 @@ class ArnaColorButton<T> extends StatelessWidget {
                         ? ArnaDynamicColor.applyOverlay(
                             ArnaDynamicColor.onBackgroundColor(color),
                           )
-                        : ArnaDynamicColor.outerColor(
-                            color,
-                            focused ? true : hover,
-                            brightness,
-                          ),
+                        : ArnaDynamicColor.outerColor(color),
                     context,
                   ),
                 ),

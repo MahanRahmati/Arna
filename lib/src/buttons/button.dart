@@ -94,7 +94,7 @@ class ArnaButton extends StatelessWidget {
               borderRadius: Styles.borderRadius,
               border: Border.all(
                 color: focused
-                    ? accent
+                    ? ArnaDynamicColor.outerColor(accent)
                     : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
               ),
               color: !enabled

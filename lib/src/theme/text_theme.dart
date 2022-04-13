@@ -29,6 +29,7 @@ class ArnaTextTheme with Diagnosticable {
           captionTextStyle,
         );
 
+  /// Creates a text theme that uses the given values.
   const ArnaTextTheme._raw(
     this._titleLargeTextStyle,
     this._titleTextStyle,

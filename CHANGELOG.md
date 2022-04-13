@@ -1,3 +1,14 @@
+## 0.4.0
+
+- Add ArnaBorderlessButton
+- Update styles
+- Update helpers
+- Update ArnaTheme
+- Update ArnaSearchField
+- Update ArnaTextTheme
+- Update ArnaDynamicColor
+- Update ROADMAP.md
+
 ## 0.3.9
 
 - Update ROADMAP.md

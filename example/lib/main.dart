@@ -100,7 +100,7 @@ class _HomeState extends ConsumerState<Home> {
         title: "This is an information banner!",
         subtitle: "Hello There!",
         actions: [
-          ArnaIconButton(
+          ArnaBorderlessButton(
             icon: Icons.close_outlined,
             onPressed: () => setState(() => showBanner = false),
           ),
@@ -148,7 +148,7 @@ class _HomeState extends ConsumerState<Home> {
                   title: "This is an information banner!",
                   subtitle: "Hello There!",
                   actions: [
-                    ArnaIconButton(
+                    ArnaBorderlessButton(
                       icon: Icons.close_outlined,
                       onPressed: () => setState(() => showBanner = false),
                     ),

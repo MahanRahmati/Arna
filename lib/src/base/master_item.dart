@@ -70,17 +70,6 @@ class ArnaMasterItem extends StatelessWidget {
                     ? ArnaColors.disabledColor
                     : selected
                         ? ArnaDynamicColor.matchingColor(
-                            hovered
-                                ? ArnaDynamicColor.applyOverlay(
-                                    ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
-                                      context,
-                                    ),
-                                  )
-                                : ArnaDynamicColor.resolve(
-                                    ArnaColors.sideColor,
-                                    context,
-                                  ),
                             accent,
                             ArnaTheme.brightnessOf(context),
                           )
@@ -184,17 +173,6 @@ class ArnaMasterItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
                   color: ArnaDynamicColor.matchingColor(
-                    hover
-                        ? ArnaDynamicColor.applyOverlay(
-                            ArnaDynamicColor.resolve(
-                              ArnaColors.buttonColor,
-                              context,
-                            ),
-                          )
-                        : ArnaDynamicColor.resolve(
-                            ArnaColors.sideColor,
-                            context,
-                          ),
                     accent,
                     ArnaTheme.brightnessOf(context),
                   ),

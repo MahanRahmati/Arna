@@ -985,7 +985,6 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             cursorHeight: widget.cursorHeight,
             cursorRadius: const Radius.circular(Styles.cursorRadius),
             cursorColor: ArnaDynamicColor.matchingColor(
-              ArnaColors.textFieldColor,
               accent,
               ArnaTheme.brightnessOf(context),
             ),
@@ -1052,7 +1051,6 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                   color: ArnaDynamicColor.resolve(
                     _effectiveFocusNode.hasFocus
                         ? ArnaDynamicColor.matchingColor(
-                            ArnaColors.textFieldColor,
                             accent,
                             ArnaTheme.brightnessOf(context),
                           )

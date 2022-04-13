@@ -66,18 +66,6 @@ class Settings extends ConsumerWidget {
                 onPressed: () => ref.read(changeColor.notifier).orange(),
                 color: ArnaColors.orange,
               ),
-              ArnaColorButton(
-                value: AccentColor.white,
-                groupValue: accentColor,
-                onPressed: () => ref.read(changeColor.notifier).white(),
-                color: ArnaColors.shade255,
-              ),
-              ArnaColorButton(
-                value: AccentColor.black,
-                groupValue: accentColor,
-                onPressed: () => ref.read(changeColor.notifier).black(),
-                color: ArnaColors.shade00,
-              ),
             ],
           ),
         ],
@@ -111,7 +99,7 @@ class ChangeThemeState extends ChangeNotifier {
   }
 }
 
-enum AccentColor { blue, green, red, orange, white, black }
+enum AccentColor { blue, green, red, orange }
 
 final changeColor = ChangeNotifierProvider.autoDispose(
   (ref) => ChangeColorState(),
@@ -137,16 +125,6 @@ class ChangeColorState extends ChangeNotifier {
 
   void orange() {
     accent = AccentColor.orange;
-    notifyListeners();
-  }
-
-  void white() {
-    accent = AccentColor.white;
-    notifyListeners();
-  }
-
-  void black() {
-    accent = AccentColor.black;
     notifyListeners();
   }
 }

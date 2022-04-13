@@ -81,7 +81,6 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   void updateScrollbarPainter() {
     scrollbarPainter
       ..color = ArnaDynamicColor.matchingColor(
-        ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
         widget.thumbColor ?? ArnaTheme.of(context).accentColor,
         ArnaTheme.brightnessOf(context),
       )

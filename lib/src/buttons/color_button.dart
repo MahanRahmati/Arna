@@ -74,11 +74,7 @@ class ArnaColorButton<T> extends StatelessWidget {
               border: Border.all(
                 width: 2,
                 color: selected
-                    ? ArnaDynamicColor.matchingColor(
-                        ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
-                        color,
-                        brightness,
-                      )
+                    ? ArnaDynamicColor.matchingColor(color, brightness)
                     : ArnaColors.transparent,
               ),
             ),

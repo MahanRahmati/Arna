@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 
@@ -426,93 +424,19 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     return Color.alphaBlend(foregroundColor, color);
   }
 
-  static double _colorDistance(Color a, Color b) {
-    int rmean = (a.red + b.red) ~/ 2;
-    int rr = a.red - b.red;
-    int gg = b.green - b.green;
-    int bb = a.blue - b.blue;
-    return math.sqrt((((512 + rmean) * rr * rr) >> 8) +
-        4 * gg * gg +
-        (((767 - rmean) * bb * bb) >> 8));
-  }
-
-  static double _calculateError(Color color, Color a, Color b) {
-    double da = _colorDistance(color, a);
-    double db = _colorDistance(color, b);
-    double x = (da > db) ? da - db : db - da;
-    int sign = (da > db) ? 1 : -1;
-    return sign * (x / (da + db));
-  }
-
-  /// Computes the color that matches with [backgroundColor] and [accent]
-  /// by using [computeLuminance] (and getting [bias]).
-  static Color matchingColor(
-    Color backgroundColor,
-    Color accent,
-    Brightness brightness, [
-    double bias = 21,
-  ]) {
-    assert(bias >= 0 && bias < 100);
-
-    Color themeColor = (brightness == Brightness.light)
-        ? ArnaColors.shade00
-        : ArnaColors.shade255;
-    Color themeInverseColor = (brightness == Brightness.light)
-        ? ArnaColors.shade255
-        : ArnaColors.shade00;
-
-    double accentError = _calculateError(
-      accent,
-      themeColor,
-      themeInverseColor,
-    );
-    double backgroundError = _calculateError(
-      backgroundColor,
-      themeColor,
-      themeInverseColor,
-    );
-
-    double distance = (accentError +
-            backgroundError -
-            ((brightness == Brightness.light) ? 1 : 0.75)) /
-        2;
-
-    Color secondColor = themeColor;
-    if (distance < 0) {
-      secondColor = themeInverseColor;
-      distance -= distance;
-    }
-
-    bool ignore = false;
-    double alternativePercentage = bias;
-    if (_colorDistance(accent, backgroundColor) < 200) {
-      ignore = true;
-      alternativePercentage += (200 -
-              _colorDistance(
-                accent,
-                backgroundColor,
-              )) /
-          4;
-    }
-
-    double percentage = distance * 100;
-    if (!ignore) return _colorBlender(accent, secondColor, percentage);
-    return _colorBlender(accent, secondColor, alternativePercentage);
-  }
-
-  /// Blends the [base] color to [secondColor] by [percentage] and
-  /// [computeLuminance].
-  static Color _colorBlender(
-    Color base,
-    Color secondColor,
-    double percentage,
-  ) {
-    if (percentage < 1) return base;
-    if (percentage > 99) return secondColor;
-    int r = base.red + (percentage * (secondColor.red - base.red)) ~/ 100;
-    int g = base.green + (percentage * (secondColor.green - base.green)) ~/ 100;
-    int b = base.blue + (percentage * (secondColor.blue - base.blue)) ~/ 100;
-    return Color.fromRGBO(r, g, b, 1.0);
+  /// Computes the color that matches with [color] and [brightness].
+  static Color matchingColor(Color color, Brightness brightness) {
+    double colorLuminance = color.computeLuminance();
+    Color foregroundColor = colorLuminance < 0.2 &&
+            brightness == Brightness.dark
+        ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.49), color)
+        : colorLuminance > 0.8 && brightness == Brightness.light
+            ? Color.alphaBlend(
+                onBackgroundColor(color).withOpacity(0.28),
+                color,
+              )
+            : color;
+    return Color.alphaBlend(foregroundColor, color);
   }
 
   bool get _isPlatformBrightnessDependent =>

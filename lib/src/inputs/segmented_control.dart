@@ -211,10 +211,6 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                   ? borderColor
                   : focused
                       ? ArnaDynamicColor.matchingColor(
-                          ArnaDynamicColor.resolve(
-                            ArnaColors.buttonColor,
-                            context,
-                          ),
                           accentColor,
                           ArnaTheme.brightnessOf(context),
                         )

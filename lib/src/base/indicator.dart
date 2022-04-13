@@ -121,7 +121,6 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
   Widget build(BuildContext context) {
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     Color indicatorColor = ArnaDynamicColor.matchingColor(
-      ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
       accent,
       ArnaTheme.brightnessOf(context),
     );

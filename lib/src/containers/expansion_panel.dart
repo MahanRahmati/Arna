@@ -185,10 +185,6 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                       color: ArnaDynamicColor.resolve(
                         _focused
                             ? ArnaDynamicColor.matchingColor(
-                                ArnaDynamicColor.resolve(
-                                  ArnaColors.cardColor,
-                                  context,
-                                ),
                                 accent,
                                 ArnaTheme.brightnessOf(context),
                               )

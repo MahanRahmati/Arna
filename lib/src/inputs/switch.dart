@@ -14,8 +14,8 @@ import 'package:arna/arna.dart';
 ///
 /// See also:
 ///
-///  * [ArnaSwitchListTile], which combines this widget with a [ArnaListTile] so that
-///    you can give the switch a label.
+///  * [ArnaSwitchListTile], which combines this widget with a [ArnaListTile]
+///    so that you can give the switch a label.
 ///  * [ArnaCheckBox], another widget with similar semantics.
 ///  * [ArnaRadio], for selecting among a set of explicit values.
 ///  * [ArnaSlider], for selecting a value in a range.
@@ -42,9 +42,9 @@ class ArnaSwitch extends StatelessWidget {
   ///
   /// If null, the switch will be displayed as disabled.
   ///
-  /// The callback provided to [onChanged] should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
+  /// The callback provided to [onChanged] should update the state of the
+  /// parent [StatefulWidget] using the [State.setState] method, so that the
+  /// parent gets rebuilt; for example:
   ///
   /// ```dart
   /// ArnaSwitch(
@@ -83,6 +83,10 @@ class ArnaSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     Brightness brightness = ArnaTheme.brightnessOf(context);
+    Color borderColor = ArnaDynamicColor.resolve(
+      ArnaColors.borderColor,
+      context,
+    );
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
@@ -104,15 +108,13 @@ class ArnaSwitch extends StatelessWidget {
                           ? ArnaDynamicColor.outerColor(accent)
                           : !enabled
                               ? ArnaColors.borderColor
-                              : hover
-                                  ? value
-                                      ? ArnaDynamicColor.outerColor(accent)
-                                      : ArnaDynamicColor.matchingColor(
+                              : value
+                                  ? ArnaDynamicColor.outerColor(accent)
+                                  : hover
+                                      ? ArnaDynamicColor.matchingColor(
                                           accent,
                                           brightness,
                                         )
-                                  : value
-                                      ? ArnaDynamicColor.outerColor(accent)
                                       : ArnaColors.borderColor,
                       context,
                     ),
@@ -150,22 +152,10 @@ class ArnaSwitch extends StatelessWidget {
                     borderRadius: Styles.radioBorderRadius,
                     border: Border.all(
                       color: !enabled
-                          ? ArnaDynamicColor.resolve(
-                              ArnaColors.borderColor,
-                              context,
-                            )
+                          ? borderColor
                           : !value
-                              ? ArnaDynamicColor.resolve(
-                                  ArnaColors.borderColor,
-                                  context,
-                                )
-                              : ArnaDynamicColor.matchingColor(
-                                  ArnaDynamicColor.resolve(
-                                    ArnaColors.borderColor,
-                                    context,
-                                  ),
-                                  ArnaTheme.brightnessOf(context),
-                                ),
+                              ? borderColor
+                              : ArnaDynamicColor.outerColor(borderColor),
                     ),
                     color: ArnaDynamicColor.resolve(
                       !enabled

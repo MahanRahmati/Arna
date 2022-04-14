@@ -42,17 +42,17 @@
     - [x] ArnaVerticalDivider
     - [x] ArnaHorizontalSeparator
     - [x] ArnaVerticalSeparator
-  - Inputs (4/11)
+  - Inputs (7/11)
     - [x] ArnaCheckBoxListTile
-    - [ ] ArnaCheckBox
+    - [x] ArnaCheckBox
     - [ ] ArnaPopupMenu
     - [x] ArnaRadioListTile
-    - [ ] ArnaRadio
+    - [x] ArnaRadio
     - [ ] ArnaSegmentedControl
     - [x] ArnaSliderListTile
     - [ ] ArnaSlider
     - [x] ArnaSwitchListTile
-    - [ ] ArnaSwitch
+    - [x] ArnaSwitch
     - [ ] ArnaTextField
   - Theme (5/5)
     - [x] ArnaColors

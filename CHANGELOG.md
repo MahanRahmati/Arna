@@ -3,6 +3,7 @@
 - Update ROADMAP.md
 - Update ArnaRadio
 - Update ArnaSwitch
+- Update ArnaColorButton
 
 ## 0.4.0
 

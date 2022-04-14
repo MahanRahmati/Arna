@@ -70,7 +70,7 @@ class ArnaColorButton<T> extends StatelessWidget {
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,
             decoration: BoxDecoration(
-              borderRadius: Styles.buttonBorderRadius,
+              borderRadius: Styles.borderRadius,
               border: Border.all(
                 width: 2,
                 color: selected
@@ -84,7 +84,7 @@ class ArnaColorButton<T> extends StatelessWidget {
               curve: Styles.basicCurve,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                borderRadius: Styles.buttonBorderRadius,
+                borderRadius: Styles.colorButtonBorderRadius,
                 border: Border.all(
                   color: ArnaDynamicColor.resolve(
                     !enabled

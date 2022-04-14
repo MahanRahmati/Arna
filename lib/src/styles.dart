@@ -16,6 +16,9 @@ abstract class Styles {
   /// Cursor radius
   static const double cursorRadius = base / 2;
 
+  /// Color button radius
+  static const double colorButtonBorderRadiusSize = base / 2;
+
   /// normal padding
   static const double padding = base;
 
@@ -265,8 +268,8 @@ abstract class Styles {
     Radius.circular(switchHeight),
   );
 
-  /// Button border radius
-  static BorderRadius buttonBorderRadius = const BorderRadius.all(
-    Radius.circular(buttonSize),
+  /// Color button border radius
+  static BorderRadius colorButtonBorderRadius = const BorderRadius.all(
+    Radius.circular(colorButtonBorderRadiusSize),
   );
 }

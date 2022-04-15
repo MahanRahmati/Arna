@@ -146,7 +146,7 @@ class ArnaAlertDialog extends StatelessWidget {
                         padding: Styles.horizontal,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [primary, secondary, tertiary],
+                          children: <Widget>[primary, secondary, tertiary],
                         ),
                       ),
                     ),

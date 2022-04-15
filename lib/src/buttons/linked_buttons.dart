@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 
+/// An Arna-styled linked buttons.
 class ArnaLinkedButtons extends StatelessWidget {
   /// Creates linked buttons.
   const ArnaLinkedButtons({Key? key, required this.buttons}) : super(key: key);
@@ -7,19 +8,16 @@ class ArnaLinkedButtons extends StatelessWidget {
   /// The list of linked buttons.
   final List<ArnaLinkedButton> buttons;
 
-  Widget _buildChild() {
-    List<Widget> children = <Widget>[];
-    children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
-    children.addAll(
-      buttons.map((button) {
-        int index = buttons.indexOf(button);
-        bool first = index == 0 ? true : false;
-        bool last = index == buttons.length - 1 ? true : false;
-        return _ArnaLinked(button: button, first: first, last: last);
-      }).toList(),
-    );
-    children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
-    return Row(children: children);
+  // Determines if this is the first child that is being laid out.
+  bool _isFirstButton(int index, int length, TextDirection textDirection) {
+    return (index == 0 && textDirection == TextDirection.ltr) ||
+        (index == length - 1 && textDirection == TextDirection.rtl);
+  }
+
+  // Determines if this is the last child that is being laid out.
+  bool _isLastButton(int index, int length, TextDirection textDirection) {
+    return (index == length - 1 && textDirection == TextDirection.ltr) ||
+        (index == 0 && textDirection == TextDirection.rtl);
   }
 
   @override
@@ -33,64 +31,54 @@ class ArnaLinkedButtons extends StatelessWidget {
           borderRadius: Styles.borderRadius,
           color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
         ),
-        child: _buildChild(),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const SizedBox(height: Styles.buttonSize, width: 0.5),
+            ...buttons.map((button) {
+              int index = buttons.indexOf(button);
+              int length = buttons.length;
+              TextDirection textDirection = Directionality.of(context);
+              return _ArnaLinkedItem(
+                button: button,
+                first: _isFirstButton(index, length, textDirection),
+                last: _isLastButton(index, length, textDirection),
+              );
+            }).toList(),
+            const SizedBox(height: Styles.buttonSize, width: 0.5),
+          ],
+        ),
       ),
     );
   }
 }
 
-class _ArnaLinked extends StatelessWidget {
-  final ArnaLinkedButton button;
-  final bool first;
-  final bool last;
-
-  const _ArnaLinked({
+/// An Arna-styled linked item.
+class _ArnaLinkedItem extends StatelessWidget {
+  /// Creates linked item.
+  const _ArnaLinkedItem({
     Key? key,
     required this.button,
     required this.first,
     required this.last,
   }) : super(key: key);
 
-  Widget _buildChild(BuildContext context, bool enabled) {
-    final List<Widget> children = <Widget>[];
-    if (button.icon != null) {
-      Widget iconWidget = Icon(
-        button.icon,
-        size: Styles.iconSize,
-        color: ArnaDynamicColor.resolve(
-          !enabled ? ArnaColors.disabledColor : ArnaColors.iconColor,
-          context,
-        ),
-      );
-      children.add(iconWidget);
-      if (button.label != null) {
-        children.add(const SizedBox(width: Styles.padding));
-      }
-    }
-    if (button.label != null) {
-      Widget labelWidget = Flexible(
-        child: Text(
-          button.label!,
-          style: ArnaTheme.of(context).textTheme.button!.copyWith(
-                color: ArnaDynamicColor.resolve(
-                  !enabled
-                      ? ArnaColors.disabledColor
-                      : ArnaColors.primaryTextColor,
-                  context,
-                ),
-              ),
-        ),
-      );
-      children.add(labelWidget);
-      if (button.icon != null) {
-        children.add(const SizedBox(width: Styles.padding));
-      }
-    }
-    return Row(mainAxisSize: MainAxisSize.min, children: children);
-  }
+  /// The linked button.
+  final ArnaLinkedButton button;
+
+  /// Whether or not this button is the first button in the list.
+  final bool first;
+
+  /// Whether or not this button is the last button in the list.
+  final bool last;
 
   @override
   Widget build(BuildContext context) {
+    Color buttonColor = ArnaDynamicColor.resolve(
+      ArnaColors.buttonColor,
+      context,
+    );
+    Color accent = button.accentColor ?? ArnaTheme.of(context).accentColor;
     return ArnaBaseWidget(
       builder: (context, enabled, hover, focused, pressed, selected) {
         return AnimatedContainer(
@@ -107,33 +95,69 @@ class _ArnaLinked extends StatelessWidget {
                   ? const Radius.circular(Styles.borderRadiusSize - 1)
                   : const Radius.circular(0),
             ),
-            border: focused
-                ? Border.all(
-                    color: ArnaDynamicColor.matchingColor(
-                      button.accentColor ?? ArnaTheme.of(context).accentColor,
-                      ArnaTheme.brightnessOf(context),
-                    ),
-                  )
-                : Border.all(color: ArnaColors.transparent),
-            color: ArnaDynamicColor.resolve(
-              !enabled
-                  ? ArnaColors.backgroundColor
-                  : pressed || hover
-                      ? ArnaDynamicColor.applyOverlay(
-                          ArnaDynamicColor.resolve(
-                            ArnaColors.buttonColor,
-                            context,
-                          ),
-                        )
-                      : ArnaColors.buttonColor,
-              context,
+            border: Border.all(
+              color: ArnaDynamicColor.outerColor(accent).withAlpha(
+                focused ? 255 : 0,
+              ),
             ),
+            color: !enabled
+                ? ArnaDynamicColor.resolve(
+                    ArnaColors.backgroundColor,
+                    context,
+                  )
+                : button.buttonType == ButtonType.normal
+                    ? pressed || hover
+                        ? ArnaDynamicColor.applyOverlay(buttonColor)
+                        : buttonColor
+                    : pressed || hover || focused
+                        ? ArnaDynamicColor.applyOverlay(accent)
+                        : accent,
           ),
           margin: const EdgeInsets.all(0.5),
           padding: button.icon != null
               ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
               : Styles.largeHorizontal,
-          child: _buildChild(context, enabled),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (button.icon != null)
+                Icon(
+                  button.icon!,
+                  size: Styles.iconSize,
+                  color: ArnaDynamicColor.resolve(
+                    !enabled
+                        ? ArnaColors.disabledColor
+                        : button.buttonType == ButtonType.normal
+                            ? ArnaColors.iconColor
+                            : ArnaDynamicColor.onBackgroundColor(accent),
+                    context,
+                  ),
+                ),
+              if (button.icon != null && button.label != null)
+                const SizedBox(width: Styles.padding),
+              if (button.label != null)
+                Flexible(
+                  child: Text(
+                    button.label!,
+                    style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                          color: ArnaDynamicColor.resolve(
+                            !enabled
+                                ? ArnaColors.disabledColor
+                                : button.buttonType == ButtonType.normal
+                                    ? ArnaColors.primaryTextColor
+                                    : ArnaDynamicColor.onBackgroundColor(
+                                        accent,
+                                      ),
+                            context,
+                          ),
+                        ),
+                  ),
+                ),
+              if (button.icon != null && button.label != null)
+                const SizedBox(width: Styles.padding),
+            ],
+          ),
         );
       },
       onPressed: button.onPressed,
@@ -146,6 +170,7 @@ class _ArnaLinked extends StatelessWidget {
   }
 }
 
+/// An Arna-styled linked button.
 class ArnaLinkedButton {
   /// Creates a linked button.
   const ArnaLinkedButton({
@@ -154,6 +179,7 @@ class ArnaLinkedButton {
     this.icon,
     required this.onPressed,
     this.tooltipMessage,
+    this.buttonType = ButtonType.normal,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -168,10 +194,16 @@ class ArnaLinkedButton {
   final IconData? icon;
 
   /// The callback that is called when a button is tapped.
+  ///
+  /// If this callback is null, then the button will be disabled.
   final VoidCallback? onPressed;
 
-  /// Text that describes the action that will occur when the button is pressed.
+  /// Text that describes the action that will occur when the button is
+  /// pressed.
   final String? tooltipMessage;
+
+  /// The type of the button.
+  final ButtonType buttonType;
 
   /// Whether this button is focusable or not.
   final bool isFocusable;

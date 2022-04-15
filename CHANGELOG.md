@@ -4,6 +4,7 @@
 - Update ArnaRadio
 - Update ArnaSwitch
 - Update ArnaColorButton
+- Update ArnaLinkedButtons
 
 ## 0.4.0
 

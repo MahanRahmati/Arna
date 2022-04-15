@@ -24,7 +24,7 @@
     - [x] ArnaButton
     - [x] ArnaColorButton
     - [x] ArnaIconButton
-    - [ ] ArnaLinkedButtons
+    - [x] ArnaLinkedButtons
     - [ ] ArnaPopupMenuButton
     - [x] ArnaTextButton
   - Containers (6/6)

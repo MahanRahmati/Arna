@@ -5,6 +5,7 @@
 - Update ArnaSwitch
 - Update ArnaColorButton
 - Update ArnaLinkedButtons
+- Update ArnaPopupMenuButton
 
 ## 0.4.0
 

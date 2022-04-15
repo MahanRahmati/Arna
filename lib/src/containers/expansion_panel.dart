@@ -63,7 +63,7 @@ class ArnaExpansionPanel extends StatefulWidget {
   _ArnaExpansionPanelState createState() => _ArnaExpansionPanelState();
 }
 
-/// State of [ArnaExpansionPanel].
+/// The [State] for a [ArnaExpansionPanel].
 class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     with SingleTickerProviderStateMixin {
   FocusNode? focusNode;

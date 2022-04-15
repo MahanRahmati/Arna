@@ -45,7 +45,7 @@ class ArnaSearchField extends StatefulWidget {
   State<ArnaSearchField> createState() => _ArnaSearchFieldState();
 }
 
-/// State of [ArnaSearchField].
+/// The [State] for a [ArnaSearchField].
 class _ArnaSearchFieldState extends State<ArnaSearchField>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;

@@ -71,7 +71,7 @@ class ArnaProgressIndicator extends StatefulWidget {
   _ArnaProgressIndicatorState createState() => _ArnaProgressIndicatorState();
 }
 
-/// State of [ArnaProgressIndicator].
+/// The [State] for a [ArnaProgressIndicator].
 class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
     with SingleTickerProviderStateMixin {
   static const int _pathCount = (1400 * 2100) ~/ 1400;

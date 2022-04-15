@@ -45,7 +45,7 @@ class ArnaBanner extends StatefulWidget {
   _ArnaBannerState createState() => _ArnaBannerState();
 }
 
-/// State of [ArnaBanner].
+/// The [State] for a [ArnaBanner].
 class _ArnaBannerState extends State<ArnaBanner>
     with SingleTickerProviderStateMixin {
   late IconData icon;

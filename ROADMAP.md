@@ -19,13 +19,13 @@
     - [ ] ArnaSideScaffold
     - [ ] ArnaSnackBar
     - [ ] ArnaTooltip
-  - Buttons (5/7)
+  - Buttons (7/7)
     - [x] ArnaBorderlessButton
     - [x] ArnaButton
     - [x] ArnaColorButton
     - [x] ArnaIconButton
     - [x] ArnaLinkedButtons
-    - [ ] ArnaPopupMenuButton
+    - [x] ArnaPopupMenuButton
     - [x] ArnaTextButton
   - Containers (6/6)
     - [x] ArnaBadge

@@ -29,7 +29,6 @@ typedef ArnaBaseWidgetBuilder = Widget Function(
 ///  * [ArnaButton]
 ///  * [ArnaIconButton]
 ///  * [ArnaTextButton]
-///  * [ArnaBottomBarItem]
 ///  * [ArnaMasterItem]
 ///  * [ArnaSideBarItem]
 ///  * [ArnaLinkedButtons]

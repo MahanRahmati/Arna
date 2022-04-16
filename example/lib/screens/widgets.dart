@@ -42,26 +42,17 @@ class _WidgetsState extends State<Widgets> {
                     children: <Widget>[
                       ArnaIconButton(
                         icon: Icons.add_outlined,
-                        onPressed: () => showArnaSnackbar(
-                          context: context,
-                          message: "Hello There!",
-                        ),
+                        onPressed: () {},
                         tooltipMessage: "Add",
                       ),
                       ArnaTextButton(
                         label: "Add",
-                        onPressed: () => showArnaSnackbar(
-                          context: context,
-                          message: "Hello There!",
-                        ),
+                        onPressed: () {},
                       ),
                       ArnaButton(
                         label: "Add",
                         icon: Icons.add_outlined,
-                        onPressed: () => showArnaSnackbar(
-                          context: context,
-                          message: "Hello There!",
-                        ),
+                        onPressed: () {},
                       ),
                       const ArnaButton(
                         label: "Add",
@@ -72,19 +63,13 @@ class _WidgetsState extends State<Widgets> {
                       ArnaIconButton(
                         icon: Icons.add_outlined,
                         buttonType: ButtonType.colored,
-                        onPressed: () => showArnaSnackbar(
-                          context: context,
-                          message: "Hello There!",
-                        ),
+                        onPressed: () {},
                         tooltipMessage: "Add",
                       ),
                       ArnaBorderlessButton(
                         icon: Icons.add_outlined,
                         buttonType: ButtonType.normal,
-                        onPressed: () => showArnaSnackbar(
-                          context: context,
-                          message: "Hello There!",
-                        ),
+                        onPressed: () {},
                         tooltipMessage: "Add",
                       ),
                       ArnaPopupMenuButton<String>(
@@ -112,10 +97,11 @@ class _WidgetsState extends State<Widgets> {
                             value: "Third Item",
                           ),
                         ],
-                        onSelected: (String value) => showArnaSnackbar(
-                          context: context,
-                          message: value,
-                        ),
+                        onSelected: (String value) {
+                          ArnaScaffoldMessenger.of(context).showSnackBar(
+                            ArnaSnackBar(message: value),
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -137,26 +123,29 @@ class _WidgetsState extends State<Widgets> {
                       buttons: <ArnaLinkedButton>[
                         ArnaLinkedButton(
                           icon: Icons.add_outlined,
-                          onPressed: () => showArnaSnackbar(
-                            context: context,
-                            message: "Hello There!",
-                          ),
+                          onPressed: () {
+                            ArnaScaffoldMessenger.of(context).showSnackBar(
+                              const ArnaSnackBar(message: "Hello There!"),
+                            );
+                          },
                           tooltipMessage: "Add",
                         ),
                         ArnaLinkedButton(
                           label: "Add",
-                          onPressed: () => showArnaSnackbar(
-                            context: context,
-                            message: "Hello There!",
-                          ),
+                          onPressed: () {
+                            ArnaScaffoldMessenger.of(context).showSnackBar(
+                              const ArnaSnackBar(message: "Hello There!"),
+                            );
+                          },
                         ),
                         ArnaLinkedButton(
                           label: "Add",
                           icon: Icons.add_outlined,
-                          onPressed: () => showArnaSnackbar(
-                            context: context,
-                            message: "Hello There!",
-                          ),
+                          onPressed: () {
+                            ArnaScaffoldMessenger.of(context).showSnackBar(
+                              const ArnaSnackBar(message: "Hello There!"),
+                            );
+                          },
                         ),
                         const ArnaLinkedButton(
                           label: "Add",
@@ -166,10 +155,11 @@ class _WidgetsState extends State<Widgets> {
                         ArnaLinkedButton(
                           icon: Icons.add_outlined,
                           buttonType: ButtonType.colored,
-                          onPressed: () => showArnaSnackbar(
-                            context: context,
-                            message: "Hello There!",
-                          ),
+                          onPressed: () {
+                            ArnaScaffoldMessenger.of(context).showSnackBar(
+                              const ArnaSnackBar(message: "Hello There!"),
+                            );
+                          },
                           tooltipMessage: "Add",
                         ),
                       ],
@@ -399,6 +389,58 @@ class _WidgetsState extends State<Widgets> {
                 ),
                 title: "Text Field",
                 child: const ArnaTextField(),
+              ),
+              ArnaExpansionPanel(
+                leading: Icon(
+                  Icons.ad_units_outlined,
+                  color: ArnaDynamicColor.resolve(
+                    ArnaColors.iconColor,
+                    context,
+                  ),
+                ),
+                title: "Banner and SnackBar",
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ArnaTextButton(
+                      label: "Show Banner",
+                      onPressed: () {
+                        ArnaScaffoldMessenger.of(context).showBanner(
+                          ArnaBanner(
+                            title: "This is an information banner!",
+                            subtitle: "Hello There!",
+                            actions: <Widget>[
+                              ArnaBorderlessButton(
+                                icon: Icons.close_outlined,
+                                onPressed: () {
+                                  ArnaScaffoldMessenger.of(context)
+                                      .hideCurrentBanner();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                    ArnaTextButton(
+                      label: "Show SnackBar",
+                      onPressed: () {
+                        ArnaScaffoldMessenger.of(context).showSnackBar(
+                          ArnaSnackBar(
+                            message: "Hello There!",
+                            action: ArnaSnackBarAction(
+                              label: "Close",
+                              onPressed: () {
+                                ArnaScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -6,6 +6,10 @@
 - Update ArnaColorButton
 - Update ArnaLinkedButtons
 - Update ArnaPopupMenuButton
+- Update ArnaApp
+- Update ArnaBanner
+- Update ArnaScaffold
+- Update ArnaSnackBar
 
 ## 0.4.0
 

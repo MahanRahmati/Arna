@@ -65,7 +65,6 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   var showSearch = false;
   TextEditingController controller = TextEditingController();
-  var showBanner = true;
   String url = "https://github.com/MahanRahmati/Arna";
   bool showMaster = false;
 
@@ -94,17 +93,6 @@ class _HomeState extends ConsumerState<Home> {
       searchField: ArnaSearchField(
         showSearch: showSearch,
         controller: controller,
-      ),
-      banner: ArnaBanner(
-        showBanner: showBanner,
-        title: "This is an information banner!",
-        subtitle: "Hello There!",
-        actions: <Widget>[
-          ArnaBorderlessButton(
-            icon: Icons.close_outlined,
-            onPressed: () => setState(() => showBanner = false),
-          ),
-        ],
       ),
       builder: (_) => const Widgets(),
     );
@@ -142,17 +130,6 @@ class _HomeState extends ConsumerState<Home> {
                 searchField: ArnaSearchField(
                   showSearch: showSearch,
                   controller: controller,
-                ),
-                banner: ArnaBanner(
-                  showBanner: showBanner,
-                  title: "This is an information banner!",
-                  subtitle: "Hello There!",
-                  actions: <Widget>[
-                    ArnaBorderlessButton(
-                      icon: Icons.close_outlined,
-                      onPressed: () => setState(() => showBanner = false),
-                    ),
-                  ],
                 ),
               ),
               MasterNavigationItem(

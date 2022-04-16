@@ -110,7 +110,6 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
           title: page.title,
           actions: page.actions,
           searchField: page.searchField,
-          banner: page.banner,
           body: page.builder(context),
         );
       },
@@ -181,7 +180,6 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
                             actions: widget.items[_currentIndex].actions,
                             searchField:
                                 widget.items[_currentIndex].searchField,
-                            banner: widget.items[_currentIndex].banner,
                             body: FadeTransition(
                               opacity: _animation,
                               child: widget.items[_currentIndex].builder(
@@ -223,7 +221,6 @@ class MasterNavigationItem {
     this.headerBarLeading,
     this.actions,
     this.searchField,
-    this.banner,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -263,9 +260,6 @@ class MasterNavigationItem {
 
   /// The [ArnaSearchField] of the item.
   final ArnaSearchField? searchField;
-
-  /// The [ArnaBanner] of the item.
-  final ArnaBanner? banner;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

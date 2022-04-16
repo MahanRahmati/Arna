@@ -40,7 +40,6 @@ class _ArnaPopupDialog extends StatelessWidget {
     this.title,
     this.actions,
     this.searchField,
-    this.banner,
     required this.body,
   }) : super(key: key);
 
@@ -63,9 +62,6 @@ class _ArnaPopupDialog extends StatelessWidget {
 
   /// The [ArnaSearchField] of the popup dialog.
   final ArnaSearchField? searchField;
-
-  /// The [ArnaBanner] of the popup dialog.
-  final ArnaBanner? banner;
 
   /// The body widget of the popup dialog.
   final Widget body;
@@ -116,7 +112,6 @@ class _ArnaPopupDialog extends StatelessWidget {
                     ),
                   ],
                   searchField: searchField,
-                  banner: banner,
                   body: body,
                   isDialog: true,
                 ),
@@ -168,7 +163,6 @@ class _ArnaPopupPage extends StatelessWidget {
     this.title,
     this.actions,
     this.searchField,
-    this.banner,
     required this.body,
   }) : super(key: key);
 
@@ -192,9 +186,6 @@ class _ArnaPopupPage extends StatelessWidget {
   /// The [ArnaSearchField] of the popup dialog page.
   final ArnaSearchField? searchField;
 
-  /// The [ArnaBanner] of the popup dialog page.
-  final ArnaBanner? banner;
-
   /// The body widget of the popup dialog page.
   final Widget body;
 
@@ -216,7 +207,6 @@ class _ArnaPopupPage extends StatelessWidget {
       title: title,
       actions: actions,
       searchField: searchField,
-      banner: banner,
       body: body,
     );
   }
@@ -263,7 +253,6 @@ Future<T?> showArnaPopupDialog<T>({
   String? title,
   List<Widget>? actions,
   ArnaSearchField? searchField,
-  ArnaBanner? banner,
   required Widget body,
   bool barrierDismissible = false,
   Color barrierColor = ArnaColors.barrierColor,
@@ -279,7 +268,6 @@ Future<T?> showArnaPopupDialog<T>({
               title: title,
               actions: actions,
               searchField: searchField,
-              banner: banner,
               body: body,
             ),
           ),
@@ -298,7 +286,6 @@ Future<T?> showArnaPopupDialog<T>({
               title: title,
               actions: actions,
               searchField: searchField,
-              banner: banner,
               body: body,
             );
           },

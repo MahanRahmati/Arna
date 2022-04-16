@@ -166,7 +166,6 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                             ],
                             searchField:
                                 widget.items[_currentIndex].searchField,
-                            banner: widget.items[_currentIndex].banner,
                             body: Column(
                               children: <Widget>[
                                 Expanded(
@@ -206,7 +205,6 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
                     if (widget.actions != null) ...widget.actions!,
                   ],
                   searchField: widget.items[_currentIndex].searchField,
-                  banner: widget.items[_currentIndex].banner,
                   body: FadeTransition(
                     opacity: _animation,
                     child: widget.items[_currentIndex].builder(context),
@@ -228,7 +226,6 @@ class NavigationItem {
     this.headerBarLeading,
     this.actions,
     this.searchField,
-    this.banner,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -262,9 +259,6 @@ class NavigationItem {
 
   /// The [ArnaSearchField] of the item.
   final ArnaSearchField? searchField;
-
-  /// The [ArnaBanner] of the item.
-  final ArnaBanner? banner;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

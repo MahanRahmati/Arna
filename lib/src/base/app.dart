@@ -103,6 +103,7 @@ class ArnaApp extends StatefulWidget {
   const ArnaApp({
     Key? key,
     this.navigatorKey,
+    this.scaffoldMessengerKey,
     this.home,
     this.theme,
     Map<String, WidgetBuilder> this.routes = const <String, WidgetBuilder>{},
@@ -140,6 +141,7 @@ class ArnaApp extends StatefulWidget {
   /// Creates a [ArnaApp] that uses the [Router] instead of a [Navigator].
   const ArnaApp.router({
     Key? key,
+    this.scaffoldMessengerKey,
     this.routeInformationProvider,
     required RouteInformationParser<Object> this.routeInformationParser,
     required RouterDelegate<Object> this.routerDelegate,
@@ -176,6 +178,14 @@ class ArnaApp extends StatefulWidget {
 
   /// {@macro flutter.widgets.widgetsApp.navigatorKey}
   final GlobalKey<NavigatorState>? navigatorKey;
+
+  /// A key to use when building the [ArnaScaffoldMessenger].
+  ///
+  /// If a [scaffoldMessengerKey] is specified, the [ArnaScaffoldMessenger] can
+  /// be directly manipulated without first obtaining it from a [BuildContext]
+  /// via [ArnaScaffoldMessenger.of]: from the [scaffoldMessengerKey], use the
+  /// [GlobalKey.currentState] getter.
+  final GlobalKey<ArnaScaffoldMessengerState>? scaffoldMessengerKey;
 
   /// {@macro flutter.widgets.widgetsApp.home}
   final Widget? home;
@@ -514,6 +524,7 @@ class ArnaScrollBehavior extends ScrollBehavior {
   }
 }
 
+/// The [State] for a [ArnaApp].
 class _ArnaAppState extends State<ArnaApp> {
   late HeroController _heroController;
 
@@ -562,26 +573,30 @@ class _ArnaAppState extends State<ArnaApp> {
 
     theme ??= widget.theme ?? ArnaThemeData.light();
 
-    return AnimatedArnaTheme(
-      data: theme,
-      child: widget.builder != null
-          ? Builder(
-              builder: (BuildContext context) {
-                // Why are we surrounding a builder with a builder?
-                //
-                // The widget.builder may contain code that invokes
-                // Theme.of(), which should return the theme we selected
-                // above in AnimatedTheme. However, if we invoke
-                // widget.builder() directly as the child of AnimatedTheme
-                // then there is no Context separating them, and the
-                // widget.builder() will not find the theme. Therefore, we
-                // surround widget.builder with yet another builder so that
-                // a context separates them and Theme.of() correctly
-                // resolves to the theme we passed to AnimatedTheme.
-                return widget.builder!(context, child);
-              },
-            )
-          : child ?? const SizedBox.shrink(),
+    return ArnaScaffoldMessenger(
+      key: widget.scaffoldMessengerKey,
+      child: AnimatedArnaTheme(
+        data: theme,
+        child: widget.builder != null
+            ? Builder(
+                builder: (BuildContext context) {
+                  // Why are we surrounding a builder with a builder?
+                  //
+                  // The widget.builder may contain code that invokes
+                  // ArnaTheme.of(), which should return the theme we selected
+                  // above in AnimatedArbaTheme. However, if we invoke
+                  // widget.builder() directly as the child of
+                  // AnimatedArnaTheme then there is no Context separating
+                  // them, and the widget.builder() will not find the theme.
+                  // Therefore, we surround widget.builder with yet another
+                  // builder so that a context separates them and
+                  // ArnaTheme.of() correctly resolves to the theme we passed
+                  // to AnimatedArnaTheme.
+                  return widget.builder!(context, child);
+                },
+              )
+            : child ?? const SizedBox.shrink(),
+      ),
     );
   }
 

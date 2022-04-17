@@ -1,4 +1,4 @@
-name: Pana
+name: Pana Analysis
 on: [push, pull_request, workflow_dispatch]
 
 jobs:

@@ -4,7 +4,6 @@
   <a href="https://pub.dartlang.org/packages/arna"><img src="https://img.shields.io/pub/v/arna.svg" alt="pub.dev"></a>
   <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
   <a href="https://github.com/leanflutter/awesome-flutter-desktop"> <img src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg" /></a>
-  <a href="https://github.com/marketplace/actions/super-linter"><img src="https://github.com/MahanRahmati/Arna/workflows/Lint%20Code%20Base/badge.svg"></a>
   <a href="https://github.com/MahanRahmati/Arna/actions/workflows/pana_analysis.yml"><img src="https://github.com/MahanRahmati/Arna/actions/workflows/pana_analysis.yml/badge.svg"></a>
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>

@@ -5,6 +5,7 @@
   <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
   <a href="https://github.com/leanflutter/awesome-flutter-desktop"> <img src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg" /></a>
   <a href="https://github.com/MahanRahmati/Arna/actions/workflows/pana_analysis.yml"><img src="https://github.com/MahanRahmati/Arna/actions/workflows/pana_analysis.yml/badge.svg"></a>
+  <a href="https://github.com/MahanRahmati/Arna/actions/workflows/flutter_analysis.yml"><img src="https://github.com/MahanRahmati/Arna/actions/workflows/flutter_analysis.yml/badge.svg"></a>
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 

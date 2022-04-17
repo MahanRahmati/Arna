@@ -1,23 +1,39 @@
 # Arna
 
+<p align="start">
+  <a href="https://pub.dartlang.org/packages/arna"><img src="https://img.shields.io/pub/v/arna.svg" alt="pub.dev"></a>
+  <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
+  <a href="https://github.com/leanflutter/awesome-flutter-desktop"> <img src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg" /></a>
+  <a href="https://github.com/marketplace/actions/super-linter"><img src="https://github.com/MahanRahmati/Arna/workflows/Lint%20Code%20Base/badge.svg"></a>
+  <a href="https://github.com/MahanRahmati/Arna/actions/workflows/pana_analysis.yml"><img src="https://github.com/MahanRahmati/Arna/actions/workflows/pana_analysis.yml/badge.svg"></a>
+  <img src="https://img.shields.io/github/license/MahanRahmati/arna">
+</p>
+
 Arna Framework - A unique set of widgets for building applications with Flutter.
 
 This Framework is in active development. Any contribution, idea, criticism or feedback is welcomed.
 
-<p align="start">
-  <a href="https://pub.dartlang.org/packages/arna"><img src="https://img.shields.io/pub/v/arna.svg" alt="pub.dev"></a>
-  <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
-  <a href="https://github.com/leanflutter/awesome-flutter-desktop">
-   <img alt="Awesome Flutter Desktop" src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg" /></a>
-  <img src="https://img.shields.io/github/license/MahanRahmati/arna">
-</p>
+### You can check the web version [here](https://mahanrahmati.github.io/arna_demo/).
 
 <img alt="Light" src="https://user-images.githubusercontent.com/16052180/159135644-4b449c54-7dd5-44f1-a892-e7191f2cab99.png">
 <img alt="Dark" src="https://user-images.githubusercontent.com/16052180/159135635-bf3a17dd-ecbd-48c5-b3c6-5597c600e405.png">
 
+## Platform Support
+
+| Platform | Supported |
+| -------- | --------- |
+| Android  | ✅        |
+| iOS      | ✅        |
+| Linux    | ✅        |
+| MacOS    | ✅        |
+| Web      | ✅        |
+| Windows  | ✅        |
+
 ## Content
 
 - [Arna](#arna)
+    - [You can check the web version here.](#you-can-check-the-web-version-here)
+  - [Platform Support](#platform-support)
   - [Content](#content)
   - [Getting Started](#getting-started)
   - [Usage](#usage)

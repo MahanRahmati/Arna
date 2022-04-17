@@ -43,12 +43,6 @@ And import it
 import 'package:arna/arna.dart';
 ```
 
-## TODO
-
-- Dropdown Button
-- Date and Time Pickers
-- Chip
-
 ## Special thanks
 
 - [flutter](https://github.com/flutter/) for [flutter](https://github.com/flutter/flutter/).

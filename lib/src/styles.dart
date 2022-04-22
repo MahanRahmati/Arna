@@ -52,6 +52,9 @@ abstract class Styles {
   /// Arrow size
   static const double arrowSize = base * 2.5;
 
+  /// Color button indicator size
+  static const double colorButtonIndicatorSize = base * 2.5;
+
   /// Icon size
   static const double iconSize = base * 3;
 
@@ -72,6 +75,9 @@ abstract class Styles {
 
   /// Tooltip height
   static const double tooltipHeight = base * 4;
+
+  /// Color button size
+  static const double colorButtonSize = base * 4;
 
   /// Button size
   static const double buttonSize = base * 5;

@@ -1,7 +1,8 @@
 import 'package:arna/arna.dart';
 
+/// A navigation item used inside [ArnaMasterDetailScaffold].
 class ArnaMasterItem extends StatelessWidget {
-  /// Creates a master item.
+  /// Creates a navigation item.
   const ArnaMasterItem({
     Key? key,
     this.leading,
@@ -118,6 +119,10 @@ class ArnaMasterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color buttonColor = ArnaDynamicColor.resolve(
+      ArnaColors.buttonColor,
+      context,
+    );
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     bool buttonSelected = selected;
     return Padding(
@@ -150,17 +155,9 @@ class ArnaMasterItem extends StatelessWidget {
                   ),
                   color: !enabled
                       ? ArnaColors.transparent
-                      : ArnaDynamicColor.resolve(
-                          pressed || selected || hover
-                              ? ArnaDynamicColor.applyOverlay(
-                                  ArnaDynamicColor.resolve(
-                                    ArnaColors.buttonColor,
-                                    context,
-                                  ),
-                                )
-                              : ArnaColors.buttonColor,
-                          context,
-                        ),
+                      : pressed || selected || hover
+                          ? ArnaDynamicColor.applyOverlay(buttonColor)
+                          : buttonColor,
                 ),
                 padding: Styles.tilePadding,
                 child: _buildChild(context, enabled, hover, accent),

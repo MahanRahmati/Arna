@@ -58,48 +58,52 @@ class ArnaColorButton<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Brightness brightness = ArnaTheme.brightnessOf(context);
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
         builder: (context, enabled, hover, focused, pressed, selected) {
           selected = value == groupValue;
-          return AnimatedContainer(
-            height: Styles.buttonSize,
-            width: Styles.buttonSize,
-            duration: Styles.basicDuration,
-            curve: Styles.basicCurve,
-            decoration: BoxDecoration(
-              borderRadius: Styles.borderRadius,
-              border: Border.all(
-                width: 2,
-                color: selected
-                    ? ArnaDynamicColor.matchingColor(color, brightness)
-                    : ArnaColors.transparent,
-              ),
-            ),
-            padding: Styles.small,
-            child: AnimatedContainer(
-              duration: Styles.basicDuration,
-              curve: Styles.basicCurve,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: Styles.colorButtonBorderRadius,
-                border: Border.all(
-                  color: ArnaDynamicColor.resolve(
-                    !enabled
-                        ? ArnaDynamicColor.applyOverlay(
-                            ArnaDynamicColor.onBackgroundColor(color),
-                          )
-                        : ArnaDynamicColor.outerColor(color),
-                    context,
+          return Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              AnimatedContainer(
+                height: Styles.colorButtonSize,
+                width: Styles.colorButtonSize,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.radioBorderRadius,
+                  border: Border.all(
+                    color: ArnaDynamicColor.resolve(
+                      !enabled
+                          ? ArnaDynamicColor.applyOverlay(
+                              ArnaDynamicColor.onBackgroundColor(color),
+                            )
+                          : ArnaDynamicColor.outerColor(color),
+                      context,
+                    ),
                   ),
+                  color: pressed || hover || focused
+                      ? ArnaDynamicColor.applyOverlay(color)
+                      : color,
                 ),
-                color: pressed || hover || focused
-                    ? ArnaDynamicColor.applyOverlay(color)
-                    : color,
               ),
-            ),
+              AnimatedContainer(
+                height: selected ? Styles.colorButtonIndicatorSize : 0,
+                width: selected ? Styles.colorButtonIndicatorSize : 0,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.radioBorderRadius,
+                  color: !enabled
+                      ? ArnaDynamicColor.resolve(
+                          ArnaColors.backgroundColor,
+                          context,
+                        )
+                      : ArnaDynamicColor.onBackgroundColor(color),
+                ),
+              ),
+            ],
           );
         },
         onPressed: onPressed,

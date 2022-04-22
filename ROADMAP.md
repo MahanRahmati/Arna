@@ -10,6 +10,7 @@
     - [x] ArnaDrawer
     - [x] ArnaHeaderBar
     - [x] ArnaProgressIndicator
+    - [ ] ArnaMasterDetailScaffold
     - [ ] ArnaMasterItem
     - [x] ArnaPageRoute
     - [ ] ArnaScaffold

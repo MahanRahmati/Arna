@@ -4,6 +4,8 @@
 - Update ArnaColorButton
 - Update ArnaMasterItem
 - Update ArnaColors
+- Update ArnaList
+- Update basicDuration
 
 ## 0.4.1
 

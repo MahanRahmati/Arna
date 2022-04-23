@@ -166,7 +166,7 @@ class ArnaList extends StatelessWidget {
       padding: Styles.normal,
       child: Column(
         children: <Widget>[
-          const SizedBox(height: 1, width: double.infinity),
+          const SizedBox(width: double.infinity),
           LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return ConstrainedBox(

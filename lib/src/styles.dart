@@ -143,7 +143,7 @@ abstract class Styles {
   static const Duration tooltipReverseDuration = Duration(milliseconds: 105);
 
   /// Basic duration
-  static const Duration basicDuration = Duration(milliseconds: 210);
+  static const Duration basicDuration = Duration(milliseconds: 280);
 
   /// Tooltip wait duration
   static const Duration tooltipWaitDuration = Duration(milliseconds: 350);

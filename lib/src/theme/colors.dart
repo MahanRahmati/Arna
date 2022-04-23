@@ -416,7 +416,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// Applies an overlay color to a [backgroundColor].
   static Color applyOverlay(Color backgroundColor) {
     Color foregroundColor = onBackgroundColor(backgroundColor);
-    return Color.alphaBlend(foregroundColor.withOpacity(0.14), backgroundColor);
+    return Color.alphaBlend(foregroundColor.withOpacity(0.105), backgroundColor);
   }
 
   /// The color to use when drawn outside of [color].

@@ -3,6 +3,7 @@
 - Update ROADMAP.md
 - Update ArnaColorButton
 - Update ArnaMasterItem
+- Update ArnaColors
 
 ## 0.4.1
 

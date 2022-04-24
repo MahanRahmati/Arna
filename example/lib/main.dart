@@ -65,7 +65,7 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   var showSearch = false;
   TextEditingController controller = TextEditingController();
-  String url = "https://github.com/MahanRahmati/Arna";
+  Uri url = Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna');
   bool showMaster = false;
 
   @override
@@ -150,7 +150,7 @@ class _HomeState extends ConsumerState<Home> {
                         "A unique set of widgets for building applications with Flutter.",
                     primary: ArnaTextButton(
                       label: "Source code",
-                      onPressed: () async => await launch(url),
+                      onPressed: () async => await launchUrl(url),
                     ),
                     secondary: ArnaTextButton(
                       label: "OK",
@@ -186,7 +186,7 @@ class _HomeState extends ConsumerState<Home> {
                         "A unique set of widgets for building applications with Flutter.",
                     primary: ArnaTextButton(
                       label: "Source code",
-                      onPressed: () async => await launch(url),
+                      onPressed: () async => await launchUrl(url),
                     ),
                     secondary: ArnaTextButton(
                       label: "OK",

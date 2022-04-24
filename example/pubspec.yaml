@@ -14,7 +14,7 @@ dependencies:
   arna:
     path: ../
   flutter_riverpod: ^2.0.0-dev.5
-  url_launcher: ^6.0.20
+  url_launcher: ^6.1.0
 
 dev_dependencies:
   flutter_test:

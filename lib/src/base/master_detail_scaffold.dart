@@ -31,9 +31,9 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   /// operations. For less common operations, consider using a
   /// [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built
-  /// by this widget. The height of each action is constrained to be no bigger
-  /// than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar]
+  /// built by this widget. The height of each action is constrained to be no
+  /// bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the scaffold.
@@ -52,164 +52,365 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   final int? currentIndex;
 
   @override
-  _ArnaMasterDetailScaffoldState createState() =>
+  State<ArnaMasterDetailScaffold> createState() =>
       _ArnaMasterDetailScaffoldState();
 }
 
-class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold>
-    with SingleTickerProviderStateMixin {
-  late int _currentIndex;
-  final _navigatorKey = GlobalKey<NavigatorState>();
-  late AnimationController _controller;
-  late Animation<double> _animation;
+/// The [State] for a [ArnaMasterDetailScaffold].
+class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
+  var _index = -1;
+  var _previousIndex = 0;
 
-  NavigatorState get _navigator => _navigatorKey.currentState!;
-
-  @override
-  void initState() {
-    _controller = AnimationController(
-      duration: Styles.scaffoldDuration,
-      vsync: this,
-      value: 1,
-    );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Styles.basicCurve,
-    );
-    _currentIndex = widget.currentIndex ?? -1;
-    super.initState();
+  void _setIndex(int index) {
+    _previousIndex = _index;
+    _index = index;
   }
-
-  void onTap(int index, bool isPhone) {
-    if (isPhone) _navigator.push(pageRoute(index));
-    if (widget.onItemSelected != null) widget.onItemSelected!(index);
-    setState(() => _currentIndex = index);
-    _controller.value = 0;
-    _controller.forward().then((value) => null);
-  }
-
-  ArnaPageRoute pageRoute(int index) {
-    return ArnaPageRoute(
-      builder: (context) {
-        final page = widget.items[index];
-        return ArnaScaffold(
-          headerBarLeading: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ArnaIconButton(
-                icon: Icons.arrow_back_outlined,
-                onPressed: () => _navigator.pop(context),
-                tooltipMessage:
-                    MaterialLocalizations.of(context).backButtonTooltip,
-                semanticLabel:
-                    MaterialLocalizations.of(context).backButtonTooltip,
-              ),
-              if (page.headerBarLeading != null) page.headerBarLeading!,
-            ],
-          ),
-          title: page.title,
-          actions: page.actions,
-          searchField: page.searchField,
-          body: page.builder(context),
-        );
-      },
-    );
-  }
-
-  Widget _buildChild(bool isPhone) {
-    return ListView.builder(
-      controller: ScrollController(),
-      itemCount: widget.items.length,
-      padding: Styles.small,
-      itemBuilder: (BuildContext context, int index) {
-        return ArnaMasterItem(
-          leading: widget.items[index].leading,
-          title: widget.items[index].title,
-          subtitle: widget.items[index].subtitle,
-          trailing: widget.items[index].trailing,
-          onPressed: () => onTap(index, isPhone),
-          selected: isPhone ? false : index == _currentIndex,
-          isFocusable: widget.items[index].isFocusable,
-          autofocus: widget.items[index].autofocus,
-          accentColor: widget.items[index].accentColor ??
-              ArnaTheme.of(context).accentColor,
-          cursor: widget.items[index].cursor,
-          semanticLabel: widget.items[index].semanticLabel,
-        );
-      },
-    );
-  }
-
-  Widget listBuilder(bool isPhone) => ArnaScaffold(
-        headerBarLeading: widget.headerBarLeading,
-        title: widget.title,
-        actions: widget.actions,
-        searchField: widget.searchField,
-        body: _buildChild(isPhone),
-      );
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return constraints.maxWidth > Styles.expanded
-            ? Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    width: Styles.masterSideMaxWidth,
-                    child: listBuilder(false),
-                  ),
-                  const ArnaVerticalDivider(),
-                  _currentIndex == -1
-                      ? Expanded(
-                          child: Container(
-                            height: double.infinity,
-                            color: ArnaDynamicColor.resolve(
-                              ArnaColors.backgroundColor,
-                              context,
-                            ),
-                            child: widget.emptyBody ?? const SizedBox.shrink(),
-                          ),
-                        )
-                      : Expanded(
-                          child: ArnaScaffold(
-                            headerBarLeading:
-                                widget.items[_currentIndex].headerBarLeading,
-                            title: widget.items[_currentIndex].title,
-                            actions: widget.items[_currentIndex].actions,
-                            searchField:
-                                widget.items[_currentIndex].searchField,
-                            body: FadeTransition(
-                              opacity: _animation,
-                              child: widget.items[_currentIndex].builder(
-                                context,
-                              ),
-                            ),
-                          ),
-                        ),
-                ],
+            ? _LateralPage(
+                headerBarLeading: widget.headerBarLeading,
+                title: widget.title,
+                actions: widget.actions,
+                searchField: widget.searchField,
+                items: widget.items,
+                emptyBody: widget.emptyBody,
+                currentIndex: _index == -1 ? _previousIndex : _index,
+                onSelected: _setIndex,
               )
-            : WillPopScope(
-                onWillPop: () async => !await _navigator.maybePop(),
-                child: Navigator(
-                  key: _navigatorKey,
-                  onGenerateInitialRoutes: (navigator, initialRoute) {
-                    return <Route<dynamic>>[
-                      ArnaPageRoute(
-                        builder: (context) => listBuilder(true),
-                      ),
-                      if (_currentIndex != -1) pageRoute(_currentIndex)
-                    ];
-                  },
-                ),
+            : _NestedPage(
+                headerBarLeading: widget.headerBarLeading,
+                title: widget.title,
+                actions: widget.actions,
+                searchField: widget.searchField,
+                items: widget.items,
+                emptyBody: widget.emptyBody,
+                currentIndex: _index,
+                onSelected: _setIndex,
               );
       },
     );
   }
 }
 
-/// a navigation item used inside [ArnaMasterDetailScaffold].
+/// Lateral page widget.
+class _LateralPage extends StatefulWidget {
+  /// Creates a lateral page.
+  const _LateralPage({
+    Key? key,
+    this.headerBarLeading,
+    this.title,
+    this.actions,
+    this.searchField,
+    required this.items,
+    this.emptyBody,
+    required this.currentIndex,
+    required this.onSelected,
+  }) : super(key: key);
+
+  /// The leading widget laid out within the header bar.
+  final Widget? headerBarLeading;
+
+  /// The title displayed in the header bar.
+  final String? title;
+
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar]
+  /// built by this widget. The height of each action is constrained to be no
+  /// bigger than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
+
+  /// The [ArnaSearchField] of the scaffold.
+  final ArnaSearchField? searchField;
+
+  /// The list of navigation items.
+  final List<MasterNavigationItem> items;
+
+  /// The widget to show when no item is selected.
+  final Widget? emptyBody;
+
+  /// Current index of the selected item.
+  final int currentIndex;
+
+  /// Callback that returns an index when the page changes.
+  final ValueChanged<int> onSelected;
+
+  @override
+  State<_LateralPage> createState() => _LateralPageState();
+}
+
+/// The [State] for a [_LateralPage].
+class _LateralPageState extends State<_LateralPage> {
+  late int _currentIndex;
+
+  @override
+  void initState() {
+    _currentIndex = widget.currentIndex;
+    super.initState();
+  }
+
+  void _onPressed(int index) {
+    widget.onSelected(index);
+    setState(() => _currentIndex = index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        SizedBox(
+          width: Styles.masterSideWidth,
+          child: ArnaScaffold(
+            headerBarLeading: widget.headerBarLeading,
+            title: widget.title,
+            actions: widget.actions,
+            searchField: widget.searchField,
+            body: _MasterItemBuilder(
+              items: widget.items,
+              onPressed: _onPressed,
+              currentIndex: _currentIndex,
+            ),
+          ),
+        ),
+        const Padding(
+          padding: EdgeInsetsDirectional.only(start: Styles.masterSideWidth),
+          child: ArnaVerticalDivider(),
+        ),
+        Padding(
+          padding: const EdgeInsetsDirectional.only(
+            start: Styles.masterSideWidth + 1,
+          ),
+          child: widget.items.length > _currentIndex
+              ? ArnaScaffold(
+                  headerBarLeading:
+                      widget.items[_currentIndex].headerBarLeading,
+                  title: widget.items[_currentIndex].title,
+                  actions: widget.items[_currentIndex].actions,
+                  searchField: widget.items[_currentIndex].searchField,
+                  body: widget.items[_currentIndex].builder(context),
+                )
+              : widget.emptyBody != null
+                  ? Container(
+                      constraints: const BoxConstraints.expand(),
+                      color: ArnaDynamicColor.resolve(
+                        ArnaColors.backgroundColor,
+                        context,
+                      ),
+                      child: widget.emptyBody,
+                    )
+                  : ArnaScaffold(
+                      headerBarLeading: widget.items[0].headerBarLeading,
+                      title: widget.items[0].title,
+                      actions: widget.items[0].actions,
+                      searchField: widget.items[0].searchField,
+                      body: widget.items[0].builder(context),
+                    ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Nested page widget.
+class _NestedPage extends StatefulWidget {
+  /// Creates a nested page.
+  const _NestedPage({
+    Key? key,
+    this.headerBarLeading,
+    this.title,
+    this.actions,
+    this.searchField,
+    required this.items,
+    this.emptyBody,
+    required this.currentIndex,
+    required this.onSelected,
+  }) : super(key: key);
+
+  /// The leading widget laid out within the header bar.
+  final Widget? headerBarLeading;
+
+  /// The title displayed in the header bar.
+  final String? title;
+
+  /// A list of Widgets to display in a row after the [title] widget.
+  ///
+  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// operations. For less common operations, consider using a
+  /// [ArnaPopupMenuButton] as the last action.
+  ///
+  /// The [actions] become the trailing component of the [NavigationToolbar]
+  /// built by this widget. The height of each action is constrained to be no
+  /// bigger than the [Styles.headerBarHeight].
+  final List<Widget>? actions;
+
+  /// The [ArnaSearchField] of the scaffold.
+  final ArnaSearchField? searchField;
+
+  /// The list of navigation items.
+  final List<MasterNavigationItem> items;
+
+  /// The widget to show when no item is selected.
+  final Widget? emptyBody;
+
+  /// Current index of the selected item.
+  final int currentIndex;
+
+  /// Callback that returns an index when the page changes.
+  final ValueChanged<int> onSelected;
+
+  @override
+  State<_NestedPage> createState() => _NestedPageState();
+}
+
+/// The [State] for a [_NestedPage].
+class _NestedPageState extends State<_NestedPage> {
+  late int _currentIndex;
+
+  /// Key to access navigator in the nested layout.
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  void initState() {
+    _currentIndex = widget.currentIndex;
+    super.initState();
+  }
+
+  void _onPressed(int index) {
+    widget.onSelected(index);
+    _navigatorKey.currentState!.push(_detailPageRoute(index));
+    setState(() => _currentIndex = index);
+  }
+
+  void _goBack() {
+    widget.onSelected(-1);
+    _navigatorKey.currentState!.pop(context);
+  }
+
+  ArnaPageRoute<void> _detailPageRoute(int index) {
+    return ArnaPageRoute<dynamic>(
+      builder: (BuildContext context) {
+        final page = widget.items[_currentIndex];
+        String tooltip = MaterialLocalizations.of(context).backButtonTooltip;
+        return WillPopScope(
+          onWillPop: () async {
+            _goBack();
+            return false;
+          },
+          child: BlockSemantics(
+            child: ArnaScaffold(
+              headerBarLeading: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  ArnaIconButton(
+                    icon: Icons.arrow_back_outlined,
+                    onPressed: _goBack,
+                    tooltipMessage: tooltip,
+                    semanticLabel: tooltip,
+                  ),
+                  if (page.headerBarLeading != null) page.headerBarLeading!,
+                ],
+              ),
+              title: page.title,
+              actions: page.actions,
+              searchField: page.searchField,
+              body: page.builder(context),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () async => !await _navigatorKey.currentState!.maybePop(),
+      child: Navigator(
+        key: _navigatorKey,
+        onGenerateInitialRoutes: (navigator, initialRoute) {
+          return [
+            ArnaPageRoute(
+              builder: (context) {
+                return ArnaScaffold(
+                  headerBarLeading: widget.headerBarLeading,
+                  title: widget.title,
+                  actions: widget.actions,
+                  searchField: widget.searchField,
+                  body: _MasterItemBuilder(
+                    items: widget.items,
+                    onPressed: _onPressed,
+                    currentIndex: _currentIndex,
+                    isNested: true,
+                  ),
+                );
+              },
+            ),
+            if (_currentIndex != -1) _detailPageRoute(_currentIndex)
+          ];
+        },
+      ),
+    );
+  }
+}
+
+/// Master item list builder.
+class _MasterItemBuilder extends StatelessWidget {
+  /// Creates a master item list.
+  const _MasterItemBuilder({
+    Key? key,
+    required this.items,
+    required this.onPressed,
+    required this.currentIndex,
+    this.isNested = false,
+  }) : super(key: key);
+
+  /// The list of navigation items.
+  final List<MasterNavigationItem> items;
+
+  /// The callback that is called when an item is tapped.
+  final Function(int index) onPressed;
+
+  /// Current index of the selected item.
+  final int currentIndex;
+
+  /// Whether this builder is used inside nested or not.
+  final bool isNested;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      controller: ScrollController(),
+      itemCount: items.length,
+      padding: Styles.small,
+      itemBuilder: (BuildContext context, int index) {
+        return ArnaMasterItem(
+          leading: items[index].leading,
+          title: items[index].title,
+          subtitle: items[index].subtitle,
+          trailing: items[index].trailing,
+          onPressed: onPressed,
+          itemSelected: isNested ? false : index == currentIndex,
+          index: index,
+          isFocusable: items[index].isFocusable,
+          autofocus: items[index].autofocus,
+          accentColor: items[index].accentColor,
+          cursor: items[index].cursor,
+          semanticLabel: items[index].semanticLabel,
+        );
+      },
+    );
+  }
+}
+
+/// A navigation item used inside [ArnaMasterDetailScaffold].
 class MasterNavigationItem {
   /// Creates a master navigation item.
   const MasterNavigationItem({
@@ -253,9 +454,9 @@ class MasterNavigationItem {
   /// operations. For less common operations, consider using a
   /// [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built
-  /// by this widget. The height of each action is constrained to be no bigger
-  /// than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar]
+  /// built by this widget. The height of each action is constrained to be no
+  /// bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the item.

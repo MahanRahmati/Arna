@@ -3,15 +3,15 @@
 ## 1.0.0
 
 - Finalizing the current set of widgets.
-  - Base (9/16)
+  - Base (11/16)
     - [ ] ArnaApp
     - [x] ArnaBanner
     - [x] ArnaBaseWidget
     - [x] ArnaDrawer
     - [x] ArnaHeaderBar
     - [x] ArnaProgressIndicator
-    - [ ] ArnaMasterDetailScaffold
-    - [ ] ArnaMasterItem
+    - [x] ArnaMasterDetailScaffold
+    - [x] ArnaMasterItem
     - [x] ArnaPageRoute
     - [ ] ArnaScaffold
     - [x] ArnaScrollbar

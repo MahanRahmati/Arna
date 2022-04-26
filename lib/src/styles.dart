@@ -124,8 +124,8 @@ abstract class Styles {
   /// Menu maximum width
   static const double menuMaxWidth = base * 45;
 
-  /// Master side maximum width
-  static const double masterSideMaxWidth = base * 56;
+  /// Master side width
+  static const double masterSideWidth = base * 56;
 
   /// Compact
   static const double compact = base * 86;

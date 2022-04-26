@@ -6,6 +6,8 @@
 - Update ArnaColors
 - Update ArnaList
 - Update basicDuration
+- Refactor ArnaMasterDetailScaffold
+- Update ArnaMasterItem
 
 ## 0.4.1
 

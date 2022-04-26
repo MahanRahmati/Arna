@@ -10,7 +10,8 @@ class ArnaMasterItem extends StatelessWidget {
     this.subtitle,
     this.trailing,
     required this.onPressed,
-    this.selected = false,
+    this.itemSelected = false,
+    required this.index,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -31,10 +32,13 @@ class ArnaMasterItem extends StatelessWidget {
   final Widget? trailing;
 
   /// The callback that is called when an item is tapped.
-  final VoidCallback? onPressed;
+  final Function(int index) onPressed;
 
   /// Whether this item is selected or not.
-  final bool selected;
+  final bool itemSelected;
+
+  /// The index of the item.
+  final int index;
 
   /// Whether this item is focusable or not.
   final bool isFocusable;
@@ -53,70 +57,6 @@ class ArnaMasterItem extends StatelessWidget {
   /// The semantic label of the item.
   final String? semanticLabel;
 
-  Widget _buildChild(
-    BuildContext context,
-    bool enabled,
-    bool hovered,
-    Color accent,
-  ) {
-    final List<Widget> children = <Widget>[];
-    if (leading != null) {
-      children.add(
-        Padding(
-          padding: Styles.normal,
-          child: IconTheme.merge(
-            data: IconThemeData(
-              color: ArnaDynamicColor.resolve(
-                !enabled
-                    ? ArnaColors.disabledColor
-                    : selected
-                        ? ArnaDynamicColor.matchingColor(
-                            accent,
-                            ArnaTheme.brightnessOf(context),
-                          )
-                        : ArnaColors.iconColor,
-                context,
-              ),
-            ),
-            child: leading!,
-          ),
-        ),
-      );
-    }
-    children.add(
-      Flexible(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (title != null)
-              SizedBox(
-                width: Styles.sideBarWidth,
-                child: Padding(
-                  padding: Styles.tileTextPadding,
-                  child: Text(
-                    title!,
-                    style: ArnaTheme.of(context).textTheme.button,
-                  ),
-                ),
-              ),
-            if (subtitle != null)
-              Padding(
-                padding: Styles.tileTextPadding,
-                child: Text(
-                  subtitle!,
-                  style: ArnaTheme.of(context).textTheme.subtitle,
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-    if (trailing != null) {
-      children.add(Padding(padding: Styles.normal, child: trailing));
-    }
-    return Row(children: children);
-  }
-
   @override
   Widget build(BuildContext context) {
     Color buttonColor = ArnaDynamicColor.resolve(
@@ -124,12 +64,11 @@ class ArnaMasterItem extends StatelessWidget {
       context,
     );
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
-    bool buttonSelected = selected;
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
         builder: (context, enabled, hover, focused, pressed, selected) {
-          selected = buttonSelected;
+          selected = itemSelected;
           return Stack(
             alignment: Alignment.centerLeft,
             children: <Widget>[
@@ -160,7 +99,58 @@ class ArnaMasterItem extends StatelessWidget {
                           : buttonColor,
                 ),
                 padding: Styles.tilePadding,
-                child: _buildChild(context, enabled, hover, accent),
+                child: Row(
+                  children: [
+                    if (leading != null)
+                      Padding(
+                        padding: Styles.normal,
+                        child: IconTheme.merge(
+                          data: IconThemeData(
+                            color: ArnaDynamicColor.resolve(
+                              !enabled
+                                  ? ArnaColors.disabledColor
+                                  : selected
+                                      ? ArnaDynamicColor.matchingColor(
+                                          accent,
+                                          ArnaTheme.brightnessOf(context),
+                                        )
+                                      : ArnaColors.iconColor,
+                              context,
+                            ),
+                          ),
+                          child: leading!,
+                        ),
+                      ),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          if (title != null)
+                            SizedBox(
+                              width: Styles.sideBarWidth,
+                              child: Padding(
+                                padding: Styles.tileTextPadding,
+                                child: Text(
+                                  title!,
+                                  style: ArnaTheme.of(context).textTheme.button,
+                                ),
+                              ),
+                            ),
+                          if (subtitle != null)
+                            Padding(
+                              padding: Styles.tileTextPadding,
+                              child: Text(
+                                subtitle!,
+                                style: ArnaTheme.of(context).textTheme.subtitle,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    if (trailing != null)
+                      Padding(padding: Styles.normal, child: trailing),
+                  ],
+                ),
               ),
               AnimatedContainer(
                 height: selected ? Styles.iconSize : 0,
@@ -178,7 +168,7 @@ class ArnaMasterItem extends StatelessWidget {
             ],
           );
         },
-        onPressed: onPressed,
+        onPressed: () => onPressed(index),
         tooltipMessage: title,
         isFocusable: isFocusable,
         autofocus: autofocus,

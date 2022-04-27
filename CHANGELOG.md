@@ -8,6 +8,8 @@
 - Update basicDuration
 - Refactor ArnaMasterDetailScaffold
 - Update ArnaMasterItem
+- Update ArnaButton
+- Update ArnaLinkedButtons
 
 ## 0.4.1
 

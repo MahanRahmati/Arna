@@ -122,20 +122,23 @@ class _ArnaLinkedItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               if (button.icon != null)
-                Icon(
-                  button.icon!,
-                  size: Styles.iconSize,
-                  color: ArnaDynamicColor.resolve(
-                    !enabled
-                        ? ArnaColors.disabledColor
-                        : button.buttonType == ButtonType.normal
-                            ? ArnaColors.iconColor
-                            : ArnaDynamicColor.onBackgroundColor(accent),
-                    context,
+                Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    end: button.label != null ? Styles.padding : 0,
+                  ),
+                  child: Icon(
+                    button.icon!,
+                    size: Styles.iconSize,
+                    color: ArnaDynamicColor.resolve(
+                      !enabled
+                          ? ArnaColors.disabledColor
+                          : button.buttonType == ButtonType.normal
+                              ? ArnaColors.iconColor
+                              : ArnaDynamicColor.onBackgroundColor(accent),
+                      context,
+                    ),
                   ),
                 ),
-              if (button.icon != null && button.label != null)
-                const SizedBox(width: Styles.padding),
               if (button.label != null)
                 Flexible(
                   child: Text(

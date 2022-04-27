@@ -120,20 +120,23 @@ class ArnaButton extends StatelessWidget {
                   : MainAxisSize.min,
               children: <Widget>[
                 if (icon != null)
-                  Icon(
-                    icon!,
-                    size: Styles.iconSize,
-                    color: ArnaDynamicColor.resolve(
-                      !enabled
-                          ? ArnaColors.disabledColor
-                          : buttonType == ButtonType.normal
-                              ? ArnaColors.iconColor
-                              : ArnaDynamicColor.onBackgroundColor(accent),
-                      context,
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      end: label != null ? Styles.padding : 0,
+                    ),
+                    child: Icon(
+                      icon!,
+                      size: Styles.iconSize,
+                      color: ArnaDynamicColor.resolve(
+                        !enabled
+                            ? ArnaColors.disabledColor
+                            : buttonType == ButtonType.normal
+                                ? ArnaColors.iconColor
+                                : ArnaDynamicColor.onBackgroundColor(accent),
+                        context,
+                      ),
                     ),
                   ),
-                if (icon != null && label != null)
-                  const SizedBox(width: Styles.padding),
                 if (label != null)
                   Flexible(
                     child: Text(

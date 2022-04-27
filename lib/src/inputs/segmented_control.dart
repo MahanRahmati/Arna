@@ -26,11 +26,11 @@ import 'package:arna/arna.dart';
 /// tallest widget provided as a value in the [Map] of [children].
 /// The width of each child in the segmented control will be equal to the width
 /// of widest child, unless the combined width of the children is wider than
-/// the available horizontal space. In this case, the available horizontal space
-/// is divided by the number of provided [children] to determine the width of
-/// each widget. The selection area for each of the widgets in the [Map] of
-/// [children] will then be expanded to fill the calculated space, so each
-/// widget will appear to have the same dimensions.
+/// the available horizontal space. In this case, the available horizontal
+/// space is divided by the number of provided [children] to determine the
+/// width of each widget. The selection area for each of the widgets in the
+/// [Map] of [children] will then be expanded to fill the calculated space, so
+/// each widget will appear to have the same dimensions.
 class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   /// Creates An Arna-styled segmented control bar.
   ///
@@ -43,10 +43,10 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   /// in the [onValueChanged] callback when a new value from the [children] map
   /// is selected.
   ///
-  /// The [groupValue] is the currently selected value for the segmented control.
-  /// If no [groupValue] is provided, or the [groupValue] is null, no widget will
-  /// appear as selected. The [groupValue] must be either null or one of the keys
-  /// in the [children] map.
+  /// The [groupValue] is the currently selected value for the segmented
+  /// control. If no [groupValue] is provided, or the [groupValue] is null, no
+  /// widget will appear as selected. The [groupValue] must be either null or
+  /// one of the keys in the [children] map.
   const ArnaSegmentedControl({
     Key? key,
     required this.children,
@@ -90,6 +90,7 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
       _ArnaSegmentedControlState<T>();
 }
 
+/// The [State] for a [ArnaSegmentedControl].
 class _ArnaSegmentedControlState<T extends Object>
     extends State<ArnaSegmentedControl<T>> {
   T? _pressedKey;
@@ -99,34 +100,21 @@ class _ArnaSegmentedControlState<T extends Object>
     if (currentKey != widget.groupValue) widget.onValueChanged(currentKey);
   }
 
-  Widget _buildChild() {
-    List<Widget> children = <Widget>[];
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
-    int index = 0;
-    for (final T currentKey in widget.children.keys) {
-      bool first = index == 0 ? true : false;
-      bool last = index == widget.children.length - 1 ? true : false;
-      children.add(
-        _ArnaSegmentedControlItem(
-          label: widget.children[currentKey],
-          buttonSelected: widget.groupValue == currentKey,
-          onPressed: () => _onPressed(currentKey),
-          first: first,
-          last: last,
-          accentColor: accent,
-          borderColor: ArnaDynamicColor.outerColor(accent),
-          cursor: widget.cursor,
-        ),
-      );
-      index += 1;
-    }
-    children.add(const SizedBox(height: Styles.buttonSize, width: 0.5));
-    return Row(mainAxisSize: MainAxisSize.min, children: children);
+  // Determines if this is the first child that is being laid out.
+  bool _isFirstButton(int index, int length, TextDirection textDirection) {
+    return (index == 0 && textDirection == TextDirection.ltr) ||
+        (index == length - 1 && textDirection == TextDirection.rtl);
+  }
+
+  // Determines if this is the last child that is being laid out.
+  bool _isLastButton(int index, int length, TextDirection textDirection) {
+    return (index == length - 1 && textDirection == TextDirection.ltr) ||
+        (index == 0 && textDirection == TextDirection.rtl);
   }
 
   @override
   Widget build(BuildContext context) {
+    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: Container(
@@ -136,62 +124,75 @@ class _ArnaSegmentedControlState<T extends Object>
           borderRadius: Styles.borderRadius,
           color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
         ),
-        child: _buildChild(),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const SizedBox(height: Styles.buttonSize, width: 0.5),
+            ...widget.children.keys.map((item) {
+              int index = widget.children.keys.toList().indexOf(item);
+              int length = widget.children.length;
+              TextDirection textDirection = Directionality.of(context);
+              return _ArnaSegmentedControlItem(
+                label: widget.children[item],
+                itemSelected: widget.groupValue == item,
+                onPressed: () => _onPressed(item),
+                first: _isFirstButton(index, length, textDirection),
+                last: _isLastButton(index, length, textDirection),
+                accentColor: accent,
+                cursor: widget.cursor,
+              );
+            }).toList(),
+            const SizedBox(height: Styles.buttonSize, width: 0.5),
+          ],
+        ),
       ),
     );
   }
 }
 
+/// An Arna-styled segmented control item.
 class _ArnaSegmentedControlItem extends StatelessWidget {
+  /// Creates segmented control item.
   const _ArnaSegmentedControlItem({
     Key? key,
     required this.label,
-    required this.buttonSelected,
+    required this.itemSelected,
     required this.onPressed,
     required this.first,
     required this.last,
     required this.accentColor,
-    required this.borderColor,
     required this.cursor,
   }) : super(key: key);
 
+  /// The text label of the item.
   final String? label;
-  final bool buttonSelected;
-  final GestureTapCallback? onPressed;
-  final bool first;
-  final bool last;
-  final Color accentColor;
-  final Color borderColor;
-  final MouseCursor cursor;
 
-  Widget _buildChild(BuildContext context, bool enabled, bool selected) {
-    final List<Widget> children = <Widget>[];
-    if (label != null) {
-      Widget labelWidget = Flexible(
-        child: Text(
-          label!,
-          style: ArnaTheme.of(context).textTheme.button!.copyWith(
-                color: ArnaDynamicColor.resolve(
-                  !enabled
-                      ? ArnaColors.disabledColor
-                      : selected
-                          ? ArnaDynamicColor.onBackgroundColor(accentColor)
-                          : ArnaColors.primaryTextColor,
-                  context,
-                ),
-              ),
-        ),
-      );
-      children.add(labelWidget);
-    }
-    return Row(mainAxisSize: MainAxisSize.min, children: children);
-  }
+  /// Whether or not this item is selected.
+  final bool itemSelected;
+
+  /// The callback that is called when an item is tapped.
+  ///
+  /// If this callback is null, then the item will be disabled.
+  final GestureTapCallback? onPressed;
+
+  /// Whether or not this item is the first item in the list.
+  final bool first;
+
+  /// Whether or not this item is the last item in the list.
+  final bool last;
+
+  /// The color of the item's focused border and selected background.
+  final Color accentColor;
+
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// item.
+  final MouseCursor cursor;
 
   @override
   Widget build(BuildContext context) {
     return ArnaBaseWidget(
       builder: (context, enabled, hover, focused, pressed, selected) {
-        selected = buttonSelected;
+        selected = itemSelected;
         return AnimatedContainer(
           height: Styles.buttonSize - 2,
           duration: Styles.basicDuration,
@@ -208,7 +209,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
             ),
             border: Border.all(
               color: selected
-                  ? borderColor
+                  ? ArnaDynamicColor.outerColor(accentColor)
                   : focused
                       ? ArnaDynamicColor.matchingColor(
                           accentColor,
@@ -234,7 +235,29 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
           ),
           margin: const EdgeInsets.all(0.5),
           padding: Styles.largeHorizontal,
-          child: _buildChild(context, enabled, selected),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (label != null)
+                Flexible(
+                  child: Text(
+                    label!,
+                    style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                          color: ArnaDynamicColor.resolve(
+                            !enabled
+                                ? ArnaColors.disabledColor
+                                : selected
+                                    ? ArnaDynamicColor.onBackgroundColor(
+                                        accentColor,
+                                      )
+                                    : ArnaColors.primaryTextColor,
+                            context,
+                          ),
+                        ),
+                  ),
+                ),
+            ],
+          ),
         );
       },
       onPressed: onPressed,

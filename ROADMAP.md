@@ -43,13 +43,13 @@
     - [x] ArnaVerticalDivider
     - [x] ArnaHorizontalSeparator
     - [x] ArnaVerticalSeparator
-  - Inputs (7/11)
+  - Inputs (8/11)
     - [x] ArnaCheckBoxListTile
     - [x] ArnaCheckBox
     - [ ] ArnaPopupMenu
     - [x] ArnaRadioListTile
     - [x] ArnaRadio
-    - [ ] ArnaSegmentedControl
+    - [x] ArnaSegmentedControl
     - [x] ArnaSliderListTile
     - [ ] ArnaSlider
     - [x] ArnaSwitchListTile

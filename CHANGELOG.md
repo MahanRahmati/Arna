@@ -10,6 +10,7 @@
 - Update ArnaMasterItem
 - Update ArnaButton
 - Update ArnaLinkedButtons
+- Update ArnaSegmentedControl
 
 ## 0.4.1
 

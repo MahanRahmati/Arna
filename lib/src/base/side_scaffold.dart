@@ -29,9 +29,9 @@ class ArnaSideScaffold extends StatefulWidget {
   /// operations. For less common operations, consider using a
   /// [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built
-  /// by this widget. The height of each action is constrained to be no bigger
-  /// than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar]
+  /// built by this widget. The height of each action is constrained to be no
+  /// bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The list of navigation items.
@@ -47,24 +47,13 @@ class ArnaSideScaffold extends StatefulWidget {
   State<ArnaSideScaffold> createState() => _ArnaSideScaffoldState();
 }
 
-class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
-    with SingleTickerProviderStateMixin {
+/// The [State] for a [ArnaSideScaffold].
+class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   late int _currentIndex;
   var showDrawer = false;
-  late AnimationController _controller;
-  late Animation<double> _animation;
 
   @override
   void initState() {
-    _controller = AnimationController(
-      duration: Styles.scaffoldDuration,
-      vsync: this,
-      value: 1,
-    );
-    _animation = CurvedAnimation(
-      parent: _controller,
-      curve: Styles.basicCurve,
-    );
     _currentIndex = widget.currentIndex;
     super.initState();
   }
@@ -74,16 +63,18 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
     if (widget.onItemSelected != null) widget.onItemSelected!(index);
     _drawerOpenedCallback(false);
     setState(() => _currentIndex = index);
-    _controller.value = 0;
-    _controller.forward().then((value) => null);
   }
 
   void _drawerOpenedCallback(bool isOpened) {
     if (showDrawer != isOpened) setState(() => showDrawer = isOpened);
   }
 
-  Widget _buildChild() {
-    return ListView.builder(
+  @override
+  Widget build(BuildContext context) {
+    if (!isCompact(context) && showDrawer) _drawerOpenedCallback(false);
+    String tooltip = MaterialLocalizations.of(context).drawerLabel;
+
+    Widget sideItemBuilder = ListView.builder(
       controller: ScrollController(),
       itemCount: widget.items.length,
       padding: Styles.small,
@@ -103,115 +94,102 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold>
         );
       },
     );
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    if (!isCompact(context) && showDrawer) _drawerOpenedCallback(false);
-    return SafeArea(
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return widget.items.length > 1
-              ? Stack(
+    Widget sideScaffold = LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        double padding = constraints.maxWidth > Styles.expanded
+            ? Styles.sideBarWidth
+            : Styles.sideBarCompactWidth;
+
+        return Stack(
+          children: <Widget>[
+            if (constraints.maxWidth > Styles.compact)
+              AnimatedContainer(
+                width: padding,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                clipBehavior: Clip.antiAlias,
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.sideColor,
+                  context,
+                ),
+                child: sideItemBuilder,
+              ),
+            if (constraints.maxWidth > Styles.compact)
+              Padding(
+                padding: EdgeInsetsDirectional.only(start: padding),
+                child: const ArnaVerticalDivider(),
+              ),
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                start: constraints.maxWidth > Styles.compact ? padding + 1 : 0,
+              ),
+              child: ArnaScaffold(
+                headerBarLeading: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        if (constraints.maxWidth > Styles.compact)
-                          AnimatedContainer(
-                            width: constraints.maxWidth > Styles.expanded
-                                ? Styles.sideBarWidth
-                                : Styles.sideBarCompactWidth,
-                            duration: Styles.basicDuration,
-                            curve: Styles.basicCurve,
-                            clipBehavior: Clip.antiAlias,
-                            color: ArnaDynamicColor.resolve(
-                              ArnaColors.sideColor,
-                              context,
-                            ),
-                            child: _buildChild(),
-                          ),
-                        if (constraints.maxWidth > Styles.compact)
-                          const ArnaVerticalDivider(),
-                        Expanded(
-                          child: ArnaScaffold(
-                            headerBarLeading: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                if (constraints.maxWidth < Styles.compact)
-                                  ArnaIconButton(
-                                    icon: Icons.menu_outlined,
-                                    onPressed: () =>
-                                        _drawerOpenedCallback(true),
-                                    tooltipMessage:
-                                        MaterialLocalizations.of(context)
-                                            .drawerLabel,
-                                    semanticLabel:
-                                        MaterialLocalizations.of(context)
-                                            .drawerLabel,
-                                  ),
-                                if (widget.headerBarLeading != null)
-                                  widget.headerBarLeading!,
-                                if (widget.items[_currentIndex]
-                                        .headerBarLeading !=
-                                    null)
-                                  widget.items[_currentIndex].headerBarLeading!,
-                              ],
-                            ),
-                            title: widget.title,
-                            actions: <Widget>[
-                              if (widget.items[_currentIndex].actions != null)
-                                ...widget.items[_currentIndex].actions!,
-                              if (widget.actions != null) ...widget.actions!,
-                            ],
-                            searchField:
-                                widget.items[_currentIndex].searchField,
-                            body: Column(
-                              children: <Widget>[
-                                Expanded(
-                                  child: FadeTransition(
-                                    opacity: _animation,
-                                    child: widget.items[_currentIndex]
-                                        .builder(context),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     if (constraints.maxWidth < Styles.compact)
-                      ArnaDrawerController(
-                        drawer: ArnaDrawer(child: _buildChild()),
-                        drawerCallback: _drawerOpenedCallback,
-                        isDrawerOpen: showDrawer,
+                      ArnaIconButton(
+                        icon: Icons.menu_outlined,
+                        onPressed: () => _drawerOpenedCallback(true),
+                        tooltipMessage: tooltip,
+                        semanticLabel: tooltip,
                       ),
+                    if (widget.headerBarLeading != null)
+                      widget.headerBarLeading!,
+                    if (widget.items[_currentIndex].headerBarLeading != null)
+                      widget.items[_currentIndex].headerBarLeading!,
                   ],
-                )
+                ),
+                title: widget.title,
+                actions: <Widget>[
+                  if (widget.items[_currentIndex].actions != null)
+                    ...widget.items[_currentIndex].actions!,
+                  if (widget.actions != null) ...widget.actions!,
+                ],
+                searchField: widget.items[_currentIndex].searchField,
+                body: widget.items[_currentIndex].builder(context),
+              ),
+            ),
+            if (constraints.maxWidth < Styles.compact)
+              ArnaDrawerController(
+                drawer: ArnaDrawer(child: sideItemBuilder),
+                drawerCallback: _drawerOpenedCallback,
+                isDrawerOpen: showDrawer,
+              ),
+          ],
+        );
+      },
+    );
+
+    return SafeArea(
+      child: widget.items.isEmpty
+          ? Container(
+              color: ArnaDynamicColor.resolve(
+                ArnaColors.backgroundColor,
+                context,
+              ),
+            )
+          : widget.items.length > 1
+              ? sideScaffold
               : ArnaScaffold(
                   headerBarLeading: Row(
                     children: <Widget>[
                       if (widget.headerBarLeading != null)
                         widget.headerBarLeading!,
-                      if (widget.items[_currentIndex].headerBarLeading != null)
-                        widget.items[_currentIndex].headerBarLeading!,
+                      if (widget.items[0].headerBarLeading != null)
+                        widget.items[0].headerBarLeading!,
                     ],
                   ),
                   title: widget.title,
                   actions: <Widget>[
-                    if (widget.items[_currentIndex].actions != null)
-                      ...widget.items[_currentIndex].actions!,
+                    if (widget.items[0].actions != null)
+                      ...widget.items[0].actions!,
                     if (widget.actions != null) ...widget.actions!,
                   ],
-                  searchField: widget.items[_currentIndex].searchField,
-                  body: FadeTransition(
-                    opacity: _animation,
-                    child: widget.items[_currentIndex].builder(context),
-                  ),
-                );
-        },
-      ),
+                  searchField: widget.items[0].searchField,
+                  body: widget.items[0].builder(context),
+                ),
     );
   }
 }
@@ -252,9 +230,9 @@ class NavigationItem {
   /// operations. For less common operations, consider using a
   /// [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built
-  /// by this widget. The height of each action is constrained to be no bigger
-  /// than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar]
+  /// built by this widget. The height of each action is constrained to be no
+  /// bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the item.

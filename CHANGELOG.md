@@ -1,3 +1,7 @@
+## 0.4.3
+
+- Update ArnaSideScaffold
+
 ## 0.4.2
 
 - Update ROADMAP.md

@@ -19,12 +19,24 @@ class _WidgetsState extends State<Widgets> {
   double _sliderValue2 = 0;
   final double _sliderValue3 = 0;
   int segmentedControlGroupValue = 0;
+  var _showBanner = true;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
+          ArnaBanner(
+            showBanner: _showBanner,
+            title: "This is an information banner!",
+            subtitle: "Hello There!",
+            actions: <Widget>[
+              ArnaBorderlessButton(
+                icon: Icons.close_outlined,
+                onPressed: () => setState(() => _showBanner = false),
+              ),
+            ],
+          ),
           ArnaList(
             title: "Widgets",
             children: <Widget>[
@@ -405,21 +417,7 @@ class _WidgetsState extends State<Widgets> {
                     ArnaTextButton(
                       label: "Show Banner",
                       onPressed: () {
-                        ArnaScaffoldMessenger.of(context).showBanner(
-                          ArnaBanner(
-                            title: "This is an information banner!",
-                            subtitle: "Hello There!",
-                            actions: <Widget>[
-                              ArnaBorderlessButton(
-                                icon: Icons.close_outlined,
-                                onPressed: () {
-                                  ArnaScaffoldMessenger.of(context)
-                                      .hideCurrentBanner();
-                                },
-                              ),
-                            ],
-                          ),
-                        );
+                        if (!_showBanner) setState(() => _showBanner = true);
                       },
                     ),
                     ArnaTextButton(

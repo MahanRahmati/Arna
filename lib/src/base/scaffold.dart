@@ -3,16 +3,15 @@ import 'dart:collection';
 
 import 'package:arna/arna.dart';
 
-/// Manages [ArnaSnackBar]s and [ArnaBanner]s for descendant [ArnaScaffold]s.
+/// Manages [ArnaSnackBar]s for descendant [ArnaScaffold]s.
 ///
-/// This class provides APIs for showing snack bars and banners at the bottom
-/// and top of the screen, respectively.
+/// This class provides APIs for showing snack bars at the bottom of the
+/// screen.
 ///
 /// To display one of these notifications, obtain the
 /// [ArnaScaffoldMessengerState] for the current [BuildContext] via
 /// [ArnaScaffoldMessenger.of] and use the
-/// [ArnaScaffoldMessengerState.showSnackBar] or the
-/// [ArnaScaffoldMessengerState.showBanner] functions.
+/// [ArnaScaffoldMessengerState.showSnackBar] function.
 ///
 /// When the [ArnaScaffoldMessenger] has nested [ArnaScaffold] descendants, the
 /// ArnaScaffoldMessenger will only present the notification to the root
@@ -25,8 +24,6 @@ import 'package:arna/arna.dart';
 ///  * [ArnaSnackBar], which is a temporary notification typically shown near
 ///    the bottom of the app using the
 ///    [ArnaScaffoldMessengerState.showSnackBar] method.
-///  * [ArnaBanner], which is a temporary notification typically shown at the
-///    top of the app using the [ArnaScaffoldMessengerState.showBanner] method.
 ///  * [debugCheckHasArnaScaffoldMessenger], which asserts that the given
 ///    context has a [ArnaScaffoldMessenger] ancestor.
 class ArnaScaffoldMessenger extends StatefulWidget {
@@ -91,21 +88,16 @@ class ArnaScaffoldMessenger extends StatefulWidget {
 
 /// State for an [ArnaScaffoldMessenger].
 ///
-/// An [ArnaScaffoldMessengerState] object can be used to [showSnackBar] or
-/// [showBanner] for every registered [ArnaScaffold] that is a descendant of
-/// the associated [ArnaScaffoldMessenger]. ArnaScaffolds will register to
-/// receive [ArnaSnackBar]s and [ArnaBanner]s from their closest
-/// ArnaScaffoldMessenger ancestor.
+/// An [ArnaScaffoldMessengerState] object can be used to [showSnackBar] for
+/// every registered [ArnaScaffold] that is a descendant of the associated
+/// [ArnaScaffoldMessenger]. ArnaScaffolds will register to receive
+/// [ArnaSnackBar]s from their closest ArnaScaffoldMessenger ancestor.
 ///
 /// Typically obtained via [ArnaScaffoldMessenger.of].
 class ArnaScaffoldMessengerState extends State<ArnaScaffoldMessenger>
     with TickerProviderStateMixin {
   final LinkedHashSet<ArnaScaffoldState> _scaffolds =
       LinkedHashSet<ArnaScaffoldState>();
-  final Queue<ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason>>
-      _banners = Queue<
-          ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason>>();
-  AnimationController? _bannerController;
   final Queue<
       ArnaScaffoldFeatureController<ArnaSnackBar,
           ArnaSnackBarClosedReason>> _snackBars = Queue<
@@ -136,7 +128,6 @@ class ArnaScaffoldMessengerState extends State<ArnaScaffoldMessenger>
     _scaffolds.add(scaffold);
     if (_isRoot(scaffold)) {
       if (_snackBars.isNotEmpty) scaffold._updateSnackBar();
-      if (_banners.isNotEmpty) scaffold._updateBanner();
     }
   }
 
@@ -152,14 +143,12 @@ class ArnaScaffoldMessengerState extends State<ArnaScaffoldMessenger>
     for (final ArnaScaffoldState scaffold in _scaffolds) {
       if (_isRoot(scaffold)) {
         scaffold._updateSnackBar();
-        scaffold._updateBanner();
       }
     }
   }
 
   // Nested Scaffolds are handled by the ArnaScaffoldMessenger by only
-  // presenting a ArnaBanner or ArnaSnackBar in the root ArnaScaffold of the
-  // nested set.
+  // presenting an ArnaSnackBar in the root ArnaScaffold of the nested set.
   /// Check whether this scaffold is root or not.
   bool _isRoot(ArnaScaffoldState scaffold) {
     final ArnaScaffoldState? parent =
@@ -281,111 +270,6 @@ class ArnaScaffoldMessengerState extends State<ArnaScaffoldMessenger>
     _snackBars.clear();
     _snackBars.add(currentSnackbar);
     hideCurrentSnackBar();
-  }
-
-  // BANNER API
-
-  /// Shows a [ArnaBanner] across all registered [ArnaScaffold]s.
-  ///
-  /// A scaffold can show at most one banner at a time. If this function is
-  /// called while another banner is already visible, the given banner will be
-  /// added to a queue and displayed after the earlier banners have closed.
-  ///
-  /// To remove the [ArnaBanner] with an exit animation, use
-  /// [hideCurrentBanner] or call [ArnaScaffoldFeatureController.close] on the
-  /// returned [ArnaScaffoldFeatureController]. To remove a [ArnaBanner]
-  /// suddenly (without an animation), use [removeCurrentBanner].
-  ///
-  /// See [ArnaScaffoldMessenger.of] for information about how to obtain the
-  /// [ArnaScaffoldMessengerState].
-  ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason> showBanner(
-      ArnaBanner arnaBanner) {
-    _bannerController ??= ArnaBanner.createAnimationController(vsync: this)
-      ..addStatusListener(_handleBannerStatusChanged);
-    if (_banners.isEmpty) {
-      assert(_bannerController!.isDismissed);
-      _bannerController!.forward();
-    }
-    late ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason>
-        controller;
-    controller =
-        ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason>._(
-      arnaBanner.withAnimation(_bannerController!, fallbackKey: UniqueKey()),
-      Completer<ArnaBannerClosedReason>(),
-      () {
-        assert(_banners.first == controller);
-        hideCurrentBanner();
-      },
-      null, // ArnaBanner doesn't use a builder function so setState() wouldn't rebuild it
-    );
-    setState(() => _banners.addLast(controller));
-    _updateScaffolds();
-    return controller;
-  }
-
-  void _handleBannerStatusChanged(AnimationStatus status) {
-    switch (status) {
-      case AnimationStatus.dismissed:
-        assert(_banners.isNotEmpty);
-        setState(() => _banners.removeFirst());
-        _updateScaffolds();
-        if (_banners.isNotEmpty) _bannerController!.forward();
-        break;
-      case AnimationStatus.completed:
-        _updateScaffolds();
-        break;
-      case AnimationStatus.forward:
-        break;
-      case AnimationStatus.reverse:
-        break;
-    }
-  }
-
-  /// Removes the current [ArnaBanner] (if any) immediately from registered
-  /// [ArnaScaffold]s.
-  ///
-  /// The removed banner does not run its normal exit animation. If there are
-  /// any queued banners, they begin their entrance animation immediately.
-  void removeCurrentBanner(
-      {ArnaBannerClosedReason reason = ArnaBannerClosedReason.remove}) {
-    if (_banners.isEmpty) return;
-    final Completer<ArnaBannerClosedReason> completer =
-        _banners.first._completer;
-    if (!completer.isCompleted) completer.complete(reason);
-    // This will trigger the animation's status callback.
-    _bannerController!.value = 0.0;
-  }
-
-  /// Removes the current [ArnaBanner] by running its normal exit animation.
-  ///
-  /// The closed completer is called after the animation is complete.
-  void hideCurrentBanner(
-      {ArnaBannerClosedReason reason = ArnaBannerClosedReason.hide}) {
-    if (_banners.isEmpty ||
-        _bannerController!.status == AnimationStatus.dismissed) return;
-    final Completer<ArnaBannerClosedReason> completer =
-        _banners.first._completer;
-    if (_accessibleNavigation!) {
-      _bannerController!.value = 0.0;
-      completer.complete(reason);
-    } else {
-      _bannerController!.reverse().then<void>((void value) {
-        assert(mounted);
-        if (!completer.isCompleted) completer.complete(reason);
-      });
-    }
-  }
-
-  /// Removes all the banners currently in queue by clearing the queue and
-  /// running normal exit animation on the current banner.
-  void clearArnaBanners() {
-    if (_banners.isEmpty ||
-        _bannerController!.status == AnimationStatus.dismissed) return;
-    final ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason>
-        currentArnaBanner = _banners.first;
-    _banners.clear();
-    _banners.add(currentArnaBanner);
-    hideCurrentBanner();
   }
 
   @override
@@ -586,7 +470,7 @@ class ArnaScaffold extends StatefulWidget {
 /// The [State] for a [ArnaScaffold].
 class ArnaScaffoldState extends State<ArnaScaffold>
     with TickerProviderStateMixin {
-  // Used for both the snackbar and banner APIs
+  // Used for the snackbar API.
   ArnaScaffoldMessengerState? _scaffoldMessenger;
 
   // SNACKBAR API
@@ -603,25 +487,6 @@ class ArnaScaffoldState extends State<ArnaScaffold>
 
     if (_messengerSnackBar != messengerSnackBar) {
       setState(() => _messengerSnackBar = messengerSnackBar);
-    }
-  }
-
-  //  BANNER API
-
-  // The _messengerBanner represents the current ArnaBanner being managed by
-  // the ArnaScaffoldMessenger, instead of the ArnaScaffold.
-  ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason>?
-      _messengerBanner;
-
-  // This is used to update the _messengerBanner by the ArnaScaffoldMessenger.
-  void _updateBanner() {
-    final ArnaScaffoldFeatureController<ArnaBanner, ArnaBannerClosedReason>?
-        messengerBanner = _scaffoldMessenger!._banners.isNotEmpty
-            ? _scaffoldMessenger!._banners.first
-            : null;
-
-    if (_messengerBanner != messengerBanner) {
-      setState(() => _messengerBanner = messengerBanner);
     }
   }
 
@@ -682,7 +547,6 @@ class ArnaScaffoldState extends State<ArnaScaffold>
                   actions: widget.actions,
                 ),
                 if (widget.searchField != null) widget.searchField!,
-                if (_messengerBanner != null) _messengerBanner!._widget,
                 Flexible(child: widget.body),
                 if (_messengerSnackBar != null) _messengerSnackBar!._widget,
               ],

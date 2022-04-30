@@ -1,6 +1,7 @@
 ## 0.4.3
 
 - Update ArnaSideScaffold
+- [BREAKING] Revert and Update ArnaBanner
 
 ## 0.4.2
 

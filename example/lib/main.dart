@@ -205,6 +205,10 @@ class _HomeState extends ConsumerState<Home> {
                 },
               ),
             ],
+            leading: const Padding(
+              padding: Styles.normal,
+              child: FlutterLogo(size: Styles.base * 5),
+            ),
             items: <NavigationItem>[hello, widgets, typography],
           );
   }

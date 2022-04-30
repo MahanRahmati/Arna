@@ -12,7 +12,9 @@ class ArnaSideScaffold extends StatefulWidget {
     this.headerBarLeading,
     this.title,
     this.actions,
+    this.leading,
     required this.items,
+    this.trailing,
     this.onItemSelected,
     this.currentIndex = 0,
   }) : super(key: key);
@@ -34,8 +36,18 @@ class ArnaSideScaffold extends StatefulWidget {
   /// bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
+  /// The leading widget in the side bar that is placed above the items.
+  ///
+  /// The default value is null.
+  final Widget? leading;
+
   /// The list of navigation items.
   final List<NavigationItem> items;
+
+  /// The trailing widget in the side bar that is placed below the items.
+  ///
+  /// The default value is null.
+  final Widget? trailing;
 
   /// Called when one of the [items] is tapped.
   final ValueChanged<int>? onItemSelected;
@@ -74,25 +86,36 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     if (!isCompact(context) && showDrawer) _drawerOpenedCallback(false);
     String tooltip = MaterialLocalizations.of(context).drawerLabel;
 
-    Widget sideItemBuilder = ListView.builder(
-      controller: ScrollController(),
-      itemCount: widget.items.length,
-      padding: Styles.small,
-      itemBuilder: (BuildContext context, int index) {
-        return ArnaSideBarItem(
-          label: widget.items[index].title,
-          icon: widget.items[index].icon,
-          onPressed: () => onTap(index),
-          badge: widget.items[index].badge,
-          compact: isMedium(context) ? true : false,
-          selected: index == _currentIndex,
-          isFocusable: widget.items[index].isFocusable,
-          autofocus: widget.items[index].autofocus,
-          accentColor: widget.items[index].accentColor,
-          cursor: widget.items[index].cursor,
-          semanticLabel: widget.items[index].semanticLabel,
-        );
-      },
+    Widget sideItemBuilder = Semantics(
+      explicitChildNodes: true,
+      child: Column(
+        children: <Widget>[
+          if (widget.leading != null) widget.leading!,
+          Expanded(
+            child: ListView.builder(
+              controller: ScrollController(),
+              itemCount: widget.items.length,
+              padding: Styles.small,
+              itemBuilder: (BuildContext context, int index) {
+                return ArnaSideBarItem(
+                  label: widget.items[index].title,
+                  icon: widget.items[index].icon,
+                  onPressed: () => onTap(index),
+                  badge: widget.items[index].badge,
+                  compact: isMedium(context) ? true : false,
+                  selected: index == _currentIndex,
+                  isFocusable: widget.items[index].isFocusable,
+                  autofocus: widget.items[index].autofocus,
+                  accentColor: widget.items[index].accentColor,
+                  cursor: widget.items[index].cursor,
+                  semanticLabel: widget.items[index].semanticLabel,
+                );
+              },
+            ),
+          ),
+          if (widget.trailing != null) widget.trailing!,
+        ],
+      ),
     );
 
     Widget sideScaffold = LayoutBuilder(

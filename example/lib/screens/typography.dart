@@ -15,45 +15,27 @@ class Typography extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: Styles.normal,
-                child: Text(
-                  "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.titleLarge,
-                ),
+                child: Text("Lorem ipsum dolor", style: ArnaTheme.of(context).textTheme.titleLarge),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(
-                  "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.title,
-                ),
+                child: Text("Lorem ipsum dolor", style: ArnaTheme.of(context).textTheme.title),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(
-                  "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.body,
-                ),
+                child: Text("Lorem ipsum dolor", style: ArnaTheme.of(context).textTheme.body),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(
-                  "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.button,
-                ),
+                child: Text("Lorem ipsum dolor", style: ArnaTheme.of(context).textTheme.button),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(
-                  "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.subtitle,
-                ),
+                child: Text("Lorem ipsum dolor", style: ArnaTheme.of(context).textTheme.subtitle),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(
-                  "Lorem ipsum dolor",
-                  style: ArnaTheme.of(context).textTheme.caption,
-                ),
+                child: Text("Lorem ipsum dolor", style: ArnaTheme.of(context).textTheme.caption),
               ),
             ],
           ),

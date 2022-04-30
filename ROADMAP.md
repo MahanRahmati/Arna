@@ -19,7 +19,7 @@
     - [ ] ArnaSideBarItem
     - [ ] ArnaSideScaffold
     - [x] ArnaSnackBar
-    - [ ] ArnaTooltip
+    - [x] ArnaTooltip
   - Buttons (7/7)
     - [x] ArnaBorderlessButton
     - [x] ArnaButton

@@ -4,18 +4,15 @@ import 'package:arna/arna.dart';
 ///
 /// Used to toggle the on/off state of a single setting.
 ///
-/// The switch itself does not maintain any state. Instead, when the state of
-/// the switch changes, the widget calls the [onChanged] callback. Most widgets
-/// that use a switch will listen for the [onChanged] callback and rebuild the
+/// The switch itself does not maintain any state. Instead, when the state of the switch changes, the widget calls the
+/// [onChanged] callback. Most widgets that use a switch will listen for the [onChanged] callback and rebuild the
 /// switch with a new [value] to update the visual appearance of the switch.
 ///
-/// If the [onChanged] callback is null, then the switch will be disabled (it
-/// will not respond to input).
+/// If the [onChanged] callback is null, then the switch will be disabled (it will not respond to input).
 ///
 /// See also:
 ///
-///  * [ArnaSwitchListTile], which combines this widget with a [ArnaListTile]
-///    so that you can give the switch a label.
+///  * [ArnaSwitchListTile], which combines this widget with a [ArnaListTile] so that you can give the switch a label.
 ///  * [ArnaCheckBox], another widget with similar semantics.
 ///  * [ArnaRadio], for selecting among a set of explicit values.
 ///  * [ArnaSlider], for selecting a value in a range.
@@ -36,15 +33,13 @@ class ArnaSwitch extends StatelessWidget {
 
   /// Called when the user toggles the switch on or off.
   ///
-  /// The switch passes the new value to the callback but does not actually
-  /// change state until the parent widget rebuilds the switch with the new
-  /// value.
+  /// The switch passes the new value to the callback but does not actually change state until the parent widget
+  /// rebuilds the switch with the new value.
   ///
   /// If null, the switch will be displayed as disabled.
   ///
-  /// The callback provided to [onChanged] should update the state of the
-  /// parent [StatefulWidget] using the [State.setState] method, so that the
-  /// parent gets rebuilt; for example:
+  /// The callback provided to [onChanged] should update the state of the parent [StatefulWidget] using the
+  /// [State.setState] method, so that the parent gets rebuilt; for example:
   ///
   /// ```dart
   /// ArnaSwitch(
@@ -61,15 +56,13 @@ class ArnaSwitch extends StatelessWidget {
   /// Whether this switch is focusable or not.
   final bool isFocusable;
 
-  /// Whether this switch should focus itself if nothing else is already
-  /// focused.
+  /// Whether this switch should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the switch's focused border and selected state.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// switch.
+  /// The cursor for a mouse pointer when it enters or is hovering over the switch.
   final MouseCursor cursor;
 
   /// The semantic label of the switch.
@@ -83,10 +76,8 @@ class ArnaSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     Brightness brightness = ArnaTheme.brightnessOf(context);
-    Color borderColor = ArnaDynamicColor.resolve(
-      ArnaColors.borderColor,
-      context,
-    );
+    Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
+
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
@@ -111,10 +102,7 @@ class ArnaSwitch extends StatelessWidget {
                               : value
                                   ? ArnaDynamicColor.outerColor(accent)
                                   : hover
-                                      ? ArnaDynamicColor.matchingColor(
-                                          accent,
-                                          brightness,
-                                        )
+                                      ? ArnaDynamicColor.matchingColor(accent, brightness)
                                       : ArnaColors.borderColor,
                       context,
                     ),
@@ -128,10 +116,7 @@ class ArnaSwitch extends StatelessWidget {
                                 : accent
                             : hover
                                 ? ArnaDynamicColor.applyOverlay(
-                                    ArnaDynamicColor.resolve(
-                                      ArnaColors.buttonColor,
-                                      context,
-                                    ),
+                                    ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
                                   )
                                 : ArnaColors.backgroundColor,
                     context,
@@ -141,8 +126,7 @@ class ArnaSwitch extends StatelessWidget {
               AnimatedPositioned(
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
-                left:
-                    value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
+                left: value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
                 child: AnimatedContainer(
                   height: Styles.switchThumbSize,
                   width: Styles.switchThumbSize,

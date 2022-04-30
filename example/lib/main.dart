@@ -76,6 +76,7 @@ class _HomeState extends ConsumerState<Home> {
       headerBarLeading: ArnaIconButton(
         icon: Icons.add_outlined,
         onPressed: () => ref.read(counterProvider.state).state++,
+        tooltipMessage: "Add",
       ),
       builder: (_) => const HelloWorld(),
     );
@@ -87,6 +88,7 @@ class _HomeState extends ConsumerState<Home> {
           showSearch = !showSearch;
           controller.text = "";
         }),
+        tooltipMessage: "Search",
       ),
       title: "Widgets",
       icon: Icons.widgets_outlined,
@@ -113,6 +115,7 @@ class _HomeState extends ConsumerState<Home> {
                 headerBarLeading: ArnaIconButton(
                   icon: Icons.add_outlined,
                   onPressed: () => ref.read(counterProvider.state).state++,
+                  tooltipMessage: "Add",
                 ),
                 builder: (_) => const HelloWorld(),
               ),
@@ -126,6 +129,7 @@ class _HomeState extends ConsumerState<Home> {
                     showSearch = !showSearch;
                     controller.text = "";
                   }),
+                  tooltipMessage: "Search",
                 ),
                 searchField: ArnaSearchField(
                   showSearch: showSearch,
@@ -146,8 +150,7 @@ class _HomeState extends ConsumerState<Home> {
                   barrierDismissible: true,
                   dialog: ArnaAlertDialog(
                     title: "Arna Framework",
-                    message:
-                        "A unique set of widgets for building applications with Flutter.",
+                    message: "A unique set of widgets for building applications with Flutter.",
                     primary: ArnaTextButton(
                       label: "Source code",
                       onPressed: () async => await launchUrl(url),
@@ -158,6 +161,7 @@ class _HomeState extends ConsumerState<Home> {
                     ),
                   ),
                 ),
+                tooltipMessage: "About",
               ),
               ArnaIconButton(
                 icon: Icons.settings_outlined,
@@ -168,6 +172,7 @@ class _HomeState extends ConsumerState<Home> {
                     body: const Settings(),
                   );
                 },
+                tooltipMessage: "Settings",
               ),
             ],
           )
@@ -181,8 +186,7 @@ class _HomeState extends ConsumerState<Home> {
                   barrierDismissible: true,
                   dialog: ArnaAlertDialog(
                     title: "Arna Framework",
-                    message:
-                        "A unique set of widgets for building applications with Flutter.",
+                    message: "A unique set of widgets for building applications with Flutter.",
                     primary: ArnaTextButton(
                       label: "Source code",
                       onPressed: () async => await launchUrl(url),
@@ -193,6 +197,7 @@ class _HomeState extends ConsumerState<Home> {
                     ),
                   ),
                 ),
+                tooltipMessage: "About",
               ),
               ArnaIconButton(
                 icon: Icons.settings_outlined,
@@ -203,6 +208,7 @@ class _HomeState extends ConsumerState<Home> {
                     body: const Settings(),
                   );
                 },
+                tooltipMessage: "Settings",
               ),
             ],
             leading: const Padding(

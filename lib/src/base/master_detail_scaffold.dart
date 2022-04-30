@@ -2,6 +2,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// Implements the master detail layout structure.
+///
 /// See also:
 ///
 ///  * [ArnaHeaderBar], which is a horizontal bar shown at the top of the app.
@@ -27,13 +28,11 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget. The height of each action is constrained to be no
-  /// bigger than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the scaffold.
@@ -52,8 +51,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   final int? currentIndex;
 
   @override
-  State<ArnaMasterDetailScaffold> createState() =>
-      _ArnaMasterDetailScaffoldState();
+  State<ArnaMasterDetailScaffold> createState() => _ArnaMasterDetailScaffoldState();
 }
 
 /// The [State] for a [ArnaMasterDetailScaffold].
@@ -119,13 +117,11 @@ class _LateralPage extends StatefulWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget. The height of each action is constrained to be no
-  /// bigger than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the scaffold.
@@ -173,11 +169,7 @@ class _LateralPageState extends State<_LateralPage> {
             title: widget.title,
             actions: widget.actions,
             searchField: widget.searchField,
-            body: _MasterItemBuilder(
-              items: widget.items,
-              onPressed: _onPressed,
-              currentIndex: _currentIndex,
-            ),
+            body: _MasterItemBuilder(items: widget.items, onPressed: _onPressed, currentIndex: _currentIndex),
           ),
         ),
         const Padding(
@@ -190,8 +182,7 @@ class _LateralPageState extends State<_LateralPage> {
           ),
           child: widget.items.length > _currentIndex
               ? ArnaScaffold(
-                  headerBarLeading:
-                      widget.items[_currentIndex].headerBarLeading,
+                  headerBarLeading: widget.items[_currentIndex].headerBarLeading,
                   title: widget.items[_currentIndex].title,
                   actions: widget.items[_currentIndex].actions,
                   searchField: widget.items[_currentIndex].searchField,
@@ -200,10 +191,7 @@ class _LateralPageState extends State<_LateralPage> {
               : widget.emptyBody != null
                   ? Container(
                       constraints: const BoxConstraints.expand(),
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.backgroundColor,
-                        context,
-                      ),
+                      color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
                       child: widget.emptyBody,
                     )
                   : ArnaScaffold(
@@ -242,13 +230,11 @@ class _NestedPage extends StatefulWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget. The height of each action is constrained to be no
-  /// bigger than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the scaffold.
@@ -450,13 +436,11 @@ class MasterNavigationItem {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget. The height of each action is constrained to be no
-  /// bigger than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the item.
@@ -468,15 +452,13 @@ class MasterNavigationItem {
   /// Whether this item is focusable or not.
   final bool isFocusable;
 
-  /// Whether this item should focus itself if nothing else is already
-  /// focused.
+  /// Whether this item should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the item's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// item.
+  /// The cursor for a mouse pointer when it enters or is hovering over the item.
   final MouseCursor cursor;
 
   /// The semantic label of the item.

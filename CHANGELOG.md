@@ -1,7 +1,11 @@
 ## 0.4.3
 
+- Change dart.lineLength to 120
 - Update ArnaSideScaffold
 - [BREAKING] Revert and Update ArnaBanner
+- [BREAKING] Revert and Update ArnaSnackBar
+- [BREAKING] Revert and Update ArnaScaffold
+- Update ArnaTooltip
 
 ## 0.4.2
 

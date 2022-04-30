@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 
+/// A navigation item used inside [ArnaSideScaffold].
 class ArnaSideBarItem extends StatelessWidget {
   /// Creates a side bar item.
   const ArnaSideBarItem({
@@ -38,69 +39,17 @@ class ArnaSideBarItem extends StatelessWidget {
   /// Whether this item is focusable or not.
   final bool isFocusable;
 
-  /// Whether this item should focus itself if nothing else is already
-  /// focused.
+  /// Whether this item should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the item's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// widget.
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor cursor;
 
   /// The semantic label of the item.
   final String? semanticLabel;
-
-  Widget _buildChild(
-    BuildContext context,
-    bool enabled,
-    bool selected,
-    bool hovered,
-    Color accent,
-  ) {
-    return ScrollConfiguration(
-      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const NeverScrollableScrollPhysics(),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: Styles.normal,
-              child: Icon(
-                icon,
-                size: Styles.iconSize,
-                color: ArnaDynamicColor.resolve(
-                  !enabled
-                      ? ArnaColors.disabledColor
-                      : selected
-                          ? ArnaDynamicColor.matchingColor(
-                              accent,
-                              ArnaTheme.brightnessOf(context),
-                            )
-                          : ArnaColors.iconColor,
-                  context,
-                ),
-              ),
-            ),
-            const SizedBox(width: Styles.padding),
-            Text(
-              label,
-              style: ArnaTheme.of(context).textTheme.button!.copyWith(
-                    color: ArnaDynamicColor.resolve(
-                      !enabled
-                          ? ArnaColors.disabledColor
-                          : ArnaColors.primaryTextColor,
-                      context,
-                    ),
-                  ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,16 +78,10 @@ class ArnaSideBarItem extends StatelessWidget {
                         color: ArnaDynamicColor.resolve(
                           selected
                               ? focused
-                                  ? ArnaDynamicColor.matchingColor(
-                                      accent,
-                                      ArnaTheme.brightnessOf(context),
-                                    )
+                                  ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
                                   : ArnaColors.borderColor
                               : focused
-                                  ? ArnaDynamicColor.matchingColor(
-                                      accent,
-                                      ArnaTheme.brightnessOf(context),
-                                    )
+                                  ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
                                   : ArnaColors.transparent,
                           context,
                         ),
@@ -149,18 +92,14 @@ class ArnaSideBarItem extends StatelessWidget {
                             : pressed
                                 ? ArnaDynamicColor.applyOverlay(
                                     ArnaDynamicColor.resolve(
-                                      selected
-                                          ? ArnaColors.buttonColor
-                                          : ArnaColors.sideColor,
+                                      selected ? ArnaColors.buttonColor : ArnaColors.sideColor,
                                       context,
                                     ),
                                   )
                                 : hover
                                     ? ArnaDynamicColor.applyOverlay(
                                         ArnaDynamicColor.resolve(
-                                          selected
-                                              ? ArnaColors.buttonColor
-                                              : ArnaColors.sideColor,
+                                          selected ? ArnaColors.buttonColor : ArnaColors.sideColor,
                                           context,
                                         ),
                                       )
@@ -171,18 +110,44 @@ class ArnaSideBarItem extends StatelessWidget {
                       ),
                     ),
                     padding: Styles.horizontal,
-                    child: _buildChild(
-                      context,
-                      enabled,
-                      selected,
-                      hover,
-                      accent,
+                    child: ScrollConfiguration(
+                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        physics: const NeverScrollableScrollPhysics(),
+                        child: Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: Styles.normal,
+                              child: Icon(
+                                icon,
+                                size: Styles.iconSize,
+                                color: ArnaDynamicColor.resolve(
+                                  !enabled
+                                      ? ArnaColors.disabledColor
+                                      : selected
+                                          ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                          : ArnaColors.iconColor,
+                                  context,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: Styles.padding),
+                            Text(
+                              label,
+                              style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                                    color: ArnaDynamicColor.resolve(
+                                      !enabled ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
+                                      context,
+                                    ),
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                  if (badge != null)
-                    compact
-                        ? badge!
-                        : Padding(padding: Styles.horizontal, child: badge!),
+                  if (badge != null) compact ? badge! : Padding(padding: Styles.horizontal, child: badge!),
                 ],
               ),
               AnimatedContainer(
@@ -192,10 +157,7 @@ class ArnaSideBarItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: ArnaDynamicColor.matchingColor(
-                    accent,
-                    ArnaTheme.brightnessOf(context),
-                  ),
+                  color: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
                 ),
               ),
             ],

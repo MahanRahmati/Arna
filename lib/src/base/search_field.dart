@@ -28,8 +28,7 @@ class ArnaSearchField extends StatefulWidget {
   ///
   /// See also:
   ///
-  ///  * [onEditingComplete], [onSubmitted]:
-  ///    which are more specialized input change notifications.
+  ///  * [onEditingComplete], [onSubmitted]: which are more specialized input change notifications.
   final ValueChanged<String>? onChanged;
 
   /// {@macro flutter.widgets.editableText.onEditingComplete}
@@ -46,21 +45,15 @@ class ArnaSearchField extends StatefulWidget {
 }
 
 /// The [State] for a [ArnaSearchField].
-class _ArnaSearchFieldState extends State<ArnaSearchField>
-    with SingleTickerProviderStateMixin {
+class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProviderStateMixin {
+  FocusNode? focusNode;
   late AnimationController _controller;
   late Animation<double> _animation;
-
-  FocusNode? focusNode;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: Styles.basicDuration,
-      debugLabel: 'ArnaSearchField',
-      vsync: this,
-    );
+    _controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaSearchField', vsync: this);
     _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     if (widget.showSearch) _controller.forward();
     focusNode = FocusNode(canRequestFocus: widget.showSearch);
@@ -113,10 +106,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
                     hintText: widget.hintText,
                     prefix: Icon(
                       Icons.search_outlined,
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.iconColor,
-                        context,
-                      ),
+                      color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                     ),
                     clearButtonMode: ArnaOverlayVisibilityMode.editing,
                     onChanged: widget.onChanged,

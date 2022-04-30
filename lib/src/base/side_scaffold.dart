@@ -27,13 +27,11 @@ class ArnaSideScaffold extends StatefulWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget. The height of each action is constrained to be no
-  /// bigger than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The leading widget in the side bar that is placed above the items.
@@ -120,9 +118,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 
     Widget sideScaffold = LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        double padding = constraints.maxWidth > Styles.expanded
-            ? Styles.sideBarWidth
-            : Styles.sideBarCompactWidth;
+        double padding = constraints.maxWidth > Styles.expanded ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
 
         return Stack(
           children: <Widget>[
@@ -132,21 +128,13 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
                 clipBehavior: Clip.antiAlias,
-                color: ArnaDynamicColor.resolve(
-                  ArnaColors.sideColor,
-                  context,
-                ),
+                color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
                 child: sideItemBuilder,
               ),
             if (constraints.maxWidth > Styles.compact)
-              Padding(
-                padding: EdgeInsetsDirectional.only(start: padding),
-                child: const ArnaVerticalDivider(),
-              ),
+              Padding(padding: EdgeInsetsDirectional.only(start: padding), child: const ArnaVerticalDivider()),
             Padding(
-              padding: EdgeInsetsDirectional.only(
-                start: constraints.maxWidth > Styles.compact ? padding + 1 : 0,
-              ),
+              padding: EdgeInsetsDirectional.only(start: constraints.maxWidth > Styles.compact ? padding + 1 : 0),
               child: ArnaScaffold(
                 headerBarLeading: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -158,16 +146,14 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                         tooltipMessage: tooltip,
                         semanticLabel: tooltip,
                       ),
-                    if (widget.headerBarLeading != null)
-                      widget.headerBarLeading!,
+                    if (widget.headerBarLeading != null) widget.headerBarLeading!,
                     if (widget.items[_currentIndex].headerBarLeading != null)
                       widget.items[_currentIndex].headerBarLeading!,
                   ],
                 ),
                 title: widget.title,
                 actions: <Widget>[
-                  if (widget.items[_currentIndex].actions != null)
-                    ...widget.items[_currentIndex].actions!,
+                  if (widget.items[_currentIndex].actions != null) ...widget.items[_currentIndex].actions!,
                   if (widget.actions != null) ...widget.actions!,
                 ],
                 searchField: widget.items[_currentIndex].searchField,
@@ -187,27 +173,19 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 
     return SafeArea(
       child: widget.items.isEmpty
-          ? Container(
-              color: ArnaDynamicColor.resolve(
-                ArnaColors.backgroundColor,
-                context,
-              ),
-            )
+          ? Container(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context))
           : widget.items.length > 1
               ? sideScaffold
               : ArnaScaffold(
                   headerBarLeading: Row(
                     children: <Widget>[
-                      if (widget.headerBarLeading != null)
-                        widget.headerBarLeading!,
-                      if (widget.items[0].headerBarLeading != null)
-                        widget.items[0].headerBarLeading!,
+                      if (widget.headerBarLeading != null) widget.headerBarLeading!,
+                      if (widget.items[0].headerBarLeading != null) widget.items[0].headerBarLeading!,
                     ],
                   ),
                   title: widget.title,
                   actions: <Widget>[
-                    if (widget.items[0].actions != null)
-                      ...widget.items[0].actions!,
+                    if (widget.items[0].actions != null) ...widget.items[0].actions!,
                     if (widget.actions != null) ...widget.actions!,
                   ],
                   searchField: widget.items[0].searchField,
@@ -249,13 +227,11 @@ class NavigationItem {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget. The height of each action is constrained to be no
-  /// bigger than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the item.
@@ -267,15 +243,13 @@ class NavigationItem {
   /// Whether this item is focusable or not.
   final bool isFocusable;
 
-  /// Whether this item should focus itself if nothing else is already
-  /// focused.
+  /// Whether this item should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the item's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// item.
+  /// The cursor for a mouse pointer when it enters or is hovering over the item.
   final MouseCursor cursor;
 
   /// The semantic label of the item.

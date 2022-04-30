@@ -2,27 +2,24 @@ import 'dart:math' as math;
 
 import 'package:arna/arna.dart';
 
-/// A circular progress indicator, which spins to indicate that the application
-/// is busy.
+/// A circular progress indicator, which spins to indicate that the application is busy.
 ///
 /// There are two kinds of circular progress indicators:
 ///
-///  * _Determinate_. Determinate progress indicators have a specific value at
-///    each point in time, and the value should increase monotonically from 0.0
-///    to 1.0, at which time the indicator is complete. To create a determinate
-///    progress indicator, use a non-null [value] between 0.0 and 1.0.
-///  * _Indeterminate_. Indeterminate progress indicators do not have a
-///    specific value at each point in time and instead indicate that progress
-///    is being made without indicating how much progress remains. To create an
+///  * _Determinate_. Determinate progress indicators have a specific value at each point in time, and the value should
+///    increase monotonically from 0.0
+///    to 1.0, at which time the indicator is complete. To create a determinate progress indicator, use a non-null
+///    [value] between 0.0 and 1.0.
+///  * _Indeterminate_. Indeterminate progress indicators do not have a specific value at each point in time and
+///    instead indicate that progress is being made without indicating how much progress remains. To create an
 ///    indeterminate progress indicator, use a null [value].
 class ArnaProgressIndicator extends StatefulWidget {
   /// Creates a circular progress indicator.
   /// ## Accessibility
   ///
-  /// The [semanticsLabel] can be used to identify the purpose of this progress
-  /// bar for screen reading software. The [semanticsValue] property may be
-  /// used for determinate progress indicators to indicate how much progress
-  /// has been made.
+  /// The [semanticsLabel] can be used to identify the purpose of this progress bar for screen reading software. The
+  /// [semanticsValue] property may be used for determinate progress indicators to indicate how much progress has been
+  /// made.
   const ArnaProgressIndicator({
     Key? key,
     this.value,
@@ -37,9 +34,8 @@ class ArnaProgressIndicator extends StatefulWidget {
   /// A value of 0.0 means no progress and 1.0 means that progress is complete.
   /// The value will be clamped to be in the range 0.0-1.0.
   ///
-  /// If null, this progress indicator is indeterminate, which means the
-  /// indicator displays a predetermined animation that does not indicate how
-  /// much actual progress is being made.
+  /// If null, this progress indicator is indeterminate, which means the indicator displays a predetermined animation
+  /// that does not indicate how much actual progress is being made.
   final double? value;
 
   /// The progress indicator's size.
@@ -50,21 +46,17 @@ class ArnaProgressIndicator extends StatefulWidget {
 
   /// The [SemanticsProperties.label] for this progress indicator.
   ///
-  /// This value indicates the purpose of the progress bar, and will be
-  /// read out by screen readers to indicate the purpose of this progress
-  /// indicator.
+  /// This value indicates the purpose of the progress bar, and will be read out by screen readers to indicate the
+  /// purpose of this progress indicator.
   final String? semanticsLabel;
 
   /// The [SemanticsProperties.value] for this progress indicator.
   ///
-  /// This will be used in conjunction with the [semanticsLabel] by
-  /// screen reading software to identify the widget, and is primarily
-  /// intended for use with determinate progress indicators to announce
-  /// how far along they are.
+  /// This will be used in conjunction with the [semanticsLabel] by screen reading software to identify the widget, and
+  /// is primarily intended for use with determinate progress indicators to announce how far along they are.
   ///
-  /// For determinate progress indicators, this will be defaulted to
-  /// [ProgressIndicator.value] expressed as a percentage, i.e. `0.1` will
-  /// become '10%'.
+  /// For determinate progress indicators, this will be defaulted to [ProgressIndicator.value] expressed as a
+  /// percentage, i.e. `0.1` will become '10%'.
   final String? semanticsValue;
 
   @override
@@ -72,22 +64,19 @@ class ArnaProgressIndicator extends StatefulWidget {
 }
 
 /// The [State] for a [ArnaProgressIndicator].
-class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
-    with SingleTickerProviderStateMixin {
+class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with SingleTickerProviderStateMixin {
   static const int _pathCount = (1400 * 2100) ~/ 1400;
   static const int _rotationCount = (1400 * 2100) ~/ 2100;
+
   static final Animatable<double> _strokeHeadTween = CurveTween(
     curve: const Interval(0.0, 0.5, curve: Styles.basicCurve),
   ).chain(CurveTween(curve: const SawTooth(_pathCount)));
   static final Animatable<double> _strokeTailTween = CurveTween(
     curve: const Interval(0.5, 1.0, curve: Styles.basicCurve),
   ).chain(CurveTween(curve: const SawTooth(_pathCount)));
-  static final Animatable<double> _offsetTween = CurveTween(
-    curve: const SawTooth(_pathCount),
-  );
-  static final Animatable<double> _rotationTween = CurveTween(
-    curve: const SawTooth(_rotationCount),
-  );
+  static final Animatable<double> _offsetTween = CurveTween(curve: const SawTooth(_pathCount));
+  static final Animatable<double> _rotationTween = CurveTween(curve: const SawTooth(_rotationCount));
+
   late AnimationController _controller;
 
   @override
@@ -120,14 +109,8 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
   @override
   Widget build(BuildContext context) {
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    Color indicatorColor = ArnaDynamicColor.matchingColor(
-      accent,
-      ArnaTheme.brightnessOf(context),
-    );
     String? expandedSemanticsValue = widget.semanticsValue;
-    if (widget.value != null) {
-      expandedSemanticsValue ??= '${(widget.value! * 100).round()}%';
-    }
+    if (widget.value != null) expandedSemanticsValue ??= '${(widget.value! * 100).round()}%';
 
     return AnimatedBuilder(
       animation: _controller,
@@ -138,26 +121,15 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
           child: Container(
             height: widget.size,
             width: widget.size,
-            constraints: const BoxConstraints(
-              minWidth: Styles.indicatorSize,
-              minHeight: Styles.indicatorSize,
-            ),
+            constraints: const BoxConstraints(minWidth: Styles.indicatorSize, minHeight: Styles.indicatorSize),
             child: CustomPaint(
               painter: _ProgressPainter(
-                color: indicatorColor,
+                color: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
                 value: widget.value,
-                headValue: widget.value != null
-                    ? 0
-                    : _strokeHeadTween.evaluate(_controller),
-                tailValue: widget.value != null
-                    ? 0
-                    : _strokeTailTween.evaluate(_controller),
-                offsetValue: widget.value != null
-                    ? 0
-                    : _offsetTween.evaluate(_controller),
-                rotationValue: widget.value != null
-                    ? 0
-                    : _rotationTween.evaluate(_controller),
+                headValue: widget.value != null ? 0 : _strokeHeadTween.evaluate(_controller),
+                tailValue: widget.value != null ? 0 : _strokeTailTween.evaluate(_controller),
+                offsetValue: widget.value != null ? 0 : _offsetTween.evaluate(_controller),
+                rotationValue: widget.value != null ? 0 : _rotationTween.evaluate(_controller),
               ),
             ),
           ),
@@ -178,16 +150,10 @@ class _ProgressPainter extends CustomPainter {
     required this.rotationValue,
   })  : arcStart = value != null
             ? _startAngle
-            : _startAngle +
-                tailValue * 3 / 2 * math.pi +
-                rotationValue * math.pi * 2.0 +
-                offsetValue * 0.5 * math.pi,
+            : _startAngle + tailValue * 3 / 2 * math.pi + rotationValue * math.pi * 2.0 + offsetValue * 0.5 * math.pi,
         arcSweep = value != null
             ? value.clamp(0.0, 1.0) * _sweep
-            : math.max(
-                headValue * 3 / 2 * math.pi - tailValue * 3 / 2 * math.pi,
-                _epsilon,
-              );
+            : math.max(headValue * 3 / 2 * math.pi - tailValue * 3 / 2 * math.pi, _epsilon);
 
   final Color color;
   final double? value;

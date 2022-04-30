@@ -7,7 +7,7 @@ class ArnaIconButton extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.onPressed,
-    this.tooltipMessage,
+    required this.tooltipMessage,
     this.buttonType = ButtonType.normal,
     this.buttonSize = ButtonSize.normal,
     this.isFocusable = true,
@@ -25,8 +25,7 @@ class ArnaIconButton extends StatelessWidget {
   /// If this callback is null, then the button will be disabled.
   final VoidCallback? onPressed;
 
-  /// Text that describes the action that will occur when the button is
-  /// pressed.
+  /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
 
   /// The type of the button.
@@ -38,15 +37,13 @@ class ArnaIconButton extends StatelessWidget {
   /// Whether this button is focusable or not.
   final bool isFocusable;
 
-  /// Whether this button should focus itself if nothing else is already
-  /// focused.
+  /// Whether this button should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the button's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// button.
+  /// The cursor for a mouse pointer when it enters or is hovering over the button.
   final MouseCursor cursor;
 
   /// The semantic label of the button.

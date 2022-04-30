@@ -1,46 +1,35 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaSlider]. In other words, a slider with a
-/// label.
+/// A [ArnaListTile] with a [ArnaSlider]. In other words, a slider with a label.
 ///
 ///
-/// To ensure that [onChanged] correctly triggers, the state passed
-/// into [value] must be properly managed. This is typically done by invoking
-/// [State.setState] in [onChanged] to toggle the state value.
+/// To ensure that [onChanged] correctly triggers, the state passed into [value] must be properly managed. This is
+/// typically done by invoking [State.setState] in [onChanged] to toggle the state value.
 ///
-/// The [value], [onChanged] , [onChangeStart], [onChangeEnd], [min] and [max]
-/// properties of this widget are identical to the similarly-named properties
-/// on the [ArnaSlider] widget.
+/// The [value], [onChanged] , [onChangeStart], [onChangeEnd], [min] and [max] properties of this widget are identical
+/// to the similarly-named properties on the [ArnaSlider] widget.
 ///
-/// The [title] and [subtitle] properties are like those of the same name on
-/// [ArnaListTile].
+/// The [title] and [subtitle] properties are like those of the same name on [ArnaListTile].
 ///
-/// To show the [ArnaSliderListTile] as disabled, pass null as the [onChanged]
-/// callback.
-///
+/// To show the [ArnaSliderListTile] as disabled, pass null as the [onChanged] callback.
 ///
 /// See also:
 ///
 ///  * [ArnaCheckBoxListTile], a similar widget for checkboxes.
 ///  * [ArnaRadioListTile], a similar widget for radio buttons.
 ///  * [ArnaSwitchListTile], a similar widget for switches.
-///  * [ArnaListTile] and [ArnaSwitch], the widgets from which this widget is
-///    made.
+///  * [ArnaListTile] and [ArnaSwitch], the widgets from which this widget is made.
 class ArnaSliderListTile extends StatelessWidget {
   /// Creates a combination of a list tile and a slider.
   ///
-  /// The slider itself does not maintain any state. Instead, when the state of
-  /// the slider changes, the widget calls the [onChanged] callback. Most
-  /// widgets that use a slider will listen for the [onChanged] callback and
-  /// rebuild the slider with a new [value] to update the visual appearance of
-  /// the slider.
+  /// The slider itself does not maintain any state. Instead, when the state of the slider changes, the widget calls
+  /// the [onChanged] callback. Most widgets that use a slider will listen for the [onChanged] callback and rebuild the
+  /// slider with a new [value] to update the visual appearance of the slider.
   ///
   /// * [value] determines currently selected value for this slider.
   /// * [onChanged] is called when the user selects a new value for the slider.
-  /// * [onChangeStart] is called when the user starts to select a new value
-  ///   for the slider.
-  /// * [onChangeEnd] is called when the user is done selecting a new value for
-  ///   the slider.
+  /// * [onChangeStart] is called when the user starts to select a new value for the slider.
+  /// * [onChangeEnd] is called when the user is done selecting a new value for the slider.
   const ArnaSliderListTile({
     Key? key,
     required this.value,
@@ -67,15 +56,13 @@ class ArnaSliderListTile extends StatelessWidget {
 
   /// Called when the user selects a new value for the slider.
   ///
-  /// The slider passes the new value to the callback but does not actually
-  /// change state until the parent widget rebuilds the slider with the new
-  /// value.
+  /// The slider passes the new value to the callback but does not actually change state until the parent widget
+  /// rebuilds the slider with the new value.
   ///
   /// If null, the slider will be displayed as disabled.
   ///
-  /// The callback provided to onChanged should update the state of the parent
-  /// [StatefulWidget] using the [State.setState] method, so that the parent
-  /// gets rebuilt; for example:
+  /// The callback provided to onChanged should update the state of the parent [StatefulWidget] using the
+  /// [State.setState] method, so that the parent gets rebuilt; for example:
   ///
   /// ```dart
   /// ArnaSliderListTile(
@@ -93,10 +80,8 @@ class ArnaSliderListTile extends StatelessWidget {
   ///
   /// See also:
   ///
-  ///  * [onChangeStart] for a callback that is called when the user starts
-  ///    changing the value.
-  ///  * [onChangeEnd] for a callback that is called when the user stops
-  ///    changing the value.
+  ///  * [onChangeStart] for a callback that is called when the user starts changing the value.
+  ///  * [onChangeEnd] for a callback that is called when the user stops changing the value.
   final ValueChanged<double>? onChanged;
 
   /// The primary content of the list tile.
@@ -110,12 +95,10 @@ class ArnaSliderListTile extends StatelessWidget {
 
   /// Called when the user starts selecting a new value for the slider.
   ///
-  /// This callback shouldn't be used to update the slider [value] (use
-  /// [onChanged] for that), but rather to be notified when the user has
-  /// started selecting a new value by starting a drag.
+  /// This callback shouldn't be used to update the slider [value] (use [onChanged] for that), but rather to be
+  /// notified when the user has started selecting a new value by starting a drag.
   ///
-  /// The value passed will be the last [value] that the slider had before the
-  /// change began.
+  /// The value passed will be the last [value] that the slider had before the change began.
   ///
   /// {@tool snippet}
   ///
@@ -139,15 +122,13 @@ class ArnaSliderListTile extends StatelessWidget {
   ///
   /// See also:
   ///
-  ///  * [onChangeEnd] for a callback that is called when the value change is
-  ///    complete.
+  ///  * [onChangeEnd] for a callback that is called when the value change is complete.
   final ValueChanged<double>? onChangeStart;
 
   /// Called when the user is done selecting a new value for the slider.
   ///
-  /// This callback shouldn't be used to update the slider [value] (use
-  /// [onChanged] for that), but rather to know when the user has completed
-  /// selecting a new [value] by ending a drag.
+  /// This callback shouldn't be used to update the slider [value] (use [onChanged] for that), but rather to know when
+  /// the user has completed selecting a new [value] by ending a drag.
   ///
   /// {@tool snippet}
   ///
@@ -171,8 +152,7 @@ class ArnaSliderListTile extends StatelessWidget {
   ///
   /// See also:
   ///
-  ///  * [onChangeStart] for a callback that is called when a value change
-  ///    begins.
+  ///  * [onChangeStart] for a callback that is called when a value change begins.
   final ValueChanged<double>? onChangeEnd;
 
   /// The minimum value the user can select.
@@ -193,15 +173,13 @@ class ArnaSliderListTile extends StatelessWidget {
   /// Whether this slider is focusable or not.
   final bool isFocusable;
 
-  /// Whether this slider should focus itself if nothing else is already
-  /// focused.
+  /// Whether this slider should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the slider's progress.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// slider.
+  /// The cursor for a mouse pointer when it enters or is hovering over the slider.
   final MouseCursor cursor;
 
   @override

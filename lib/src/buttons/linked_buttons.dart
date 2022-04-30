@@ -74,11 +74,9 @@ class _ArnaLinkedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = ArnaDynamicColor.resolve(
-      ArnaColors.buttonColor,
-      context,
-    );
+    Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
     Color accent = button.accentColor ?? ArnaTheme.of(context).accentColor;
+
     return ArnaBaseWidget(
       builder: (context, enabled, hover, focused, pressed, selected) {
         return AnimatedContainer(
@@ -88,23 +86,12 @@ class _ArnaLinkedItem extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.horizontal(
-              left: first
-                  ? const Radius.circular(Styles.borderRadiusSize - 1)
-                  : const Radius.circular(0),
-              right: last
-                  ? const Radius.circular(Styles.borderRadiusSize - 1)
-                  : const Radius.circular(0),
+              left: first ? const Radius.circular(Styles.borderRadiusSize - 1) : const Radius.circular(0),
+              right: last ? const Radius.circular(Styles.borderRadiusSize - 1) : const Radius.circular(0),
             ),
-            border: Border.all(
-              color: ArnaDynamicColor.outerColor(accent).withAlpha(
-                focused ? 255 : 0,
-              ),
-            ),
+            border: Border.all(color: ArnaDynamicColor.outerColor(accent).withAlpha(focused ? 255 : 0)),
             color: !enabled
-                ? ArnaDynamicColor.resolve(
-                    ArnaColors.backgroundColor,
-                    context,
-                  )
+                ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
                 : button.buttonType == ButtonType.normal
                     ? pressed || hover
                         ? ArnaDynamicColor.applyOverlay(buttonColor)
@@ -114,18 +101,15 @@ class _ArnaLinkedItem extends StatelessWidget {
                         : accent,
           ),
           margin: const EdgeInsets.all(0.5),
-          padding: button.icon != null
-              ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
-              : Styles.largeHorizontal,
+          padding:
+              button.icon != null ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1) : Styles.largeHorizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               if (button.icon != null)
                 Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    end: button.label != null ? Styles.padding : 0,
-                  ),
+                  padding: EdgeInsetsDirectional.only(end: button.label != null ? Styles.padding : 0),
                   child: Icon(
                     button.icon!,
                     size: Styles.iconSize,
@@ -149,16 +133,13 @@ class _ArnaLinkedItem extends StatelessWidget {
                                 ? ArnaColors.disabledColor
                                 : button.buttonType == ButtonType.normal
                                     ? ArnaColors.primaryTextColor
-                                    : ArnaDynamicColor.onBackgroundColor(
-                                        accent,
-                                      ),
+                                    : ArnaDynamicColor.onBackgroundColor(accent),
                             context,
                           ),
                         ),
                   ),
                 ),
-              if (button.icon != null && button.label != null)
-                const SizedBox(width: Styles.padding),
+              if (button.icon != null && button.label != null) const SizedBox(width: Styles.padding),
             ],
           ),
         );
@@ -201,8 +182,7 @@ class ArnaLinkedButton {
   /// If this callback is null, then the button will be disabled.
   final VoidCallback? onPressed;
 
-  /// Text that describes the action that will occur when the button is
-  /// pressed.
+  /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
 
   /// The type of the button.
@@ -211,15 +191,13 @@ class ArnaLinkedButton {
   /// Whether this button is focusable or not.
   final bool isFocusable;
 
-  /// Whether this button should focus itself if nothing else is already
-  /// focused.
+  /// Whether this button should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the button's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// button.
+  /// The cursor for a mouse pointer when it enters or is hovering over the button.
   final MouseCursor cursor;
 
   /// The semantic label of the button.

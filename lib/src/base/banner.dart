@@ -1,17 +1,29 @@
 import 'package:arna/arna.dart';
 
 /// Banner types.
-enum BannerType { information, warning, error, success, colored }
+enum BannerType {
+  /// Information.
+  information,
+
+  /// Warning.
+  warning,
+
+  /// Error.
+  error,
+
+  /// Success.
+  success,
+
+  /// Colored.
+  colored,
+}
 
 /// An Arna-styled banner.
 ///
-/// A banner displays an important, succinct message, and provides actions for
-/// users to address (or dismiss the banner). A user action is required for it
-/// to be dismissed.
+/// A banner displays an important, succinct message, and provides actions for users to address or dismiss the banner.
 ///
-/// Banners are displayed at the top of the screen, below a header bar. They
-/// are persistent and non-modal, allowing the user to either ignore them or
-/// interact with them at any time.
+/// Banners are displayed at the top of the screen, below a header bar. They are persistent and non-modal, allowing the
+/// user to either ignore them or interact with them at any time.
 class ArnaBanner extends StatefulWidget {
   /// Creates a banner in the Arna style.
   const ArnaBanner({
@@ -47,19 +59,14 @@ class ArnaBanner extends StatefulWidget {
 }
 
 /// The [State] for a [ArnaBanner].
-class _ArnaBannerState extends State<ArnaBanner>
-    with SingleTickerProviderStateMixin {
+class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: Styles.basicDuration,
-      debugLabel: 'ArnaBanner',
-      vsync: this,
-    );
+    _controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaBanner', vsync: this);
     _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     if (widget.showBanner) _controller.forward();
   }
@@ -113,11 +120,6 @@ class _ArnaBannerState extends State<ArnaBanner>
         break;
     }
 
-    Widget? trailing;
-    if (widget.actions != null) {
-      trailing = Row(mainAxisSize: MainAxisSize.min, children: widget.actions!);
-    }
-
     Widget banner = Semantics(
       container: true,
       liveRegion: true,
@@ -129,13 +131,10 @@ class _ArnaBannerState extends State<ArnaBanner>
             curve: Styles.basicCurve,
             color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
             child: ArnaListTile(
-              leading: Icon(
-                icon,
-                color: ArnaDynamicColor.resolve(accent, context),
-              ),
+              leading: Icon(icon, color: ArnaDynamicColor.resolve(accent, context)),
               title: widget.title,
               subtitle: widget.subtitle,
-              trailing: trailing,
+              trailing: widget.actions != null ? Row(mainAxisSize: MainAxisSize.min, children: widget.actions!) : null,
               actionable: false,
             ),
           ),
@@ -148,11 +147,7 @@ class _ArnaBannerState extends State<ArnaBanner>
       tag: '<ArnaBanner Hero tag - ${widget.title}>',
       child: MediaQuery.of(context).accessibleNavigation
           ? banner
-          : SizeTransition(
-              axisAlignment: 1,
-              sizeFactor: _animation,
-              child: banner,
-            ),
+          : SizeTransition(axisAlignment: 1, sizeFactor: _animation, child: banner),
     );
   }
 }

@@ -5,9 +5,8 @@ import 'package:flutter/foundation.dart';
 ///
 /// All constructor parameters can be null.
 ///
-/// Parameters can also be partially specified, in which case some parameters
-/// will cascade down to other dependent parameters to create a cohesive
-/// visual effect.
+/// Parameters can also be partially specified, in which case some parameters will cascade down to other dependent
+/// parameters to create a cohesive visual effect.
 ///
 /// See also:
 ///
@@ -20,14 +19,8 @@ class ArnaThemeData with Diagnosticable {
   ///
   ///  * [ArnaThemeData.light], which creates a light theme.
   ///  * [ArnaThemeData.dark], which creates dark theme.
-  factory ArnaThemeData({
-    Brightness? brightness,
-    Color? accentColor,
-    ArnaTextTheme? textTheme,
-  }) {
-    ArnaTextTheme defaultTextTheme = brightness == Brightness.dark
-        ? ArnaTypography.dark
-        : ArnaTypography.light;
+  factory ArnaThemeData({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
+    ArnaTextTheme defaultTextTheme = brightness == Brightness.dark ? ArnaTypography.dark : ArnaTypography.light;
     final ArnaTextTheme effectiveTextTheme = textTheme ?? defaultTextTheme;
 
     return ArnaThemeData.raw(
@@ -37,23 +30,18 @@ class ArnaThemeData with Diagnosticable {
     );
   }
 
-  /// Create a [ArnaThemeData] given a set of exact values. All the values must be
-  /// specified. They all must also be non-null.
+  /// Create a [ArnaThemeData] given a set of exact values. All the values must be specified. They all must also be
+  /// non-null.
   ///
-  /// This will rarely be used directly. It is used by [lerp] to
-  /// create intermediate themes based on two themes created with the
-  /// [ArnaThemeData] constructor.
-  const ArnaThemeData.raw({
-    required this.brightness,
-    required this.accentColor,
-    required this.textTheme,
-  });
+  /// This will rarely be used directly. It is used by [lerp] to create intermediate themes based on two themes created
+  /// with the [ArnaThemeData] constructor.
+  const ArnaThemeData.raw({required this.brightness, required this.accentColor, required this.textTheme});
 
   /// The brightness override for Arna descendants.
   /// See also:
   ///
-  ///  * [ArnaTheme.brightnessOf], a method used to retrieve the overall
-  ///    [Brightness] from a [BuildContext], for Arna widgets.
+  ///  * [ArnaTheme.brightnessOf], a method used to retrieve the overall [Brightness] from a [BuildContext], for Arna
+  ///    widgets.
   final Brightness? brightness;
 
   /// A color used on interactive elements of the theme.
@@ -66,28 +54,13 @@ class ArnaThemeData with Diagnosticable {
   final ArnaTextTheme textTheme;
 
   /// A default light theme.
-  factory ArnaThemeData.light() {
-    return ArnaThemeData(
-      brightness: Brightness.light,
-      textTheme: ArnaTypography.light,
-    );
-  }
+  factory ArnaThemeData.light() => ArnaThemeData(brightness: Brightness.light, textTheme: ArnaTypography.light);
 
   /// A default dark theme.
-  factory ArnaThemeData.dark() {
-    return ArnaThemeData(
-      brightness: Brightness.dark,
-      textTheme: ArnaTypography.dark,
-    );
-  }
+  factory ArnaThemeData.dark() => ArnaThemeData(brightness: Brightness.dark, textTheme: ArnaTypography.dark);
 
-  /// Creates a copy of this theme but with the given fields replaced with the
-  /// new values.
-  ArnaThemeData copyWith({
-    Brightness? brightness,
-    Color? accentColor,
-    ArnaTextTheme? textTheme,
-  }) {
+  /// Creates a copy of this theme but with the given fields replaced with the new values.
+  ArnaThemeData copyWith({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
     return ArnaThemeData.raw(
       brightness: brightness ?? this.brightness,
       accentColor: accentColor ?? this.accentColor,
@@ -136,19 +109,8 @@ class ArnaThemeData with Diagnosticable {
       ),
     );
     properties.add(
-      ColorProperty(
-        'accentColor',
-        accentColor,
-        defaultValue: defaultData.accentColor,
-        level: DiagnosticLevel.debug,
-      ),
+      ColorProperty('accentColor', accentColor, defaultValue: defaultData.accentColor, level: DiagnosticLevel.debug),
     );
-    properties.add(
-      DiagnosticsProperty<ArnaTextTheme>(
-        'textTheme',
-        textTheme,
-        level: DiagnosticLevel.debug,
-      ),
-    );
+    properties.add(DiagnosticsProperty<ArnaTextTheme>('textTheme', textTheme, level: DiagnosticLevel.debug));
   }
 }

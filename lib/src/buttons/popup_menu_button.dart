@@ -10,14 +10,13 @@ enum ArnaPopupMenuPosition {
   under,
 }
 
-/// Displays a menu when pressed and calls [onSelected] when the menu is
-/// dismissed because an item was selected. The value passed to [onSelected] is
-/// the value of the selected menu item.
+/// Displays a menu when pressed and calls [onSelected] when the menu is dismissed because an item was selected. The
+/// value passed to [onSelected] is the value of the selected menu item.
 ///
 /// {@tool snippet}
 ///
-/// This example shows a menu with four items, selecting between an enum's
-/// values and setting a `_selection` field based on the selection.
+/// This example shows a menu with four items, selecting between an enum's values and setting a `_selection` field
+/// based on the selection.
 ///
 /// ```dart
 /// // This is the type used by the popup menu below.
@@ -54,10 +53,8 @@ enum ArnaPopupMenuPosition {
 /// See also:
 ///
 ///  * [ArnaPopupMenuItem], a popup menu entry for a single value.
-///  * [ArnaPopupMenuDivider], a popup menu entry that is just a horizontal
-///    line.
-///  * [showArnaMenu], a method to dynamically show a popup menu at a given
-///    location.
+///  * [ArnaPopupMenuDivider], a popup menu entry that is just a horizontal line.
+///  * [showArnaMenu], a method to dynamically show a popup menu at a given location.
 class ArnaPopupMenuButton<T> extends StatefulWidget {
   /// Creates a button that shows a popup menu.
   ///
@@ -81,22 +78,18 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
     this.semanticLabel,
   }) : super(key: key);
 
-  /// Called when the button is pressed to create the items to show in the
-  /// menu.
+  /// Called when the button is pressed to create the items to show in the menu.
   final ArnaPopupMenuItemBuilder<T> itemBuilder;
 
-  /// The value of the menu item, if any, that should be highlighted when the
-  /// menu opens.
+  /// The value of the menu item, if any, that should be highlighted when the menu opens.
   final T? initialValue;
 
   /// The icon of the button.
   final IconData? icon;
 
-  /// Called when the user selects a value from the popup menu created by this
-  /// button.
+  /// Called when the user selects a value from the popup menu created by this button.
   ///
-  /// If the popup menu is dismissed without selecting a value, [onCanceled] is
-  /// called instead.
+  /// If the popup menu is dismissed without selecting a value, [onCanceled] is called instead.
   final ArnaPopupMenuItemSelected<T>? onSelected;
 
   /// Called when the user dismisses the popup menu without selecting an item.
@@ -104,8 +97,7 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
   /// If the user selects a value, [onSelected] is called instead.
   final ArnaPopupMenuCanceled? onCanceled;
 
-  /// The offset is applied relative to the initial position
-  /// set by the [position].
+  /// The offset is applied relative to the initial position set by the [position].
   ///
   /// When not set, the offset defaults to [Offset.zero].
   final Offset offset;
@@ -116,25 +108,22 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
   ///
   /// If `true` the button will respond to presses by displaying the menu.
   ///
-  /// If `false`, the button will not respond to presses or show the popup menu
-  /// and [onSelected], [onCanceled] and [itemBuilder] will not be called.
+  /// If `false`, the button will not respond to presses or show the popup menu and [onSelected], [onCanceled] and
+  /// [itemBuilder] will not be called.
   ///
-  /// This can be useful in situations where the app needs to show the button,
-  /// but doesn't currently have anything to show in the menu.
+  /// This can be useful in situations where the app needs to show the button, but doesn't currently have anything to
+  /// show in the menu.
   final bool enabled;
 
   /// Whether the popup menu is positioned over or under the popup menu button.
   ///
-  /// [offset] is used to change the position of the popup menu relative to the
-  /// position set by this parameter.
+  /// [offset] is used to change the position of the popup menu relative to the position set by this parameter.
   ///
-  /// When not set, the position defaults to [ArnaPopupMenuPosition.over] which
-  /// makes the popup menu appear directly over the button that was used to
-  /// create it.
+  /// When not set, the position defaults to [ArnaPopupMenuPosition.over] which makes the popup menu appear directly
+  /// over the button that was used to create it.
   final ArnaPopupMenuPosition position;
 
-  /// Text that describes the action that will occur when the button is
-  /// pressed.
+  /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
 
   /// The type of the button.
@@ -143,15 +132,13 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
   /// Whether this button is focusable or not.
   final bool isFocusable;
 
-  /// Whether this button should focus itself if nothing else is already
-  /// focused.
+  /// Whether this button should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the button's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// button.
+  /// The cursor for a mouse pointer when it enters or is hovering over the button.
   final MouseCursor cursor;
 
   /// The semantic label of the button.
@@ -163,41 +150,32 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
 
 /// The [State] for a [ArnaPopupMenuButton].
 ///
-/// See [showArnaButtonMenu] for a way to programmatically open the popup menu
-/// of your button state.
+/// See [showArnaButtonMenu] for a way to programmatically open the popup menu of your button state.
 class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
-  /// A method to show a popup menu with the items supplied to
-  /// [ArnaPopupMenuButton.itemBuilder] at the position of your
-  /// [ArnaPopupMenuButton].
+  /// A method to show a popup menu with the items supplied to [ArnaPopupMenuButton.itemBuilder] at the position of
+  /// your [ArnaPopupMenuButton].
   ///
-  /// By default, it is called when the user taps the button and
-  /// [ArnaPopupMenuButton.enabled] is set to `true`. Moreover, you can open
-  /// the button by calling the method manually.
+  /// By default, it is called when the user taps the button and [ArnaPopupMenuButton.enabled] is set to `true`.
+  /// Moreover, you can open the button by calling the method manually.
   ///
-  /// You would access your [ArnaPopupMenuButtonState] using a [GlobalKey] and
-  /// show the menu of the button with
+  /// You would access your [ArnaPopupMenuButtonState] using a [GlobalKey] and show the menu of the button with
   /// `globalKey.currentState.showArnaButtonMenu`.
   void showArnaButtonMenu() {
     final RenderBox button = context.findRenderObject()! as RenderBox;
-    final RenderBox overlay =
-        Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
+    final RenderBox overlay = Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
     final Offset offset;
     switch (widget.position) {
       case ArnaPopupMenuPosition.over:
         offset = widget.offset;
         break;
       case ArnaPopupMenuPosition.under:
-        offset = Offset(0.0, button.size.height - (Styles.padding / 2)) +
-            widget.offset;
+        offset = Offset(0.0, button.size.height - (Styles.padding / 2)) + widget.offset;
         break;
     }
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
         button.localToGlobal(offset, ancestor: overlay),
-        button.localToGlobal(
-          button.size.bottomRight(Offset.zero) + offset,
-          ancestor: overlay,
-        ),
+        button.localToGlobal(button.size.bottomRight(Offset.zero) + offset, ancestor: overlay),
       ),
       Offset.zero & overlay.size,
     );
@@ -225,8 +203,7 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
     return ArnaIconButton(
       icon: widget.icon ?? Icons.more_vert_outlined,
       onPressed: widget.enabled ? showArnaButtonMenu : null,
-      tooltipMessage: widget.tooltipMessage ??
-          MaterialLocalizations.of(context).showMenuTooltip,
+      tooltipMessage: widget.tooltipMessage ?? MaterialLocalizations.of(context).showMenuTooltip,
       buttonType: widget.buttonType,
       isFocusable: widget.isFocusable,
       autofocus: widget.autofocus,

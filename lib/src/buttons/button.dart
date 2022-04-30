@@ -35,8 +35,7 @@ class ArnaButton extends StatelessWidget {
   /// If this callback is null, then the button will be disabled.
   final VoidCallback? onPressed;
 
-  /// Text that describes the action that will occur when the button is
-  /// pressed.
+  /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
 
   /// The type of the button.
@@ -48,15 +47,13 @@ class ArnaButton extends StatelessWidget {
   /// Whether this button is focusable or not.
   final bool isFocusable;
 
-  /// Whether this button should focus itself if nothing else is already
-  /// focused.
+  /// Whether this button should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the button's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// button.
+  /// The cursor for a mouse pointer when it enters or is hovering over the button.
   final MouseCursor cursor;
 
   /// The semantic label of the button.
@@ -64,10 +61,7 @@ class ArnaButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = ArnaDynamicColor.resolve(
-      ArnaColors.buttonColor,
-      context,
-    );
+    Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
     Color accent;
     switch (buttonType) {
       case ButtonType.destructive:
@@ -84,9 +78,7 @@ class ArnaButton extends StatelessWidget {
       child: ArnaBaseWidget(
         builder: (context, enabled, hover, focused, pressed, selected) {
           return AnimatedContainer(
-            height: (buttonSize == ButtonSize.huge)
-                ? Styles.hugeButtonSize
-                : Styles.buttonSize,
+            height: (buttonSize == ButtonSize.huge) ? Styles.hugeButtonSize : Styles.buttonSize,
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,
             clipBehavior: Clip.antiAlias,
@@ -98,10 +90,7 @@ class ArnaButton extends StatelessWidget {
                     : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
               ),
               color: !enabled
-                  ? ArnaDynamicColor.resolve(
-                      ArnaColors.backgroundColor,
-                      context,
-                    )
+                  ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
                   : buttonType == ButtonType.normal
                       ? pressed || hover
                           ? ArnaDynamicColor.applyOverlay(buttonColor)
@@ -110,20 +99,14 @@ class ArnaButton extends StatelessWidget {
                           ? ArnaDynamicColor.applyOverlay(accent)
                           : accent,
             ),
-            padding: icon != null
-                ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
-                : Styles.largeHorizontal,
+            padding: icon != null ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1) : Styles.largeHorizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: buttonSize == ButtonSize.huge
-                  ? MainAxisSize.max
-                  : MainAxisSize.min,
+              mainAxisSize: buttonSize == ButtonSize.huge ? MainAxisSize.max : MainAxisSize.min,
               children: <Widget>[
                 if (icon != null)
                   Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      end: label != null ? Styles.padding : 0,
-                    ),
+                    padding: EdgeInsetsDirectional.only(end: label != null ? Styles.padding : 0),
                     child: Icon(
                       icon!,
                       size: Styles.iconSize,
@@ -147,16 +130,13 @@ class ArnaButton extends StatelessWidget {
                                   ? ArnaColors.disabledColor
                                   : buttonType == ButtonType.normal
                                       ? ArnaColors.primaryTextColor
-                                      : ArnaDynamicColor.onBackgroundColor(
-                                          accent,
-                                        ),
+                                      : ArnaDynamicColor.onBackgroundColor(accent),
                               context,
                             ),
                           ),
                     ),
                   ),
-                if (icon != null && label != null)
-                  const SizedBox(width: Styles.padding),
+                if (icon != null && label != null) const SizedBox(width: Styles.padding),
               ],
             ),
           );

@@ -195,8 +195,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   bool _focused = false;
   final GlobalKey _renderObjectKey = GlobalKey();
   late Map<Type, Action<Intent>> _actions;
-  final Map<ShortcutActivator, Intent> _shortcuts =
-      const <ShortcutActivator, Intent>{
+  final Map<ShortcutActivator, Intent> _shortcuts = const <ShortcutActivator, Intent>{
     SingleActivator(LogicalKeyboardKey.arrowUp): _AdjustSliderIntent.up(),
     SingleActivator(LogicalKeyboardKey.arrowDown): _AdjustSliderIntent.down(),
     SingleActivator(LogicalKeyboardKey.arrowLeft): _AdjustSliderIntent.left(),
@@ -233,10 +232,8 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   }
 
   void _actionHandler(_AdjustSliderIntent intent) {
-    final _RenderArnaSlider renderSlider = _renderObjectKey.currentContext!
-        .findRenderObject()! as _RenderArnaSlider;
-    final TextDirection textDirection =
-        Directionality.of(_renderObjectKey.currentContext!);
+    final _RenderArnaSlider renderSlider = _renderObjectKey.currentContext!.findRenderObject()! as _RenderArnaSlider;
+    final TextDirection textDirection = Directionality.of(_renderObjectKey.currentContext!);
     switch (intent.type) {
       case _SliderAdjustmentType.right:
         switch (textDirection) {
@@ -599,8 +596,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   }
 
   double _getValueFromGlobalPosition(Offset globalPosition) {
-    final double visualPosition =
-        (globalToLocal(globalPosition).dx - _trackLeft) / _trackRight;
+    final double visualPosition = (globalToLocal(globalPosition).dx - _trackLeft) / _trackRight;
     return _getValueFromVisualPosition(visualPosition);
   }
 
@@ -676,8 +672,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
     );
 
     if (visualPosition > 0.0) {
-      final Paint paint = Paint()
-        ..color = isInteractive ? leftColor : trackColor;
+      final Paint paint = Paint()..color = isInteractive ? leftColor : trackColor;
       if (visualPosition != 1.0) {
         canvas.drawRRect(
           RRect.fromRectAndCorners(
@@ -699,8 +694,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
     }
 
     if (visualPosition < 1.0) {
-      final Paint paint = Paint()
-        ..color = isInteractive ? rightColor : trackColor;
+      final Paint paint = Paint()..color = isInteractive ? rightColor : trackColor;
       if (visualPosition != 0.0) {
         canvas.drawRRect(
           RRect.fromRectAndCorners(
@@ -726,9 +720,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
     final RRect rrect = RRect.fromRectAndRadius(
       Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize),
       Radius.circular(
-        Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize)
-                .shortestSide /
-            2.0,
+        Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize).shortestSide / 2.0,
       ),
     );
 
@@ -743,9 +735,7 @@ class _RenderArnaSlider extends RenderConstrainedBox {
       RRect.fromRectAndRadius(
         Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2),
         Radius.circular(
-          Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2)
-                  .shortestSide /
-              2.0,
+          Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2).shortestSide / 2.0,
         ),
       ),
       Paint()..color = isInteractive ? thumbColor : trackColor,
@@ -762,10 +752,8 @@ class _RenderArnaSlider extends RenderConstrainedBox {
       config.onIncrease = increaseAction;
       config.onDecrease = decreaseAction;
       config.value = "${(value * 100).round()}%";
-      config.increasedValue =
-          "${((value + _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%";
-      config.decreasedValue =
-          "${((value - _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%";
+      config.increasedValue = "${((value + _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%";
+      config.decreasedValue = "${((value - _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%";
     }
   }
 

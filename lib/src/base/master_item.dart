@@ -43,15 +43,13 @@ class ArnaMasterItem extends StatelessWidget {
   /// Whether this item is focusable or not.
   final bool isFocusable;
 
-  /// Whether this item should focus itself if nothing else is already
-  /// focused.
+  /// Whether this item should focus itself if nothing else is already focused.
   final bool autofocus;
 
   /// The color of the item's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// widget.
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor cursor;
 
   /// The semantic label of the item.
@@ -59,10 +57,7 @@ class ArnaMasterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = ArnaDynamicColor.resolve(
-      ArnaColors.buttonColor,
-      context,
-    );
+    Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
     Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
@@ -73,9 +68,7 @@ class ArnaMasterItem extends StatelessWidget {
             alignment: Alignment.centerLeft,
             children: <Widget>[
               AnimatedContainer(
-                constraints: const BoxConstraints(
-                  minHeight: Styles.masterItemMinHeight,
-                ),
+                constraints: const BoxConstraints(minHeight: Styles.masterItemMinHeight),
                 width: double.infinity,
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
@@ -87,10 +80,7 @@ class ArnaMasterItem extends StatelessWidget {
                         ? ArnaColors.transparent
                         : focused
                             ? accent
-                            : ArnaDynamicColor.resolve(
-                                ArnaColors.borderColor,
-                                context,
-                              ),
+                            : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
                   ),
                   color: !enabled
                       ? ArnaColors.transparent
@@ -110,10 +100,7 @@ class ArnaMasterItem extends StatelessWidget {
                               !enabled
                                   ? ArnaColors.disabledColor
                                   : selected
-                                      ? ArnaDynamicColor.matchingColor(
-                                          accent,
-                                          ArnaTheme.brightnessOf(context),
-                                        )
+                                      ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
                                       : ArnaColors.iconColor,
                               context,
                             ),
@@ -130,25 +117,18 @@ class ArnaMasterItem extends StatelessWidget {
                               width: Styles.sideBarWidth,
                               child: Padding(
                                 padding: Styles.tileTextPadding,
-                                child: Text(
-                                  title!,
-                                  style: ArnaTheme.of(context).textTheme.button,
-                                ),
+                                child: Text(title!, style: ArnaTheme.of(context).textTheme.button),
                               ),
                             ),
                           if (subtitle != null)
                             Padding(
                               padding: Styles.tileTextPadding,
-                              child: Text(
-                                subtitle!,
-                                style: ArnaTheme.of(context).textTheme.subtitle,
-                              ),
+                              child: Text(subtitle!, style: ArnaTheme.of(context).textTheme.subtitle),
                             ),
                         ],
                       ),
                     ),
-                    if (trailing != null)
-                      Padding(padding: Styles.normal, child: trailing),
+                    if (trailing != null) Padding(padding: Styles.normal, child: trailing),
                   ],
                 ),
               ),
@@ -159,10 +139,7 @@ class ArnaMasterItem extends StatelessWidget {
                 curve: Styles.basicCurve,
                 decoration: BoxDecoration(
                   borderRadius: Styles.borderRadius,
-                  color: ArnaDynamicColor.matchingColor(
-                    accent,
-                    ArnaTheme.brightnessOf(context),
-                  ),
+                  color: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
                 ),
               ),
             ],

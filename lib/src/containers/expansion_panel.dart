@@ -1,8 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 
-/// An Arna-styled expansion panel. The body of the panel is only visible when
-/// it is expanded.
+/// An Arna-styled expansion panel. The body of the panel is only visible when it is expanded.
 class ArnaExpansionPanel extends StatefulWidget {
   /// Creates an expansion panel in the Arna style.
   ///
@@ -52,8 +51,7 @@ class ArnaExpansionPanel extends StatefulWidget {
   /// The color of the panel's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// widget.
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor cursor;
 
   /// The semantic label of the panel.
@@ -64,8 +62,7 @@ class ArnaExpansionPanel extends StatefulWidget {
 }
 
 /// The [State] for a [ArnaExpansionPanel].
-class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
-    with SingleTickerProviderStateMixin {
+class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTickerProviderStateMixin {
   FocusNode? focusNode;
   late bool expanded;
   bool _focused = false;
@@ -80,11 +77,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: Styles.basicDuration,
-      debugLabel: 'ArnaExpansionPanel',
-      vsync: this,
-    );
+    _controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaExpansionPanel', vsync: this);
     _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(
       CurvedAnimation(parent: _controller, curve: Styles.basicCurve),
@@ -147,6 +140,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
   @override
   Widget build(BuildContext context) {
     Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+
     return Padding(
       padding: Styles.normal,
       child: MergeSemantics(
@@ -168,26 +162,19 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                 actions: _actions,
                 shortcuts: _shortcuts,
                 child: AnimatedContainer(
-                  constraints: const BoxConstraints(
-                    minHeight: Styles.expansionPanelMinHeight,
-                  ),
+                  constraints: const BoxConstraints(minHeight: Styles.expansionPanelMinHeight),
                   duration: Styles.basicDuration,
                   curve: Styles.basicCurve,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(
                       top: const Radius.circular(Styles.borderRadiusSize),
-                      bottom: expanded
-                          ? const Radius.circular(0)
-                          : const Radius.circular(Styles.borderRadiusSize),
+                      bottom: expanded ? const Radius.circular(0) : const Radius.circular(Styles.borderRadiusSize),
                     ),
                     border: Border.all(
                       color: ArnaDynamicColor.resolve(
                         _focused
-                            ? ArnaDynamicColor.matchingColor(
-                                accent,
-                                ArnaTheme.brightnessOf(context),
-                              )
+                            ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
                             : ArnaColors.borderColor,
                         context,
                       ),
@@ -196,9 +183,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(
                       top: const Radius.circular(Styles.borderRadiusSize - 1),
-                      bottom: expanded
-                          ? const Radius.circular(0)
-                          : const Radius.circular(Styles.borderRadiusSize - 1),
+                      bottom: expanded ? const Radius.circular(0) : const Radius.circular(Styles.borderRadiusSize - 1),
                     ),
                     child: ArnaListTile(
                       leading: widget.leading,
@@ -217,9 +202,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                                   Icons.arrow_back_ios_new_outlined,
                                   size: Styles.arrowSize,
                                   color: ArnaDynamicColor.resolve(
-                                    isEnabled
-                                        ? ArnaColors.iconColor
-                                        : ArnaColors.disabledColor,
+                                    isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
                                     context,
                                   ),
                                 ),
@@ -228,8 +211,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                           ),
                         ],
                       ),
-                      onTap:
-                          isEnabled && widget.isFocusable ? _handleTap : null,
+                      onTap: isEnabled && widget.isFocusable ? _handleTap : null,
                       actionable: isEnabled && widget.isFocusable,
                       cursor: widget.cursor,
                     ),
@@ -243,10 +225,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                       top: Radius.circular(0),
                       bottom: Radius.circular(Styles.borderRadiusSize + 1),
                     ),
-                    color: ArnaDynamicColor.resolve(
-                      ArnaColors.borderColor,
-                      context,
-                    ),
+                    color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: AnimatedContainer(
@@ -258,16 +237,9 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                         top: Radius.circular(0),
                         bottom: Radius.circular(Styles.borderRadiusSize),
                       ),
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.cardColor,
-                        context,
-                      ),
+                      color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
                     ),
-                    margin: const EdgeInsetsDirectional.only(
-                      start: 1,
-                      end: 1,
-                      bottom: 1,
-                    ),
+                    margin: const EdgeInsetsDirectional.only(start: 1, end: 1, bottom: 1),
                     child: SizeTransition(
                       axisAlignment: 1,
                       sizeFactor: _animation,

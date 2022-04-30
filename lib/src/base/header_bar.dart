@@ -3,19 +3,13 @@ import 'package:arna/arna.dart';
 /// An Arna-styled header bar.
 ///
 /// The HeaderBar displays [leading], [middle], and [actions] widgets.
-/// [leading] widget is in the top left, the [actions] are in the top right,
-/// the [middle] is between them.
+/// [leading] widget is in the top left, the [actions] are in the top right, the [middle] is between them.
 /// See also:
 ///
 ///  * [ArnaScaffold], which displays the [ArnaHeaderBar].
 class ArnaHeaderBar extends StatelessWidget {
   /// Creates a header bar in the Arna style.
-  const ArnaHeaderBar({
-    Key? key,
-    this.leading,
-    this.middle,
-    this.actions,
-  }) : super(key: key);
+  const ArnaHeaderBar({Key? key, this.leading, this.middle, this.actions}) : super(key: key);
 
   /// The leading widget laid out within the header bar.
   final Widget? leading;
@@ -25,24 +19,14 @@ class ArnaHeaderBar extends StatelessWidget {
 
   /// A list of Widgets to display in a row after the [middle] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget.
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget.
   final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
-    Widget? trailing;
-    if (actions != null) {
-      trailing = Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: actions!,
-      );
-    }
     return Semantics(
       container: true,
       child: Align(
@@ -53,16 +37,19 @@ class ArnaHeaderBar extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: Styles.headerBarHeight,
-                color: ArnaDynamicColor.resolve(
-                  ArnaColors.headerColor,
-                  context,
-                ),
+                color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
                 child: Padding(
                   padding: Styles.small,
                   child: NavigationToolbar(
                     leading: leading,
                     middle: middle,
-                    trailing: trailing,
+                    trailing: actions != null
+                        ? Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: actions!,
+                          )
+                        : null,
                     middleSpacing: Styles.smallPadding,
                   ),
                 ),

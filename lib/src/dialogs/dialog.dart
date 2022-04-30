@@ -3,17 +3,14 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// An Arna-styled alert dialog.
 ///
-/// An alert dialog informs the user about situations that require
-/// acknowledgement.
+/// An alert dialog informs the user about situations that require acknowledgement.
 ///
-/// Typically passed as the child widget to [showArnaDialog], which displays
-/// the dialog.
+/// Typically passed as the child widget to [showArnaDialog], which displays the dialog.
 ///
 /// {@tool snippet}
 ///
-/// This snippet shows a method in a [State] which, when called, displays a
-/// dialog box and returns a [Future] that completes when the dialog is
-/// dismissed.
+/// This snippet shows a method in a [State] which, when called, displays a dialog box and returns a [Future] that
+/// completes when the dialog is dismissed.
 ///
 /// ```dart
 /// Future<void> _showMyDialog() async {
@@ -49,24 +46,19 @@ class ArnaAlertDialog extends StatelessWidget {
     this.tertiary = const SizedBox.shrink(),
   }) : super(key: key);
 
-  /// The (optional) title of the dialog is displayed in a large font at the top
-  /// of the dialog.
+  /// The (optional) title of the dialog is displayed in a large font at the top of the dialog.
   final String? title;
 
-  /// The (optional) content of the dialog is displayed in the center of the
-  /// dialog in a lighter font.
+  /// The (optional) content of the dialog is displayed in the center of the dialog in a lighter font.
   final String? message;
 
-  /// The primary action that is displayed at the bottom of the
-  /// dialog.
+  /// The primary action that is displayed at the bottom of the dialog.
   final Widget primary;
 
-  /// The (optional) secondary action that is displayed at the bottom of the
-  /// dialog.
+  /// The (optional) secondary action that is displayed at the bottom of the dialog.
   final Widget secondary;
 
-  /// The (optional) tertiary action that is displayed at the bottom of the
-  /// dialog.
+  /// The (optional) tertiary action that is displayed at the bottom of the dialog.
   final Widget tertiary;
 
   @override
@@ -83,12 +75,8 @@ class ArnaAlertDialog extends StatelessWidget {
           context: context,
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minWidth: isCompact(context)
-                  ? deviceWidth(context) - Styles.largePadding
-                  : Styles.dialogSize,
-              maxWidth: isCompact(context)
-                  ? deviceWidth(context) - Styles.largePadding
-                  : Styles.dialogSize,
+              minWidth: isCompact(context) ? deviceWidth(context) - Styles.largePadding : Styles.dialogSize,
+              maxWidth: isCompact(context) ? deviceWidth(context) - Styles.largePadding : Styles.dialogSize,
             ),
             child: AnimatedContainer(
               duration: Styles.basicDuration,
@@ -96,12 +84,7 @@ class ArnaAlertDialog extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
-                border: Border.all(
-                  color: ArnaDynamicColor.resolve(
-                    ArnaColors.borderColor,
-                    context,
-                  ),
-                ),
+                border: Border.all(color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context)),
                 color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
               ),
               child: ClipRRect(
@@ -138,10 +121,7 @@ class ArnaAlertDialog extends StatelessWidget {
                     const ArnaHorizontalDivider(),
                     Container(
                       height: Styles.headerBarHeight,
-                      color: ArnaDynamicColor.resolve(
-                        ArnaColors.backgroundColor,
-                        context,
-                      ),
+                      color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
                       child: Padding(
                         padding: Styles.horizontal,
                         child: Row(
@@ -167,35 +147,31 @@ class ArnaAlertDialog extends StatelessWidget {
 /// This function takes a [dialog] which is used to build the dialog widget.
 /// Content below the dialog is dimmed with a [ModalBarrier].
 ///
-/// The [context] argument is used to look up the [Navigator] for the
-/// dialog. It is only used when the method is called. Its corresponding widget
-/// can be safely removed from the tree before the dialog is closed.
+/// The [context] argument is used to look up the [Navigator] for the dialog. It is only used when the method is
+/// called. Its corresponding widget can be safely removed from the tree before the dialog is closed.
 ///
-/// The [useRootNavigator] argument is used to determine whether to push the
-/// dialog to the [Navigator] furthest from or nearest to the given `context`.
-/// By default, [useRootNavigator] is true and the dialog route created by
-/// this method is pushed to the root navigator.
+/// The [useRootNavigator] argument is used to determine whether to push the dialog to the [Navigator] furthest from or
+/// nearest to the given `context`.
+/// By default, [useRootNavigator] is true and the dialog route created by this method is pushed to the root navigator.
 ///
-/// If the application has multiple [Navigator] objects, it may be necessary to
-/// call `Navigator.of(context, rootNavigator: true).pop(result)` to close the
-/// dialog rather than just `Navigator.pop(context, result)`.
+/// If the application has multiple [Navigator] objects, it may be necessary to call
+/// `Navigator.of(context, rootNavigator: true).pop(result)` to close the dialog rather than just
+/// `Navigator.pop(context, result)`.
 ///
-/// The [barrierDismissible] argument is used to determine whether this route
-/// can be dismissed by tapping the modal barrier. This argument defaults
-/// to false. If [barrierDismissible] is true, a non-null [barrierLabel] must be
+/// The [barrierDismissible] argument is used to determine whether this route can be dismissed by tapping the modal
+/// barrier. This argument defaults to false. If [barrierDismissible] is true, a non-null [barrierLabel] must be
 /// provided.
 ///
-/// The [barrierLabel] argument is the semantic label used for a dismissible
-/// barrier. This argument defaults to `null`.
+/// The [barrierLabel] argument is the semantic label used for a dismissible barrier. This argument defaults to `null`.
 ///
-/// The [barrierColor] argument is the color used for the modal barrier. This
-/// argument defaults to [ArnaColors.barrierColor].
+/// The [barrierColor] argument is the color used for the modal barrier. This argument defaults to
+/// [ArnaColors.barrierColor].
 ///
 /// The [routeSettings] will be used in the construction of the dialog's route.
 /// See [RouteSettings] for more details.
 ///
-/// Returns a [Future] that resolves to the value (if any) that was passed to
-/// [Navigator.pop] when the dialog was closed.
+/// Returns a [Future] that resolves to the value (if any) that was passed to [Navigator.pop] when the dialog was
+/// closed.
 Future<T?> showArnaDialog<T>({
   required BuildContext context,
   required ArnaAlertDialog dialog,
@@ -207,40 +183,25 @@ Future<T?> showArnaDialog<T>({
 }) {
   return showGeneralDialog(
     context: context,
-    barrierLabel: barrierLabel ??
-        MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    barrierLabel: barrierLabel ?? MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: barrierColor,
     barrierDismissible: barrierDismissible,
     transitionDuration: Styles.basicDuration,
     routeSettings: routeSettings,
-    pageBuilder: (context, animation, secondaryAnimation) {
-      return dialog;
-    },
+    pageBuilder: (context, animation, secondaryAnimation) => dialog,
     transitionBuilder: (context, animation, secondaryAnimation, child) {
       return isCompact(context)
           ? SlideTransition(
-              position: Tween(
-                begin: const Offset(0, 1),
-                end: Offset.zero,
-              ).animate(animation),
+              position: Tween(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
               child: FadeTransition(
-                opacity: CurvedAnimation(
-                  parent: animation,
-                  curve: Styles.basicCurve,
-                ),
+                opacity: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
                 child: child,
               ),
             )
           : ScaleTransition(
-              scale: CurvedAnimation(
-                parent: animation,
-                curve: Styles.basicCurve,
-              ),
+              scale: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
               child: FadeTransition(
-                opacity: CurvedAnimation(
-                  parent: animation,
-                  curve: Styles.basicCurve,
-                ),
+                opacity: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
                 child: child,
               ),
             );

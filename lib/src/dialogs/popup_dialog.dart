@@ -6,13 +6,12 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 /// A popup dialog displays a dialog box in desktop and tablet mode.
 ///
 ///
-/// Typically passed as the child widget to [showArnaDialog], which displays
-/// the dialog.
+/// Typically passed as the child widget to [showArnaDialog], which displays the dialog.
 ///
 /// {@tool snippet}
 ///
-/// This snippet shows an ArnaIconButton which, when pressed, displays a dialog
-/// box in desktop and tablet mode and a new page on phones.
+/// This snippet shows an ArnaIconButton which, when pressed, displays a dialog box in desktop and tablet mode and a
+/// new page on phones.
 ///
 /// ```dart
 /// ArnaIconButton(
@@ -51,13 +50,11 @@ class _ArnaPopupDialog extends StatelessWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built
-  /// by this widget. The height of each action is constrained to be no bigger
-  /// than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the popup dialog.
@@ -88,16 +85,8 @@ class _ArnaPopupDialog extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
-                border: Border.all(
-                  color: ArnaDynamicColor.resolve(
-                    ArnaColors.borderColor,
-                    context,
-                  ),
-                ),
-                color: ArnaDynamicColor.resolve(
-                  ArnaColors.backgroundColor,
-                  context,
-                ),
+                border: Border.all(color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context)),
+                color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
               ),
               child: ClipRRect(
                 borderRadius: Styles.borderRadius,
@@ -129,13 +118,12 @@ class _ArnaPopupDialog extends StatelessWidget {
 /// A popup dialog displays a page in phone mode.
 ///
 ///
-/// Typically passed as the child widget to [showArnaDialog], which displays
-/// the dialog.
+/// Typically passed as the child widget to [showArnaDialog], which displays the dialog.
 ///
 /// {@tool snippet}
 ///
-/// This snippet shows an ArnaIconButton which, when pressed, displays a dialog
-/// box in desktop and tablet mode and a new page on phones.
+/// This snippet shows an ArnaIconButton which, when pressed, displays a dialog box in desktop and tablet mode and a
+/// new page on phones.
 ///
 /// ```dart
 /// ArnaIconButton(
@@ -174,13 +162,11 @@ class _ArnaPopupPage extends StatelessWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
-  /// operations. For less common operations, consider using a
-  /// [ArnaPopupMenuButton] as the last action.
+  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// consider using a [ArnaPopupMenuButton] as the last action.
   ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built
-  /// by this widget. The height of each action is constrained to be no bigger
-  /// than the [Styles.headerBarHeight].
+  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
+  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
 
   /// The [ArnaSearchField] of the popup dialog page.
@@ -215,38 +201,33 @@ class _ArnaPopupPage extends StatelessWidget {
 /// Displays a dialog in desktop and tablet mode and a new page on phones.
 ///
 ///
-/// In desktop and tablet mode content below the dialog is dimmed with a
-/// [ModalBarrier].
+/// In desktop and tablet mode content below the dialog is dimmed with a [ModalBarrier].
 ///
-/// The [context] argument is used to look up the [Navigator] for the
-/// dialog. It is only used when the method is called. Its corresponding widget
-/// can be safely removed from the tree before the dialog is closed.
+/// The [context] argument is used to look up the [Navigator] for the dialog. It is only used when the method is
+/// called. Its corresponding widget can be safely removed from the tree before the dialog is closed.
 ///
-/// The [useRootNavigator] argument is used to determine whether to push the
-/// dialog to the [Navigator] furthest from or nearest to the given `context`.
-/// By default, [useRootNavigator] is true and the dialog route created by
-/// this method is pushed to the root navigator.
+/// The [useRootNavigator] argument is used to determine whether to push the dialog to the [Navigator] furthest from or
+/// nearest to the given `context`.
+/// By default, [useRootNavigator] is true and the dialog route created by this method is pushed to the root navigator.
 ///
-/// If the application has multiple [Navigator] objects, it may be necessary to
-/// call `Navigator.of(context, rootNavigator: true).pop(result)` to close the
-/// dialog rather than just `Navigator.pop(context, result)`.
+/// If the application has multiple [Navigator] objects, it may be necessary to call
+/// `Navigator.of(context, rootNavigator: true).pop(result)` to close the dialog rather than just
+/// `Navigator.pop(context, result)`.
 ///
-/// The [barrierDismissible] argument is used to determine whether this route
-/// can be dismissed by tapping the modal barrier. This argument defaults
-/// to false. If [barrierDismissible] is true, a non-null [barrierLabel] must be
+/// The [barrierDismissible] argument is used to determine whether this route can be dismissed by tapping the modal
+/// barrier. This argument defaults to false. If [barrierDismissible] is true, a non-null [barrierLabel] must be
 /// provided.
 ///
-/// The [barrierLabel] argument is the semantic label used for a dismissible
-/// barrier. This argument defaults to `null`.
+/// The [barrierLabel] argument is the semantic label used for a dismissible barrier. This argument defaults to `null`.
 ///
-/// The [barrierColor] argument is the color used for the modal barrier. This
-/// argument defaults to [ArnaColors.barrierColor].
+/// The [barrierColor] argument is the color used for the modal barrier. This argument defaults to
+/// [ArnaColors.barrierColor].
 ///
 /// The [routeSettings] will be used in the construction of the dialog's route.
 /// See [RouteSettings] for more details.
 ///
-/// Returns a [Future] that resolves to the value (if any) that was passed to
-/// [Navigator.pop] when the dialog was closed.
+/// Returns a [Future] that resolves to the value (if any) that was passed to [Navigator.pop] when the dialog was
+/// closed.
 Future<T?> showArnaPopupDialog<T>({
   required BuildContext context,
   Widget? headerBarLeading,
@@ -274,8 +255,7 @@ Future<T?> showArnaPopupDialog<T>({
         )
       : showGeneralDialog(
           context: context,
-          barrierLabel: barrierLabel ??
-              MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          barrierLabel: barrierLabel ?? MaterialLocalizations.of(context).modalBarrierDismissLabel,
           barrierColor: barrierColor,
           barrierDismissible: barrierDismissible,
           transitionDuration: Styles.basicDuration,
@@ -291,15 +271,9 @@ Future<T?> showArnaPopupDialog<T>({
           },
           transitionBuilder: (context, animation, secondaryAnimation, child) {
             return ScaleTransition(
-              scale: CurvedAnimation(
-                parent: animation,
-                curve: Styles.basicCurve,
-              ),
+              scale: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
               child: FadeTransition(
-                opacity: CurvedAnimation(
-                  parent: animation,
-                  curve: Styles.basicCurve,
-                ),
+                opacity: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
                 child: child,
               ),
             );

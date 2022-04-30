@@ -55,6 +55,6 @@ export 'package:arna/src/theme/text_theme.dart';
 export 'package:arna/src/theme/theme.dart';
 export 'package:arna/src/theme/theme_data.dart';
 export 'package:arna/src/theme/typography.dart';
-export 'package:flutter/material.dart' show Icons, FlutterLogo;
+export 'package:flutter/material.dart' show Icons, FlutterLogo, Feedback;
 export 'package:flutter/services.dart' show Brightness;
 export 'package:flutter/widgets.dart';

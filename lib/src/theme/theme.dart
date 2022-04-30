@@ -3,18 +3,16 @@ import 'package:flutter/foundation.dart';
 
 /// Applies a visual styling theme to descendant Arna widgets.
 ///
-/// Affects the color and text styles of Arna widgets whose styling
-/// are not overridden when constructing the respective widgets instances.
+/// Affects the color and text styles of Arna widgets whose styling are not overridden when constructing the respective
+/// widgets instances.
 ///
-/// Descendant widgets can retrieve the current [ArnaThemeData] by calling
-/// [ArnaTheme.of]. An [InheritedWidget] dependency is created when
-/// an ancestor [ArnaThemeData] is retrieved via [ArnaTheme.of].
+/// Descendant widgets can retrieve the current [ArnaThemeData] by calling [ArnaTheme.of]. An [InheritedWidget]
+/// dependency is created when an ancestor [ArnaThemeData] is retrieved via [ArnaTheme.of].
 ///
 /// See also:
 ///
 ///  * [ArnaThemeData], specifies the theme's visual styling.
-///  * [ArnaApp], which will automatically add a [ArnaTheme] based on the
-///    value of [ArnaApp.theme].
+///  * [ArnaApp], which will automatically add a [ArnaTheme] based on the value of [ArnaApp.theme].
 class ArnaTheme extends StatelessWidget {
   /// Creates a [ArnaTheme] to change descendant Arna widgets' styling.
   ///
@@ -33,27 +31,22 @@ class ArnaTheme extends StatelessWidget {
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
 
-  /// Retrieves the [ArnaThemeData] from the closest ancestor [ArnaTheme]
-  /// widget, or a default [ArnaThemeData] if no [ArnaTheme] ancestor
-  /// exists.
+  /// Retrieves the [ArnaThemeData] from the closest ancestor [ArnaTheme] widget, or a default [ArnaThemeData] if no
+  /// [ArnaTheme] ancestor exists.
   ///
-  /// Resolves all the colors defined in that [ArnaThemeData] against the
-  /// given [BuildContext] on a best-effort basis.
+  /// Resolves all the colors defined in that [ArnaThemeData] against the given [BuildContext] on a best-effort basis.
   static ArnaThemeData of(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
+    final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
     return (inheritedTheme?.theme.data ?? ArnaThemeData.light());
   }
 
-  /// Retrieves the [Brightness] to use for descendant Arna widgets, based
-  /// on the value of [ArnaThemeData.brightness] in the given [context].
+  /// Retrieves the [Brightness] to use for descendant Arna widgets, based on the value of [ArnaThemeData.brightness]
+  /// in the given [context].
   ///
-  /// If no [ArnaTheme] can be found in the given [context], or its
-  /// `brightness` is null, it will fall back to
+  /// If no [ArnaTheme] can be found in the given [context], or its `brightness` is null, it will fall back to
   /// [MediaQueryData.platformBrightness].
   ///
-  /// Throws an exception if no valid [ArnaTheme] or [MediaQuery] widgets
-  /// exist in the ancestry tree.
+  /// Throws an exception if no valid [ArnaTheme] or [MediaQuery] widgets exist in the ancestry tree.
   ///
   /// See also:
   ///
@@ -62,20 +55,16 @@ class ArnaTheme extends StatelessWidget {
   /// * [ArnaThemeData.brightness], the property takes precedence over
   ///   [MediaQueryData.platformBrightness] for descendant Arna widgets.
   static Brightness brightnessOf(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return inheritedTheme?.theme.data.brightness ??
-        MediaQuery.of(context).platformBrightness;
+    final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
+    return inheritedTheme?.theme.data.brightness ?? MediaQuery.of(context).platformBrightness;
   }
 
-  /// Retrieves the [Brightness] to use for descendant Arna widgets, based
-  /// on the value of [ArnaThemeData.brightness] in the given [context].
+  /// Retrieves the [Brightness] to use for descendant Arna widgets, based on the value of [ArnaThemeData.brightness]
+  /// in the given [context].
   ///
-  /// If no [ArnaTheme] can be found in the given [context], it will fall
-  /// back to [MediaQueryData.platformBrightness].
+  /// If no [ArnaTheme] can be found in the given [context], it will fall back to [MediaQueryData.platformBrightness].
   ///
-  /// Returns null if no valid [ArnaTheme] or [MediaQuery] widgets exist in
-  /// the ancestry tree.
+  /// Returns null if no valid [ArnaTheme] or [MediaQuery] widgets exist in the ancestry tree.
   ///
   /// See also:
   ///
@@ -84,10 +73,8 @@ class ArnaTheme extends StatelessWidget {
   /// * [brightnessOf], which throws if no valid [ArnaTheme] or
   ///   [MediaQuery] exists, instead of returning null.
   static Brightness? maybeBrightnessOf(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme =
-        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return inheritedTheme?.theme.data.brightness ??
-        MediaQuery.maybeOf(context)?.platformBrightness;
+    final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
+    return inheritedTheme?.theme.data.brightness ?? MediaQuery.maybeOf(context)?.platformBrightness;
   }
 
   @override
@@ -113,41 +100,33 @@ class _InheritedArnaTheme extends InheritedWidget {
   final ArnaTheme theme;
 
   @override
-  bool updateShouldNotify(_InheritedArnaTheme old) =>
-      theme.data != old.theme.data;
+  bool updateShouldNotify(_InheritedArnaTheme old) => theme.data != old.theme.data;
 }
 
 /// An interpolation between two [ArnaThemeData]s.
 ///
-/// This class specializes the interpolation of [Tween<ArnaThemeData>] to call
-/// the [ArnaThemeData.lerp] method.
+/// This class specializes the interpolation of [Tween<ArnaThemeData>] to call the [ArnaThemeData.lerp] method.
 ///
 /// See [Tween] for a discussion on how to use interpolation objects.
 class ArnaThemeDataTween extends Tween<ArnaThemeData> {
   /// Creates a [ArnaThemeData] tween.
   ///
-  /// The [begin] and [end] properties must be non-null before the tween is
-  /// first used, but the arguments can be null if the values are going to be
-  /// filled in later.
-  ArnaThemeDataTween({
-    ArnaThemeData? begin,
-    ArnaThemeData? end,
-  }) : super(begin: begin, end: end);
+  /// The [begin] and [end] properties must be non-null before the tween is first used, but the arguments can be null
+  /// if the values are going to be filled in later.
+  ArnaThemeDataTween({ArnaThemeData? begin, ArnaThemeData? end}) : super(begin: begin, end: end);
 
   @override
   ArnaThemeData lerp(double t) => ArnaThemeData.lerp(begin!, end!, t);
 }
 
-/// Animated version of [ArnaTheme] which automatically transitions the colors,
-/// etc, over a given duration whenever the given theme changes.
+/// Animated version of [ArnaTheme] which automatically transitions the colors, etc, over a given duration whenever the
+/// given theme changes.
 ///
 /// See also:
 ///
-///  * [ArnaTheme], which [AnimatedArnaTheme] uses to actually apply the
-///    interpolated theme.
+///  * [ArnaTheme], which [AnimatedArnaTheme] uses to actually apply the interpolated theme.
 ///  * [ArnaThemeData], which describes the actual configuration of a theme.
-///  * [ArnaApp], which includes an [AnimatedArnaTheme] widget configured via
-///    the [ArnaApp.theme] argument.
+///  * [ArnaApp], which includes an [AnimatedArnaTheme] widget configured via the [ArnaApp.theme] argument.
 class AnimatedArnaTheme extends ImplicitlyAnimatedWidget {
   /// Creates an animated theme.
   ///
@@ -170,13 +149,11 @@ class AnimatedArnaTheme extends ImplicitlyAnimatedWidget {
   final Widget child;
 
   @override
-  AnimatedWidgetBaseState<AnimatedArnaTheme> createState() =>
-      _AnimatedArnaThemeState();
+  AnimatedWidgetBaseState<AnimatedArnaTheme> createState() => _AnimatedArnaThemeState();
 }
 
 /// The [State] for a [AnimatedArnaTheme].
-class _AnimatedArnaThemeState
-    extends AnimatedWidgetBaseState<AnimatedArnaTheme> {
+class _AnimatedArnaThemeState extends AnimatedWidgetBaseState<AnimatedArnaTheme> {
   ArnaThemeDataTween? _data;
 
   @override
@@ -196,13 +173,6 @@ class _AnimatedArnaThemeState
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder description) {
     super.debugFillProperties(description);
-    description.add(
-      DiagnosticsProperty<ArnaThemeDataTween>(
-        'data',
-        _data,
-        showName: false,
-        defaultValue: null,
-      ),
-    );
+    description.add(DiagnosticsProperty<ArnaThemeDataTween>('data', _data, showName: false, defaultValue: null));
   }
 }

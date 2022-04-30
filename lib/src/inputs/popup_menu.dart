@@ -221,8 +221,7 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
   bool represents(T? value) => value == this.value;
 
   @override
-  ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>> createState() =>
-      ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>>();
+  ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>> createState() => ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>>();
 }
 
 // The [State] for [ArnaPopupMenuItem] subclasses.
@@ -238,8 +237,7 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
 /// the [Widget] that is using this [State]. It must be a subclass of
 /// [ArnaPopupMenuItem]. The first, `T`, must match the type argument of that widget
 /// class, and is the type of values returned from this menu.
-class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>>
-    extends State<W> {
+class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W> {
   /// The menu item contents.
   ///
   /// Used by the [build] method.
@@ -322,9 +320,7 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double unit = 1.0 /
-        (route.items.length +
-            1.5); // 1.0 for the width and 0.5 for the last item's fade.
+    final double unit = 1.0 / (route.items.length + 1.5); // 1.0 for the width and 0.5 for the last item's fade.
     final List<Widget> children = <Widget>[];
 
     for (int i = 0; i < route.items.length; i += 1) {
@@ -488,14 +484,12 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
     // pixels from the edge of the screen in every direction.
     if (x < Styles.padding + padding.left) {
       x = Styles.padding + padding.left;
-    } else if (x + childSize.width >
-        size.width - Styles.padding - padding.right) {
+    } else if (x + childSize.width > size.width - Styles.padding - padding.right) {
       x = size.width - childSize.width - Styles.padding - padding.right;
     }
     if (y < Styles.padding + padding.top) {
       y = Styles.padding + padding.top;
-    } else if (y + childSize.height >
-        size.height - Styles.padding - padding.bottom) {
+    } else if (y + childSize.height > size.height - Styles.padding - padding.bottom) {
       y = size.height - padding.bottom - Styles.padding - childSize.height;
     }
 
@@ -555,13 +549,10 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
   final String barrierLabel;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
     int? selectedItemIndex;
     if (initialValue != null) {
-      for (int index = 0;
-          selectedItemIndex == null && index < items.length;
-          index += 1) {
+      for (int index = 0; selectedItemIndex == null && index < items.length; index += 1) {
         if (items[index].represents(initialValue)) selectedItemIndex = index;
       }
     }

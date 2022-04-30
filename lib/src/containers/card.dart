@@ -33,9 +33,7 @@ class ArnaCard extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          border: Border.all(
-            color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
-          ),
+          border: Border.all(color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context)),
           color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
         ),
         child: child,

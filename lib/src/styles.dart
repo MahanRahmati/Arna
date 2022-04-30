@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 
+/// The style properties of Arna widgets.
 abstract class Styles {
   /// Base
   static const double base = 7;
@@ -173,32 +174,22 @@ abstract class Styles {
   static const EdgeInsets large = EdgeInsets.all(largePadding);
 
   /// Small horizontal Padding
-  static const EdgeInsets smallHorizontal = EdgeInsets.symmetric(
-    horizontal: smallPadding,
-  );
+  static const EdgeInsets smallHorizontal = EdgeInsets.symmetric(horizontal: smallPadding);
 
   /// Normal horizontal Padding
-  static const EdgeInsets horizontal = EdgeInsets.symmetric(
-    horizontal: padding,
-  );
+  static const EdgeInsets horizontal = EdgeInsets.symmetric(horizontal: padding);
 
   /// Large horizontal Padding
-  static const EdgeInsets largeHorizontal = EdgeInsets.symmetric(
-    horizontal: largePadding,
-  );
+  static const EdgeInsets largeHorizontal = EdgeInsets.symmetric(horizontal: largePadding);
 
   /// Small vertical Padding
-  static const EdgeInsets smallVertical = EdgeInsets.symmetric(
-    vertical: smallPadding,
-  );
+  static const EdgeInsets smallVertical = EdgeInsets.symmetric(vertical: smallPadding);
 
   /// Normal vertical Padding
   static const EdgeInsets vertical = EdgeInsets.symmetric(vertical: padding);
 
   /// Large vertical Padding
-  static const EdgeInsets largeVertical = EdgeInsets.symmetric(
-    vertical: largePadding,
-  );
+  static const EdgeInsets largeVertical = EdgeInsets.symmetric(vertical: largePadding);
 
   /// Left vertical Padding
   static const EdgeInsets left = EdgeInsets.only(left: padding);
@@ -213,22 +204,13 @@ abstract class Styles {
   static const EdgeInsets bottom = EdgeInsets.only(bottom: padding);
 
   /// Tile Padding
-  static const EdgeInsets tilePadding = EdgeInsets.symmetric(
-    horizontal: largePadding,
-    vertical: smallPadding,
-  );
+  static const EdgeInsets tilePadding = EdgeInsets.symmetric(horizontal: largePadding, vertical: smallPadding);
 
   /// Tooltip Padding
-  static const EdgeInsets tooltipPadding = EdgeInsets.symmetric(
-    horizontal: largePadding,
-    vertical: padding,
-  );
+  static const EdgeInsets tooltipPadding = EdgeInsets.symmetric(horizontal: largePadding, vertical: padding);
 
   /// Tile text Padding
-  static const EdgeInsets tileTextPadding = EdgeInsets.symmetric(
-    horizontal: padding,
-    vertical: smallPadding,
-  );
+  static const EdgeInsets tileTextPadding = EdgeInsets.symmetric(horizontal: padding, vertical: smallPadding);
 
   /// Tile with subtitle Padding
   static const EdgeInsets tileWithSubtitlePadding = EdgeInsets.fromLTRB(
@@ -239,43 +221,26 @@ abstract class Styles {
   );
 
   /// Tile subtitle Padding
-  static const EdgeInsets tileSubtitlePadding = EdgeInsets.fromLTRB(
-    padding,
-    0,
-    padding,
-    smallPadding,
-  );
+  static const EdgeInsets tileSubtitlePadding = EdgeInsets.fromLTRB(padding, 0, padding, smallPadding);
 
   /// Super large Padding
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 
   /// Normal border radius
-  static BorderRadius borderRadius = const BorderRadius.all(
-    Radius.circular(borderRadiusSize),
-  );
+  static BorderRadius borderRadius = const BorderRadius.all(Radius.circular(borderRadiusSize));
 
   /// List border radius
-  static BorderRadius listBorderRadius = const BorderRadius.all(
-    Radius.circular(borderRadiusSize - 1),
-  );
+  static BorderRadius listBorderRadius = const BorderRadius.all(Radius.circular(borderRadiusSize - 1));
 
   /// Checkbox border radius
-  static BorderRadius checkBoxBorderRadius = const BorderRadius.all(
-    Radius.circular(smallPadding),
-  );
+  static BorderRadius checkBoxBorderRadius = const BorderRadius.all(Radius.circular(smallPadding));
 
   /// Radio border radius
-  static BorderRadius radioBorderRadius = const BorderRadius.all(
-    Radius.circular(radioSize),
-  );
+  static BorderRadius radioBorderRadius = const BorderRadius.all(Radius.circular(radioSize));
 
   /// Switch border radius
-  static BorderRadius switchBorderRadius = const BorderRadius.all(
-    Radius.circular(switchHeight),
-  );
+  static BorderRadius switchBorderRadius = const BorderRadius.all(Radius.circular(switchHeight));
 
   /// Color button border radius
-  static BorderRadius colorButtonBorderRadius = const BorderRadius.all(
-    Radius.circular(colorButtonBorderRadiusSize),
-  );
+  static BorderRadius colorButtonBorderRadius = const BorderRadius.all(Radius.circular(colorButtonBorderRadiusSize));
 }

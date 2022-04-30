@@ -64,12 +64,10 @@ class ArnaBaseWidget extends StatefulWidget {
   /// Whether to show animation or not.
   final bool showAnimation;
 
-  /// Whether this widget should focus itself if nothing else is already
-  /// focused.
+  /// Whether this widget should focus itself if nothing else is already focused.
   final bool autofocus;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// widget.
+  /// The cursor for a mouse pointer when it enters or is hovering over the widget.
   final MouseCursor cursor;
 
   /// The semantic label of the widget.
@@ -80,8 +78,7 @@ class ArnaBaseWidget extends StatefulWidget {
 }
 
 /// The [State] for a [ArnaBaseWidget].
-class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
-    with SingleTickerProviderStateMixin {
+class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProviderStateMixin {
   FocusNode? focusNode;
   bool _hover = false;
   bool _focused = false;
@@ -93,8 +90,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
   late Map<Type, Action<Intent>> _actions;
   late Map<ShortcutActivator, Intent> _shortcuts;
 
-  /// Whether the widget is enabled or disabled. Widgets are disabled by
-  /// default.
+  /// Whether the widget is enabled or disabled. Widgets are disabled by default.
   /// To enable a widget, set its [onPressed] property to a non-null value.
   bool get isEnabled => widget.onPressed != null;
 
@@ -110,10 +106,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
         upperBound: 1.0,
         vsync: this,
       );
-      _animation = CurvedAnimation(
-        parent: _controller,
-        curve: Styles.basicCurve,
-      );
+      _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     }
     focusNode = FocusNode(canRequestFocus: isEnabled);
     if (widget.autofocus) focusNode!.requestFocus();
@@ -189,17 +182,8 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
 
   @override
   Widget build(BuildContext context) {
-    Widget child = widget.builder(
-      context,
-      isEnabled,
-      _hover,
-      _focused,
-      _pressed,
-      _selected,
-    );
-    if (widget.showAnimation) {
-      child = ScaleTransition(scale: _animation, child: child);
-    }
+    Widget child = widget.builder(context, isEnabled, _hover, _focused, _pressed, _selected);
+
     return ArnaTooltip(
       message: widget.tooltipMessage,
       child: MergeSemantics(
@@ -233,7 +217,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
               onFocusChange: _handleFocusChange,
               actions: _actions,
               shortcuts: _shortcuts,
-              child: child,
+              child: widget.showAnimation ? ScaleTransition(scale: _animation, child: child) : child,
             ),
           ),
         ),

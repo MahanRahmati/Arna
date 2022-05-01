@@ -1,6 +1,7 @@
 ## 0.4.3
 
 - Change dart.lineLength to 120
+- Update ROADMAP.md
 - Update ArnaSideScaffold
 - [BREAKING] Revert and Update ArnaBanner
 - [BREAKING] Revert and Update ArnaSnackBar

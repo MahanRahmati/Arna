@@ -3,7 +3,7 @@
 ## 1.0.0
 
 - Finalizing the current set of widgets.
-  - Base (11/16)
+  - Base (12/16)
     - [ ] ArnaApp
     - [x] ArnaBanner
     - [x] ArnaBaseWidget

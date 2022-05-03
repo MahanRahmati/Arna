@@ -29,15 +29,16 @@ class ArnaHeaderBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       container: true,
-      child: Align(
+      child: Container(
         alignment: Alignment.topCenter,
+        color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
         child: SafeArea(
           bottom: false,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: Styles.headerBarHeight,
-                color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
                 child: Padding(
                   padding: Styles.small,
                   child: NavigationToolbar(

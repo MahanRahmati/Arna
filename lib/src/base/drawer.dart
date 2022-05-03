@@ -51,7 +51,7 @@ class ArnaDrawer extends StatelessWidget {
               curve: Styles.basicCurve,
               clipBehavior: Clip.antiAlias,
               color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
-              child: child,
+              child: SafeArea(child: child ?? const SizedBox.shrink()),
             ),
           ),
           const ArnaVerticalDivider(),
@@ -179,11 +179,9 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
                 RepaintBoundary(
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
-                    child: SafeArea(
-                      child: SlideTransition(
-                        position: Tween(begin: const Offset(-1, 0), end: const Offset(0, 0)).animate(_controller),
-                        child: widget.drawer,
-                      ),
+                    child: SlideTransition(
+                      position: Tween(begin: const Offset(-1, 0), end: const Offset(0, 0)).animate(_controller),
+                      child: widget.drawer,
                     ),
                   ),
                 )

@@ -171,27 +171,25 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
       },
     );
 
-    return SafeArea(
-      child: widget.items.isEmpty
-          ? Container(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context))
-          : widget.items.length > 1
-              ? sideScaffold
-              : ArnaScaffold(
-                  headerBarLeading: Row(
-                    children: <Widget>[
-                      if (widget.headerBarLeading != null) widget.headerBarLeading!,
-                      if (widget.items[0].headerBarLeading != null) widget.items[0].headerBarLeading!,
-                    ],
-                  ),
-                  title: widget.title,
-                  actions: <Widget>[
-                    if (widget.items[0].actions != null) ...widget.items[0].actions!,
-                    if (widget.actions != null) ...widget.actions!,
+    return widget.items.isEmpty
+        ? Container(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context))
+        : widget.items.length > 1
+            ? sideScaffold
+            : ArnaScaffold(
+                headerBarLeading: Row(
+                  children: <Widget>[
+                    if (widget.headerBarLeading != null) widget.headerBarLeading!,
+                    if (widget.items[0].headerBarLeading != null) widget.items[0].headerBarLeading!,
                   ],
-                  searchField: widget.items[0].searchField,
-                  body: widget.items[0].builder(context),
                 ),
-    );
+                title: widget.title,
+                actions: <Widget>[
+                  if (widget.items[0].actions != null) ...widget.items[0].actions!,
+                  if (widget.actions != null) ...widget.actions!,
+                ],
+                searchField: widget.items[0].searchField,
+                body: widget.items[0].builder(context),
+              );
   }
 }
 

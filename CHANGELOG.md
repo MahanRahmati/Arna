@@ -1,3 +1,9 @@
+## 0.4.4
+
+- Update ArnaDrawer
+- Update ArnaHeaderBar
+- Update ArnaSideScaffold
+
 ## 0.4.3
 
 - Change dart.lineLength to 120

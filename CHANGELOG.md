@@ -8,6 +8,7 @@
 - [Example] Update widgets
 - Add ArnaFeedback
 - Update ArnaTooltip
+- Update ArnaButton
 
 ## 0.4.3
 

@@ -1,10 +1,28 @@
 import 'package:arna/arna.dart';
 
 /// Button types.
-enum ButtonType { normal, colored, destructive, suggested }
+enum ButtonType {
+  /// Normal button.
+  normal,
+
+  /// Colored button.
+  colored,
+
+  /// Destructive button.
+  destructive,
+
+  /// Suggested button.
+  suggested,
+}
 
 /// Button sizes.
-enum ButtonSize { normal, huge }
+enum ButtonSize {
+  /// Normal button.
+  normal,
+
+  /// Huge button.
+  huge,
+}
 
 /// An Arna-styled button.
 class ArnaButton extends StatelessWidget {

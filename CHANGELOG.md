@@ -5,6 +5,7 @@
 - Update ArnaHeaderBar
 - Update ArnaSideScaffold
 - Update ArnaApp
+- [Example] Update widgets
 
 ## 0.4.3
 

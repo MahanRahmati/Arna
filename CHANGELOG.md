@@ -6,6 +6,8 @@
 - Update ArnaSideScaffold
 - Update ArnaApp
 - [Example] Update widgets
+- Add ArnaFeedback
+- Update ArnaTooltip
 
 ## 0.4.3
 

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/gestures.dart' show GestureBinding;
+import 'package:flutter/rendering.dart' show RendererBinding, SemanticsService;
 import 'package:flutter/services.dart' show PointerEnterEventListener, PointerExitEventListener;
 
 /// An Arna-styled tooltip.
@@ -353,7 +353,7 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   void _handlePress() {
     _pressActivated = true;
     final bool tooltipCreated = ensureTooltipVisible();
-    if (tooltipCreated && _enableFeedback) Feedback.forLongPress(context);
+    if (tooltipCreated && _enableFeedback) ArnaFeedback.forLongPress(context);
   }
 
   @override

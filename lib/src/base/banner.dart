@@ -135,7 +135,6 @@ class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateM
               title: widget.title,
               subtitle: widget.subtitle,
               trailing: widget.actions != null ? Row(mainAxisSize: MainAxisSize.min, children: widget.actions!) : null,
-              actionable: false,
             ),
           ),
           const ArnaHorizontalDivider(),

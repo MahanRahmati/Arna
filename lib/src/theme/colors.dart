@@ -221,7 +221,7 @@ class ArnaColors {
 ///
 /// ```dart
 /// Container(
-///   // Container is not a Arna widget, but ArnaTheme.of implicitly
+///   // Container is not an Arna widget, but ArnaTheme.of implicitly
 ///   // resolves colors used in the retrieved ArnaThemeData.
 ///   color: ArnaTheme.of(context).accentColor,
 /// )
@@ -239,7 +239,7 @@ class ArnaColors {
 ///
 /// ```dart
 /// Container(
-///   // Container is not a Arna widget.
+///   // Container is not an Arna widget.
 ///   color: ArnaDynamicColor.resolve(ArnaColors.accentColor, context),
 /// )
 /// ```

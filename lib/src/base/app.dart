@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart' show DefaultCupertinoLocalizations;
 import 'package:flutter/material.dart' show DefaultMaterialLocalizations;
 import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 
+//TODO: Add routerConfig after 2.13
+
 /// An application that uses Arna design.
 ///
 /// It builds upon a [WidgetsApp] by Arna specific defaulting such as fonts and scrolling physics.
@@ -83,7 +85,7 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 ///  * [Navigator], which is used to manage the app's stack of pages.
 ///  * [WidgetsApp], which defines the basic app elements but does not depend on the Arna library.
 class ArnaApp extends StatefulWidget {
-  /// Creates a ArnaApp.
+  /// Creates an ArnaApp.
   ///
   /// At least one of [home], [routes], [onGenerateRoute], or [builder] must be non-null. If only [routes] is given, it
   /// must include an entry for the [Navigator.defaultRouteName] (`/`), since that is the route used when the
@@ -364,7 +366,7 @@ class ArnaApp extends StatefulWidget {
   ///
   /// ```dart
   /// Widget build(BuildContext context) {
-  ///   return WidgetsApp(
+  ///   return ArnaApp(
   ///     shortcuts: <ShortcutActivator, Intent>{
   ///       ... WidgetsApp.defaultShortcuts,
   ///       const SingleActivator(LogicalKeyboardKey.select): const ActivateIntent(),
@@ -390,7 +392,7 @@ class ArnaApp extends StatefulWidget {
   ///
   /// ```dart
   /// Widget build(BuildContext context) {
-  ///   return WidgetsApp(
+  ///   return ArnaApp(
   ///     actions: <Type, Action<Intent>>{
   ///       ... WidgetsApp.defaultActions,
   ///       ActivateAction: CallbackAction<Intent>(
@@ -439,37 +441,43 @@ class ArnaApp extends StatefulWidget {
 ///
 /// {@macro flutter.widgets.scrollBehavior}
 ///
-/// Setting a [ArnaScrollBehavior] will result in descendant [Scrollable] widgets using [BouncingScrollPhysics] by
-/// default. No [GlowingOverscrollIndicator] is applied when using a [ArnaScrollBehavior] either, regardless of
-/// platform. When executing on desktop platforms, a [ArnaScrollbar] is applied to the child.
+/// Setting a [ArnaScrollBehavior] will result in descendant [Scrollable] widgets.
+/// When executing on desktop platforms, a [ArnaScrollbar] is applied to the child.
 ///
 /// See also:
 ///
 ///  * [ScrollBehavior], the default scrolling behavior extended by this class.
 class ArnaScrollBehavior extends ScrollBehavior {
-  /// Creates a ArnaScrollBehavior that uses [BouncingScrollPhysics] and adds [ArnaScrollbar]s on desktop platforms.
+  /// Creates an ArnaScrollBehavior that adds [ArnaScrollbar]s on desktop platforms.
   const ArnaScrollBehavior();
 
   @override
   Widget buildScrollbar(context, Widget child, ScrollableDetails details) {
     // When modifying this function, consider modifying the implementation in the base class as well.
-    switch (getPlatform(context)) {
-      case TargetPlatform.linux:
-      case TargetPlatform.macOS:
-      case TargetPlatform.windows:
-        return ArnaScrollbar(controller: details.controller, child: child);
-      case TargetPlatform.android:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.iOS:
+    switch (axisDirectionToAxis(details.direction)) {
+      case Axis.horizontal:
         return child;
+      case Axis.vertical:
+        switch (getPlatform(context)) {
+          case TargetPlatform.linux:
+          case TargetPlatform.macOS:
+          case TargetPlatform.windows:
+            return ArnaScrollbar(controller: details.controller, child: child);
+          case TargetPlatform.android:
+          case TargetPlatform.fuchsia:
+          case TargetPlatform.iOS:
+            return child;
+        }
     }
   }
 
   @override
-  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) => child;
-
-  @override
-  ScrollPhysics getScrollPhysics(BuildContext context) => const BouncingScrollPhysics();
+  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
+    return StretchingOverscrollIndicator(
+      axisDirection: details.direction,
+      child: child,
+    );
+  }
 }
 
 /// The [State] for a [ArnaApp].

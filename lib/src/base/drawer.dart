@@ -1,3 +1,5 @@
+import 'dart:math' show min;
+
 import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 
@@ -43,8 +45,7 @@ class ArnaDrawer extends StatelessWidget {
         children: <Widget>[
           ConstrainedBox(
             constraints: BoxConstraints.expand(
-              width:
-                  Styles.sideBarWidth < (deviceWidth(context) * 0.7) ? Styles.sideBarWidth : deviceWidth(context) * 0.7,
+              width: min(Styles.sideBarWidth, deviceWidth(context) * 0.7),
             ),
             child: AnimatedContainer(
               duration: Styles.basicDuration,
@@ -62,7 +63,10 @@ class ArnaDrawer extends StatelessWidget {
 }
 
 /// Signature for the callback that's called when a [ArnaDrawerController] is opened or closed.
-typedef ArnaDrawerCallback = void Function(bool isOpened);
+typedef ArnaDrawerCallback = void Function(
+  /// Whether or not the drawer is opened or closed.
+  bool isOpened,
+);
 
 /// Provides interactive behavior for [ArnaDrawer] widgets.
 ///
@@ -110,7 +114,11 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaDrawerController', vsync: this);
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      debugLabel: 'ArnaDrawerController',
+      vsync: this,
+    );
     _controller.addListener(_animationChanged);
     if (widget.isDrawerOpen) open();
   }

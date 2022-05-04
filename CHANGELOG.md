@@ -14,6 +14,8 @@
 - Update ArnaTextButton
 - Update ArnaBorderlessButton
 - Update ArnaLinkedButtons
+- Rename indicator to progress_indicator
+- Update ArnaProgressIndicator
 
 ## 0.4.3
 

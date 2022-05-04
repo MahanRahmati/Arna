@@ -65,17 +65,12 @@ class ArnaProgressIndicator extends StatefulWidget {
 
 /// The [State] for a [ArnaProgressIndicator].
 class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with SingleTickerProviderStateMixin {
-  static const int _pathCount = (1400 * 2100) ~/ 1400;
-  static const int _rotationCount = (1400 * 2100) ~/ 2100;
-
-  static final Animatable<double> _strokeHeadTween = CurveTween(
+  static final Animatable<double> _headTween = CurveTween(
     curve: const Interval(0.0, 0.5, curve: Styles.basicCurve),
-  ).chain(CurveTween(curve: const SawTooth(_pathCount)));
-  static final Animatable<double> _strokeTailTween = CurveTween(
+  );
+  static final Animatable<double> _tailTween = CurveTween(
     curve: const Interval(0.5, 1.0, curve: Styles.basicCurve),
-  ).chain(CurveTween(curve: const SawTooth(_pathCount)));
-  static final Animatable<double> _offsetTween = CurveTween(curve: const SawTooth(_pathCount));
-  static final Animatable<double> _rotationTween = CurveTween(curve: const SawTooth(_rotationCount));
+  );
 
   late AnimationController _controller;
 
@@ -83,7 +78,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with Sing
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: (1400 * 2100)),
+      duration: Styles.indicatorDuration,
       debugLabel: 'ArnaProgressIndicator',
       vsync: this,
     );
@@ -126,10 +121,8 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with Sing
               painter: _ProgressPainter(
                 color: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
                 value: widget.value,
-                headValue: widget.value != null ? 0 : _strokeHeadTween.evaluate(_controller),
-                tailValue: widget.value != null ? 0 : _strokeTailTween.evaluate(_controller),
-                offsetValue: widget.value != null ? 0 : _offsetTween.evaluate(_controller),
-                rotationValue: widget.value != null ? 0 : _rotationTween.evaluate(_controller),
+                headValue: widget.value != null ? 0 : _headTween.evaluate(_controller),
+                tailValue: widget.value != null ? 0 : _tailTween.evaluate(_controller),
               ),
             ),
           ),
@@ -146,21 +139,15 @@ class _ProgressPainter extends CustomPainter {
     required this.value,
     required this.headValue,
     required this.tailValue,
-    required this.offsetValue,
-    required this.rotationValue,
-  })  : arcStart = value != null
-            ? _startAngle
-            : _startAngle + tailValue * 3 / 2 * math.pi + rotationValue * math.pi * 2.0 + offsetValue * 0.5 * math.pi,
+  })  : arcStart = value != null ? _startAngle : _startAngle + tailValue * _twoPi,
         arcSweep = value != null
             ? value.clamp(0.0, 1.0) * _sweep
-            : math.max(headValue * 3 / 2 * math.pi - tailValue * 3 / 2 * math.pi, _epsilon);
+            : math.max(headValue * _twoPi - tailValue * _twoPi, _epsilon);
 
   final Color color;
   final double? value;
   final double headValue;
   final double tailValue;
-  final double offsetValue;
-  final double rotationValue;
   final double arcStart;
   final double arcSweep;
 
@@ -190,8 +177,6 @@ class _ProgressPainter extends CustomPainter {
     return oldPainter.color != color ||
         oldPainter.value != value ||
         oldPainter.headValue != headValue ||
-        oldPainter.tailValue != tailValue ||
-        oldPainter.offsetValue != offsetValue ||
-        oldPainter.rotationValue != rotationValue;
+        oldPainter.tailValue != tailValue;
   }
 }

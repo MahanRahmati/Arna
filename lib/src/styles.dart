@@ -158,6 +158,9 @@ abstract class Styles {
   /// Tooltip duration
   static const Duration tooltipDuration = Duration(milliseconds: 2100);
 
+  /// Indicator duration
+  static const Duration indicatorDuration = Duration(milliseconds: 2100);
+
   /// Snackbar duration
   static const Duration snackbarDuration = Duration(milliseconds: 3500);
 

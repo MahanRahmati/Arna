@@ -9,7 +9,12 @@ import 'package:arna/arna.dart';
 ///  * [ArnaScaffold], which displays the [ArnaHeaderBar].
 class ArnaHeaderBar extends StatelessWidget {
   /// Creates a header bar in the Arna style.
-  const ArnaHeaderBar({Key? key, this.leading, this.middle, this.actions}) : super(key: key);
+  const ArnaHeaderBar({
+    Key? key,
+    this.leading,
+    this.middle,
+    this.actions,
+  }) : super(key: key);
 
   /// The leading widget laid out within the header bar.
   final Widget? leading;
@@ -44,13 +49,11 @@ class ArnaHeaderBar extends StatelessWidget {
                   child: NavigationToolbar(
                     leading: leading,
                     middle: middle,
-                    trailing: actions != null
-                        ? Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: actions!,
-                          )
-                        : null,
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [...?actions],
+                    ),
                     middleSpacing: Styles.smallPadding,
                   ),
                 ),

@@ -153,8 +153,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                 ),
                 title: widget.title,
                 actions: <Widget>[
-                  if (widget.items[_currentIndex].actions != null) ...widget.items[_currentIndex].actions!,
-                  if (widget.actions != null) ...widget.actions!,
+                  ...?widget.items[_currentIndex].actions,
+                  ...?widget.actions,
                 ],
                 searchField: widget.items[_currentIndex].searchField,
                 body: widget.items[_currentIndex].builder(context),
@@ -184,8 +184,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                 ),
                 title: widget.title,
                 actions: <Widget>[
-                  if (widget.items[0].actions != null) ...widget.items[0].actions!,
-                  if (widget.actions != null) ...widget.actions!,
+                  ...?widget.items[0].actions,
+                  ...?widget.actions,
                 ],
                 searchField: widget.items[0].searchField,
                 body: widget.items[0].builder(context),

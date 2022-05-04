@@ -9,6 +9,11 @@
 - Add ArnaFeedback
 - Update ArnaTooltip
 - Update ArnaButton
+- Update ArnaBaseWidget
+- Update ArnaIconButton
+- Update ArnaTextButton
+- Update ArnaBorderlessButton
+- Update ArnaLinkedButtons
 
 ## 0.4.3
 

@@ -32,6 +32,7 @@ class ArnaButton extends StatelessWidget {
     this.label,
     this.icon,
     required this.onPressed,
+    this.onLongPress,
     this.tooltipMessage,
     this.buttonType = ButtonType.normal,
     this.buttonSize = ButtonSize.normal,
@@ -50,8 +51,13 @@ class ArnaButton extends StatelessWidget {
 
   /// The callback that is called when a button is tapped.
   ///
-  /// If this callback is null, then the button will be disabled.
+  /// If this callback and [onLongPress] are null, then the button will be disabled.
   final VoidCallback? onPressed;
+
+  /// The callback that is called when a button is long-pressed.
+  ///
+  /// If this callback and [onPressed] are null, then the button will be disabled.
+  final VoidCallback? onLongPress;
 
   /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
@@ -160,7 +166,8 @@ class ArnaButton extends StatelessWidget {
           );
         },
         onPressed: onPressed,
-        tooltipMessage: onPressed != null ? tooltipMessage : null,
+        onLongPress: onLongPress,
+        tooltipMessage: onPressed != null || onLongPress != null ? tooltipMessage : null,
         isFocusable: isFocusable,
         autofocus: autofocus,
         cursor: cursor,

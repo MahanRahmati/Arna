@@ -41,6 +41,7 @@ class ArnaBaseWidget extends StatefulWidget {
     Key? key,
     required this.builder,
     this.onPressed,
+    this.onLongPress,
     this.tooltipMessage,
     this.showAnimation = true,
     this.isFocusable = true,
@@ -53,7 +54,14 @@ class ArnaBaseWidget extends StatefulWidget {
   final ArnaBaseWidgetBuilder builder;
 
   /// The callback that is called when a widget is tapped.
+  ///
+  /// If this callback and [onLongPress] are null, then the widget will be disabled.
   final VoidCallback? onPressed;
+
+  /// The callback that is called when a widget is long-pressed.
+  ///
+  /// If this callback and [onPressed] are null, then the widget will be disabled.
+  final VoidCallback? onLongPress;
 
   /// The tooltip message of the widget.
   final String? tooltipMessage;
@@ -91,8 +99,8 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   late Map<ShortcutActivator, Intent> _shortcuts;
 
   /// Whether the widget is enabled or disabled. Widgets are disabled by default.
-  /// To enable a widget, set its [onPressed] property to a non-null value.
-  bool get isEnabled => widget.onPressed != null;
+  /// To enable a widget, set its [onPressed] or [onLongPress] property to a non-null value.
+  bool get _isEnabled => widget.onPressed != null || widget.onLongPress != null;
 
   @override
   void initState() {
@@ -108,7 +116,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
       );
       _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     }
-    focusNode = FocusNode(canRequestFocus: isEnabled);
+    focusNode = FocusNode(canRequestFocus: _isEnabled);
     if (widget.autofocus) focusNode!.requestFocus();
     _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
     _shortcuts = const {
@@ -120,9 +128,9 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   @override
   void didUpdateWidget(ArnaBaseWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.onPressed != oldWidget.onPressed) {
-      focusNode!.canRequestFocus = isEnabled;
-      if (!isEnabled) _hover = _pressed = false;
+    if (widget.onPressed != oldWidget.onPressed || widget.onLongPress != oldWidget.onLongPress) {
+      focusNode!.canRequestFocus = _isEnabled;
+      if (!_isEnabled) _hover = _pressed = false;
     }
   }
 
@@ -142,7 +150,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   }
 
   Future<void> _handleTap() async {
-    if (isEnabled) {
+    if (_isEnabled) {
       if (mounted) setState(() => _pressed = true);
       widget.onPressed!();
       if (widget.showAnimation) {
@@ -154,7 +162,11 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
     }
   }
 
-  void _handleTapDown(_) {
+  void _handleLongPress() {
+    if (_isEnabled && widget.onLongPress != null) widget.onLongPress!();
+  }
+
+  void _handlePressDown(_) {
     if (!_pressed && mounted) {
       if (widget.showAnimation) _controller.reverse();
       setState(() => _pressed = true);
@@ -168,8 +180,11 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
     }
   }
 
-  void _handleTapCancel() {
-    if (mounted && widget.showAnimation) _controller.forward();
+  void _handleLongPressUp() {
+    if (_pressed && mounted) {
+      if (widget.showAnimation) _controller.forward();
+      setState(() => _pressed = false);
+    }
   }
 
   void _handleHover(hover) {
@@ -182,7 +197,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    Widget child = widget.builder(context, isEnabled, _hover, _focused, _pressed, _selected);
+    Widget child = widget.builder(context, _isEnabled, _hover, _focused, _pressed, _selected);
 
     return ArnaTooltip(
       message: widget.tooltipMessage,
@@ -190,27 +205,24 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
         child: Semantics(
           label: widget.semanticLabel,
           button: true,
-          enabled: isEnabled,
-          focusable: isEnabled,
+          enabled: _isEnabled,
+          focusable: _isEnabled,
           focused: _focused,
           checked: _selected,
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: _handleTap,
-            onTapDown: _handleTapDown,
-            onTapUp: _handleTapUp,
-            onTapCancel: _handleTapCancel,
-            onLongPress: _handleTap,
-            onLongPressStart: _handleTapDown,
-            onLongPressEnd: _handleTapUp,
-            onHorizontalDragStart: _handleTapDown,
+            onLongPress: _handleLongPress,
+            onLongPressDown: _handlePressDown,
+            onLongPressUp: _handleLongPressUp,
+            onHorizontalDragStart: _handlePressDown,
             onHorizontalDragEnd: _handleTapUp,
-            onVerticalDragStart: _handleTapDown,
+            onVerticalDragStart: _handlePressDown,
             onVerticalDragEnd: _handleTapUp,
             child: FocusableActionDetector(
-              enabled: isEnabled && widget.isFocusable,
+              enabled: _isEnabled && widget.isFocusable,
               focusNode: focusNode,
-              autofocus: !isEnabled ? false : widget.autofocus,
+              autofocus: !_isEnabled ? false : widget.autofocus,
               mouseCursor: widget.cursor,
               onShowHoverHighlight: _handleHover,
               onShowFocusHighlight: _handleFocus,

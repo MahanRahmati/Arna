@@ -145,7 +145,8 @@ class _ArnaLinkedItem extends StatelessWidget {
         );
       },
       onPressed: button.onPressed,
-      tooltipMessage: button.onPressed != null ? button.tooltipMessage : null,
+      onLongPress: button.onLongPress,
+      tooltipMessage: button.onPressed != null || button.onLongPress != null ? button.tooltipMessage : null,
       isFocusable: button.isFocusable,
       autofocus: button.autofocus,
       cursor: button.cursor,
@@ -162,6 +163,7 @@ class ArnaLinkedButton {
     this.label,
     this.icon,
     required this.onPressed,
+    this.onLongPress,
     this.tooltipMessage,
     this.buttonType = ButtonType.normal,
     this.isFocusable = true,
@@ -179,8 +181,13 @@ class ArnaLinkedButton {
 
   /// The callback that is called when a button is tapped.
   ///
-  /// If this callback is null, then the button will be disabled.
+  /// If this callback and [onLongPress] are null, then the button will be disabled.
   final VoidCallback? onPressed;
+
+  /// The callback that is called when a button is long-pressed.
+  ///
+  /// If this callback and [onPressed] are null, then the button will be disabled.
+  final VoidCallback? onLongPress;
 
   /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;

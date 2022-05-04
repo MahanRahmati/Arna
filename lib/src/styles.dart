@@ -86,9 +86,6 @@ abstract class Styles {
   /// Indicator size
   static const double indicatorSize = base * 5;
 
-  /// Master item minimum height
-  static const double masterItemMinHeight = base * 5;
-
   /// Menu item size
   static const double menuItemSize = base * 5;
 
@@ -106,6 +103,9 @@ abstract class Styles {
 
   /// Expansion panel minimum height
   static const double expansionPanelMinHeight = base * 7;
+
+  /// Master item minimum height
+  static const double masterItemMinHeight = base * 7;
 
   /// Sidebar compact width
   static const double sideBarCompactWidth = base * 9;

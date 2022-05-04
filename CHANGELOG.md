@@ -16,6 +16,7 @@
 - Update ArnaLinkedButtons
 - Rename indicator to progress_indicator
 - Update ArnaProgressIndicator
+- Update ArnaMasterDetailScaffold
 
 ## 0.4.3
 

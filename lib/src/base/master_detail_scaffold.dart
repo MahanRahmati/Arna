@@ -14,7 +14,9 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     this.title,
     this.actions,
     this.searchField,
+    this.leading,
     required this.items,
+    this.trailing,
     this.emptyBody,
     this.onItemSelected,
     this.currentIndex,
@@ -38,8 +40,18 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   /// The [ArnaSearchField] of the scaffold.
   final ArnaSearchField? searchField;
 
+  /// The leading widget in the master that is placed above the items.
+  ///
+  /// The default value is null.
+  final Widget? leading;
+
   /// The list of navigation items.
   final List<MasterNavigationItem> items;
+
+  /// The trailing widget in the master that is placed below the items.
+  ///
+  /// The default value is null.
+  final Widget? trailing;
 
   /// The widget to show when no item is selected.
   final Widget? emptyBody;
@@ -74,7 +86,9 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 title: widget.title,
                 actions: widget.actions,
                 searchField: widget.searchField,
+                leading: widget.leading,
                 items: widget.items,
+                trailing: widget.trailing,
                 emptyBody: widget.emptyBody,
                 currentIndex: _index == -1 ? _previousIndex : _index,
                 onSelected: _setIndex,
@@ -84,7 +98,9 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 title: widget.title,
                 actions: widget.actions,
                 searchField: widget.searchField,
+                leading: widget.leading,
                 items: widget.items,
+                trailing: widget.trailing,
                 emptyBody: widget.emptyBody,
                 currentIndex: _index,
                 onSelected: _setIndex,
@@ -103,7 +119,9 @@ class _LateralPage extends StatefulWidget {
     this.title,
     this.actions,
     this.searchField,
+    this.leading,
     required this.items,
+    this.trailing,
     this.emptyBody,
     required this.currentIndex,
     required this.onSelected,
@@ -127,8 +145,18 @@ class _LateralPage extends StatefulWidget {
   /// The [ArnaSearchField] of the scaffold.
   final ArnaSearchField? searchField;
 
+  /// The leading widget in the master that is placed above the items.
+  ///
+  /// The default value is null.
+  final Widget? leading;
+
   /// The list of navigation items.
   final List<MasterNavigationItem> items;
+
+  /// The trailing widget in the master that is placed below the items.
+  ///
+  /// The default value is null.
+  final Widget? trailing;
 
   /// The widget to show when no item is selected.
   final Widget? emptyBody;
@@ -169,7 +197,13 @@ class _LateralPageState extends State<_LateralPage> {
             title: widget.title,
             actions: widget.actions,
             searchField: widget.searchField,
-            body: _MasterItemBuilder(items: widget.items, onPressed: _onPressed, currentIndex: _currentIndex),
+            body: _MasterItemBuilder(
+              leading: widget.leading,
+              items: widget.items,
+              trailing: widget.trailing,
+              onPressed: _onPressed,
+              currentIndex: _currentIndex,
+            ),
           ),
         ),
         const Padding(
@@ -216,7 +250,9 @@ class _NestedPage extends StatefulWidget {
     this.title,
     this.actions,
     this.searchField,
+    this.leading,
     required this.items,
+    this.trailing,
     this.emptyBody,
     required this.currentIndex,
     required this.onSelected,
@@ -240,8 +276,18 @@ class _NestedPage extends StatefulWidget {
   /// The [ArnaSearchField] of the scaffold.
   final ArnaSearchField? searchField;
 
+  /// The leading widget in the master that is placed above the items.
+  ///
+  /// The default value is null.
+  final Widget? leading;
+
   /// The list of navigation items.
   final List<MasterNavigationItem> items;
+
+  /// The trailing widget in the master that is placed below the items.
+  ///
+  /// The default value is null.
+  final Widget? trailing;
 
   /// The widget to show when no item is selected.
   final Widget? emptyBody;
@@ -331,7 +377,9 @@ class _NestedPageState extends State<_NestedPage> {
                   actions: widget.actions,
                   searchField: widget.searchField,
                   body: _MasterItemBuilder(
+                    leading: widget.leading,
                     items: widget.items,
+                    trailing: widget.trailing,
                     onPressed: _onPressed,
                     currentIndex: _currentIndex,
                     isNested: true,
@@ -352,14 +400,26 @@ class _MasterItemBuilder extends StatelessWidget {
   /// Creates a master item list.
   const _MasterItemBuilder({
     Key? key,
+    this.leading,
     required this.items,
+    this.trailing,
     required this.onPressed,
     required this.currentIndex,
     this.isNested = false,
   }) : super(key: key);
 
+  /// The leading widget in the master that is placed above the items.
+  ///
+  /// The default value is null.
+  final Widget? leading;
+
   /// The list of navigation items.
   final List<MasterNavigationItem> items;
+
+  /// The trailing widget in the master that is placed below the items.
+  ///
+  /// The default value is null.
+  final Widget? trailing;
 
   /// The callback that is called when an item is tapped.
   final Function(int index) onPressed;
@@ -372,26 +432,34 @@ class _MasterItemBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: ScrollController(),
-      itemCount: items.length,
-      padding: Styles.small,
-      itemBuilder: (BuildContext context, int index) {
-        return ArnaMasterItem(
-          leading: items[index].leading,
-          title: items[index].title,
-          subtitle: items[index].subtitle,
-          trailing: items[index].trailing,
-          onPressed: onPressed,
-          itemSelected: isNested ? false : index == currentIndex,
-          index: index,
-          isFocusable: items[index].isFocusable,
-          autofocus: items[index].autofocus,
-          accentColor: items[index].accentColor,
-          cursor: items[index].cursor,
-          semanticLabel: items[index].semanticLabel,
-        );
-      },
+    return Column(
+      children: <Widget>[
+        if (leading != null) leading!,
+        Expanded(
+          child: ListView.builder(
+            controller: ScrollController(),
+            itemCount: items.length,
+            padding: Styles.small,
+            itemBuilder: (BuildContext context, int index) {
+              return ArnaMasterItem(
+                leading: items[index].leading,
+                title: items[index].title,
+                subtitle: items[index].subtitle,
+                trailing: items[index].trailing,
+                onPressed: onPressed,
+                itemSelected: isNested ? false : index == currentIndex,
+                index: index,
+                isFocusable: items[index].isFocusable,
+                autofocus: items[index].autofocus,
+                accentColor: items[index].accentColor,
+                cursor: items[index].cursor,
+                semanticLabel: items[index].semanticLabel,
+              );
+            },
+          ),
+        ),
+        if (trailing != null) trailing!,
+      ],
     );
   }
 }

@@ -38,7 +38,6 @@ class _ArnaPopupDialog extends StatelessWidget {
     this.headerBarLeading,
     this.title,
     this.actions,
-    this.searchField,
     required this.body,
   }) : super(key: key);
 
@@ -56,9 +55,6 @@ class _ArnaPopupDialog extends StatelessWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the popup dialog.
-  final ArnaSearchField? searchField;
 
   /// The body widget of the popup dialog.
   final Widget body;
@@ -100,7 +96,6 @@ class _ArnaPopupDialog extends StatelessWidget {
                       onPressed: Navigator.of(context).pop,
                     ),
                   ],
-                  searchField: searchField,
                   body: body,
                   isDialog: true,
                 ),
@@ -192,7 +187,6 @@ class _ArnaPopupPage extends StatelessWidget {
       ),
       title: title,
       actions: actions,
-      searchField: searchField,
       body: body,
     );
   }
@@ -233,7 +227,6 @@ Future<T?> showArnaPopupDialog<T>({
   Widget? headerBarLeading,
   String? title,
   List<Widget>? actions,
-  ArnaSearchField? searchField,
   required Widget body,
   bool barrierDismissible = false,
   Color barrierColor = ArnaColors.barrierColor,
@@ -248,7 +241,6 @@ Future<T?> showArnaPopupDialog<T>({
               headerBarLeading: headerBarLeading,
               title: title,
               actions: actions,
-              searchField: searchField,
               body: body,
             ),
           ),
@@ -265,7 +257,6 @@ Future<T?> showArnaPopupDialog<T>({
               headerBarLeading: headerBarLeading,
               title: title,
               actions: actions,
-              searchField: searchField,
               body: body,
             );
           },

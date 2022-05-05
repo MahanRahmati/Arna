@@ -17,9 +17,9 @@
     - [x] ArnaPage
     - [x] ArnaProgressIndicator
     - [x] ArnaPageRoute
-    - [ ] ArnaScaffold
+    - [x] ArnaScaffold
     - [x] ArnaScrollbar
-    - [x] ArnaSearchField
+    - [ ] ArnaSearchField
     - [ ] ArnaSideBarItem
     - [ ] ArnaSideScaffold
     - [x] ArnaSnackBar

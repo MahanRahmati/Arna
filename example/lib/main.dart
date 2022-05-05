@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/services.dart' show SystemChrome, DeviceOrientation;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -7,7 +8,13 @@ import '/screens/settings.dart';
 import '/screens/typography.dart';
 import '/screens/widgets.dart';
 
-void main() => runApp(const ProviderScope(child: MyApp()));
+void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  runApp(const ProviderScope(child: MyApp()));
+}
 
 class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -63,8 +70,6 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class _HomeState extends ConsumerState<Home> {
-  var showSearch = false;
-  TextEditingController controller = TextEditingController();
   Uri url = Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna');
   bool showMaster = false;
 
@@ -82,20 +87,8 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     NavigationItem widgets = NavigationItem(
-      headerBarLeading: ArnaIconButton(
-        icon: Icons.search_outlined,
-        onPressed: () => setState(() {
-          showSearch = !showSearch;
-          controller.text = "";
-        }),
-        tooltipMessage: "Search",
-      ),
       title: "Widgets",
       icon: Icons.widgets_outlined,
-      searchField: ArnaSearchField(
-        showSearch: showSearch,
-        controller: controller,
-      ),
       builder: (_) => const Widgets(),
     );
 
@@ -160,18 +153,6 @@ class _HomeState extends ConsumerState<Home> {
                 builder: (_) => const Widgets(),
                 title: "Widgets",
                 leading: const Icon(Icons.widgets_outlined),
-                headerBarLeading: ArnaIconButton(
-                  icon: Icons.search_outlined,
-                  onPressed: () => setState(() {
-                    showSearch = !showSearch;
-                    controller.text = "";
-                  }),
-                  tooltipMessage: "Search",
-                ),
-                searchField: ArnaSearchField(
-                  showSearch: showSearch,
-                  controller: controller,
-                ),
               ),
               MasterNavigationItem(
                 title: "Typography",

@@ -17,6 +17,7 @@ class ArnaSideScaffold extends StatefulWidget {
     this.trailing,
     this.onItemSelected,
     this.currentIndex = 0,
+    this.resizeToAvoidBottomInset = true,
   }) : super(key: key);
 
   /// The leading widget laid out within the header bar.
@@ -52,6 +53,14 @@ class ArnaSideScaffold extends StatefulWidget {
 
   /// The index into [items] for the current active [NavigationItem].
   final int currentIndex;
+
+  /// Whether the [body] should size itself to avoid the window's bottom inset.
+  ///
+  /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
+  /// overlapping the keyboard, which prevents widgets inside the body from being obscured by the keyboard.
+  ///
+  /// Defaults to true and cannot be null.
+  final bool resizeToAvoidBottomInset;
 
   @override
   State<ArnaSideScaffold> createState() => _ArnaSideScaffoldState();
@@ -156,8 +165,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   ...?widget.items[_currentIndex].actions,
                   ...?widget.actions,
                 ],
-                searchField: widget.items[_currentIndex].searchField,
                 body: widget.items[_currentIndex].builder(context),
+                resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               ),
             ),
             if (constraints.maxWidth < Styles.compact)
@@ -187,8 +196,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   ...?widget.items[0].actions,
                   ...?widget.actions,
                 ],
-                searchField: widget.items[0].searchField,
                 body: widget.items[0].builder(context),
+                resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               );
   }
 }
@@ -202,7 +211,6 @@ class NavigationItem {
     required this.builder,
     this.headerBarLeading,
     this.actions,
-    this.searchField,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -231,9 +239,6 @@ class NavigationItem {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the item.
-  final ArnaSearchField? searchField;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

@@ -18,6 +18,7 @@
 - Update ArnaProgressIndicator
 - Update ArnaMasterDetailScaffold
 - Add ArnaPage
+- Update ArnaScaffold
 
 ## 0.4.3
 

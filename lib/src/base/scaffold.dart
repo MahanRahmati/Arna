@@ -12,9 +12,9 @@ class ArnaScaffold extends StatelessWidget {
     this.headerBarLeading,
     this.title,
     this.actions,
-    this.searchField,
     required this.body,
     this.isDialog = false,
+    this.resizeToAvoidBottomInset = true,
   }) : super(key: key);
 
   /// The leading widget laid out within the header bar.
@@ -31,9 +31,6 @@ class ArnaScaffold extends StatelessWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the scaffold.
-  final ArnaSearchField? searchField;
 
   /// The body widget of the scaffold.
   /// The primary content of the scaffold.
@@ -52,34 +49,41 @@ class ArnaScaffold extends StatelessWidget {
   /// Whether the scaffold is inside dialog or not.
   final bool isDialog;
 
+  /// Whether the [body] should size itself to avoid the window's bottom inset.
+  ///
+  /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
+  /// overlapping the keyboard, which prevents widgets inside the body from being obscured by the keyboard.
+  ///
+  /// Defaults to true and cannot be null.
+  final bool resizeToAvoidBottomInset;
+
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final MediaQueryData metrics = MediaQuery.of(context);
-        return MediaQuery(
-          data: metrics.copyWith(
-            padding: metrics.padding.copyWith(
-              top: isDialog ? 0 : metrics.padding.top,
-              bottom: isDialog ? 0 : metrics.padding.bottom,
+    final MediaQueryData metrics = MediaQuery.of(context);
+    final double bottomPadding = resizeToAvoidBottomInset ? metrics.viewInsets.bottom : 0.0;
+
+    return MediaQuery(
+      data: metrics.copyWith(
+        padding: metrics.padding.copyWith(top: isDialog ? 0 : metrics.padding.top),
+      ),
+      child: DecoratedBox(
+        decoration: BoxDecoration(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)),
+        child: Column(
+          children: <Widget>[
+            ArnaHeaderBar(
+              leading: headerBarLeading,
+              middle: title != null ? Text(title!, style: ArnaTheme.of(context).textTheme.title) : null,
+              actions: actions,
             ),
-          ),
-          child: DecoratedBox(
-            decoration: BoxDecoration(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)),
-            child: Column(
-              children: <Widget>[
-                ArnaHeaderBar(
-                  leading: headerBarLeading,
-                  middle: title != null ? Text(title!, style: ArnaTheme.of(context).textTheme.title) : null,
-                  actions: actions,
-                ),
-                if (searchField != null) searchField!,
-                Flexible(child: body),
-              ],
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: bottomPadding),
+                child: body,
+              ),
             ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }

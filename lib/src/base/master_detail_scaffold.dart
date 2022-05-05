@@ -13,13 +13,13 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     this.headerBarLeading,
     this.title,
     this.actions,
-    this.searchField,
     this.leading,
     required this.items,
     this.trailing,
     this.emptyBody,
     this.onItemSelected,
     this.currentIndex,
+    this.resizeToAvoidBottomInset = true,
   }) : super(key: key);
 
   /// The leading widget laid out within the header bar.
@@ -36,9 +36,6 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the scaffold.
-  final ArnaSearchField? searchField;
 
   /// The leading widget in the master that is placed above the items.
   ///
@@ -61,6 +58,14 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
 
   /// The index into [items] for the current active [MasterNavigationItem].
   final int? currentIndex;
+
+  /// Whether the [body] should size itself to avoid the window's bottom inset.
+  ///
+  /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
+  /// overlapping the keyboard, which prevents widgets inside the body from being obscured by the keyboard.
+  ///
+  /// Defaults to true and cannot be null.
+  final bool resizeToAvoidBottomInset;
 
   @override
   State<ArnaMasterDetailScaffold> createState() => _ArnaMasterDetailScaffoldState();
@@ -85,7 +90,6 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 headerBarLeading: widget.headerBarLeading,
                 title: widget.title,
                 actions: widget.actions,
-                searchField: widget.searchField,
                 leading: widget.leading,
                 items: widget.items,
                 trailing: widget.trailing,
@@ -97,7 +101,6 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 headerBarLeading: widget.headerBarLeading,
                 title: widget.title,
                 actions: widget.actions,
-                searchField: widget.searchField,
                 leading: widget.leading,
                 items: widget.items,
                 trailing: widget.trailing,
@@ -118,13 +121,13 @@ class _LateralPage extends StatefulWidget {
     this.headerBarLeading,
     this.title,
     this.actions,
-    this.searchField,
     this.leading,
     required this.items,
     this.trailing,
     this.emptyBody,
     required this.currentIndex,
     required this.onSelected,
+    this.resizeToAvoidBottomInset = true,
   }) : super(key: key);
 
   /// The leading widget laid out within the header bar.
@@ -141,9 +144,6 @@ class _LateralPage extends StatefulWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the scaffold.
-  final ArnaSearchField? searchField;
 
   /// The leading widget in the master that is placed above the items.
   ///
@@ -166,6 +166,14 @@ class _LateralPage extends StatefulWidget {
 
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
+
+  /// Whether the [body] should size itself to avoid the window's bottom inset.
+  ///
+  /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
+  /// overlapping the keyboard, which prevents widgets inside the body from being obscured by the keyboard.
+  ///
+  /// Defaults to true and cannot be null.
+  final bool resizeToAvoidBottomInset;
 
   @override
   State<_LateralPage> createState() => _LateralPageState();
@@ -196,7 +204,6 @@ class _LateralPageState extends State<_LateralPage> {
             headerBarLeading: widget.headerBarLeading,
             title: widget.title,
             actions: widget.actions,
-            searchField: widget.searchField,
             body: _MasterItemBuilder(
               leading: widget.leading,
               items: widget.items,
@@ -204,6 +211,7 @@ class _LateralPageState extends State<_LateralPage> {
               onPressed: _onPressed,
               currentIndex: _currentIndex,
             ),
+            resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
           ),
         ),
         const Padding(
@@ -219,8 +227,8 @@ class _LateralPageState extends State<_LateralPage> {
                   headerBarLeading: widget.items[_currentIndex].headerBarLeading,
                   title: widget.items[_currentIndex].title,
                   actions: widget.items[_currentIndex].actions,
-                  searchField: widget.items[_currentIndex].searchField,
                   body: widget.items[_currentIndex].builder(context),
+                  resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
                 )
               : widget.emptyBody != null
                   ? Container(
@@ -232,8 +240,8 @@ class _LateralPageState extends State<_LateralPage> {
                       headerBarLeading: widget.items[0].headerBarLeading,
                       title: widget.items[0].title,
                       actions: widget.items[0].actions,
-                      searchField: widget.items[0].searchField,
                       body: widget.items[0].builder(context),
+                      resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
                     ),
         ),
       ],
@@ -249,13 +257,13 @@ class _NestedPage extends StatefulWidget {
     this.headerBarLeading,
     this.title,
     this.actions,
-    this.searchField,
     this.leading,
     required this.items,
     this.trailing,
     this.emptyBody,
     required this.currentIndex,
     required this.onSelected,
+    this.resizeToAvoidBottomInset = true,
   }) : super(key: key);
 
   /// The leading widget laid out within the header bar.
@@ -272,9 +280,6 @@ class _NestedPage extends StatefulWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the scaffold.
-  final ArnaSearchField? searchField;
 
   /// The leading widget in the master that is placed above the items.
   ///
@@ -297,6 +302,14 @@ class _NestedPage extends StatefulWidget {
 
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
+
+  /// Whether the [body] should size itself to avoid the window's bottom inset.
+  ///
+  /// For example, if there is an onscreen keyboard displayed above the scaffold, the body can be resized to avoid
+  /// overlapping the keyboard, which prevents widgets inside the body from being obscured by the keyboard.
+  ///
+  /// Defaults to true and cannot be null.
+  final bool resizeToAvoidBottomInset;
 
   @override
   State<_NestedPage> createState() => _NestedPageState();
@@ -352,8 +365,8 @@ class _NestedPageState extends State<_NestedPage> {
               ),
               title: page.title,
               actions: page.actions,
-              searchField: page.searchField,
               body: page.builder(context),
+              resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
             ),
           ),
         );
@@ -375,7 +388,6 @@ class _NestedPageState extends State<_NestedPage> {
                   headerBarLeading: widget.headerBarLeading,
                   title: widget.title,
                   actions: widget.actions,
-                  searchField: widget.searchField,
                   body: _MasterItemBuilder(
                     leading: widget.leading,
                     items: widget.items,
@@ -384,6 +396,7 @@ class _NestedPageState extends State<_NestedPage> {
                     currentIndex: _currentIndex,
                     isNested: true,
                   ),
+                  resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
                 );
               },
             ),
@@ -475,7 +488,6 @@ class MasterNavigationItem {
     required this.builder,
     this.headerBarLeading,
     this.actions,
-    this.searchField,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -510,9 +522,6 @@ class MasterNavigationItem {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the item.
-  final ArnaSearchField? searchField;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

@@ -20,18 +20,12 @@ class _WidgetsState extends State<Widgets> {
   final double _sliderValue3 = 0;
   int segmentedControlGroupValue = 0;
   var _showBanner = true;
-  var showSearch = false;
-  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        ArnaSearchField(
-          showSearch: showSearch,
-          controller: controller,
-        ),
         ArnaBanner(
           showBanner: _showBanner,
           title: "This is an information banner!",

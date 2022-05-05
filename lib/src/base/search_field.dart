@@ -1,51 +1,66 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/material.dart' show MaterialLocalizations;
+import 'package:flutter/services.dart' show TextInputAction;
 
-/// Shows a search field inside the scaffold.
-/// See also:
-///
-///  * [ArnaScaffold]
-///  * [ArnaSideScaffold]
-///  * [ArnaMasterDetailScaffold]
+//TODO: Add ArnaSearchField to Example
+
+/// An Arna-styled search field.
 class ArnaSearchField extends StatefulWidget {
   /// Creates a search field in the Arna style.
   const ArnaSearchField({
     Key? key,
     required this.showSearch,
-    required this.controller,
+    this.controller,
     this.onChanged,
-    this.onEditingComplete,
     this.onSubmitted,
     this.hintText,
+    this.restorationId,
+    this.autofocus = false,
+    this.onTap,
+    this.autocorrect = true,
+    this.enabled,
   }) : super(key: key);
 
   /// Whether to show search or not.
   final bool showSearch;
 
   /// Controls the text being edited.
-  final TextEditingController controller;
+  ///
+  /// Similar to [ArnaTextField], to provide a prefilled text entry, pass in a [TextEditingController] with an initial
+  /// value to the [controller] parameter. Defaults to creating its own [TextEditingController].
+  final TextEditingController? controller;
 
-  /// {@macro flutter.widgets.editableText.onChanged}
-  ///
-  /// See also:
-  ///
-  ///  * [onEditingComplete], [onSubmitted]: which are more specialized input change notifications.
+  /// Invoked upon user input.
   final ValueChanged<String>? onChanged;
 
-  /// {@macro flutter.widgets.editableText.onEditingComplete}
-  final VoidCallback? onEditingComplete;
-
-  /// {@macro flutter.widgets.editableText.onSubmitted}
+  /// Invoked upon keyboard submission.
   final ValueChanged<String>? onSubmitted;
 
-  /// The hint text of the search field.
+  /// The hint text that appears when the text entry is empty.
   final String? hintText;
+
+  /// {@macro flutter.material.textfield.restorationId}
+  final String? restorationId;
+
+  /// {@macro flutter.widgets.editableText.autofocus}
+  final bool autofocus;
+
+  /// {@macro flutter.material.textfield.onTap}
+  final VoidCallback? onTap;
+
+  /// {@macro flutter.widgets.editableText.autocorrect}
+  final bool autocorrect;
+
+  /// Disables the text field when false.
+  final bool? enabled;
 
   @override
   State<ArnaSearchField> createState() => _ArnaSearchFieldState();
 }
 
 /// The [State] for a [ArnaSearchField].
-class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProviderStateMixin {
+class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProviderStateMixin, RestorationMixin {
+  RestorableTextEditingController? _textcontroller;
   FocusNode? focusNode;
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -62,6 +77,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
       parent: _controller,
       curve: Styles.basicCurve,
     );
+    if (widget.controller == null) _createLocalController();
     if (widget.showSearch) _controller.forward();
     focusNode = FocusNode(canRequestFocus: widget.showSearch);
   }
@@ -82,6 +98,13 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
           break;
       }
     }
+    if (widget.controller == null && oldWidget.controller != null) {
+      _createLocalController(oldWidget.controller!.value);
+    } else if (widget.controller != null && oldWidget.controller == null) {
+      unregisterFromRestoration(_textcontroller!);
+      _textcontroller!.dispose();
+      _textcontroller = null;
+    }
   }
 
   @override
@@ -93,11 +116,32 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
   }
 
   @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    if (_textcontroller != null) _registerController();
+  }
+
+  void _registerController() {
+    assert(_textcontroller != null);
+    registerForRestoration(_textcontroller!, '_textcontroller');
+  }
+
+  void _createLocalController([TextEditingValue? value]) {
+    assert(_textcontroller == null);
+    _textcontroller =
+        value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
+    if (!restorePending) _registerController();
+  }
+
+  @override
+  String? get restorationId => widget.restorationId;
+
+  @override
   Widget build(BuildContext context) {
     return SizeTransition(
       axisAlignment: 1,
       sizeFactor: _animation,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           AnimatedContainer(
             duration: Styles.basicDuration,
@@ -109,18 +153,21 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
                 child: SizedBox(
                   width: Styles.searchWidth,
                   child: ArnaTextField(
-                    controller: widget.controller,
-                    hintText: widget.hintText,
+                    controller: widget.controller ?? _textcontroller!.value,
+                    hintText: widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel,
                     prefix: Icon(
                       Icons.search_outlined,
                       color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                     ),
+                    enabled: widget.enabled,
+                    onTap: widget.onTap,
                     clearButtonMode: ArnaOverlayVisibilityMode.editing,
                     onChanged: widget.onChanged,
-                    onEditingComplete: widget.onEditingComplete,
                     onSubmitted: widget.onSubmitted,
                     focusNode: focusNode,
-                    autofocus: widget.showSearch,
+                    autofocus: widget.autofocus && widget.showSearch,
+                    autocorrect: widget.autocorrect,
+                    textInputAction: TextInputAction.search,
                   ),
                 ),
               ),

@@ -20,6 +20,7 @@
 - Add ArnaPage
 - Update ArnaScaffold
 - Update ArnaScrollbar
+- Update ArnaSearchField
 
 ## 0.4.3
 

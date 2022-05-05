@@ -836,9 +836,13 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                         }
                       }
                     : null,
-                child: const Padding(
+                child: Padding(
                   padding: Styles.horizontal,
-                  child: Icon(Icons.clear_outlined, size: Styles.iconSize),
+                  child: Icon(
+                    Icons.clear_outlined,
+                    size: Styles.iconSize,
+                    color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  ),
                 ),
               ),
           ],

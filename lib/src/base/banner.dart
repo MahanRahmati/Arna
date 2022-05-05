@@ -66,8 +66,15 @@ class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaBanner', vsync: this);
-    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      debugLabel: 'ArnaBanner',
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Styles.basicCurve,
+    );
     if (widget.showBanner) _controller.forward();
   }
 

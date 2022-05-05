@@ -53,8 +53,15 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaSearchField', vsync: this);
-    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      debugLabel: 'ArnaSearchField',
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Styles.basicCurve,
+    );
     if (widget.showSearch) _controller.forward();
     focusNode = FocusNode(canRequestFocus: widget.showSearch);
   }

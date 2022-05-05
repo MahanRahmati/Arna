@@ -1,6 +1,8 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/gestures.dart';
 
+//TODO: Deprecated isAlwaysShown: Use thumbVisibility instead.
+
 /// An Arna-styled scrollbar.
 ///
 /// To add a scrollbar to a [ScrollView], wrap the scroll view widget in a [ArnaScrollbar] widget.
@@ -30,7 +32,7 @@ class ArnaScrollbar extends RawScrollbar {
     Key? key,
     required Widget child,
     ScrollController? controller,
-    bool isAlwaysShown = false,
+    bool thumbVisibility = false,
     ScrollNotificationPredicate? notificationPredicate,
     bool? interactive,
     ScrollbarOrientation? scrollbarOrientation,
@@ -39,7 +41,7 @@ class ArnaScrollbar extends RawScrollbar {
           key: key,
           child: child,
           controller: controller,
-          isAlwaysShown: isAlwaysShown,
+          isAlwaysShown: thumbVisibility,
           pressDuration: Duration.zero,
           notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
           interactive: interactive,
@@ -52,7 +54,7 @@ class ArnaScrollbar extends RawScrollbar {
 }
 
 class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
-  late AnimationController _hoverAnimationController;
+  late AnimationController _controller;
   bool _hoverIsActive = false;
 
   @override
@@ -64,8 +66,12 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   @override
   void initState() {
     super.initState();
-    _hoverAnimationController = AnimationController(vsync: this, duration: Styles.basicDuration);
-    _hoverAnimationController.addListener(() => updateScrollbarPainter());
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      debugLabel: 'ArnaScrollbar',
+      vsync: this,
+    );
+    _controller.addListener(() => updateScrollbarPainter());
   }
 
   @override
@@ -93,11 +99,11 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
     if (isPointerOverScrollbar(event.position, event.kind, forHover: true)) {
       // Pointer is hovering over the scrollbar
       setState(() => _hoverIsActive = true);
-      _hoverAnimationController.forward();
+      _controller.forward();
     } else if (_hoverIsActive) {
       // Pointer was, but is no longer over painted scrollbar.
       setState(() => _hoverIsActive = false);
-      _hoverAnimationController.reverse();
+      _controller.reverse();
     }
   }
 
@@ -105,12 +111,12 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   void handleHoverExit(PointerExitEvent event) {
     super.handleHoverExit(event);
     setState(() => _hoverIsActive = false);
-    _hoverAnimationController.reverse();
+    _controller.reverse();
   }
 
   @override
   void dispose() {
-    _hoverAnimationController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 }

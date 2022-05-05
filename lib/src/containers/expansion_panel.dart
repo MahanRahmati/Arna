@@ -77,10 +77,20 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaExpansionPanel', vsync: this);
-    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
+    _controller = AnimationController(
+      duration: Styles.basicDuration,
+      debugLabel: 'ArnaExpansionPanel',
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Styles.basicCurve,
+    );
     _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(
-      CurvedAnimation(parent: _controller, curve: Styles.basicCurve),
+      CurvedAnimation(
+        parent: _controller,
+        curve: Styles.basicCurve,
+      ),
     );
     focusNode = FocusNode(canRequestFocus: isEnabled);
     if (widget.autofocus) focusNode!.requestFocus();

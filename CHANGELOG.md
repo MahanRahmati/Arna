@@ -19,6 +19,7 @@
 - Update ArnaMasterDetailScaffold
 - Add ArnaPage
 - Update ArnaScaffold
+- Update ArnaScrollbar
 
 ## 0.4.3
 

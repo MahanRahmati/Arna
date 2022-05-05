@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart' show CupertinoRouteTransitionMixin;
 /// By default, when a modal route is replaced by another, the previous route remains in memory. To free all the
 /// resources when this is not necessary, set [maintainState] to false.
 ///
-/// The `fullscreenDialog` property specifies whether the incoming route is a fullscreen modal dialog.
+/// The [fullscreenDialog] property specifies whether the incoming route is a fullscreen modal dialog.
 ///
 /// The type `T` specifies the return type of the route which can be supplied as the route is popped from the stack via
 /// [Navigator.pop] by providing the optional `result` argument.
@@ -74,7 +74,11 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
       }
       return true;
     }());
-    return Semantics(scopesRoute: true, explicitChildNodes: true, child: result);
+    return Semantics(
+      scopesRoute: true,
+      explicitChildNodes: true,
+      child: result,
+    );
   }
 
   @override

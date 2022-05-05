@@ -12,6 +12,7 @@ export 'package:arna/src/base/feedback.dart';
 export 'package:arna/src/base/header_bar.dart';
 export 'package:arna/src/base/master_detail_scaffold.dart';
 export 'package:arna/src/base/master_item.dart';
+export 'package:arna/src/base/page.dart';
 export 'package:arna/src/base/progress_indicator.dart';
 export 'package:arna/src/base/route.dart';
 export 'package:arna/src/base/scaffold.dart';

@@ -17,6 +17,7 @@
 - Rename indicator to progress_indicator
 - Update ArnaProgressIndicator
 - Update ArnaMasterDetailScaffold
+- Add ArnaPage
 
 ## 0.4.3
 

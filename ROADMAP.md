@@ -4,7 +4,7 @@
 
 - Finalizing the current set of widgets.
 
-  - Base (14/17)
+  - Base (15/18)
 
     - [x] ArnaApp
     - [x] ArnaBanner
@@ -14,6 +14,7 @@
     - [x] ArnaHeaderBar
     - [x] ArnaMasterDetailScaffold
     - [x] ArnaMasterItem
+    - [x] ArnaPage
     - [x] ArnaProgressIndicator
     - [x] ArnaPageRoute
     - [ ] ArnaScaffold

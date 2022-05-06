@@ -35,28 +35,27 @@ class ArnaDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool ltr = Directionality.of(context) == TextDirection.ltr;
     return Semantics(
       scopesRoute: true,
       namesRoute: true,
       explicitChildNodes: true,
       label: semanticLabel ?? MaterialLocalizations.of(context).drawerLabel,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ConstrainedBox(
-            constraints: BoxConstraints.expand(
-              width: min(Styles.sideBarWidth, deviceWidth(context) * 0.7),
-            ),
-            child: AnimatedContainer(
-              duration: Styles.basicDuration,
-              curve: Styles.basicCurve,
-              clipBehavior: Clip.antiAlias,
-              color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
-              child: SafeArea(child: child ?? const SizedBox.shrink()),
-            ),
+      child: AnimatedContainer(
+        constraints: BoxConstraints.expand(
+          width: min(Styles.sideBarWidth, deviceWidth(context) * 0.7),
+        ),
+        duration: Styles.basicDuration,
+        curve: Styles.basicCurve,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.horizontal(
+            left: ltr ? const Radius.circular(0) : const Radius.circular(Styles.drawerBorderRadiusSize),
+            right: ltr ? const Radius.circular(Styles.drawerBorderRadiusSize) : const Radius.circular(0),
           ),
-          const ArnaVerticalDivider(),
-        ],
+          color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
+        ),
+        child: SafeArea(child: child ?? const SizedBox.shrink()),
       ),
     );
   }

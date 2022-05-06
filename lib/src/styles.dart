@@ -44,17 +44,20 @@ abstract class Styles {
   /// Large padding
   static const double largePadding = padding * 2;
 
-  /// Checkbox icon size
-  static const double checkBoxIconSize = base * 2.5;
-
   /// Tooltip offset
   static const double tooltipOffset = base * 2;
+
+  /// Checkbox icon size
+  static const double checkBoxIconSize = base * 2.5;
 
   /// Arrow size
   static const double arrowSize = base * 2.5;
 
   /// Color button indicator size
   static const double colorButtonIndicatorSize = base * 2.5;
+
+  /// Drawer border radius size
+  static const double drawerBorderRadiusSize = base * 2.5;
 
   /// Icon size
   static const double iconSize = base * 3;

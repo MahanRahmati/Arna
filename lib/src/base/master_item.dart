@@ -64,85 +64,70 @@ class ArnaMasterItem extends StatelessWidget {
       child: ArnaBaseWidget(
         builder: (context, enabled, hover, focused, pressed, selected) {
           selected = itemSelected;
-          return Stack(
-            alignment: Alignment.centerLeft,
-            children: <Widget>[
-              AnimatedContainer(
-                constraints: const BoxConstraints(minHeight: Styles.masterItemMinHeight),
-                width: double.infinity,
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: Styles.borderRadius,
-                  border: Border.all(
-                    color: !enabled
-                        ? ArnaColors.transparent
-                        : focused
-                            ? accent
-                            : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
-                  ),
-                  color: !enabled
-                      ? ArnaColors.transparent
-                      : pressed || selected || hover
-                          ? ArnaDynamicColor.applyOverlay(buttonColor)
-                          : buttonColor,
-                ),
-                padding: Styles.tilePadding,
-                child: Row(
-                  children: [
-                    if (leading != null)
-                      Padding(
-                        padding: Styles.normal,
-                        child: IconTheme.merge(
-                          data: IconThemeData(
-                            color: ArnaDynamicColor.resolve(
-                              !enabled
-                                  ? ArnaColors.disabledColor
-                                  : selected
-                                      ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
-                                      : ArnaColors.iconColor,
-                              context,
-                            ),
-                          ),
-                          child: leading!,
+          return AnimatedContainer(
+            constraints: const BoxConstraints(minHeight: Styles.masterItemMinHeight),
+            width: double.infinity,
+            duration: Styles.basicDuration,
+            curve: Styles.basicCurve,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: Styles.borderRadius,
+              border: Border.all(
+                color: !enabled
+                    ? ArnaColors.transparent
+                    : focused
+                        ? accent
+                        : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+              ),
+              color: !enabled
+                  ? ArnaColors.transparent
+                  : pressed || selected || hover
+                      ? ArnaDynamicColor.applyOverlay(buttonColor)
+                      : buttonColor,
+            ),
+            padding: Styles.tilePadding,
+            child: Row(
+              children: [
+                if (leading != null)
+                  Padding(
+                    padding: Styles.normal,
+                    child: IconTheme.merge(
+                      data: IconThemeData(
+                        color: ArnaDynamicColor.resolve(
+                          !enabled
+                              ? ArnaColors.disabledColor
+                              : selected
+                                  ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                  : ArnaColors.iconColor,
+                          context,
                         ),
                       ),
-                    Flexible(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          if (title != null)
-                            SizedBox(
-                              width: Styles.sideBarWidth,
-                              child: Padding(
-                                padding: Styles.tileTextPadding,
-                                child: Text(title!, style: ArnaTheme.of(context).textTheme.button),
-                              ),
-                            ),
-                          if (subtitle != null)
-                            Padding(
-                              padding: Styles.tileTextPadding,
-                              child: Text(subtitle!, style: ArnaTheme.of(context).textTheme.subtitle),
-                            ),
-                        ],
-                      ),
+                      child: leading!,
                     ),
-                    if (trailing != null) Padding(padding: Styles.normal, child: trailing),
-                  ],
+                  ),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      if (title != null)
+                        SizedBox(
+                          width: Styles.sideBarWidth,
+                          child: Padding(
+                            padding: Styles.tileTextPadding,
+                            child: Text(title!, style: ArnaTheme.of(context).textTheme.button),
+                          ),
+                        ),
+                      if (subtitle != null)
+                        Padding(
+                          padding: Styles.tileTextPadding,
+                          child: Text(subtitle!, style: ArnaTheme.of(context).textTheme.subtitle),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-              AnimatedContainer(
-                height: selected ? Styles.iconSize : 0,
-                width: Styles.smallPadding,
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                decoration: BoxDecoration(
-                  borderRadius: Styles.borderRadius,
-                  color: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
-                ),
-              ),
-            ],
+                if (trailing != null) Padding(padding: Styles.normal, child: trailing),
+              ],
+            ),
           );
         },
         onPressed: () => onPressed(index),

@@ -21,6 +21,7 @@
 - Update ArnaScaffold
 - Update ArnaScrollbar
 - Update ArnaSearchField
+- Update ArnaMasterItem
 
 ## 0.4.3
 

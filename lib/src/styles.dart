@@ -113,9 +113,6 @@ abstract class Styles {
   /// Sidebar compact width
   static const double sideBarCompactWidth = base * 9;
 
-  /// Sidebar icon height
-  static const double sideBarIconHeight = base * 9;
-
   /// Menu minimum width
   static const double menuMinWidth = base * 15;
 

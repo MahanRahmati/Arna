@@ -1,6 +1,7 @@
 ## 0.4.4
 
-- Update ROADMAP.md
+- Update ROADMAP
+- Update README
 - Update ArnaDrawer
 - Update ArnaHeaderBar
 - Update ArnaSideScaffold

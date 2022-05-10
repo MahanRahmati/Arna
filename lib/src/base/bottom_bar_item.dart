@@ -1,16 +1,22 @@
 import 'package:arna/arna.dart';
 
-/// A navigation item used inside [ArnaSideScaffold].
-class ArnaSideBarItem extends StatelessWidget {
-  /// Creates a side bar item.
-  const ArnaSideBarItem({
+/// An interactive button within [ArnaBottomBar].
+///
+/// This class is rarely used in isolation. It is typically embedded
+/// in [ArnaBottomBar].
+///
+/// See also:
+///
+///  * [ArnaBottomBar]
+class ArnaBottomBarItem extends StatelessWidget {
+  /// Creates a bottom bar item.
+  const ArnaBottomBarItem({
     Key? key,
     required this.label,
     required this.icon,
     this.selectedIcon,
     required this.onPressed,
     this.badge,
-    this.compact = false,
     this.selected = false,
     this.isFocusable = true,
     this.autofocus = false,
@@ -33,9 +39,6 @@ class ArnaSideBarItem extends StatelessWidget {
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;
-
-  /// Whether this item is compact or not.
-  final bool compact;
 
   /// Whether this item is selected or not.
   final bool selected;
@@ -68,11 +71,10 @@ class ArnaSideBarItem extends StatelessWidget {
           builder: (context, enabled, hover, focused, pressed, selected) {
             selected = buttonSelected;
             return Stack(
-              alignment: compact ? Alignment.topRight : Alignment.centerRight,
+              alignment: Alignment.topRight,
               children: <Widget>[
                 AnimatedContainer(
-                  height: Styles.sideBarItemHeight,
-                  width: compact ? Styles.sideBarItemHeight : Styles.sideBarWidth,
+                  height: Styles.bottomNavigationBarItemHeight,
                   duration: Styles.basicDuration,
                   curve: Styles.basicCurve,
                   clipBehavior: Clip.antiAlias,
@@ -96,22 +98,24 @@ class ArnaSideBarItem extends StatelessWidget {
                           : pressed || hover
                               ? ArnaDynamicColor.applyOverlay(
                                   ArnaDynamicColor.resolve(
-                                    selected ? ArnaColors.buttonColor : ArnaColors.sideColor,
+                                    selected ? ArnaColors.buttonColor : ArnaColors.headerColor,
                                     context,
                                   ),
                                 )
                               : selected
                                   ? ArnaColors.buttonColor
-                                  : ArnaColors.sideColor,
+                                  : ArnaColors.headerColor,
                       context,
                     ),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: Styles.padding - 1),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  padding: Styles.bottomBarItemPadding,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Padding(
-                        padding: Styles.normal,
+                      Align(
+                        alignment: Alignment.topCenter,
+                        heightFactor: 1.0,
                         child: Icon(
                           selected ? selectedIcon ?? icon : icon,
                           size: Styles.iconSize,
@@ -125,28 +129,27 @@ class ArnaSideBarItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (!compact) const SizedBox(width: Styles.padding),
-                      if (!compact)
-                        Flexible(
-                          child: Text(
-                            label,
-                            style: ArnaTheme.of(context).textTheme.button!.copyWith(
-                                  color: ArnaDynamicColor.resolve(
-                                    !enabled ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
-                                    context,
-                                  ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          label,
+                          style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                                color: ArnaDynamicColor.resolve(
+                                  !enabled ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
+                                  context,
                                 ),
-                          ),
+                              ),
                         ),
+                      ),
                     ],
                   ),
                 ),
-                if (badge != null) compact ? badge! : Padding(padding: Styles.horizontal, child: badge!),
+                if (badge != null) badge!,
               ],
             );
           },
           onPressed: onPressed,
-          tooltipMessage: compact ? label : null,
+          tooltipMessage: null,
           isFocusable: isFocusable,
           autofocus: autofocus,
           cursor: cursor,

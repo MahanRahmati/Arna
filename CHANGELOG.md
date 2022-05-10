@@ -23,6 +23,8 @@
 - Update ArnaSearchField
 - Update ArnaMasterItem
 - Update ArnaSideBarItem
+- Add ArnaBottomBar
+- Add ArnaBottomBarItem
 
 ## 0.4.3
 

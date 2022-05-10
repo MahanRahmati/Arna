@@ -4,11 +4,13 @@
 
 - Finalizing the current set of widgets.
 
-  - Base (18/18)
+  - Base (20/20)
 
     - [x] ArnaApp [TODO]
     - [x] ArnaBanner
     - [x] ArnaBaseWidget
+    - [x] ArnaBottomBarItem
+    - [x] ArnaBottomBar
     - [x] ArnaDrawer
     - [x] ArnaFeedback
     - [x] ArnaHeaderBar

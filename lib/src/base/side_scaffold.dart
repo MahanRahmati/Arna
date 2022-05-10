@@ -78,9 +78,9 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   }
 
   void onTap(int index) {
-    showDrawer = false;
+    if (isCompact(context)) showDrawer = false;
     if (widget.onItemSelected != null) widget.onItemSelected!(index);
-    _drawerOpenedCallback(false);
+    if (isCompact(context)) _drawerOpenedCallback(false);
     setState(() => _currentIndex = index);
   }
 
@@ -119,7 +119,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
             headerBarLeading: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                if (compact)
+                if (compact && widget.items.length > 4)
                   ArnaIconButton(
                     icon: Icons.menu_outlined,
                     onPressed: () => _drawerOpenedCallback(true),
@@ -135,11 +135,38 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               ...?widget.items[_currentIndex].actions,
               ...?widget.actions,
             ],
-            body: widget.items[_currentIndex].builder(context),
+            body: Column(
+              children: <Widget>[
+                Expanded(child: widget.items[_currentIndex].builder(context)),
+                if (compact && widget.items.length < 4)
+                  ArnaBottomBar(
+                    items: widget.items.map(
+                      (item) {
+                        var index = widget.items.indexOf(item);
+                        return Expanded(
+                          child: ArnaBottomBarItem(
+                            label: item.title,
+                            icon: item.icon,
+                            selectedIcon: item.selectedIcon,
+                            onPressed: () => onTap(index),
+                            badge: item.badge,
+                            selected: index == _currentIndex,
+                            isFocusable: item.isFocusable,
+                            autofocus: item.autofocus,
+                            accentColor: item.accentColor,
+                            cursor: item.cursor,
+                            semanticLabel: item.semanticLabel,
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  ),
+              ],
+            ),
             resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
           ),
         ),
-        if (compact)
+        if (compact && widget.items.length > 4)
           ArnaDrawerController(
             drawer: ArnaDrawer(child: sideItemBuilder),
             drawerCallback: _drawerOpenedCallback,

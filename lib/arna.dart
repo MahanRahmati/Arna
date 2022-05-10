@@ -7,6 +7,8 @@ library arna;
 export 'package:arna/src/base/app.dart';
 export 'package:arna/src/base/banner.dart';
 export 'package:arna/src/base/base_widget.dart';
+export 'package:arna/src/base/bottom_bar.dart';
+export 'package:arna/src/base/bottom_bar_item.dart';
 export 'package:arna/src/base/drawer.dart';
 export 'package:arna/src/base/feedback.dart';
 export 'package:arna/src/base/header_bar.dart';

@@ -113,6 +113,12 @@ abstract class Styles {
   /// Sidebar compact width
   static const double sideBarCompactWidth = base * 9;
 
+  /// Bottom navigation bar item height
+  static const double bottomNavigationBarItemHeight = base * 9;
+
+  /// Bottom navigation bar height
+  static const double bottomNavigationBarHeight = base * 11;
+
   /// Menu minimum width
   static const double menuMinWidth = base * 15;
 
@@ -225,6 +231,9 @@ abstract class Styles {
 
   /// Tile subtitle Padding
   static const EdgeInsets tileSubtitlePadding = EdgeInsets.fromLTRB(padding, 0, padding, smallPadding);
+
+  /// Bottom bar item Padding
+  static const EdgeInsets bottomBarItemPadding = EdgeInsets.symmetric(horizontal: smallPadding, vertical: padding);
 
   /// Super large Padding
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);

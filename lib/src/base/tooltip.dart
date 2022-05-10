@@ -496,6 +496,7 @@ class _ArnaTooltipOverlay extends StatelessWidget {
     if (onEnter != null || onExit != null) result = MouseRegion(onEnter: onEnter, onExit: onExit, child: result);
 
     return Positioned.fill(
+      bottom: MediaQuery.maybeOf(context)?.viewInsets.bottom ?? 0.0,
       child: CustomSingleChildLayout(
         delegate: _ArnaTooltipPositionDelegate(
           target: target,

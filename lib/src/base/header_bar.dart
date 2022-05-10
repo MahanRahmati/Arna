@@ -33,6 +33,7 @@ class ArnaHeaderBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics(
+      explicitChildNodes: true,
       container: true,
       child: Container(
         alignment: Alignment.topCenter,

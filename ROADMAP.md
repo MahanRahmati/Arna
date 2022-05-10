@@ -45,11 +45,8 @@
   - Dialogs (0/2)
     - [ ] ArnaAlertDialog
     - [ ] ArnaPopupDialog
-  - Dividers (4/4)
-    - [x] ArnaHorizontalDivider
-    - [x] ArnaVerticalDivider
-    - [x] ArnaHorizontalSeparator
-    - [x] ArnaVerticalSeparator
+  - Dividers (1/1)
+    - [x] ArnaDivider
   - Inputs (8/11)
     - [x] ArnaCheckBoxListTile
     - [x] ArnaCheckBox

@@ -7,6 +7,7 @@ class ArnaSideBarItem extends StatelessWidget {
     Key? key,
     required this.label,
     required this.icon,
+    this.selectedIcon,
     required this.onPressed,
     this.badge,
     this.compact = false,
@@ -23,6 +24,9 @@ class ArnaSideBarItem extends StatelessWidget {
 
   /// The icon of the item.
   final IconData icon;
+
+  /// The icon of the item when selected.
+  final IconData? selectedIcon;
 
   /// The callback that is called when an item is tapped.
   final VoidCallback? onPressed;
@@ -61,105 +65,87 @@ class ArnaSideBarItem extends StatelessWidget {
         builder: (context, enabled, hover, focused, pressed, selected) {
           selected = buttonSelected;
           return Stack(
-            alignment: Alignment.centerLeft,
+            alignment: compact ? Alignment.topRight : Alignment.centerRight,
             children: <Widget>[
-              Stack(
-                alignment: compact ? Alignment.topRight : Alignment.centerRight,
-                children: <Widget>[
-                  AnimatedContainer(
-                    height: Styles.sideBarItemHeight,
-                    width: double.infinity,
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: Styles.borderRadius,
-                      border: Border.all(
-                        color: ArnaDynamicColor.resolve(
-                          selected
-                              ? focused
-                                  ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
-                                  : ArnaColors.borderColor
-                              : focused
-                                  ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
-                                  : ArnaColors.transparent,
-                          context,
-                        ),
-                      ),
-                      color: ArnaDynamicColor.resolve(
-                        !enabled
-                            ? ArnaColors.backgroundColor
-                            : pressed
+              AnimatedContainer(
+                height: Styles.sideBarItemHeight,
+                width: compact ? Styles.sideBarItemHeight : Styles.sideBarWidth,
+                duration: Styles.basicDuration,
+                curve: Styles.basicCurve,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: Styles.borderRadius,
+                  border: Border.all(
+                    color: ArnaDynamicColor.resolve(
+                      selected
+                          ? focused
+                              ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                              : ArnaColors.borderColor
+                          : focused
+                              ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                              : ArnaColors.transparent,
+                      context,
+                    ),
+                  ),
+                  color: ArnaDynamicColor.resolve(
+                    !enabled
+                        ? ArnaColors.backgroundColor
+                        : pressed
+                            ? ArnaDynamicColor.applyOverlay(
+                                ArnaDynamicColor.resolve(
+                                  selected ? ArnaColors.buttonColor : ArnaColors.sideColor,
+                                  context,
+                                ),
+                              )
+                            : hover
                                 ? ArnaDynamicColor.applyOverlay(
                                     ArnaDynamicColor.resolve(
                                       selected ? ArnaColors.buttonColor : ArnaColors.sideColor,
                                       context,
                                     ),
                                   )
-                                : hover
-                                    ? ArnaDynamicColor.applyOverlay(
-                                        ArnaDynamicColor.resolve(
-                                          selected ? ArnaColors.buttonColor : ArnaColors.sideColor,
-                                          context,
-                                        ),
-                                      )
-                                    : selected
-                                        ? ArnaColors.buttonColor
-                                        : ArnaColors.sideColor,
-                        context,
-                      ),
-                    ),
-                    padding: Styles.horizontal,
-                    child: ScrollConfiguration(
-                      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        physics: const NeverScrollableScrollPhysics(),
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: Styles.normal,
-                              child: Icon(
-                                icon,
-                                size: Styles.iconSize,
-                                color: ArnaDynamicColor.resolve(
-                                  !enabled
-                                      ? ArnaColors.disabledColor
-                                      : selected
-                                          ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
-                                          : ArnaColors.iconColor,
-                                  context,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: Styles.padding),
-                            Text(
-                              label,
-                              style: ArnaTheme.of(context).textTheme.button!.copyWith(
-                                    color: ArnaDynamicColor.resolve(
-                                      !enabled ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
-                                      context,
-                                    ),
-                                  ),
-                            ),
-                          ],
+                                : selected
+                                    ? ArnaColors.buttonColor
+                                    : ArnaColors.sideColor,
+                    context,
+                  ),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: Styles.padding - 1),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: Styles.normal,
+                      child: Icon(
+                        selected ? selectedIcon ?? icon : icon,
+                        size: Styles.iconSize,
+                        color: ArnaDynamicColor.resolve(
+                          !enabled
+                              ? ArnaColors.disabledColor
+                              : selected
+                                  ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                  : ArnaColors.iconColor,
+                          context,
                         ),
                       ),
                     ),
-                  ),
-                  if (badge != null) compact ? badge! : Padding(padding: Styles.horizontal, child: badge!),
-                ],
-              ),
-              AnimatedContainer(
-                height: selected ? Styles.iconSize : 0,
-                width: Styles.smallPadding,
-                duration: Styles.basicDuration,
-                curve: Styles.basicCurve,
-                decoration: BoxDecoration(
-                  borderRadius: Styles.borderRadius,
-                  color: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+                    if (!compact) const SizedBox(width: Styles.padding),
+                    if (!compact)
+                      Flexible(
+                        child: Text(
+                          label,
+                          style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                                color: ArnaDynamicColor.resolve(
+                                  !enabled ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
+                                  context,
+                                ),
+                              ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
+              if (badge != null) compact ? badge! : Padding(padding: Styles.horizontal, child: badge!),
             ],
           );
         },

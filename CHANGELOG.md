@@ -22,6 +22,7 @@
 - Update ArnaScrollbar
 - Update ArnaSearchField
 - Update ArnaMasterItem
+- Update ArnaSideBarItem
 
 ## 0.4.3
 

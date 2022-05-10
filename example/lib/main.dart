@@ -78,6 +78,7 @@ class _HomeState extends ConsumerState<Home> {
     NavigationItem hello = NavigationItem(
       title: "Hello World!",
       icon: Icons.emoji_emotions_outlined,
+      selectedIcon: Icons.emoji_emotions,
       headerBarLeading: ArnaIconButton(
         icon: Icons.add_outlined,
         onPressed: () => ref.read(counterProvider.state).state++,
@@ -89,12 +90,14 @@ class _HomeState extends ConsumerState<Home> {
     NavigationItem widgets = NavigationItem(
       title: "Widgets",
       icon: Icons.widgets_outlined,
+      selectedIcon: Icons.widgets,
       builder: (_) => const Widgets(),
     );
 
     NavigationItem typography = NavigationItem(
       title: "Typography",
       icon: Icons.font_download_outlined,
+      selectedIcon: Icons.font_download,
       builder: (_) => const Typography(),
     );
 

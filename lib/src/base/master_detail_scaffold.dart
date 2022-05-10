@@ -216,7 +216,7 @@ class _LateralPageState extends State<_LateralPage> {
         ),
         const Padding(
           padding: EdgeInsetsDirectional.only(start: Styles.masterSideWidth),
-          child: ArnaVerticalDivider(),
+          child: ArnaDivider(direction: Axis.vertical),
         ),
         Padding(
           padding: const EdgeInsetsDirectional.only(

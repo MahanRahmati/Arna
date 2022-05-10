@@ -40,7 +40,6 @@ export 'package:arna/src/containers/list_tile.dart';
 export 'package:arna/src/dialogs/dialog.dart';
 export 'package:arna/src/dialogs/popup_dialog.dart';
 export 'package:arna/src/dividers/divider.dart';
-export 'package:arna/src/dividers/separator.dart';
 export 'package:arna/src/helpers.dart';
 export 'package:arna/src/inputs/checkbox.dart';
 export 'package:arna/src/inputs/checkbox_list_tile.dart';

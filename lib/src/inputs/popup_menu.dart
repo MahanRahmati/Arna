@@ -81,7 +81,12 @@ class ArnaPopupMenuDivider extends ArnaPopupMenuEntry<Never> {
 
 class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
   @override
-  Widget build(BuildContext context) => const ArnaHorizontalSeparator();
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: Styles.smallVertical,
+      child: ArnaDivider(),
+    );
+  }
 }
 
 // This widget only exists to enable _PopupMenuRoute to save the sizes of

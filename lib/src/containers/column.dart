@@ -93,7 +93,7 @@ class ArnaColumn extends StatelessWidget {
     if (children.isNotEmpty) {
       for (int i = 0; i < children.length; i++) {
         items.add(children[i]);
-        if (children.length - i != 1) items.add(const ArnaHorizontalDivider());
+        if (children.length - i != 1) items.add(const ArnaDivider());
       }
     }
     return Column(

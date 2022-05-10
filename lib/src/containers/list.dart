@@ -112,7 +112,7 @@ class ArnaList extends StatelessWidget {
       for (int i = 0; i < children.length; i++) {
         items.add(children[i]);
         if (children.length - i != 1) {
-          items.add(direction == Axis.vertical ? const ArnaHorizontalDivider() : const ArnaVerticalDivider());
+          items.add(direction == Axis.vertical ? const ArnaDivider() : const ArnaDivider(direction: Axis.vertical));
         }
       }
     } else {

@@ -111,7 +111,10 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
             color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
             child: sideItemBuilder,
           ),
-          Padding(padding: EdgeInsetsDirectional.only(start: padding), child: const ArnaVerticalDivider()),
+          Padding(
+            padding: EdgeInsetsDirectional.only(start: padding),
+            child: const ArnaDivider(direction: Axis.vertical),
+          ),
         ],
         Padding(
           padding: EdgeInsetsDirectional.only(start: !compact ? padding + 1 : 0),

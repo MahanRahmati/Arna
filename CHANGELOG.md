@@ -25,6 +25,11 @@
 - Update ArnaSideBarItem
 - Add ArnaBottomBar
 - Add ArnaBottomBarItem
+- Add ArnaDivider
+- [BREAKING] Remove ArnaHorizontalDivider
+- [BREAKING] Remove ArnaVerticalDivider
+- [BREAKING] Remove ArnaHorizontalSeparator
+- [BREAKING] Remove ArnaVerticalSeparator
 
 ## 0.4.3
 

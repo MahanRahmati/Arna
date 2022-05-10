@@ -173,7 +173,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
               ),
             ),
           ),
-          const ArnaHorizontalDivider(),
+          const ArnaDivider(),
         ],
       ),
     );

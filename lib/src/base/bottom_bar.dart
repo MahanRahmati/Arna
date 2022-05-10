@@ -26,7 +26,7 @@ class ArnaBottomBar extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const ArnaHorizontalDivider(),
+              const ArnaDivider(),
               SizedBox(
                 height: Styles.bottomNavigationBarHeight,
                 child: Padding(

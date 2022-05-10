@@ -59,7 +59,7 @@ class ArnaHeaderBar extends StatelessWidget {
                   ),
                 ),
               ),
-              const ArnaHorizontalDivider(),
+              const ArnaDivider(),
             ],
           ),
         ),

@@ -59,7 +59,7 @@ class ArnaTooltip extends StatefulWidget {
   ///
   /// See also:
   ///
-  ///  * [Feedback], for providing platform-specific feedback to certain actions.
+  ///  * [ArnaFeedback], for providing platform-specific feedback to certain actions.
   final bool? enableFeedback;
 
   /// The widget below this widget in the tree.
@@ -110,18 +110,22 @@ class ArnaTooltip extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(StringProperty(
-      'message',
-      message,
-      showName: message == null,
-      defaultValue: message == null ? null : kNoDefaultValue,
-    ));
-    properties.add(StringProperty(
-      'richMessage',
-      richMessage?.toPlainText(),
-      showName: richMessage == null,
-      defaultValue: richMessage == null ? null : kNoDefaultValue,
-    ));
+    properties.add(
+      StringProperty(
+        'message',
+        message,
+        showName: message == null,
+        defaultValue: message == null ? null : kNoDefaultValue,
+      ),
+    );
+    properties.add(
+      StringProperty(
+        'richMessage',
+        richMessage?.toPlainText(),
+        showName: richMessage == null,
+        defaultValue: richMessage == null ? null : kNoDefaultValue,
+      ),
+    );
     properties.add(FlagProperty('position', value: preferBelow, ifTrue: 'below', ifFalse: 'above', showName: true));
     properties.add(FlagProperty('semantics', value: excludeFromSemantics, ifTrue: 'excluded', showName: true));
     properties.add(FlagProperty('enableFeedback', value: enableFeedback, ifTrue: 'true', showName: true));

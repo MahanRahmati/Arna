@@ -955,7 +955,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             minLines: widget.minLines,
             expands: widget.expands,
             // Only show the selection highlight when the text field is focused.
-            selectionColor: _effectiveFocusNode.hasFocus ? accent : null,
+            selectionColor: _effectiveFocusNode.hasFocus ? accent.withOpacity(0.42) : null,
             selectionControls: widget.selectionEnabled ? textSelectionControls : null,
             onChanged: widget.onChanged,
             onSelectionChanged: _handleSelectionChanged,

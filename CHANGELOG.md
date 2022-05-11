@@ -31,6 +31,7 @@
 - [BREAKING] Remove ArnaVerticalDivider
 - [BREAKING] Remove ArnaHorizontalSeparator
 - [BREAKING] Remove ArnaVerticalSeparator
+- Update ArnaTextField
 
 ## 0.4.3
 

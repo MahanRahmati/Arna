@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/services.dart' show SystemChrome, DeviceOrientation;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -8,13 +7,7 @@ import '/screens/settings.dart';
 import '/screens/typography.dart';
 import '/screens/widgets.dart';
 
-void main() {
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-  runApp(const ProviderScope(child: MyApp()));
-}
+void main() => runApp(const ProviderScope(child: MyApp()));
 
 class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);

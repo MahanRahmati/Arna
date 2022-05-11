@@ -28,6 +28,7 @@
     - [x] ArnaTooltip
 
   - Buttons (7/7)
+
     - [x] ArnaBorderlessButton
     - [x] ArnaButton
     - [x] ArnaColorButton
@@ -35,19 +36,27 @@
     - [x] ArnaLinkedButtons
     - [x] ArnaPopupMenuButton
     - [x] ArnaTextButton
+
   - Containers (6/6)
+
     - [x] ArnaBadge
     - [x] ArnaCard
     - [x] ArnaColumn
     - [x] ArnaExpansionPanel
     - [x] ArnaListTile
     - [x] ArnaList
+
   - Dialogs (0/2)
+
     - [ ] ArnaAlertDialog
     - [ ] ArnaPopupDialog
+
   - Dividers (1/1)
+
     - [x] ArnaDivider
+
   - Inputs (8/11)
+
     - [x] ArnaCheckBoxListTile
     - [x] ArnaCheckBox
     - [ ] ArnaPopupMenu
@@ -59,6 +68,7 @@
     - [x] ArnaSwitchListTile
     - [x] ArnaSwitch
     - [ ] ArnaTextField
+
   - Theme (5/5)
     - [x] ArnaColors
     - [x] ArnaTextTheme

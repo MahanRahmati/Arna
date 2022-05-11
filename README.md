@@ -19,8 +19,7 @@ NOTE: Since this package is formatted with `flutter format -l 120` therefore the
 
 You can check the web version [here](https://mahanrahmati.github.io/arna_demo/).
 
-<img alt="Light" src="https://user-images.githubusercontent.com/16052180/159135644-4b449c54-7dd5-44f1-a892-e7191f2cab99.png">
-<img alt="Dark" src="https://user-images.githubusercontent.com/16052180/159135635-bf3a17dd-ecbd-48c5-b3c6-5597c600e405.png">
+<img alt="Screenshot" src="https://user-images.githubusercontent.com/16052180/167907541-4971eada-0846-4583-8fb5-10a32cf1d872.png">
 
 ## Platform Support
 

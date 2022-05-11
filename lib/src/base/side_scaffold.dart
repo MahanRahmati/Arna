@@ -236,34 +236,36 @@ class _SideItemBuilder extends StatelessWidget {
     bool compact = isMedium(context) ? true : false;
     return Semantics(
       explicitChildNodes: true,
-      child: Column(
-        children: <Widget>[
-          if (leading != null) leading!,
-          Expanded(
-            child: ListView.builder(
-              controller: ScrollController(),
-              itemCount: items.length,
-              padding: Styles.small,
-              itemBuilder: (BuildContext context, int index) {
-                return ArnaSideBarItem(
-                  label: items[index].title,
-                  icon: items[index].icon,
-                  selectedIcon: items[index].selectedIcon,
-                  onPressed: () => onTap(index),
-                  badge: items[index].badge,
-                  compact: compact,
-                  selected: index == currentIndex,
-                  isFocusable: items[index].isFocusable,
-                  autofocus: items[index].autofocus,
-                  accentColor: items[index].accentColor,
-                  cursor: items[index].cursor,
-                  semanticLabel: items[index].semanticLabel,
-                );
-              },
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            if (leading != null) leading!,
+            Expanded(
+              child: ListView.builder(
+                controller: ScrollController(),
+                itemCount: items.length,
+                padding: Styles.small,
+                itemBuilder: (BuildContext context, int index) {
+                  return ArnaSideBarItem(
+                    label: items[index].title,
+                    icon: items[index].icon,
+                    selectedIcon: items[index].selectedIcon,
+                    onPressed: () => onTap(index),
+                    badge: items[index].badge,
+                    compact: compact,
+                    selected: index == currentIndex,
+                    isFocusable: items[index].isFocusable,
+                    autofocus: items[index].autofocus,
+                    accentColor: items[index].accentColor,
+                    cursor: items[index].cursor,
+                    semanticLabel: items[index].semanticLabel,
+                  );
+                },
+              ),
             ),
-          ),
-          if (trailing != null) trailing!,
-        ],
+            if (trailing != null) trailing!,
+          ],
+        ),
       ),
     );
   }

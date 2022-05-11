@@ -82,7 +82,7 @@ class ArnaBaseWidget extends StatefulWidget {
   final String? semanticLabel;
 
   @override
-  _ArnaBaseWidgetState createState() => _ArnaBaseWidgetState();
+  State<ArnaBaseWidget> createState() => _ArnaBaseWidgetState();
 }
 
 /// The [State] for a [ArnaBaseWidget].

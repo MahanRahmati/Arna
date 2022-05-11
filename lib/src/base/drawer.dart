@@ -100,7 +100,7 @@ class ArnaDrawerController extends StatefulWidget {
   final bool isDrawerOpen;
 
   @override
-  _ArnaDrawerControllerState createState() => _ArnaDrawerControllerState();
+  State<ArnaDrawerController> createState() => _ArnaDrawerControllerState();
 }
 
 /// State for a [ArnaDrawerController].

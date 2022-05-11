@@ -73,7 +73,7 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   final MouseCursor cursor;
 
   @override
-  _ArnaSegmentedControlState<T> createState() => _ArnaSegmentedControlState<T>();
+  State<ArnaSegmentedControl<T>> createState() => _ArnaSegmentedControlState<T>();
 }
 
 /// The [State] for a [ArnaSegmentedControl].

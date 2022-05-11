@@ -60,7 +60,7 @@ class ArnaProgressIndicator extends StatefulWidget {
   final String? semanticsValue;
 
   @override
-  _ArnaProgressIndicatorState createState() => _ArnaProgressIndicatorState();
+  State<ArnaProgressIndicator> createState() => _ArnaProgressIndicatorState();
 }
 
 /// The [State] for a [ArnaProgressIndicator].

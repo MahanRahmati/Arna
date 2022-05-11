@@ -429,7 +429,7 @@ class ArnaApp extends StatefulWidget {
   final bool useInheritedMediaQuery;
 
   @override
-  _ArnaAppState createState() => _ArnaAppState();
+  State<ArnaApp> createState() => _ArnaAppState();
 
   /// The [HeroController] used for Arna page transitions.
   ///

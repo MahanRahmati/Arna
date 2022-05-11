@@ -58,7 +58,7 @@ class ArnaExpansionPanel extends StatefulWidget {
   final String? semanticLabel;
 
   @override
-  _ArnaExpansionPanelState createState() => _ArnaExpansionPanelState();
+  State<ArnaExpansionPanel> createState() => _ArnaExpansionPanelState();
 }
 
 /// The [State] for a [ArnaExpansionPanel].

@@ -55,7 +55,7 @@ class ArnaBanner extends StatefulWidget {
   final BannerType bannerType;
 
   @override
-  _ArnaBannerState createState() => _ArnaBannerState();
+  State<ArnaBanner> createState() => _ArnaBannerState();
 }
 
 /// The [State] for a [ArnaBanner].

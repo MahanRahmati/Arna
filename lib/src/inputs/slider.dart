@@ -187,7 +187,7 @@ class ArnaSlider extends StatefulWidget {
   final MouseCursor cursor;
 
   @override
-  _ArnaSliderState createState() => _ArnaSliderState();
+  State<ArnaSlider> createState() => _ArnaSliderState();
 }
 
 class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {

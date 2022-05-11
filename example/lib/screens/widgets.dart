@@ -4,7 +4,7 @@ class Widgets extends StatefulWidget {
   const Widgets({Key? key}) : super(key: key);
 
   @override
-  _WidgetsState createState() => _WidgetsState();
+  State<Widgets> createState() => _WidgetsState();
 }
 
 class _WidgetsState extends State<Widgets> {

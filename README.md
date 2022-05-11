@@ -1,5 +1,3 @@
-# Arna
-
 <img src="https://user-images.githubusercontent.com/16052180/167886260-187e625f-8c20-47ed-bc34-f4e790930c49.png">
 
 <p align="start">
@@ -11,7 +9,7 @@
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-Arna Framework - A unique set of widgets for building applications with Flutter.
+A unique set of widgets for building applications with Flutter.
 
 This Framework is in active development. Any contribution, idea, criticism or feedback is welcomed.
 

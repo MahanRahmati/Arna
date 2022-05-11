@@ -32,6 +32,8 @@
 - [BREAKING] Remove ArnaHorizontalSeparator
 - [BREAKING] Remove ArnaVerticalSeparator
 - Update ArnaTextField
+- [Example] Update settings page
+- [Example] Update main page
 
 ## 0.4.3
 

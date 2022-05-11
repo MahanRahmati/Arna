@@ -21,12 +21,12 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(changeTheme);
-    final accentColor = ref.watch(changeColor);
+    final theme = ref.watch(themeProvider);
+    final accentColor = ref.watch(accentProvider);
     Brightness? brightness;
     Color? accent;
 
-    switch (theme.theme) {
+    switch (theme) {
       case Theme.dark:
         brightness = Brightness.dark;
         break;
@@ -37,7 +37,7 @@ class MyApp extends ConsumerWidget {
         brightness = null;
     }
 
-    switch (accentColor.accent) {
+    switch (accentColor) {
       case AccentColor.green:
         accent = ArnaColors.green;
         break;

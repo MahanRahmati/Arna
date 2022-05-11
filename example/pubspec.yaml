@@ -13,8 +13,8 @@ dependencies:
     sdk: flutter
   arna:
     path: ../
-  flutter_riverpod: ^2.0.0-dev.5
-  url_launcher: ^6.1.0
+  flutter_riverpod: ^2.0.0-dev.6
+  url_launcher: ^6.1.1
 
 dev_dependencies:
   flutter_test:

@@ -6,8 +6,8 @@ class Settings extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Theme? themeMode = ref.watch(changeTheme).theme;
-    AccentColor? accentColor = ref.watch(changeColor).accent;
+    final themeMode = ref.watch(themeProvider);
+    final accentColor = ref.watch(accentProvider);
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -20,19 +20,19 @@ class Settings extends ConsumerWidget {
                 value: Theme.system,
                 groupValue: themeMode,
                 title: "System",
-                onChanged: (_) => ref.read(changeTheme.notifier).system(),
+                onChanged: (_) => ref.read(themeProvider.notifier).state = Theme.system,
               ),
               ArnaRadioListTile(
                 value: Theme.dark,
                 groupValue: themeMode,
                 title: "Dark",
-                onChanged: (_) => ref.read(changeTheme.notifier).dark(),
+                onChanged: (_) => ref.read(themeProvider.notifier).state = Theme.dark,
               ),
               ArnaRadioListTile(
                 value: Theme.light,
                 groupValue: themeMode,
                 title: "Light",
-                onChanged: (_) => ref.read(changeTheme.notifier).light(),
+                onChanged: (_) => ref.read(themeProvider.notifier).state = Theme.light,
               ),
             ],
           ),
@@ -45,25 +45,25 @@ class Settings extends ConsumerWidget {
               ArnaColorButton(
                 value: AccentColor.blue,
                 groupValue: accentColor,
-                onPressed: () => ref.read(changeColor.notifier).blue(),
+                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.blue,
                 color: ArnaColors.blue,
               ),
               ArnaColorButton(
                 value: AccentColor.green,
                 groupValue: accentColor,
-                onPressed: () => ref.read(changeColor.notifier).green(),
+                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.green,
                 color: ArnaColors.green,
               ),
               ArnaColorButton(
                 value: AccentColor.red,
                 groupValue: accentColor,
-                onPressed: () => ref.read(changeColor.notifier).red(),
+                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.red,
                 color: ArnaColors.red,
               ),
               ArnaColorButton(
                 value: AccentColor.orange,
                 groupValue: accentColor,
-                onPressed: () => ref.read(changeColor.notifier).orange(),
+                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.orange,
                 color: ArnaColors.orange,
               ),
             ],
@@ -76,55 +76,8 @@ class Settings extends ConsumerWidget {
 
 enum Theme { system, dark, light }
 
-final changeTheme = ChangeNotifierProvider.autoDispose(
-  (ref) => ChangeThemeState(),
-);
-
-class ChangeThemeState extends ChangeNotifier {
-  Theme? theme = Theme.system;
-
-  void system() {
-    theme = Theme.system;
-    notifyListeners();
-  }
-
-  void dark() {
-    theme = Theme.dark;
-    notifyListeners();
-  }
-
-  void light() {
-    theme = Theme.light;
-    notifyListeners();
-  }
-}
+final themeProvider = StateProvider.autoDispose<Theme>((ref) => Theme.system);
 
 enum AccentColor { blue, green, red, orange }
 
-final changeColor = ChangeNotifierProvider.autoDispose(
-  (ref) => ChangeColorState(),
-);
-
-class ChangeColorState extends ChangeNotifier {
-  AccentColor? accent = AccentColor.blue;
-
-  void blue() {
-    accent = AccentColor.blue;
-    notifyListeners();
-  }
-
-  void green() {
-    accent = AccentColor.green;
-    notifyListeners();
-  }
-
-  void red() {
-    accent = AccentColor.red;
-    notifyListeners();
-  }
-
-  void orange() {
-    accent = AccentColor.orange;
-    notifyListeners();
-  }
-}
+final accentProvider = StateProvider.autoDispose<AccentColor>((ref) => AccentColor.blue);

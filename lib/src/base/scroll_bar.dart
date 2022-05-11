@@ -1,8 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/gestures.dart';
 
-//TODO: Deprecated isAlwaysShown: Use thumbVisibility instead.
-
 /// An Arna-styled scrollbar.
 ///
 /// To add a scrollbar to a [ScrollView], wrap the scroll view widget in a [ArnaScrollbar] widget.
@@ -41,7 +39,7 @@ class ArnaScrollbar extends RawScrollbar {
           key: key,
           child: child,
           controller: controller,
-          isAlwaysShown: thumbVisibility,
+          thumbVisibility: thumbVisibility,
           pressDuration: Duration.zero,
           notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
           interactive: interactive,
@@ -58,7 +56,7 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   bool _hoverIsActive = false;
 
   @override
-  bool get showScrollbar => widget.isAlwaysShown ?? false;
+  bool get showScrollbar => widget.thumbVisibility ?? false;
 
   @override
   bool get enableGestures => widget.interactive ?? true;

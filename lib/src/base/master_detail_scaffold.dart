@@ -96,6 +96,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 emptyBody: widget.emptyBody,
                 currentIndex: _index == -1 ? _previousIndex : _index,
                 onSelected: _setIndex,
+                resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               )
             : _NestedPage(
                 headerBarLeading: widget.headerBarLeading,
@@ -107,6 +108,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 emptyBody: widget.emptyBody,
                 currentIndex: _index,
                 onSelected: _setIndex,
+                resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               );
       },
     );

@@ -96,13 +96,13 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
 
 OverlayEntry showArnaSnackbar({required BuildContext context, required String message, Widget? action}) {
   final GlobalKey<_ArnaSnackBarState> snackBarKey = GlobalKey<_ArnaSnackBarState>();
-  final _overlayEntry = OverlayEntry(
+  final overlayEntry = OverlayEntry(
     builder: (context) => ArnaSnackBar(key: snackBarKey, message: message, action: action),
   );
-  Overlay.of(context)!.insert(_overlayEntry);
+  Overlay.of(context)!.insert(overlayEntry);
   Future.delayed(Styles.snackbarDuration).then((value) async {
-    if (_overlayEntry.mounted) await snackBarKey.currentState?.controller.reverse();
-    if (_overlayEntry.mounted) _overlayEntry.remove();
+    if (overlayEntry.mounted) await snackBarKey.currentState?.controller.reverse();
+    if (overlayEntry.mounted) overlayEntry.remove();
   });
-  return _overlayEntry;
+  return overlayEntry;
 }

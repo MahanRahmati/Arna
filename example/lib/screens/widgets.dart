@@ -88,17 +88,17 @@ class _WidgetsState extends State<Widgets> {
                             ArnaPopupMenuButton<String>(
                               itemBuilder: (context) => <ArnaPopupMenuEntry<String>>[
                                 ArnaPopupMenuItem(
-                                  child: Text("First Item", style: ArnaTheme.of(context).textTheme.body),
                                   value: "First Item",
+                                  child: Text("First Item", style: ArnaTheme.of(context).textTheme.body),
                                 ),
                                 ArnaPopupMenuItem(
-                                  child: Text("Second Item", style: ArnaTheme.of(context).textTheme.body),
                                   value: "Second Item",
+                                  child: Text("Second Item", style: ArnaTheme.of(context).textTheme.body),
                                 ),
                                 const ArnaPopupMenuDivider(),
                                 ArnaPopupMenuItem(
-                                  child: Text("Third Item", style: ArnaTheme.of(context).textTheme.body),
                                   value: "Third Item",
+                                  child: Text("Third Item", style: ArnaTheme.of(context).textTheme.body),
                                 ),
                               ],
                               onSelected: (String value) {},

@@ -121,22 +121,22 @@ class ArnaList extends StatelessWidget {
 
     Widget child = direction == Axis.vertical
         ? Column(
-            children: items,
             mainAxisAlignment: mainAxisAlignment,
             mainAxisSize: mainAxisSize,
             crossAxisAlignment: crossAxisAlignment,
             textDirection: textDirection,
             verticalDirection: verticalDirection,
             textBaseline: textBaseline,
+            children: items,
           )
         : Row(
-            children: items,
             mainAxisAlignment: mainAxisAlignment,
             mainAxisSize: mainAxisSize,
             crossAxisAlignment: crossAxisAlignment,
             textDirection: textDirection,
             verticalDirection: verticalDirection,
             textBaseline: textBaseline,
+            children: items,
           );
 
     if (addBackground) {

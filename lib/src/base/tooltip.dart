@@ -157,7 +157,7 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     super.initState();
     _isConcealed = false;
     _forceRemoval = false;
-    _mouseIsConnected = RendererBinding.instance!.mouseTracker.mouseIsConnected;
+    _mouseIsConnected = RendererBinding.instance.mouseTracker.mouseIsConnected;
     _controller = AnimationController(
       duration: Styles.basicDuration,
       reverseDuration: Styles.tooltipReverseDuration,
@@ -165,9 +165,9 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
       vsync: this,
     )..addStatusListener(_handleStatusChanged);
     // Listen to see when a mouse is added.
-    RendererBinding.instance!.mouseTracker.addListener(_handleMouseTrackerChange);
+    RendererBinding.instance.mouseTracker.addListener(_handleMouseTrackerChange);
     // Listen to global pointer events so that we can hide a tooltip immediately if some other control is clicked on.
-    GestureBinding.instance!.pointerRouter.addGlobalRoute(_handlePointerEvent);
+    GestureBinding.instance.pointerRouter.addGlobalRoute(_handlePointerEvent);
   }
 
   @override
@@ -179,7 +179,7 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   // Forces a rebuild if a mouse has been added or removed.
   void _handleMouseTrackerChange() {
     if (!mounted) return;
-    final bool mouseIsConnected = RendererBinding.instance!.mouseTracker.mouseIsConnected;
+    final bool mouseIsConnected = RendererBinding.instance.mouseTracker.mouseIsConnected;
     if (mouseIsConnected != _mouseIsConnected) setState(() => _mouseIsConnected = mouseIsConnected);
   }
 
@@ -347,8 +347,8 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
 
   @override
   void dispose() {
-    GestureBinding.instance!.pointerRouter.removeGlobalRoute(_handlePointerEvent);
-    RendererBinding.instance!.mouseTracker.removeListener(_handleMouseTrackerChange);
+    GestureBinding.instance.pointerRouter.removeGlobalRoute(_handlePointerEvent);
+    RendererBinding.instance.mouseTracker.removeListener(_handleMouseTrackerChange);
     _removeEntry();
     _controller.dispose();
     super.dispose();

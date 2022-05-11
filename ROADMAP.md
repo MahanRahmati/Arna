@@ -20,7 +20,7 @@
     - [x] ArnaProgressIndicator
     - [x] ArnaPageRoute
     - [x] ArnaScaffold
-    - [x] ArnaScrollbar [TODO]
+    - [x] ArnaScrollbar
     - [x] ArnaSearchField [TODO]
     - [x] ArnaSideBarItem
     - [x] ArnaSideScaffold

@@ -443,9 +443,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             ? darkHighContrastColor
             : darkColor;
 
-    Element? _debugContext;
+    Element? debugContext;
     assert(() {
-      _debugContext = context as Element;
+      debugContext = context as Element;
       return true;
     }());
     return ArnaDynamicColor._(
@@ -454,7 +454,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       darkColor,
       highContrastColor,
       darkHighContrastColor,
-      _debugContext,
+      debugContext,
       _debugLabel,
     );
   }

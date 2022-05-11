@@ -97,13 +97,13 @@ class ArnaColumn extends StatelessWidget {
       }
     }
     return Column(
-      children: items,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       textDirection: textDirection,
       verticalDirection: verticalDirection,
       textBaseline: textBaseline,
+      children: items,
     );
   }
 }

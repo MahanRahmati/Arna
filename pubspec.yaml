@@ -1,11 +1,11 @@
 name: arna
 description: Arna Framework - A unique set of widgets for building applications with Flutter.
-version: 0.4.4
+version: 0.4.4+1
 homepage: https://github.com/MahanRahmati/Arna
 
 environment:
-  sdk: ">=2.17.0 <3.0.0"
-  flutter: ">=3.0.0"
+  sdk: ">=2.16.2 <3.0.0"
+  flutter: ">=2.10.5"
 
 dependencies:
   flutter:

@@ -43,27 +43,27 @@ class Settings extends ConsumerWidget {
             addBackground: true,
             children: <Widget>[
               ArnaColorButton(
-                value: AccentColor.blue,
+                value: ArnaColors.blue,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.blue,
+                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.blue,
                 color: ArnaColors.blue,
               ),
               ArnaColorButton(
-                value: AccentColor.green,
+                value: ArnaColors.green,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.green,
+                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.green,
                 color: ArnaColors.green,
               ),
               ArnaColorButton(
-                value: AccentColor.red,
+                value: ArnaColors.red,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.red,
+                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.red,
                 color: ArnaColors.red,
               ),
               ArnaColorButton(
-                value: AccentColor.orange,
+                value: ArnaColors.orange,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = AccentColor.orange,
+                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.orange,
                 color: ArnaColors.orange,
               ),
             ],
@@ -78,6 +78,4 @@ enum Theme { system, dark, light }
 
 final themeProvider = StateProvider.autoDispose<Theme>((ref) => Theme.system);
 
-enum AccentColor { blue, green, red, orange }
-
-final accentProvider = StateProvider.autoDispose<AccentColor>((ref) => AccentColor.blue);
+final accentProvider = StateProvider.autoDispose<Color>((ref) => ArnaColors.blue);

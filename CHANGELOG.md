@@ -1,3 +1,9 @@
+## 0.4.4+1
+
+- Update pubspec
+- [Example] Update settings page
+- [Example] Update main page
+
 ## 0.4.4
 
 - Update ROADMAP

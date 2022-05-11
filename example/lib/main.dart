@@ -17,7 +17,6 @@ class MyApp extends ConsumerWidget {
     final theme = ref.watch(themeProvider);
     final accentColor = ref.watch(accentProvider);
     Brightness? brightness;
-    Color? accent;
 
     switch (theme) {
       case Theme.dark:
@@ -30,25 +29,11 @@ class MyApp extends ConsumerWidget {
         brightness = null;
     }
 
-    switch (accentColor) {
-      case AccentColor.green:
-        accent = ArnaColors.green;
-        break;
-      case AccentColor.red:
-        accent = ArnaColors.red;
-        break;
-      case AccentColor.orange:
-        accent = ArnaColors.orange;
-        break;
-      default:
-        accent = ArnaColors.blue;
-    }
-
     return ArnaApp(
       debugShowCheckedModeBanner: false,
       theme: ArnaThemeData(
         brightness: brightness,
-        accentColor: accent,
+        accentColor: accentColor,
       ),
       home: const Home(),
     );

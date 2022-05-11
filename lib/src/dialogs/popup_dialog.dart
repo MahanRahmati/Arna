@@ -145,7 +145,6 @@ class _ArnaPopupPage extends StatelessWidget {
     this.headerBarLeading,
     this.title,
     this.actions,
-    this.searchField,
     required this.body,
   }) : super(key: key);
 
@@ -163,9 +162,6 @@ class _ArnaPopupPage extends StatelessWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
-
-  /// The [ArnaSearchField] of the popup dialog page.
-  final ArnaSearchField? searchField;
 
   /// The body widget of the popup dialog page.
   final Widget body;

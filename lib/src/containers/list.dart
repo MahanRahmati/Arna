@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 class ArnaList extends StatelessWidget {
   /// Creates an array of children.
   const ArnaList({
-    Key? key,
+    super.key,
     this.title,
     required this.children,
     this.direction = Axis.vertical,
@@ -16,7 +16,7 @@ class ArnaList extends StatelessWidget {
     this.textBaseline,
     this.addDivider = false,
     this.addBackground = false,
-  }) : super(key: key);
+  });
 
   /// The title of list view.
   final String? title;

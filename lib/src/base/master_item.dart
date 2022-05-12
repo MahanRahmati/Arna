@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 class ArnaMasterItem extends StatelessWidget {
   /// Creates a navigation item.
   const ArnaMasterItem({
-    Key? key,
+    super.key,
     this.leading,
     this.title,
     this.subtitle,
@@ -17,7 +17,7 @@ class ArnaMasterItem extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The leading widget of the item.
   final Widget? leading;

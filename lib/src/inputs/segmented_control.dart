@@ -38,13 +38,13 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   /// the [groupValue] is null, no widget will appear as selected. The [groupValue] must be either null or one of the
   /// keys in the [children] map.
   const ArnaSegmentedControl({
-    Key? key,
+    super.key,
     required this.children,
     required this.onValueChanged,
     this.groupValue,
     this.accentColor,
     this.cursor = MouseCursor.defer,
-  }) : super(key: key);
+  });
 
   /// The identifying keys and corresponding widget values in the segmented control.
   ///
@@ -144,7 +144,6 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
 class _ArnaSegmentedControlItem extends StatelessWidget {
   /// Creates segmented control item.
   const _ArnaSegmentedControlItem({
-    Key? key,
     required this.label,
     required this.itemSelected,
     required this.onPressed,
@@ -152,7 +151,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
     required this.last,
     required this.accentColor,
     required this.cursor,
-  }) : super(key: key);
+  });
 
   /// The text label of the item.
   final String? label;

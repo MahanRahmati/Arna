@@ -29,7 +29,7 @@ class ArnaCheckBox extends StatelessWidget {
   /// * [onChanged], which is called when the value of the checkbox should change. It can be set to null to disable the
   ///   checkbox.
   const ArnaCheckBox({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.tristate = false,
@@ -38,7 +38,7 @@ class ArnaCheckBox extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// Whether this checkbox is checked.
   final bool? value;

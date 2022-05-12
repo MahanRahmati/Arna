@@ -9,7 +9,7 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 class ArnaMasterDetailScaffold extends StatefulWidget {
   /// Creates a master detail structure in the Arna style.
   const ArnaMasterDetailScaffold({
-    Key? key,
+    super.key,
     this.headerBarLeading,
     this.title,
     this.actions,
@@ -20,7 +20,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     this.onItemSelected,
     this.currentIndex,
     this.resizeToAvoidBottomInset = true,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;
@@ -119,7 +119,6 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
 class _LateralPage extends StatefulWidget {
   /// Creates a lateral page.
   const _LateralPage({
-    Key? key,
     this.headerBarLeading,
     this.title,
     this.actions,
@@ -130,7 +129,7 @@ class _LateralPage extends StatefulWidget {
     required this.currentIndex,
     required this.onSelected,
     this.resizeToAvoidBottomInset = true,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;
@@ -255,7 +254,6 @@ class _LateralPageState extends State<_LateralPage> {
 class _NestedPage extends StatefulWidget {
   /// Creates a nested page.
   const _NestedPage({
-    Key? key,
     this.headerBarLeading,
     this.title,
     this.actions,
@@ -266,7 +264,7 @@ class _NestedPage extends StatefulWidget {
     required this.currentIndex,
     required this.onSelected,
     this.resizeToAvoidBottomInset = true,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;
@@ -414,14 +412,13 @@ class _NestedPageState extends State<_NestedPage> {
 class _MasterItemBuilder extends StatelessWidget {
   /// Creates a master item list.
   const _MasterItemBuilder({
-    Key? key,
     this.leading,
     required this.items,
     this.trailing,
     required this.onPressed,
     required this.currentIndex,
     this.isNested = false,
-  }) : super(key: key);
+  });
 
   /// The leading widget in the master that is placed above the items.
   ///

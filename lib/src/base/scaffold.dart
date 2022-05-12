@@ -8,14 +8,14 @@ import 'package:arna/arna.dart';
 class ArnaScaffold extends StatelessWidget {
   /// Creates a basic layout structure in the Arna style.
   const ArnaScaffold({
-    Key? key,
+    super.key,
     this.headerBarLeading,
     this.title,
     this.actions,
     required this.body,
     this.isDialog = false,
     this.resizeToAvoidBottomInset = true,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;

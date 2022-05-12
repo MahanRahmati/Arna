@@ -38,7 +38,7 @@ typedef ArnaBaseWidgetBuilder = Widget Function(
 class ArnaBaseWidget extends StatefulWidget {
   /// Creates a base widget.
   const ArnaBaseWidget({
-    Key? key,
+    super.key,
     required this.builder,
     this.onPressed,
     this.onLongPress,
@@ -48,7 +48,7 @@ class ArnaBaseWidget extends StatefulWidget {
     this.autofocus = false,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The base builder for widgets.
   final ArnaBaseWidgetBuilder builder;

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 class ArnaSideScaffold extends StatefulWidget {
   /// Creates a side view structure in the Arna style.
   const ArnaSideScaffold({
-    Key? key,
+    super.key,
     this.headerBarLeading,
     this.title,
     this.actions,
@@ -18,7 +18,7 @@ class ArnaSideScaffold extends StatefulWidget {
     this.onItemSelected,
     this.currentIndex = 0,
     this.resizeToAvoidBottomInset = true,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;
@@ -214,13 +214,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 class _SideItemBuilder extends StatelessWidget {
   /// Creates a side item list.
   const _SideItemBuilder({
-    Key? key,
     required this.leading,
     required this.items,
     required this.trailing,
     required this.onTap,
     required this.currentIndex,
-  }) : super(key: key);
+  });
 
   /// The leading widget in the side bar that is placed above the items.
   ///

@@ -20,10 +20,10 @@ class ArnaPageRoute<T> extends PageRoute<T> with ArnaRouteTransitionMixin<T> {
   /// The values of [builder], [maintainState], and [PageRoute.fullscreenDialog] must not be null.
   ArnaPageRoute({
     required this.builder,
-    RouteSettings? settings,
+    super.settings,
     this.maintainState = true,
-    bool fullscreenDialog = false,
-  }) : super(settings: settings, fullscreenDialog: fullscreenDialog) {
+    super.fullscreenDialog,
+  }) {
     assert(opaque);
   }
 

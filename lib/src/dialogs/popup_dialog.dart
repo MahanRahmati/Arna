@@ -34,12 +34,11 @@ class _ArnaPopupDialog extends StatelessWidget {
   ///
   /// Typically used in conjunction with [showArnaPopupDialog].
   const _ArnaPopupDialog({
-    Key? key,
     this.headerBarLeading,
     this.title,
     this.actions,
     required this.body,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;
@@ -141,12 +140,11 @@ class _ArnaPopupPage extends StatelessWidget {
   ///
   /// Typically used in conjunction with [showArnaPopupDialog].
   const _ArnaPopupPage({
-    Key? key,
     this.headerBarLeading,
     this.title,
     this.actions,
     required this.body,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;

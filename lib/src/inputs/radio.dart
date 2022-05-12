@@ -27,7 +27,7 @@ class ArnaRadio<T> extends StatelessWidget {
   /// * [value] and [groupValue] together determine whether the radio button is selected.
   /// * [onChanged] is called when the user selects this radio button.
   const ArnaRadio({
-    Key? key,
+    super.key,
     required this.value,
     required this.groupValue,
     required this.onChanged,
@@ -36,7 +36,7 @@ class ArnaRadio<T> extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The value represented by this radio button.
   final T value;

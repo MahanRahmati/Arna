@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 class ArnaIconButton extends StatelessWidget {
   /// Creates an icon button.
   const ArnaIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     required this.onPressed,
     this.onLongPress,
@@ -16,7 +16,7 @@ class ArnaIconButton extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The icon of the button.
   final IconData? icon;

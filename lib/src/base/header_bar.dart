@@ -10,11 +10,11 @@ import 'package:arna/arna.dart';
 class ArnaHeaderBar extends StatelessWidget {
   /// Creates a header bar in the Arna style.
   const ArnaHeaderBar({
-    Key? key,
+    super.key,
     this.leading,
     this.middle,
     this.actions,
-  }) : super(key: key);
+  });
 
   /// The leading widget laid out within the header bar.
   final Widget? leading;

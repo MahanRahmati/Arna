@@ -27,14 +27,14 @@ enum BannerType {
 class ArnaBanner extends StatefulWidget {
   /// Creates a banner in the Arna style.
   const ArnaBanner({
-    Key? key,
+    super.key,
     required this.showBanner,
     required this.title,
     this.subtitle,
     required this.actions,
     this.accentColor,
     this.bannerType = BannerType.information,
-  }) : super(key: key);
+  });
 
   /// Whether to show banner or not.
   final bool showBanner;

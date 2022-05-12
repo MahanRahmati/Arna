@@ -13,7 +13,7 @@ class ArnaColorButton<T> extends StatelessWidget {
   /// * [value] and [groupValue] together determine whether the color button is selected.
   /// * [onPressed] is called when the user selects this color button.
   const ArnaColorButton({
-    Key? key,
+    super.key,
     required this.value,
     required this.groupValue,
     required this.onPressed,
@@ -22,7 +22,7 @@ class ArnaColorButton<T> extends StatelessWidget {
     this.autofocus = false,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The value represented by this button.
   final T value;

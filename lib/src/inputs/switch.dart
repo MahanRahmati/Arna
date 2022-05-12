@@ -18,7 +18,7 @@ import 'package:arna/arna.dart';
 ///  * [ArnaSlider], for selecting a value in a range.
 class ArnaSwitch extends StatelessWidget {
   const ArnaSwitch({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.isFocusable = true,
@@ -26,7 +26,7 @@ class ArnaSwitch extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// Whether this switch is on or off.
   final bool value;

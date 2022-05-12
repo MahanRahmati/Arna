@@ -21,13 +21,13 @@ class ArnaProgressIndicator extends StatefulWidget {
   /// [semanticsValue] property may be used for determinate progress indicators to indicate how much progress has been
   /// made.
   const ArnaProgressIndicator({
-    Key? key,
+    super.key,
     this.value,
     this.size,
     this.accentColor,
     this.semanticsLabel,
     this.semanticsValue,
-  }) : super(key: key);
+  });
 
   /// If non-null, the value of this progress indicator.
   ///

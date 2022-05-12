@@ -11,7 +11,7 @@ import 'package:arna/arna.dart';
 class ArnaBottomBarItem extends StatelessWidget {
   /// Creates a bottom bar item.
   const ArnaBottomBarItem({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     this.selectedIcon,
@@ -23,7 +23,7 @@ class ArnaBottomBarItem extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The text label of the item.
   final String label;

@@ -8,7 +8,7 @@ import 'package:flutter/services.dart' show TextInputAction;
 class ArnaSearchField extends StatefulWidget {
   /// Creates a search field in the Arna style.
   const ArnaSearchField({
-    Key? key,
+    super.key,
     required this.showSearch,
     this.controller,
     this.onChanged,
@@ -19,7 +19,7 @@ class ArnaSearchField extends StatefulWidget {
     this.onTap,
     this.autocorrect = true,
     this.enabled,
-  }) : super(key: key);
+  });
 
   /// Whether to show search or not.
   final bool showSearch;

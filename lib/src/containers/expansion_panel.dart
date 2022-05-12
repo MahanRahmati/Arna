@@ -7,7 +7,7 @@ class ArnaExpansionPanel extends StatefulWidget {
   ///
   /// If child is null, then the expansion panel will be disabled.
   const ArnaExpansionPanel({
-    Key? key,
+    super.key,
     this.leading,
     this.title,
     this.subtitle,
@@ -19,7 +19,7 @@ class ArnaExpansionPanel extends StatefulWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The leading widget of the panel.
   final Widget? leading;

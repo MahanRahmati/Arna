@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 class ArnaTextButton extends StatelessWidget {
   /// Creates a text button.
   const ArnaTextButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.onPressed,
     this.onLongPress,
@@ -16,7 +16,7 @@ class ArnaTextButton extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The text label of the button.
   final String? label;

@@ -18,10 +18,10 @@ class ArnaTheme extends StatelessWidget {
   ///
   /// The [data] and [child] parameters must not be null.
   const ArnaTheme({
-    Key? key,
+    super.key,
     required this.data,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// The [ArnaThemeData] styling for this theme.
   final ArnaThemeData data;
@@ -92,10 +92,9 @@ class ArnaTheme extends StatelessWidget {
 /// _InheritedArnaTheme which extends InheritedWidget
 class _InheritedArnaTheme extends InheritedWidget {
   const _InheritedArnaTheme({
-    Key? key,
     required this.theme,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   final ArnaTheme theme;
 
@@ -113,7 +112,7 @@ class ArnaThemeDataTween extends Tween<ArnaThemeData> {
   ///
   /// The [begin] and [end] properties must be non-null before the tween is first used, but the arguments can be null
   /// if the values are going to be filled in later.
-  ArnaThemeDataTween({ArnaThemeData? begin, ArnaThemeData? end}) : super(begin: begin, end: end);
+  ArnaThemeDataTween({super.begin, super.end});
 
   @override
   ArnaThemeData lerp(double t) => ArnaThemeData.lerp(begin!, end!, t);
@@ -132,13 +131,13 @@ class AnimatedArnaTheme extends ImplicitlyAnimatedWidget {
   ///
   /// The [data] and [child] arguments must not be null.
   const AnimatedArnaTheme({
-    Key? key,
+    super.key,
     required this.data,
-    Curve curve = Styles.basicCurve,
-    Duration duration = Styles.basicDuration,
-    VoidCallback? onEnd,
+    super.curve = Styles.basicCurve,
+    super.duration = Styles.basicDuration,
+    super.onEnd,
     required this.child,
-  }) : super(key: key, curve: curve, duration: duration, onEnd: onEnd);
+  });
 
   /// Specifies the color and typography values for descendant widgets.
   final ArnaThemeData data;

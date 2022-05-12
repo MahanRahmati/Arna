@@ -10,7 +10,7 @@ import 'package:arna/arna.dart';
 class ArnaListTile extends StatefulWidget {
   /// Creates a list tile.
   const ArnaListTile({
-    Key? key,
+    super.key,
     this.leading,
     this.title,
     this.subtitle,
@@ -19,7 +19,7 @@ class ArnaListTile extends StatefulWidget {
     this.actionable = false,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// A widget to display before the title.
   final Widget? leading;

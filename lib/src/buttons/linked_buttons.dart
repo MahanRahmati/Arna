@@ -3,7 +3,10 @@ import 'package:arna/arna.dart';
 /// An Arna-styled linked buttons.
 class ArnaLinkedButtons extends StatelessWidget {
   /// Creates linked buttons.
-  const ArnaLinkedButtons({Key? key, required this.buttons}) : super(key: key);
+  const ArnaLinkedButtons({
+    super.key,
+    required this.buttons,
+  });
 
   /// The list of linked buttons.
   final List<ArnaLinkedButton> buttons;
@@ -57,11 +60,10 @@ class ArnaLinkedButtons extends StatelessWidget {
 class _ArnaLinkedItem extends StatelessWidget {
   /// Creates linked item.
   const _ArnaLinkedItem({
-    Key? key,
     required this.button,
     required this.first,
     required this.last,
-  }) : super(key: key);
+  });
 
   /// The linked button.
   final ArnaLinkedButton button;

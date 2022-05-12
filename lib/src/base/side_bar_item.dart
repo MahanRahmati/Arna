@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 class ArnaSideBarItem extends StatelessWidget {
   /// Creates a side bar item.
   const ArnaSideBarItem({
-    Key? key,
+    super.key,
     required this.label,
     required this.icon,
     this.selectedIcon,
@@ -17,7 +17,7 @@ class ArnaSideBarItem extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The text label of the item.
   final String label;

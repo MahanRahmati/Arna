@@ -32,7 +32,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   /// * [value] and [groupValue] together determine whether the radio button is selected.
   /// * [onChanged] is called when the user selects this radio button.
   const ArnaRadioListTile({
-    Key? key,
+    super.key,
     required this.value,
     required this.groupValue,
     required this.onChanged,
@@ -44,7 +44,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The value represented by this radio button.
   final T value;

@@ -19,14 +19,14 @@ class ArnaTooltip extends StatefulWidget {
   /// Creates a tooltip.
   /// Only one of [message] and [richMessage] may be non-null.
   const ArnaTooltip({
-    Key? key,
+    super.key,
     this.message,
     this.richMessage,
     this.preferBelow,
     this.excludeFromSemantics,
     this.enableFeedback,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// The text to display in the tooltip.
   ///
@@ -481,14 +481,13 @@ class _ArnaTooltipPositionDelegate extends SingleChildLayoutDelegate {
 class _ArnaTooltipOverlay extends StatelessWidget {
   /// Creates a tooltip overlay.
   const _ArnaTooltipOverlay({
-    Key? key,
     required this.richMessage,
     required this.animation,
     required this.target,
     required this.preferBelow,
     this.onEnter,
     this.onExit,
-  }) : super(key: key);
+  });
 
   final InlineSpan richMessage;
   final Animation<double> animation;
@@ -553,10 +552,9 @@ class _ArnaTooltipOverlay extends StatelessWidget {
 class _ArnaTooltipVisibilityScope extends InheritedWidget {
   /// Creates a tooltip visibility scope.
   const _ArnaTooltipVisibilityScope({
-    Key? key,
-    required Widget child,
+    required super.child,
     required this.visible,
-  }) : super(key: key, child: child);
+  });
 
   final bool visible;
 
@@ -574,10 +572,10 @@ class ArnaTooltipVisibility extends StatelessWidget {
   ///
   /// Both arguments must not be null.
   const ArnaTooltipVisibility({
-    Key? key,
+    super.key,
     required this.visible,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// The widget below this widget in the tree.
   ///

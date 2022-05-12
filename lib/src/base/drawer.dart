@@ -13,10 +13,10 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 class ArnaDrawer extends StatelessWidget {
   /// Creates an Arna drawer.
   const ArnaDrawer({
-    Key? key,
+    super.key,
     this.child,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The widget below this widget in the tree.
   ///

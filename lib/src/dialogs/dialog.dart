@@ -38,13 +38,13 @@ class ArnaAlertDialog extends StatelessWidget {
   ///
   /// Typically used in conjunction with [showArnaDialog].
   const ArnaAlertDialog({
-    Key? key,
+    super.key,
     this.title,
     this.message,
     required this.primary,
     this.secondary = const SizedBox.shrink(),
     this.tertiary = const SizedBox.shrink(),
-  }) : super(key: key);
+  });
 
   /// The (optional) title of the dialog is displayed in a large font at the top of the dialog.
   final String? title;

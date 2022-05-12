@@ -4,9 +4,9 @@ import 'package:arna/arna.dart';
 class ArnaDivider extends StatelessWidget {
   /// Creates a divider.
   const ArnaDivider({
-    Key? key,
+    super.key,
     this.direction = Axis.horizontal,
-  }) : super(key: key);
+  });
 
   /// The direction to use as the main axis.
   final Axis direction;

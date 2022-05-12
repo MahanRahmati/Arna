@@ -34,7 +34,7 @@ class ArnaSwitchListTile extends StatelessWidget {
   /// * [value] determines whether this switch is on or off.
   /// * [onChanged] is called when the user toggles the switch on or off.
   const ArnaSwitchListTile({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.title,
@@ -45,7 +45,7 @@ class ArnaSwitchListTile extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// Whether this switch is on or off.
   final bool value;

@@ -28,7 +28,7 @@ enum ButtonSize {
 class ArnaButton extends StatelessWidget {
   /// Creates a button.
   const ArnaButton({
-    Key? key,
+    super.key,
     this.label,
     this.icon,
     required this.onPressed,
@@ -41,7 +41,7 @@ class ArnaButton extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// The text label of the button.
   final String? label;

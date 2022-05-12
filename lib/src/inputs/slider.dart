@@ -36,7 +36,7 @@ class ArnaSlider extends StatefulWidget {
   /// * [onChangeEnd] is called when the user is done selecting a new value for
   ///   the slider.
   const ArnaSlider({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.onChangeStart,
@@ -48,8 +48,7 @@ class ArnaSlider extends StatefulWidget {
     this.autofocus = false,
     this.accentColor,
     this.cursor = MouseCursor.defer,
-  })  : assert(value >= min && value <= max),
-        super(key: key);
+  }) : assert(value >= min && value <= max);
 
   /// The currently selected value for this slider.
   ///
@@ -334,7 +333,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
 
 class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
   const _ArnaSliderRenderObjectWidget({
-    Key? key,
+    super.key,
     required this.value,
     this.divisions,
     this.onChanged,
@@ -345,7 +344,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
     required this.trackColor,
     required this.thumbColor,
     required this.vsync,
-  }) : super(key: key);
+  });
 
   final double value;
   final int? divisions;

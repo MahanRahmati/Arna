@@ -27,7 +27,7 @@ import 'package:flutter/rendering.dart';
 abstract class ArnaPopupMenuEntry<T> extends StatefulWidget {
   /// Abstract const constructor. This constructor enables subclasses to provide
   /// const constructors so that they can be used in const expressions.
-  const ArnaPopupMenuEntry({Key? key}) : super(key: key);
+  const ArnaPopupMenuEntry({super.key});
 
   /// The amount of vertical space occupied by this entry.
   ///
@@ -64,8 +64,8 @@ abstract class ArnaPopupMenuEntry<T> extends StatefulWidget {
 class ArnaPopupMenuDivider extends ArnaPopupMenuEntry<Never> {
   /// Creates a horizontal divider for a popup menu.
   const ArnaPopupMenuDivider({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// The height of the divider entry.
   @override
@@ -94,10 +94,9 @@ class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
 // item lines up with the center of its PopupMenuButton.
 class _ArnaMenuItem extends SingleChildRenderObjectWidget {
   const _ArnaMenuItem({
-    Key? key,
     required this.onLayout,
-    required Widget? child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   final ValueChanged<Size> onLayout;
 
@@ -178,7 +177,7 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
   ///
   /// The `enabled` and `height` arguments must not be null.
   const ArnaPopupMenuItem({
-    Key? key,
+    super.key,
     this.value,
     this.onTap,
     this.enabled = true,
@@ -187,7 +186,7 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// The value that will be returned by [showArnaMenu] if this entry is selected.
   final T? value;
@@ -316,10 +315,10 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W>
 
 class _ArnaPopupMenu<T> extends StatelessWidget {
   const _ArnaPopupMenu({
-    Key? key,
+    super.key,
     required this.route,
     required this.semanticLabel,
-  }) : super(key: key);
+  });
 
   final _ArnaPopupMenuRoute<T> route;
   final String? semanticLabel;

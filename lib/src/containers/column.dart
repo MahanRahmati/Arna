@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 class ArnaColumn extends StatelessWidget {
   /// Creates an array of children.
   const ArnaColumn({
-    Key? key,
+    super.key,
     required this.children,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
@@ -12,7 +12,7 @@ class ArnaColumn extends StatelessWidget {
     this.textDirection,
     this.verticalDirection = VerticalDirection.down,
     this.textBaseline,
-  }) : super(key: key);
+  });
 
   /// The children of column.
   final List<Widget> children;

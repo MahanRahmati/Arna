@@ -60,7 +60,7 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
   ///
   /// The [itemBuilder] argument must not be null.
   const ArnaPopupMenuButton({
-    Key? key,
+    super.key,
     required this.itemBuilder,
     this.icon,
     this.initialValue,
@@ -76,7 +76,7 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// Called when the button is pressed to create the items to show in the menu.
   final ArnaPopupMenuItemBuilder<T> itemBuilder;

@@ -31,7 +31,7 @@ class ArnaSliderListTile extends StatelessWidget {
   /// * [onChangeStart] is called when the user starts to select a new value for the slider.
   /// * [onChangeEnd] is called when the user is done selecting a new value for the slider.
   const ArnaSliderListTile({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.title,
@@ -46,8 +46,7 @@ class ArnaSliderListTile extends StatelessWidget {
     this.autofocus = false,
     this.accentColor,
     this.cursor = MouseCursor.defer,
-  })  : assert(value >= min && value <= max),
-        super(key: key);
+  }) : assert(value >= min && value <= max);
 
   /// The currently selected value for this slider.
   ///

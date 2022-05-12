@@ -6,9 +6,9 @@ import 'package:arna/arna.dart';
 class ArnaBottomBar extends StatelessWidget {
   /// Creates a bottom bar in the Arna style.
   const ArnaBottomBar({
-    Key? key,
+    super.key,
     required this.items,
-  }) : super(key: key);
+  });
 
   /// The items laid out within the bottom bar.
   final List<Widget> items;

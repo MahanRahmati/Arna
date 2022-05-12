@@ -4,11 +4,11 @@ import 'package:arna/arna.dart';
 class ArnaCard extends StatelessWidget {
   /// Creates a card in the Arna style.
   const ArnaCard({
-    Key? key,
+    super.key,
     this.height,
     this.width,
     required this.child,
-  }) : super(key: key);
+  });
 
   /// The card's height.
   final double? height;

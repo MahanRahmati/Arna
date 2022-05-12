@@ -4,11 +4,11 @@ import 'package:arna/arna.dart';
 class ArnaBadge extends StatelessWidget {
   /// Creates a badge in the Arna style.
   const ArnaBadge({
-    Key? key,
+    super.key,
     required this.label,
     this.accentColor,
     this.textColor = ArnaColors.shade243,
-  }) : super(key: key);
+  });
 
   /// The text label of the badge.
   final String label;

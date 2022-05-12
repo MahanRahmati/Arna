@@ -32,7 +32,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   ///
   /// The value of [tristate] must not be null.
   const ArnaCheckBoxListTile({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.title,
@@ -44,7 +44,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-  }) : super(key: key);
+  });
 
   /// Whether this checkbox is checked.
   final bool? value;

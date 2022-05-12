@@ -27,24 +27,17 @@ class ArnaScrollbar extends RawScrollbar {
   /// If the [controller] is null, the default behavior is to enable scrollbar dragging using the
   /// [PrimaryScrollController].
   const ArnaScrollbar({
-    Key? key,
-    required Widget child,
-    ScrollController? controller,
-    bool thumbVisibility = false,
+    super.key,
+    required super.child,
+    super.controller,
+    bool super.thumbVisibility = false,
     ScrollNotificationPredicate? notificationPredicate,
-    bool? interactive,
-    ScrollbarOrientation? scrollbarOrientation,
-    Color? thumbColor,
+    super.interactive,
+    super.scrollbarOrientation,
+    super.thumbColor,
   }) : super(
-          key: key,
-          child: child,
-          controller: controller,
-          thumbVisibility: thumbVisibility,
           pressDuration: Duration.zero,
           notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
-          interactive: interactive,
-          scrollbarOrientation: scrollbarOrientation,
-          thumbColor: thumbColor,
         );
 
   @override

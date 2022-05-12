@@ -7,10 +7,10 @@ import 'package:arna/arna.dart';
 class ArnaSnackBar extends StatefulWidget {
   /// Creates a snack bar in the Arna style.
   const ArnaSnackBar({
-    Key? key,
+    super.key,
     required this.message,
     this.action,
-  }) : super(key: key);
+  });
 
   /// The message of the snack bar.
   final String message;

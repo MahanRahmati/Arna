@@ -21,7 +21,7 @@ class ArnaBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: AnimatedContainer(

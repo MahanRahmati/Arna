@@ -85,7 +85,7 @@ class ArnaButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
     Color accent;
     switch (buttonType) {
       case ButtonType.destructive:
@@ -94,13 +94,16 @@ class ArnaButton extends StatelessWidget {
       case ButtonType.suggested:
         accent = ArnaColors.blue;
         break;
-      default:
+      case ButtonType.colored:
+        accent = accentColor ?? ArnaTheme.of(context).accentColor;
+        break;
+      case ButtonType.normal:
         accent = accentColor ?? ArnaTheme.of(context).accentColor;
     }
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (context, enabled, hover, focused, pressed, selected) {
+        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
           return AnimatedContainer(
             height: (buttonSize == ButtonSize.huge) ? Styles.hugeButtonSize : Styles.buttonSize,
             duration: Styles.basicDuration,
@@ -132,7 +135,7 @@ class ArnaButton extends StatelessWidget {
                   Padding(
                     padding: EdgeInsetsDirectional.only(end: label != null ? Styles.padding : 0),
                     child: Icon(
-                      icon!,
+                      icon,
                       size: Styles.iconSize,
                       color: ArnaDynamicColor.resolve(
                         !enabled

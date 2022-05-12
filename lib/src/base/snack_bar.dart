@@ -43,7 +43,7 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    Widget snackBar = Semantics(
+    final Widget snackBar = Semantics(
       container: true,
       liveRegion: true,
       child: Align(
@@ -60,7 +60,7 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: <Widget>[
                 const SizedBox(width: Styles.padding),
                 Flexible(
                   child: Text(
@@ -84,7 +84,7 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
       child: MediaQuery.of(context).accessibleNavigation
           ? snackBar
           : SlideTransition(
-              position: Tween(begin: const Offset(0, 1), end: Offset.zero).animate(controller),
+              position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(controller),
               child: FadeTransition(
                 opacity: CurvedAnimation(parent: controller, curve: Styles.basicCurve),
                 child: snackBar,
@@ -96,13 +96,17 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
 
 OverlayEntry showArnaSnackbar({required BuildContext context, required String message, Widget? action}) {
   final GlobalKey<_ArnaSnackBarState> snackBarKey = GlobalKey<_ArnaSnackBarState>();
-  final overlayEntry = OverlayEntry(
-    builder: (context) => ArnaSnackBar(key: snackBarKey, message: message, action: action),
+  final OverlayEntry overlayEntry = OverlayEntry(
+    builder: (BuildContext context) => ArnaSnackBar(key: snackBarKey, message: message, action: action),
   );
   Overlay.of(context)!.insert(overlayEntry);
-  Future.delayed(Styles.snackbarDuration).then((value) async {
-    if (overlayEntry.mounted) await snackBarKey.currentState?.controller.reverse();
-    if (overlayEntry.mounted) overlayEntry.remove();
+  Future<dynamic>.delayed(Styles.snackbarDuration).then((_) async {
+    if (overlayEntry.mounted) {
+      await snackBarKey.currentState?.controller.reverse();
+    }
+    if (overlayEntry.mounted) {
+      overlayEntry.remove();
+    }
   });
   return overlayEntry;
 }

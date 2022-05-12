@@ -58,7 +58,7 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
   @override
   bool canTransitionTo(TransitionRoute<dynamic> nextRoute) {
     // Don't perform outgoing animation if the next route is a fullscreen dialog.
-    return (nextRoute is ArnaRouteTransitionMixin && !nextRoute.fullscreenDialog);
+    return nextRoute is ArnaRouteTransitionMixin && !nextRoute.fullscreenDialog;
   }
 
   @override

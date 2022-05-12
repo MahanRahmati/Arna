@@ -202,17 +202,17 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
     SingleActivator(LogicalKeyboardKey.arrowRight): _AdjustSliderIntent.right(),
   };
 
-  bool get isEnabled => widget.onChanged != null;
+  bool get _isEnabled => widget.onChanged != null;
 
   @override
   void initState() {
     super.initState();
-    focusNode = FocusNode(canRequestFocus: isEnabled);
-    if (widget.autofocus) focusNode!.requestFocus();
-    _actions = {
-      _AdjustSliderIntent: CallbackAction<_AdjustSliderIntent>(
-        onInvoke: _actionHandler,
-      ),
+    focusNode = FocusNode(canRequestFocus: _isEnabled);
+    if (widget.autofocus) {
+      focusNode!.requestFocus();
+    }
+    _actions = <Type, Action<Intent>>{
+      _AdjustSliderIntent: CallbackAction<_AdjustSliderIntent>(onInvoke: _actionHandler),
     };
   }
 
@@ -220,7 +220,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   void didUpdateWidget(ArnaSlider oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.onChanged != oldWidget.onChanged) {
-      focusNode!.canRequestFocus = isEnabled;
+      focusNode!.canRequestFocus = _isEnabled;
     }
   }
 
@@ -270,8 +270,10 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
     });
   }
 
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
+  void _handleFocus(bool focus) {
+    if (focus != _focused && mounted) {
+      setState(() => _focused = focus);
+    }
   }
 
   void _handleChanged(double value) {
@@ -291,13 +293,13 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: FocusableActionDetector(
-        enabled: isEnabled && widget.isFocusable,
+        enabled: _isEnabled && widget.isFocusable,
         focusNode: focusNode,
-        autofocus: !isEnabled ? false : widget.autofocus,
+        autofocus: _isEnabled && widget.autofocus,
         mouseCursor: widget.cursor,
         onShowFocusHighlight: _handleFocus,
         onFocusChange: _handleFocusChange,
@@ -307,7 +309,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
           key: _renderObjectKey,
           value: (widget.value - widget.min) / (widget.max - widget.min),
           divisions: widget.divisions,
-          onChanged: isEnabled ? _handleChanged : null,
+          onChanged: _isEnabled ? _handleChanged : null,
           onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
           onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
           accent: ArnaDynamicColor.matchingColor(
@@ -445,7 +447,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
 
   set value(double newValue) {
     assert(newValue >= 0.0 && newValue <= 1.0);
-    if (newValue == _value) return;
+    if (newValue == _value) {
+      return;
+    }
     _value = newValue;
     if (divisions != null) {
       _position.animateTo(newValue, curve: Curves.fastOutSlowIn);
@@ -458,7 +462,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   int? get divisions => _divisions;
   int? _divisions;
   set divisions(int? value) {
-    if (value == _divisions) return;
+    if (value == _divisions) {
+      return;
+    }
     _divisions = value;
     markNeedsPaint();
   }
@@ -467,10 +473,14 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   ValueChanged<double>? _onChanged;
 
   set onChanged(ValueChanged<double>? value) {
-    if (value == _onChanged) return;
+    if (value == _onChanged) {
+      return;
+    }
     final bool wasInteractive = isInteractive;
     _onChanged = value;
-    if (wasInteractive != isInteractive) markNeedsSemanticsUpdate();
+    if (wasInteractive != isInteractive) {
+      markNeedsSemanticsUpdate();
+    }
   }
 
   ValueChanged<double>? onChangeStart;
@@ -479,7 +489,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   Color get accent => _accent;
   Color _accent;
   set accent(Color value) {
-    if (value == _accent) return;
+    if (value == _accent) {
+      return;
+    }
     _accent = value;
     markNeedsPaint();
   }
@@ -487,7 +499,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   Color get borderColor => _borderColor;
   Color _borderColor;
   set borderColor(Color value) {
-    if (value == _borderColor) return;
+    if (value == _borderColor) {
+      return;
+    }
     _borderColor = value;
     markNeedsPaint();
   }
@@ -495,7 +509,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   Color get trackColor => _trackColor;
   Color _trackColor;
   set trackColor(Color value) {
-    if (value == _trackColor) return;
+    if (value == _trackColor) {
+      return;
+    }
     _trackColor = value;
     markNeedsPaint();
   }
@@ -503,7 +519,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   Color get thumbColor => _thumbColor;
   Color _thumbColor;
   set thumbColor(Color value) {
-    if (value == _thumbColor) return;
+    if (value == _thumbColor) {
+      return;
+    }
     _thumbColor = value;
     markNeedsPaint();
   }
@@ -512,7 +530,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   TextDirection _textDirection;
 
   set textDirection(TextDirection value) {
-    if (_textDirection == value) return;
+    if (_textDirection == value) {
+      return;
+    }
     _textDirection = value;
     markNeedsPaint();
   }
@@ -611,7 +631,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
   }
 
   void _endInteraction() {
-    if (onChangeEnd != null) onChangeEnd!(_discretizedCurrentDragValue);
+    if (onChangeEnd != null) {
+      onChangeEnd!(_discretizedCurrentDragValue);
+    }
     _currentDragValue = 0.0;
   }
 
@@ -751,9 +773,9 @@ class _RenderArnaSlider extends RenderConstrainedBox {
       config.textDirection = textDirection;
       config.onIncrease = increaseAction;
       config.onDecrease = decreaseAction;
-      config.value = "${(value * 100).round()}%";
-      config.increasedValue = "${((value + _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%";
-      config.decreasedValue = "${((value - _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%";
+      config.value = '${(value * 100).round()}%';
+      config.increasedValue = '${((value + _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%';
+      config.decreasedValue = '${((value - _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%';
     }
   }
 

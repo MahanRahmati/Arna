@@ -1,3 +1,7 @@
+## 0.4.5
+
+- Update analysis_options
+
 ## 0.4.4+1
 
 - Update pubspec

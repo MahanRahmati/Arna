@@ -92,7 +92,7 @@ class _ArnaPopupDialog extends StatelessWidget {
                   actions: <Widget>[
                     if (actions != null) ...actions!,
                     ArnaTextButton(
-                      label: "Close",
+                      label: 'Close',
                       onPressed: Navigator.of(context).pop,
                     ),
                   ],
@@ -232,8 +232,8 @@ Future<T?> showArnaPopupDialog<T>({
 }) {
   return isCompact(context)
       ? Navigator.of(context).push(
-          ArnaPageRoute(
-            builder: (context) => _ArnaPopupPage(
+          ArnaPageRoute<T>(
+            builder: (BuildContext context) => _ArnaPopupPage(
               headerBarLeading: headerBarLeading,
               title: title,
               actions: actions,
@@ -248,7 +248,7 @@ Future<T?> showArnaPopupDialog<T>({
           barrierDismissible: barrierDismissible,
           transitionDuration: Styles.basicDuration,
           routeSettings: routeSettings,
-          pageBuilder: (context, animation, secondaryAnimation) {
+          pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
             return _ArnaPopupDialog(
               headerBarLeading: headerBarLeading,
               title: title,
@@ -256,7 +256,12 @@ Future<T?> showArnaPopupDialog<T>({
               body: body,
             );
           },
-          transitionBuilder: (context, animation, secondaryAnimation, child) {
+          transitionBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) {
             return ScaleTransition(
               scale: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
               child: FadeTransition(

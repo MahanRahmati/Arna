@@ -69,7 +69,7 @@ class ArnaSideScaffold extends StatefulWidget {
 /// The [State] for a [ArnaSideScaffold].
 class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   late int _currentIndex;
-  var showDrawer = false;
+  bool showDrawer = false;
 
   @override
   void initState() {
@@ -78,24 +78,34 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   }
 
   void onTap(int index) {
-    if (isCompact(context)) showDrawer = false;
-    if (widget.onItemSelected != null) widget.onItemSelected!(index);
-    if (isCompact(context)) _drawerOpenedCallback(false);
+    if (isCompact(context)) {
+      showDrawer = false;
+    }
+    if (widget.onItemSelected != null) {
+      widget.onItemSelected!(index);
+    }
+    if (isCompact(context)) {
+      _drawerOpenedCallback(false);
+    }
     setState(() => _currentIndex = index);
   }
 
   void _drawerOpenedCallback(bool isOpened) {
-    if (showDrawer != isOpened) setState(() => showDrawer = isOpened);
+    if (showDrawer != isOpened) {
+      setState(() => showDrawer = isOpened);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    bool compact = isCompact(context);
-    if (!compact && showDrawer) _drawerOpenedCallback(false);
-    double padding = isExpanded(context) ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
-    String tooltip = MaterialLocalizations.of(context).drawerLabel;
+    final bool compact = isCompact(context);
+    if (!compact && showDrawer) {
+      _drawerOpenedCallback(false);
+    }
+    final double padding = isExpanded(context) ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
+    final String tooltip = MaterialLocalizations.of(context).drawerLabel;
 
-    Widget sideItemBuilder = _SideItemBuilder(
+    final Widget sideItemBuilder = _SideItemBuilder(
       leading: widget.leading,
       items: widget.items,
       trailing: widget.trailing,
@@ -103,9 +113,9 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
       currentIndex: _currentIndex,
     );
 
-    Widget sideScaffold = Stack(
+    final Widget sideScaffold = Stack(
       children: <Widget>[
-        if (!compact) ...[
+        if (!compact) ...<Widget>[
           Container(
             width: padding,
             color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
@@ -144,8 +154,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                 if (compact && widget.items.length < 4)
                   ArnaBottomBar(
                     items: widget.items.map(
-                      (item) {
-                        var index = widget.items.indexOf(item);
+                      (NavigationItem item) {
+                        final int index = widget.items.indexOf(item);
                         return Expanded(
                           child: ArnaBottomBarItem(
                             label: item.title,
@@ -233,7 +243,7 @@ class _SideItemBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool compact = isMedium(context) ? true : false;
+    final bool compact = isMedium(context);
     return Semantics(
       explicitChildNodes: true,
       child: SafeArea(

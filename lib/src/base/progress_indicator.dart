@@ -82,7 +82,9 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with Sing
       debugLabel: 'ArnaProgressIndicator',
       vsync: this,
     );
-    if (widget.value == null) _controller.repeat();
+    if (widget.value == null) {
+      _controller.repeat();
+    }
   }
 
   @override
@@ -103,9 +105,11 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with Sing
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     String? expandedSemanticsValue = widget.semanticsValue;
-    if (widget.value != null) expandedSemanticsValue ??= '${(widget.value! * 100).round()}%';
+    if (widget.value != null) {
+      expandedSemanticsValue ??= '${(widget.value! * 100).round()}%';
+    }
 
     return AnimatedBuilder(
       animation: _controller,
@@ -158,7 +162,7 @@ class _ProgressPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width / 2, size.height / 2);
+    final Offset center = Offset(size.width / 2, size.height / 2);
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: size.width / 4),
       arcStart,

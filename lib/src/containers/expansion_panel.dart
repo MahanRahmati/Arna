@@ -72,7 +72,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
   late Map<Type, Action<Intent>> _actions;
   late Map<ShortcutActivator, Intent> _shortcuts;
 
-  bool get isEnabled => widget.child != null;
+  bool get _isEnabled => widget.child != null;
 
   @override
   void initState() {
@@ -86,21 +86,25 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
       parent: _controller,
       curve: Styles.basicCurve,
     );
-    _rotateAnimation = Tween(begin: 0.0, end: 0.5).animate(
+    _rotateAnimation = Tween<double>(begin: 0.0, end: 0.5).animate(
       CurvedAnimation(
         parent: _controller,
         curve: Styles.basicCurve,
       ),
     );
-    focusNode = FocusNode(canRequestFocus: isEnabled);
-    if (widget.autofocus) focusNode!.requestFocus();
-    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
-    _shortcuts = const {
+    focusNode = FocusNode(canRequestFocus: _isEnabled);
+    if (widget.autofocus) {
+      focusNode!.requestFocus();
+    }
+    _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
+    _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
       SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
     };
     expanded = widget.isExpanded;
-    if (expanded) _controller.forward();
+    if (expanded) {
+      _controller.forward();
+    }
   }
 
   @override
@@ -128,11 +132,13 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
   }
 
   void _handleFocusChange(bool hasFocus) {
-    if (mounted) setState(() => _focused = hasFocus);
+    if (mounted) {
+      setState(() => _focused = hasFocus);
+    }
   }
 
-  void _handleTap() async {
-    if (isEnabled) {
+  Future<void> _handleTap() async {
+    if (_isEnabled) {
       if (expanded) {
         await _controller.reverse();
         setState(() => expanded = false);
@@ -143,13 +149,15 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
     }
   }
 
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
+  void _handleFocus(bool focus) {
+    if (focus != _focused && mounted) {
+      setState(() => _focused = focus);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return Padding(
       padding: Styles.normal,
@@ -158,15 +166,15 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
           label: widget.semanticLabel,
           container: true,
           enabled: true,
-          focusable: isEnabled,
+          focusable: _isEnabled,
           focused: _focused,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               FocusableActionDetector(
-                enabled: isEnabled && widget.isFocusable,
+                enabled: _isEnabled && widget.isFocusable,
                 focusNode: focusNode,
-                autofocus: !isEnabled ? false : widget.autofocus,
+                autofocus: _isEnabled && widget.autofocus,
                 onShowFocusHighlight: _handleFocus,
                 onFocusChange: _handleFocusChange,
                 actions: _actions,
@@ -179,7 +187,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.vertical(
                       top: const Radius.circular(Styles.borderRadiusSize),
-                      bottom: expanded ? const Radius.circular(0) : const Radius.circular(Styles.borderRadiusSize),
+                      bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize),
                     ),
                     border: Border.all(
                       color: ArnaDynamicColor.resolve(
@@ -193,7 +201,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                   child: ClipRRect(
                     borderRadius: BorderRadius.vertical(
                       top: const Radius.circular(Styles.borderRadiusSize - 1),
-                      bottom: expanded ? const Radius.circular(0) : const Radius.circular(Styles.borderRadiusSize - 1),
+                      bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize - 1),
                     ),
                     child: ArnaListTile(
                       leading: widget.leading,
@@ -212,7 +220,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                                   Icons.arrow_back_ios_new_outlined,
                                   size: Styles.arrowSize,
                                   color: ArnaDynamicColor.resolve(
-                                    isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
+                                    _isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
                                     context,
                                   ),
                                 ),
@@ -221,8 +229,8 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                           ),
                         ],
                       ),
-                      onTap: isEnabled && widget.isFocusable ? _handleTap : null,
-                      actionable: isEnabled && widget.isFocusable,
+                      onTap: _isEnabled && widget.isFocusable ? _handleTap : null,
+                      actionable: _isEnabled && widget.isFocusable,
                       cursor: widget.cursor,
                     ),
                   ),
@@ -232,7 +240,6 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(0),
                       bottom: Radius.circular(Styles.borderRadiusSize + 1),
                     ),
                     color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
@@ -244,7 +251,6 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.vertical(
-                        top: Radius.circular(0),
                         bottom: Radius.circular(Styles.borderRadiusSize),
                       ),
                       color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
@@ -253,7 +259,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                     child: SizeTransition(
                       axisAlignment: 1,
                       sizeFactor: _animation,
-                      child: widget.child!,
+                      child: widget.child,
                     ),
                   ),
                 ),

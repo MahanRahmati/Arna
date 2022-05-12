@@ -452,7 +452,7 @@ class ArnaScrollBehavior extends ScrollBehavior {
   const ArnaScrollBehavior();
 
   @override
-  Widget buildScrollbar(context, Widget child, ScrollableDetails details) {
+  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
     // When modifying this function, consider modifying the implementation in the base class as well.
     switch (axisDirectionToAxis(details.direction)) {
       case Axis.horizontal:

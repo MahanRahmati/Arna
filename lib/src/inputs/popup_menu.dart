@@ -65,12 +65,11 @@ class ArnaPopupMenuDivider extends ArnaPopupMenuEntry<Never> {
   /// Creates a horizontal divider for a popup menu.
   const ArnaPopupMenuDivider({
     Key? key,
-  })  : height = (Styles.smallPadding * 2) + 1,
-        super(key: key);
+  }) : super(key: key);
 
   /// The height of the divider entry.
   @override
-  final double height;
+  double get height => (Styles.smallPadding * 2) + 1;
 
   @override
   bool represents(void value) => false;
@@ -123,7 +122,9 @@ class _RenderArnaMenuItem extends RenderShiftedBox {
 
   @override
   Size computeDryLayout(BoxConstraints constraints) {
-    if (child == null) return Size.zero;
+    if (child == null) {
+      return Size.zero;
+    }
     return child!.getDryLayout(constraints);
   }
 
@@ -264,9 +265,9 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W>
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return ArnaBaseWidget(
-      builder: (context, enabled, hover, focused, pressed, selected) {
+      builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
         enabled = widget.enabled;
         selected = widget.selected;
         return AnimatedContainer(
@@ -558,7 +559,9 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
     int? selectedItemIndex;
     if (initialValue != null) {
       for (int index = 0; selectedItemIndex == null && index < items.length; index += 1) {
-        if (items[index].represents(initialValue)) selectedItemIndex = index;
+        if (items[index].represents(initialValue)) {
+          selectedItemIndex = index;
+        }
       }
     }
 

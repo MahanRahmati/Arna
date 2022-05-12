@@ -77,8 +77,12 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
       parent: _controller,
       curve: Styles.basicCurve,
     );
-    if (widget.controller == null) _createLocalController();
-    if (widget.showSearch) _controller.forward();
+    if (widget.controller == null) {
+      _createLocalController();
+    }
+    if (widget.showSearch) {
+      _controller.forward();
+    }
     focusNode = FocusNode(canRequestFocus: widget.showSearch);
   }
 
@@ -117,7 +121,9 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    if (_textcontroller != null) _registerController();
+    if (_textcontroller != null) {
+      _registerController();
+    }
   }
 
   void _registerController() {
@@ -129,7 +135,9 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
     assert(_textcontroller == null);
     _textcontroller =
         value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
-    if (!restorePending) _registerController();
+    if (!restorePending) {
+      _registerController();
+    }
   }
 
   @override

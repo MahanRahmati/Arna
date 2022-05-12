@@ -120,7 +120,9 @@ class ArnaTextTheme with Diagnosticable {
   ///  * [copyWith] is used instead of [merge] when you wish to override individual fields in the [ArnaTextTheme]
   ///    instead of merging all of the fields of two [ArnaTextTheme]s.
   ArnaTextTheme merge(ArnaTextTheme? other) {
-    if (other == null) return this;
+    if (other == null) {
+      return this;
+    }
     return copyWith(
       titleLargeTextStyle: _titleLargeTextStyle?.merge(other._titleLargeTextStyle) ?? other._titleLargeTextStyle,
       titleTextStyle: _titleTextStyle?.merge(other._titleTextStyle) ?? other._titleTextStyle,
@@ -218,8 +220,12 @@ class ArnaTextTheme with Diagnosticable {
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other.runtimeType != runtimeType) return false;
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
     return other is ArnaTextTheme &&
         _titleLargeTextStyle == other._titleLargeTextStyle &&
         _titleTextStyle == other._titleTextStyle &&

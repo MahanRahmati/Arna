@@ -60,15 +60,15 @@ class ArnaBottomBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
-    bool buttonSelected = selected;
+    final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    final bool buttonSelected = selected;
     return Semantics(
       selected: selected,
       container: true,
       child: Padding(
         padding: Styles.small,
         child: ArnaBaseWidget(
-          builder: (context, enabled, hover, focused, pressed, selected) {
+          builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
             selected = buttonSelected;
             return Stack(
               alignment: Alignment.topRight,
@@ -149,7 +149,6 @@ class ArnaBottomBarItem extends StatelessWidget {
             );
           },
           onPressed: onPressed,
-          tooltipMessage: null,
           isFocusable: isFocusable,
           autofocus: autofocus,
           cursor: cursor,

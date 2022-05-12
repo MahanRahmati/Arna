@@ -37,7 +37,7 @@ class ArnaTheme extends StatelessWidget {
   /// Resolves all the colors defined in that [ArnaThemeData] against the given [BuildContext] on a best-effort basis.
   static ArnaThemeData of(BuildContext context) {
     final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return (inheritedTheme?.theme.data ?? ArnaThemeData.light());
+    return inheritedTheme?.theme.data ?? ArnaThemeData.light();
   }
 
   /// Retrieves the [Brightness] to use for descendant Arna widgets, based on the value of [ArnaThemeData.brightness]

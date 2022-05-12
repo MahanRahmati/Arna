@@ -35,10 +35,10 @@ class ArnaLinkedButtons extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const SizedBox(height: Styles.buttonSize, width: 0.5),
-            ...buttons.map((button) {
-              int index = buttons.indexOf(button);
-              int length = buttons.length;
-              TextDirection textDirection = Directionality.of(context);
+            ...buttons.map((ArnaLinkedButton button) {
+              final int index = buttons.indexOf(button);
+              final int length = buttons.length;
+              final TextDirection textDirection = Directionality.of(context);
               return _ArnaLinkedItem(
                 button: button,
                 first: _isFirstButton(index, length, textDirection),
@@ -74,11 +74,11 @@ class _ArnaLinkedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
-    Color accent = button.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color accent = button.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return ArnaBaseWidget(
-      builder: (context, enabled, hover, focused, pressed, selected) {
+      builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
         return AnimatedContainer(
           height: Styles.buttonSize - 2,
           duration: Styles.basicDuration,
@@ -86,8 +86,8 @@ class _ArnaLinkedItem extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.horizontal(
-              left: first ? const Radius.circular(Styles.borderRadiusSize - 1) : const Radius.circular(0),
-              right: last ? const Radius.circular(Styles.borderRadiusSize - 1) : const Radius.circular(0),
+              left: first ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
+              right: last ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
             ),
             border: Border.all(color: ArnaDynamicColor.outerColor(accent).withAlpha(focused ? 255 : 0)),
             color: !enabled
@@ -111,7 +111,7 @@ class _ArnaLinkedItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsetsDirectional.only(end: button.label != null ? Styles.padding : 0),
                   child: Icon(
-                    button.icon!,
+                    button.icon,
                     size: Styles.iconSize,
                     color: ArnaDynamicColor.resolve(
                       !enabled
@@ -159,7 +159,6 @@ class _ArnaLinkedItem extends StatelessWidget {
 class ArnaLinkedButton {
   /// Creates a linked button.
   const ArnaLinkedButton({
-    Key? key,
     this.label,
     this.icon,
     required this.onPressed,

@@ -55,7 +55,7 @@ class ArnaColorButton<T> extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (context, enabled, hover, focused, pressed, selected) {
+        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
           selected = value == groupValue;
           return Stack(
             alignment: Alignment.center,

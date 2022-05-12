@@ -35,7 +35,7 @@ class ArnaDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool ltr = Directionality.of(context) == TextDirection.ltr;
+    final bool ltr = Directionality.of(context) == TextDirection.ltr;
     return Semantics(
       scopesRoute: true,
       namesRoute: true,
@@ -50,8 +50,8 @@ class ArnaDrawer extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.horizontal(
-            left: ltr ? const Radius.circular(0) : const Radius.circular(Styles.drawerBorderRadiusSize),
-            right: ltr ? const Radius.circular(Styles.drawerBorderRadiusSize) : const Radius.circular(0),
+            left: ltr ? Radius.zero : const Radius.circular(Styles.drawerBorderRadiusSize),
+            right: ltr ? const Radius.circular(Styles.drawerBorderRadiusSize) : Radius.zero,
           ),
           color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
         ),
@@ -119,7 +119,9 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
       vsync: this,
     );
     _controller.addListener(_animationChanged);
-    if (widget.isDrawerOpen) open();
+    if (widget.isDrawerOpen) {
+      open();
+    }
   }
 
   @override
@@ -187,7 +189,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: SlideTransition(
-                      position: Tween(begin: const Offset(-1, 0), end: const Offset(0, 0)).animate(_controller),
+                      position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero).animate(_controller),
                       child: widget.drawer,
                     ),
                   ),

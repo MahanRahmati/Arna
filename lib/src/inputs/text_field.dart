@@ -586,7 +586,9 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   void initState() {
     super.initState();
     _selectionGestureDetectorBuilder = _ArnaTextFieldSelectionGestureDetectorBuilder(state: this);
-    if (widget.controller == null) _createLocalController();
+    if (widget.controller == null) {
+      _createLocalController();
+    }
     _focusNode = FocusNode(canRequestFocus: widget.enabled ?? true);
     _effectiveFocusNode.canRequestFocus = widget.enabled ?? true;
     _effectiveFocusNode.addListener(_handleFocusChanged);
@@ -618,7 +620,9 @@ class _ArnaTextFieldState extends State<ArnaTextField>
 
   @override
   void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    if (_controller != null) _registerController();
+    if (_controller != null) {
+      _registerController();
+    }
   }
 
   void _registerController() {
@@ -630,7 +634,9 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   void _createLocalController([TextEditingValue? value]) {
     assert(_controller == null);
     _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
-    if (!restorePending) _registerController();
+    if (!restorePending) {
+      _registerController();
+    }
   }
 
   @override
@@ -659,13 +665,21 @@ class _ArnaTextFieldState extends State<ArnaTextField>
       return false;
     }
 
-    if (_effectiveController.selection.isCollapsed) return false;
+    if (_effectiveController.selection.isCollapsed) {
+      return false;
+    }
 
-    if (cause == SelectionChangedCause.keyboard) return false;
+    if (cause == SelectionChangedCause.keyboard) {
+      return false;
+    }
 
-    if (cause == SelectionChangedCause.longPress) return true;
+    if (cause == SelectionChangedCause.longPress) {
+      return true;
+    }
 
-    if (_effectiveController.text.isNotEmpty) return true;
+    if (_effectiveController.text.isNotEmpty) {
+      return true;
+    }
 
     return false;
   }
@@ -705,11 +719,13 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   }
 
   void _handleHover(bool hovering) {
-    if (hovering != _isHovering) setState(() => _isHovering = hovering);
+    if (hovering != _isHovering) {
+      setState(() => _isHovering = hovering);
+    }
   }
 
   @override
-  bool get wantKeepAlive => _controller?.value.text.isNotEmpty == true;
+  bool get wantKeepAlive => _controller?.value.text.isNotEmpty ?? false;
 
   bool _shouldShowAttachment({
     required ArnaOverlayVisibilityMode attachment,
@@ -771,7 +787,9 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   Widget _addTextDependentAttachments(Widget editableText) {
     // If there are no surrounding widgets, just return the core editable text
     // part.
-    if (!_hasDecoration) return editableText;
+    if (!_hasDecoration) {
+      return editableText;
+    }
 
     // Otherwise, listen to the current state of the text entry.
     return ValueListenableBuilder<TextEditingValue>(
@@ -785,7 +803,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             if (_showPrefixWidget(text!))
               Padding(
                 padding: Styles.horizontal,
-                child: widget.prefix!,
+                child: widget.prefix,
               ),
             // In the middle part, stack the hintText on top of the main EditableText
             // if needed.
@@ -819,7 +837,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             if (_showSuffixWidget(text))
               Padding(
                 padding: Styles.horizontal,
-                child: widget.suffix!,
+                child: widget.suffix,
               )
             // Otherwise, try to show a clear button if its visibility mode matches.
             else if (_showClearButton(text))
@@ -922,7 +940,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         ),
     ];
 
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     final Widget paddedEditable = Padding(
       padding: Styles.normal,
@@ -974,7 +992,6 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             ),
             cursorOpacityAnimates: true,
             cursorOffset: cursorOffset,
-            paintCursorAboveText: false,
             autocorrectionTextRectColor: accent.withOpacity(0.21),
             selectionHeightStyle: widget.selectionHeightStyle,
             selectionWidthStyle: widget.selectionWidthStyle,

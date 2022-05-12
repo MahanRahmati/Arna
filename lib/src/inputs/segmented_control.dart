@@ -81,8 +81,12 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
   T? _pressedKey;
 
   void _onPressed(T currentKey) {
-    if (currentKey == _pressedKey) return;
-    if (currentKey != widget.groupValue) widget.onValueChanged(currentKey);
+    if (currentKey == _pressedKey) {
+      return;
+    }
+    if (currentKey != widget.groupValue) {
+      widget.onValueChanged(currentKey);
+    }
   }
 
   // Determines if this is the first child that is being laid out.
@@ -99,7 +103,7 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
 
   @override
   Widget build(BuildContext context) {
-    Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return Padding(
       padding: Styles.small,
@@ -114,10 +118,10 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const SizedBox(height: Styles.buttonSize, width: 0.5),
-            ...widget.children.keys.map((item) {
-              int index = widget.children.keys.toList().indexOf(item);
-              int length = widget.children.length;
-              TextDirection textDirection = Directionality.of(context);
+            ...widget.children.keys.map((T item) {
+              final int index = widget.children.keys.toList().indexOf(item);
+              final int length = widget.children.length;
+              final TextDirection textDirection = Directionality.of(context);
               return _ArnaSegmentedControlItem(
                 label: widget.children[item],
                 itemSelected: widget.groupValue == item,
@@ -176,7 +180,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaBaseWidget(
-      builder: (context, enabled, hover, focused, pressed, selected) {
+      builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
         selected = itemSelected;
         return AnimatedContainer(
           height: Styles.buttonSize - 2,
@@ -185,8 +189,8 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.horizontal(
-              left: first ? const Radius.circular(Styles.borderRadiusSize - 1) : const Radius.circular(0),
-              right: last ? const Radius.circular(Styles.borderRadiusSize - 1) : const Radius.circular(0),
+              left: first ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
+              right: last ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
             ),
             border: Border.all(
               color: selected

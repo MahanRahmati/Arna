@@ -77,7 +77,9 @@ class ArnaTooltip extends StatefulWidget {
       // Avoid concurrent modification.
       final List<_ArnaTooltipState> openedTooltips = _openedTooltips.toList();
       for (final _ArnaTooltipState state in openedTooltips) {
-        if (state == current) continue;
+        if (state == current) {
+          continue;
+        }
         state._concealTooltip();
       }
     }
@@ -85,7 +87,9 @@ class ArnaTooltip extends StatefulWidget {
 
   // Causes the most recently concealed tooltip to be revealed. Only called for mouse hover exit detections.
   static void _revealLastTooltip() {
-    if (_openedTooltips.isNotEmpty) _openedTooltips.last._revealTooltip();
+    if (_openedTooltips.isNotEmpty) {
+      _openedTooltips.last._revealTooltip();
+    }
   }
 
   /// Dismiss all of the tooltips that are currently shown on the screen.
@@ -178,15 +182,21 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
 
   // Forces a rebuild if a mouse has been added or removed.
   void _handleMouseTrackerChange() {
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
     final bool mouseIsConnected = RendererBinding.instance.mouseTracker.mouseIsConnected;
-    if (mouseIsConnected != _mouseIsConnected) setState(() => _mouseIsConnected = mouseIsConnected);
+    if (mouseIsConnected != _mouseIsConnected) {
+      setState(() => _mouseIsConnected = mouseIsConnected);
+    }
   }
 
   void _handleStatusChanged(AnimationStatus status) {
     // If this tip is concealed, don't remove it, even if it is dismissed, so that we can reveal it later, unless it
     // has explicitly been hidden with _dismissTooltip.
-    if (status == AnimationStatus.dismissed && (_forceRemoval || !_isConcealed)) _removeEntry();
+    if (status == AnimationStatus.dismissed && (_forceRemoval || !_isConcealed)) {
+      _removeEntry();
+    }
   }
 
   void _dismissTooltip({bool immediately = false}) {
@@ -226,7 +236,9 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     _dismissTimer = null;
     _showTimer?.cancel();
     _showTimer = null;
-    if (_entry != null) _entry!.remove();
+    if (_entry != null) {
+      _entry!.remove();
+    }
     _controller.reverse();
   }
 
@@ -252,12 +264,16 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   ///
   /// Returns `false` when the tooltip shouldn't be shown or when the tooltip was already visible.
   bool ensureTooltipVisible() {
-    if (!_visible) return false;
+    if (!_visible) {
+      return false;
+    }
     _showTimer?.cancel();
     _showTimer = null;
     _forceRemoval = false;
     if (_isConcealed) {
-      if (_mouseIsConnected) ArnaTooltip._concealOtherTooltips(this);
+      if (_mouseIsConnected) {
+        ArnaTooltip._concealOtherTooltips(this);
+      }
       _revealTooltip();
       return true;
     }
@@ -276,12 +292,16 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   static final Set<_ArnaTooltipState> _mouseIn = <_ArnaTooltipState>{};
 
   void _handleMouseEnter() {
-    if (mounted) _showTooltip();
+    if (mounted) {
+      _showTooltip();
+    }
   }
 
   void _handleMouseExit({bool immediately = false}) {
     // If the tip is currently covered, we can just remove it without waiting.
-    if (mounted) _dismissTooltip(immediately: _isConcealed || immediately);
+    if (mounted) {
+      _dismissTooltip(immediately: _isConcealed || immediately);
+    }
   }
 
   void _createNewEntry() {
@@ -311,7 +331,9 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     SemanticsService.tooltip(_tooltipMessage);
     // Hovered tooltips shouldn't show more than one at once. For example, a chip with a delete icon shouldn't show
     // both the delete icon tooltip and the chip tooltip at the same time.
-    if (_mouseIsConnected) ArnaTooltip._concealOtherTooltips(this);
+    if (_mouseIsConnected) {
+      ArnaTooltip._concealOtherTooltips(this);
+    }
     assert(!ArnaTooltip._openedTooltips.contains(this));
     ArnaTooltip._openedTooltips.add(this);
   }
@@ -323,14 +345,20 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     _dismissTimer = null;
     _showTimer?.cancel();
     _showTimer = null;
-    if (!_isConcealed) _entry?.remove();
+    if (!_isConcealed) {
+      _entry?.remove();
+    }
     _isConcealed = false;
     _entry = null;
-    if (_mouseIsConnected) ArnaTooltip._revealLastTooltip();
+    if (_mouseIsConnected) {
+      ArnaTooltip._revealLastTooltip();
+    }
   }
 
   void _handlePointerEvent(PointerEvent event) {
-    if (_entry == null) return;
+    if (_entry == null) {
+      return;
+    }
     if (event is PointerUpEvent || event is PointerCancelEvent) {
       _handleMouseExit();
     } else if (event is PointerDownEvent) {
@@ -340,7 +368,9 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
 
   @override
   void deactivate() {
-    if (_entry != null) _dismissTooltip(immediately: true);
+    if (_entry != null) {
+      _dismissTooltip(immediately: true);
+    }
     _showTimer?.cancel();
     super.deactivate();
   }
@@ -357,14 +387,18 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   void _handlePress() {
     _pressActivated = true;
     final bool tooltipCreated = ensureTooltipVisible();
-    if (tooltipCreated && _enableFeedback) ArnaFeedback.forLongPress(context);
+    if (tooltipCreated && _enableFeedback) {
+      ArnaFeedback.forLongPress(context);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     // If message is empty then no need to create a tooltip overlay to show the empty black container so just return
     // the wrapped child as is.
-    if (widget.message == null && widget.richMessage == null) return widget.child;
+    if (widget.message == null && widget.richMessage == null) {
+      return widget.child;
+    }
 
     _preferBelow = widget.preferBelow ?? true;
     _excludeFromSemantics = widget.excludeFromSemantics ?? false;
@@ -497,7 +531,9 @@ class _ArnaTooltipOverlay extends StatelessWidget {
       ),
     );
 
-    if (onEnter != null || onExit != null) result = MouseRegion(onEnter: onEnter, onExit: onExit, child: result);
+    if (onEnter != null || onExit != null) {
+      result = MouseRegion(onEnter: onEnter, onExit: onExit, child: result);
+    }
 
     return Positioned.fill(
       bottom: MediaQuery.maybeOf(context)?.viewInsets.bottom ?? 0.0,

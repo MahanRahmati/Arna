@@ -111,15 +111,16 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
         duration: Styles.basicDuration,
         debugLabel: 'ArnaBaseWidget',
         lowerBound: 0.7,
-        upperBound: 1.0,
         vsync: this,
       );
       _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     }
     focusNode = FocusNode(canRequestFocus: _isEnabled);
-    if (widget.autofocus) focusNode!.requestFocus();
-    _actions = {ActivateIntent: CallbackAction(onInvoke: (_) => _handleTap())};
-    _shortcuts = const {
+    if (widget.autofocus) {
+      focusNode!.requestFocus();
+    }
+    _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
+    _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
       SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
     };
@@ -130,7 +131,9 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
     super.didUpdateWidget(oldWidget);
     if (widget.onPressed != oldWidget.onPressed || widget.onLongPress != oldWidget.onLongPress) {
       focusNode!.canRequestFocus = _isEnabled;
-      if (!_isEnabled) _hover = _pressed = false;
+      if (!_isEnabled) {
+        _hover = _pressed = false;
+      }
     }
   }
 
@@ -138,66 +141,88 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   void dispose() {
     focusNode!.dispose();
     focusNode = null;
-    if (widget.showAnimation) _controller.dispose();
+    if (widget.showAnimation) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 
   void _handleFocusChange(bool hasFocus) {
     setState(() {
       _focused = hasFocus;
-      if (!hasFocus) _pressed = false;
+      if (!hasFocus) {
+        _pressed = false;
+      }
     });
   }
 
   Future<void> _handleTap() async {
     if (_isEnabled) {
-      if (mounted) setState(() => _pressed = true);
+      if (mounted) {
+        setState(() => _pressed = true);
+      }
       widget.onPressed!();
       if (widget.showAnimation) {
         _controller.reverse().then((_) {
-          if (mounted) _controller.forward();
+          if (mounted) {
+            _controller.forward();
+          }
         });
       }
-      if (mounted) setState(() => _pressed = false);
+      if (mounted) {
+        setState(() => _pressed = false);
+      }
     }
   }
 
   void _handleLongPress() {
-    if (_isEnabled && widget.onLongPress != null) widget.onLongPress!();
+    if (_isEnabled && widget.onLongPress != null) {
+      widget.onLongPress!();
+    }
   }
 
   void _handlePressDown(_) {
     if (!_pressed && mounted) {
-      if (widget.showAnimation) _controller.reverse();
+      if (widget.showAnimation) {
+        _controller.reverse();
+      }
       setState(() => _pressed = true);
     }
   }
 
   void _handleTapUp(_) {
     if (_pressed && mounted) {
-      if (widget.showAnimation) _controller.forward();
+      if (widget.showAnimation) {
+        _controller.forward();
+      }
       setState(() => _pressed = false);
     }
   }
 
   void _handleLongPressUp() {
     if (_pressed && mounted) {
-      if (widget.showAnimation) _controller.forward();
+      if (widget.showAnimation) {
+        _controller.forward();
+      }
       setState(() => _pressed = false);
     }
   }
 
-  void _handleHover(hover) {
-    if (hover != _hover && mounted) setState(() => _hover = hover);
+  void _handleHover(bool hover) {
+    if (hover != _hover && mounted) {
+      setState(() => _hover = hover);
+    }
   }
 
-  void _handleFocus(focus) {
-    if (focus != _focused && mounted) setState(() => _focused = focus);
+  void _handleFocus(bool focus) {
+    if (focus != _focused && mounted) {
+      setState(() => _focused = focus);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget child = widget.builder(context, _isEnabled, _hover, _focused, _pressed, _selected);
+    final Widget child = widget.builder(context, _isEnabled, _hover, _focused, _pressed, _selected);
 
     return ArnaTooltip(
       message: widget.tooltipMessage,
@@ -222,7 +247,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
             child: FocusableActionDetector(
               enabled: _isEnabled && widget.isFocusable,
               focusNode: focusNode,
-              autofocus: !_isEnabled ? false : widget.autofocus,
+              autofocus: _isEnabled && widget.autofocus,
               mouseCursor: widget.cursor,
               onShowHoverHighlight: _handleHover,
               onShowFocusHighlight: _handleFocus,

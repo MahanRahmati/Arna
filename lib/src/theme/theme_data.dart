@@ -20,7 +20,7 @@ class ArnaThemeData with Diagnosticable {
   ///  * [ArnaThemeData.light], which creates a light theme.
   ///  * [ArnaThemeData.dark], which creates dark theme.
   factory ArnaThemeData({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
-    ArnaTextTheme defaultTextTheme = brightness == Brightness.dark ? ArnaTypography.dark : ArnaTypography.light;
+    final ArnaTextTheme defaultTextTheme = brightness == Brightness.dark ? ArnaTypography.dark : ArnaTypography.light;
     final ArnaTextTheme effectiveTextTheme = textTheme ?? defaultTextTheme;
 
     return ArnaThemeData.raw(
@@ -37,6 +37,12 @@ class ArnaThemeData with Diagnosticable {
   /// with the [ArnaThemeData] constructor.
   const ArnaThemeData.raw({required this.brightness, required this.accentColor, required this.textTheme});
 
+  /// A default light theme.
+  factory ArnaThemeData.light() => ArnaThemeData(brightness: Brightness.light, textTheme: ArnaTypography.light);
+
+  /// A default dark theme.
+  factory ArnaThemeData.dark() => ArnaThemeData(brightness: Brightness.dark, textTheme: ArnaTypography.dark);
+
   /// The brightness override for Arna descendants.
   /// See also:
   ///
@@ -52,12 +58,6 @@ class ArnaThemeData with Diagnosticable {
 
   /// Text styles used by Arna widgets.
   final ArnaTextTheme textTheme;
-
-  /// A default light theme.
-  factory ArnaThemeData.light() => ArnaThemeData(brightness: Brightness.light, textTheme: ArnaTypography.light);
-
-  /// A default dark theme.
-  factory ArnaThemeData.dark() => ArnaThemeData(brightness: Brightness.dark, textTheme: ArnaTypography.dark);
 
   /// Creates a copy of this theme but with the given fields replaced with the new values.
   ArnaThemeData copyWith({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
@@ -83,7 +83,9 @@ class ArnaThemeData with Diagnosticable {
 
   @override
   bool operator ==(Object other) {
-    if (other.runtimeType != runtimeType) return false;
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
     return other is ArnaThemeData &&
         other.brightness == brightness &&
         other.accentColor == accentColor &&

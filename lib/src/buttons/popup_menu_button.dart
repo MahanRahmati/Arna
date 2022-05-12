@@ -188,7 +188,9 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
         initialValue: widget.initialValue,
         position: position,
       ).then<void>((T? newValue) {
-        if (!mounted) return null;
+        if (!mounted) {
+          return null;
+        }
         if (newValue == null) {
           widget.onCanceled?.call();
           return null;

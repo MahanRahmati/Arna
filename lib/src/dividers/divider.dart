@@ -13,7 +13,7 @@ class ArnaDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget container = Center(
+    final Widget container = Center(
       child: Container(
         color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
       ),

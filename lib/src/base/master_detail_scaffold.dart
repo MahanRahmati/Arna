@@ -73,8 +73,8 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
 
 /// The [State] for a [ArnaMasterDetailScaffold].
 class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
-  var _index = -1;
-  var _previousIndex = 0;
+  int _index = -1;
+  int _previousIndex = 0;
 
   void _setIndex(int index) {
     _previousIndex = _index;
@@ -344,8 +344,8 @@ class _NestedPageState extends State<_NestedPage> {
   ArnaPageRoute<void> _detailPageRoute(int index) {
     return ArnaPageRoute<dynamic>(
       builder: (BuildContext context) {
-        final page = widget.items[_currentIndex];
-        String tooltip = MaterialLocalizations.of(context).backButtonTooltip;
+        final MasterNavigationItem page = widget.items[_currentIndex];
+        final String tooltip = MaterialLocalizations.of(context).backButtonTooltip;
         return WillPopScope(
           onWillPop: () async {
             _goBack();
@@ -382,10 +382,10 @@ class _NestedPageState extends State<_NestedPage> {
       onWillPop: () async => !await _navigatorKey.currentState!.maybePop(),
       child: Navigator(
         key: _navigatorKey,
-        onGenerateInitialRoutes: (navigator, initialRoute) {
-          return [
-            ArnaPageRoute(
-              builder: (context) {
+        onGenerateInitialRoutes: (NavigatorState navigator, String initialRoute) {
+          return <Route<dynamic>>[
+            ArnaPageRoute<dynamic>(
+              builder: (BuildContext context) {
                 return ArnaScaffold(
                   headerBarLeading: widget.headerBarLeading,
                   title: widget.title,
@@ -462,7 +462,7 @@ class _MasterItemBuilder extends StatelessWidget {
                 subtitle: items[index].subtitle,
                 trailing: items[index].trailing,
                 onPressed: onPressed,
-                itemSelected: isNested ? false : index == currentIndex,
+                itemSelected: !isNested && (index == currentIndex),
                 index: index,
                 isFocusable: items[index].isFocusable,
                 autofocus: items[index].autofocus,

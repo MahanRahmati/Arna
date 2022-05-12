@@ -75,7 +75,9 @@ class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateM
       parent: _controller,
       curve: Styles.basicCurve,
     );
-    if (widget.showBanner) _controller.forward();
+    if (widget.showBanner) {
+      _controller.forward();
+    }
   }
 
   @override
@@ -127,7 +129,7 @@ class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateM
         break;
     }
 
-    Widget banner = Semantics(
+    final Widget banner = Semantics(
       container: true,
       liveRegion: true,
       child: Column(

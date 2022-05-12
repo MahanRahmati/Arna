@@ -57,12 +57,12 @@ class ArnaMasterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
-    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (context, enabled, hover, focused, pressed, selected) {
+        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
           selected = itemSelected;
           return AnimatedContainer(
             constraints: const BoxConstraints(minHeight: Styles.masterItemMinHeight),
@@ -87,7 +87,7 @@ class ArnaMasterItem extends StatelessWidget {
             ),
             padding: Styles.tilePadding,
             child: Row(
-              children: [
+              children: <Widget>[
                 if (leading != null)
                   Padding(
                     padding: Styles.normal,

@@ -105,13 +105,15 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   final String? semanticLabel;
 
   void _handleTap() {
-    if (onChanged != null) onChanged!(value);
+    if (onChanged != null) {
+      onChanged!(value);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return ArnaListTile(
-      leading: ArnaRadio(
+      leading: ArnaRadio<T>(
         value: value,
         groupValue: groupValue,
         onChanged: onChanged,

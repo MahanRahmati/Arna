@@ -361,7 +361,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///  * [resolve], which is similar to this function, but returns a non-nullable value, and does not allow a null
   ///    `resolvable` color.
   static Color? maybeResolve(Color? resolvable, BuildContext context) {
-    if (resolvable == null) return null;
+    if (resolvable == null) {
+      return null;
+    }
     return (resolvable is ArnaDynamicColor) ? resolvable.resolveFrom(context) : resolvable;
   }
 
@@ -379,14 +381,14 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 
   /// Applies an overlay color to a [backgroundColor].
   static Color applyOverlay(Color backgroundColor) {
-    Color foregroundColor = onBackgroundColor(backgroundColor);
+    final Color foregroundColor = onBackgroundColor(backgroundColor);
     return Color.alphaBlend(foregroundColor.withOpacity(0.1), backgroundColor);
   }
 
   /// The color to use when drawn outside of [color].
   static Color outerColor(Color color) {
-    double colorLuminance = color.computeLuminance();
-    Color foregroundColor = colorLuminance < 0.2 || colorLuminance > 0.8
+    final double colorLuminance = color.computeLuminance();
+    final Color foregroundColor = colorLuminance < 0.2 || colorLuminance > 0.8
         ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.49), color)
         : color;
     return Color.alphaBlend(foregroundColor, color);
@@ -394,8 +396,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 
   /// Computes the color that matches with [color] and [brightness].
   static Color matchingColor(Color color, Brightness brightness) {
-    double colorLuminance = color.computeLuminance();
-    Color foregroundColor = colorLuminance < 0.2 && brightness == Brightness.dark
+    final double colorLuminance = color.computeLuminance();
+    final Color foregroundColor = colorLuminance < 0.2 && brightness == Brightness.dark
         ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.49), color)
         : colorLuminance > 0.8 && brightness == Brightness.light
             ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.28), color)
@@ -430,10 +432,14 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// used ([Brightness.light] platform brightness and normal contrast).
   ArnaDynamicColor resolveFrom(BuildContext context) {
     Brightness brightness = Brightness.light;
-    if (_isPlatformBrightnessDependent) brightness = ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
+    if (_isPlatformBrightnessDependent) {
+      brightness = ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
+    }
 
     bool isHighContrastEnabled = false;
-    if (_isHighContrastDependent) isHighContrastEnabled = MediaQuery.maybeOf(context)?.highContrast ?? false;
+    if (_isHighContrastDependent) {
+      isHighContrastEnabled = MediaQuery.maybeOf(context)?.highContrast ?? false;
+    }
 
     final Color resolved = brightness == Brightness.light
         ? isHighContrastEnabled
@@ -461,8 +467,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    if (other.runtimeType != runtimeType) return false;
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
     return other is ArnaDynamicColor &&
         other.value == value &&
         other.color == color &&
@@ -495,14 +505,22 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    if (_debugLabel != null) properties.add(MessageProperty('debugLabel', _debugLabel!));
+    if (_debugLabel != null) {
+      properties.add(MessageProperty('debugLabel', _debugLabel!));
+    }
     properties.add(createArnaColorProperty('color', color));
-    if (_isPlatformBrightnessDependent) properties.add(createArnaColorProperty('darkColor', darkColor));
-    if (_isHighContrastDependent) properties.add(createArnaColorProperty('highContrastColor', highContrastColor));
+    if (_isPlatformBrightnessDependent) {
+      properties.add(createArnaColorProperty('darkColor', darkColor));
+    }
+    if (_isHighContrastDependent) {
+      properties.add(createArnaColorProperty('highContrastColor', highContrastColor));
+    }
     if (_isPlatformBrightnessDependent && _isHighContrastDependent) {
       properties.add(createArnaColorProperty('darkHighContrastColor', darkHighContrastColor));
     }
-    if (_debugResolveContext != null) properties.add(DiagnosticsProperty('last resolved', _debugResolveContext));
+    if (_debugResolveContext != null) {
+      properties.add(DiagnosticsProperty<Element>('last resolved', _debugResolveContext));
+    }
   }
 }
 

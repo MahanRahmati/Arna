@@ -61,13 +61,16 @@ class ArnaBorderlessButton extends StatelessWidget {
       case ButtonType.suggested:
         accent = ArnaColors.blue;
         break;
-      default:
+      case ButtonType.colored:
+        accent = accentColor ?? ArnaTheme.of(context).accentColor;
+        break;
+      case ButtonType.normal:
         accent = accentColor ?? ArnaTheme.of(context).accentColor;
     }
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (context, enabled, hover, focused, pressed, selected) {
+        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
           return AnimatedContainer(
             height: Styles.buttonSize,
             duration: Styles.basicDuration,

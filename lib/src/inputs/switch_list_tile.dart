@@ -96,10 +96,6 @@ class ArnaSwitchListTile extends StatelessWidget {
   /// The semantic label of the switch.
   final String? semanticLabel;
 
-  void _handleTap() {
-    if (onChanged != null) onChanged!(!value);
-  }
-
   @override
   Widget build(BuildContext context) {
     return ArnaListTile(
@@ -119,7 +115,7 @@ class ArnaSwitchListTile extends StatelessWidget {
           if (trailing != null) trailing!,
         ],
       ),
-      onTap: onChanged != null ? _handleTap : null,
+      onTap: onChanged != null ? () => onChanged!(!value) : null,
       actionable: true,
       cursor: cursor,
     );

@@ -56,15 +56,21 @@ class _ArnaListTileState extends State<ArnaListTile> {
   bool get isEnabled => widget.onTap != null;
 
   void _handleTap() {
-    if (isEnabled) widget.onTap!();
+    if (isEnabled) {
+      widget.onTap!();
+    }
   }
 
-  void _handleEnter(event) {
-    if (!_hover && mounted) setState(() => _hover = true);
+  void _handleEnter(dynamic event) {
+    if (!_hover && mounted) {
+      setState(() => _hover = true);
+    }
   }
 
-  void _handleExit(event) {
-    if (_hover && mounted) setState(() => _hover = false);
+  void _handleExit(dynamic event) {
+    if (_hover && mounted) {
+      setState(() => _hover = false);
+    }
   }
 
   @override

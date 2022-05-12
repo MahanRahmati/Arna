@@ -188,11 +188,16 @@ Future<T?> showArnaDialog<T>({
     barrierDismissible: barrierDismissible,
     transitionDuration: Styles.basicDuration,
     routeSettings: routeSettings,
-    pageBuilder: (context, animation, secondaryAnimation) => dialog,
-    transitionBuilder: (context, animation, secondaryAnimation, child) {
+    pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) => dialog,
+    transitionBuilder: (
+      BuildContext context,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+      Widget child,
+    ) {
       return isCompact(context)
           ? SlideTransition(
-              position: Tween(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+              position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
               child: FadeTransition(
                 opacity: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
                 child: child,

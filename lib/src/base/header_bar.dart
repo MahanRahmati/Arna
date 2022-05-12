@@ -53,7 +53,7 @@ class ArnaHeaderBar extends StatelessWidget {
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [...?actions],
+                      children: <Widget>[...?actions],
                     ),
                     middleSpacing: Styles.smallPadding,
                   ),

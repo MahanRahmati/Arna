@@ -57,15 +57,15 @@ class ArnaSideBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
-    bool buttonSelected = selected;
+    final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    final bool buttonSelected = selected;
     return Semantics(
       selected: selected,
       container: true,
       child: Padding(
         padding: Styles.small,
         child: ArnaBaseWidget(
-          builder: (context, enabled, hover, focused, pressed, selected) {
+          builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
             selected = buttonSelected;
             return Stack(
               alignment: compact ? Alignment.topRight : Alignment.centerRight,
@@ -108,7 +108,6 @@ class ArnaSideBarItem extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: Styles.padding - 1),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Padding(
                         padding: Styles.normal,
@@ -141,7 +140,7 @@ class ArnaSideBarItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (badge != null) compact ? badge! : Padding(padding: Styles.horizontal, child: badge!),
+                if (badge != null) compact ? badge! : Padding(padding: Styles.horizontal, child: badge),
               ],
             );
           },

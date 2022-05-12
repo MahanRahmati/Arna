@@ -87,18 +87,20 @@ class ArnaRadio<T> extends StatelessWidget {
   final String? semanticLabel;
 
   void _handleTap() {
-    if (onChanged != null) onChanged!(value);
+    if (onChanged != null) {
+      onChanged!(value);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
-    Brightness brightness = ArnaTheme.brightnessOf(context);
+    final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    final Brightness brightness = ArnaTheme.brightnessOf(context);
 
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (context, enabled, hover, focused, pressed, selected) {
+        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
           selected = value == groupValue;
           enabled = onChanged != null;
           return Stack(

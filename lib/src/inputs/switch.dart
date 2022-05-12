@@ -68,20 +68,16 @@ class ArnaSwitch extends StatelessWidget {
   /// The semantic label of the switch.
   final String? semanticLabel;
 
-  void _handleTap() {
-    if (onChanged != null) onChanged!(!value);
-  }
-
   @override
   Widget build(BuildContext context) {
-    Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
-    Brightness brightness = ArnaTheme.brightnessOf(context);
-    Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
+    final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
+    final Brightness brightness = ArnaTheme.brightnessOf(context);
+    final Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
 
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (context, enabled, hover, focused, pressed, selected) {
+        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
           enabled = onChanged != null;
           return Stack(
             alignment: Alignment.center,
@@ -155,7 +151,7 @@ class ArnaSwitch extends StatelessWidget {
             ],
           );
         },
-        onPressed: onChanged != null ? _handleTap : null,
+        onPressed: onChanged != null ? () => onChanged!(!value) : null,
         isFocusable: isFocusable,
         autofocus: autofocus,
         cursor: cursor,

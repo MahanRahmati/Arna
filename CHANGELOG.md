@@ -1,6 +1,7 @@
 ## 0.4.5
 
 - Update analysis_options
+- Update ArnaApp
 
 ## 0.4.4+1
 

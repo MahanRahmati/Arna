@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart' show DefaultCupertinoLocalizations;
 import 'package:flutter/material.dart' show DefaultMaterialLocalizations;
 import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 
-//TODO: Add routerConfig after 2.13
+//TODO: Add routerConfig when it is landed.
 
 /// An application that uses Arna design.
 ///

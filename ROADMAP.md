@@ -11,6 +11,7 @@
     - [x] ArnaBaseWidget
     - [x] ArnaBottomBarItem
     - [x] ArnaBottomBar
+    - [x] ArnaDivider
     - [x] ArnaDrawer
     - [x] ArnaFeedback
     - [x] ArnaHeaderBar
@@ -48,10 +49,6 @@
 
     - [ ] ArnaAlertDialog
     - [ ] ArnaPopupDialog
-
-  - Dividers (1/1)
-
-    - [x] ArnaDivider
 
   - Inputs (8/11)
 

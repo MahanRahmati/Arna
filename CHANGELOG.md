@@ -12,6 +12,7 @@
 - Update ArnaPageRoute
 - Update ArnaBadge
 - [BREAKING] Remove ArnaColumn
+- Move ArnaDivider to base
 
 ## 0.4.4+1
 

@@ -246,4 +246,7 @@ abstract class Styles {
 
   /// Color button border radius
   static BorderRadius colorButtonBorderRadius = const BorderRadius.all(Radius.circular(buttonSize));
+
+  /// Badge border radius
+  static BorderRadius badgeBorderRadius = const BorderRadius.all(Radius.circular(badgeSize));
 }

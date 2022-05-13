@@ -9,6 +9,8 @@
 - Update ArnaLinkedButtons
 - Update ArnaSegmentedControl
 - Move ArnaPopupMenuButton to popup_menu.dart
+- Update ArnaPageRoute
+- Update ArnaBadge
 
 ## 0.4.4+1
 

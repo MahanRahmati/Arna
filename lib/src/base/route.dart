@@ -22,8 +22,10 @@ class ArnaPageRoute<T> extends PageRoute<T> with ArnaRouteTransitionMixin<T> {
     required this.builder,
     super.settings,
     this.maintainState = true,
-    super.fullscreenDialog,
-  }) {
+    super.fullscreenDialog = false,
+  })  : assert(builder != null),
+        assert(maintainState != null),
+        assert(fullscreenDialog != null) {
     assert(opaque);
   }
 

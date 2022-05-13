@@ -174,7 +174,9 @@ class _WidgetsState extends State<Widgets> {
                         color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                       ),
                       title: "CheckBox",
-                      child: ArnaColumn(
+                      child: ArnaList(
+                        addBackground: true,
+                        addDivider: true,
                         children: <Widget>[
                           ArnaCheckBoxListTile(
                             value: _checkBox1,
@@ -206,7 +208,9 @@ class _WidgetsState extends State<Widgets> {
                         color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                       ),
                       title: "Radio",
-                      child: ArnaColumn(
+                      child: ArnaList(
+                        addBackground: true,
+                        addDivider: true,
                         children: <Widget>[
                           ArnaRadioListTile(
                             value: "1",
@@ -240,7 +244,9 @@ class _WidgetsState extends State<Widgets> {
                         color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                       ),
                       title: "Switch",
-                      child: ArnaColumn(
+                      child: ArnaList(
+                        addBackground: true,
+                        addDivider: true,
                         children: <Widget>[
                           ArnaSwitchListTile(
                             title: "Switch 1",
@@ -271,7 +277,9 @@ class _WidgetsState extends State<Widgets> {
                         color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                       ),
                       title: "List Tile",
-                      child: ArnaColumn(
+                      child: ArnaList(
+                        addBackground: true,
+                        addDivider: true,
                         children: <Widget>[
                           ArnaListTile(
                             title: "Title 1",
@@ -292,7 +300,9 @@ class _WidgetsState extends State<Widgets> {
                         color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                       ),
                       title: "Slider",
-                      child: ArnaColumn(
+                      child: ArnaList(
+                        addBackground: true,
+                        addDivider: true,
                         children: <Widget>[
                           ArnaSliderListTile(
                             title: "Title 1",

@@ -11,6 +11,7 @@
 - Move ArnaPopupMenuButton to popup_menu.dart
 - Update ArnaPageRoute
 - Update ArnaBadge
+- [BREAKING] Remove ArnaColumn
 
 ## 0.4.4+1
 

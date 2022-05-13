@@ -32,7 +32,6 @@ export 'package:arna/src/buttons/linked_buttons.dart';
 export 'package:arna/src/buttons/text_button.dart';
 export 'package:arna/src/containers/badge.dart';
 export 'package:arna/src/containers/card.dart';
-export 'package:arna/src/containers/column.dart';
 export 'package:arna/src/containers/expansion_panel.dart';
 export 'package:arna/src/containers/list.dart';
 export 'package:arna/src/containers/list_tile.dart';

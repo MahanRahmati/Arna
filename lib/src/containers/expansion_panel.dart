@@ -9,7 +9,7 @@ class ArnaExpansionPanel extends StatefulWidget {
   const ArnaExpansionPanel({
     super.key,
     this.leading,
-    this.title,
+    required this.title,
     this.subtitle,
     this.trailing,
     this.child,
@@ -25,7 +25,7 @@ class ArnaExpansionPanel extends StatefulWidget {
   final Widget? leading;
 
   /// The title of the panel.
-  final String? title;
+  final String title;
 
   /// The subtitle of the panel.
   final String? subtitle;
@@ -208,6 +208,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                       title: widget.title,
                       subtitle: widget.subtitle,
                       trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           if (widget.trailing != null) widget.trailing!,
                           Padding(

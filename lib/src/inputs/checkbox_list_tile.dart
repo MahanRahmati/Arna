@@ -35,7 +35,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
     super.key,
     required this.value,
     required this.onChanged,
-    this.title,
+    required this.title,
     this.subtitle,
     this.trailing,
     this.tristate = false,
@@ -75,7 +75,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   final ValueChanged<bool?>? onChanged;
 
   /// The primary content of the list tile.
-  final String? title;
+  final String title;
 
   /// Additional content displayed below the title.
   final String? subtitle;

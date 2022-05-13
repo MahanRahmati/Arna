@@ -36,7 +36,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
     required this.value,
     required this.groupValue,
     required this.onChanged,
-    this.title,
+    required this.title,
     this.subtitle,
     this.trailing,
     this.isFocusable = true,
@@ -81,7 +81,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   final ValueChanged<T?>? onChanged;
 
   /// The primary content of the list tile.
-  final String? title;
+  final String title;
 
   /// Additional content displayed below the title.
   final String? subtitle;

@@ -14,6 +14,7 @@
 - [BREAKING] Remove ArnaColumn
 - Move ArnaDivider to base
 - Update ArnaExpansionPanel
+- Update ArnaListTile
 
 ## 0.4.4+1
 

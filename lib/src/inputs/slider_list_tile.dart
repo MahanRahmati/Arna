@@ -34,7 +34,7 @@ class ArnaSliderListTile extends StatelessWidget {
     super.key,
     required this.value,
     required this.onChanged,
-    this.title,
+    required this.title,
     this.subtitle,
     this.trailing,
     this.onChangeStart,
@@ -84,7 +84,7 @@ class ArnaSliderListTile extends StatelessWidget {
   final ValueChanged<double>? onChanged;
 
   /// The primary content of the list tile.
-  final String? title;
+  final String title;
 
   /// Additional content displayed below the title.
   final String? subtitle;
@@ -187,6 +187,7 @@ class ArnaSliderListTile extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ArnaSlider(
             value: value,

@@ -74,6 +74,9 @@ abstract class Styles {
   /// Tooltip height
   static const double tooltipHeight = base * 4;
 
+  /// Title baseline
+  static const double titleBaseline = base * 4;
+
   /// Button size
   static const double buttonSize = base * 5;
 
@@ -98,8 +101,17 @@ abstract class Styles {
   /// Master item minimum height
   static const double masterItemMinHeight = base * 7;
 
+  /// List tile height
+  static const double listTileHeight = base * 7;
+
+  /// Subtitle baseline
+  static const double subtitleBaseline = base * 7;
+
   /// Expansion panel minimum height
   static const double expansionPanelMinHeight = base * 8;
+
+  /// List tile with subtitle height
+  static const double listTileTwoLineHeight = base * 8;
 
   /// Sidebar compact width
   static const double sideBarCompactWidth = base * 9;

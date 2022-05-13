@@ -37,7 +37,7 @@ class ArnaSwitchListTile extends StatelessWidget {
     super.key,
     required this.value,
     required this.onChanged,
-    this.title,
+    required this.title,
     this.subtitle,
     this.trailing,
     this.isFocusable = true,
@@ -73,7 +73,7 @@ class ArnaSwitchListTile extends StatelessWidget {
   final ValueChanged<bool>? onChanged;
 
   /// The primary content of the list tile.
-  final String? title;
+  final String title;
 
   /// Additional content displayed below the title.
   final String? subtitle;
@@ -102,6 +102,7 @@ class ArnaSwitchListTile extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ArnaSwitch(
             value: value,

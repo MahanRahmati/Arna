@@ -2,6 +2,9 @@
 
 - Update analysis_options
 - Update ArnaApp
+- Update ArnaSnackBar
+- Update ArnaTextField
+- Revert and Update ArnaColorButton
 
 ## 0.4.4+1
 

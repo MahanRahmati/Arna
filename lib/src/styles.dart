@@ -17,9 +17,6 @@ abstract class Styles {
   /// Cursor radius
   static const double cursorRadius = base / 2;
 
-  /// Color button radius
-  static const double colorButtonBorderRadiusSize = base / 2;
-
   /// normal padding
   static const double padding = base;
 
@@ -53,9 +50,6 @@ abstract class Styles {
   /// Arrow size
   static const double arrowSize = base * 2.5;
 
-  /// Color button indicator size
-  static const double colorButtonIndicatorSize = base * 2.5;
-
   /// Drawer border radius size
   static const double drawerBorderRadiusSize = base * 2.5;
 
@@ -79,9 +73,6 @@ abstract class Styles {
 
   /// Tooltip height
   static const double tooltipHeight = base * 4;
-
-  /// Color button size
-  static const double colorButtonSize = base * 4;
 
   /// Button size
   static const double buttonSize = base * 5;
@@ -254,5 +245,5 @@ abstract class Styles {
   static BorderRadius switchBorderRadius = const BorderRadius.all(Radius.circular(switchHeight));
 
   /// Color button border radius
-  static BorderRadius colorButtonBorderRadius = const BorderRadius.all(Radius.circular(colorButtonBorderRadiusSize));
+  static BorderRadius colorButtonBorderRadius = const BorderRadius.all(Radius.circular(buttonSize));
 }

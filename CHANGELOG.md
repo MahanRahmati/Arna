@@ -5,6 +5,7 @@
 - Update ArnaSnackBar
 - Update ArnaTextField
 - Revert and Update ArnaColorButton
+- [Example] Update Example
 
 ## 0.4.4+1
 

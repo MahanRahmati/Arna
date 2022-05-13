@@ -101,7 +101,10 @@ class _WidgetsState extends State<Widgets> {
                                   child: Text("Third Item", style: ArnaTheme.of(context).textTheme.body),
                                 ),
                               ],
-                              onSelected: (String value) {},
+                              onSelected: (String value) => showArnaSnackbar(
+                                context: context,
+                                message: value,
+                              ),
                             ),
                           ],
                         ),

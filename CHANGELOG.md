@@ -8,6 +8,7 @@
 - [Example] Update Example
 - Update ArnaLinkedButtons
 - Update ArnaSegmentedControl
+- Move ArnaPopupMenuButton to popup_menu.dart
 
 ## 0.4.4+1
 

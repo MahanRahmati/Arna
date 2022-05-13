@@ -29,7 +29,6 @@ export 'package:arna/src/buttons/button.dart';
 export 'package:arna/src/buttons/color_button.dart';
 export 'package:arna/src/buttons/icon_button.dart';
 export 'package:arna/src/buttons/linked_buttons.dart';
-export 'package:arna/src/buttons/popup_menu_button.dart';
 export 'package:arna/src/buttons/text_button.dart';
 export 'package:arna/src/containers/badge.dart';
 export 'package:arna/src/containers/card.dart';

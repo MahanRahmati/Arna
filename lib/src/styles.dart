@@ -95,11 +95,11 @@ abstract class Styles {
   /// Sidebar item height
   static const double sideBarItemHeight = base * 7;
 
-  /// Expansion panel minimum height
-  static const double expansionPanelMinHeight = base * 7;
-
   /// Master item minimum height
   static const double masterItemMinHeight = base * 7;
+
+  /// Expansion panel minimum height
+  static const double expansionPanelMinHeight = base * 8;
 
   /// Sidebar compact width
   static const double sideBarCompactWidth = base * 9;

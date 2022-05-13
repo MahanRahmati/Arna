@@ -253,7 +253,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                       borderRadius: const BorderRadius.vertical(
                         bottom: Radius.circular(Styles.borderRadiusSize),
                       ),
-                      color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
+                      color: ArnaDynamicColor.resolve(ArnaColors.expansionPanelColor, context),
                     ),
                     margin: const EdgeInsetsDirectional.only(start: 1, end: 1, bottom: 1),
                     child: SizeTransition(

@@ -105,6 +105,15 @@ class ArnaColors {
     darkHighContrastColor: shade00,
   );
 
+  /// The color of the expansion panel's background.
+  static const ArnaDynamicColor expansionPanelColor = ArnaDynamicColor(
+    debugLabel: 'expansionPanelColor',
+    color: shade248,
+    darkColor: shade37,
+    highContrastColor: shade255,
+    darkHighContrastColor: shade00,
+  );
+
   /// The color of borders.
   static const ArnaDynamicColor borderColor = ArnaDynamicColor(
     debugLabel: 'borderColor',

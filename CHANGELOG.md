@@ -13,6 +13,7 @@
 - Update ArnaBadge
 - [BREAKING] Remove ArnaColumn
 - Move ArnaDivider to base
+- Update ArnaExpansionPanel
 
 ## 0.4.4+1
 

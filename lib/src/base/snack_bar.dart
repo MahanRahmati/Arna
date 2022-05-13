@@ -1,5 +1,7 @@
 import 'package:arna/arna.dart';
 
+//TODO: Refactor ArnaSnackBar.
+
 /// A message with an optional action which briefly displays at the bottom of the screen.
 ///
 /// An [ArnaSnackBar] with an action will not time out when TalkBack or VoiceOver are enabled. This is controlled by

@@ -24,7 +24,7 @@
     - [x] ArnaSearchField [TODO]
     - [x] ArnaSideBarItem
     - [x] ArnaSideScaffold
-    - [x] ArnaSnackBar
+    - [x] ArnaSnackBar [TODO]
     - [x] ArnaTooltip
 
   - Buttons (7/7)

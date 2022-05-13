@@ -6,6 +6,8 @@
 - Update ArnaTextField
 - Revert and Update ArnaColorButton
 - [Example] Update Example
+- Update ArnaLinkedButtons
+- Update ArnaSegmentedControl
 
 ## 0.4.4+1
 

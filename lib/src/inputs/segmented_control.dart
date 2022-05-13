@@ -89,18 +89,6 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
     }
   }
 
-  // Determines if this is the first child that is being laid out.
-  bool _isFirstButton(int index, int length, TextDirection textDirection) {
-    return (index == 0 && textDirection == TextDirection.ltr) ||
-        (index == length - 1 && textDirection == TextDirection.rtl);
-  }
-
-  // Determines if this is the last child that is being laid out.
-  bool _isLastButton(int index, int length, TextDirection textDirection) {
-    return (index == length - 1 && textDirection == TextDirection.ltr) ||
-        (index == 0 && textDirection == TextDirection.rtl);
-  }
-
   @override
   Widget build(BuildContext context) {
     final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
@@ -126,8 +114,8 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
                 label: widget.children[item],
                 itemSelected: widget.groupValue == item,
                 onPressed: () => _onPressed(item),
-                first: _isFirstButton(index, length, textDirection),
-                last: _isLastButton(index, length, textDirection),
+                first: isFirstButton(index, length, textDirection),
+                last: isLastButton(index, length, textDirection),
                 accentColor: accent,
                 cursor: widget.cursor,
               );

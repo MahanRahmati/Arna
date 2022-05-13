@@ -11,18 +11,6 @@ class ArnaLinkedButtons extends StatelessWidget {
   /// The list of linked buttons.
   final List<ArnaLinkedButton> buttons;
 
-  // Determines if this is the first child that is being laid out.
-  bool _isFirstButton(int index, int length, TextDirection textDirection) {
-    return (index == 0 && textDirection == TextDirection.ltr) ||
-        (index == length - 1 && textDirection == TextDirection.rtl);
-  }
-
-  // Determines if this is the last child that is being laid out.
-  bool _isLastButton(int index, int length, TextDirection textDirection) {
-    return (index == length - 1 && textDirection == TextDirection.ltr) ||
-        (index == 0 && textDirection == TextDirection.rtl);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -44,8 +32,8 @@ class ArnaLinkedButtons extends StatelessWidget {
               final TextDirection textDirection = Directionality.of(context);
               return _ArnaLinkedItem(
                 button: button,
-                first: _isFirstButton(index, length, textDirection),
-                last: _isLastButton(index, length, textDirection),
+                first: isFirstButton(index, length, textDirection),
+                last: isLastButton(index, length, textDirection),
               );
             }).toList(),
             const SizedBox(height: Styles.buttonSize, width: 0.5),

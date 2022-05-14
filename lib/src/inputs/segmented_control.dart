@@ -166,6 +166,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
     return ArnaBaseWidget(
       builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
         selected = itemSelected;
@@ -186,18 +187,13 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                       ? ArnaDynamicColor.matchingColor(accentColor, ArnaTheme.brightnessOf(context))
                       : ArnaColors.transparent,
             ),
-            color: ArnaDynamicColor.resolve(
-              selected
-                  ? pressed || hover || focused
-                      ? ArnaDynamicColor.applyOverlay(accentColor)
-                      : accentColor
-                  : pressed || hover
-                      ? ArnaDynamicColor.applyOverlay(
-                          ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
-                        )
-                      : ArnaColors.buttonColor,
-              context,
-            ),
+            color: selected
+                ? pressed || hover || focused
+                    ? ArnaDynamicColor.applyOverlay(accentColor)
+                    : accentColor
+                : pressed || hover
+                    ? ArnaDynamicColor.applyOverlay(buttonColor)
+                    : buttonColor,
           ),
           margin: const EdgeInsets.all(0.5),
           padding: Styles.largeHorizontal,

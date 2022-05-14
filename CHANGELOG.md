@@ -10,6 +10,7 @@
 - Update Styles
 - Update ArnaRadioListTile
 - Update ArnaRadio
+- Update ArnaSegmentedControl
 
 ## 0.4.5
 

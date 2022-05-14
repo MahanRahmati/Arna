@@ -6,6 +6,7 @@
 - Update ArnaPageRoute
 - Update ArnaCheckBoxListTile
 - Update ArnaCheckBox
+- Update ArnaPopupMenu
 
 ## 0.4.5
 

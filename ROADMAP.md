@@ -50,11 +50,11 @@
     - [x] ArnaDialog
     - [x] ArnaPopupDialog
 
-  - Inputs (8/11)
+  - Inputs (9/11)
 
     - [x] ArnaCheckBoxListTile
     - [x] ArnaCheckBox
-    - [ ] ArnaPopupMenu
+    - [x] ArnaPopupMenu
     - [x] ArnaRadioListTile
     - [x] ArnaRadio
     - [x] ArnaSegmentedControl

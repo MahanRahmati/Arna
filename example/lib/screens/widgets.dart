@@ -84,23 +84,24 @@ class _WidgetsState extends State<Widgets> {
                         ),
                         ArnaPopupMenuButton<String>(
                           itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry<String>>[
-                            ArnaPopupMenuItem<String>(
+                            const ArnaPopupMenuItem<String>(
                               value: 'First Item',
-                              child: Text('First Item', style: ArnaTheme.of(context).textTheme.body),
+                              child: Text('First Item'),
                             ),
-                            ArnaPopupMenuItem<String>(
+                            const ArnaPopupMenuItem<String>(
+                              enabled: false,
                               value: 'Second Item',
-                              child: Text('Second Item', style: ArnaTheme.of(context).textTheme.body),
+                              child: Text('Second Item'),
                             ),
                             const ArnaPopupMenuDivider(),
-                            ArnaPopupMenuItem<String>(
+                            const ArnaPopupMenuItem<String>(
                               value: 'Third Item',
-                              child: Text('Third Item', style: ArnaTheme.of(context).textTheme.body),
+                              child: Text('Third Item'),
                             ),
                           ],
                           onSelected: (String value) => showArnaSnackbar(
                             context: context,
-                            message: value,
+                            message: 'Selected: $value',
                           ),
                         ),
                       ],

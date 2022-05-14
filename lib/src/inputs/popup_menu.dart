@@ -3,73 +3,73 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart';
 
+/// Used to configure how the [ArnaPopupMenuButton] positions its popup menu.
+enum ArnaPopupMenuPosition {
+  /// Menu is positioned over the anchor.
+  over,
+
+  /// Menu is positioned under the anchor.
+  under,
+}
+
 /// A base class for entries in popup menu.
 ///
 /// The popup menu widget uses this interface to interact with the menu items.
-/// To show a popup menu, use the [showArnaMenu] function. To create a button
-/// that shows a popup menu, consider using [ArnaPopupMenuButton].
+/// To show a popup menu, use the [showArnaMenu] function. To create a button that shows a popup menu, consider using
+/// [ArnaPopupMenuButton].
 ///
-/// The type `T` is the type of the value(s) the entry represents. All the
-/// entries in a given menu must represent values with consistent types.
+/// The type [T] is the type of the value(s) the entry represents. All the entries in a given menu must represent
+/// values with consistent types.
 ///
-/// An [ArnaPopupMenuEntry] may represent multiple values, for example a row
-/// with several icons, or a single entry, for example a menu item with an icon
-/// (see [ArnaPopupMenuItem]), or no value at all (for example,
-/// [ArnaPopupMenuDivider]).
+/// An [ArnaPopupMenuEntry] may represent multiple values, for example a row with several icons, or a single entry, for
+/// example a menu item with an icon (see [ArnaPopupMenuItem]), or no value at all (for example, [ArnaPopupMenuDivider]
+/// ).
 ///
 /// See also:
 ///
 ///  * [ArnaPopupMenuItem], a popup menu entry for a single value.
 ///  * [ArnaPopupMenuDivider], a popup menu entry that is just a horizontal line.
 ///  * [showArnaMenu], a method to dynamically show a popup menu at a given location.
-///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a menu when
-///    it is tapped.
+///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a menu when it is tapped.
 abstract class ArnaPopupMenuEntry<T> extends StatefulWidget {
-  /// Abstract const constructor. This constructor enables subclasses to provide
-  /// const constructors so that they can be used in const expressions.
+  /// Abstract const constructor. This constructor enables subclasses to provide const constructors so that they can be
+  /// used in const expressions.
   const ArnaPopupMenuEntry({super.key});
 
   /// The amount of vertical space occupied by this entry.
   ///
-  /// This value is used at the time the [showArnaMenu] method is called, if the
-  /// `initialValue` argument is provided, to determine the position of this
-  /// entry when aligning the selected entry over the given `position`. It is
+  /// This value is used at the time the [showArnaMenu] method is called, if the [initialValue] argument is provided,
+  /// to determine the position of this entry when aligning the selected entry over the given [position]. It is
   /// otherwise ignored.
   double get height;
 
   /// Whether this entry represents a particular value.
   ///
-  /// This method is used by [showArnaMenu], when it is called, to align the entry
-  /// representing the `initialValue`, if any, to the given `position`, and then
-  /// later is called on each entry to determine if it should be highlighted.
-  /// If `initialValue` is null, then this method is not called.
+  /// This method is used by [showArnaMenu], when it is called, to align the entry representing the [initialValue], if
+  /// any, to the given [position], and then later is called on each entry to determine if it should be highlighted.
+  /// If [initialValue] is null, then this method is not called.
   ///
-  /// If the [ArnaPopupMenuEntry] represents a single value, this should return true
-  /// if the argument matches that value. If it represents multiple values, it
-  /// should return true if the argument matches any of them.
+  /// If the [ArnaPopupMenuEntry] represents a single value, this should return true if the argument matches that
+  /// value. If it represents multiple values, it should return true if the argument matches any of them.
   bool represents(T? value);
 }
 
 /// A horizontal divider in popup menu.
 ///
-/// This widget adapts the [ArnaHorizontalSeparator] for use in popup menus.
+/// This widget adapts the [ArnaDivider] for use in popup menus.
 ///
 /// See also:
 ///
 ///  * [ArnaPopupMenuItem], for the kinds of items that this widget divides.
-///  * [showArnaMenu], a method to dynamically show a popup menu at a given
-///    location.
-///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a
-///    menu when it is tapped.
+///  * [showArnaMenu], a method to dynamically show a popup menu at a given location.
+///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a menu when it is tapped.
 class ArnaPopupMenuDivider extends ArnaPopupMenuEntry<Never> {
   /// Creates a horizontal divider for a popup menu.
-  const ArnaPopupMenuDivider({
-    super.key,
-  });
+  const ArnaPopupMenuDivider({super.key});
 
   /// The height of the divider entry.
   @override
-  double get height => (Styles.smallPadding * 2) + 1;
+  double get height => (Styles.padding) + 1;
 
   @override
   bool represents(void value) => false;
@@ -78,6 +78,7 @@ class ArnaPopupMenuDivider extends ArnaPopupMenuEntry<Never> {
   State<ArnaPopupMenuDivider> createState() => _ArnaPopupMenuDividerState();
 }
 
+/// The [State] for a [ArnaPopupMenuDivider].
 class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
   @override
   Widget build(BuildContext context) {
@@ -88,10 +89,9 @@ class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
   }
 }
 
-// This widget only exists to enable _PopupMenuRoute to save the sizes of
-// each menu item. The sizes are used by _PopupMenuRouteLayout to compute the
-// y coordinate of the menu's origin so that the center of selected menu
-// item lines up with the center of its PopupMenuButton.
+/// This widget only exists to enable _PopupMenuRoute to save the sizes of each menu item. The sizes are used by
+/// [_ArnaPopupMenuRouteLayout] to compute the y coordinate of the menu's origin so that the center of selected menu
+/// item lines up with the center of its [ArnaPopupMenuButton].
 class _ArnaMenuItem extends SingleChildRenderObjectWidget {
   const _ArnaMenuItem({
     required this.onLayout,
@@ -106,16 +106,18 @@ class _ArnaMenuItem extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-    BuildContext context,
-    covariant _RenderArnaMenuItem renderObject,
-  ) {
+  void updateRenderObject(BuildContext context, covariant _RenderArnaMenuItem renderObject) {
     renderObject.onLayout = onLayout;
   }
 }
 
+/// _RenderArnaMenuItem class.
 class _RenderArnaMenuItem extends RenderShiftedBox {
-  _RenderArnaMenuItem(this.onLayout, [RenderBox? child]) : super(child);
+  /// Renders a ArnaMenuItem.
+  _RenderArnaMenuItem(
+    this.onLayout, [
+    RenderBox? child,
+  ]) : super(child);
 
   ValueChanged<Size> onLayout;
 
@@ -143,45 +145,41 @@ class _RenderArnaMenuItem extends RenderShiftedBox {
 
 /// An item in popup menu.
 ///
-/// To show a popup menu, use the [showArnaMenu] function. To create a button
-/// that shows a popup menu, consider using [ArnaPopupMenuButton].
+/// To show a popup menu, use the [showArnaMenu] function. To create a button that shows a popup menu, consider using
+/// [ArnaPopupMenuButton].
 ///
 /// Typically the [child] of a [ArnaPopupMenuItem] is a [Text] widget.
 ///
 /// {@tool snippet}
 ///
-/// Here, a [Text] widget is used with a popup menu item. The `WhyFarther` type
-/// is an enum, not shown here.
+/// Here, a [Text] widget is used with a popup menu item. The `Menu` type is an enum, not shown here.
 ///
 /// ```dart
-/// const ArnaPopupMenuItem<WhyFarther>(
-///   value: WhyFarther.harder,
-///   child: Text('Working a lot harder'),
+/// const ArnaPopupMenuItem<Menu>(
+///   value: Menu.itemOne,
+///   child: Text('Item 1'),
 /// )
 /// ```
 /// {@end-tool}
 ///
-/// See the example at [ArnaPopupMenuButton] for how this example could be used in a
-/// complete menu.
+/// See the example at [ArnaPopupMenuButton] for how this example could be used in a complete menu.
 ///
 /// See also:
 ///
 ///  * [ArnaPopupMenuDivider], which can be used to divide items from each other.
 ///  * [showArnaMenu], a method to dynamically show a popup menu at a given location.
-///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a menu when
-///    it is tapped.
+///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a menu when it is tapped.
 class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
   /// Creates an item for a popup menu.
   ///
   /// By default, the item is [enabled].
   ///
-  /// The `enabled` and `height` arguments must not be null.
+  /// The [enabled] and [height] arguments must not be null.
   const ArnaPopupMenuItem({
     super.key,
     this.value,
     this.onTap,
     this.enabled = true,
-    this.selected = false,
     this.height = Styles.menuItemSize,
     this.accentColor,
     this.cursor = MouseCursor.defer,
@@ -196,14 +194,8 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
 
   /// Whether the user is permitted to select this item.
   ///
-  /// Defaults to true. If this is false, then the item will not react to
-  /// touches.
+  /// Defaults to true. If this is false, then the item will not react to touches.
   final bool enabled;
-
-  /// Whether the menu item is selected or not.
-  ///
-  /// Defaults to false.
-  final bool selected;
 
   /// The minimum height of the menu item.
   @override
@@ -212,14 +204,13 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
   /// The color of the button's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the
-  /// menu item.
+  /// The cursor for a mouse pointer when it enters or is hovering over the menu item.
   final MouseCursor cursor;
 
   /// The widget below this widget in the tree.
   ///
-  /// Typically a single-line [ArnaListTile] (for menus with icons) or a [Text].
-  /// The text should be short enough that it won't wrap.
+  /// Typically a single-line [ArnaListTile] (for menus with icons) or a [Text]. The text should be short enough that
+  /// it won't wrap.
   final Widget? child;
 
   @override
@@ -231,31 +222,27 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
 
 // The [State] for [ArnaPopupMenuItem] subclasses.
 ///
-/// The [buildChild] method can be overridden to adjust exactly what gets placed
-/// in the menu. By default it returns [ArnaPopupMenuItem.child].
+/// The [buildChild] method can be overridden to adjust exactly what gets placed in the menu. By default it returns
+/// [ArnaPopupMenuItem.child].
 ///
-/// The [handleTap] method can be overridden to adjust exactly what happens when
-/// the item is tapped. By default, it uses [Navigator.pop] to return the
-/// [PopupMenuItem.value] from the menu route.
+/// The [handleTap] method can be overridden to adjust exactly what happens when the item is tapped. By default, it
+/// uses [Navigator.pop] to return the [ArnaPopupMenuItem.value] from the menu route.
 ///
-/// This class takes two type arguments. The second, `W`, is the exact type of
-/// the [Widget] that is using this [State]. It must be a subclass of
-/// [ArnaPopupMenuItem]. The first, `T`, must match the type argument of that widget
-/// class, and is the type of values returned from this menu.
+/// This class takes two type arguments. The second, [W], is the exact type of the [Widget] that is using this [State].
+/// It must be a subclass of [ArnaPopupMenuItem]. The first, [T], must match the type argument of that widget class,
+/// and is the type of values returned from this menu.
 class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W> {
   /// The menu item contents.
   ///
   /// Used by the [build] method.
   ///
-  /// By default, this returns [ArnaPopupMenuItem.child]. Override this to put
-  /// something else in the menu entry.
+  /// By default, this returns [ArnaPopupMenuItem.child]. Override this to put something else in the menu entry.
   @protected
   Widget? buildChild() => widget.child;
 
   /// The handler for when the user selects the menu item.
   ///
-  /// By default, uses [Navigator.pop] to return the [ArnaPopupMenuItem.value] from
-  /// the menu route.
+  /// By default, uses [Navigator.pop] to return the [ArnaPopupMenuItem.value] from the menu route.
   @protected
   void handleTap() {
     widget.onTap?.call();
@@ -264,56 +251,68 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W>
 
   @override
   Widget build(BuildContext context) {
-    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    return ArnaBaseWidget(
-      builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
-        enabled = widget.enabled;
-        selected = widget.selected;
-        return AnimatedContainer(
-          height: widget.height,
-          duration: Styles.basicDuration,
-          curve: Styles.basicCurve,
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            borderRadius: Styles.borderRadius,
-            border: Border.all(
-              color: ArnaDynamicColor.resolve(
-                selected ? accent : ArnaColors.transparent,
-                context,
+    final Color cardColor = ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
+    final Color disabledColor = ArnaDynamicColor.resolve(ArnaColors.disabledColor, context);
+
+    TextStyle style = ArnaTheme.of(context).textTheme.button!;
+
+    if (!widget.enabled) {
+      style = style.copyWith(color: disabledColor);
+    }
+
+    Widget item = AnimatedDefaultTextStyle(
+      style: style,
+      duration: Styles.basicDuration,
+      curve: Styles.basicCurve,
+      child: Container(
+        alignment: AlignmentDirectional.centerStart,
+        constraints: BoxConstraints(minHeight: widget.height),
+        padding: Styles.largeHorizontal,
+        child: buildChild(),
+      ),
+    );
+
+    if (!widget.enabled) {
+      item = IconTheme.merge(
+        data: IconThemeData(color: disabledColor),
+        child: item,
+      );
+    }
+
+    return MergeSemantics(
+      child: Semantics(
+        enabled: widget.enabled,
+        button: true,
+        child: ArnaBaseWidget(
+          builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+            enabled = widget.enabled;
+            return AnimatedContainer(
+              height: widget.height,
+              duration: Styles.basicDuration,
+              curve: Styles.basicCurve,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                borderRadius: Styles.borderRadius,
+                color: !enabled
+                    ? cardColor
+                    : pressed || hover || focused
+                        ? ArnaDynamicColor.applyOverlay(cardColor)
+                        : cardColor,
               ),
-            ),
-            color: ArnaDynamicColor.resolve(
-              !enabled
-                  ? ArnaColors.backgroundColor
-                  : pressed
-                      ? ArnaDynamicColor.applyOverlay(
-                          ArnaDynamicColor.resolve(
-                            ArnaColors.cardColor,
-                            context,
-                          ),
-                        )
-                      : hover
-                          ? ArnaDynamicColor.applyOverlay(
-                              ArnaDynamicColor.resolve(
-                                ArnaColors.cardColor,
-                                context,
-                              ),
-                            )
-                          : ArnaColors.cardColor,
-              context,
-            ),
-          ),
-          padding: Styles.horizontal,
-          child: Center(child: buildChild()),
-        );
-      },
-      showAnimation: false,
-      onPressed: widget.enabled ? handleTap : null,
+              child: item,
+            );
+          },
+          showAnimation: false,
+          onPressed: widget.enabled ? handleTap : null,
+        ),
+      ),
     );
   }
 }
 
+/// _ArnaPopupMenu class.
 class _ArnaPopupMenu<T> extends StatelessWidget {
+  /// Creates an ArnaPopupMenu.
   const _ArnaPopupMenu({
     super.key,
     required this.route,
@@ -335,32 +334,42 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
         parent: route.animation!,
         curve: Interval(start, end),
       );
+      Widget item = route.items[i];
+      if (route.initialValue != null && route.items[i].represents(route.initialValue)) {
+        item = Container(
+          color: ArnaTheme.of(context).accentColor,
+          child: item,
+        );
+      }
       children.add(
         _ArnaMenuItem(
           onLayout: (Size size) => route.itemSizes[i] = size,
-          child: FadeTransition(opacity: opacity, child: route.items[i]),
+          child: FadeTransition(
+            opacity: opacity,
+            child: item,
+          ),
         ),
       );
     }
 
-    final CurveTween opacity = CurveTween(
-      curve: const Interval(0.0, 1.0 / 3.0),
-    );
+    final CurveTween opacity = CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
     final CurveTween width = CurveTween(curve: Interval(0.0, unit));
-    final CurveTween height = CurveTween(
-      curve: Interval(0.0, unit * route.items.length),
-    );
+    final CurveTween height = CurveTween(curve: Interval(0.0, unit * route.items.length));
 
     return AnimatedBuilder(
       animation: route.animation!,
       builder: (BuildContext context, Widget? child) {
-        return SlideTransition(
-          position: Tween<Offset>(
-            begin: const Offset(0.0, -0.03),
-            end: Offset.zero,
-          ).animate(route.animation!),
-          child: FadeTransition(
-            opacity: opacity.animate(route.animation!),
+        return FadeTransition(
+          opacity: opacity.animate(route.animation!),
+          child: AnimatedContainer(
+            duration: Styles.basicDuration,
+            curve: Styles.basicCurve,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: Styles.borderRadius,
+              border: Border.all(color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context)),
+              color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
+            ),
             child: Align(
               alignment: AlignmentDirectional.topEnd,
               widthFactor: width.evaluate(route.animation!),
@@ -382,24 +391,9 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
             namesRoute: true,
             explicitChildNodes: true,
             label: semanticLabel,
-            child: AnimatedContainer(
-              duration: Styles.basicDuration,
-              curve: Styles.basicCurve,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: Styles.borderRadius,
-                border: Border.all(
-                  color: ArnaDynamicColor.resolve(
-                    ArnaColors.borderColor,
-                    context,
-                  ),
-                ),
-                color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
-              ),
-              child: SingleChildScrollView(
-                padding: Styles.small,
-                child: ListBody(children: children),
-              ),
+            child: SingleChildScrollView(
+              padding: Styles.small,
+              child: ListBody(children: children),
             ),
           ),
         ),
@@ -408,41 +402,42 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
   }
 }
 
-// Positioning of the menu on the screen.
+/// Positioning of the menu on the screen.
 class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
+  /// Creates an ArnaPopupMenuRouteLayout.
   _ArnaPopupMenuRouteLayout(
     this.position,
     this.itemSizes,
     this.selectedItemIndex,
     this.textDirection,
     this.padding,
+    this.avoidBounds,
   );
 
-  // Rectangle of underlying button, relative to the overlay's dimensions.
+  /// Rectangle of underlying button, relative to the overlay's dimensions.
   final RelativeRect position;
 
-  // The sizes of each item are computed when the menu is laid out, and before
-  // the route is laid out.
+  /// The sizes of each item are computed when the menu is laid out, and before the route is laid out.
   List<Size?> itemSizes;
 
-  // The index of the selected item, or null if ArnaPopupMenuButton.initialValue
-  // was not specified.
+  /// The index of the selected item, or null if ArnaPopupMenuButton.initialValue was not specified.
   final int? selectedItemIndex;
 
-  // Whether to prefer going to the left or to the right.
+  /// Whether to prefer going to the left or to the right.
   final TextDirection textDirection;
 
-  // The padding of unsafe area.
+  /// The padding of unsafe area.
   EdgeInsets padding;
 
-  // We put the child wherever position specifies, so long as it will fit within
-  // the specified parent size padded (inset) by [Styles.padding].
-  // If necessary, we adjust the child's position so that it fits.
+  /// List of rectangles that we should avoid overlapping. Unusable screen area.
+  final Set<Rect> avoidBounds;
+
+  /// We put the child wherever position specifies, so long as it will fit within the specified parent size padded
+  /// (inset) by [Styles.padding]. If necessary, we adjust the child's position so that it fits.
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    // The menu can be at most the size of the overlay minus [Styles.padding]
-    // pixels in each direction.
+    // The menu can be at most the size of the overlay minus [Styles.padding] pixels in each direction.
     return BoxConstraints.loose(constraints.biggest).deflate(
       const EdgeInsets.all(Styles.padding) + padding,
     );
@@ -451,13 +446,12 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
   @override
   Offset getPositionForChild(Size size, Size childSize) {
     // size: The size of the overlay.
-    // childSize: The size of the menu, when fully open, as determined by
-    // getConstraintsForChild.
+    // childSize: The size of the menu, when fully open, as determined by getConstraintsForChild.
 
     final double buttonHeight = size.height - position.top - position.bottom;
     // Find the ideal vertical position.
     double y = position.top;
-    if (selectedItemIndex != null) {
+    if (selectedItemIndex != null && itemSizes != null) {
       double selectedItemOffset = Styles.padding;
       for (int index = 0; index < selectedItemIndex!; index += 1) {
         selectedItemOffset += itemSizes[index]!.height;
@@ -485,17 +479,36 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
           break;
       }
     }
-    // Avoid going outside an area defined as the rectangle [Styles.padding]
-    // pixels from the edge of the screen in every direction.
-    if (x < Styles.padding + padding.left) {
-      x = Styles.padding + padding.left;
-    } else if (x + childSize.width > size.width - Styles.padding - padding.right) {
-      x = size.width - childSize.width - Styles.padding - padding.right;
+    final Offset wantedPosition = Offset(x, y);
+    final Offset originCenter = position.toRect(Offset.zero & size).center;
+    final Iterable<Rect> subScreens = DisplayFeatureSubScreen.subScreensInBounds(Offset.zero & size, avoidBounds);
+    final Rect subScreen = _closestScreen(subScreens, originCenter);
+    return _fitInsideScreen(subScreen, childSize, wantedPosition);
+  }
+
+  Rect _closestScreen(Iterable<Rect> screens, Offset point) {
+    Rect closest = screens.first;
+    for (final Rect screen in screens) {
+      if ((screen.center - point).distance < (closest.center - point).distance) {
+        closest = screen;
+      }
     }
-    if (y < Styles.padding + padding.top) {
+    return closest;
+  }
+
+  Offset _fitInsideScreen(Rect screen, Size childSize, Offset wantedPosition) {
+    double x = wantedPosition.dx;
+    double y = wantedPosition.dy;
+    // Avoid going outside an area defined as the rectangle 8.0 pixels from the edge of the screen in every direction.
+    if (x < screen.left + Styles.padding + padding.left) {
+      x = screen.left + Styles.padding + padding.left;
+    } else if (x + childSize.width > screen.right - Styles.padding - padding.right) {
+      x = screen.right - childSize.width - Styles.padding - padding.right;
+    }
+    if (y < screen.top + Styles.padding + padding.top) {
       y = Styles.padding + padding.top;
-    } else if (y + childSize.height > size.height - Styles.padding - padding.bottom) {
-      y = size.height - padding.bottom - Styles.padding - childSize.height;
+    } else if (y + childSize.height > screen.bottom - Styles.padding - padding.bottom) {
+      y = screen.bottom - childSize.height - Styles.padding - padding.bottom;
     }
 
     return Offset(x, y);
@@ -503,9 +516,8 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
 
   @override
   bool shouldRelayout(_ArnaPopupMenuRouteLayout oldDelegate) {
-    // If called when the old and new itemSizes have been initialized then
-    // we expect them to have the same length because there's no practical
-    // way to change length of the items list once the menu has been shown.
+    // If called when the old and new itemSizes have been initialized then we expect them to have the same length
+    // because there's no practical way to change length of the items list once the menu has been shown.
     assert(itemSizes.length == oldDelegate.itemSizes.length);
 
     return position != oldDelegate.position ||
@@ -516,7 +528,9 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
   }
 }
 
+/// _ArnaPopupMenuRoute class.
 class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
+  /// Creates an ArnaPopupMenuRoute.
   _ArnaPopupMenuRoute({
     required this.position,
     required this.items,
@@ -538,6 +552,7 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
     return CurvedAnimation(
       parent: super.createAnimation(),
       curve: Styles.basicCurve,
+      reverseCurve: const Interval(0.0, 2.0 / 3.0),
     );
   }
 
@@ -554,7 +569,7 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
   final String barrierLabel;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation, _) {
     int? selectedItemIndex;
     if (initialValue != null) {
       for (int index = 0; selectedItemIndex == null && index < items.length; index += 1) {
@@ -564,10 +579,7 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
       }
     }
 
-    final Widget menu = _ArnaPopupMenu<T>(
-      route: this,
-      semanticLabel: semanticLabel,
-    );
+    final Widget menu = _ArnaPopupMenu<T>(route: this, semanticLabel: semanticLabel);
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     return MediaQuery.removePadding(
       context: context,
@@ -584,6 +596,7 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
               selectedItemIndex,
               Directionality.of(context),
               mediaQuery.padding,
+              _avoidBounds(mediaQuery),
             ),
             child: menu,
           );
@@ -591,158 +604,92 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
       ),
     );
   }
+
+  Set<Rect> _avoidBounds(MediaQueryData mediaQuery) {
+    return DisplayFeatureSubScreen.avoidBounds(mediaQuery).toSet();
+  }
 }
 
-/// Show a popup menu that contains the `items` at `position`.
+/// Show a popup menu that contains the [items] at [position].
 ///
-/// `items` should be non-null and not empty.
+/// [items] should be non-null and not empty.
 ///
-/// If `initialValue` is specified then the first item with a matching value
-/// will be highlighted and the value of `position` gives the rectangle whose
-/// vertical center will be aligned with the vertical center of the highlighted
+/// If [initialValue] is specified then the first item with a matching value will be highlighted and the value of
+/// [position] gives the rectangle whose vertical center will be aligned with the vertical center of the highlighted
 /// item (when possible).
 ///
-/// If `initialValue` is not specified then the top of the menu will be aligned
-/// with the top of the `position` rectangle.
+/// If [initialValue] is not specified then the top of the menu will be aligned with the top of the [position]
+/// rectangle.
 ///
-/// In both cases, the menu position will be adjusted if necessary to fit on the
-/// screen.
+/// In both cases, the menu position will be adjusted if necessary to fit on the screen.
 ///
-/// Horizontally, the menu is positioned so that it grows in the direction that
-/// has the most room. For example, if the `position` describes a rectangle on
-/// the left edge of the screen, then the left edge of the menu is aligned with
-/// the left edge of the `position`, and the menu grows to the right. If both
-/// edges of the `position` are equidistant from the opposite edge of the
-/// screen, then the ambient [Directionality] is used as a tie-breaker,
-/// preferring to grow in the reading direction.
+/// Horizontally, the menu is positioned so that it grows in the direction that has the most room. For example, if the
+/// [position] describes a rectangle on the left edge of the screen, then the left edge of the menu is aligned with the
+/// left edge of the [position], and the menu grows to the right. If both edges of the [position] are equidistant from
+/// the opposite edge of the screen, then the ambient [Directionality] is used as a tie-breaker, preferring to grow in
+/// the reading direction.
 ///
-/// The positioning of the `initialValue` at the `position` is implemented by
-/// iterating over the `items` to find the first whose
-/// [ArnaPopupMenuEntry.represents] method returns true for `initialValue`, and then
-/// summing the values of [ArnaPopupMenuEntry.height] for all the preceding widgets
-/// in the list.
+/// The positioning of the [initialValue] at the [position] is implemented by iterating over the [items] to find the
+/// first whose [ArnaPopupMenuEntry.represents] method returns true for [initialValue], and then summing the values of
+/// [ArnaPopupMenuEntry.height] for all the preceding widgets in the list.
 ///
-/// The `context` argument is used to look up the [Navigator] for the menu.
-/// It is only used when the method is called. Its corresponding widget can be
-/// safely removed from the tree before the popup menu is closed.
+/// The [context] argument is used to look up the [Navigator] for the menu. It is only used when the method is called.
+/// Its corresponding widget can be safely removed from the tree before the popup menu is closed.
 ///
-/// The `useRootNavigator` argument is used to determine whether to push the
-/// menu to the [Navigator] furthest from or nearest to the given `context`. It
-/// is `false` by default.
+/// The [useRootNavigator] argument is used to determine whether to push the menu to the [Navigator] furthest from or
+/// nearest to the given [context]. It is `false` by default.
 ///
-/// The `semanticLabel` argument is used by accessibility frameworks to
-/// announce screen transitions when the menu is opened and closed. If this
-/// label is not provided, it will default to
-/// [MaterialLocalizations.popupMenuLabel].
+/// The [semanticLabel] argument is used by accessibility frameworks to announce screen transitions when the menu is
+/// opened and closed. If this label is not provided, it will default to [MaterialLocalizations.popupMenuLabel].
 ///
 /// See also:
 ///
 ///  * [ArnaPopupMenuItem], a popup menu entry for a single value.
 ///  * [ArnaPopupMenuDivider], a popup menu entry that is just a horizontal line.
-///  * [ArnaPopupMenuButton], which provides an [ArnaIconButton] that shows a menu by
-///    calling this method automatically.
-///  * [SemanticsConfiguration.namesRoute], for a description of edge triggered
-///    semantics.
+///  * [ArnaPopupMenuButton], which provides an [ArnaIconButton] that shows a menu by  calling this method
+///    automatically.
+///  * [SemanticsConfiguration.namesRoute], for a description of edge triggered semantics.
 Future<T?> showArnaMenu<T>({
   required BuildContext context,
   required RelativeRect position,
   required List<ArnaPopupMenuEntry<T>> items,
   T? initialValue,
-  double? elevation,
   String? semanticLabel,
-  ShapeBorder? shape,
   Color? color,
   bool useRootNavigator = false,
 }) {
   assert(items.isNotEmpty);
 
-  semanticLabel ??= MaterialLocalizations.of(context).popupMenuLabel;
-
-  final NavigatorState navigator = Navigator.of(
-    context,
-    rootNavigator: useRootNavigator,
-  );
-  return navigator.push(
+  return Navigator.of(context, rootNavigator: useRootNavigator).push(
     _ArnaPopupMenuRoute<T>(
       position: position,
       items: items,
       initialValue: initialValue,
-      semanticLabel: semanticLabel,
+      semanticLabel: semanticLabel ?? MaterialLocalizations.of(context).popupMenuLabel,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       color: color,
     ),
   );
 }
 
-/// Signature for the callback invoked when a menu item is selected. The
-/// argument is the value of the [ArnaPopupMenuItem] that caused its menu to be
-/// dismissed.
+/// Signature for the callback invoked when a menu item is selected. The argument is the value of the
+/// [ArnaPopupMenuItem] that caused its menu to be dismissed.
 ///
 /// Used by [ArnaPopupMenuButton.onSelected].
 typedef ArnaPopupMenuItemSelected<T> = void Function(T value);
 
-/// Signature for the callback invoked when a [ArnaPopupMenuButton] is dismissed
-/// without selecting an item.
+/// Signature for the callback invoked when a [ArnaPopupMenuButton] is dismissed without selecting an item.
 ///
 /// Used by [ArnaPopupMenuButton.onCanceled].
 typedef ArnaPopupMenuCanceled = void Function();
 
-/// Signature used by [ArnaPopupMenuButton] to lazily construct the items shown when
-/// the button is pressed.
+/// Signature used by [ArnaPopupMenuButton] to lazily construct the items shown when the button is pressed.
 ///
 /// Used by [ArnaPopupMenuButton.itemBuilder].
-typedef ArnaPopupMenuItemBuilder<T> = List<ArnaPopupMenuEntry<T>> Function(
-  BuildContext context,
-);
-
-/// Used to configure how the [ArnaPopupMenuButton] positions its popup menu.
-enum ArnaPopupMenuPosition {
-  /// Menu is positioned over the anchor.
-  over,
-
-  /// Menu is positioned under the anchor.
-  under,
-}
+typedef ArnaPopupMenuItemBuilder<T> = List<ArnaPopupMenuEntry<T>> Function(BuildContext context);
 
 /// Displays a menu when pressed and calls [onSelected] when the menu is dismissed because an item was selected. The
 /// value passed to [onSelected] is the value of the selected menu item.
-///
-/// {@tool snippet}
-///
-/// This example shows a menu with four items, selecting between an enum's values and setting a `_selection` field
-/// based on the selection.
-///
-/// ```dart
-/// // This is the type used by the popup menu below.
-/// enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
-///
-/// // This menu button widget updates a _selection field (of type WhyFarther,
-/// // not shown here).
-/// ArnaPopupMenuButton<WhyFarther>(
-///   onSelected: (WhyFarther result) {
-///     setState(() { _selection = result; });
-///   },
-///   itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry<WhyFarther>>[
-///     const ArnaPopupMenuItem<WhyFarther>(
-///       value: WhyFarther.harder,
-///       child: Text('Working a lot harder'),
-///     ),
-///     const ArnaPopupMenuItem<WhyFarther>(
-///       value: WhyFarther.smarter,
-///       child: Text('Being a lot smarter'),
-///     ),
-///     const ArnaPopupMenuItem<WhyFarther>(
-///       value: WhyFarther.selfStarter,
-///       child: Text('Being a self-starter'),
-///     ),
-///     const ArnaPopupMenuItem<WhyFarther>(
-///       value: WhyFarther.tradingCharter,
-///       child: Text('Placed in charge of trading charter'),
-///     ),
-///   ],
-/// )
-/// ```
-/// {@end-tool}
 ///
 /// See also:
 ///
@@ -762,7 +709,6 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
     this.onCanceled,
     this.offset = Offset.zero,
     this.enabled = true,
-    this.position = ArnaPopupMenuPosition.over,
     this.tooltipMessage,
     this.buttonType = ButtonType.normal,
     this.isFocusable = true,
@@ -770,6 +716,8 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
+    this.enableFeedback,
+    this.position = ArnaPopupMenuPosition.over,
   });
 
   /// Called when the button is pressed to create the items to show in the menu.
@@ -809,14 +757,6 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
   /// show in the menu.
   final bool enabled;
 
-  /// Whether the popup menu is positioned over or under the popup menu button.
-  ///
-  /// [offset] is used to change the position of the popup menu relative to the position set by this parameter.
-  ///
-  /// When not set, the position defaults to [ArnaPopupMenuPosition.over] which makes the popup menu appear directly
-  /// over the button that was used to create it.
-  final ArnaPopupMenuPosition position;
-
   /// Text that describes the action that will occur when the button is pressed.
   final String? tooltipMessage;
 
@@ -837,6 +777,23 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
 
   /// The semantic label of the button.
   final String? semanticLabel;
+
+  /// Whether detected gestures should provide acoustic and/or haptic feedback.
+  ///
+  /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
+  ///
+  /// See also:
+  ///
+  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
+  final bool? enableFeedback;
+
+  /// Whether the popup menu is positioned over or under the popup menu button.
+  ///
+  /// [offset] is used to change the position of the popup menu relative to the position set by this parameter.
+  ///
+  /// When not set, the position defaults to [ArnaPopupMenuPosition.over] which makes the popup menu appear directly
+  /// over the button that was used to create it.
+  final ArnaPopupMenuPosition position;
 
   @override
   ArnaPopupMenuButtonState<T> createState() => ArnaPopupMenuButtonState<T>();
@@ -863,7 +820,7 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
         offset = widget.offset;
         break;
       case ArnaPopupMenuPosition.under:
-        offset = Offset(0.0, button.size.height - (Styles.padding / 2)) + widget.offset;
+        offset = Offset(0.0, button.size.height - Styles.smallPadding) + widget.offset;
         break;
     }
     final RelativeRect position = RelativeRect.fromRect(
@@ -881,6 +838,7 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
         items: items,
         initialValue: widget.initialValue,
         position: position,
+        color: widget.accentColor ?? ArnaTheme.of(context).accentColor,
       ).then<void>((T? newValue) {
         if (!mounted) {
           return null;

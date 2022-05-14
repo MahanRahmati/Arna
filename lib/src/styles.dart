@@ -29,11 +29,11 @@ abstract class Styles {
   /// Slider track size
   static const double sliderTrackSize = base * 1.25;
 
-  /// Slider size
-  static const double sliderSize = base * 1.5;
-
   /// Scrollbar hover thickness
   static const double scrollBarHoverThickness = base * 1.25;
+
+  /// Slider size
+  static const double sliderSize = base * 1.5;
 
   /// Radio indicator size
   static const double radioIndicatorSize = base * 1.5;
@@ -161,9 +161,6 @@ abstract class Styles {
   /// Route duration
   static const Duration routeDuration = Duration(milliseconds: 350);
 
-  /// Scaffold duration
-  static const Duration scaffoldDuration = Duration(milliseconds: 770);
-
   /// Tooltip duration
   static const Duration tooltipDuration = Duration(milliseconds: 2100);
 
@@ -223,17 +220,6 @@ abstract class Styles {
 
   /// Tile text Padding
   static const EdgeInsets tileTextPadding = EdgeInsets.symmetric(horizontal: padding, vertical: smallPadding);
-
-  /// Tile with subtitle Padding
-  static const EdgeInsets tileWithSubtitlePadding = EdgeInsets.fromLTRB(
-    Styles.padding,
-    Styles.smallPadding,
-    Styles.padding,
-    Styles.tinyPadding,
-  );
-
-  /// Tile subtitle Padding
-  static const EdgeInsets tileSubtitlePadding = EdgeInsets.fromLTRB(padding, 0, padding, smallPadding);
 
   /// Bottom bar item Padding
   static const EdgeInsets bottomBarItemPadding = EdgeInsets.symmetric(horizontal: smallPadding, vertical: padding);

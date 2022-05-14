@@ -7,6 +7,7 @@
 - Update ArnaCheckBoxListTile
 - Update ArnaCheckBox
 - Update ArnaPopupMenu
+- Update Styles
 
 ## 0.4.5
 

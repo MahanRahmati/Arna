@@ -1,3 +1,8 @@
+## 0.4.6
+
+- [BREAKING] Update ArnaDialog
+- [Example] Update Example
+
 ## 0.4.5
 
 - Update analysis_options

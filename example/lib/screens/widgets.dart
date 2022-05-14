@@ -1,14 +1,14 @@
 import 'package:arna/arna.dart';
 
 class Widgets extends StatefulWidget {
-  const Widgets({Key? key}) : super(key: key);
+  const Widgets({super.key});
 
   @override
   State<Widgets> createState() => _WidgetsState();
 }
 
 class _WidgetsState extends State<Widgets> {
-  var _selectedType = "1";
+  String _selectedType = '1';
   bool _checkBox1 = false;
   bool? _checkBox2 = false;
   final bool _checkBox3 = false;
@@ -19,7 +19,7 @@ class _WidgetsState extends State<Widgets> {
   double _sliderValue2 = 0;
   final double _sliderValue3 = 0;
   int segmentedControlGroupValue = 0;
-  var _showBanner = true;
+  bool _showBanner = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +28,8 @@ class _WidgetsState extends State<Widgets> {
       children: <Widget>[
         ArnaBanner(
           showBanner: _showBanner,
-          title: "This is an information banner!",
-          subtitle: "Hello There!",
+          title: 'This is an information banner!',
+          subtitle: 'Hello There!',
           actions: <Widget>[
             ArnaBorderlessButton(
               icon: Icons.close_outlined,
@@ -40,63 +40,62 @@ class _WidgetsState extends State<Widgets> {
         Flexible(
           child: SingleChildScrollView(
             child: ArnaList(
-              title: "Widgets",
+              title: 'Widgets',
               children: <Widget>[
                 ArnaExpansionPanel(
                   leading: Icon(
                     Icons.adjust_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Buttons",
+                  title: 'Buttons',
                   child: Center(
                     child: Wrap(
                       children: <Widget>[
                         ArnaIconButton(
                           icon: Icons.add_outlined,
                           onPressed: () {},
-                          tooltipMessage: "Add",
+                          tooltipMessage: 'Add',
                         ),
                         ArnaTextButton(
-                          label: "Add",
+                          label: 'Add',
                           onPressed: () {},
                         ),
                         ArnaButton(
-                          label: "Add",
+                          label: 'Add',
                           icon: Icons.add_outlined,
                           onPressed: () {},
                         ),
                         const ArnaButton(
-                          label: "Add",
+                          label: 'Add',
                           icon: Icons.add_outlined,
                           onPressed: null,
-                          tooltipMessage: "Add",
+                          tooltipMessage: 'Add',
                         ),
                         ArnaIconButton(
                           icon: Icons.add_outlined,
                           buttonType: ButtonType.colored,
                           onPressed: () {},
-                          tooltipMessage: "Add",
+                          tooltipMessage: 'Add',
                         ),
                         ArnaBorderlessButton(
                           icon: Icons.add_outlined,
-                          buttonType: ButtonType.normal,
                           onPressed: () {},
-                          tooltipMessage: "Add",
+                          tooltipMessage: 'Add',
                         ),
                         ArnaPopupMenuButton<String>(
-                          itemBuilder: (context) => <ArnaPopupMenuEntry<String>>[
-                            ArnaPopupMenuItem(
-                              value: "First Item",
-                              child: Text("First Item", style: ArnaTheme.of(context).textTheme.body),
+                          itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry<String>>[
+                            ArnaPopupMenuItem<String>(
+                              value: 'First Item',
+                              child: Text('First Item', style: ArnaTheme.of(context).textTheme.body),
                             ),
-                            ArnaPopupMenuItem(
-                              value: "Second Item",
-                              child: Text("Second Item", style: ArnaTheme.of(context).textTheme.body),
+                            ArnaPopupMenuItem<String>(
+                              value: 'Second Item',
+                              child: Text('Second Item', style: ArnaTheme.of(context).textTheme.body),
                             ),
                             const ArnaPopupMenuDivider(),
-                            ArnaPopupMenuItem(
-                              value: "Third Item",
-                              child: Text("Third Item", style: ArnaTheme.of(context).textTheme.body),
+                            ArnaPopupMenuItem<String>(
+                              value: 'Third Item',
+                              child: Text('Third Item', style: ArnaTheme.of(context).textTheme.body),
                             ),
                           ],
                           onSelected: (String value) => showArnaSnackbar(
@@ -113,7 +112,7 @@ class _WidgetsState extends State<Widgets> {
                     Icons.more_horiz_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Linked Buttons",
+                  title: 'Linked Buttons',
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -122,19 +121,19 @@ class _WidgetsState extends State<Widgets> {
                           ArnaLinkedButton(
                             icon: Icons.add_outlined,
                             onPressed: () {},
-                            tooltipMessage: "Add",
+                            tooltipMessage: 'Add',
                           ),
                           ArnaLinkedButton(
-                            label: "Add",
+                            label: 'Add',
                             onPressed: () {},
                           ),
                           ArnaLinkedButton(
-                            label: "Add",
+                            label: 'Add',
                             icon: Icons.add_outlined,
                             onPressed: () {},
                           ),
                           const ArnaLinkedButton(
-                            label: "Add",
+                            label: 'Add',
                             icon: Icons.add_outlined,
                             onPressed: null,
                           ),
@@ -142,7 +141,7 @@ class _WidgetsState extends State<Widgets> {
                             icon: Icons.add_outlined,
                             buttonType: ButtonType.colored,
                             onPressed: () {},
-                            tooltipMessage: "Add",
+                            tooltipMessage: 'Add',
                           ),
                         ],
                       ),
@@ -154,13 +153,13 @@ class _WidgetsState extends State<Widgets> {
                     Icons.calendar_view_week_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Segmented Control",
+                  title: 'Segmented Control',
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ArnaSegmentedControl(
+                      ArnaSegmentedControl<int>(
                         groupValue: segmentedControlGroupValue,
-                        children: const {0: "Item 1", 1: "Item 2", 2: "Item 3"},
+                        children: const <int, String>{0: 'Item 1', 1: 'Item 2', 2: 'Item 3'},
                         onValueChanged: (int i) => setState(() => segmentedControlGroupValue = i),
                       ),
                     ],
@@ -171,22 +170,22 @@ class _WidgetsState extends State<Widgets> {
                     Icons.check_box_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "CheckBox",
+                  title: 'CheckBox',
                   child: ArnaList(
                     showBackground: true,
                     showDividers: true,
                     children: <Widget>[
                       ArnaCheckBoxListTile(
                         value: _checkBox1,
-                        title: "CheckBox 1",
-                        onChanged: (value) => setState(() => _checkBox1 = value!),
+                        title: 'CheckBox 1',
+                        onChanged: (bool? value) => setState(() => _checkBox1 = value!),
                       ),
                       ArnaCheckBoxListTile(
                         value: _checkBox2,
-                        title: "CheckBox 2",
-                        subtitle: "Subtitle 2",
+                        title: 'CheckBox 2',
+                        subtitle: 'Subtitle 2',
                         tristate: true,
-                        onChanged: (value) => setState(() => _checkBox2 = value),
+                        onChanged: (bool? value) => setState(() => _checkBox2 = value),
                         trailing: ArnaButton(
                           icon: Icons.more_vert_outlined,
                           onPressed: () {},
@@ -194,7 +193,7 @@ class _WidgetsState extends State<Widgets> {
                       ),
                       ArnaCheckBoxListTile(
                         value: _checkBox3,
-                        title: "CheckBox 3",
+                        title: 'CheckBox 3',
                         onChanged: null,
                       )
                     ],
@@ -205,32 +204,32 @@ class _WidgetsState extends State<Widgets> {
                     Icons.radio_button_checked_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Radio",
+                  title: 'Radio',
                   child: ArnaList(
                     showBackground: true,
                     showDividers: true,
                     children: <Widget>[
-                      ArnaRadioListTile(
-                        value: "1",
+                      ArnaRadioListTile<String>(
+                        value: '1',
                         groupValue: _selectedType,
-                        title: "Radio 1",
-                        onChanged: (value) => setState(() => _selectedType = value as String),
+                        title: 'Radio 1',
+                        onChanged: (String? value) => setState(() => _selectedType = value!),
                       ),
-                      ArnaRadioListTile(
-                        value: "2",
+                      ArnaRadioListTile<String>(
+                        value: '2',
                         groupValue: _selectedType,
-                        title: "Radio 2",
-                        subtitle: "Subtitle 2",
-                        onChanged: (value) => setState(() => _selectedType = value as String),
+                        title: 'Radio 2',
+                        subtitle: 'Subtitle 2',
+                        onChanged: (String? value) => setState(() => _selectedType = value!),
                         trailing: ArnaButton(
                           icon: Icons.more_vert_outlined,
                           onPressed: () {},
                         ),
                       ),
-                      ArnaRadioListTile(
-                        value: "3",
+                      ArnaRadioListTile<String>(
+                        value: '3',
                         groupValue: _selectedType,
-                        title: "Radio 3",
+                        title: 'Radio 3',
                         onChanged: null,
                       ),
                     ],
@@ -241,28 +240,28 @@ class _WidgetsState extends State<Widgets> {
                     Icons.toggle_on_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Switch",
+                  title: 'Switch',
                   child: ArnaList(
                     showBackground: true,
                     showDividers: true,
                     children: <Widget>[
                       ArnaSwitchListTile(
-                        title: "Switch 1",
+                        title: 'Switch 1',
                         value: _switch1,
-                        onChanged: (value) => setState(() => _switch1 = value),
+                        onChanged: (bool value) => setState(() => _switch1 = value),
                       ),
                       ArnaSwitchListTile(
-                        title: "Switch 2",
-                        subtitle: "Subtitle 2",
+                        title: 'Switch 2',
+                        subtitle: 'Subtitle 2',
                         value: _switch2,
-                        onChanged: (value) => setState(() => _switch2 = value),
+                        onChanged: (bool value) => setState(() => _switch2 = value),
                         trailing: ArnaButton(
                           icon: Icons.more_vert_outlined,
                           onPressed: () {},
                         ),
                       ),
                       ArnaSwitchListTile(
-                        title: "Switch 3",
+                        title: 'Switch 3',
                         value: _switch3,
                         onChanged: null,
                       ),
@@ -274,20 +273,20 @@ class _WidgetsState extends State<Widgets> {
                     Icons.view_list_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "List Tile",
+                  title: 'List Tile',
                   child: ArnaList(
                     showBackground: true,
                     showDividers: true,
                     children: <Widget>[
                       ArnaListTile(
-                        title: "Title 1",
-                        subtitle: "Subtitle 1",
-                        trailing: const ArnaBadge(label: "1"),
+                        title: 'Title 1',
+                        subtitle: 'Subtitle 1',
+                        trailing: const ArnaBadge(label: '1'),
                         onTap: () {},
                       ),
                       const ArnaListTile(
-                        title: "Title 2",
-                        trailing: ArnaBadge(label: "2"),
+                        title: 'Title 2',
+                        trailing: ArnaBadge(label: '2'),
                       ),
                     ],
                   ),
@@ -297,23 +296,21 @@ class _WidgetsState extends State<Widgets> {
                     Icons.linear_scale_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Slider",
+                  title: 'Slider',
                   child: ArnaList(
                     showBackground: true,
                     showDividers: true,
                     children: <Widget>[
                       ArnaSliderListTile(
-                        title: "Title 1",
+                        title: 'Title 1',
                         value: _sliderValue1,
-                        min: 0,
                         max: 100,
                         onChanged: (double newValue) => setState(() => _sliderValue1 = newValue),
                       ),
                       ArnaSliderListTile(
-                        title: "Title 2",
-                        subtitle: "Subtitle 2",
+                        title: 'Title 2',
+                        subtitle: 'Subtitle 2',
                         value: _sliderValue2,
-                        min: 0,
                         max: 100,
                         onChanged: (double newValue) => setState(() => _sliderValue2 = newValue),
                         trailing: ArnaButton(
@@ -322,9 +319,8 @@ class _WidgetsState extends State<Widgets> {
                         ),
                       ),
                       ArnaSliderListTile(
-                        title: "Title 3",
+                        title: 'Title 3',
                         value: _sliderValue3,
-                        min: 0,
                         max: 100,
                         onChanged: null,
                       ),
@@ -336,7 +332,7 @@ class _WidgetsState extends State<Widgets> {
                     Icons.refresh_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Indicator",
+                  title: 'Indicator',
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const <Widget>[
@@ -350,7 +346,7 @@ class _WidgetsState extends State<Widgets> {
                     Icons.text_fields_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Text Field",
+                  title: 'Text Field',
                   child: const ArnaTextField(),
                 ),
                 ArnaExpansionPanel(
@@ -358,22 +354,24 @@ class _WidgetsState extends State<Widgets> {
                     Icons.ad_units_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  title: "Banner and SnackBar",
+                  title: 'Banner and SnackBar',
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: <Widget>[
                       ArnaTextButton(
-                        label: "Show Banner",
+                        label: 'Show Banner',
                         onPressed: () {
-                          if (!_showBanner) setState(() => _showBanner = true);
+                          if (!_showBanner) {
+                            setState(() => _showBanner = true);
+                          }
                         },
                       ),
                       ArnaTextButton(
-                        label: "Show SnackBar",
+                        label: 'Show SnackBar',
                         onPressed: () {
                           showArnaSnackbar(
                             context: context,
-                            message: "Hello There!",
+                            message: 'Hello There!',
                           );
                         },
                       ),

@@ -45,9 +45,9 @@
     - [x] ArnaListTile
     - [x] ArnaList
 
-  - Dialogs (0/2)
+  - Dialogs (1/2)
 
-    - [ ] ArnaAlertDialog
+    - [x] ArnaDialog
     - [ ] ArnaPopupDialog
 
   - Inputs (8/11)

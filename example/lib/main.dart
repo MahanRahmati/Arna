@@ -10,12 +10,12 @@ import '/screens/widgets.dart';
 void main() => runApp(const ProviderScope(child: MyApp()));
 
 class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
-    final accentColor = ref.watch(accentProvider);
+    final Theme theme = ref.watch(themeProvider);
+    final Color accentColor = ref.watch(accentProvider);
     Brightness? brightness;
 
     switch (theme) {
@@ -25,7 +25,7 @@ class MyApp extends ConsumerWidget {
       case Theme.light:
         brightness = Brightness.light;
         break;
-      default:
+      case Theme.system:
         brightness = null;
     }
 
@@ -41,7 +41,7 @@ class MyApp extends ConsumerWidget {
 }
 
 class Home extends ConsumerStatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _HomeState();
@@ -53,66 +53,74 @@ class _HomeState extends ConsumerState<Home> {
 
   @override
   Widget build(BuildContext context) {
-    NavigationItem hello = NavigationItem(
-      title: "Hello World!",
+    final NavigationItem hello = NavigationItem(
+      title: 'Hello World!',
       icon: Icons.emoji_emotions_outlined,
       selectedIcon: Icons.emoji_emotions,
       headerBarLeading: ArnaIconButton(
         icon: Icons.add_outlined,
         onPressed: () => ref.read(counterProvider.state).state++,
-        tooltipMessage: "Add",
+        tooltipMessage: 'Add',
       ),
       builder: (_) => const HelloWorld(),
     );
 
-    NavigationItem widgets = NavigationItem(
-      title: "Widgets",
+    final NavigationItem widgets = NavigationItem(
+      title: 'Widgets',
       icon: Icons.widgets_outlined,
       selectedIcon: Icons.widgets,
       builder: (_) => const Widgets(),
     );
 
-    NavigationItem typography = NavigationItem(
-      title: "Typography",
+    final NavigationItem typography = NavigationItem(
+      title: 'Typography',
       icon: Icons.font_download_outlined,
       selectedIcon: Icons.font_download,
       builder: (_) => const Typography(),
     );
 
+    final Widget dialog = ArnaAlertDialog(
+      title: 'Arna Framework',
+      content: Text(
+        'A unique set of widgets for building applications with Flutter.',
+        style: ArnaTheme.of(context).textTheme.body,
+        textAlign: TextAlign.center,
+      ),
+      actions: <Widget>[
+        ArnaTextButton(
+          label: 'Source code',
+          onPressed: () async => launchUrl(url),
+        ),
+        ArnaTextButton(
+          label: 'OK',
+          onPressed: Navigator.of(context).pop,
+        )
+      ],
+    );
+
     return showMaster
         ? ArnaMasterDetailScaffold(
-            title: "Arna Demo",
+            title: 'Arna Demo',
             actions: <Widget>[
               ArnaIconButton(
                 icon: Icons.info_outlined,
                 onPressed: () => showArnaDialog(
                   context: context,
                   barrierDismissible: true,
-                  dialog: ArnaAlertDialog(
-                    title: "Arna Framework",
-                    message: "A unique set of widgets for building applications with Flutter.",
-                    primary: ArnaTextButton(
-                      label: "Source code",
-                      onPressed: () async => await launchUrl(url),
-                    ),
-                    secondary: ArnaTextButton(
-                      label: "OK",
-                      onPressed: Navigator.of(context).pop,
-                    ),
-                  ),
+                  builder: (BuildContext context) => dialog,
                 ),
-                tooltipMessage: "About",
+                tooltipMessage: 'About',
               ),
               ArnaIconButton(
                 icon: Icons.settings_outlined,
                 onPressed: () {
                   showArnaPopupDialog(
                     context: context,
-                    title: "Settings",
+                    title: 'Settings',
                     body: const Settings(),
                   );
                 },
-                tooltipMessage: "Settings",
+                tooltipMessage: 'Settings',
               ),
             ],
             leading: const Padding(
@@ -121,60 +129,49 @@ class _HomeState extends ConsumerState<Home> {
             ),
             items: <MasterNavigationItem>[
               MasterNavigationItem(
-                title: "Hello World!",
+                title: 'Hello World!',
                 leading: const Icon(Icons.emoji_emotions_outlined),
                 headerBarLeading: ArnaIconButton(
                   icon: Icons.add_outlined,
                   onPressed: () => ref.read(counterProvider.state).state++,
-                  tooltipMessage: "Add",
+                  tooltipMessage: 'Add',
                 ),
                 builder: (_) => const HelloWorld(),
               ),
               MasterNavigationItem(
                 builder: (_) => const Widgets(),
-                title: "Widgets",
+                title: 'Widgets',
                 leading: const Icon(Icons.widgets_outlined),
               ),
               MasterNavigationItem(
-                title: "Typography",
+                title: 'Typography',
                 leading: const Icon(Icons.font_download_outlined),
                 builder: (_) => const Typography(),
               ),
             ],
           )
         : ArnaSideScaffold(
-            title: "Arna Demo",
+            title: 'Arna Demo',
             actions: <Widget>[
               ArnaIconButton(
                 icon: Icons.info_outlined,
                 onPressed: () => showArnaDialog(
                   context: context,
                   barrierDismissible: true,
-                  dialog: ArnaAlertDialog(
-                    title: "Arna Framework",
-                    message: "A unique set of widgets for building applications with Flutter.",
-                    primary: ArnaTextButton(
-                      label: "Source code",
-                      onPressed: () async => await launchUrl(url),
-                    ),
-                    secondary: ArnaTextButton(
-                      label: "OK",
-                      onPressed: Navigator.of(context).pop,
-                    ),
-                  ),
+                  builder: (BuildContext context) => dialog,
                 ),
-                tooltipMessage: "About",
+                tooltipMessage: 'About',
               ),
               ArnaIconButton(
                 icon: Icons.settings_outlined,
                 onPressed: () {
                   showArnaPopupDialog(
                     context: context,
-                    title: "Settings",
+                    title: 'Settings',
                     body: const Settings(),
                   );
                 },
-                tooltipMessage: "Settings",
+                tooltipMessage: 'Settings',
               ),
             ],
             leading: const Padding(

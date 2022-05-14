@@ -15,6 +15,7 @@
 - Move ArnaDivider to base
 - Update ArnaExpansionPanel
 - Update ArnaListTile
+- [BREAKING] Update ArnaList
 
 ## 0.4.4+1
 

@@ -173,8 +173,8 @@ class _WidgetsState extends State<Widgets> {
                   ),
                   title: "CheckBox",
                   child: ArnaList(
-                    addBackground: true,
-                    addDivider: true,
+                    showBackground: true,
+                    showDividers: true,
                     children: <Widget>[
                       ArnaCheckBoxListTile(
                         value: _checkBox1,
@@ -207,8 +207,8 @@ class _WidgetsState extends State<Widgets> {
                   ),
                   title: "Radio",
                   child: ArnaList(
-                    addBackground: true,
-                    addDivider: true,
+                    showBackground: true,
+                    showDividers: true,
                     children: <Widget>[
                       ArnaRadioListTile(
                         value: "1",
@@ -243,8 +243,8 @@ class _WidgetsState extends State<Widgets> {
                   ),
                   title: "Switch",
                   child: ArnaList(
-                    addBackground: true,
-                    addDivider: true,
+                    showBackground: true,
+                    showDividers: true,
                     children: <Widget>[
                       ArnaSwitchListTile(
                         title: "Switch 1",
@@ -276,8 +276,8 @@ class _WidgetsState extends State<Widgets> {
                   ),
                   title: "List Tile",
                   child: ArnaList(
-                    addBackground: true,
-                    addDivider: true,
+                    showBackground: true,
+                    showDividers: true,
                     children: <Widget>[
                       ArnaListTile(
                         title: "Title 1",
@@ -299,8 +299,8 @@ class _WidgetsState extends State<Widgets> {
                   ),
                   title: "Slider",
                   child: ArnaList(
-                    addBackground: true,
-                    addDivider: true,
+                    showBackground: true,
+                    showDividers: true,
                     children: <Widget>[
                       ArnaSliderListTile(
                         title: "Title 1",

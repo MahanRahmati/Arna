@@ -14,8 +14,8 @@ class ArnaList extends StatelessWidget {
     this.textDirection,
     this.verticalDirection = VerticalDirection.down,
     this.textBaseline,
-    this.addDivider = false,
-    this.addBackground = false,
+    this.showDividers = false,
+    this.showBackground = false,
   });
 
   /// The title of list view.
@@ -99,16 +99,16 @@ class ArnaList extends StatelessWidget {
   /// know the correct baseline.
   final TextBaseline? textBaseline;
 
-  /// Whether to add dividers or not.
-  final bool addDivider;
+  /// Whether to show dividers or not.
+  final bool showDividers;
 
   /// Whether to show background or not.
-  final bool addBackground;
+  final bool showBackground;
 
   @override
   Widget build(BuildContext context) {
     final List<Widget> items = <Widget>[];
-    if (addDivider && children.isNotEmpty) {
+    if (showDividers && children.isNotEmpty) {
       for (int i = 0; i < children.length; i++) {
         items.add(children[i]);
         if (children.length - i != 1) {
@@ -139,7 +139,7 @@ class ArnaList extends StatelessWidget {
             children: items,
           );
 
-    if (addBackground) {
+    if (showBackground) {
       child = ArnaCard(
         child: ClipRRect(
           borderRadius: Styles.listBorderRadius,
@@ -153,35 +153,25 @@ class ArnaList extends StatelessWidget {
       child: Column(
         children: <Widget>[
           const SizedBox(width: double.infinity),
-          LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              return ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: isExpanded(context)
-                      ? constraints.maxWidth > Styles.expanded
-                          ? constraints.maxWidth * 0.7
-                          : double.infinity
-                      : double.infinity,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    if (title != null)
-                      Padding(
-                        padding: Styles.normal,
-                        child: Row(
-                          children: <Widget>[
-                            Flexible(child: Text(title!, style: ArnaTheme.of(context).textTheme.body)),
-                          ],
-                        ),
-                      ),
-                    child,
-                  ],
-                ),
-              );
-            },
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: Styles.expanded),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (title != null)
+                  Padding(
+                    padding: Styles.normal,
+                    child: Row(
+                      children: <Widget>[
+                        Flexible(child: Text(title!, style: ArnaTheme.of(context).textTheme.body)),
+                      ],
+                    ),
+                  ),
+                child,
+              ],
+            ),
           ),
         ],
       ),

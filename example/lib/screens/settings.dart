@@ -13,8 +13,8 @@ class Settings extends ConsumerWidget {
         children: <Widget>[
           ArnaList(
             title: "Theme",
-            addDivider: true,
-            addBackground: true,
+            showDividers: true,
+            showBackground: true,
             children: <Widget>[
               ArnaRadioListTile(
                 value: Theme.system,
@@ -40,7 +40,7 @@ class Settings extends ConsumerWidget {
             title: "Accent",
             direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
-            addBackground: true,
+            showBackground: true,
             children: <Widget>[
               ArnaColorButton(
                 value: ArnaColors.blue,

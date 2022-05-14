@@ -3,6 +3,7 @@
 - [BREAKING] Update ArnaDialog
 - [Example] Update Example
 - [BREAKING] Update ArnaPopupDialog
+- Update ArnaPageRoute
 
 ## 0.4.5
 

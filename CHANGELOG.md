@@ -8,6 +8,8 @@
 - Update ArnaCheckBox
 - Update ArnaPopupMenu
 - Update Styles
+- Update ArnaRadioListTile
+- Update ArnaRadio
 
 ## 0.4.5
 

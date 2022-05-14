@@ -3,7 +3,7 @@ import 'package:arna/arna.dart';
 /// An Arna-styled radio button.
 ///
 /// Used to select between a number of mutually exclusive values. When one radio button in a group is selected, the
-/// other radio buttons in the group cease to be selected. The values are of type `T`, the type parameter of the
+/// other radio buttons in the group cease to be selected. The values are of type [T], the type parameter of the
 /// [ArnaRadio] class. Enums are commonly used for this purpose.
 ///
 /// The radio button itself does not maintain any state. Instead, selecting the radio invokes the [onChanged] callback,
@@ -86,14 +86,10 @@ class ArnaRadio<T> extends StatelessWidget {
   /// The semantic label of the radio button.
   final String? semanticLabel;
 
-  void _handleTap() {
-    if (onChanged != null) {
-      onChanged!(value);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     final Brightness brightness = ArnaTheme.brightnessOf(context);
 
@@ -114,35 +110,27 @@ class ArnaRadio<T> extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.radioBorderRadius,
                   border: Border.all(
-                    color: ArnaDynamicColor.resolve(
-                      focused
-                          ? ArnaDynamicColor.outerColor(accent)
-                          : !enabled
-                              ? ArnaColors.borderColor
-                              : selected && hover
-                                  ? ArnaDynamicColor.outerColor(accent)
-                                  : hover
-                                      ? ArnaDynamicColor.matchingColor(accent, brightness)
-                                      : selected
-                                          ? ArnaDynamicColor.outerColor(accent)
-                                          : ArnaColors.borderColor,
-                      context,
-                    ),
+                    color: focused
+                        ? ArnaDynamicColor.outerColor(accent)
+                        : !enabled
+                            ? borderColor
+                            : selected && hover
+                                ? ArnaDynamicColor.outerColor(accent)
+                                : hover
+                                    ? ArnaDynamicColor.matchingColor(accent, brightness)
+                                    : selected
+                                        ? ArnaDynamicColor.outerColor(accent)
+                                        : borderColor,
                   ),
-                  color: ArnaDynamicColor.resolve(
-                    !enabled
-                        ? ArnaColors.backgroundColor
-                        : selected && enabled
-                            ? hover || focused
-                                ? ArnaDynamicColor.applyOverlay(accent)
-                                : accent
-                            : hover
-                                ? ArnaDynamicColor.applyOverlay(
-                                    ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
-                                  )
-                                : ArnaColors.buttonColor,
-                    context,
-                  ),
+                  color: !enabled
+                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      : selected && enabled
+                          ? hover || focused
+                              ? ArnaDynamicColor.applyOverlay(accent)
+                              : accent
+                          : hover
+                              ? ArnaDynamicColor.applyOverlay(borderColor)
+                              : buttonColor,
                 ),
               ),
               AnimatedContainer(
@@ -157,11 +145,7 @@ class ArnaRadio<T> extends StatelessWidget {
                       : selected && enabled
                           ? ArnaDynamicColor.onBackgroundColor(accent)
                           : ArnaDynamicColor.resolve(
-                              hover
-                                  ? ArnaDynamicColor.applyOverlay(
-                                      ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
-                                    )
-                                  : ArnaColors.backgroundColor,
+                              hover ? ArnaDynamicColor.applyOverlay(buttonColor) : ArnaColors.backgroundColor,
                               context,
                             ),
                 ),
@@ -169,7 +153,7 @@ class ArnaRadio<T> extends StatelessWidget {
             ],
           );
         },
-        onPressed: onChanged != null ? _handleTap : null,
+        onPressed: onChanged != null ? () => onChanged!(value) : null,
         isFocusable: isFocusable,
         autofocus: autofocus,
         cursor: cursor,

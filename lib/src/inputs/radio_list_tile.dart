@@ -7,10 +7,9 @@ import 'package:arna/arna.dart';
 /// The [value], [groupValue], [onChanged] properties of this widget are identical to the similarly-named properties on
 /// the [ArnaRadio] widget.
 ///
-/// The type parameter `T` serves the same purpose as that of the [ArnaRadio] class' type parameter.
+/// The type parameter [T] serves the same purpose as that of the [ArnaRadio] class' type parameter.
 ///
 /// The [title] and [subtitle] properties are like those of the same name on [ArnaListTile].
-///
 ///
 /// To show the [ArnaRadioListTile] as disabled, pass null as the [onChanged] callback.
 ///
@@ -69,6 +68,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   ///
   /// ```dart
   /// ArnaRadioListTile<SingingCharacter>(
+  ///   title: 'Lafayette',
   ///   value: SingingCharacter.lafayette,
   ///   groupValue: _character,
   ///   onChanged: (SingingCharacter newValue) {
@@ -104,12 +104,6 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   /// The semantic label of the radio button.
   final String? semanticLabel;
 
-  void _handleTap() {
-    if (onChanged != null) {
-      onChanged!(value);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return ArnaListTile(
@@ -126,7 +120,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
       title: title,
       subtitle: subtitle,
       trailing: trailing,
-      onTap: onChanged != null ? _handleTap : null,
+      onTap: onChanged != null ? () => onChanged!(value) : null,
       actionable: true,
       cursor: cursor,
     );

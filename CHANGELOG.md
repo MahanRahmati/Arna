@@ -4,6 +4,8 @@
 - [Example] Update Example
 - [BREAKING] Update ArnaPopupDialog
 - Update ArnaPageRoute
+- Update ArnaCheckBoxListTile
+- Update ArnaCheckBox
 
 ## 0.4.5
 

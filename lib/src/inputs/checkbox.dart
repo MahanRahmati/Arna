@@ -112,6 +112,8 @@ class ArnaCheckBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     final Brightness brightness = ArnaTheme.brightnessOf(context);
 
@@ -132,35 +134,27 @@ class ArnaCheckBox extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.checkBoxBorderRadius,
                   border: Border.all(
-                    color: ArnaDynamicColor.resolve(
-                      focused
-                          ? ArnaDynamicColor.outerColor(accent)
-                          : !enabled
-                              ? ArnaColors.borderColor
-                              : selected && hover
-                                  ? ArnaDynamicColor.outerColor(accent)
-                                  : hover
-                                      ? ArnaDynamicColor.matchingColor(accent, brightness)
-                                      : selected
-                                          ? ArnaDynamicColor.outerColor(accent)
-                                          : ArnaColors.borderColor,
-                      context,
-                    ),
+                    color: focused
+                        ? ArnaDynamicColor.outerColor(accent)
+                        : !enabled
+                            ? borderColor
+                            : selected && hover
+                                ? ArnaDynamicColor.outerColor(accent)
+                                : hover
+                                    ? ArnaDynamicColor.matchingColor(accent, brightness)
+                                    : selected
+                                        ? ArnaDynamicColor.outerColor(accent)
+                                        : borderColor,
                   ),
-                  color: ArnaDynamicColor.resolve(
-                    !enabled
-                        ? ArnaColors.backgroundColor
-                        : selected && enabled
-                            ? hover || focused
-                                ? ArnaDynamicColor.applyOverlay(accent)
-                                : accent
-                            : hover
-                                ? ArnaDynamicColor.applyOverlay(
-                                    ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
-                                  )
-                                : ArnaColors.buttonColor,
-                    context,
-                  ),
+                  color: !enabled
+                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      : selected && enabled
+                          ? hover || focused
+                              ? ArnaDynamicColor.applyOverlay(accent)
+                              : accent
+                          : hover
+                              ? ArnaDynamicColor.applyOverlay(buttonColor)
+                              : buttonColor,
                 ),
               ),
               AnimatedContainer(

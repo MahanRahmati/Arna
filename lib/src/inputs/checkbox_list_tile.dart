@@ -64,6 +64,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   ///
   /// ```dart
   /// ArnaCheckBoxListTile(
+  ///   title: 'throwShotAway',
   ///   value: _throwShotAway,
   ///   onChanged: (bool? newValue) {
   ///     setState(() {

@@ -344,14 +344,23 @@ Future<T?> showArnaDialog<T>({
           ? SlideTransition(
               position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
               child: FadeTransition(
-                opacity: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Styles.basicCurve,
+                ),
                 child: child,
               ),
             )
           : ScaleTransition(
-              scale: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
+              scale: CurvedAnimation(
+                parent: animation,
+                curve: Styles.basicCurve,
+              ),
               child: FadeTransition(
-                opacity: CurvedAnimation(parent: animation, curve: Styles.basicCurve),
+                opacity: CurvedAnimation(
+                  parent: animation,
+                  curve: Styles.basicCurve,
+                ),
                 child: child,
               ),
             );

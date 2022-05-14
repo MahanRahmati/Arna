@@ -2,6 +2,7 @@
 
 - [BREAKING] Update ArnaDialog
 - [Example] Update Example
+- [BREAKING] Update ArnaPopupDialog
 
 ## 0.4.5
 

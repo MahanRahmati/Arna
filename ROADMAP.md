@@ -45,10 +45,10 @@
     - [x] ArnaListTile
     - [x] ArnaList
 
-  - Dialogs (1/2)
+  - Dialogs (2/2)
 
     - [x] ArnaDialog
-    - [ ] ArnaPopupDialog
+    - [x] ArnaPopupDialog
 
   - Inputs (8/11)
 

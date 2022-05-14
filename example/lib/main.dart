@@ -117,7 +117,7 @@ class _HomeState extends ConsumerState<Home> {
                   showArnaPopupDialog(
                     context: context,
                     title: 'Settings',
-                    body: const Settings(),
+                    builder: (BuildContext context) => const Settings(),
                   );
                 },
                 tooltipMessage: 'Settings',
@@ -168,7 +168,7 @@ class _HomeState extends ConsumerState<Home> {
                   showArnaPopupDialog(
                     context: context,
                     title: 'Settings',
-                    body: const Settings(),
+                    builder: (BuildContext context) => const Settings(),
                   );
                 },
                 tooltipMessage: 'Settings',

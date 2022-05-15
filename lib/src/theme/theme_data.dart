@@ -21,12 +21,11 @@ class ArnaThemeData with Diagnosticable {
   ///  * [ArnaThemeData.dark], which creates dark theme.
   factory ArnaThemeData({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
     final ArnaTextTheme defaultTextTheme = brightness == Brightness.dark ? ArnaTypography.dark : ArnaTypography.light;
-    final ArnaTextTheme effectiveTextTheme = textTheme ?? defaultTextTheme;
 
     return ArnaThemeData.raw(
       brightness: brightness,
       accentColor: accentColor ?? ArnaColors.blue,
-      textTheme: effectiveTextTheme,
+      textTheme: textTheme ?? defaultTextTheme,
     );
   }
 
@@ -35,7 +34,11 @@ class ArnaThemeData with Diagnosticable {
   ///
   /// This will rarely be used directly. It is used by [lerp] to create intermediate themes based on two themes created
   /// with the [ArnaThemeData] constructor.
-  const ArnaThemeData.raw({required this.brightness, required this.accentColor, required this.textTheme});
+  const ArnaThemeData.raw({
+    required this.brightness,
+    required this.accentColor,
+    required this.textTheme,
+  });
 
   /// A default light theme.
   factory ArnaThemeData.light() => ArnaThemeData(brightness: Brightness.light, textTheme: ArnaTypography.light);

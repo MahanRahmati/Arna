@@ -50,10 +50,9 @@ class ArnaTheme extends StatelessWidget {
   ///
   /// See also:
   ///
-  /// * [maybeBrightnessOf], which returns null if no valid [ArnaTheme] or
-  ///   [MediaQuery] exists, instead of throwing.
-  /// * [ArnaThemeData.brightness], the property takes precedence over
-  ///   [MediaQueryData.platformBrightness] for descendant Arna widgets.
+  /// * [maybeBrightnessOf], which returns null if no valid [ArnaTheme] or [MediaQuery] exists, instead of throwing.
+  /// * [ArnaThemeData.brightness], the property takes precedence over [MediaQueryData.platformBrightness] for
+  ///   descendant Arna widgets.
   static Brightness brightnessOf(BuildContext context) {
     final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
     return inheritedTheme?.theme.data.brightness ?? MediaQuery.of(context).platformBrightness;
@@ -68,10 +67,9 @@ class ArnaTheme extends StatelessWidget {
   ///
   /// See also:
   ///
-  /// * [ArnaThemeData.brightness], the property takes precedence over
-  ///   [MediaQueryData.platformBrightness] for descendant Arna widgets.
-  /// * [brightnessOf], which throws if no valid [ArnaTheme] or
-  ///   [MediaQuery] exists, instead of returning null.
+  /// * [ArnaThemeData.brightness], the property takes precedence over [MediaQueryData.platformBrightness] for
+  ///   descendant Arna widgets.
+  /// * [brightnessOf], which throws if no valid [ArnaTheme] or [MediaQuery] exists, instead of returning null.
   static Brightness? maybeBrightnessOf(BuildContext context) {
     final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
     return inheritedTheme?.theme.data.brightness ?? MediaQuery.maybeOf(context)?.platformBrightness;
@@ -89,8 +87,9 @@ class ArnaTheme extends StatelessWidget {
   }
 }
 
-/// _InheritedArnaTheme which extends InheritedWidget
+/// _InheritedArnaTheme which extends InheritedWidget.
 class _InheritedArnaTheme extends InheritedWidget {
+  /// Creates a InheritedArnaTheme.
   const _InheritedArnaTheme({
     required this.theme,
     required super.child,

@@ -19,6 +19,8 @@
 - Update ArnaTextField
 - Add ArnaTextFormField
 - Add ArnaTextSelectionControls
+- Update ArnaThemeData
+- Update ArnaTheme
 
 ## 0.4.5
 

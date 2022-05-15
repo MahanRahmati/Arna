@@ -62,6 +62,7 @@ class ArnaSwitchListTile extends StatelessWidget {
   ///
   /// ```dart
   /// ArnaSwitch(
+  ///   title: 'giveVerse',
   ///   value: _giveVerse,
   ///   onChanged: (bool newValue) {
   ///     setState(() {

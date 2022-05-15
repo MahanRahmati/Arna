@@ -13,6 +13,8 @@
 - Update ArnaSegmentedControl
 - Update ArnaSliderListTile
 - Update ArnaSlider
+- Update ArnaSwitchListTile
+- Update ArnaSwitch
 
 ## 0.4.5
 

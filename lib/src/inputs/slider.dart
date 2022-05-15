@@ -893,11 +893,11 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
   void describeSemanticsConfiguration(SemanticsConfiguration config) {
     super.describeSemanticsConfiguration(config);
 
-    // The Slider widget has its own Focus widget with semantics information, and we want that semantics node to 
+    // The Slider widget has its own Focus widget with semantics information, and we want that semantics node to
     // collect the semantics information here so that it's all in the same node: otherwise Talkback sees that the node
-    // has focusable children, and it won't focus the Slider's Focus widget because it thinks the Focus widget's node 
-    // doesn't have anything to say (which it doesn't, but this child does). Aggregating the semantic information into 
-    // one node means that Talkback will recognize that it has something to say and focus it when it receives keyboard 
+    // has focusable children, and it won't focus the Slider's Focus widget because it thinks the Focus widget's node
+    // doesn't have anything to say (which it doesn't, but this child does). Aggregating the semantic information into
+    // one node means that Talkback will recognize that it has something to say and focus it when it receives keyboard
     // focus. (See https://github.com/flutter/flutter/issues/57038 for context).
     config.isSemanticBoundary = false;
 

@@ -4,13 +4,14 @@
 - [Example] Update Example
 - [BREAKING] Update ArnaPopupDialog
 - Update ArnaPageRoute
-- Update ArnaCheckBoxListTile
-- Update ArnaCheckBox
+- [BREAKING] Update ArnaCheckBoxListTile and Rename to ArnaCheckboxListTile
+- [BREAKING] Update ArnaCheckBox and Rename to ArnaCheckbox
 - Update ArnaPopupMenu
 - Update Styles
 - Update ArnaRadioListTile
 - Update ArnaRadio
 - Update ArnaSegmentedControl
+- Update ArnaSliderListTile
 
 ## 0.4.5
 

@@ -176,12 +176,12 @@ class _WidgetsState extends State<Widgets> {
                     showBackground: true,
                     showDividers: true,
                     children: <Widget>[
-                      ArnaCheckBoxListTile(
+                      ArnaCheckboxListTile(
                         value: _checkBox1,
                         title: 'CheckBox 1',
                         onChanged: (bool? value) => setState(() => _checkBox1 = value!),
                       ),
-                      ArnaCheckBoxListTile(
+                      ArnaCheckboxListTile(
                         value: _checkBox2,
                         title: 'CheckBox 2',
                         subtitle: 'Subtitle 2',
@@ -192,7 +192,7 @@ class _WidgetsState extends State<Widgets> {
                           onPressed: () {},
                         ),
                       ),
-                      ArnaCheckBoxListTile(
+                      ArnaCheckboxListTile(
                         value: _checkBox3,
                         title: 'CheckBox 3',
                         onChanged: null,

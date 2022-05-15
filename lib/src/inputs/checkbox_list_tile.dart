@@ -1,23 +1,23 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaCheckBox]. In other words, a checkbox with a label.
+/// A [ArnaListTile] with a [ArnaCheckbox]. In other words, a checkbox with a label.
 ///
 /// The entire list tile is interactive: tapping anywhere in the tile toggles the checkbox.
 ///
 /// The [value] and [onChanged] properties of this widget are identical to the similarly-named properties on the
-/// [ArnaCheckBox] widget.
+/// [ArnaCheckbox] widget.
 ///
 /// The [title] and [subtitle] properties are like  those of the same name on [ArnaListTile].
 ///
-/// To show the [ArnaCheckBoxListTile] as disabled, pass null as the [onChanged] callback.
+/// To show the [ArnaCheckboxListTile] as disabled, pass null as the [onChanged] callback.
 ///
 /// See also:
 ///
 ///  * [ArnaRadioListTile], a similar widget for radio buttons.
 ///  * [ArnaSwitchListTile], a similar widget for switches.
 ///  * [ArnaSliderListTile], a similar widget for sliders.
-///  * [ArnaListTile] and [ArnaCheckBox], the widgets from which this widget is made.
-class ArnaCheckBoxListTile extends StatelessWidget {
+///  * [ArnaListTile] and [ArnaCheckbox], the widgets from which this widget is made.
+class ArnaCheckboxListTile extends StatelessWidget {
   /// Creates a combination of a list tile and a checkbox.
   ///
   /// The checkbox tile itself does not maintain any state. Instead, when the state of the checkbox changes, the widget
@@ -31,7 +31,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   ///   checkbox.
   ///
   /// The value of [tristate] must not be null.
-  const ArnaCheckBoxListTile({
+  const ArnaCheckboxListTile({
     super.key,
     required this.value,
     required this.onChanged,
@@ -129,7 +129,7 @@ class ArnaCheckBoxListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaListTile(
-      leading: ArnaCheckBox(
+      leading: ArnaCheckbox(
         value: value,
         tristate: tristate,
         onChanged: onChanged,

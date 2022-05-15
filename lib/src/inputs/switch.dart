@@ -13,7 +13,7 @@ import 'package:arna/arna.dart';
 /// See also:
 ///
 ///  * [ArnaSwitchListTile], which combines this widget with a [ArnaListTile] so that you can give the switch a label.
-///  * [ArnaCheckBox], another widget with similar semantics.
+///  * [ArnaCheckbox], another widget with similar semantics.
 ///  * [ArnaRadio], for selecting among a set of explicit values.
 ///  * [ArnaSlider], for selecting a value in a range.
 class ArnaSwitch extends StatelessWidget {

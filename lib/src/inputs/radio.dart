@@ -14,7 +14,7 @@ import 'package:arna/arna.dart';
 ///  * [ArnaRadioListTile], which combines this widget with a [ArnaListTile] so that you can give the radio button a
 ///    label.
 ///  * [ArnaSlider], for selecting a value in a range.
-///  * [ArnaCheckBox] and [ArnaSwitch], for toggling a particular value on or off.
+///  * [ArnaCheckbox] and [ArnaSwitch], for toggling a particular value on or off.
 class ArnaRadio<T> extends StatelessWidget {
   /// Creates An Arna-styled radio button.
   ///

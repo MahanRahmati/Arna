@@ -15,7 +15,7 @@ import 'package:arna/arna.dart';
 ///
 /// See also:
 ///
-///  * [ArnaCheckBoxListTile], a similar widget for checkboxes.
+///  * [ArnaCheckboxListTile], a similar widget for checkboxes.
 ///  * [ArnaRadioListTile], a similar widget for radio buttons.
 ///  * [ArnaSwitchListTile], a similar widget for switches.
 ///  * [ArnaListTile] and [ArnaSwitch], the widgets from which this widget is made.
@@ -65,6 +65,7 @@ class ArnaSliderListTile extends StatelessWidget {
   ///
   /// ```dart
   /// ArnaSliderListTile(
+  ///   title: 'Value',
   ///   value: _sliderValue.toDouble(),
   ///   min: 1.0,
   ///   max: 10.0,
@@ -103,6 +104,7 @@ class ArnaSliderListTile extends StatelessWidget {
   ///
   /// ```dart
   /// ArnaSliderListTile(
+  ///   title: 'Value',
   ///   value: _sliderValue.toDouble(),
   ///   min: 1.0,
   ///   max: 10.0,
@@ -133,6 +135,7 @@ class ArnaSliderListTile extends StatelessWidget {
   ///
   /// ```dart
   /// ArnaSliderListTile(
+  ///   title: 'Value',
   ///   value: _sliderValue.toDouble(),
   ///   min: 1.0,
   ///   max: 10.0,

@@ -32,7 +32,7 @@ typedef ArnaBaseWidgetBuilder = Widget Function(
 ///  * [ArnaMasterItem]
 ///  * [ArnaSideBarItem]
 ///  * [ArnaLinkedButtons]
-///  * [ArnaCheckBox]
+///  * [ArnaCheckbox]
 ///  * [ArnaRadio]
 ///  * [ArnaSwitch]
 class ArnaBaseWidget extends StatefulWidget {

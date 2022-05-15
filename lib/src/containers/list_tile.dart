@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart' show BoxParentData, BoxHitTestResult;
 ///
 /// See also:
 ///
-///  * [ArnaCheckBoxListTile], [ArnaRadioListTile], and [ArnaSwitchListTile], widgets that combine [ArnaListTile] with
+///  * [ArnaCheckboxListTile], [ArnaRadioListTile], and [ArnaSwitchListTile], widgets that combine [ArnaListTile] with
 ///    other controls.
 class ArnaListTile extends StatefulWidget {
   /// Creates a list tile.

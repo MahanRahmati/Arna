@@ -15,7 +15,7 @@ import 'package:arna/arna.dart';
 ///
 /// See also:
 ///
-///  * [ArnaCheckBoxListTile], a similar widget for checkboxes.
+///  * [ArnaCheckboxListTile], a similar widget for checkboxes.
 ///  * [ArnaSwitchListTile], a similar widget for switches.
 ///  * [ArnaSliderListTile], a similar widget for sliders.
 ///  * [ArnaListTile] and [ArnaRadio], the widgets from which this widget is made.

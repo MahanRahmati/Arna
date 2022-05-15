@@ -11,12 +11,12 @@ import 'package:arna/arna.dart';
 ///
 /// See also:
 ///
-///  * [ArnaCheckBoxListTile], which combines this widget with a [ArnaListTile] so that you can give the checkbox a
+///  * [ArnaCheckboxListTile], which combines this widget with a [ArnaListTile] so that you can give the checkbox a
 ///    label.
-///  * [ArnaSwitch], a widget with semantics similar to [ArnaCheckBox].
+///  * [ArnaSwitch], a widget with semantics similar to [ArnaCheckbox].
 ///  * [ArnaRadio], for selecting among a set of explicit values.
 ///  * [ArnaSlider], for selecting a value in a range.
-class ArnaCheckBox extends StatelessWidget {
+class ArnaCheckbox extends StatelessWidget {
   /// Creates An Arna-styled checkbox.
   ///
   /// The checkbox itself does not maintain any state. Instead, when the state of the checkbox changes, the widget
@@ -28,7 +28,7 @@ class ArnaCheckBox extends StatelessWidget {
   /// * [value], which determines whether the checkbox is checked. The [value] can only be null if [tristate] is true.
   /// * [onChanged], which is called when the value of the checkbox should change. It can be set to null to disable the
   ///   checkbox.
-  const ArnaCheckBox({
+  const ArnaCheckbox({
     super.key,
     required this.value,
     required this.onChanged,

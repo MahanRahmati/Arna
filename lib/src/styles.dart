@@ -128,6 +128,9 @@ abstract class Styles {
   /// Slider track minimum width
   static const double sliderTrackMinWidth = base * 25;
 
+  /// Toolbar width
+  static const double toolbarWidth = base * 30;
+
   /// Search width
   static const double searchWidth = base * 44;
 

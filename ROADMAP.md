@@ -4,7 +4,7 @@
 
 - Finalizing the current set of widgets.
 
-  - Base (20/20)
+  - Base (21/21)
 
     - [x] ArnaApp [TODO]
     - [x] ArnaBanner
@@ -26,6 +26,7 @@
     - [x] ArnaSideBarItem
     - [x] ArnaSideScaffold
     - [x] ArnaSnackBar [TODO]
+    - [x] ArnaTextSelectionControls
     - [x] ArnaTooltip
 
   - Buttons (6/6)
@@ -50,7 +51,7 @@
     - [x] ArnaDialog
     - [x] ArnaPopupDialog
 
-  - Inputs (10/11)
+  - Inputs (12/12)
 
     - [x] ArnaCheckBoxListTile
     - [x] ArnaCheckBox
@@ -62,7 +63,8 @@
     - [x] ArnaSlider
     - [x] ArnaSwitchListTile
     - [x] ArnaSwitch
-    - [ ] ArnaTextField
+    - [x] ArnaTextField
+    - [x] ArnaTextFormField
 
   - Theme (5/5)
     - [x] ArnaColors

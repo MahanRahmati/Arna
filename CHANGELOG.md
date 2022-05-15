@@ -1,5 +1,6 @@
 ## 0.4.6
 
+- Update ROADMAP
 - [BREAKING] Update ArnaDialog
 - [Example] Update Example
 - [BREAKING] Update ArnaPopupDialog
@@ -15,6 +16,9 @@
 - Update ArnaSlider
 - Update ArnaSwitchListTile
 - Update ArnaSwitch
+- Update ArnaTextField
+- Add ArnaTextFormField
+- Add ArnaTextSelectionControls
 
 ## 0.4.5
 

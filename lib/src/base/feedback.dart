@@ -24,7 +24,7 @@ import 'package:flutter/services.dart' show HapticFeedback;
 ///   @override
 ///   Widget build(BuildContext context) {
 ///     return GestureDetector(
-///       onLongPress: Feedback.wrapForLongPress(_onLongPressHandler, context),
+///       onLongPress: ArnaFeedback.wrapForLongPress(_onLongPressHandler, context),
 ///       child: const Text('X'),
 ///     );
 ///   }
@@ -48,7 +48,7 @@ import 'package:flutter/services.dart' show HapticFeedback;
 ///     return GestureDetector(
 ///       onLongPress: () {
 ///         // Do some work (e.g. check if the long press is valid)
-///         Feedback.forLongPress(context);
+///         ArnaFeedback.forLongPress(context);
 ///         // Do more work (e.g. respond to the long press)
 ///       },
 ///       child: const Text('X'),

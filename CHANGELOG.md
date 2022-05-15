@@ -12,6 +12,7 @@
 - Update ArnaRadio
 - Update ArnaSegmentedControl
 - Update ArnaSliderListTile
+- Update ArnaSlider
 
 ## 0.4.5
 

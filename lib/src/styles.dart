@@ -125,6 +125,9 @@ abstract class Styles {
   /// Menu minimum width
   static const double menuMinWidth = base * 15;
 
+  /// Slider track minimum width
+  static const double sliderTrackMinWidth = base * 25;
+
   /// Search width
   static const double searchWidth = base * 44;
 

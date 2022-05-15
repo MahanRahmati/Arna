@@ -113,7 +113,7 @@ class _ArnaMenuItem extends SingleChildRenderObjectWidget {
 
 /// _RenderArnaMenuItem class.
 class _RenderArnaMenuItem extends RenderShiftedBox {
-  /// Renders a ArnaMenuItem.
+  /// Renders an ArnaMenuItem.
   _RenderArnaMenuItem(
     this.onLayout, [
     RenderBox? child,

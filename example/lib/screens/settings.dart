@@ -76,8 +76,10 @@ class Settings extends ConsumerWidget {
 
 enum Theme { system, dark, light }
 
-final AutoDisposeStateProvider<Theme> themeProvider =
-    StateProvider.autoDispose<Theme>((AutoDisposeStateProviderRef<Theme> ref) => Theme.system);
+final AutoDisposeStateProvider<Theme> themeProvider = StateProvider.autoDispose<Theme>(
+  (AutoDisposeStateProviderRef<Theme> ref) => Theme.system,
+);
 
-final AutoDisposeStateProvider<Color> accentProvider =
-    StateProvider.autoDispose<Color>((AutoDisposeStateProviderRef<Color> ref) => ArnaColors.blue);
+final AutoDisposeStateProvider<Color> accentProvider = StateProvider.autoDispose<Color>(
+  (AutoDisposeStateProviderRef<Color> ref) => ArnaColors.blue,
+);

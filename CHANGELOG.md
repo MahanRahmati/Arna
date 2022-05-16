@@ -2,6 +2,9 @@
 
 - Update ArnaFeedback
 - Update ArnaBaseWidget
+- Add ArnaDateUtils
+- Add ArnaDatePicker
+- [Example] Update Example
 
 ## 0.4.6
 

@@ -86,6 +86,15 @@ abstract class Styles {
   /// Menu item size
   static const double menuItemSize = base * 5;
 
+  /// Picker row height
+  static const double pickerRowHeight = base * 5;
+
+  /// Year picker row height
+  static const double yearPickerRowHeight = base * 5;
+
+  /// Picker top row height
+  static const double pickerTopRowHeight = base * 6;
+
   /// Huge button size
   static const double hugeButtonSize = base * 6.5;
 
@@ -118,6 +127,9 @@ abstract class Styles {
 
   /// Bottom navigation bar item height
   static const double bottomNavigationBarItemHeight = base * 9;
+
+  /// Year picker row width
+  static const double yearPickerRowWidth = base * 10;
 
   /// Bottom navigation bar height
   static const double bottomNavigationBarHeight = base * 11;

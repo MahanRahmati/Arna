@@ -379,6 +379,36 @@ class _WidgetsState extends State<Widgets> {
                     ],
                   ),
                 ),
+                ArnaExpansionPanel(
+                  leading: Icon(
+                    Icons.calendar_today_outlined,
+                    color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  ),
+                  title: 'Pickers',
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      ArnaTextButton(
+                        label: 'Date Picker',
+                        onPressed: () async {
+                          final DateTime? pickedDate = await showArnaDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(DateTime.now().year - 5),
+                            lastDate: DateTime(DateTime.now().year + 5),
+                          );
+                          if (pickedDate != null) {
+                            showArnaSnackbar(
+                              context: context,
+                              message: '${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
+                            );
+                          }
+                        },
+                        tooltipMessage: 'Add',
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

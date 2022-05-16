@@ -72,3 +72,15 @@
     - [x] ArnaThemeData
     - [x] ArnaTheme
     - [x] ArnaTypography
+
+## Future
+
+- Add missing widgets.
+
+  - [x] ArnaDatePicker
+  - [ ] ArnaPicker
+  - [ ] ArnaTimePicker
+  - [ ] ArnaChip
+  - [ ] ArnaDropdownButton
+  - [ ] ArnaDataTable
+  - [ ] ArnaPageIndicator

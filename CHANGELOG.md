@@ -1,6 +1,7 @@
 ## 0.4.7
 
 - Update ArnaFeedback
+- Update ArnaBaseWidget
 
 ## 0.4.6
 

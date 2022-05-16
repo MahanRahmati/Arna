@@ -43,8 +43,9 @@ class ArnaBaseWidget extends StatefulWidget {
     this.onPressed,
     this.onLongPress,
     this.tooltipMessage,
-    this.showAnimation = true,
+    this.focusNode,
     this.isFocusable = true,
+    this.showAnimation = true,
     this.autofocus = false,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
@@ -65,6 +66,9 @@ class ArnaBaseWidget extends StatefulWidget {
 
   /// The tooltip message of the widget.
   final String? tooltipMessage;
+
+  /// The focus node of the widget.
+  final FocusNode? focusNode;
 
   /// Whether this widget is focusable or not.
   final bool isFocusable;
@@ -87,7 +91,7 @@ class ArnaBaseWidget extends StatefulWidget {
 
 /// The [State] for a [ArnaBaseWidget].
 class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProviderStateMixin {
-  FocusNode? focusNode;
+  FocusNode? _focusNode;
   bool _hover = false;
   bool _focused = false;
   bool _pressed = false;
@@ -102,6 +106,8 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   /// To enable a widget, set its [onPressed] or [onLongPress] property to a non-null value.
   bool get _isEnabled => widget.onPressed != null || widget.onLongPress != null;
 
+  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+
   @override
   void initState() {
     super.initState();
@@ -115,9 +121,11 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
       );
       _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
     }
-    focusNode = FocusNode(canRequestFocus: _isEnabled);
+
+    _focusNode = FocusNode(canRequestFocus: _isEnabled);
+    _effectiveFocusNode.canRequestFocus = _isEnabled;
     if (widget.autofocus) {
-      focusNode!.requestFocus();
+      _effectiveFocusNode.requestFocus();
     }
     _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
     _shortcuts = const <ShortcutActivator, Intent>{
@@ -130,17 +138,16 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   void didUpdateWidget(ArnaBaseWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.onPressed != oldWidget.onPressed || widget.onLongPress != oldWidget.onLongPress) {
-      focusNode!.canRequestFocus = _isEnabled;
       if (!_isEnabled) {
         _hover = _pressed = false;
       }
     }
+    _effectiveFocusNode.canRequestFocus = _isEnabled;
   }
 
   @override
   void dispose() {
-    focusNode!.dispose();
-    focusNode = null;
+    _focusNode!.dispose();
     if (widget.showAnimation) {
       _controller.dispose();
     }
@@ -246,7 +253,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
             onVerticalDragEnd: _handleTapUp,
             child: FocusableActionDetector(
               enabled: _isEnabled && widget.isFocusable,
-              focusNode: focusNode,
+              focusNode: _effectiveFocusNode,
               autofocus: _isEnabled && widget.autofocus,
               mouseCursor: widget.cursor,
               onShowHoverHighlight: _handleHover,

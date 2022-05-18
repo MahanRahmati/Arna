@@ -274,9 +274,9 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
                 style: ArnaTheme.of(context).textTheme.title,
               ),
               actions: <Widget>[
-                ArnaIconButton(
+                ArnaBorderlessButton(
                   icon: Icons.close,
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: Navigator.of(context).pop,
                   tooltipMessage: widget.cancelText ?? MaterialLocalizations.of(context).cancelButtonLabel,
                 )
               ],

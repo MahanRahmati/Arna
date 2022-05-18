@@ -269,17 +269,15 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ArnaHeaderBar(
+              leading: ArnaBorderlessButton(
+                icon: Icons.close,
+                onPressed: Navigator.of(context).pop,
+                tooltipMessage: widget.cancelText ?? MaterialLocalizations.of(context).cancelButtonLabel,
+              ),
               middle: Text(
                 widget.helpText ?? MaterialLocalizations.of(context).datePickerHelpText,
                 style: ArnaTheme.of(context).textTheme.title,
               ),
-              actions: <Widget>[
-                ArnaBorderlessButton(
-                  icon: Icons.close,
-                  onPressed: Navigator.of(context).pop,
-                  tooltipMessage: widget.cancelText ?? MaterialLocalizations.of(context).cancelButtonLabel,
-                )
-              ],
             ),
             ArnaCalendarDatePicker(
               key: _calendarPickerKey,

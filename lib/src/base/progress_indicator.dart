@@ -2,6 +2,8 @@ import 'dart:math' as math;
 
 import 'package:arna/arna.dart';
 
+// TODO: Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35
+
 /// A circular progress indicator, which spins to indicate that the application is busy.
 ///
 /// There are two kinds of circular progress indicators:

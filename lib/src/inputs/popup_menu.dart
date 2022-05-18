@@ -3,6 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart';
 
+// TODO: Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35
+
 /// Used to configure how the [ArnaPopupMenuButton] positions its popup menu.
 enum ArnaPopupMenuPosition {
   /// Menu is positioned over the anchor.

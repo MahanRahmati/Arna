@@ -90,11 +90,13 @@ class _ArnaPopupDialog extends StatelessWidget {
                   headerBarLeading: headerBarLeading,
                   title: title,
                   actions: <Widget>[
-                    if (actions != null) ...actions!,
-                    ArnaTextButton(
-                      label: 'Close',
-                      onPressed: Navigator.of(context).pop,
-                    ),
+                    if (actions != null)
+                      ...actions!
+                    else
+                      ArnaTextButton(
+                        label: 'Close',
+                        onPressed: Navigator.of(context).pop,
+                      ),
                   ],
                   body: body,
                   isDialog: true,

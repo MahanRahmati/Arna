@@ -92,7 +92,7 @@ class _ArnaPopupDialog extends StatelessWidget {
                     children: <Widget>[
                       ArnaTextButton(
                         label: MaterialLocalizations.of(context).backButtonTooltip,
-                        onPressed: () => Navigator.pop(context),
+                        onPressed: Navigator.of(context).pop,
                       ),
                       if (headerBarLeading != null) headerBarLeading!,
                     ],
@@ -187,7 +187,7 @@ class _ArnaPopupPage extends StatelessWidget {
         children: <Widget>[
           ArnaIconButton(
             icon: Icons.arrow_back_outlined,
-            onPressed: () => Navigator.pop(context),
+            onPressed: Navigator.of(context).pop,
             tooltipMessage: MaterialLocalizations.of(context).backButtonTooltip,
             semanticLabel: MaterialLocalizations.of(context).backButtonTooltip,
           ),

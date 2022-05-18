@@ -114,7 +114,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
     if (widget.showAnimation) {
       _controller = AnimationController(
         value: 1.0,
-        duration: Styles.basicDuration,
+        duration: Styles.baseWidgetDuration,
         debugLabel: 'ArnaBaseWidget',
         lowerBound: 0.7,
         vsync: this,

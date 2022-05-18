@@ -1,3 +1,8 @@
+## 0.4.8
+
+- Update README
+- Update ArnaBaseWidget
+
 ## 0.4.7
 
 - Update ROADMAP

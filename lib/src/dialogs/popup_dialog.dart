@@ -87,16 +87,18 @@ class _ArnaPopupDialog extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: Styles.listBorderRadius,
                 child: ArnaScaffold(
-                  headerBarLeading: headerBarLeading,
+                  headerBarLeading: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ArnaTextButton(
+                        label: MaterialLocalizations.of(context).backButtonTooltip,
+                        onPressed: Navigator.of(context).pop,
+                      ),
+                      if (headerBarLeading != null) headerBarLeading!,
+                    ],
+                  ),
                   title: title,
-                  actions: <Widget>[
-                    if (actions != null) ...actions!,
-                    ArnaBorderlessButton(
-                      icon: Icons.close,
-                      onPressed: Navigator.of(context).pop,
-                      tooltipMessage: MaterialLocalizations.of(context).closeButtonTooltip,
-                    )
-                  ],
+                  actions: actions,
                   body: body,
                   isDialog: true,
                 ),
@@ -185,7 +187,7 @@ class _ArnaPopupPage extends StatelessWidget {
         children: <Widget>[
           ArnaIconButton(
             icon: Icons.arrow_back_outlined,
-            onPressed: () => Navigator.pop(context),
+            onPressed: Navigator.of(context).pop,
             tooltipMessage: MaterialLocalizations.of(context).backButtonTooltip,
             semanticLabel: MaterialLocalizations.of(context).backButtonTooltip,
           ),

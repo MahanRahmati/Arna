@@ -2,6 +2,8 @@
 
 - Update README
 - Update ArnaBaseWidget
+- Update ArnaPopupDialog
+- Update ArnaDatePicker
 
 ## 0.4.7
 

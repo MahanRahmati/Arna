@@ -91,10 +91,11 @@ class _ArnaPopupDialog extends StatelessWidget {
                   title: title,
                   actions: <Widget>[
                     if (actions != null) ...actions!,
-                    ArnaTextButton(
-                      label: 'Close',
+                    ArnaBorderlessButton(
+                      icon: Icons.close,
                       onPressed: Navigator.of(context).pop,
-                    ),
+                      tooltipMessage: MaterialLocalizations.of(context).closeButtonTooltip,
+                    )
                   ],
                   body: body,
                   isDialog: true,

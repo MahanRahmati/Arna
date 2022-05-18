@@ -87,17 +87,18 @@ class _ArnaPopupDialog extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: Styles.listBorderRadius,
                 child: ArnaScaffold(
-                  headerBarLeading: headerBarLeading,
-                  title: title,
-                  actions: <Widget>[
-                    if (actions != null)
-                      ...actions!
-                    else
+                  headerBarLeading: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
                       ArnaTextButton(
-                        label: 'Close',
-                        onPressed: Navigator.of(context).pop,
+                        label: MaterialLocalizations.of(context).backButtonTooltip,
+                        onPressed: () => Navigator.pop(context),
                       ),
-                  ],
+                      if (headerBarLeading != null) headerBarLeading!,
+                    ],
+                  ),
+                  title: title,
+                  actions: actions,
                   body: body,
                   isDialog: true,
                 ),

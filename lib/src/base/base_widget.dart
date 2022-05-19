@@ -49,6 +49,7 @@ class ArnaBaseWidget extends StatefulWidget {
     this.autofocus = false,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
+    this.enableFeedback = true,
   });
 
   /// The base builder for widgets.
@@ -84,6 +85,15 @@ class ArnaBaseWidget extends StatefulWidget {
 
   /// The semantic label of the widget.
   final String? semanticLabel;
+
+  /// Whether detected gestures should provide acoustic and/or haptic feedback.
+  ///
+  /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
+  ///
+  /// See also:
+  ///
+  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
+  final bool enableFeedback;
 
   @override
   State<ArnaBaseWidget> createState() => _ArnaBaseWidgetState();
@@ -164,7 +174,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   }
 
   Future<void> _handleTap() async {
-    if (_isEnabled) {
+    if (_isEnabled && widget.onPressed != null) {
       if (mounted) {
         setState(() => _pressed = true);
       }
@@ -184,6 +194,9 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
 
   void _handleLongPress() {
     if (_isEnabled && widget.onLongPress != null) {
+      if (widget.enableFeedback) {
+        ArnaFeedback.forLongPress(context);
+      }
       widget.onLongPress!();
     }
   }

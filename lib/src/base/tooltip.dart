@@ -24,7 +24,7 @@ class ArnaTooltip extends StatefulWidget {
     this.richMessage,
     this.preferBelow,
     this.excludeFromSemantics,
-    this.enableFeedback,
+    this.enableFeedback = true,
     required this.child,
   });
 
@@ -51,16 +51,14 @@ class ArnaTooltip extends StatefulWidget {
   /// provide its own custom semantics label.
   final bool? excludeFromSemantics;
 
-  /// Whether the tooltip should provide acoustic and/or haptic feedback.
+  /// Whether detected gestures should provide acoustic and/or haptic feedback.
   ///
   /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
   ///
-  /// When null, the default value is true.
-  ///
   /// See also:
   ///
-  ///  * [ArnaFeedback], for providing platform-specific feedback to certain actions.
-  final bool? enableFeedback;
+  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
+  final bool enableFeedback;
 
   /// The widget below this widget in the tree.
   ///
@@ -149,7 +147,6 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   late bool _isConcealed;
   late bool _forceRemoval;
   late bool _visible;
-  late bool _enableFeedback;
 
   /// The plain text message for this tooltip.
   ///
@@ -387,7 +384,7 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   void _handlePress() {
     _pressActivated = true;
     final bool tooltipCreated = ensureTooltipVisible();
-    if (tooltipCreated && _enableFeedback) {
+    if (tooltipCreated && widget.enableFeedback) {
       ArnaFeedback.forLongPress(context);
     }
   }
@@ -402,7 +399,6 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
 
     _preferBelow = widget.preferBelow ?? true;
     _excludeFromSemantics = widget.excludeFromSemantics ?? false;
-    _enableFeedback = widget.enableFeedback ?? true;
 
     Widget result = Semantics(
       label: _excludeFromSemantics ? null : _tooltipMessage,

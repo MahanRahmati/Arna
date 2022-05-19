@@ -23,7 +23,7 @@ class ArnaListTile extends StatefulWidget {
     this.actionable = false,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-    this.enableFeedback,
+    this.enableFeedback = true,
   });
 
   /// A widget to display before the title.
@@ -57,13 +57,11 @@ class ArnaListTile extends StatefulWidget {
   ///
   /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
   ///
-  /// When null, the default value is true.
-  /// {@endtemplate}
-  ///
   /// See also:
   ///
   ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
-  final bool? enableFeedback;
+  final bool enableFeedback;
+
   @override
   State<ArnaListTile> createState() => _ArnaListTileState();
 }
@@ -74,8 +72,14 @@ class _ArnaListTileState extends State<ArnaListTile> {
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;
 
   void _handleTap() {
-    if (_isEnabled) {
+    if (_isEnabled && widget.onTap != null) {
       widget.onTap!();
+    }
+  }
+
+  void _handleLongPress() {
+    if (_isEnabled && widget.onLongPress != null) {
+      widget.onLongPress!();
     }
   }
 
@@ -106,6 +110,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: _handleTap,
+            onLongPress: _handleLongPress,
             child: AnimatedContainer(
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,

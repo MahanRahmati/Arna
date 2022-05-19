@@ -16,6 +16,7 @@ class ArnaIconButton extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
+    this.enableFeedback = true,
   });
 
   /// The icon of the button.
@@ -55,6 +56,15 @@ class ArnaIconButton extends StatelessWidget {
   /// The semantic label of the button.
   final String? semanticLabel;
 
+  /// Whether detected gestures should provide acoustic and/or haptic feedback.
+  ///
+  /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
+  ///
+  /// See also:
+  ///
+  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
+  final bool enableFeedback;
+
   @override
   Widget build(BuildContext context) {
     return ArnaButton(
@@ -69,6 +79,7 @@ class ArnaIconButton extends StatelessWidget {
       accentColor: accentColor,
       cursor: cursor,
       semanticLabel: semanticLabel,
+      enableFeedback: enableFeedback,
     );
   }
 }

@@ -141,6 +141,7 @@ class _ArnaLinkedItem extends StatelessWidget {
       autofocus: button.autofocus,
       cursor: button.cursor,
       semanticLabel: button.semanticLabel,
+      enableFeedback: button.enableFeedback,
     );
   }
 }
@@ -160,6 +161,7 @@ class ArnaLinkedButton {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
+    this.enableFeedback = true,
   });
 
   /// The text label of the button.
@@ -198,4 +200,13 @@ class ArnaLinkedButton {
 
   /// The semantic label of the button.
   final String? semanticLabel;
+
+  /// Whether detected gestures should provide acoustic and/or haptic feedback.
+  ///
+  /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
+  ///
+  /// See also:
+  ///
+  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
+  final bool enableFeedback;
 }

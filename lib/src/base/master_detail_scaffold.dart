@@ -18,6 +18,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     this.trailing,
     this.emptyBody,
     this.onItemSelected,
+    this.onItemLongPressed,
     this.currentIndex,
     this.resizeToAvoidBottomInset = true,
   });
@@ -55,6 +56,9 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
 
   /// Called when one of the [items] is tapped.
   final ValueChanged<int>? onItemSelected;
+
+  /// Called when one of the [items] is long pressed.
+  final ValueChanged<int>? onItemLongPressed;
 
   /// The index into [items] for the current active [MasterNavigationItem].
   final int? currentIndex;
@@ -96,6 +100,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 emptyBody: widget.emptyBody,
                 currentIndex: _index == -1 ? _previousIndex : _index,
                 onSelected: _setIndex,
+                onItemLongPressed: widget.onItemLongPressed,
                 resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               )
             : _NestedPage(
@@ -108,6 +113,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 emptyBody: widget.emptyBody,
                 currentIndex: _index,
                 onSelected: _setIndex,
+                onItemLongPressed: widget.onItemLongPressed,
                 resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               );
       },
@@ -128,6 +134,7 @@ class _LateralPage extends StatefulWidget {
     this.emptyBody,
     required this.currentIndex,
     required this.onSelected,
+    this.onItemLongPressed,
     this.resizeToAvoidBottomInset = true,
   });
 
@@ -167,6 +174,9 @@ class _LateralPage extends StatefulWidget {
 
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
+
+  /// Called when one of the [items] is long pressed.
+  final ValueChanged<int>? onItemLongPressed;
 
   /// Whether the [body] should size itself to avoid the window's bottom inset.
   ///
@@ -210,6 +220,7 @@ class _LateralPageState extends State<_LateralPage> {
               items: widget.items,
               trailing: widget.trailing,
               onPressed: _onPressed,
+              onLongPressed: widget.onItemLongPressed,
               currentIndex: _currentIndex,
             ),
             resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
@@ -263,6 +274,7 @@ class _NestedPage extends StatefulWidget {
     this.emptyBody,
     required this.currentIndex,
     required this.onSelected,
+    this.onItemLongPressed,
     this.resizeToAvoidBottomInset = true,
   });
 
@@ -302,6 +314,9 @@ class _NestedPage extends StatefulWidget {
 
   /// Callback that returns an index when the page changes.
   final ValueChanged<int> onSelected;
+
+  /// Called when one of the [items] is long pressed.
+  final ValueChanged<int>? onItemLongPressed;
 
   /// Whether the [body] should size itself to avoid the window's bottom inset.
   ///
@@ -393,6 +408,7 @@ class _NestedPageState extends State<_NestedPage> {
                     items: widget.items,
                     trailing: widget.trailing,
                     onPressed: _onPressed,
+                    onLongPressed: widget.onItemLongPressed,
                     currentIndex: _currentIndex,
                     isNested: true,
                   ),
@@ -416,6 +432,7 @@ class _MasterItemBuilder extends StatelessWidget {
     required this.items,
     this.trailing,
     required this.onPressed,
+    this.onLongPressed,
     required this.currentIndex,
     this.isNested = false,
   });
@@ -435,6 +452,9 @@ class _MasterItemBuilder extends StatelessWidget {
 
   /// The callback that is called when an item is tapped.
   final Function(int index) onPressed;
+
+  /// The callback that is called when an item is long pressed.
+  final Function(int index)? onLongPressed;
 
   /// Current index of the selected item.
   final int currentIndex;
@@ -460,6 +480,7 @@ class _MasterItemBuilder extends StatelessWidget {
                 subtitle: items[index].subtitle,
                 trailing: items[index].trailing,
                 onPressed: onPressed,
+                onLongPressed: onLongPressed,
                 itemSelected: !isNested && (index == currentIndex),
                 index: index,
                 isFocusable: items[index].isFocusable,

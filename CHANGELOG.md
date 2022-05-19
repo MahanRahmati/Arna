@@ -9,6 +9,15 @@
 - Add blur to ArnaDrawer
 - Update MasterNavigationItem
 - Update NavigationItem
+- Update ArnaMasterDetailScaffold
+- Update ArnaTooltip
+- Update ArnaBorderlessButton
+- Update ArnaButton
+- Update ArnaIconButton
+- Update ArnaLinkedButtons
+- Update ArnaTextButton
+- Update ArnaListTile
+- Update ArnaPopupMenuButton
 
 ## 0.4.7
 

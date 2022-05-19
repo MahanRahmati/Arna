@@ -10,6 +10,7 @@ class ArnaMasterItem extends StatelessWidget {
     this.subtitle,
     this.trailing,
     required this.onPressed,
+    this.onLongPressed,
     this.itemSelected = false,
     required this.index,
     this.isFocusable = true,
@@ -17,6 +18,7 @@ class ArnaMasterItem extends StatelessWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
+    this.enableFeedback = true,
   });
 
   /// The leading widget of the item.
@@ -33,6 +35,9 @@ class ArnaMasterItem extends StatelessWidget {
 
   /// The callback that is called when an item is tapped.
   final Function(int index) onPressed;
+
+  /// The callback that is called when an item is long pressed.
+  final Function(int index)? onLongPressed;
 
   /// Whether this item is selected or not.
   final bool itemSelected;
@@ -54,6 +59,15 @@ class ArnaMasterItem extends StatelessWidget {
 
   /// The semantic label of the item.
   final String? semanticLabel;
+
+  /// Whether detected gestures should provide acoustic and/or haptic feedback.
+  ///
+  /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
+  ///
+  /// See also:
+  ///
+  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
+  final bool enableFeedback;
 
   @override
   Widget build(BuildContext context) {
@@ -131,11 +145,13 @@ class ArnaMasterItem extends StatelessWidget {
           );
         },
         onPressed: () => onPressed(index),
+        onLongPress: onLongPressed != null ? () => onLongPressed!(index) : null,
         tooltipMessage: title,
         isFocusable: isFocusable,
         autofocus: autofocus,
         cursor: cursor,
         semanticLabel: semanticLabel,
+        enableFeedback: enableFeedback,
       ),
     );
   }

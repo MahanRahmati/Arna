@@ -718,7 +718,6 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-    this.enableFeedback,
     this.position = ArnaPopupMenuPosition.over,
   });
 
@@ -779,15 +778,6 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
 
   /// The semantic label of the button.
   final String? semanticLabel;
-
-  /// Whether detected gestures should provide acoustic and/or haptic feedback.
-  ///
-  /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
-  ///
-  /// See also:
-  ///
-  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
-  final bool? enableFeedback;
 
   /// Whether the popup menu is positioned over or under the popup menu button.
   ///

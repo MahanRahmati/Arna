@@ -158,6 +158,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                         final int index = widget.items.indexOf(item);
                         return Expanded(
                           child: ArnaBottomBarItem(
+                            key: item.key,
                             label: item.title,
                             icon: item.icon,
                             selectedIcon: item.selectedIcon,
@@ -256,6 +257,7 @@ class _SideItemBuilder extends StatelessWidget {
                 padding: Styles.small,
                 itemBuilder: (BuildContext context, int index) {
                   return ArnaSideBarItem(
+                    key: items[index].key,
                     label: items[index].title,
                     icon: items[index].icon,
                     selectedIcon: items[index].selectedIcon,
@@ -284,6 +286,7 @@ class _SideItemBuilder extends StatelessWidget {
 class NavigationItem {
   /// Creates a navigation item.
   const NavigationItem({
+    this.key,
     required this.title,
     required this.icon,
     this.selectedIcon,
@@ -297,6 +300,9 @@ class NavigationItem {
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
+
+  /// Controls how one widget replaces another widget in the tree.
+  final Key? key;
 
   /// The title of the item.
   final String title;

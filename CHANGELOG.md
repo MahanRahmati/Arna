@@ -7,6 +7,8 @@
 - Add blur to ArnaDialog
 - Add blur to ArnaPopupDialog
 - Add blur to ArnaDrawer
+- Update MasterNavigationItem
+- Update NavigationItem
 
 ## 0.4.7
 

@@ -454,6 +454,7 @@ class _MasterItemBuilder extends StatelessWidget {
             padding: Styles.small,
             itemBuilder: (BuildContext context, int index) {
               return ArnaMasterItem(
+                key: items[index].key,
                 leading: items[index].leading,
                 title: items[index].title,
                 subtitle: items[index].subtitle,
@@ -480,6 +481,7 @@ class _MasterItemBuilder extends StatelessWidget {
 class MasterNavigationItem {
   /// Creates a master navigation item.
   const MasterNavigationItem({
+    this.key,
     this.leading,
     this.title,
     this.subtitle,
@@ -494,6 +496,9 @@ class MasterNavigationItem {
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
+
+  /// Controls how one widget replaces another widget in the tree.
+  final Key? key;
 
   /// The leading widget of the item.
   final Widget? leading;

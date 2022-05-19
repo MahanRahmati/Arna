@@ -1,4 +1,5 @@
 import 'dart:math' show min;
+import 'dart:ui' as ui;
 
 import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
@@ -181,7 +182,10 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
                     onTap: close,
                     child: Semantics(
                       label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-                      child: Container(color: _scrimColorTween.evaluate(_controller)),
+                      child: BackdropFilter(
+                        filter: ui.ImageFilter.blur(sigmaX: _controller.value * 5, sigmaY: _controller.value * 5),
+                        child: Container(color: _scrimColorTween.evaluate(_controller)),
+                      ),
                     ),
                   ),
                 ),

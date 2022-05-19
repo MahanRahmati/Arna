@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 
@@ -341,27 +343,33 @@ Future<T?> showArnaDialog<T>({
     transitionDuration: Styles.basicDuration,
     transitionBuilder: (BuildContext context, Animation<double> animation, _, Widget child) {
       return isCompact(context)
-          ? SlideTransition(
-              position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
-              child: FadeTransition(
-                opacity: CurvedAnimation(
-                  parent: animation,
-                  curve: Styles.basicCurve,
+          ? BackdropFilter(
+              filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
+              child: SlideTransition(
+                position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+                child: FadeTransition(
+                  opacity: CurvedAnimation(
+                    parent: animation,
+                    curve: Styles.basicCurve,
+                  ),
+                  child: child,
                 ),
-                child: child,
               ),
             )
-          : ScaleTransition(
-              scale: CurvedAnimation(
-                parent: animation,
-                curve: Styles.basicCurve,
-              ),
-              child: FadeTransition(
-                opacity: CurvedAnimation(
+          : BackdropFilter(
+              filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
+              child: ScaleTransition(
+                scale: CurvedAnimation(
                   parent: animation,
                   curve: Styles.basicCurve,
                 ),
-                child: child,
+                child: FadeTransition(
+                  opacity: CurvedAnimation(
+                    parent: animation,
+                    curve: Styles.basicCurve,
+                  ),
+                  child: child,
+                ),
               ),
             );
     },

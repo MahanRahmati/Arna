@@ -4,6 +4,9 @@
 - Update ArnaBaseWidget
 - Update ArnaPopupDialog
 - Update ArnaDatePicker
+- Add blur to ArnaDialog
+- Add blur to ArnaPopupDialog
+- Add blur to ArnaDrawer
 
 ## 0.4.7
 

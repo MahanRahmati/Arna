@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 
@@ -292,17 +294,20 @@ Future<T?> showArnaPopupDialog<T>({
           barrierColor: barrierColor ?? ArnaColors.barrierColor,
           transitionDuration: Styles.basicDuration,
           transitionBuilder: (BuildContext context, Animation<double> animation, _, Widget child) {
-            return ScaleTransition(
-              scale: CurvedAnimation(
-                parent: animation,
-                curve: Styles.basicCurve,
-              ),
-              child: FadeTransition(
-                opacity: CurvedAnimation(
+            return BackdropFilter(
+              filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
+              child: ScaleTransition(
+                scale: CurvedAnimation(
                   parent: animation,
                   curve: Styles.basicCurve,
                 ),
-                child: child,
+                child: FadeTransition(
+                  opacity: CurvedAnimation(
+                    parent: animation,
+                    curve: Styles.basicCurve,
+                  ),
+                  child: child,
+                ),
               ),
             );
           },

@@ -9,6 +9,8 @@
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
+#### [Meet Arna](https://medium.com/@mahan.rahmati/meet-arna-b0e5f771968d)
+
 A unique set of widgets for building applications with Flutter.
 
 This Framework is in active development. Any contribution, idea, criticism or feedback is welcomed.
@@ -36,7 +38,7 @@ Add Arna as a dependency in your pubspec.yaml
 
 ```yaml
 dependencies:
-  arna: ^0.4.7
+  arna: ^0.4.8
 ```
 
 And import it

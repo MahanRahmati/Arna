@@ -211,6 +211,7 @@ class ArnaTextFormField extends FormField<String> {
   FormFieldState<String> createState() => _ArnaTextFormFieldState();
 }
 
+/// The [State] for an [ArnaTextFormField].
 class _ArnaTextFormFieldState extends FormFieldState<String> {
   RestorableTextEditingController? _controller;
 

@@ -27,6 +27,7 @@
 - Update ArnaSliderListTile
 - Update ArnaSwitchListTile
 - Update ArnaSlider
+- Update ArnaTextFormField
 
 ## 0.4.8
 

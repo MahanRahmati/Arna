@@ -14,26 +14,11 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ArnaThemeMode theme = ref.watch(themeProvider);
-    final Color accentColor = ref.watch(accentProvider);
-    Brightness? brightness;
-
-    switch (theme) {
-      case ArnaThemeMode.dark:
-        brightness = Brightness.dark;
-        break;
-      case ArnaThemeMode.light:
-        brightness = Brightness.light;
-        break;
-      case ArnaThemeMode.system:
-        brightness = null;
-    }
-
     return ArnaApp(
       debugShowCheckedModeBanner: false,
       theme: ArnaThemeData(
-        brightness: brightness,
-        accentColor: accentColor,
+        brightness: ref.watch(themeProvider),
+        accentColor: ref.watch(accentProvider),
       ),
       home: const Home(),
     );

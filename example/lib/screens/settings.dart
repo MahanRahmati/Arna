@@ -6,7 +6,7 @@ class Settings extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ArnaThemeMode themeMode = ref.watch(themeProvider);
+    final Brightness? themeMode = ref.watch(themeProvider);
     final bool masterMode = ref.watch(masterProvider);
     final Color accentColor = ref.watch(accentProvider);
     return SingleChildScrollView(
@@ -17,23 +17,23 @@ class Settings extends ConsumerWidget {
             showDividers: true,
             showBackground: true,
             children: <Widget>[
-              ArnaRadioListTile<ArnaThemeMode>(
-                value: ArnaThemeMode.system,
+              ArnaRadioListTile<Brightness?>(
+                value: null,
                 groupValue: themeMode,
                 title: 'System',
-                onChanged: (_) => ref.read(themeProvider.notifier).state = ArnaThemeMode.system,
+                onChanged: (_) => ref.read(themeProvider.notifier).state = null,
               ),
-              ArnaRadioListTile<ArnaThemeMode>(
-                value: ArnaThemeMode.dark,
+              ArnaRadioListTile<Brightness?>(
+                value: Brightness.dark,
                 groupValue: themeMode,
                 title: 'Dark',
-                onChanged: (_) => ref.read(themeProvider.notifier).state = ArnaThemeMode.dark,
+                onChanged: (_) => ref.read(themeProvider.notifier).state = Brightness.dark,
               ),
-              ArnaRadioListTile<ArnaThemeMode>(
-                value: ArnaThemeMode.light,
+              ArnaRadioListTile<Brightness?>(
+                value: Brightness.light,
                 groupValue: themeMode,
                 title: 'Light',
-                onChanged: (_) => ref.read(themeProvider.notifier).state = ArnaThemeMode.light,
+                onChanged: (_) => ref.read(themeProvider.notifier).state = Brightness.light,
               ),
             ],
           ),
@@ -86,20 +86,8 @@ class Settings extends ConsumerWidget {
   }
 }
 
-/// Describes which theme will be used by.
-enum ArnaThemeMode {
-  /// Use either the light or dark theme based on what the user has selected in the system settings.
-  system,
-
-  /// Always use the dark mode regardless of system preference.
-  dark,
-
-  /// Always use the light mode regardless of system preference.
-  light,
-}
-
-final AutoDisposeStateProvider<ArnaThemeMode> themeProvider = StateProvider.autoDispose<ArnaThemeMode>(
-  (AutoDisposeStateProviderRef<ArnaThemeMode> ref) => ArnaThemeMode.system,
+final AutoDisposeStateProvider<Brightness?> themeProvider = StateProvider.autoDispose<Brightness?>(
+  (AutoDisposeStateProviderRef<Brightness?> ref) => null,
 );
 
 final AutoDisposeStateProvider<bool> masterProvider = StateProvider.autoDispose<bool>(

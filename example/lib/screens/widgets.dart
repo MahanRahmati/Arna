@@ -19,7 +19,7 @@ class _WidgetsState extends State<Widgets> {
   double _sliderValue2 = 0;
   final double _sliderValue3 = 0;
   int segmentedControlGroupValue = 0;
-  bool _showBanner = true;
+  bool _showBanner = false;
 
   @override
   Widget build(BuildContext context) {

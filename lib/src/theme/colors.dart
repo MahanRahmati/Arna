@@ -300,6 +300,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// Must not be null. Defaults to [color] if this [ArnaDynamicColor] has never been resolved.
   final Color _effectiveColor;
 
+  /// A 32 bit value representing this color.
   @override
   int get value => _effectiveColor.value;
 

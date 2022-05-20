@@ -29,6 +29,7 @@
 - Update ArnaSlider
 - Update ArnaTextFormField
 - Update ArnaDatePicker
+- Update ArnaColors
 
 ## 0.4.8
 

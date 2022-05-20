@@ -6,6 +6,7 @@
 - Update ArnaPopupMenu
 - Add ArnaBackButton
 - Update documentations
+- Update ArnaListTile
 
 ## 0.4.8
 

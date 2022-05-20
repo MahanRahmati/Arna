@@ -181,7 +181,7 @@ class _ArnaListTile extends RenderObjectWidget with SlottedMultiChildRenderObjec
     required this.subtitle,
     required this.trailing,
     required this.textDirection,
-  }) : assert(textDirection != null);
+  });
 
   final Widget? leading;
   final Widget title;
@@ -222,8 +222,7 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
   /// Renders an ArnaListTile.
   _RenderArnaListTile({
     required TextDirection textDirection,
-  })  : assert(textDirection != null),
-        _textDirection = textDirection;
+  }) : _textDirection = textDirection;
 
   RenderBox? get leading => childForSlot(_ArnaListTileSlot.leading);
   RenderBox? get title => childForSlot(_ArnaListTileSlot.title);

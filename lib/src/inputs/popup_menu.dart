@@ -100,6 +100,7 @@ class _ArnaMenuItem extends SingleChildRenderObjectWidget {
     required super.child,
   });
 
+  /// onLayout
   final ValueChanged<Size> onLayout;
 
   @override
@@ -121,6 +122,7 @@ class _RenderArnaMenuItem extends RenderShiftedBox {
     RenderBox? child,
   ]) : super(child);
 
+  /// onLayout
   ValueChanged<Size> onLayout;
 
   @override
@@ -321,7 +323,10 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
     required this.semanticLabel,
   });
 
+  /// The route of the menu.
   final _ArnaPopupMenuRoute<T> route;
+
+  /// The semantic label of the menu.
   final String? semanticLabel;
 
   @override
@@ -535,11 +540,22 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
     this.color,
   }) : itemSizes = List<Size?>.filled(items.length, null);
 
+  /// position
   final RelativeRect position;
+
+  /// items
   final List<ArnaPopupMenuEntry<T>> items;
+
+  /// itemSizes
   final List<Size?> itemSizes;
+
+  /// initialValue
   final T? initialValue;
+
+  /// semanticLabel
   final String? semanticLabel;
+
+  /// color
   final Color? color;
 
   @override
@@ -711,7 +727,7 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
-    this.position = ArnaPopupMenuPosition.over,
+    this.position = ArnaPopupMenuPosition.under,
   });
 
   /// Called when the button is pressed to create the items to show in the menu.

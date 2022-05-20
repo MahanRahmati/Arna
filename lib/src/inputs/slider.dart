@@ -412,15 +412,34 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
     required this.thumbColor,
   });
 
+  /// The currently selected value for this slider.
   final double value;
+
+  /// The number of discrete divisions.
   final int? divisions;
+
+  /// Called during a drag when the user is selecting a new value for the slider by dragging.
   final ValueChanged<double>? onChanged;
+
+  /// Called when the user starts selecting a new value for the slider.
   final ValueChanged<double>? onChangeStart;
+
+  /// Called when the user is done selecting a new value for the slider.
   final ValueChanged<double>? onChangeEnd;
+
+  /// The state of the slider.
   final _ArnaSliderState state;
+
+  /// The color of the slider's progress.
   final Color accent;
+
+  /// The color of the slider's boder.
   final Color borderColor;
+
+  /// The color of the slider's track.
   final Color trackColor;
+
+  /// The color of the slider's thumb.
   final Color thumbColor;
 
   @override

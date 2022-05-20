@@ -26,6 +26,7 @@
 - Update ArnaRadioListTile
 - Update ArnaSliderListTile
 - Update ArnaSwitchListTile
+- Update ArnaSlider
 
 ## 0.4.8
 

@@ -15,13 +15,13 @@ bool isMedium(BuildContext context) => !isCompact(context) && !isExpanded(contex
 /// Is device expanded?
 bool isExpanded(BuildContext context) => deviceWidth(context) > Styles.expanded;
 
-// Determines if this is the first child that is being laid out.
+/// Determines if this is the first child that is being laid out.
 bool isFirstButton(int index, int length, TextDirection textDirection) {
   return (index == 0 && textDirection == TextDirection.ltr) ||
       (index == length - 1 && textDirection == TextDirection.rtl);
 }
 
-// Determines if this is the last child that is being laid out.
+/// Determines if this is the last child that is being laid out.
 bool isLastButton(int index, int length, TextDirection textDirection) {
   return (index == length - 1 && textDirection == TextDirection.ltr) ||
       (index == 0 && textDirection == TextDirection.rtl);

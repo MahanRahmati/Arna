@@ -21,6 +21,7 @@
 - Update ArnaSnackBar
 - Update ArnaTextSelectionControls
 - Update ArnaBorderlessButton
+- Update Helpers
 
 ## 0.4.8
 

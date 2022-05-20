@@ -213,13 +213,13 @@ class ArnaColors {
 /// If it has never been resolved, the light, normal contrast [ArnaDynamicColor.color] will be the default effective
 /// color.
 ///
-/// Sometimes manually resolving a [ArnaDynamicColor] is not necessary, because the Arna Library provides built-in
+/// Sometimes manually resolving an [ArnaDynamicColor] is not necessary, because the Arna Library provides built-in
 /// support for it.
 ///
-/// ### Using a [ArnaDynamicColor] from a [ArnaTheme]
+/// ### Using an [ArnaDynamicColor] from an [ArnaTheme]
 ///
-/// When referring to a [ArnaTheme] color, generally the color will already have adapted to the ambient [BuildContext],
-/// because [ArnaTheme.of] implicitly resolves all the colors used in the retrieved [ArnaThemeData], before returning
+/// When referring to an [ArnaTheme] color, generally the color will already have adapted to the ambient [BuildContext]
+/// , because [ArnaTheme.of] implicitly resolves all the colors used in the retrieved [ArnaThemeData], before returning
 /// it.
 ///
 /// {@tool snippet}
@@ -237,14 +237,14 @@ class ArnaColors {
 /// ```
 /// {@end-tool}
 ///
-/// ### Manually Resolving a [ArnaDynamicColor]
+/// ### Manually Resolving an [ArnaDynamicColor]
 ///
 /// When used to configure a non-Arna widget, or wrapped in an object opaque to the receiving Arna component, a
 /// [ArnaDynamicColor] may need to be manually resolved using [ArnaDynamicColor.resolve], before it can used to paint.
 ///
 /// {@tool snippet}
 ///
-/// The following code samples demonstrate a cases where you have to manually resolve a [ArnaDynamicColor].
+/// The following code samples demonstrate a cases where you have to manually resolve an [ArnaDynamicColor].
 ///
 /// ```dart
 /// Container(
@@ -313,7 +313,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   /// In other words, this color will be the effective color of the [ArnaDynamicColor] after it is resolved against a
   /// [BuildContext] that:
-  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.light], or a [MediaQuery] whose
+  /// - has an [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.light], or a [MediaQuery] whose
   ///   [MediaQueryData.platformBrightness] is [Brightness.light].
   /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `false`.
   final Color color;
@@ -322,7 +322,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   /// In other words, this color will be the effective color of the [ArnaDynamicColor] after it is resolved against a
   /// [BuildContext] that:
-  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.dark], or a [MediaQuery] whose
+  /// - has an [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.dark], or a [MediaQuery] whose
   ///   [MediaQueryData.platformBrightness] is [Brightness.dark].
   /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `false`.
   final Color darkColor;
@@ -331,7 +331,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   /// In other words, this color will be the effective color of the [ArnaDynamicColor] after it is resolved against a
   /// [BuildContext] that:
-  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.light], or a [MediaQuery] whose
+  /// - has an [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.light], or a [MediaQuery] whose
   ///   [MediaQueryData.platformBrightness] is [Brightness.light].
   /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `true`.
   final Color highContrastColor;
@@ -340,7 +340,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   /// In other words, this color will be the effective color of the [ArnaDynamicColor] after it is resolved against a
   /// [BuildContext] that:
-  /// - has a [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.dark], or a [MediaQuery] whose
+  /// - has an [ArnaTheme] whose [ArnaThemeData.brightness] is [Brightness.dark], or a [MediaQuery] whose
   ///   [MediaQueryData.platformBrightness] is [Brightness.dark].
   /// - has a [MediaQuery] whose [MediaQueryData.highContrast] is `true`.
   final Color darkHighContrastColor;
@@ -348,7 +348,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// Resolves the given [Color] by calling [resolveFrom].
   ///
   /// If the given color is already a concrete [Color], it will be returned as is.
-  /// If the given color is a [ArnaDynamicColor], but the given [BuildContext] lacks the dependencies required to the
+  /// If the given color is an [ArnaDynamicColor], but the given [BuildContext] lacks the dependencies required to the
   /// color resolution, the default trait value will be used ([Brightness.light] platform brightness, normal contrast).
   ///
   /// See also:
@@ -362,7 +362,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   /// If the given color is already a concrete [Color], it will be returned as is.
   /// If the given color is null, returns null.
-  /// If the given color is a [ArnaDynamicColor], but the given [BuildContext] lacks the dependencies required to the
+  /// If the given color is an [ArnaDynamicColor], but the given [BuildContext] lacks the dependencies required to the
   /// color resolution, the default trait value will be used ([Brightness.light] platform brightness, normal contrast).
   ///
   /// See also:

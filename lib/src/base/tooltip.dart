@@ -11,7 +11,7 @@ import 'package:flutter/services.dart' show PointerEnterEventListener, PointerEx
 /// Tooltips provide text labels which help explain the function of a button or other user interface action.
 ///
 /// Many widgets, such as [ArnaButton], [ArnaIconButton], and [ArnaTextButton] have a `tooltipMessage` property that,
-/// when non-null, causes the widget to include a [ArnaTooltip] in its build.
+/// when non-null, causes the widget to include an [ArnaTooltip] in its build.
 ///
 /// Tooltips improve the accessibility of visual widgets by proving a textual representation of the widget, which, for
 /// example, can be vocalized by a screen reader.
@@ -134,7 +134,7 @@ class ArnaTooltip extends StatefulWidget {
   }
 }
 
-/// The [State] for a [ArnaTooltip].
+/// The [State] for an [ArnaTooltip].
 class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStateMixin {
   late bool _preferBelow;
   late bool _excludeFromSemantics;

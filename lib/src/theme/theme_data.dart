@@ -1,7 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 
-/// Styling specifications for a [ArnaTheme].
+/// Styling specifications for an [ArnaTheme].
 ///
 /// All constructor parameters can be null.
 ///
@@ -13,7 +13,7 @@ import 'package:flutter/foundation.dart';
 ///  * [ArnaTheme], in which this [ArnaThemeData] is inserted.
 @immutable
 class ArnaThemeData with Diagnosticable {
-  /// Create a [ArnaThemeData] that's used to configure a [ArnaTheme].
+  /// Create an [ArnaThemeData] that's used to configure an [ArnaTheme].
   ///
   /// See also:
   ///
@@ -29,7 +29,7 @@ class ArnaThemeData with Diagnosticable {
     );
   }
 
-  /// Create a [ArnaThemeData] given a set of exact values. All the values must be specified. They all must also be
+  /// Create an [ArnaThemeData] given a set of exact values. All the values must be specified. They all must also be
   /// non-null.
   ///
   /// This will rarely be used directly. It is used by [lerp] to create intermediate themes based on two themes created

@@ -214,7 +214,7 @@ class ArnaSlider extends StatefulWidget {
   }
 }
 
-/// The [State] for a [ArnaSlider].
+/// The [State] for an [ArnaSlider].
 class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   FocusNode? focusNode;
   bool _focused = false;

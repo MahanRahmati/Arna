@@ -4,6 +4,8 @@
 - Update ArnaDialog
 - Update ArnaPopupDialog
 - Update ArnaPopupMenu
+- Add ArnaBackButton
+- Update documentations
 
 ## 0.4.8
 

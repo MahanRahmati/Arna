@@ -99,7 +99,7 @@ class ArnaBaseWidget extends StatefulWidget {
   State<ArnaBaseWidget> createState() => _ArnaBaseWidgetState();
 }
 
-/// The [State] for a [ArnaBaseWidget].
+/// The [State] for an [ArnaBaseWidget].
 class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProviderStateMixin {
   FocusNode? _focusNode;
   bool _hover = false;

@@ -76,7 +76,7 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   State<ArnaSegmentedControl<T>> createState() => _ArnaSegmentedControlState<T>();
 }
 
-/// The [State] for a [ArnaSegmentedControl].
+/// The [State] for an [ArnaSegmentedControl].
 class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedControl<T>> {
   T? _pressedKey;
 

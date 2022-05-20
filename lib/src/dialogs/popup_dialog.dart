@@ -53,7 +53,7 @@ class _ArnaPopupDialog extends StatelessWidget {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
@@ -159,7 +159,7 @@ class _ArnaPopupPage extends StatelessWidget {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
@@ -182,12 +182,7 @@ class _ArnaPopupPage extends StatelessWidget {
       headerBarLeading: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ArnaIconButton(
-            icon: Icons.arrow_back_outlined,
-            onPressed: Navigator.of(context).pop,
-            tooltipMessage: MaterialLocalizations.of(context).backButtonTooltip,
-            semanticLabel: MaterialLocalizations.of(context).backButtonTooltip,
-          ),
+          const ArnaBackButton(),
           if (headerBarLeading != null) headerBarLeading!,
         ],
       ),

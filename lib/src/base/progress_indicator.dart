@@ -65,7 +65,7 @@ class ArnaProgressIndicator extends StatefulWidget {
   State<ArnaProgressIndicator> createState() => _ArnaProgressIndicatorState();
 }
 
-/// The [State] for a [ArnaProgressIndicator].
+/// The [State] for an [ArnaProgressIndicator].
 class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with SingleTickerProviderStateMixin {
   static final Animatable<double> _headTween = CurveTween(
     curve: const Interval(0.0, 0.5, curve: Styles.basicCurve),

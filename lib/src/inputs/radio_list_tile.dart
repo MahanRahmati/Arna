@@ -1,6 +1,6 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaRadio]. In other words, a radio button with a label.
+/// an [ArnaListTile] with an [ArnaRadio]. In other words, a radio button with a label.
 ///
 /// The entire list tile is interactive: tapping anywhere in the tile selects the radio button.
 ///

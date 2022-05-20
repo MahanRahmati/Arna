@@ -11,7 +11,7 @@ import 'package:arna/arna.dart';
 /// respond to [onChanged] by calling [State.setState] to update the radio button's [groupValue].
 /// See also:
 ///
-///  * [ArnaRadioListTile], which combines this widget with a [ArnaListTile] so that you can give the radio button a
+///  * [ArnaRadioListTile], which combines this widget with an [ArnaListTile] so that you can give the radio button a
 ///    label.
 ///  * [ArnaSlider], for selecting a value in a range.
 ///  * [ArnaCheckbox] and [ArnaSwitch], for toggling a particular value on or off.

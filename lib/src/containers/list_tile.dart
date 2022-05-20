@@ -66,7 +66,7 @@ class ArnaListTile extends StatefulWidget {
   State<ArnaListTile> createState() => _ArnaListTileState();
 }
 
-/// The [State] for a [ArnaListTile].
+/// The [State] for an [ArnaListTile].
 class _ArnaListTileState extends State<ArnaListTile> {
   bool _hover = false;
   bool get _isEnabled => widget.onTap != null || widget.onLongPress != null;

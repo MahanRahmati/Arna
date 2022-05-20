@@ -12,7 +12,7 @@ import 'package:arna/arna.dart';
 ///
 /// See also:
 ///
-///  * [ArnaSwitchListTile], which combines this widget with a [ArnaListTile] so that you can give the switch a label.
+///  * [ArnaSwitchListTile], which combines this widget with an [ArnaListTile] so that you can give the switch a label.
 ///  * [ArnaCheckbox], another widget with similar semantics.
 ///  * [ArnaRadio], for selecting among a set of explicit values.
 ///  * [ArnaSlider], for selecting a value in a range.

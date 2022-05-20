@@ -7,14 +7,14 @@ import 'package:flutter/foundation.dart';
 /// widgets instances.
 ///
 /// Descendant widgets can retrieve the current [ArnaThemeData] by calling [ArnaTheme.of]. An [InheritedWidget]
-/// dependency is created when an ancestor [ArnaThemeData] is retrieved via [ArnaTheme.of].
+/// dependency is created when an ancestor [ArnaThemeData] is retrieved vian [ArnaTheme.of].
 ///
 /// See also:
 ///
 ///  * [ArnaThemeData], specifies the theme's visual styling.
-///  * [ArnaApp], which will automatically add a [ArnaTheme] based on the value of [ArnaApp.theme].
+///  * [ArnaApp], which will automatically add an [ArnaTheme] based on the value of [ArnaApp.theme].
 class ArnaTheme extends StatelessWidget {
-  /// Creates a [ArnaTheme] to change descendant Arna widgets' styling.
+  /// Creates an [ArnaTheme] to change descendant Arna widgets' styling.
   ///
   /// The [data] and [child] parameters must not be null.
   const ArnaTheme({
@@ -107,7 +107,7 @@ class _InheritedArnaTheme extends InheritedWidget {
 ///
 /// See [Tween] for a discussion on how to use interpolation objects.
 class ArnaThemeDataTween extends Tween<ArnaThemeData> {
-  /// Creates a [ArnaThemeData] tween.
+  /// Creates an [ArnaThemeData] tween.
   ///
   /// The [begin] and [end] properties must be non-null before the tween is first used, but the arguments can be null
   /// if the values are going to be filled in later.

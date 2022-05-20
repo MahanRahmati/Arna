@@ -11,7 +11,7 @@ import 'package:arna/arna.dart';
 ///
 /// See also:
 ///
-///  * [ArnaCheckboxListTile], which combines this widget with a [ArnaListTile] so that you can give the checkbox a
+///  * [ArnaCheckboxListTile], which combines this widget with an [ArnaListTile] so that you can give the checkbox a
 ///    label.
 ///  * [ArnaSwitch], a widget with semantics similar to [ArnaCheckbox].
 ///  * [ArnaRadio], for selecting among a set of explicit values.

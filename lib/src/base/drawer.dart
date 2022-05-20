@@ -62,7 +62,7 @@ class ArnaDrawer extends StatelessWidget {
   }
 }
 
-/// Signature for the callback that's called when a [ArnaDrawerController] is opened or closed.
+/// Signature for the callback that's called when an [ArnaDrawerController] is opened or closed.
 typedef ArnaDrawerCallback = void Function(
   /// Whether or not the drawer is opened or closed.
   bool isOpened,
@@ -79,7 +79,7 @@ typedef ArnaDrawerCallback = void Function(
 ///  * [ArnaDrawer]
 ///  * [ArnaSideScaffold]
 class ArnaDrawerController extends StatefulWidget {
-  /// Creates a controller for a [ArnaDrawer].
+  /// Creates a controller for an [ArnaDrawer].
   const ArnaDrawerController({
     GlobalKey? key,
     required this.drawer,
@@ -90,7 +90,7 @@ class ArnaDrawerController extends StatefulWidget {
   /// The [ArnaDrawer] widget.
   final ArnaDrawer drawer;
 
-  /// Optional callback that is called when a [ArnaDrawer] is opened or closed.
+  /// Optional callback that is called when an [ArnaDrawer] is opened or closed.
   final ArnaDrawerCallback? drawerCallback;
 
   /// Whether or not the drawer is opened or closed.
@@ -104,7 +104,7 @@ class ArnaDrawerController extends StatefulWidget {
   State<ArnaDrawerController> createState() => _ArnaDrawerControllerState();
 }
 
-/// State for a [ArnaDrawerController].
+/// State for an [ArnaDrawerController].
 ///
 /// Used by [ArnaSideScaffold] to [open] and [close] the drawer.
 class _ArnaDrawerControllerState extends State<ArnaDrawerController> with SingleTickerProviderStateMixin {

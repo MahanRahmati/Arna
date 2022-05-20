@@ -27,6 +27,7 @@ export 'package:arna/src/base/side_scaffold.dart';
 export 'package:arna/src/base/snack_bar.dart';
 export 'package:arna/src/base/text_selection.dart';
 export 'package:arna/src/base/tooltip.dart';
+export 'package:arna/src/buttons/back_button.dart';
 export 'package:arna/src/buttons/borderless_button.dart';
 export 'package:arna/src/buttons/button.dart';
 export 'package:arna/src/buttons/color_button.dart';

@@ -1,6 +1,6 @@
 import 'package:arna/arna.dart';
 
-/// A [ArnaListTile] with a [ArnaCheckbox]. In other words, a checkbox with a label.
+/// an [ArnaListTile] with an [ArnaCheckbox]. In other words, a checkbox with a label.
 ///
 /// The entire list tile is interactive: tapping anywhere in the tile toggles the checkbox.
 ///

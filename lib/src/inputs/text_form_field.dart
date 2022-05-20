@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 /// A [FormField] that contains an [ArnaTextField].
 ///
-/// This is a convenience widget that wraps a [ArnaTextField] widget in a [FormField].
+/// This is a convenience widget that wraps an [ArnaTextField] widget in a [FormField].
 ///
 /// A [Form] ancestor is not required. The [Form] simply makes it easier to save, reset, or validate multiple fields at
 /// once. To use without a [Form], pass a [GlobalKey] to the constructor and use [GlobalKey.currentState] to save or
@@ -24,7 +24,7 @@ import 'package:flutter/services.dart';
 ///
 /// {@tool snippet}
 ///
-/// Creates a [ArnaTextFormField] and validator function.
+/// Creates an [ArnaTextFormField] and validator function.
 ///
 /// ```dart
 /// ArnaTextFormField(
@@ -44,7 +44,7 @@ import 'package:flutter/services.dart';
 ///
 ///  * [ArnaTextField], which is the underlying text field without the [Form] integration.
 class ArnaTextFormField extends FormField<String> {
-  /// Creates a [FormField] that contains a [ArnaTextField].
+  /// Creates a [FormField] that contains an [ArnaTextField].
   ///
   /// When a [controller] is specified, [initialValue] must be null (the default). If [controller] is null, then a
   /// [TextEditingController] will be constructed automatically and its `text` will be initialized to [initialValue] or

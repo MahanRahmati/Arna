@@ -58,7 +58,7 @@ class ArnaSearchField extends StatefulWidget {
   State<ArnaSearchField> createState() => _ArnaSearchFieldState();
 }
 
-/// The [State] for a [ArnaSearchField].
+/// The [State] for an [ArnaSearchField].
 class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProviderStateMixin, RestorationMixin {
   RestorableTextEditingController? _textcontroller;
   FocusNode? focusNode;

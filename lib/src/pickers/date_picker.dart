@@ -23,7 +23,7 @@ enum ArnaDatePickerMode {
 
 /// Signature for predicating dates for enabled date selections.
 ///
-/// See [showArnaDatePicker], which has a [ArnaSelectableDayPredicate] parameter used to specify allowable days in the
+/// See [showArnaDatePicker], which has an [ArnaSelectableDayPredicate] parameter used to specify allowable days in the
 /// date picker.
 typedef ArnaSelectableDayPredicate = bool Function(DateTime day);
 
@@ -247,7 +247,7 @@ class ArnaDatePickerDialog extends StatefulWidget {
   State<ArnaDatePickerDialog> createState() => _ArnaDatePickerDialogState();
 }
 
-/// The [State] for a [ArnaDatePickerDialog].
+/// The [State] for an [ArnaDatePickerDialog].
 class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with RestorationMixin {
   final GlobalKey _calendarPickerKey = GlobalKey();
   late final RestorableDateTime _selectedDate = RestorableDateTime(widget.initialDate);
@@ -318,7 +318,7 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
 ///
 /// See also:
 ///
-///  * [showArnaDatePicker], which creates a Dialog that contains a [ArnaCalendarDatePicker].
+///  * [showArnaDatePicker], which creates a Dialog that contains an [ArnaCalendarDatePicker].
 class ArnaCalendarDatePicker extends StatefulWidget {
   /// Creates a calendar date picker.
   ///
@@ -401,7 +401,7 @@ class ArnaCalendarDatePicker extends StatefulWidget {
   State<ArnaCalendarDatePicker> createState() => _ArnaCalendarDatePickerState();
 }
 
-/// The [State] for a [ArnaCalendarDatePicker].
+/// The [State] for an [ArnaCalendarDatePicker].
 class _ArnaCalendarDatePickerState extends State<ArnaCalendarDatePicker> {
   bool _announcedInitialDate = false;
   late ArnaDatePickerMode _mode;

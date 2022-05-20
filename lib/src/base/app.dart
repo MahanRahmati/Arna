@@ -29,7 +29,7 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 /// [ArnaTheme] widget, which the [ArnaApp] composes.
 ///
 /// {@tool snippet}
-/// This example shows how to create a [ArnaApp] that disables the "debug" banner with a [home] route that will be
+/// This example shows how to create an [ArnaApp] that disables the "debug" banner with a [home] route that will be
 /// displayed when the app is launched.
 ///
 /// ```dart
@@ -43,8 +43,8 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 /// {@end-tool}
 ///
 /// {@tool snippet}
-/// This example shows how to create a [ArnaApp] that uses the [routes] `Map` to define the "home" route and an "about"
-/// route.
+/// This example shows how to create an [ArnaApp] that uses the [routes] `Map` to define the "home" route and an 
+/// "about" route.
 ///
 /// ```dart
 /// ArnaApp(
@@ -65,7 +65,7 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 /// {@end-tool}
 ///
 /// {@tool snippet}
-/// This example shows how to create a [ArnaApp] that defines a [theme] that will be used for Arna widgets in the app.
+/// This example shows how to create an [ArnaApp] that defines a [theme] that will be used for Arna widgets in the app.
 ///
 /// ```dart
 /// const ArnaApp(
@@ -129,7 +129,7 @@ class ArnaApp extends StatefulWidget {
         routerDelegate = null,
         backButtonDispatcher = null;
 
-  /// Creates a [ArnaApp] that uses the [Router] instead of a [Navigator].
+  /// Creates an [ArnaApp] that uses the [Router] instead of a [Navigator].
   const ArnaApp.router({
     super.key,
     this.routeInformationProvider,
@@ -177,7 +177,7 @@ class ArnaApp extends StatefulWidget {
   /// The application's top-level routing table.
   ///
   /// When a named route is pushed with [Navigator.pushNamed], the route name is looked up in this map. If the name is
-  /// present, the associated [widgets.WidgetBuilder] is used to construct a [ArnaPageRoute] that performs an
+  /// present, the associated [widgets.WidgetBuilder] is used to construct an [ArnaPageRoute] that performs an
   /// appropriate transition, including [Hero] animations, to the new route.
   ///
   /// {@macro flutter.widgets.widgetsApp.routes}
@@ -292,7 +292,7 @@ class ArnaApp extends StatefulWidget {
   /// }
   /// ```
   ///
-  /// Constructing a [ArnaApp] with a `FooLocalizationsDelegate` overrides the automatically included delegate for
+  /// Constructing an [ArnaApp] with a `FooLocalizationsDelegate` overrides the automatically included delegate for
   /// [MaterialLocalizations] because only the first delegate of each [LocalizationsDelegate.type] is used and the
   /// automatically included delegates are added to the end of the app's [localizationsDelegates] list.
   ///
@@ -439,8 +439,8 @@ class ArnaApp extends StatefulWidget {
 ///
 /// {@macro flutter.widgets.scrollBehavior}
 ///
-/// Setting a [ArnaScrollBehavior] will result in descendant [Scrollable] widgets.
-/// When executing on desktop platforms, a [ArnaScrollbar] is applied to the child.
+/// Setting an [ArnaScrollBehavior] will result in descendant [Scrollable] widgets.
+/// When executing on desktop platforms, an [ArnaScrollbar] is applied to the child.
 ///
 /// See also:
 ///
@@ -478,7 +478,7 @@ class ArnaScrollBehavior extends ScrollBehavior {
   }
 }
 
-/// The [State] for a [ArnaApp].
+/// The [State] for an [ArnaApp].
 class _ArnaAppState extends State<ArnaApp> {
   late HeroController _heroController;
 

@@ -80,7 +80,7 @@ class ArnaPopupMenuDivider extends ArnaPopupMenuEntry<Never> {
   State<ArnaPopupMenuDivider> createState() => _ArnaPopupMenuDividerState();
 }
 
-/// The [State] for a [ArnaPopupMenuDivider].
+/// The [State] for an [ArnaPopupMenuDivider].
 class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
   @override
   Widget build(BuildContext context) {
@@ -150,7 +150,7 @@ class _RenderArnaMenuItem extends RenderShiftedBox {
 /// To show a popup menu, use the [showArnaMenu] function. To create a button that shows a popup menu, consider using
 /// [ArnaPopupMenuButton].
 ///
-/// Typically the [child] of a [ArnaPopupMenuItem] is a [Text] widget.
+/// Typically the [child] of an [ArnaPopupMenuItem] is a [Text] widget.
 ///
 /// {@tool snippet}
 ///
@@ -673,7 +673,7 @@ Future<T?> showArnaMenu<T>({
 /// Used by [ArnaPopupMenuButton.onSelected].
 typedef ArnaPopupMenuItemSelected<T> = void Function(T value);
 
-/// Signature for the callback invoked when a [ArnaPopupMenuButton] is dismissed without selecting an item.
+/// Signature for the callback invoked when an [ArnaPopupMenuButton] is dismissed without selecting an item.
 ///
 /// Used by [ArnaPopupMenuButton.onCanceled].
 typedef ArnaPopupMenuCanceled = void Function();
@@ -784,7 +784,7 @@ class ArnaPopupMenuButton<T> extends StatefulWidget {
   ArnaPopupMenuButtonState<T> createState() => ArnaPopupMenuButtonState<T>();
 }
 
-/// The [State] for a [ArnaPopupMenuButton].
+/// The [State] for an [ArnaPopupMenuButton].
 ///
 /// See [showArnaButtonMenu] for a way to programmatically open the popup menu of your button state.
 class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {

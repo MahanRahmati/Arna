@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// Implements the master detail layout structure.
 ///
@@ -32,7 +31,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
@@ -75,7 +74,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   State<ArnaMasterDetailScaffold> createState() => _ArnaMasterDetailScaffoldState();
 }
 
-/// The [State] for a [ArnaMasterDetailScaffold].
+/// The [State] for an [ArnaMasterDetailScaffold].
 class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
   int _index = -1;
   int _previousIndex = 0;
@@ -147,7 +146,7 @@ class _LateralPage extends StatefulWidget {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
@@ -287,7 +286,7 @@ class _NestedPage extends StatefulWidget {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
@@ -358,7 +357,6 @@ class _NestedPageState extends State<_NestedPage> {
     return ArnaPageRoute<dynamic>(
       builder: (BuildContext context) {
         final MasterNavigationItem page = widget.items[_currentIndex];
-        final String tooltip = MaterialLocalizations.of(context).backButtonTooltip;
         return WillPopScope(
           onWillPop: () async {
             _goBack();
@@ -369,12 +367,7 @@ class _NestedPageState extends State<_NestedPage> {
               headerBarLeading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  ArnaIconButton(
-                    icon: Icons.arrow_back_outlined,
-                    onPressed: _goBack,
-                    tooltipMessage: tooltip,
-                    semanticLabel: tooltip,
-                  ),
+                  ArnaBackButton(onPressed: _goBack),
                   if (page.headerBarLeading != null) page.headerBarLeading!,
                 ],
               ),
@@ -542,7 +535,7 @@ class MasterNavigationItem {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].

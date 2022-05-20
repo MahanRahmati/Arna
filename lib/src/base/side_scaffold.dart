@@ -29,7 +29,7 @@ class ArnaSideScaffold extends StatefulWidget {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
@@ -66,7 +66,7 @@ class ArnaSideScaffold extends StatefulWidget {
   State<ArnaSideScaffold> createState() => _ArnaSideScaffoldState();
 }
 
-/// The [State] for a [ArnaSideScaffold].
+/// The [State] for an [ArnaSideScaffold].
 class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   late int _currentIndex;
   bool showDrawer = false;
@@ -322,7 +322,7 @@ class NavigationItem {
   /// A list of Widgets to display in a row after the [title] widget.
   ///
   /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
-  /// consider using a [ArnaPopupMenuButton] as the last action.
+  /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].

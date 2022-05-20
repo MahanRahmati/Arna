@@ -26,7 +26,7 @@ class ArnaSnackBar extends StatefulWidget {
   State<ArnaSnackBar> createState() => _ArnaSnackBarState();
 }
 
-/// The [State] for a [ArnaSnackBar].
+/// The [State] for an [ArnaSnackBar].
 class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderStateMixin {
   late AnimationController controller;
 

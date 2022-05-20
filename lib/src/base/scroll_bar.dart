@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 
 /// An Arna-styled scrollbar.
 ///
-/// To add a scrollbar to a [ScrollView], wrap the scroll view widget in a [ArnaScrollbar] widget.
+/// To add a scrollbar to a [ScrollView], wrap the scroll view widget in an [ArnaScrollbar] widget.
 ///
 /// {@macro flutter.widgets.Scrollbar}
 ///

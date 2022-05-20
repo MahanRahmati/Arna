@@ -238,7 +238,7 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
   }
 }
 
-/// A [ArnaTextButton] for the Arna text selection toolbar.
+/// an [ArnaTextButton] for the Arna text selection toolbar.
 class _ArnaTextSelectionToolbarButton extends StatelessWidget {
   /// Creates an instance of ArnaTextSelectionToolbarButton.
   const _ArnaTextSelectionToolbarButton({

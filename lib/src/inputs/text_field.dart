@@ -144,7 +144,7 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder extends TextSelectionGesture
 /// will ensure we discard any resources used by the object.
 ///
 /// {@tool snippet}
-/// This example shows how to create a [ArnaTextField] that will obscure input.
+/// This example shows how to create an [ArnaTextField] that will obscure input.
 ///
 /// ```dart
 /// const ArnaTextField(
@@ -170,7 +170,7 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder extends TextSelectionGesture
 /// See also:
 ///
 ///  * [ArnaTextFormField], which integrates with the [Form] widget.
-///  * [EditableText], which is the raw text editing control at the heart of a [ArnaTextField].
+///  * [EditableText], which is the raw text editing control at the heart of an [ArnaTextField].
 class ArnaTextField extends StatefulWidget {
   /// Creates an Arna-styled text field.
   ///
@@ -641,7 +641,7 @@ class ArnaTextField extends StatefulWidget {
   }
 }
 
-/// The [State] for a [ArnaTextField].
+/// The [State] for an [ArnaTextField].
 class _ArnaTextFieldState extends State<ArnaTextField>
     with RestorationMixin, AutomaticKeepAliveClientMixin<ArnaTextField>
     implements TextSelectionGestureDetectorBuilderDelegate, AutofillClient {

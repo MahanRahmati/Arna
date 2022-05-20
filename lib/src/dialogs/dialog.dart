@@ -323,6 +323,7 @@ Future<T?> showArnaDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
+  bool useBlur = true,
 }) {
   return showGeneralDialog(
     context: context,
@@ -335,36 +336,45 @@ Future<T?> showArnaDialog<T>({
     barrierColor: barrierColor ?? ArnaColors.barrierColor,
     transitionDuration: Styles.basicDuration,
     transitionBuilder: (BuildContext context, Animation<double> animation, _, Widget child) {
+      final Widget childWidget = FadeTransition(
+        opacity: CurvedAnimation(
+          parent: animation,
+          curve: Styles.basicCurve,
+        ),
+        child: child,
+      );
+
       return isCompact(context)
-          ? BackdropFilter(
-              filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
-              child: SlideTransition(
-                position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
-                child: FadeTransition(
-                  opacity: CurvedAnimation(
+          ? useBlur
+              ? BackdropFilter(
+                  filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
+                  child: SlideTransition(
+                    position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+                    child: childWidget,
+                  ),
+                )
+              : SlideTransition(
+                  position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+                  child: childWidget,
+                )
+          : useBlur
+              ? BackdropFilter(
+                  filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
+                  child: ScaleTransition(
+                    scale: CurvedAnimation(
+                      parent: animation,
+                      curve: Styles.basicCurve,
+                    ),
+                    child: childWidget,
+                  ),
+                )
+              : ScaleTransition(
+                  scale: CurvedAnimation(
                     parent: animation,
                     curve: Styles.basicCurve,
                   ),
-                  child: child,
-                ),
-              ),
-            )
-          : BackdropFilter(
-              filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
-              child: ScaleTransition(
-                scale: CurvedAnimation(
-                  parent: animation,
-                  curve: Styles.basicCurve,
-                ),
-                child: FadeTransition(
-                  opacity: CurvedAnimation(
-                    parent: animation,
-                    curve: Styles.basicCurve,
-                  ),
-                  child: child,
-                ),
-              ),
-            );
+                  child: childWidget,
+                );
     },
     useRootNavigator: useRootNavigator,
     routeSettings: routeSettings,

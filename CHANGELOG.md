@@ -28,6 +28,7 @@
 - Update ArnaSwitchListTile
 - Update ArnaSlider
 - Update ArnaTextFormField
+- Update ArnaDatePicker
 
 ## 0.4.8
 

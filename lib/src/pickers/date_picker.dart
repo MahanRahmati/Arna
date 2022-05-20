@@ -883,6 +883,7 @@ class _ArnaFocusedDate extends InheritedWidget {
     this.date,
   });
 
+  /// An instant in time.
   final DateTime? date;
 
   @override
@@ -1062,12 +1063,12 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                       excludeSemantics: true,
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: isToday ? accentColor : ArnaColors.transparent),
+                          border: Border.all(color: isToday || focused ? accentColor : ArnaColors.transparent),
                           color: isDisabled
                               ? ArnaColors.transparent
                               : isSelectedDay
                                   ? accentColor
-                                  : pressed || hover
+                                  : pressed || hover || focused
                                       ? ArnaDynamicColor.applyOverlay(
                                           ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
                                         )

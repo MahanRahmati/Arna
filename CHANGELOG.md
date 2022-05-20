@@ -20,6 +20,7 @@
 - Update ArnaScrollbar
 - Update ArnaSnackBar
 - Update ArnaTextSelectionControls
+- Update ArnaBorderlessButton
 
 ## 0.4.8
 

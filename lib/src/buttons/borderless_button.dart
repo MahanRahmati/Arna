@@ -5,7 +5,8 @@ class ArnaBorderlessButton extends StatelessWidget {
   /// Creates a borderless button.
   const ArnaBorderlessButton({
     super.key,
-    required this.icon,
+    this.label,
+    this.icon,
     required this.onPressed,
     this.onLongPress,
     this.tooltipMessage,
@@ -18,8 +19,11 @@ class ArnaBorderlessButton extends StatelessWidget {
     this.enableFeedback = true,
   });
 
+  /// The text label of the button.
+  final String? label;
+
   /// The icon of the button.
-  final IconData icon;
+  final IconData? icon;
 
   /// The callback that is called when a button is tapped.
   ///
@@ -101,18 +105,45 @@ class ArnaBorderlessButton extends StatelessWidget {
                         : 0,
               ),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: Styles.padding - 1),
-            child: Icon(
-              icon,
-              size: Styles.iconSize,
-              color: ArnaDynamicColor.resolve(
-                !enabled
-                    ? ArnaColors.disabledColor
-                    : buttonType == ButtonType.normal
-                        ? ArnaColors.iconColor
-                        : ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
-                context,
-              ),
+            padding: icon != null ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1) : Styles.largeHorizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (icon != null)
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(end: label != null ? Styles.padding : 0),
+                    child: Icon(
+                      icon,
+                      size: Styles.iconSize,
+                      color: ArnaDynamicColor.resolve(
+                        !enabled
+                            ? ArnaColors.disabledColor
+                            : buttonType == ButtonType.normal
+                                ? ArnaColors.iconColor
+                                : ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+                        context,
+                      ),
+                    ),
+                  ),
+                if (label != null)
+                  Flexible(
+                    child: Text(
+                      label!,
+                      style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                            color: ArnaDynamicColor.resolve(
+                              !enabled
+                                  ? ArnaColors.disabledColor
+                                  : buttonType == ButtonType.normal
+                                      ? ArnaColors.primaryTextColor
+                                      : ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+                              context,
+                            ),
+                          ),
+                    ),
+                  ),
+                if (icon != null && label != null) const SizedBox(width: Styles.padding),
+              ],
             ),
           );
         },

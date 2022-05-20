@@ -19,6 +19,7 @@
 - Update ArnaSearchField
 - Update ArnaScrollbar
 - Update ArnaSnackBar
+- Update ArnaTextSelectionControls
 
 ## 0.4.8
 

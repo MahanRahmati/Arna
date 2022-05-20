@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 
 // TODO: Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35
 
+/// Text selection controls.
 class _ArnaTextSelectionControls extends TextSelectionControls {
   /// Desktop has no text selection handles.
   @override
@@ -61,11 +62,12 @@ class _ArnaTextSelectionControls extends TextSelectionControls {
   }
 }
 
-/// Text selection controls that loosely follows Material design conventions.
+/// Text selection controls.
 final TextSelectionControls arnaTextSelectionControls = _ArnaTextSelectionControls();
 
 // Generates the child that's passed into ArnaTextSelectionToolbar.
 class _ArnaTextSelectionControlsToolbar extends StatefulWidget {
+  /// Creates the child that's passed into ArnaTextSelectionToolbar.
   const _ArnaTextSelectionControlsToolbar({
     required this.clipboardStatus,
     required this.endpoints,
@@ -94,6 +96,7 @@ class _ArnaTextSelectionControlsToolbar extends StatefulWidget {
   _ArnaTextSelectionControlsToolbarState createState() => _ArnaTextSelectionControlsToolbarState();
 }
 
+/// The [State] for an [_ArnaTextSelectionControlsToolbar].
 class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionControlsToolbar> {
   // Inform the widget that the value of clipboardStatus has changed.
   void _onChangedClipboardStatus() => setState(() {});
@@ -143,8 +146,8 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
     void addToolbarButton(String text, VoidCallback onPressed) {
       items.add(
         _ArnaTextSelectionToolbarButton(
-          onPressed: onPressed,
           label: text,
+          onPressed: onPressed,
         ),
       );
     }
@@ -199,14 +202,6 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
   ///   * [_ArnaTextSelectionToolbarButton], which builds a default Arna-style text selection toolbar text button.
   final List<Widget> children;
 
-  // Builds a toolbar in the Arna style.
-  static Widget _defaultToolbarBuilder(BuildContext context, Widget child) {
-    return ArnaCard(
-      width: Styles.toolbarWidth,
-      child: child,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
@@ -226,9 +221,9 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
         delegate: DesktopTextSelectionToolbarLayoutDelegate(
           anchor: anchor - localAdjustment,
         ),
-        child: _defaultToolbarBuilder(
-          context,
-          Column(
+        child: ArnaCard(
+          width: Styles.toolbarWidth,
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: children,
           ),
@@ -238,23 +233,25 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
   }
 }
 
-/// an [ArnaTextButton] for the Arna text selection toolbar.
+/// An [ArnaTextButton] for the Arna text selection toolbar.
 class _ArnaTextSelectionToolbarButton extends StatelessWidget {
   /// Creates an instance of ArnaTextSelectionToolbarButton.
   const _ArnaTextSelectionToolbarButton({
-    required this.onPressed,
     required this.label,
+    required this.onPressed,
   });
 
-  /// {@macro flutter.material.TextSelectionToolbarTextButton.onPressed}
-  final VoidCallback onPressed;
+  /// The text label of the button.
   final String label;
+
+  /// The callback that is called when a button is tapped.
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ArnaTextButton(
-      onPressed: onPressed,
       label: label,
+      onPressed: onPressed,
     );
   }
 }

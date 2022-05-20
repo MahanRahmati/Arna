@@ -11,6 +11,7 @@
 - Update ArnaTooltip
 - Update ArnaMasterItem
 - [Example] Refactor Example
+- Update ArnaDateUtils
 
 ## 0.4.8
 

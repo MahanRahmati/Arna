@@ -18,6 +18,7 @@
 - Update ArnaProgressIndicator
 - Update ArnaSearchField
 - Update ArnaScrollbar
+- Update ArnaSnackBar
 
 ## 0.4.8
 

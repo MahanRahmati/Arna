@@ -96,6 +96,7 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
   }
 }
 
+/// Shows [ArnaSnackBar].
 OverlayEntry showArnaSnackbar({required BuildContext context, required String message, Widget? action}) {
   final GlobalKey<_ArnaSnackBarState> snackBarKey = GlobalKey<_ArnaSnackBarState>();
   final OverlayEntry overlayEntry = OverlayEntry(

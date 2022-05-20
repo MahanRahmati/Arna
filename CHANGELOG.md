@@ -10,7 +10,7 @@
 - Add ArnaCloseButton
 - Update ArnaTooltip
 - Update ArnaMasterItem
-- [Example] Update Example
+- [Example] Refactor Example
 
 ## 0.4.8
 

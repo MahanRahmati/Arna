@@ -1,6 +1,8 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '/strings.dart';
+
 class Settings extends ConsumerWidget {
   const Settings({super.key});
 
@@ -13,43 +15,43 @@ class Settings extends ConsumerWidget {
       child: Column(
         children: <Widget>[
           ArnaList(
-            title: 'Theme',
+            title: Strings.theme,
             showDividers: true,
             showBackground: true,
             children: <Widget>[
               ArnaRadioListTile<Brightness?>(
                 value: null,
                 groupValue: themeMode,
-                title: 'System',
+                title: Strings.system,
                 onChanged: (_) => ref.read(themeProvider.notifier).state = null,
               ),
               ArnaRadioListTile<Brightness?>(
                 value: Brightness.dark,
                 groupValue: themeMode,
-                title: 'Dark',
+                title: Strings.dark,
                 onChanged: (_) => ref.read(themeProvider.notifier).state = Brightness.dark,
               ),
               ArnaRadioListTile<Brightness?>(
                 value: Brightness.light,
                 groupValue: themeMode,
-                title: 'Light',
+                title: Strings.light,
                 onChanged: (_) => ref.read(themeProvider.notifier).state = Brightness.light,
               ),
             ],
           ),
           ArnaList(
-            title: 'Scaffold',
+            title: Strings.scaffold,
             showBackground: true,
             children: <Widget>[
               ArnaSwitchListTile(
                 value: masterMode,
-                title: 'Use Master-Detail',
+                title: Strings.masterMode,
                 onChanged: (_) => ref.read(masterProvider.notifier).state = !masterMode,
               ),
             ],
           ),
           ArnaList(
-            title: 'Accent',
+            title: Strings.accent,
             direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
             showBackground: true,

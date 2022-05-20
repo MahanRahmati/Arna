@@ -58,7 +58,7 @@ import 'package:flutter/services.dart' show HapticFeedback;
 /// ```
 /// {@end-tool}
 class ArnaFeedback {
-  // This class is not meant to be instantiated or extended; this constructor prevents instantiation and extension.
+  /// This class is not meant to be instantiated or extended; this constructor prevents instantiation and extension.
   ArnaFeedback._();
 
   /// Provides platform-specific feedback for a long press.

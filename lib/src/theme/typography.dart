@@ -4,7 +4,7 @@ import 'package:arna/arna.dart';
 ///
 /// The color text themes are [light] and [dark].
 class ArnaTypography {
-  // This class is not meant to be instantiated or extended; this constructor prevents instantiation and extension.
+  /// This class is not meant to be instantiated or extended; this constructor prevents instantiation and extension.
   ArnaTypography._();
 
   /// A text theme used for [Brightness.light] themes.

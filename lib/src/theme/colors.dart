@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 /// A palette of [Color] constants that describe colors
 class ArnaColors {
-  // This class is not meant to be instantiated or extended; this constructor prevents instantiation and extension.
+  /// This class is not meant to be instantiated or extended; this constructor prevents instantiation and extension.
   ArnaColors._();
 
   /// Completely invisible.

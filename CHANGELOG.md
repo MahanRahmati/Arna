@@ -31,6 +31,7 @@
 - Update ArnaDatePicker
 - Update ArnaColors
 - Update ArnaTheme
+- Update ArnaTypography
 
 ## 0.4.8
 

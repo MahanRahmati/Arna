@@ -8,6 +8,7 @@ class ArnaCard extends StatelessWidget {
     this.height,
     this.width,
     required this.child,
+    this.padding = Styles.normal,
   });
 
   /// The card's height.
@@ -21,10 +22,13 @@ class ArnaCard extends StatelessWidget {
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
 
+  /// The amount of space by which to inset the child.
+  final EdgeInsetsGeometry padding;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: Styles.normal,
+      padding: padding,
       child: AnimatedContainer(
         height: height,
         width: width,

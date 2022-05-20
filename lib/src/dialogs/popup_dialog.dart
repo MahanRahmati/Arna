@@ -78,14 +78,8 @@ class _ArnaPopupDialog extends StatelessWidget {
               maxHeight: deviceHeight(context) * 0.84,
               maxWidth: deviceWidth(context) * 0.84,
             ),
-            child: AnimatedContainer(
-              duration: Styles.basicDuration,
-              curve: Styles.basicCurve,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: Styles.borderRadius,
-                border: Border.all(color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context)),
-              ),
+            child: ArnaCard(
+              padding: EdgeInsets.zero,
               child: ClipRRect(
                 borderRadius: Styles.listBorderRadius,
                 child: ArnaScaffold(

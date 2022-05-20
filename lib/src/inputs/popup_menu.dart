@@ -363,15 +363,8 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
       builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: opacity.animate(route.animation!),
-          child: AnimatedContainer(
-            duration: Styles.basicDuration,
-            curve: Styles.basicCurve,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: Styles.borderRadius,
-              border: Border.all(color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context)),
-              color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
-            ),
+          child: ArnaCard(
+            padding: EdgeInsets.zero,
             child: Align(
               alignment: AlignmentDirectional.topEnd,
               widthFactor: width.evaluate(route.animation!),

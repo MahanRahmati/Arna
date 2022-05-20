@@ -25,7 +25,7 @@ class ArnaCloseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaBorderlessButton(
-      icon: Icons.close,
+      icon: Icons.close_outlined,
       onPressed: () {
         if (onPressed != null) {
           onPressed!();

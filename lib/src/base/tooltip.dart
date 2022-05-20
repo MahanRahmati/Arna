@@ -6,6 +6,9 @@ import 'package:flutter/gestures.dart' show GestureBinding;
 import 'package:flutter/rendering.dart' show RendererBinding, SemanticsService;
 import 'package:flutter/services.dart' show PointerEnterEventListener, PointerExitEventListener;
 
+/// Signature for when a tooltip is triggered.
+typedef ArnaTooltipTriggeredCallback = void Function();
+
 /// An Arna-styled tooltip.
 ///
 /// Tooltips provide text labels which help explain the function of a button or other user interface action.
@@ -25,6 +28,7 @@ class ArnaTooltip extends StatefulWidget {
     this.preferBelow,
     this.excludeFromSemantics,
     this.enableFeedback = true,
+    this.onTriggered,
     required this.child,
   });
 
@@ -59,6 +63,11 @@ class ArnaTooltip extends StatefulWidget {
   ///
   ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
   final bool enableFeedback;
+
+  /// Called when the Tooltip is triggered.
+  ///
+  /// The tooltip is triggered after a long press.
+  final ArnaTooltipTriggeredCallback? onTriggered;
 
   /// The widget below this widget in the tree.
   ///
@@ -387,6 +396,7 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     if (tooltipCreated && widget.enableFeedback) {
       ArnaFeedback.forLongPress(context);
     }
+    widget.onTriggered?.call();
   }
 
   @override

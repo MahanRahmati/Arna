@@ -146,7 +146,6 @@ class ArnaMasterItem extends StatelessWidget {
         },
         onPressed: () => onPressed(index),
         onLongPress: onLongPressed != null ? () => onLongPressed!(index) : null,
-        tooltipMessage: title,
         isFocusable: isFocusable,
         autofocus: autofocus,
         cursor: cursor,

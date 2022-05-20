@@ -9,6 +9,7 @@
 - Update ArnaListTile
 - Add ArnaCloseButton
 - Update ArnaTooltip
+- Update ArnaMasterItem
 
 ## 0.4.8
 

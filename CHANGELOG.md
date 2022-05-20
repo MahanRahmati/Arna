@@ -13,6 +13,7 @@
 - [Example] Refactor Example
 - Update ArnaDateUtils
 - Update ArnaMasterDetailScaffold
+- Update ArnaPage
 
 ## 0.4.8
 

@@ -39,11 +39,12 @@ class ArnaPage<T> extends Page<T> {
   Route<T> createRoute(BuildContext context) => _PageBasedArnaPageRoute<T>(page: this);
 }
 
-// A page-based version of [ArnaPageRoute].
-//
-// This route uses the builder from the page to build its content. This ensures the content is up to date after page
-// updates.
+/// A page-based version of [ArnaPageRoute].
+///
+/// This route uses the builder from the page to build its content. This ensures the content is up to date after page
+/// updates.
 class _PageBasedArnaPageRoute<T> extends PageRoute<T> with ArnaRouteTransitionMixin<T> {
+  /// Creates a page-based version of [ArnaPageRoute].
   _PageBasedArnaPageRoute({
     required ArnaPage<T> page,
   }) : super(settings: page) {

@@ -18,6 +18,7 @@
 - Update ArnaTextButton
 - Update ArnaListTile
 - Update ArnaPopupMenuButton
+- [Example] Update Example
 
 ## 0.4.7
 

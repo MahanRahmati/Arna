@@ -14,18 +14,18 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Theme theme = ref.watch(themeProvider);
+    final ArnaThemeMode theme = ref.watch(themeProvider);
     final Color accentColor = ref.watch(accentProvider);
     Brightness? brightness;
 
     switch (theme) {
-      case Theme.dark:
+      case ArnaThemeMode.dark:
         brightness = Brightness.dark;
         break;
-      case Theme.light:
+      case ArnaThemeMode.light:
         brightness = Brightness.light;
         break;
-      case Theme.system:
+      case ArnaThemeMode.system:
         brightness = null;
     }
 
@@ -49,7 +49,6 @@ class Home extends ConsumerStatefulWidget {
 
 class _HomeState extends ConsumerState<Home> {
   Uri url = Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna');
-  bool showMaster = false;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +97,7 @@ class _HomeState extends ConsumerState<Home> {
       ],
     );
 
-    return showMaster
+    return ref.watch(masterProvider)
         ? ArnaMasterDetailScaffold(
             title: 'Arna Demo',
             actions: <Widget>[

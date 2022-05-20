@@ -6,7 +6,8 @@ class Settings extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Theme themeMode = ref.watch(themeProvider);
+    final ArnaThemeMode themeMode = ref.watch(themeProvider);
+    final bool masterMode = ref.watch(masterProvider);
     final Color accentColor = ref.watch(accentProvider);
     return SingleChildScrollView(
       child: Column(
@@ -16,23 +17,34 @@ class Settings extends ConsumerWidget {
             showDividers: true,
             showBackground: true,
             children: <Widget>[
-              ArnaRadioListTile<Theme>(
-                value: Theme.system,
+              ArnaRadioListTile<ArnaThemeMode>(
+                value: ArnaThemeMode.system,
                 groupValue: themeMode,
                 title: 'System',
-                onChanged: (_) => ref.read(themeProvider.notifier).state = Theme.system,
+                onChanged: (_) => ref.read(themeProvider.notifier).state = ArnaThemeMode.system,
               ),
-              ArnaRadioListTile<Theme>(
-                value: Theme.dark,
+              ArnaRadioListTile<ArnaThemeMode>(
+                value: ArnaThemeMode.dark,
                 groupValue: themeMode,
                 title: 'Dark',
-                onChanged: (_) => ref.read(themeProvider.notifier).state = Theme.dark,
+                onChanged: (_) => ref.read(themeProvider.notifier).state = ArnaThemeMode.dark,
               ),
-              ArnaRadioListTile<Theme>(
-                value: Theme.light,
+              ArnaRadioListTile<ArnaThemeMode>(
+                value: ArnaThemeMode.light,
                 groupValue: themeMode,
                 title: 'Light',
-                onChanged: (_) => ref.read(themeProvider.notifier).state = Theme.light,
+                onChanged: (_) => ref.read(themeProvider.notifier).state = ArnaThemeMode.light,
+              ),
+            ],
+          ),
+          ArnaList(
+            title: 'Scaffold',
+            showBackground: true,
+            children: <Widget>[
+              ArnaSwitchListTile(
+                value: masterMode,
+                title: 'Use Master-Detail',
+                onChanged: (_) => ref.read(masterProvider.notifier).state = !masterMode,
               ),
             ],
           ),
@@ -74,10 +86,24 @@ class Settings extends ConsumerWidget {
   }
 }
 
-enum Theme { system, dark, light }
+/// Describes which theme will be used by.
+enum ArnaThemeMode {
+  /// Use either the light or dark theme based on what the user has selected in the system settings.
+  system,
 
-final AutoDisposeStateProvider<Theme> themeProvider = StateProvider.autoDispose<Theme>(
-  (AutoDisposeStateProviderRef<Theme> ref) => Theme.system,
+  /// Always use the dark mode regardless of system preference.
+  dark,
+
+  /// Always use the light mode regardless of system preference.
+  light,
+}
+
+final AutoDisposeStateProvider<ArnaThemeMode> themeProvider = StateProvider.autoDispose<ArnaThemeMode>(
+  (AutoDisposeStateProviderRef<ArnaThemeMode> ref) => ArnaThemeMode.system,
+);
+
+final AutoDisposeStateProvider<bool> masterProvider = StateProvider.autoDispose<bool>(
+  (AutoDisposeStateProviderRef<bool> ref) => false,
 );
 
 final AutoDisposeStateProvider<Color> accentProvider = StateProvider.autoDispose<Color>(

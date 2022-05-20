@@ -44,6 +44,7 @@ class ArnaScrollbar extends RawScrollbar {
   RawScrollbarState<ArnaScrollbar> createState() => _ArnaScrollbarState();
 }
 
+/// The [State] for an [ArnaScrollbar].
 class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   late AnimationController _controller;
   bool _hoverIsActive = false;

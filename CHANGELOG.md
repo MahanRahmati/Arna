@@ -30,6 +30,7 @@
 - Update ArnaTextFormField
 - Update ArnaDatePicker
 - Update ArnaColors
+- Update ArnaTheme
 
 ## 0.4.8
 

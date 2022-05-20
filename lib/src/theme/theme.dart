@@ -95,6 +95,7 @@ class _InheritedArnaTheme extends InheritedWidget {
     required super.child,
   });
 
+  /// Theme.
   final ArnaTheme theme;
 
   @override

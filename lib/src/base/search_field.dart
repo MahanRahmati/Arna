@@ -2,7 +2,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/services.dart' show TextInputAction;
 
-//TODO: Add ArnaSearchField to Example
+//TODO: Add ArnaSearchField to Example.
 
 /// An Arna-styled search field.
 class ArnaSearchField extends StatefulWidget {

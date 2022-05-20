@@ -221,6 +221,7 @@ class _LateralPageState extends State<_LateralPage> {
               onPressed: _onPressed,
               onLongPressed: widget.onItemLongPressed,
               currentIndex: _currentIndex,
+              isNested: false,
             ),
             resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
           ),
@@ -230,9 +231,7 @@ class _LateralPageState extends State<_LateralPage> {
           child: ArnaDivider(direction: Axis.vertical),
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.only(
-            start: Styles.masterSideWidth + 1,
-          ),
+          padding: const EdgeInsetsDirectional.only(start: Styles.masterSideWidth + 1),
           child: widget.items.length > _currentIndex
               ? ArnaScaffold(
                   headerBarLeading: widget.items[_currentIndex].headerBarLeading,
@@ -421,13 +420,13 @@ class _NestedPageState extends State<_NestedPage> {
 class _MasterItemBuilder extends StatelessWidget {
   /// Creates a master item list.
   const _MasterItemBuilder({
-    this.leading,
+    required this.leading,
     required this.items,
-    this.trailing,
+    required this.trailing,
     required this.onPressed,
-    this.onLongPressed,
+    required this.onLongPressed,
     required this.currentIndex,
-    this.isNested = false,
+    required this.isNested,
   });
 
   /// The leading widget in the master that is placed above the items.

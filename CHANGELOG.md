@@ -14,6 +14,7 @@
 - Update ArnaDateUtils
 - Update ArnaMasterDetailScaffold
 - Update ArnaPage
+- Update ArnaProgressIndicator
 
 ## 0.4.8
 

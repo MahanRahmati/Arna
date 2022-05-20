@@ -140,6 +140,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with Sing
 
 /// Painter of [ArnaProgressIndicator].
 class _ProgressPainter extends CustomPainter {
+  /// Creates a progress painter.
   _ProgressPainter({
     required this.color,
     required this.value,
@@ -150,16 +151,34 @@ class _ProgressPainter extends CustomPainter {
             ? value.clamp(0.0, 1.0) * _sweep
             : math.max(headValue * _twoPi - tailValue * _twoPi, _epsilon);
 
+  /// Color of the indicator.
   final Color color;
+
+  /// Value of the indicator.
   final double? value;
+
+  /// Value of the indicator's head.
   final double headValue;
+
+  /// Value of the indicator's tail.
   final double tailValue;
+
+  /// Arc start.
   final double arcStart;
+
+  /// Arc sweep.
   final double arcSweep;
 
+  /// Pi * 2
   static const double _twoPi = math.pi * 2.0;
+
+  /// Epsilon
   static const double _epsilon = .001;
+
+  /// Sweep
   static const double _sweep = _twoPi - _epsilon;
+
+  /// Start angle
   static const double _startAngle = -math.pi / 2.0;
 
   @override

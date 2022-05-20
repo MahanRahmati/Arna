@@ -7,6 +7,7 @@
 - Add ArnaBackButton
 - Update documentations
 - Update ArnaListTile
+- Add ArnaCloseButton
 
 ## 0.4.8
 

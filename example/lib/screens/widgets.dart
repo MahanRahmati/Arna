@@ -31,10 +31,7 @@ class _WidgetsState extends State<Widgets> {
           title: 'This is an information banner!',
           subtitle: 'Hello There!',
           actions: <Widget>[
-            ArnaBorderlessButton(
-              icon: Icons.close_outlined,
-              onPressed: () => setState(() => _showBanner = false),
-            ),
+            ArnaCloseButton(onPressed: () => setState(() => _showBanner = false)),
           ],
         ),
         Flexible(

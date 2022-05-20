@@ -86,11 +86,7 @@ class _ArnaPopupDialog extends StatelessWidget {
                   headerBarLeading: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      ArnaBorderlessButton(
-                        icon: Icons.close,
-                        onPressed: Navigator.of(context).pop,
-                        tooltipMessage: MaterialLocalizations.of(context).closeButtonTooltip,
-                      ),
+                      const ArnaCloseButton(),
                       if (headerBarLeading != null) headerBarLeading!,
                     ],
                   ),

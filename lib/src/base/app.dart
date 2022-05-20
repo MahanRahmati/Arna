@@ -43,7 +43,7 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 /// {@end-tool}
 ///
 /// {@tool snippet}
-/// This example shows how to create an [ArnaApp] that uses the [routes] `Map` to define the "home" route and an 
+/// This example shows how to create an [ArnaApp] that uses the [routes] `Map` to define the "home" route and an
 /// "about" route.
 ///
 /// ```dart
@@ -385,8 +385,8 @@ class ArnaApp extends StatefulWidget {
   /// This example shows how to add a single action handling an [ActivateAction] to the default actions without needing
   /// to add your own [Actions] widget.
   ///
-  /// Alternatively, you could insert a [Actions] widget with just the mapping you want to add between the [WidgetsApp]
-  /// and its child and get the same effect.
+  /// Alternatively, you could insert an [Actions] widget with just the mapping you want to add between the
+  /// [WidgetsApp] and its child and get the same effect.
   ///
   /// ```dart
   /// Widget build(BuildContext context) {

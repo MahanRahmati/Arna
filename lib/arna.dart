@@ -30,6 +30,7 @@ export 'package:arna/src/base/tooltip.dart';
 export 'package:arna/src/buttons/back_button.dart';
 export 'package:arna/src/buttons/borderless_button.dart';
 export 'package:arna/src/buttons/button.dart';
+export 'package:arna/src/buttons/close_button.dart';
 export 'package:arna/src/buttons/color_button.dart';
 export 'package:arna/src/buttons/icon_button.dart';
 export 'package:arna/src/buttons/linked_buttons.dart';

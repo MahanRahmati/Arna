@@ -150,7 +150,7 @@ class AnimatedArnaTheme extends ImplicitlyAnimatedWidget {
   AnimatedWidgetBaseState<AnimatedArnaTheme> createState() => _AnimatedArnaThemeState();
 }
 
-/// The [State] for a [AnimatedArnaTheme].
+/// The [State] for an [AnimatedArnaTheme].
 class _AnimatedArnaThemeState extends AnimatedWidgetBaseState<AnimatedArnaTheme> {
   ArnaThemeDataTween? _data;
 

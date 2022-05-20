@@ -49,7 +49,6 @@ typedef ArnaSelectableDayPredicate = bool Function(DateTime day);
 /// dialog:
 ///
 ///   * [helpText], label displayed at the top of the dialog.
-///   * [cancelText], label on the cancel button.
 ///   * [confirmText], label on the ok button.
 ///
 /// An optional [locale] argument can be used to set the locale for the date picker. It defaults to the ambient locale
@@ -90,7 +89,6 @@ Future<DateTime?> showArnaDatePicker({
   DateTime? currentDate,
   ArnaSelectableDayPredicate? selectableDayPredicate,
   String? helpText,
-  String? cancelText,
   String? confirmText,
   Locale? locale,
   bool useRootNavigator = true,
@@ -127,7 +125,6 @@ Future<DateTime?> showArnaDatePicker({
     currentDate: currentDate,
     selectableDayPredicate: selectableDayPredicate,
     helpText: helpText,
-    cancelText: cancelText,
     confirmText: confirmText,
     initialCalendarMode: initialDatePickerMode,
   );
@@ -175,7 +172,6 @@ class ArnaDatePickerDialog extends StatefulWidget {
     required DateTime lastDate,
     DateTime? currentDate,
     this.selectableDayPredicate,
-    this.cancelText,
     this.confirmText,
     this.helpText,
     this.initialCalendarMode = ArnaDatePickerMode.day,
@@ -216,9 +212,6 @@ class ArnaDatePickerDialog extends StatefulWidget {
 
   /// Function to provide full control over which [DateTime] can be selected.
   final ArnaSelectableDayPredicate? selectableDayPredicate;
-
-  /// The text that is displayed on the cancel button.
-  final String? cancelText;
 
   /// The text that is displayed on the confirm button.
   final String? confirmText;
@@ -269,11 +262,7 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ArnaHeaderBar(
-              leading: ArnaBorderlessButton(
-                icon: Icons.close,
-                onPressed: Navigator.of(context).pop,
-                tooltipMessage: widget.cancelText ?? MaterialLocalizations.of(context).cancelButtonLabel,
-              ),
+              leading: const ArnaCloseButton(),
               middle: Text(
                 widget.helpText ?? MaterialLocalizations.of(context).datePickerHelpText,
                 style: ArnaTheme.of(context).textTheme.title,

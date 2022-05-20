@@ -183,10 +183,19 @@ class _ArnaListTile extends RenderObjectWidget with SlottedMultiChildRenderObjec
     required this.textDirection,
   });
 
+  /// A widget to display before the title.
   final Widget? leading;
+
+  /// The primary content of the list tile.
   final Widget title;
+
+  /// Additional content displayed below the title.
   final Widget? subtitle;
+
+  /// A widget to display after the title.
   final Widget? trailing;
+
+  /// A direction in which text flows.
   final TextDirection textDirection;
 
   @override

@@ -304,6 +304,7 @@ class ArnaApp extends StatefulWidget {
   ///   // ...
   /// )
   /// ```
+  ///
   /// See also:
   ///
   ///  * [supportedLocales], which must be specified along with [localizationsDelegates].

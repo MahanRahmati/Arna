@@ -2,6 +2,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// Implements the side view layout structure.
+///
 /// See also:
 ///
 ///  * [ArnaHeaderBar], which is a horizontal bar shown at the top of the app.

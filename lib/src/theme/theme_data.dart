@@ -47,6 +47,7 @@ class ArnaThemeData with Diagnosticable {
   factory ArnaThemeData.dark() => ArnaThemeData(brightness: Brightness.dark, textTheme: ArnaTypography.dark);
 
   /// The brightness override for Arna descendants.
+  ///
   /// See also:
   ///
   ///  * [ArnaTheme.brightnessOf], a method used to retrieve the overall [Brightness] from a [BuildContext], for Arna

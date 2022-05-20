@@ -15,7 +15,6 @@ import 'package:arna/arna.dart';
 ///
 /// To show the [ArnaSwitchListTile] as disabled, pass null as the [onChanged] callback.
 ///
-///
 /// See also:
 ///
 ///  * [ArnaCheckboxListTile], a similar widget for checkboxes.

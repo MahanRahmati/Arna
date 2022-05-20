@@ -9,6 +9,7 @@ import 'package:arna/arna.dart';
 /// The radio button itself does not maintain any state. Instead, selecting the radio invokes the [onChanged] callback,
 /// passing [value] as a parameter. If [groupValue] and [value] match, this radio will be selected. Most widgets will
 /// respond to [onChanged] by calling [State.setState] to update the radio button's [groupValue].
+///
 /// See also:
 ///
 ///  * [ArnaRadioListTile], which combines this widget with an [ArnaListTile] so that you can give the radio button a

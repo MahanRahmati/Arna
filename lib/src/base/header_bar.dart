@@ -4,6 +4,7 @@ import 'package:arna/arna.dart';
 ///
 /// The HeaderBar displays [leading], [middle], and [actions] widgets.
 /// [leading] widget is in the top left, the [actions] are in the top right, the [middle] is between them.
+///
 /// See also:
 ///
 ///  * [ArnaScaffold], which displays the [ArnaHeaderBar].

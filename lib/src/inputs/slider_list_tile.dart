@@ -1,6 +1,6 @@
 import 'package:arna/arna.dart';
 
-/// an [ArnaListTile] with an [ArnaSlider]. In other words, a slider with a label.
+/// An [ArnaListTile] with an [ArnaSlider]. In other words, a slider with a label.
 ///
 ///
 /// To ensure that [onChanged] correctly triggers, the state passed into [value] must be properly managed. This is

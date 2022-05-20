@@ -1,12 +1,12 @@
 ## 0.4.9
 
 - Update ROADMAP
+- Update documentations
 - Update ArnaCard
 - Update ArnaDialog
 - Update ArnaPopupDialog
 - Update ArnaPopupMenu
 - Add ArnaBackButton
-- Update documentations
 - Update ArnaListTile
 - Add ArnaCloseButton
 - Update ArnaTooltip
@@ -22,6 +22,10 @@
 - Update ArnaTextSelectionControls
 - Update ArnaBorderlessButton
 - Update Helpers
+- Update ArnaCheckboxListTile
+- Update ArnaRadioListTile
+- Update ArnaSliderListTile
+- Update ArnaSwitchListTile
 
 ## 0.4.8
 

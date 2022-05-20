@@ -1,6 +1,6 @@
 import 'package:arna/arna.dart';
 
-/// an [ArnaListTile] with an [ArnaSwitch]. In other words, a switch with a label.
+/// An [ArnaListTile] with an [ArnaSwitch]. In other words, a switch with a label.
 ///
 /// The entire list tile is interactive: tapping anywhere in the tile toggles the switch. Tapping and dragging the
 /// [ArnaSwitch] also triggers the [onChanged] callback.

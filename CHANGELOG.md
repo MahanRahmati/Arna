@@ -1,6 +1,7 @@
 ## 0.5.0
 
 - [Example] Update Example
+- Update ArnaListTile
 
 ## 0.4.9
 

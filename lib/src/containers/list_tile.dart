@@ -252,7 +252,6 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
   TextDirection get textDirection => _textDirection;
   TextDirection _textDirection;
   set textDirection(TextDirection value) {
-    assert(value != null);
     if (_textDirection == value) {
       return;
     }
@@ -314,7 +313,6 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
 
   @override
   double computeDistanceToActualBaseline(TextBaseline baseline) {
-    assert(title != null);
     final BoxParentData parentData = title!.parentData! as BoxParentData;
     return parentData.offset.dy + title!.getDistanceToActualBaseline(baseline)!;
   }
@@ -490,7 +488,6 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
-    assert(position != null);
     for (final RenderBox child in children) {
       final BoxParentData parentData = child.parentData! as BoxParentData;
       final bool isHit = result.addWithPaintOffset(

@@ -16,7 +16,7 @@ class ArnaSearchField extends StatefulWidget {
     this.autofocus = false,
     this.onTap,
     this.autocorrect = true,
-    this.enabled,
+    this.enabled = true,
   });
 
   /// Whether to show search or not.
@@ -50,7 +50,7 @@ class ArnaSearchField extends StatefulWidget {
   final bool autocorrect;
 
   /// Disables the text field when false.
-  final bool? enabled;
+  final bool enabled;
 
   @override
   State<ArnaSearchField> createState() => _ArnaSearchFieldState();
@@ -162,7 +162,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
                     Icons.search_outlined,
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
-                  enabled: widget.enabled,
+                  enabled: widget.enabled && widget.showSearch,
                   onTap: widget.onTap,
                   clearButtonMode: ArnaOverlayVisibilityMode.editing,
                   onChanged: widget.onChanged,

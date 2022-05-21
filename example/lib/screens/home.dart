@@ -2,6 +2,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '/providers.dart';
 import '/screens/hello.dart';
 import '/screens/settings.dart';
 import '/screens/typography.dart';
@@ -18,6 +19,8 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
+    final bool showSearch = ref.watch(searchProvider);
+
     final NavigationItem hello = NavigationItem(
       title: Strings.hello,
       icon: Icons.emoji_emotions_outlined,
@@ -45,12 +48,22 @@ class _HomeState extends ConsumerState<Home> {
       title: Strings.widgets,
       icon: Icons.widgets_outlined,
       selectedIcon: Icons.widgets,
+      headerBarLeading: ArnaIconButton(
+        icon: Icons.search_outlined,
+        onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
+        tooltipMessage: Strings.search,
+      ),
       builder: (_) => const Widgets(),
     );
 
     final MasterNavigationItem widgetsMaster = MasterNavigationItem(
       title: Strings.widgets,
       leading: const Icon(Icons.widgets_outlined),
+      headerBarLeading: ArnaIconButton(
+        icon: Icons.search_outlined,
+        onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
+        tooltipMessage: Strings.search,
+      ),
       builder: (_) => const Widgets(),
     );
 

@@ -1,3 +1,7 @@
+## 0.5.0
+
+- [Example] Update Example
+
 ## 0.4.9
 
 - Update ROADMAP

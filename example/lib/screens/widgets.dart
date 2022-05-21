@@ -1,6 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '/providers.dart';
 import '/strings.dart';
 import '/widgets/banners.dart';
 import '/widgets/buttons.dart';
@@ -23,6 +24,7 @@ class Widgets extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        ArnaSearchField(showSearch: ref.watch(searchProvider)),
         ArnaBanner(
           showBanner: ref.watch(bannerProvider),
           title: Strings.bannerTitle,

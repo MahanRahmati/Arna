@@ -5,6 +5,7 @@ abstract class Strings {
   static const String settings = 'Settings';
   static const String hello = 'Hello World';
   static const String add = 'Add';
+  static const String search = 'Search';
   static const String widgets = 'Widgets';
   static const String typography = 'Typography';
   static const String description = 'A unique set of widgets for building applications with Flutter.';

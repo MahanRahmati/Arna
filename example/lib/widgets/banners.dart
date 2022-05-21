@@ -1,6 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '/providers.dart';
 import '/strings.dart';
 
 class Banners extends ConsumerWidget {
@@ -40,7 +41,3 @@ class Banners extends ConsumerWidget {
     );
   }
 }
-
-final AutoDisposeStateProvider<bool> bannerProvider = StateProvider.autoDispose<bool>(
-  (AutoDisposeStateProviderRef<bool> ref) => false,
-);

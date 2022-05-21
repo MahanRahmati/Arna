@@ -1,8 +1,8 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '/providers.dart';
 import '/screens/home.dart';
-import '/screens/settings.dart';
 
 void main() => runApp(const ProviderScope(child: MyApp()));
 

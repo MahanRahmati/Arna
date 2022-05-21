@@ -456,36 +456,38 @@ class _MasterItemBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        if (leading != null) leading!,
-        Expanded(
-          child: ListView.builder(
-            controller: ScrollController(),
-            itemCount: items.length,
-            padding: Styles.small,
-            itemBuilder: (BuildContext context, int index) {
-              return ArnaMasterItem(
-                key: items[index].key,
-                leading: items[index].leading,
-                title: items[index].title,
-                subtitle: items[index].subtitle,
-                trailing: items[index].trailing,
-                onPressed: onPressed,
-                onLongPressed: onLongPressed,
-                itemSelected: !isNested && (index == currentIndex),
-                index: index,
-                isFocusable: items[index].isFocusable,
-                autofocus: items[index].autofocus,
-                accentColor: items[index].accentColor,
-                cursor: items[index].cursor,
-                semanticLabel: items[index].semanticLabel,
-              );
-            },
+    return FocusTraversalGroup(
+      child: Column(
+        children: <Widget>[
+          if (leading != null) leading!,
+          Expanded(
+            child: ListView.builder(
+              controller: ScrollController(),
+              itemCount: items.length,
+              padding: Styles.small,
+              itemBuilder: (BuildContext context, int index) {
+                return ArnaMasterItem(
+                  key: items[index].key,
+                  leading: items[index].leading,
+                  title: items[index].title,
+                  subtitle: items[index].subtitle,
+                  trailing: items[index].trailing,
+                  onPressed: onPressed,
+                  onLongPressed: onLongPressed,
+                  itemSelected: !isNested && (index == currentIndex),
+                  index: index,
+                  isFocusable: items[index].isFocusable,
+                  autofocus: items[index].autofocus,
+                  accentColor: items[index].accentColor,
+                  cursor: items[index].cursor,
+                  semanticLabel: items[index].semanticLabel,
+                );
+              },
+            ),
           ),
-        ),
-        if (trailing != null) trailing!,
-      ],
+          if (trailing != null) trailing!,
+        ],
+      ),
     );
   }
 }

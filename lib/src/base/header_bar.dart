@@ -44,19 +44,21 @@ class ArnaHeaderBar extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              SizedBox(
-                height: Styles.headerBarHeight,
-                child: Padding(
-                  padding: Styles.small,
-                  child: NavigationToolbar(
-                    leading: leading,
-                    middle: middle,
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[...?actions],
+              FocusTraversalGroup(
+                child: SizedBox(
+                  height: Styles.headerBarHeight,
+                  child: Padding(
+                    padding: Styles.small,
+                    child: NavigationToolbar(
+                      leading: leading,
+                      middle: middle,
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[...?actions],
+                      ),
+                      middleSpacing: Styles.smallPadding,
                     ),
-                    middleSpacing: Styles.smallPadding,
                   ),
                 ),
               ),

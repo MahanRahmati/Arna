@@ -27,13 +27,15 @@ class ArnaBottomBar extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               const ArnaDivider(),
-              SizedBox(
-                height: Styles.bottomNavigationBarHeight,
-                child: Padding(
-                  padding: Styles.small,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: items,
+              FocusTraversalGroup(
+                child: SizedBox(
+                  height: Styles.bottomNavigationBarHeight,
+                  child: Padding(
+                    padding: Styles.small,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: items,
+                    ),
                   ),
                 ),
               ),

@@ -56,7 +56,7 @@ class ArnaDrawer extends StatelessWidget {
           ),
           color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
         ),
-        child: SafeArea(child: child ?? const SizedBox.shrink()),
+        child: FocusTraversalGroup(child: SafeArea(child: child ?? const SizedBox.shrink())),
       ),
     );
   }

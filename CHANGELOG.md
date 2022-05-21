@@ -3,6 +3,11 @@
 - [Example] Update Example
 - Update ArnaListTile
 - Update ArnaSearchField
+- Update ArnaBottomBar
+- Update ArnaDrawer
+- Update ArnaHeaderBar
+- Update ArnaMasterDetailScaffold
+- Update ArnaSideScaffold
 
 ## 0.4.9
 

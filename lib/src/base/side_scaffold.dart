@@ -151,7 +151,11 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
             ],
             body: Column(
               children: <Widget>[
-                Expanded(child: widget.items[_currentIndex].builder(context)),
+                Expanded(
+                  child: FocusTraversalGroup(
+                    child: widget.items[_currentIndex].builder(context),
+                  ),
+                ),
                 if (compact && widget.items.length < 4)
                   ArnaBottomBar(
                     items: widget.items.map(

@@ -2,6 +2,7 @@
 
 - [Example] Update Example
 - Update ArnaListTile
+- Update ArnaSearchField
 
 ## 0.4.9
 

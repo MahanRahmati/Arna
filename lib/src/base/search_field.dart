@@ -2,8 +2,6 @@ import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/services.dart' show TextInputAction;
 
-//TODO: Add ArnaSearchField to Example.
-
 /// An Arna-styled search field.
 class ArnaSearchField extends StatefulWidget {
   /// Creates a search field in the Arna style.
@@ -145,45 +143,48 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return SizeTransition(
-      axisAlignment: 1,
-      sizeFactor: _animation,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          AnimatedContainer(
-            duration: Styles.basicDuration,
-            curve: Styles.basicCurve,
-            color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
-            child: Padding(
-              padding: Styles.small,
-              child: Center(
-                child: SizedBox(
-                  width: Styles.searchWidth,
-                  child: ArnaTextField(
-                    controller: widget.controller ?? _textcontroller!.value,
-                    hintText: widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel,
-                    prefix: Icon(
-                      Icons.search_outlined,
-                      color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
-                    ),
-                    enabled: widget.enabled,
-                    onTap: widget.onTap,
-                    clearButtonMode: ArnaOverlayVisibilityMode.editing,
-                    onChanged: widget.onChanged,
-                    onSubmitted: widget.onSubmitted,
-                    focusNode: focusNode,
-                    autofocus: widget.autofocus && widget.showSearch,
-                    autocorrect: widget.autocorrect,
-                    textInputAction: TextInputAction.search,
+    final Widget search = Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        AnimatedContainer(
+          duration: Styles.basicDuration,
+          curve: Styles.basicCurve,
+          color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+          child: Padding(
+            padding: Styles.small,
+            child: Center(
+              child: SizedBox(
+                width: Styles.searchWidth,
+                child: ArnaTextField(
+                  controller: widget.controller ?? _textcontroller!.value,
+                  hintText: widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel,
+                  prefix: Icon(
+                    Icons.search_outlined,
+                    color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
+                  enabled: widget.enabled,
+                  onTap: widget.onTap,
+                  clearButtonMode: ArnaOverlayVisibilityMode.editing,
+                  onChanged: widget.onChanged,
+                  onSubmitted: widget.onSubmitted,
+                  focusNode: focusNode,
+                  autofocus: widget.autofocus && widget.showSearch,
+                  autocorrect: widget.autocorrect,
+                  textInputAction: TextInputAction.search,
                 ),
               ),
             ),
           ),
-          const ArnaDivider(),
-        ],
-      ),
+        ),
+        const ArnaDivider(),
+      ],
+    );
+
+    return Hero(
+      tag: '<ArnaSearchField Hero tag - ${widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel}>',
+      child: MediaQuery.of(context).accessibleNavigation
+          ? search
+          : SizeTransition(axisAlignment: 1, sizeFactor: _animation, child: search),
     );
   }
 }

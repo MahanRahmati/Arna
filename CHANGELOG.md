@@ -8,6 +8,7 @@
 - Update ArnaHeaderBar
 - Update ArnaMasterDetailScaffold
 - Update ArnaSideScaffold
+- Update ArnaExpansionPanel
 
 ## 0.4.9
 

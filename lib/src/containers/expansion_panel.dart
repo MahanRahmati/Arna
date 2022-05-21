@@ -159,112 +159,117 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
   Widget build(BuildContext context) {
     final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
-    return Padding(
-      padding: Styles.normal,
-      child: MergeSemantics(
-        child: Semantics(
-          label: widget.semanticLabel,
-          container: true,
-          enabled: true,
-          focusable: _isEnabled,
-          focused: _focused,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              FocusableActionDetector(
-                enabled: _isEnabled && widget.isFocusable,
-                focusNode: focusNode,
-                autofocus: _isEnabled && widget.autofocus,
-                onShowFocusHighlight: _handleFocus,
-                onFocusChange: _handleFocusChange,
-                actions: _actions,
-                shortcuts: _shortcuts,
-                child: AnimatedContainer(
-                  constraints: const BoxConstraints(minHeight: Styles.expansionPanelMinHeight),
-                  duration: Styles.basicDuration,
-                  curve: Styles.basicCurve,
-                  clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.vertical(
-                      top: const Radius.circular(Styles.borderRadiusSize),
-                      bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize),
-                    ),
-                    border: Border.all(
-                      color: ArnaDynamicColor.resolve(
-                        _focused
-                            ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
-                            : ArnaColors.borderColor,
-                        context,
+    return AnimatedBuilder(
+      animation: _controller.view,
+      builder: (BuildContext context, Widget? child) {
+        return Padding(
+          padding: Styles.normal,
+          child: MergeSemantics(
+            child: Semantics(
+              label: widget.semanticLabel,
+              container: true,
+              enabled: true,
+              focusable: _isEnabled,
+              focused: _focused,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  FocusableActionDetector(
+                    enabled: _isEnabled && widget.isFocusable,
+                    focusNode: focusNode,
+                    autofocus: _isEnabled && widget.autofocus,
+                    onShowFocusHighlight: _handleFocus,
+                    onFocusChange: _handleFocusChange,
+                    actions: _actions,
+                    shortcuts: _shortcuts,
+                    child: AnimatedContainer(
+                      constraints: const BoxConstraints(minHeight: Styles.expansionPanelMinHeight),
+                      duration: Styles.basicDuration,
+                      curve: Styles.basicCurve,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          top: const Radius.circular(Styles.borderRadiusSize),
+                          bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize),
+                        ),
+                        border: Border.all(
+                          color: ArnaDynamicColor.resolve(
+                            _focused
+                                ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                : ArnaColors.borderColor,
+                            context,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.vertical(
-                      top: const Radius.circular(Styles.borderRadiusSize - 1),
-                      bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize - 1),
-                    ),
-                    child: ArnaListTile(
-                      leading: widget.leading,
-                      title: widget.title,
-                      subtitle: widget.subtitle,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          if (widget.trailing != null) widget.trailing!,
-                          Padding(
-                            padding: Styles.horizontal,
-                            child: RotationTransition(
-                              turns: _rotateAnimation,
-                              child: Transform.rotate(
-                                angle: -3.14 / 2,
-                                child: Icon(
-                                  Icons.arrow_back_ios_new_outlined,
-                                  size: Styles.arrowSize,
-                                  color: ArnaDynamicColor.resolve(
-                                    _isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
-                                    context,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.vertical(
+                          top: const Radius.circular(Styles.borderRadiusSize - 1),
+                          bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize - 1),
+                        ),
+                        child: ArnaListTile(
+                          leading: widget.leading,
+                          title: widget.title,
+                          subtitle: widget.subtitle,
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              if (widget.trailing != null) widget.trailing!,
+                              Padding(
+                                padding: Styles.horizontal,
+                                child: RotationTransition(
+                                  turns: _rotateAnimation,
+                                  child: Icon(
+                                    Icons.expand_more_outlined,
+                                    size: Styles.iconSize,
+                                    color: ArnaDynamicColor.resolve(
+                                      _isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
+                                      context,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
+                          onTap: _isEnabled && widget.isFocusable ? _handleTap : null,
+                          actionable: _isEnabled && widget.isFocusable,
+                          cursor: widget.cursor,
+                        ),
                       ),
-                      onTap: _isEnabled && widget.isFocusable ? _handleTap : null,
-                      actionable: _isEnabled && widget.isFocusable,
-                      cursor: widget.cursor,
                     ),
                   ),
-                ),
+                  if (child != null) child,
+                ],
               ),
-              if (expanded)
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
-                      bottom: Radius.circular(Styles.borderRadiusSize + 1),
-                    ),
-                    color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: AnimatedContainer(
-                    duration: Styles.basicDuration,
-                    curve: Styles.basicCurve,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(
-                        bottom: Radius.circular(Styles.borderRadiusSize),
-                      ),
-                      color: ArnaDynamicColor.resolve(ArnaColors.expansionPanelColor, context),
-                    ),
-                    margin: const EdgeInsetsDirectional.only(start: 1, end: 1, bottom: 1),
-                    child: SizeTransition(
-                      axisAlignment: 1,
-                      sizeFactor: _animation,
-                      child: widget.child,
-                    ),
-                  ),
-                ),
-            ],
+            ),
+          ),
+        );
+      },
+      child: Visibility(
+        visible: expanded,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.vertical(
+              bottom: Radius.circular(Styles.borderRadiusSize + 1),
+            ),
+            color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: AnimatedContainer(
+            duration: Styles.basicDuration,
+            curve: Styles.basicCurve,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(Styles.borderRadiusSize),
+              ),
+              color: ArnaDynamicColor.resolve(ArnaColors.expansionPanelColor, context),
+            ),
+            margin: const EdgeInsetsDirectional.only(start: 1, end: 1, bottom: 1),
+            child: SizeTransition(
+              axisAlignment: 1,
+              sizeFactor: _animation,
+              child: widget.child,
+            ),
           ),
         ),
       ),

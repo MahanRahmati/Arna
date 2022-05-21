@@ -47,9 +47,6 @@ abstract class Styles {
   /// Checkbox icon size
   static const double checkBoxIconSize = base * 2.5;
 
-  /// Arrow size
-  static const double arrowSize = base * 2.5;
-
   /// Drawer border radius size
   static const double drawerBorderRadiusSize = base * 2.5;
 

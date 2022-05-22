@@ -1,5 +1,7 @@
 ## 0.5.0
 
+- Update README
+- Update ROADMAP
 - [Example] Update Example
 - Update ArnaListTile
 - Update ArnaSearchField

@@ -9,28 +9,15 @@
   <img src="https://img.shields.io/github/license/MahanRahmati/arna">
 </p>
 
-#### [Meet Arna](https://medium.com/@mahan.rahmati/meet-arna-b0e5f771968d)
+## Introduction
 
-A unique set of widgets for building applications with Flutter.
-
-This Framework is in active development. Any contribution, idea, criticism or feedback is welcomed.
+Arna is a set of widgets designed to be simple and easy to use for building applications with Flutter. These widgets are designed to be clean, minimal, and modern. Arna is inspired by GNOME project.
 
 NOTE: Since this package is formatted with `flutter format -l 120` therefore the pub score of this package is 120.
 
 You can check the web version [here](https://mahanrahmati.github.io/arna_demo/).
 
 <img alt="Screenshot" src="https://user-images.githubusercontent.com/16052180/168848866-26bc6990-5226-45f1-8715-514d17058fd0.png">
-
-## Platform Support
-
-| Platform | Supported |
-| -------- | --------- |
-| Android  | ✅        |
-| iOS      | ✅        |
-| Linux    | ✅        |
-| MacOS    | ✅        |
-| Web      | ✅        |
-| Windows  | ✅        |
 
 ## Getting Started
 
@@ -46,6 +33,33 @@ And import it
 ```dart
 import 'package:arna/arna.dart';
 ```
+
+## Platform Support
+
+| Platform | Supported |
+| -------- | --------- |
+| Android  | ✅        |
+| iOS      | ✅        |
+| Linux    | ✅        |
+| MacOS    | ✅        |
+| Web      | ✅        |
+| Windows  | ✅        |
+
+## Feature roadmap
+
+See [ROADMAP](./ROADMAP.md).
+
+## Contributing
+
+Arna is in active development. Any contribution, idea, criticism or feedback is welcomed.
+
+- If you know Flutter and Dart, we would love you to help us grow Arna more.
+- If you are a designer, we would love to see more mockups for Arna.
+- You can always file feature requests and bugs at the [issue tracker](https://github.com/MahanRahmati/Arna/issues).
+
+## License
+
+Arna is [BSD 3-Clause licensed](./LICENSE).
 
 ## Special thanks
 

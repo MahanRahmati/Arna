@@ -1,6 +1,6 @@
-<img src="https://user-images.githubusercontent.com/16052180/167886260-187e625f-8c20-47ed-bc34-f4e790930c49.png">
+<img src="https://user-images.githubusercontent.com/16052180/169879175-298844aa-b75e-45b1-9006-1efb5d00baa9.png">
 
-<p align="start">
+<p align="center">
   <a href="https://pub.dartlang.org/packages/arna"><img src="https://img.shields.io/pub/v/arna.svg" alt="pub.dev"></a>
   <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
   <a href="https://github.com/leanflutter/awesome-flutter-desktop"> <img src="https://img.shields.io/badge/Awesome-Flutter%20Desktop-blue.svg" /></a>
@@ -16,8 +16,6 @@ Arna is a set of widgets designed to be simple and easy to use for building appl
 NOTE: Since this package is formatted with `flutter format -l 120` therefore the pub score of this package is 120.
 
 You can check the web version [here](https://mahanrahmati.github.io/arna_demo/).
-
-<img alt="Screenshot" src="https://user-images.githubusercontent.com/16052180/168848866-26bc6990-5226-45f1-8715-514d17058fd0.png">
 
 ## Getting Started
 

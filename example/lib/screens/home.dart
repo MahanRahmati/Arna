@@ -125,10 +125,7 @@ class _HomeState extends ConsumerState<Home> {
       )
     ];
 
-    const Widget leadingWidget = Padding(
-      padding: Styles.normal,
-      child: FlutterLogo(size: Styles.base * 5),
-    );
+    const Widget leadingWidget = ArnaLogo(size: Styles.base * 10);
 
     return ref.watch(masterProvider)
         ? ArnaMasterDetailScaffold(

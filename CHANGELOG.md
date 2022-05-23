@@ -11,6 +11,7 @@
 - Update ArnaMasterDetailScaffold
 - Update ArnaSideScaffold
 - Update ArnaExpansionPanel
+- Add ArnaLogo
 
 ## 0.4.9
 

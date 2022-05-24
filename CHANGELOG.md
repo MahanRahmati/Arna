@@ -16,6 +16,7 @@
 - Add ArnaLicensePage
 - Add ArnaAutocomplete
 - Add ArnaAvatar
+- Add ArnaReorderableList
 
 ## 0.4.9
 

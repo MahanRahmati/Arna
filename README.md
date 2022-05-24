@@ -88,6 +88,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaExpansionPanel        | ExpansionPanel                |
 | ArnaList                  | -                             |
 | ArnaListTile              | ListTile                      |
+| ArnaReorderableList       | ReorderableListView           |
 | ArnaDialog                | Dialog                        |
 | ArnaPopupDialog           | -                             |
 | ArnaAutocomplete          | Autocomplete                  |

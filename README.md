@@ -47,6 +47,61 @@ import 'package:arna/arna.dart';
 
 See [ROADMAP](./ROADMAP.md).
 
+## Widgets
+
+| Arna                      | Material                      |
+| ------------------------- | ----------------------------- |
+| ArnaApp                   | MaterialApp                   |
+| ArnaLogo                  | FlutterLogo                   |
+| ArnaBanner                | MaterialBanner                |
+| ArnaBaseWidget            | InkWell                       |
+| ArnaBottomBar             | NavigationBar                 |
+| ArnaBottomBarItem         | NavigationDestination         |
+| ArnaDivider               | Divider                       |
+| ArnaDrawer                | Drawer                        |
+| ArnaHeaderBar             | AppBar                        |
+| ArnaMasterDetailScaffold  | -                             |
+| ArnaMasterItem            | -                             |
+| ArnaPage                  | MaterialPage                  |
+| ArnaProgressIndicator     | ProgressIndicator             |
+| ArnaPageRoute             | MaterialPageRoute             |
+| ArnaScaffold              | Scaffold                      |
+| ArnaScrollbar             | Scrollbar                     |
+| ArnaSearchField           | SearchPage                    |
+| ArnaSideBarItem           | -                             |
+| ArnaSideScaffold          | -                             |
+| ArnaSnackBar              | SnackBar                      |
+| ArnaTextSelectionControls | MaterialTextSelectionControls |
+| ArnaTooltip               | Tooltip                       |
+| ArnaBackButton            | BackButton                    |
+| ArnaBorderlessButton      | -                             |
+| ArnaButton                | ElevatedButton                |
+| ArnaCloseButton           | CloseButton                   |
+| ArnaColorButton           | -                             |
+| ArnaIconButton            | IconButton                    |
+| ArnaLinkedButtons         | -                             |
+| ArnaTextButton            | TextButton                    |
+| ArnaBadge                 | -                             |
+| ArnaCard                  | Card                          |
+| ArnaExpansionPanel        | ExpansionPanel                |
+| ArnaList                  | -                             |
+| ArnaListTile              | ListTile                      |
+| ArnaDialog                | Dialog                        |
+| ArnaPopupDialog           | -                             |
+| ArnaCheckbox              | Checkbox                      |
+| ArnaCheckboxListTile      | CheckboxListTile              |
+| ArnaPopupMenu             | PopupMenu                     |
+| ArnaRadio                 | Radio                         |
+| ArnaRadioListTile         | RadioListTile                 |
+| ArnaSegmentedControl      | Tab                           |
+| ArnaSlider                | Slider                        |
+| ArnaSliderListTile        | -                             |
+| ArnaSwitch                | Switch                        |
+| ArnaSwitchListTile        | SwitchListTile                |
+| ArnaTextField             | TextField                     |
+| ArnaTextFormField         | TextFormField                 |
+| ArnaDatePicker            | DatePicker                    |
+
 ## Contributing
 
 Arna is in active development. Any contribution, idea, criticism or feedback is welcomed.

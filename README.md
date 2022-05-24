@@ -89,6 +89,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaListTile              | ListTile                      |
 | ArnaDialog                | Dialog                        |
 | ArnaPopupDialog           | -                             |
+| ArnaAutocomplete          | Autocomplete                  |
 | ArnaCheckbox              | Checkbox                      |
 | ArnaCheckboxListTile      | CheckboxListTile              |
 | ArnaPopupMenu             | PopupMenu                     |

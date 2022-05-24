@@ -15,6 +15,7 @@
 - Update ArnaThemeData
 - Add ArnaLicensePage
 - Add ArnaAutocomplete
+- Add ArnaAvatar
 
 ## 0.4.9
 

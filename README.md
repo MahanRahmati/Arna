@@ -53,6 +53,7 @@ See [ROADMAP](./ROADMAP.md).
 | ------------------------- | ----------------------------- |
 | ArnaApp                   | MaterialApp                   |
 | ArnaLogo                  | FlutterLogo                   |
+| ArnaAvatar                | CircleAvatar                  |
 | ArnaBanner                | MaterialBanner                |
 | ArnaBaseWidget            | InkWell                       |
 | ArnaBottomBar             | NavigationBar                 |

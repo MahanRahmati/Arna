@@ -92,6 +92,9 @@ abstract class Styles {
   /// Picker top row height
   static const double pickerTopRowHeight = base * 6;
 
+  /// Avatar size
+  static const double avatarSize = base * 6;
+
   /// Huge button size
   static const double hugeButtonSize = base * 6.5;
 

@@ -14,6 +14,7 @@
 - Add ArnaLogo
 - Update ArnaThemeData
 - Add ArnaLicensePage
+- Add ArnaAutocomplete
 
 ## 0.4.9
 

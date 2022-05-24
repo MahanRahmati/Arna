@@ -140,6 +140,9 @@ abstract class Styles {
   /// Toolbar width
   static const double toolbarWidth = base * 30;
 
+  /// Autocomplete options maximum height
+  static const double optionsMaxHeight = base * 30;
+
   /// Search width
   static const double searchWidth = base * 44;
 

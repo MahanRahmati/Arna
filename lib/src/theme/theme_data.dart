@@ -23,8 +23,8 @@ class ArnaThemeData with Diagnosticable {
     final ArnaTextTheme defaultTextTheme = brightness == Brightness.dark ? ArnaTypography.dark : ArnaTypography.light;
 
     return ArnaThemeData.raw(
-      brightness: brightness,
       accentColor: accentColor ?? ArnaColors.blue,
+      brightness: brightness,
       textTheme: textTheme ?? defaultTextTheme,
     );
   }
@@ -35,8 +35,8 @@ class ArnaThemeData with Diagnosticable {
   /// This will rarely be used directly. It is used by [lerp] to create intermediate themes based on two themes created
   /// with the [ArnaThemeData] constructor.
   const ArnaThemeData.raw({
-    required this.brightness,
     required this.accentColor,
+    required this.brightness,
     required this.textTheme,
   });
 
@@ -46,6 +46,12 @@ class ArnaThemeData with Diagnosticable {
   /// A default dark theme.
   factory ArnaThemeData.dark() => ArnaThemeData(brightness: Brightness.dark, textTheme: ArnaTypography.dark);
 
+  /// A color used on interactive elements of the theme.
+  ///
+  /// This color is generally used on tappable elements.
+  /// Defaults to [ArnaColors.blue].
+  final Color accentColor;
+
   /// The brightness override for Arna descendants.
   ///
   /// See also:
@@ -54,20 +60,14 @@ class ArnaThemeData with Diagnosticable {
   ///    widgets.
   final Brightness? brightness;
 
-  /// A color used on interactive elements of the theme.
-  ///
-  /// This color is generally used on tappable elements.
-  /// Defaults to [ArnaColors.blue].
-  final Color accentColor;
-
   /// Text styles used by Arna widgets.
   final ArnaTextTheme textTheme;
 
   /// Creates a copy of this theme but with the given fields replaced with the new values.
   ArnaThemeData copyWith({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
     return ArnaThemeData.raw(
-      brightness: brightness ?? this.brightness,
       accentColor: accentColor ?? this.accentColor,
+      brightness: brightness ?? this.brightness,
       textTheme: textTheme ?? this.textTheme,
     );
   }
@@ -79,8 +79,8 @@ class ArnaThemeData with Diagnosticable {
   /// {@macro dart.ui.shadow.lerp}
   static ArnaThemeData lerp(ArnaThemeData a, ArnaThemeData b, double t) {
     return ArnaThemeData.raw(
-      brightness: t < 0.5 ? a.brightness : b.brightness,
       accentColor: t < 0.5 ? a.accentColor : b.accentColor,
+      brightness: t < 0.5 ? a.brightness : b.brightness,
       textTheme: t < 0.5 ? a.textTheme : b.textTheme,
     );
   }
@@ -91,14 +91,14 @@ class ArnaThemeData with Diagnosticable {
       return false;
     }
     return other is ArnaThemeData &&
-        other.brightness == brightness &&
         other.accentColor == accentColor &&
+        other.brightness == brightness &&
         other.textTheme == textTheme;
   }
 
   @override
   int get hashCode {
-    final List<Object?> values = <Object?>[brightness, accentColor, textTheme];
+    final List<Object?> values = <Object?>[accentColor, brightness, textTheme];
     return Object.hashAll(values);
   }
 
@@ -107,15 +107,15 @@ class ArnaThemeData with Diagnosticable {
     super.debugFillProperties(properties);
     final ArnaThemeData defaultData = ArnaThemeData.light();
     properties.add(
+      ColorProperty('accentColor', accentColor, defaultValue: defaultData.accentColor, level: DiagnosticLevel.debug),
+    );
+    properties.add(
       EnumProperty<Brightness>(
         'brightness',
         brightness,
         defaultValue: defaultData.brightness,
         level: DiagnosticLevel.debug,
       ),
-    );
-    properties.add(
-      ColorProperty('accentColor', accentColor, defaultValue: defaultData.accentColor, level: DiagnosticLevel.debug),
     );
     properties.add(DiagnosticsProperty<ArnaTextTheme>('textTheme', textTheme, level: DiagnosticLevel.debug));
   }

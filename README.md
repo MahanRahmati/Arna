@@ -11,7 +11,7 @@
 
 ## Introduction
 
-Arna is a set of widgets designed to be simple and easy to use for building applications with Flutter. These widgets are designed to be clean, minimal, and modern. Arna is inspired by GNOME project.
+Arna is a set of widgets designed to be simple and easy to use for building applications with Flutter. These widgets are designed to be clean, minimal, and modern. Arna is inspired by the GNOME project.
 
 NOTE: Since this package is formatted with `flutter format -l 120` therefore the pub score of this package is 120.
 

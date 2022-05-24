@@ -12,6 +12,7 @@
 - Update ArnaSideScaffold
 - Update ArnaExpansionPanel
 - Add ArnaLogo
+- Update ArnaThemeData
 
 ## 0.4.9
 

@@ -60,6 +60,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaDivider               | Divider                       |
 | ArnaDrawer                | Drawer                        |
 | ArnaHeaderBar             | AppBar                        |
+| ArnaLicensePage           | LicensePage                   |
 | ArnaMasterDetailScaffold  | -                             |
 | ArnaMasterItem            | -                             |
 | ArnaPage                  | MaterialPage                  |

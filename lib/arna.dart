@@ -15,6 +15,7 @@ export 'package:arna/src/base/divider.dart';
 export 'package:arna/src/base/drawer.dart';
 export 'package:arna/src/base/feedback.dart';
 export 'package:arna/src/base/header_bar.dart';
+export 'package:arna/src/base/licenses.dart';
 export 'package:arna/src/base/master_detail_scaffold.dart';
 export 'package:arna/src/base/master_item.dart';
 export 'package:arna/src/base/page.dart';

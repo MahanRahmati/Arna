@@ -13,6 +13,7 @@
 - Update ArnaExpansionPanel
 - Add ArnaLogo
 - Update ArnaThemeData
+- Add ArnaLicensePage
 
 ## 0.4.9
 

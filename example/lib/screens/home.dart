@@ -96,9 +96,13 @@ class _HomeState extends ConsumerState<Home> {
           ),
         ),
         ArnaTextButton(
+          label: Strings.licenses,
+          onPressed: () => showArnaLicensePage(context: context),
+        ),
+        ArnaTextButton(
           label: Strings.ok,
           onPressed: Navigator.of(context).pop,
-        )
+        ),
       ],
     );
 

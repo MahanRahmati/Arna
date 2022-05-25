@@ -69,22 +69,41 @@ class ArnaColorButton<T> extends StatelessWidget {
               ),
             ),
             padding: Styles.small,
-            child: AnimatedContainer(
-              duration: Styles.basicDuration,
-              curve: Styles.basicCurve,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: Styles.colorButtonBorderRadius,
-                border: Border.all(
-                  color: ArnaDynamicColor.resolve(
-                    !enabled
-                        ? ArnaDynamicColor.applyOverlay(ArnaDynamicColor.onBackgroundColor(color))
-                        : ArnaDynamicColor.outerColor(color),
-                    context,
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                AnimatedContainer(
+                  duration: Styles.basicDuration,
+                  curve: Styles.basicCurve,
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: Styles.colorButtonBorderRadius,
+                    border: Border.all(
+                      color: ArnaDynamicColor.resolve(
+                        !enabled
+                            ? ArnaDynamicColor.applyOverlay(ArnaDynamicColor.onBackgroundColor(color))
+                            : ArnaDynamicColor.outerColor(color),
+                        context,
+                      ),
+                    ),
+                    color: pressed || hover || focused ? ArnaDynamicColor.applyOverlay(color) : color,
                   ),
                 ),
-                color: pressed || hover || focused ? ArnaDynamicColor.applyOverlay(color) : color,
-              ),
+                AnimatedContainer(
+                  height: Styles.checkBoxSize,
+                  width: Styles.checkBoxSize,
+                  duration: Styles.basicDuration,
+                  curve: Styles.basicCurve,
+                  child: Opacity(
+                    opacity: selected && enabled ? 1.0 : 0.0,
+                    child: Icon(
+                      Icons.check_outlined,
+                      size: Styles.checkBoxIconSize,
+                      color: ArnaDynamicColor.onBackgroundColor(color),
+                    ),
+                  ),
+                ),
+              ],
             ),
           );
         },

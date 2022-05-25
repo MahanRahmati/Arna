@@ -7,6 +7,7 @@
 - Update ArnaReorderableList
 - Update ArnaPopupMenuDivider
 - Update ArnaPopupMenuButton
+- Update ArnaColorButton
 
 ## 1.0.1
 

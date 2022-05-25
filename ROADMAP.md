@@ -17,9 +17,13 @@
 
 - Add missing widgets.
 
-  - [ ] ArnaPicker
-  - [ ] ArnaTimePicker
   - [ ] ArnaChip
-  - [ ] ArnaDropdownButton
   - [ ] ArnaDataTable
+  - [ ] ArnaDropdownButton
   - [ ] ArnaPageIndicator
+  - [ ] ArnaPaginatedDataTable
+  - [ ] ArnaPicker
+  - [ ] ArnaRangeSlider
+  - [ ] ArnaRefreshIndicator
+  - [ ] ArnaTab
+  - [ ] ArnaTimePicker

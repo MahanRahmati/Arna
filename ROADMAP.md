@@ -1,9 +1,5 @@
 # Arna Framework's roadmap
 
-## 1.0.0
-
-- [x] Finalizing the current set of widgets.
-
 ## TODO
 
 - [ ] ArnaApp [Add routerConfig when it is landed.]

@@ -11,6 +11,7 @@ class Settings extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final Brightness? themeMode = ref.watch(themeProvider);
     final bool masterMode = ref.watch(masterProvider);
+    final bool blurMode = ref.watch(blurProvider);
     final Color accentColor = ref.watch(accentProvider);
     return SingleChildScrollView(
       child: Column(
@@ -41,13 +42,19 @@ class Settings extends ConsumerWidget {
             ],
           ),
           ArnaList(
-            title: Strings.scaffold,
+            title: Strings.options,
+            showDividers: true,
             showBackground: true,
             children: <Widget>[
               ArnaSwitchListTile(
                 value: masterMode,
                 title: Strings.masterMode,
                 onChanged: (_) => ref.read(masterProvider.notifier).state = !masterMode,
+              ),
+              ArnaSwitchListTile(
+                value: blurMode,
+                title: Strings.blurMode,
+                onChanged: (_) => ref.read(blurProvider.notifier).state = !blurMode,
               ),
             ],
           ),

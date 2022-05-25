@@ -1,6 +1,7 @@
 ## 1.0.1
 
 - [Example] Update Example
+- Add Arna icons
 
 ## 1.0.0
 

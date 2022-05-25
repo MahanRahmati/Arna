@@ -97,6 +97,7 @@ Future<DateTime?> showArnaDatePicker({
   TransitionBuilder? builder,
   ArnaDatePickerMode initialDatePickerMode = ArnaDatePickerMode.day,
   Offset? anchorPoint,
+  bool useBlur = true,
 }) async {
   initialDate = ArnaDateUtils.dateOnly(initialDate);
   firstDate = ArnaDateUtils.dateOnly(firstDate);
@@ -152,6 +153,7 @@ Future<DateTime?> showArnaDatePicker({
       return builder == null ? dialog : builder(context, dialog);
     },
     anchorPoint: anchorPoint,
+    useBlur: useBlur,
   );
 }
 

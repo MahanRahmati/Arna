@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final AutoDisposeStateProvider<Brightness?> themeProvider = StateProvider.autoDispose<Brightness?>(
@@ -14,7 +15,7 @@ final AutoDisposeStateProvider<Color> accentProvider = StateProvider.autoDispose
 );
 
 final AutoDisposeStateProvider<bool> blurProvider = StateProvider.autoDispose<bool>(
-  (AutoDisposeStateProviderRef<bool> ref) => true,
+  (AutoDisposeStateProviderRef<bool> ref) => !kIsWeb,
 );
 
 final AutoDisposeStateProvider<bool> bannerProvider = StateProvider.autoDispose<bool>(

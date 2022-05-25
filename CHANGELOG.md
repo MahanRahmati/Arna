@@ -1,3 +1,7 @@
+## 1.0.1
+
+- [Example] Update Example
+
 ## 1.0.0
 
 - Update README

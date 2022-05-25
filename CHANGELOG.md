@@ -1,3 +1,10 @@
+## 1.0.2
+
+- Update ArnaDialog
+- Update ArnaPopupMenu
+- Update ArnaSlider
+- Update ArnaTextFormField
+
 ## 1.0.1
 
 - [Example] Update Example

@@ -240,25 +240,21 @@ class ArnaAlertDialog extends StatelessWidget {
       ];
     }
 
-    Widget dialogChild = IntrinsicWidth(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: columnChildren,
-      ),
-    );
-
-    if (label != null) {
-      dialogChild = Semantics(
+    return ArnaDialog(
+      child: Semantics(
         scopesRoute: true,
         explicitChildNodes: true,
         namesRoute: true,
         label: label,
-        child: dialogChild,
-      );
-    }
-
-    return ArnaDialog(child: dialogChild);
+        child: IntrinsicWidth(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: columnChildren,
+          ),
+        ),
+      ),
+    );
   }
 }
 

@@ -241,7 +241,7 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
     final Key itemGlobalKey = _ArnaReorderableListChildGlobalKey(item.key!, this);
     final Widget dragStartListener = ReorderableDragStartListener(
       index: index,
-      child: const Icon(Icons.drag_handle_outlined),
+      child: const Icon(Icons.drag_indicator_outlined),
     );
 
     switch (widget.scrollDirection) {

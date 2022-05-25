@@ -1,5 +1,6 @@
 abstract class Strings {
   static const String appName = 'Arna Gallery';
+  static const String version = '1.0.1';
   static const String arna = 'Arna';
   static const String about = 'About';
   static const String settings = 'Settings';
@@ -8,10 +9,6 @@ abstract class Strings {
   static const String search = 'Search';
   static const String widgets = 'Widgets';
   static const String typography = 'Typography';
-  static const String description = 'A set of widgets designed to be simple and easy to use for building applications.';
-  static const String source = 'Source code';
-  static const String licenses = 'Licenses';
-  static const String ok = 'OK';
   static const String buttonPushed = 'You have pushed the button this many times:';
   static const String theme = 'Theme';
   static const String system = 'System';

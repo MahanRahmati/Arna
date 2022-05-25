@@ -8,6 +8,8 @@
 - Update ArnaPopupMenuDivider
 - Update ArnaPopupMenuButton
 - Update ArnaColorButton
+- Add ArnaAboutDialog
+- Update ArnaAlertDialog
 
 ## 1.0.1
 

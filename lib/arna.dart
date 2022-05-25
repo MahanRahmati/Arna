@@ -44,6 +44,8 @@ export 'package:arna/src/containers/expansion_panel.dart';
 export 'package:arna/src/containers/list.dart';
 export 'package:arna/src/containers/list_tile.dart';
 export 'package:arna/src/containers/reorderable_list.dart';
+export 'package:arna/src/dialogs/about.dart';
+export 'package:arna/src/dialogs/alert_dialog.dart';
 export 'package:arna/src/dialogs/dialog.dart';
 export 'package:arna/src/dialogs/popup_dialog.dart';
 export 'package:arna/src/helpers.dart';

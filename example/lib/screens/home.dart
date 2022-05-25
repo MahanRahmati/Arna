@@ -1,6 +1,5 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '/providers.dart';
 import '/screens/hello.dart';
@@ -81,39 +80,15 @@ class _HomeState extends ConsumerState<Home> {
       builder: (_) => const Typography(),
     );
 
-    final Widget dialog = ArnaAlertDialog(
-      title: Strings.arna,
-      content: Text(
-        Strings.description,
-        style: ArnaTheme.of(context).textTheme.body,
-        textAlign: TextAlign.center,
-        maxLines: 3,
-      ),
-      actions: <Widget>[
-        ArnaTextButton(
-          label: Strings.source,
-          onPressed: () async => launchUrl(
-            Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna'),
-          ),
-        ),
-        ArnaTextButton(
-          label: Strings.licenses,
-          onPressed: () => showArnaLicensePage(context: context),
-        ),
-        ArnaTextButton(
-          label: Strings.ok,
-          onPressed: Navigator.of(context).pop,
-        ),
-      ],
-    );
-
     final List<Widget> actions = <Widget>[
       ArnaIconButton(
         icon: Icons.info_outlined,
-        onPressed: () => showArnaDialog(
+        onPressed: () => showArnaAboutDialog(
           context: context,
-          barrierDismissible: true,
-          builder: (BuildContext context) => dialog,
+          applicationIcon: const ArnaLogo(size: Styles.base * 30),
+          applicationName: Strings.appName,
+          applicationVersion: Strings.version,
+          applicationUri: Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna/issues'),
           useBlur: showBlur,
         ),
         tooltipMessage: Strings.about,

@@ -89,7 +89,9 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaList                  | -                             | -                                     |
 | ArnaListTile              | ListTile                      | -                                     |
 | ArnaReorderableList       | ReorderableListView           | -                                     |
-| ArnaDialog                | Dialog                        | CupertinoAlertDialog                  |
+| ArnaAboutDialog           | AboutDialog                   | -                                     |
+| ArnaAlertDialog           | AlertDialog                   | CupertinoAlertDialog                  |
+| ArnaDialog                | Dialog                        | -                                     |
 | ArnaPopupDialog           | -                             | -                                     |
 | ArnaAutocomplete          | Autocomplete                  | -                                     |
 | ArnaCheckbox              | Checkbox                      | -                                     |

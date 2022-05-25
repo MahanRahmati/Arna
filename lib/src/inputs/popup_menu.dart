@@ -821,7 +821,7 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
         offset = widget.offset;
         break;
       case ArnaPopupMenuPosition.under:
-        offset = Offset(0.0, button.size.height - Styles.smallPadding) + widget.offset;
+        offset = Offset(0.0, button.size.height) + widget.offset;
         break;
     }
     final RelativeRect position = RelativeRect.fromRect(

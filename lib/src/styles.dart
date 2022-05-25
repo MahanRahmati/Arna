@@ -248,6 +248,9 @@ abstract class Styles {
   /// Bottom bar item Padding
   static const EdgeInsets bottomBarItemPadding = EdgeInsets.symmetric(horizontal: smallPadding, vertical: padding);
 
+  /// Popup menu divider Padding
+  static const EdgeInsets popupMenuDividerPadding = EdgeInsets.symmetric(horizontal: padding, vertical: smallPadding);
+
   /// Super large Padding
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 

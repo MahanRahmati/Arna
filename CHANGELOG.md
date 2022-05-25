@@ -5,6 +5,7 @@
 - Update ArnaSlider
 - Update ArnaTextFormField
 - Update ArnaReorderableList
+- Update ArnaPopupMenuDivider
 
 ## 1.0.1
 

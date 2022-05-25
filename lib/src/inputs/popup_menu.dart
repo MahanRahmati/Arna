@@ -85,7 +85,7 @@ class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: Styles.smallVertical,
+      padding: Styles.popupMenuDividerPadding,
       child: ArnaDivider(),
     );
   }

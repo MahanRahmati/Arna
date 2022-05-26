@@ -1,5 +1,6 @@
 ## 1.0.2
 
+- Update Description
 - Update ArnaDialog
 - Update ArnaPopupMenu
 - Update ArnaSlider

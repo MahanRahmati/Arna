@@ -1,6 +1,7 @@
 ## 1.0.2
 
 - Update Description
+- Update ROADMAP
 - Update ArnaDialog
 - Update ArnaPopupMenu
 - Update ArnaSlider

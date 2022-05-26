@@ -87,6 +87,7 @@ class _HomeState extends ConsumerState<Home> {
           context: context,
           applicationIcon: const ArnaLogo(size: Styles.base * 30),
           applicationName: Strings.appName,
+          developerName: 'Mahan Rahmati',
           applicationVersion: Strings.version,
           applicationUri: Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna/issues'),
           useBlur: showBlur,

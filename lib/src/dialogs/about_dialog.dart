@@ -13,10 +13,10 @@ import 'package:url_launcher/url_launcher.dart';
 /// documentation for which discusses how it is used.
 void showArnaAboutDialog({
   required BuildContext context,
-  String? applicationName,
-  String? applicationVersion,
   Widget? applicationIcon,
-  String? applicationLegalese,
+  String? applicationName,
+  String? developerName,
+  String? applicationVersion,
   Uri? applicationUri,
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
@@ -31,6 +31,7 @@ void showArnaAboutDialog({
       return ArnaAboutDialog(
         applicationIcon: applicationIcon,
         applicationName: applicationName,
+        developerName: developerName,
         applicationVersion: applicationVersion,
         applicationUri: applicationUri,
       );
@@ -56,6 +57,7 @@ class ArnaAboutDialog extends StatelessWidget {
     super.key,
     this.applicationIcon,
     this.applicationName,
+    this.developerName,
     this.applicationVersion,
     this.applicationUri,
   });
@@ -65,6 +67,9 @@ class ArnaAboutDialog extends StatelessWidget {
 
   /// The name of the application.
   final String? applicationName;
+
+  /// The name of the application's developer.
+  final String? developerName;
 
   /// The version of this build of the application.
   final String? applicationVersion;
@@ -83,15 +88,16 @@ class ArnaAboutDialog extends StatelessWidget {
           Text(applicationName!, style: ArnaTheme.of(context).textTheme.titleLarge),
           const SizedBox(height: Styles.padding),
         ],
+        if (developerName != null) ...<Widget>[
+          const SizedBox(height: Styles.padding),
+          Text(developerName!, style: ArnaTheme.of(context).textTheme.body),
+          const SizedBox(height: Styles.padding),
+        ],
+        if (applicationVersion != null) ArnaBadge(label: applicationVersion!),
         ArnaList(
           showDividers: true,
           showBackground: true,
           children: <Widget>[
-            if (applicationVersion != null)
-              ArnaListTile(
-                title: 'Version',
-                trailing: Text(applicationVersion!, style: ArnaTheme.of(context).textTheme.body),
-              ),
             if (applicationUri != null)
               ArnaListTile(
                 title: 'Report an Issue',

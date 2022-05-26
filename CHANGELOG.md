@@ -13,6 +13,8 @@
 - Add ArnaAboutDialog
 - Update ArnaAlertDialog
 - Update ArnaDatePicker
+- Add ArnaGridTile
+- Add ArnaGridTileBar
 
 ## 1.0.1
 

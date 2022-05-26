@@ -86,6 +86,8 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaBadge                 | -                             | -                                     |
 | ArnaCard                  | Card                          | -                                     |
 | ArnaExpansionPanel        | ExpansionPanel                | -                                     |
+| ArnaGridTileBar           | GridTileBar                   | -                                     |
+| ArnaGridTile              | GridTile                      | -                                     |
 | ArnaList                  | -                             | -                                     |
 | ArnaListTile              | ListTile                      | -                                     |
 | ArnaReorderableList       | ReorderableListView           | -                                     |

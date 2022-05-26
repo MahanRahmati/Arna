@@ -259,7 +259,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
       vsync: this,
     );
     enableController.value = _isEnabled ? 1.0 : 0.0;
-    positionController.value = _unlerp(widget.value);
+    positionController.value = _convert(widget.value);
     focusNode = FocusNode(canRequestFocus: _isEnabled);
     if (widget.autofocus) {
       focusNode!.requestFocus();
@@ -349,6 +349,21 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
     return value * (widget.max - widget.min) + widget.min;
   }
 
+  double _discretize(double value) {
+    assert(value >= 0.0 && value <= 1.0);
+
+    final int divisions = widget.divisions!;
+    return (value * divisions).round() / divisions;
+  }
+
+  double _convert(double value) {
+    double ret = _unlerp(value);
+    if (widget.divisions != null) {
+      ret = _discretize(ret);
+    }
+    return ret;
+  }
+
   /// Returns a number between 0.0 and 1.0, given a value between min and max.
   double _unlerp(double value) {
     assert(value <= widget.max);
@@ -378,7 +393,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
               : _traditionalNavShortcutMap,
           child: _ArnaSliderRenderObjectWidget(
             key: _renderObjectKey,
-            value: _unlerp(widget.value),
+            value: _convert(widget.value),
             divisions: widget.divisions,
             onChanged: _isEnabled && (widget.max > widget.min) ? _handleChanged : null,
             onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,

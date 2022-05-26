@@ -12,6 +12,7 @@
 - Update ArnaColorButton
 - Add ArnaAboutDialog
 - Update ArnaAlertDialog
+- Update ArnaDatePicker
 
 ## 1.0.1
 

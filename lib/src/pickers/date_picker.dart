@@ -1302,7 +1302,6 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        const ArnaDivider(),
         Expanded(
           child: GridView.builder(
             controller: _scrollController,
@@ -1312,7 +1311,6 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
             padding: Styles.normal,
           ),
         ),
-        const ArnaDivider(),
       ],
     );
   }

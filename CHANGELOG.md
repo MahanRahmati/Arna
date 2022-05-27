@@ -1,3 +1,7 @@
+## 1.0.3
+
+- Update ArnaSlider
+
 ## 1.0.2
 
 - Update Description

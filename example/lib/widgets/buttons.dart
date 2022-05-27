@@ -2,8 +2,17 @@ import 'package:arna/arna.dart';
 
 import '/strings.dart';
 
-class Buttons extends StatelessWidget {
+class Buttons extends StatefulWidget {
   const Buttons({super.key});
+
+  @override
+  State<Buttons> createState() => _ButtonsState();
+}
+
+class _ButtonsState extends State<Buttons> {
+  List<String> items = <String>[Strings.first, Strings.second, Strings.third];
+
+  String dropdownvalue = Strings.first;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +77,22 @@ class Buttons extends StatelessWidget {
                 context: context,
                 message: '${Strings.selected} $value',
               ),
+            ),
+            ArnaDropdownButton<String>(
+              value: dropdownvalue,
+              items: items.map((String items) {
+                return ArnaDropdownMenuItem<String>(
+                  value: items,
+                  child: Text(items),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                showArnaSnackbar(
+                  context: context,
+                  message: '${Strings.selected} $newValue',
+                );
+                setState(() => dropdownvalue = newValue!);
+              },
             ),
           ],
         ),

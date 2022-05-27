@@ -15,6 +15,7 @@
 - Update ArnaDatePicker
 - Add ArnaGridTile
 - Add ArnaGridTileBar
+- Add ArnaDropdownButton
 
 ## 1.0.1
 

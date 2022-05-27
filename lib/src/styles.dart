@@ -254,6 +254,12 @@ abstract class Styles {
   /// Super large Padding
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 
+  /// Menu Margin
+  static const EdgeInsetsDirectional menuMargin = EdgeInsetsDirectional.only(
+    start: Styles.padding,
+    end: Styles.largePadding,
+  );
+
   /// Normal border radius
   static BorderRadius borderRadius = const BorderRadius.all(Radius.circular(borderRadiusSize));
 

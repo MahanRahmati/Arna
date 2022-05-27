@@ -1,5 +1,6 @@
 ## 1.0.3
 
+- Update README
 - Update ArnaSlider
 - Add ArnaLinkButton
 

@@ -2,7 +2,7 @@ import 'package:arna/arna.dart';
 
 /// A header used in an [ArnaGridTile].
 ///
-/// Typically used to add a one or two line header or footer on a [ArnaGridTile].
+/// Typically used to add a one or two line header or footer on an [ArnaGridTile].
 ///
 /// For a one-line header, include a [title] widget. To add a second line, also include a [subtitle] widget.
 /// Use [leading] or [trailing] to add an icon.

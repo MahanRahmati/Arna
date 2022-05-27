@@ -3,7 +3,7 @@ import 'package:arna/arna.dart';
 /// A tile in an Arna-styled grid list.
 ///
 /// A grid list is a [GridView] of tiles in a vertical and horizontal array. Each tile typically contains some visually
-/// rich content (e.g., an image) together with a [ArnaGridTileBar] in either a [header] or a [footer].
+/// rich content (e.g., an image) together with an [ArnaGridTileBar] in either a [header] or a [footer].
 ///
 /// See also:
 ///
@@ -20,12 +20,12 @@ class ArnaGridTile extends StatelessWidget {
 
   /// The widget to show over the top of this grid tile.
   ///
-  /// Typically a [ArnaGridTileBar].
+  /// Typically an [ArnaGridTileBar].
   final Widget? header;
 
   /// The widget to show over the bottom of this grid tile.
   ///
-  /// Typically a [ArnaGridTileBar].
+  /// Typically an [ArnaGridTileBar].
   final Widget? footer;
 
   /// The widget that fills the tile.

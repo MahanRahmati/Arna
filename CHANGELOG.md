@@ -7,6 +7,7 @@
 - Update ArnaSideScaffold
 - Update ArnaReorderableList
 - Update ArnaTypography
+- Update ArnaBaseWidget
 
 ## 1.0.2
 

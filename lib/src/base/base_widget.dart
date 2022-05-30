@@ -42,6 +42,10 @@ class ArnaBaseWidget extends StatefulWidget {
     required this.builder,
     this.onPressed,
     this.onLongPress,
+    this.onHorizontalDragStart,
+    this.onHorizontalDragEnd,
+    this.onVerticalDragStart,
+    this.onVerticalDragEnd,
     this.tooltipMessage,
     this.focusNode,
     this.isFocusable = true,
@@ -64,6 +68,20 @@ class ArnaBaseWidget extends StatefulWidget {
   ///
   /// If this callback and [onPressed] are null, then the widget will be disabled.
   final VoidCallback? onLongPress;
+
+  /// A pointer has contacted the screen and has begun to move horizontally.
+  final GestureDragStartCallback? onHorizontalDragStart;
+
+  /// A pointer that was previously in contact with the screen and moving horizontally is no longer in contact with the
+  /// screen and was moving at a specific velocity when it stopped contacting the screen.
+  final GestureDragEndCallback? onHorizontalDragEnd;
+
+  /// A pointer has contacted the screen and has begun to move vertically.
+  final GestureDragStartCallback? onVerticalDragStart;
+
+  /// A pointer that was previously in contact with the screen and moving vertically is no longer in contact with the
+  /// screen and was moving at a specific velocity when it stopped contacting the screen.
+  final GestureDragEndCallback? onVerticalDragEnd;
 
   /// The tooltip message of the widget.
   final String? tooltipMessage;
@@ -228,6 +246,34 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
     }
   }
 
+  void _handleHorizontalDragStart(DragStartDetails dragStartDetails) {
+    if (widget.onHorizontalDragStart != null) {
+      widget.onHorizontalDragStart!(dragStartDetails);
+    }
+    _handlePressDown(null);
+  }
+
+  void _handleHorizontalDragEnd(DragEndDetails dragEndDetails) {
+    if (widget.onHorizontalDragEnd != null) {
+      widget.onHorizontalDragEnd!(dragEndDetails);
+    }
+    _handleTapUp(null);
+  }
+
+  void _handleVerticalDragStart(DragStartDetails dragStartDetails) {
+    if (widget.onVerticalDragStart != null) {
+      widget.onVerticalDragStart!(dragStartDetails);
+    }
+    _handlePressDown(null);
+  }
+
+  void _handleVerticalDragEnd(DragEndDetails dragEndDetails) {
+    if (widget.onVerticalDragEnd != null) {
+      widget.onVerticalDragEnd!(dragEndDetails);
+    }
+    _handleTapUp(null);
+  }
+
   void _handleHover(bool hover) {
     if (hover != _hover && mounted) {
       setState(() => _hover = hover);
@@ -260,10 +306,10 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
             onLongPress: _handleLongPress,
             onLongPressDown: _handlePressDown,
             onLongPressUp: _handleLongPressUp,
-            onHorizontalDragStart: _handlePressDown,
-            onHorizontalDragEnd: _handleTapUp,
-            onVerticalDragStart: _handlePressDown,
-            onVerticalDragEnd: _handleTapUp,
+            onHorizontalDragStart: _handleHorizontalDragStart,
+            onHorizontalDragEnd: _handleHorizontalDragEnd,
+            onVerticalDragStart: _handleVerticalDragStart,
+            onVerticalDragEnd: _handleVerticalDragEnd,
             child: FocusableActionDetector(
               enabled: _isEnabled && widget.isFocusable,
               focusNode: _effectiveFocusNode,

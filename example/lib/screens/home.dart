@@ -96,14 +96,12 @@ class _HomeState extends ConsumerState<Home> {
       ),
       ArnaIconButton(
         icon: Icons.settings_outlined,
-        onPressed: () {
-          showArnaPopupDialog(
-            context: context,
-            title: Strings.settings,
-            builder: (BuildContext context) => const Settings(),
-            useBlur: showBlur,
-          );
-        },
+        onPressed: () => showArnaPopupDialog(
+          context: context,
+          title: Strings.settings,
+          builder: (BuildContext context) => const Settings(),
+          useBlur: showBlur,
+        ),
         tooltipMessage: Strings.settings,
       )
     ];

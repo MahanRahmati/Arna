@@ -74,8 +74,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 
   @override
   void initState() {
-    _currentIndex = widget.currentIndex;
     super.initState();
+    _currentIndex = widget.currentIndex;
   }
 
   void onTap(int index) {

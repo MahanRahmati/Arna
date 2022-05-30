@@ -16,7 +16,7 @@ class ArnaTypography {
       fontSize: 32,
       color: ArnaColors.primaryTextColor,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     titleTextStyle: TextStyle(
@@ -25,7 +25,7 @@ class ArnaTypography {
       fontSize: 21,
       color: ArnaColors.primaryTextColor,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     bodyTextStyle: TextStyle(
@@ -34,7 +34,7 @@ class ArnaTypography {
       fontSize: 17,
       color: ArnaColors.primaryTextColor,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     subtitleTextStyle: TextStyle(
@@ -43,7 +43,7 @@ class ArnaTypography {
       fontSize: 14,
       color: ArnaColors.secondaryTextColor,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     buttonTextStyle: TextStyle(
@@ -53,7 +53,7 @@ class ArnaTypography {
       fontSize: 16,
       color: ArnaColors.primaryTextColor,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     captionTextStyle: TextStyle(
@@ -63,7 +63,7 @@ class ArnaTypography {
       fontSize: 12,
       color: ArnaColors.primaryTextColor,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
   );
@@ -77,7 +77,7 @@ class ArnaTypography {
       fontSize: 32,
       color: ArnaColors.primaryTextColorDark,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     titleTextStyle: TextStyle(
@@ -86,7 +86,7 @@ class ArnaTypography {
       fontSize: 21,
       color: ArnaColors.primaryTextColorDark,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     bodyTextStyle: TextStyle(
@@ -95,7 +95,7 @@ class ArnaTypography {
       fontSize: 17,
       color: ArnaColors.primaryTextColorDark,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     subtitleTextStyle: TextStyle(
@@ -104,7 +104,7 @@ class ArnaTypography {
       fontSize: 14,
       color: ArnaColors.secondaryTextColorDark,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     buttonTextStyle: TextStyle(
@@ -114,7 +114,7 @@ class ArnaTypography {
       fontSize: 16,
       color: ArnaColors.primaryTextColorDark,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
     captionTextStyle: TextStyle(
@@ -124,7 +124,7 @@ class ArnaTypography {
       fontSize: 12,
       color: ArnaColors.primaryTextColorDark,
       decoration: TextDecoration.none,
-      overflow: TextOverflow.ellipsis,
+      overflow: TextOverflow.fade,
       textBaseline: TextBaseline.alphabetic,
     ),
   );

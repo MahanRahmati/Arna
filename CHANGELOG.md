@@ -6,6 +6,7 @@
 - [Example] Update Example
 - Update ArnaSideScaffold
 - Update ArnaReorderableList
+- Update ArnaTypography
 
 ## 1.0.2
 

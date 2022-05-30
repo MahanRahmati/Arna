@@ -922,7 +922,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                         child: Text(
                           widget.hintText!,
                           maxLines: widget.maxLines,
-                          overflow: TextOverflow.ellipsis,
+                          overflow: TextOverflow.fade,
                           style: ArnaTheme.of(context).textTheme.body!.copyWith(
                                 color: ArnaDynamicColor.resolve(
                                   ArnaColors.secondaryTextColor,

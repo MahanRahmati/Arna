@@ -156,7 +156,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                     child: widget.items[_currentIndex].builder(context),
                   ),
                 ),
-                if (compact && widget.items.length < 4)
+                if (compact && widget.items.length < 5)
                   ArnaBottomBar(
                     items: widget.items.map(
                       (NavigationItem item) {

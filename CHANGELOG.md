@@ -4,6 +4,7 @@
 - Update ArnaSlider
 - Add ArnaLinkButton
 - [Example] Update Example
+- Update ArnaSideScaffold
 
 ## 1.0.2
 

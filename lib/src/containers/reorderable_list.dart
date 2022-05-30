@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart' show CustomSemanticsAction;
@@ -26,6 +27,7 @@ class ArnaReorderableList extends StatefulWidget {
     this.itemExtent,
     this.prototypeItem,
     this.proxyDecorator,
+    this.buildDefaultDragHandles = true,
     this.padding,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
@@ -78,6 +80,7 @@ class ArnaReorderableList extends StatefulWidget {
     this.itemExtent,
     this.prototypeItem,
     this.proxyDecorator,
+    this.buildDefaultDragHandles = true,
     this.padding,
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
@@ -114,6 +117,18 @@ class ArnaReorderableList extends StatefulWidget {
 
   /// {@macro flutter.widgets.reorderable_list.proxyDecorator}
   final ReorderItemProxyDecorator? proxyDecorator;
+
+  /// If true: on desktop platforms, a drag handle is stacked over the center of each item's trailing edge; on mobile
+  /// platforms, a long press anywhere on the item starts a drag.
+  ///
+  /// The default desktop drag handle is just an [Icons.drag_indicator_outlined] wrapped by a
+  /// [ReorderableDragStartListener]. On mobile platforms, the entire item is wrapped with a
+  /// [ReorderableDelayedDragStartListener].
+  ///
+  /// To change the appearance or the layout of the drag handles, make this parameter false and wrap each list item, or
+  /// a widget within each list item, with [ReorderableDragStartListener] or [ReorderableDelayedDragStartListener], or
+  /// a custom subclass of [ReorderableDragStartListener].
+  final bool buildDefaultDragHandles;
 
   /// {@macro flutter.widgets.reorderable_list.padding}
   final EdgeInsets? padding;
@@ -231,7 +246,7 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
     assert(() {
       if (item.key == null) {
         throw FlutterError(
-          'Every item of ReorderableListView must have a key.',
+          'Every item of ArnaReorderableList must have a key.',
         );
       }
       return true;
@@ -239,47 +254,76 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
 
     final Widget itemWithSemantics = _wrapWithSemantics(item, index);
     final Key itemGlobalKey = _ArnaReorderableListChildGlobalKey(item.key!, this);
-    final Widget dragStartListener = ReorderableDragStartListener(
-      index: index,
-      child: const Icon(Icons.drag_indicator_outlined),
-    );
 
-    switch (widget.scrollDirection) {
-      case Axis.horizontal:
-        return Stack(
-          key: itemGlobalKey,
-          children: <Widget>[
-            itemWithSemantics,
-            Positioned.directional(
-              textDirection: Directionality.of(context),
-              start: 0,
-              end: 0,
-              bottom: Styles.padding,
-              child: Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: dragStartListener,
-              ),
-            ),
-          ],
-        );
-      case Axis.vertical:
-        return Stack(
-          key: itemGlobalKey,
-          children: <Widget>[
-            itemWithSemantics,
-            Positioned.directional(
-              textDirection: Directionality.of(context),
-              top: 0,
-              bottom: 0,
-              end: Styles.padding,
-              child: Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: dragStartListener,
-              ),
-            ),
-          ],
-        );
+    if (widget.buildDefaultDragHandles) {
+      switch (defaultTargetPlatform) {
+        case TargetPlatform.linux:
+        case TargetPlatform.windows:
+        case TargetPlatform.macOS:
+          switch (widget.scrollDirection) {
+            case Axis.horizontal:
+              return Stack(
+                key: itemGlobalKey,
+                children: <Widget>[
+                  itemWithSemantics,
+                  Positioned.directional(
+                    textDirection: Directionality.of(context),
+                    start: 0,
+                    end: 0,
+                    bottom: Styles.padding,
+                    child: Align(
+                      alignment: AlignmentDirectional.bottomCenter,
+                      child: ReorderableDragStartListener(
+                        index: index,
+                        child: Icon(
+                          Icons.drag_indicator_outlined,
+                          color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            case Axis.vertical:
+              return Stack(
+                key: itemGlobalKey,
+                children: <Widget>[
+                  itemWithSemantics,
+                  Positioned.directional(
+                    textDirection: Directionality.of(context),
+                    top: 0,
+                    bottom: 0,
+                    end: Styles.padding,
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: ReorderableDragStartListener(
+                        index: index,
+                        child: Icon(
+                          Icons.drag_indicator_outlined,
+                          color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+          }
+
+        case TargetPlatform.iOS:
+        case TargetPlatform.android:
+        case TargetPlatform.fuchsia:
+          return ReorderableDelayedDragStartListener(
+            key: itemGlobalKey,
+            index: index,
+            child: itemWithSemantics,
+          );
+      }
     }
+
+    return KeyedSubtree(
+      key: itemGlobalKey,
+      child: itemWithSemantics,
+    );
   }
 
   @override

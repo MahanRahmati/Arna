@@ -5,6 +5,7 @@
 - Add ArnaLinkButton
 - [Example] Update Example
 - Update ArnaSideScaffold
+- Update ArnaReorderableList
 
 ## 1.0.2
 

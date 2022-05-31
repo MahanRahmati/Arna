@@ -9,6 +9,7 @@
 - Update ArnaTypography
 - Update ArnaBaseWidget
 - Add Clipboard support to Arna
+- Update ArnaCard
 
 ## 1.0.2
 

@@ -9,6 +9,7 @@ class ArnaCard extends StatelessWidget {
     this.width,
     required this.child,
     this.padding = Styles.normal,
+    this.margin,
   });
 
   /// The card's height.
@@ -25,6 +26,9 @@ class ArnaCard extends StatelessWidget {
   /// The amount of space by which to inset the child.
   final EdgeInsetsGeometry padding;
 
+  /// Empty space to surround [child].
+  final EdgeInsetsGeometry? margin;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,6 +44,7 @@ class ArnaCard extends StatelessWidget {
           border: Border.all(color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context)),
           color: ArnaDynamicColor.resolve(ArnaColors.cardColor, context),
         ),
+        padding: margin,
         child: child,
       ),
     );

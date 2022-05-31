@@ -12,6 +12,7 @@ class ArnaSideScaffold extends StatefulWidget {
     super.key,
     this.headerBarLeading,
     this.title,
+    this.headerBarMiddle,
     this.actions,
     this.leading,
     required this.items,
@@ -26,6 +27,9 @@ class ArnaSideScaffold extends StatefulWidget {
 
   /// The title displayed in the header bar.
   final String? title;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? headerBarMiddle;
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
@@ -145,6 +149,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               ],
             ),
             title: widget.title,
+            headerBarMiddle: widget.headerBarMiddle,
             actions: <Widget>[
               ...?widget.items[_currentIndex].actions,
               ...?widget.actions,
@@ -206,6 +211,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   ],
                 ),
                 title: widget.title,
+                headerBarMiddle: widget.headerBarMiddle,
                 actions: <Widget>[
                   ...?widget.items[0].actions,
                   ...?widget.actions,

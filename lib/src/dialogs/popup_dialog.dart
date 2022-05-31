@@ -38,9 +38,10 @@ class _ArnaPopupDialog extends StatelessWidget {
   ///
   /// Typically used in conjunction with [showArnaPopupDialog].
   const _ArnaPopupDialog({
-    this.headerBarLeading,
-    this.title,
-    this.actions,
+    required this.headerBarLeading,
+    required this.title,
+    required this.headerBarMiddle,
+    required this.actions,
     required this.body,
   });
 
@@ -49,6 +50,9 @@ class _ArnaPopupDialog extends StatelessWidget {
 
   /// The title displayed in the header bar.
   final String? title;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? headerBarMiddle;
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
@@ -91,6 +95,7 @@ class _ArnaPopupDialog extends StatelessWidget {
                     ],
                   ),
                   title: title,
+                  headerBarMiddle: headerBarMiddle,
                   actions: actions,
                   body: body,
                   isDialog: true,
@@ -141,6 +146,7 @@ class _ArnaPopupPage extends StatelessWidget {
   const _ArnaPopupPage({
     required this.headerBarLeading,
     required this.title,
+    required this.headerBarMiddle,
     required this.actions,
     required this.body,
     required this.resizeToAvoidBottomInset,
@@ -151,6 +157,9 @@ class _ArnaPopupPage extends StatelessWidget {
 
   /// The title displayed in the header bar.
   final String? title;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? headerBarMiddle;
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
@@ -183,6 +192,7 @@ class _ArnaPopupPage extends StatelessWidget {
         ],
       ),
       title: title,
+      headerBarMiddle: headerBarMiddle,
       actions: actions,
       body: body,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
@@ -240,6 +250,7 @@ Future<T?> showArnaPopupDialog<T>({
   required BuildContext context,
   Widget? headerBarLeading,
   String? title,
+  Widget? headerBarMiddle,
   List<Widget>? actions,
   required WidgetBuilder builder,
   bool resizeToAvoidBottomInset = true,
@@ -258,6 +269,7 @@ Future<T?> showArnaPopupDialog<T>({
             builder: (BuildContext context) => _ArnaPopupPage(
               headerBarLeading: headerBarLeading,
               title: title,
+              headerBarMiddle: headerBarMiddle,
               actions: actions,
               body: Builder(builder: builder),
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
@@ -270,6 +282,7 @@ Future<T?> showArnaPopupDialog<T>({
             final Widget dialog = _ArnaPopupDialog(
               headerBarLeading: headerBarLeading,
               title: title,
+              headerBarMiddle: headerBarMiddle,
               actions: actions,
               body: Builder(builder: builder),
             );

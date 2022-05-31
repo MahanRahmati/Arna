@@ -11,6 +11,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     super.key,
     this.headerBarLeading,
     this.title,
+    this.headerBarMiddle,
     this.actions,
     this.leading,
     required this.items,
@@ -27,6 +28,9 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
 
   /// The title displayed in the header bar.
   final String? title;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? headerBarMiddle;
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
@@ -92,6 +96,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
             ? _LateralPage(
                 headerBarLeading: widget.headerBarLeading,
                 title: widget.title,
+                headerBarMiddle: widget.headerBarMiddle,
                 actions: widget.actions,
                 leading: widget.leading,
                 items: widget.items,
@@ -105,6 +110,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
             : _NestedPage(
                 headerBarLeading: widget.headerBarLeading,
                 title: widget.title,
+                headerBarMiddle: widget.headerBarMiddle,
                 actions: widget.actions,
                 leading: widget.leading,
                 items: widget.items,
@@ -126,6 +132,7 @@ class _LateralPage extends StatefulWidget {
   const _LateralPage({
     this.headerBarLeading,
     this.title,
+    this.headerBarMiddle,
     this.actions,
     this.leading,
     required this.items,
@@ -142,6 +149,9 @@ class _LateralPage extends StatefulWidget {
 
   /// The title displayed in the header bar.
   final String? title;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? headerBarMiddle;
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
@@ -213,6 +223,7 @@ class _LateralPageState extends State<_LateralPage> {
           child: ArnaScaffold(
             headerBarLeading: widget.headerBarLeading,
             title: widget.title,
+            headerBarMiddle: widget.headerBarMiddle,
             actions: widget.actions,
             body: _MasterItemBuilder(
               leading: widget.leading,
@@ -265,6 +276,7 @@ class _NestedPage extends StatefulWidget {
   const _NestedPage({
     this.headerBarLeading,
     this.title,
+    this.headerBarMiddle,
     this.actions,
     this.leading,
     required this.items,
@@ -281,6 +293,9 @@ class _NestedPage extends StatefulWidget {
 
   /// The title displayed in the header bar.
   final String? title;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? headerBarMiddle;
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
@@ -394,6 +409,7 @@ class _NestedPageState extends State<_NestedPage> {
                 return ArnaScaffold(
                   headerBarLeading: widget.headerBarLeading,
                   title: widget.title,
+                  headerBarMiddle: widget.headerBarMiddle,
                   actions: widget.actions,
                   body: _MasterItemBuilder(
                     leading: widget.leading,

@@ -10,6 +10,9 @@
 - Update ArnaBaseWidget
 - Add Clipboard support to Arna
 - Update ArnaCard
+- Update ArnaScaffold
+- Update ArnaMasterDetailScaffold
+- Update ArnaPopupDialog
 
 ## 1.0.2
 

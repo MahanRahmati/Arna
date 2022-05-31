@@ -11,6 +11,7 @@ class ArnaScaffold extends StatelessWidget {
     super.key,
     this.headerBarLeading,
     this.title,
+    this.headerBarMiddle,
     this.actions,
     required this.body,
     this.isDialog = false,
@@ -22,6 +23,9 @@ class ArnaScaffold extends StatelessWidget {
 
   /// The title displayed in the header bar.
   final String? title;
+
+  /// The middle widget laid out within the header bar.
+  final Widget? headerBarMiddle;
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
@@ -72,7 +76,11 @@ class ArnaScaffold extends StatelessWidget {
           children: <Widget>[
             ArnaHeaderBar(
               leading: headerBarLeading,
-              middle: title != null ? Text(title!, style: ArnaTheme.of(context).textTheme.title) : null,
+              middle: headerBarMiddle != null
+                  ? headerBarMiddle!
+                  : title != null
+                      ? Text(title!, style: ArnaTheme.of(context).textTheme.title)
+                      : null,
               actions: actions,
             ),
             Flexible(

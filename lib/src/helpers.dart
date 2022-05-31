@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 
 /// Get device height.
 double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
@@ -25,4 +26,17 @@ bool isFirstButton(int index, int length, TextDirection textDirection) {
 bool isLastButton(int index, int length, TextDirection textDirection) {
   return (index == length - 1 && textDirection == TextDirection.ltr) ||
       (index == 0 && textDirection == TextDirection.rtl);
+}
+
+/// Copy text to clipboard.
+Future<void> copyToClipboard(String text) async {
+  if (text.isNotEmpty) {
+    Clipboard.setData(ClipboardData(text: text));
+  }
+}
+
+/// Paste text from clipboard.
+Future<String?> pasteTextFromClipboard() async {
+  final ClipboardData? data = await Clipboard.getData('text/plain');
+  return data?.text;
 }

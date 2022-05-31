@@ -8,6 +8,7 @@
 - Update ArnaReorderableList
 - Update ArnaTypography
 - Update ArnaBaseWidget
+- Add Clipboard support to Arna
 
 ## 1.0.2
 

@@ -380,7 +380,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// Determines whether the given [Color] is [Brightness.light] or [Brightness.dark].
   static Brightness estimateBrightnessForColor(Color color) {
     final double relativeLuminance = color.computeLuminance();
-    const double kThreshold = 0.07;
+    const double kThreshold = 0.098;
     return ((relativeLuminance + 0.05) * (relativeLuminance + 0.05) > kThreshold) ? Brightness.light : Brightness.dark;
   }
 

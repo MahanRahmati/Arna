@@ -14,6 +14,7 @@
 - Update ArnaMasterDetailScaffold
 - Update ArnaPopupDialog
 - Add ArnaBody
+- Update ArnaColors
 
 ## 1.0.2
 

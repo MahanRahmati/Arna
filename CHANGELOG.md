@@ -13,6 +13,7 @@
 - Update ArnaScaffold
 - Update ArnaMasterDetailScaffold
 - Update ArnaPopupDialog
+- Add ArnaBody
 
 ## 1.0.2
 

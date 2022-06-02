@@ -21,9 +21,8 @@ class ArnaBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget? body;
     if (compact != null && medium != null && expanded != null) {
-      body = LayoutBuilder(
+      return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxWidth > Styles.expanded
               ? expanded!
@@ -33,31 +32,31 @@ class ArnaBody extends StatelessWidget {
         },
       );
     } else if (compact == null && medium != null && expanded != null) {
-      body = LayoutBuilder(
+      return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxWidth > Styles.expanded ? expanded! : medium!;
         },
       );
     } else if (compact != null && medium == null && expanded != null) {
-      body = LayoutBuilder(
+      return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxWidth > Styles.expanded ? expanded! : compact!;
         },
       );
     } else if (compact != null && medium != null && expanded == null) {
-      body = LayoutBuilder(
+      return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           return constraints.maxWidth < Styles.compact ? compact! : medium!;
         },
       );
     } else if (compact == null && medium == null && expanded != null) {
-      body = expanded;
+      return expanded!;
     } else if (compact == null && medium != null && expanded == null) {
-      body = medium;
+      return medium!;
     } else if (compact != null && medium == null && expanded == null) {
-      body = compact;
+      return compact!;
     }
 
-    return body ?? const SizedBox.shrink();
+    return const SizedBox.shrink();
   }
 }

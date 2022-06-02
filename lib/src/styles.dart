@@ -53,9 +53,6 @@ abstract class Styles {
   /// Icon size
   static const double iconSize = base * 3;
 
-  /// Badge size
-  static const double badgeSize = base * 3;
-
   /// Checkbox size
   static const double checkBoxSize = base * 3;
 
@@ -277,7 +274,4 @@ abstract class Styles {
 
   /// Color button border radius
   static BorderRadius colorButtonBorderRadius = const BorderRadius.all(Radius.circular(buttonSize));
-
-  /// Badge border radius
-  static BorderRadius badgeBorderRadius = const BorderRadius.all(Radius.circular(badgeSize));
 }

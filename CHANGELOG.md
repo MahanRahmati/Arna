@@ -15,6 +15,7 @@
 - Update ArnaPopupDialog
 - Add ArnaBody
 - Update ArnaColors
+- Update ArnaBadge
 
 ## 1.0.2
 

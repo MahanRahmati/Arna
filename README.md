@@ -56,6 +56,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaAvatar                | CircleAvatar                  | -                                     |
 | ArnaBanner                | MaterialBanner                | -                                     |
 | ArnaBaseWidget            | InkWell                       | -                                     |
+| ArnaBody                  | -                             | -                                     |
 | ArnaBottomBar             | NavigationBar                 | CupertinoTabBar                       |
 | ArnaBottomBarItem         | NavigationDestination         | -                                     |
 | ArnaDivider               | Divider                       | -                                     |

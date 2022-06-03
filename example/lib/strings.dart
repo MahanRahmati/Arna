@@ -9,6 +9,9 @@ abstract class Strings {
   static const String search = 'Search';
   static const String widgets = 'Widgets';
   static const String typography = 'Typography';
+  static const String tabs = 'Tabs';
+  static const String tab = 'Tab';
+  static const String closedTab = 'Tab is closed.';
   static const String buttonPushed = 'You have pushed the button this many times:';
   static const String theme = 'Theme';
   static const String system = 'System';

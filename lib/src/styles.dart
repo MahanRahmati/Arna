@@ -113,11 +113,17 @@ abstract class Styles {
   /// Subtitle baseline
   static const double subtitleBaseline = base * 7;
 
+  /// Tab height
+  static const double tabHeight = base * 7;
+
   /// Expansion panel minimum height
   static const double expansionPanelMinHeight = base * 8;
 
   /// List tile with subtitle height
   static const double listTileTwoLineHeight = base * 8;
+
+  /// Tab bar height
+  static const double tabBarHeight = base * 8;
 
   /// Sidebar compact width
   static const double sideBarCompactWidth = base * 9;
@@ -148,6 +154,9 @@ abstract class Styles {
 
   /// Sidebar width
   static const double sideBarWidth = base * 44;
+
+  /// Tab width
+  static const double tabWidth = base * 44;
 
   /// Menu maximum width
   static const double menuMaxWidth = base * 45;

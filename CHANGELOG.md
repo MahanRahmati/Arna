@@ -16,6 +16,8 @@
 - Add ArnaBody
 - Update ArnaColors
 - Update ArnaBadge
+- Add ArnaTabView
+- Add ArnaTabItem
 
 ## 1.0.2
 

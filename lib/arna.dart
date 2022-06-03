@@ -29,6 +29,8 @@ export 'package:arna/src/base/search_field.dart';
 export 'package:arna/src/base/side_bar_item.dart';
 export 'package:arna/src/base/side_scaffold.dart';
 export 'package:arna/src/base/snack_bar.dart';
+export 'package:arna/src/base/tab_item.dart';
+export 'package:arna/src/base/tab_view.dart';
 export 'package:arna/src/base/text_selection.dart';
 export 'package:arna/src/base/tooltip.dart';
 export 'package:arna/src/buttons/back_button.dart';

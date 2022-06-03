@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/providers.dart';
 import '/screens/hello.dart';
 import '/screens/settings.dart';
+import '/screens/tabs.dart';
 import '/screens/typography.dart';
 import '/screens/widgets.dart';
 import '/strings.dart';
@@ -80,6 +81,19 @@ class _HomeState extends ConsumerState<Home> {
       builder: (_) => const Typography(),
     );
 
+    final NavigationItem tabs = NavigationItem(
+      title: Strings.tabs,
+      icon: Icons.tab_outlined,
+      selectedIcon: Icons.tab,
+      builder: (_) => const Tabs(),
+    );
+
+    final MasterNavigationItem tabsMaster = MasterNavigationItem(
+      title: Strings.tabs,
+      leading: const Icon(Icons.tab_outlined),
+      builder: (_) => const Tabs(),
+    );
+
     final List<Widget> actions = <Widget>[
       ArnaIconButton(
         icon: Icons.info_outlined,
@@ -113,13 +127,23 @@ class _HomeState extends ConsumerState<Home> {
             title: Strings.appName,
             actions: actions,
             leading: leadingWidget,
-            items: <MasterNavigationItem>[helloMaster, widgetsMaster, typographyMaster],
+            items: <MasterNavigationItem>[
+              helloMaster,
+              widgetsMaster,
+              typographyMaster,
+              tabsMaster,
+            ],
           )
         : ArnaSideScaffold(
             title: Strings.appName,
             actions: actions,
             leading: leadingWidget,
-            items: <NavigationItem>[hello, widgets, typography],
+            items: <NavigationItem>[
+              hello,
+              widgets,
+              typography,
+              tabs,
+            ],
           );
   }
 }

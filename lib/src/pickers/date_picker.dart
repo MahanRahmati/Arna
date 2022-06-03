@@ -1063,7 +1063,7 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                       label: '${localizations.formatDecimal(i)}, ${localizations.formatFullDate(dayToBuild)}',
                       selected: isSelectedDay,
                       excludeSemantics: true,
-                      child: Container(
+                      child: DecoratedBox(
                         decoration: BoxDecoration(
                           border: Border.all(color: isToday || focused ? accentColor : ArnaColors.transparent),
                           color: isDisabled

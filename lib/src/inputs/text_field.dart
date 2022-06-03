@@ -1130,7 +1130,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                 child: child,
               );
             },
-            child: Container(
+            child: DecoratedBox(
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
                 border: Border.all(

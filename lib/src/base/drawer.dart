@@ -184,6 +184,7 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
                       label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
                       child: BackdropFilter(
                         filter: ui.ImageFilter.blur(sigmaX: _controller.value * 5, sigmaY: _controller.value * 5),
+                        // ignore: use_colored_box
                         child: Container(color: _scrimColorTween.evaluate(_controller)),
                       ),
                     ),

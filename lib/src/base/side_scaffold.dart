@@ -198,7 +198,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     );
 
     return widget.items.isEmpty
-        ? Container(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context))
+        ? ColoredBox(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context))
         : widget.items.length > 1
             ? sideScaffold
             : ArnaScaffold(

@@ -343,7 +343,7 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
       );
       Widget item = route.items[i];
       if (route.initialValue != null && route.items[i].represents(route.initialValue)) {
-        item = Container(
+        item = ColoredBox(
           color: ArnaTheme.of(context).accentColor,
           child: item,
         );

@@ -1,6 +1,7 @@
 ## 1.0.3
 
 - Update README
+- Update analysis_options
 - Update ArnaSlider
 - Add ArnaLinkButton
 - [Example] Update Example

@@ -158,7 +158,7 @@ class ArnaAlertDialog extends StatelessWidget {
           ),
         if (actions != null) ...<Widget>[
           const ArnaDivider(),
-          Container(
+          ColoredBox(
             color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
             child: Padding(
               padding: Styles.normal,
@@ -173,7 +173,7 @@ class ArnaAlertDialog extends StatelessWidget {
         if (content != null) Flexible(child: contentWidget!),
         if (actions != null) ...<Widget>[
           const ArnaDivider(),
-          Container(
+          ColoredBox(
             color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
             child: Padding(
               padding: Styles.normal,

@@ -281,7 +281,7 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
               initialCalendarMode: widget.initialCalendarMode,
             ),
             const ArnaDivider(),
-            Container(
+            ColoredBox(
               color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
               child: Padding(
                 padding: Styles.normal,

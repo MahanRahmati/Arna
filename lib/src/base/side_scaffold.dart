@@ -86,9 +86,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     if (isCompact(context)) {
       showDrawer = false;
     }
-    if (widget.onItemSelected != null) {
-      widget.onItemSelected!(index);
-    }
+    widget.onItemSelected?.call(index);
     if (isCompact(context)) {
       _drawerOpenedCallback(false);
     }

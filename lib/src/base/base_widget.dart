@@ -247,30 +247,22 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   }
 
   void _handleHorizontalDragStart(DragStartDetails dragStartDetails) {
-    if (widget.onHorizontalDragStart != null) {
-      widget.onHorizontalDragStart!(dragStartDetails);
-    }
+    widget.onHorizontalDragStart?.call(dragStartDetails);
     _handlePressDown(null);
   }
 
   void _handleHorizontalDragEnd(DragEndDetails dragEndDetails) {
-    if (widget.onHorizontalDragEnd != null) {
-      widget.onHorizontalDragEnd!(dragEndDetails);
-    }
+    widget.onHorizontalDragEnd?.call(dragEndDetails);
     _handleTapUp(null);
   }
 
   void _handleVerticalDragStart(DragStartDetails dragStartDetails) {
-    if (widget.onVerticalDragStart != null) {
-      widget.onVerticalDragStart!(dragStartDetails);
-    }
+    widget.onVerticalDragStart?.call(dragStartDetails);
     _handlePressDown(null);
   }
 
   void _handleVerticalDragEnd(DragEndDetails dragEndDetails) {
-    if (widget.onVerticalDragEnd != null) {
-      widget.onVerticalDragEnd!(dragEndDetails);
-    }
+    widget.onVerticalDragEnd?.call(dragEndDetails);
     _handleTapUp(null);
   }
 

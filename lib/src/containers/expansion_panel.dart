@@ -247,16 +247,14 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
       child: Visibility(
         visible: expanded,
         child: Container(
+          clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.vertical(
               bottom: Radius.circular(Styles.borderRadiusSize + 1),
             ),
             color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
           ),
-          clipBehavior: Clip.antiAlias,
-          child: AnimatedContainer(
-            duration: Styles.basicDuration,
-            curve: Styles.basicCurve,
+          child: Container(
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.vertical(

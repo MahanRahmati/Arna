@@ -20,29 +20,29 @@ class ArnaBadge extends StatelessWidget {
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
-      child: AnimatedContainer(
-        duration: Styles.basicDuration,
-        curve: Styles.basicCurve,
+      child: DecoratedBox(
         decoration: ShapeDecoration(
           shape: StadiumBorder(
             side: BorderSide(color: ArnaDynamicColor.outerColor(accent).withOpacity(0.28)),
           ),
           color: accent.withOpacity(0.28),
         ),
-        padding: Styles.tileTextPadding,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Flexible(
-              child: Text(
-                label,
-                style: ArnaTheme.of(context).textTheme.subtitle!.copyWith(
-                      color: ArnaDynamicColor.applyOverlay(accent),
-                    ),
-                maxLines: 1,
+        child: Padding(
+          padding: Styles.tileTextPadding,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Flexible(
+                child: Text(
+                  label,
+                  style: ArnaTheme.of(context).textTheme.subtitle!.copyWith(
+                        color: ArnaDynamicColor.applyOverlay(accent),
+                      ),
+                  maxLines: 1,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

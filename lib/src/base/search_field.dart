@@ -148,9 +148,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
     final Widget search = Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        AnimatedContainer(
-          duration: Styles.basicDuration,
-          curve: Styles.basicCurve,
+        ColoredBox(
           color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
           child: Padding(
             padding: Styles.small,

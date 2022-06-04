@@ -42,12 +42,10 @@ class ArnaDrawer extends StatelessWidget {
       namesRoute: true,
       explicitChildNodes: true,
       label: semanticLabel ?? MaterialLocalizations.of(context).drawerLabel,
-      child: AnimatedContainer(
+      child: Container(
         constraints: BoxConstraints.expand(
           width: min(Styles.sideBarWidth, deviceWidth(context) * 0.7),
         ),
-        duration: Styles.basicDuration,
-        curve: Styles.basicCurve,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.horizontal(

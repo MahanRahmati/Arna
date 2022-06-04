@@ -24,49 +24,55 @@ class ArnaColors {
   /// Arna orange
   static const Color orange = Color(0xFFFFA726);
 
-  /// rgb(0,0,0).
+  /// HSL(0,0,0).
   static const Color shade00 = Color(0xFF000000);
 
-  /// rgb(7,7,7).
+  /// HSL(0,0,1.6).
+  static const Color shade04 = Color(0xFF040404);
+
+  /// HSL(0,0,2.7).
   static const Color shade07 = Color(0xFF070707);
 
-  /// rgb(32,32,32).
+  /// HSL(0,0,4.7).
+  static const Color shade12 = Color(0xFF0C0C0C);
+
+  /// HSL(0,0,12.5).
   static const Color shade32 = Color(0xFF202020);
 
-  /// rgb(37,37,37).
+  /// HSL(0,0,14.5).
   static const Color shade37 = Color(0xFF252525);
 
-  /// rgb(43,43,43).
-  static const Color shade43 = Color(0xFF2B2B2B);
+  /// HSL(0,0,17.6).
+  static const Color shade45 = Color(0xFF2D2D2D);
 
-  /// rgb(57,57,57).
+  /// HSL(0,0,22.4).
   static const Color shade57 = Color(0xFF393939);
 
-  /// rgb(98,98,98).
-  static const Color shade98 = Color(0xFF626262);
+  /// HSL(0,0,39.6).
+  static const Color shade101 = Color(0xFF656565);
 
-  /// rgb(105,105,105).
-  static const Color shade105 = Color(0xFF696969);
+  /// HSL(0,0,42.4).
+  static const Color shade108 = Color(0xFF6C6C6C);
 
-  /// rgb(147,147,147).
+  /// HSL(0,0,57.6).
   static const Color shade147 = Color(0xFF939393);
 
-  /// rgb(154,154,154).
+  /// HSL(0,0,60.4).
   static const Color shade154 = Color(0xFF9A9A9A);
 
-  /// rgb(210,210,210).
+  /// HSL(0,0,82.4).
   static const Color shade210 = Color(0xFFD2D2D2);
 
-  /// rgb(243,243,243).
+  /// HSL(0,0,95.3).
   static const Color shade243 = Color(0xFFF3F3F3);
 
-  /// rgb(248,248,248).
+  /// HSL(0,0,97.3).
   static const Color shade248 = Color(0xFFF8F8F8);
 
-  /// rgb(251,251,251).
+  /// HSL(0,0,98.4).
   static const Color shade251 = Color(0xFFFBFBFB);
 
-  /// rgb(255,255,255).
+  /// HSL(0,0,100).
   static const Color shade255 = Color(0xFFFFFFFF);
 
   /// The color of the background.
@@ -127,7 +133,7 @@ class ArnaColors {
   static const ArnaDynamicColor cardColor = ArnaDynamicColor(
     debugLabel: 'cardColor',
     color: shade251,
-    darkColor: shade43,
+    darkColor: shade45,
     highContrastColor: shade255,
     darkHighContrastColor: shade00,
   );
@@ -171,7 +177,7 @@ class ArnaColors {
   /// The secondary text color.
   static const ArnaDynamicColor secondaryTextColor = ArnaDynamicColor(
     debugLabel: 'secondaryTextColor',
-    color: shade105,
+    color: shade108,
     darkColor: shade147,
     highContrastColor: shade00,
     darkHighContrastColor: shade255,
@@ -181,7 +187,7 @@ class ArnaColors {
   static const ArnaDynamicColor secondaryTextColorDark = ArnaDynamicColor(
     debugLabel: 'reverseSecondaryTextColor',
     color: shade147,
-    darkColor: shade105,
+    darkColor: shade108,
     highContrastColor: shade255,
     darkHighContrastColor: shade00,
   );
@@ -199,7 +205,7 @@ class ArnaColors {
   static const ArnaDynamicColor disabledColor = ArnaDynamicColor(
     debugLabel: 'secondaryTextColor',
     color: shade154,
-    darkColor: shade98,
+    darkColor: shade101,
     highContrastColor: shade00,
     darkHighContrastColor: shade255,
   );

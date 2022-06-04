@@ -74,6 +74,8 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaSideBarItem           | -                             | -                                     |
 | ArnaSideScaffold          | -                             | -                                     |
 | ArnaSnackBar              | SnackBar                      | -                                     |
+| ArnaTabItem               | Tab                           | -                                     |
+| ArnaTabView               | TabBarView                    | CupertinoTabScaffold                  |
 | ArnaTextSelectionControls | MaterialTextSelectionControls | CupertinoDesktopTextSelectionControls |
 | ArnaTooltip               | Tooltip                       | -                                     |
 | ArnaBackButton            | BackButton                    | -                                     |

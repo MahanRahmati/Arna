@@ -1,7 +1,5 @@
 import 'package:arna/arna.dart';
 
-//TODO: Fix focus.
-
 /// Coordinates tab selection of an [ArnaTabView].
 ///
 /// The [index] property is the index of the selected tab. Changing its value updates the actively displayed tab of the
@@ -287,133 +285,14 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
           Padding(
             padding: const EdgeInsetsDirectional.only(top: Styles.tabBarHeight + 1),
             child: FocusTraversalGroup(
-              child: _TabSwitchingView(
-                currentTabIndex: _controller.index,
-                tabs: widget.tabs,
+              child: Builder(
+                builder: (BuildContext context) {
+                  return widget.tabs[_controller.index].builder(context);
+                },
               ),
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// A widget laying out multiple tabs with only one active tab being built at a time and on stage.
-class _TabSwitchingView extends StatefulWidget {
-  /// Creates a widget laying out multiple tabs.
-  const _TabSwitchingView({
-    required this.tabs,
-    required this.currentTabIndex,
-  });
-
-  /// The interactive tabs laid out within the tab bar.
-  final List<ArnaTab> tabs;
-
-  /// The index into [tabs] of the current active tab.
-  final int currentTabIndex;
-
-  @override
-  State<_TabSwitchingView> createState() => _TabSwitchingViewState();
-}
-
-/// The [State] for a [_TabSwitchingView].
-class _TabSwitchingViewState extends State<_TabSwitchingView> {
-  final List<bool> shouldBuildTab = <bool>[];
-  final List<FocusScopeNode> tabFocusNodes = <FocusScopeNode>[];
-
-  // When focus nodes are no longer needed, we need to dispose of them, but we can't be sure that nothing else is
-  // listening to them until this widget is disposed of, so when they are no longer needed, we move them to this list,
-  // and dispose of them when we dispose of this widget.
-  final List<FocusScopeNode> discardedNodes = <FocusScopeNode>[];
-
-  @override
-  void initState() {
-    super.initState();
-    shouldBuildTab.addAll(List<bool>.filled(widget.tabs.length, false));
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _focusActiveTab();
-  }
-
-  @override
-  void didUpdateWidget(_TabSwitchingView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    // Only partially invalidate the tabs cache to avoid breaking the current behavior. We assume that the only
-    // possible change is either:
-    // - new tabs are appended to the tab list, or
-    // - some trailing tabs are removed.
-    // If the above assumption is not true, some tabs may lose their state.
-    final int lengthDiff = widget.tabs.length - shouldBuildTab.length;
-    if (lengthDiff > 0) {
-      shouldBuildTab.addAll(List<bool>.filled(lengthDiff, false));
-    } else if (lengthDiff < 0) {
-      shouldBuildTab.removeRange(widget.tabs.length, shouldBuildTab.length);
-    }
-    _focusActiveTab();
-  }
-
-  // Will focus the active tab if the FocusScope above it has focus already.  If not, then it will just mark it as the
-  // preferred focus for that scope.
-  void _focusActiveTab() {
-    if (tabFocusNodes.length != widget.tabs.length) {
-      if (tabFocusNodes.length > widget.tabs.length) {
-        discardedNodes.addAll(tabFocusNodes.sublist(widget.tabs.length));
-        tabFocusNodes.removeRange(widget.tabs.length, tabFocusNodes.length);
-      } else {
-        tabFocusNodes.addAll(
-          List<FocusScopeNode>.generate(
-            widget.tabs.length - tabFocusNodes.length,
-            (int index) => FocusScopeNode(debugLabel: '$ArnaTabView Tab ${index + tabFocusNodes.length}'),
-          ),
-        );
-      }
-    }
-    FocusScope.of(context).setFirstFocus(tabFocusNodes[widget.currentTabIndex]);
-  }
-
-  @override
-  void dispose() {
-    for (final FocusScopeNode focusScopeNode in tabFocusNodes) {
-      focusScopeNode.dispose();
-    }
-    for (final FocusScopeNode focusScopeNode in discardedNodes) {
-      focusScopeNode.dispose();
-    }
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: List<Widget>.generate(
-        widget.tabs.length,
-        (int index) {
-          final bool active = index == widget.currentTabIndex;
-          shouldBuildTab[index] = active || shouldBuildTab[index];
-
-          return HeroMode(
-            enabled: active,
-            child: Offstage(
-              offstage: !active,
-              child: TickerMode(
-                enabled: active,
-                child: FocusScope(
-                  node: tabFocusNodes[index],
-                  child: Builder(
-                    builder: (BuildContext context) {
-                      return shouldBuildTab[index] ? widget.tabs[index].builder(context) : Container();
-                    },
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }

@@ -38,7 +38,6 @@ class Widgets extends ConsumerWidget {
         const Flexible(
           child: SingleChildScrollView(
             child: ArnaList(
-              title: Strings.widgets,
               children: <Widget>[
                 Buttons(),
                 LinkedButtons(),

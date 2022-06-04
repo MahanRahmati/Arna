@@ -42,23 +42,6 @@ class Settings extends ConsumerWidget {
             ],
           ),
           ArnaList(
-            title: Strings.options,
-            showDividers: true,
-            showBackground: true,
-            children: <Widget>[
-              ArnaSwitchListTile(
-                value: masterMode,
-                title: Strings.masterMode,
-                onChanged: (_) => ref.read(masterProvider.notifier).state = !masterMode,
-              ),
-              ArnaSwitchListTile(
-                value: blurMode,
-                title: Strings.blurMode,
-                onChanged: (_) => ref.read(blurProvider.notifier).state = !blurMode,
-              ),
-            ],
-          ),
-          ArnaList(
             title: Strings.accent,
             direction: Axis.horizontal,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -87,6 +70,23 @@ class Settings extends ConsumerWidget {
                 groupValue: accentColor,
                 onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.orange,
                 color: ArnaColors.orange,
+              ),
+            ],
+          ),
+          ArnaList(
+            title: Strings.options,
+            showDividers: true,
+            showBackground: true,
+            children: <Widget>[
+              ArnaSwitchListTile(
+                value: masterMode,
+                title: Strings.masterMode,
+                onChanged: (_) => ref.read(masterProvider.notifier).state = !masterMode,
+              ),
+              ArnaSwitchListTile(
+                value: blurMode,
+                title: Strings.blurMode,
+                onChanged: (_) => ref.read(blurProvider.notifier).state = !blurMode,
               ),
             ],
           ),

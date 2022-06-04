@@ -427,7 +427,7 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
 
   // API for TextSelectionGestureDetectorBuilderDelegate.
   @override
-  late bool forcePressEnabled;
+  bool get forcePressEnabled => true;
 
   @override
   final GlobalKey<EditableTextState> editableTextKey = GlobalKey<EditableTextState>();

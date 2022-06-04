@@ -989,9 +989,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
           )
         : AutofillConfiguration.disabled;
 
-    return _editableText!.textInputConfiguration.copyWith(
-      autofillConfiguration: autofillConfiguration,
-    );
+    return _editableText!.textInputConfiguration.copyWith(autofillConfiguration: autofillConfiguration);
   }
   // AutofillClient implementation end.
 
@@ -1011,14 +1009,42 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     ];
 
     final TextSelectionControls textSelectionControls = widget.selectionControls ?? arnaTextSelectionControls;
+    final bool paintCursorAboveText;
     VoidCallback? handleDidGainAccessibilityFocus;
+    Offset? cursorOffset;
+
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
+        paintCursorAboveText = true;
+        cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
+        break;
       case TargetPlatform.android:
+        paintCursorAboveText = false;
+        break;
       case TargetPlatform.fuchsia:
+        paintCursorAboveText = false;
+        break;
       case TargetPlatform.linux:
+        paintCursorAboveText = false;
+        handleDidGainAccessibilityFocus = () {
+          // Automatically activate the TextField when it receives accessibility focus.
+          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
+            _effectiveFocusNode.requestFocus();
+          }
+        };
+        break;
       case TargetPlatform.macOS:
+        paintCursorAboveText = true;
+        cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
+        handleDidGainAccessibilityFocus = () {
+          // Automatically activate the TextField when it receives accessibility focus.
+          if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
+            _effectiveFocusNode.requestFocus();
+          }
+        };
+        break;
       case TargetPlatform.windows:
+        paintCursorAboveText = false;
         handleDidGainAccessibilityFocus = () {
           // Automatically activate the TextField when it receives accessibility focus.
           if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {
@@ -1027,7 +1053,6 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         };
         break;
     }
-    final Offset cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
 
     final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
     final Color textFieldColor = ArnaDynamicColor.resolve(ArnaColors.textFieldColor, context);
@@ -1079,6 +1104,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             cursorColor: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
             cursorOpacityAnimates: true,
             cursorOffset: cursorOffset,
+            paintCursorAboveText: paintCursorAboveText,
             autocorrectionTextRectColor: accent.withOpacity(0.21),
             selectionHeightStyle: widget.selectionHeightStyle,
             selectionWidthStyle: widget.selectionWidthStyle,

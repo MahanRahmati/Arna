@@ -25,6 +25,7 @@
 - Add ArnaPillButton
 - Update ArnaTextSelectionControls
 - Update ArnaTextField
+- Add ArnaSelectableText
 
 ## 1.0.2
 

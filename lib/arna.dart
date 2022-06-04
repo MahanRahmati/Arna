@@ -26,6 +26,7 @@ export 'package:arna/src/base/route.dart';
 export 'package:arna/src/base/scaffold.dart';
 export 'package:arna/src/base/scroll_bar.dart';
 export 'package:arna/src/base/search_field.dart';
+export 'package:arna/src/base/selectable_text.dart';
 export 'package:arna/src/base/side_bar_item.dart';
 export 'package:arna/src/base/side_scaffold.dart';
 export 'package:arna/src/base/snack_bar.dart';

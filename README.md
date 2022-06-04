@@ -71,6 +71,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaScaffold              | Scaffold                      | CupertinoPageScaffold                 |
 | ArnaScrollbar             | Scrollbar                     | CupertinoScrollbar                    |
 | ArnaSearchField           | SearchPage                    | CupertinoSearchTextField              |
+| ArnaSelectableText        | SelectableText                | -                                     |
 | ArnaSideBarItem           | -                             | -                                     |
 | ArnaSideScaffold          | -                             | -                                     |
 | ArnaSnackBar              | SnackBar                      | -                                     |

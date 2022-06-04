@@ -14,7 +14,8 @@ class ArnaDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Widget container = Center(
-      child: ColoredBox(
+      // ignore: use_colored_box
+      child: Container(
         color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
       ),
     );

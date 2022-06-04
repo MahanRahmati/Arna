@@ -1010,19 +1010,15 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         ),
     ];
 
-    TextSelectionControls? textSelectionControls = widget.selectionControls;
+    final TextSelectionControls textSelectionControls = widget.selectionControls ?? arnaTextSelectionControls;
     VoidCallback? handleDidGainAccessibilityFocus;
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
       case TargetPlatform.linux:
-        textSelectionControls ??= arnaTextSelectionControls;
-        break;
-
       case TargetPlatform.macOS:
       case TargetPlatform.windows:
-        textSelectionControls ??= arnaTextSelectionControls;
         handleDidGainAccessibilityFocus = () {
           // Automatically activate the TextField when it receives accessibility focus.
           if (!_effectiveFocusNode.hasFocus && _effectiveFocusNode.canRequestFocus) {

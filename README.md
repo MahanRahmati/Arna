@@ -85,6 +85,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaLinkButton            | -                             | -                                     |
 | ArnaLinkedButtons         | -                             | -                                     |
 | ArnaTextButton            | TextButton                    | -                                     |
+| ArnaPillButton            | FloatingActionButton          | -                                     |
 | ArnaBadge                 | -                             | -                                     |
 | ArnaCard                  | Card                          | -                                     |
 | ArnaExpansionPanel        | ExpansionPanel                | -                                     |

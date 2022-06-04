@@ -143,9 +143,10 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final List<Widget> items = <Widget>[];
 
-    void addToolbarButton(String text, VoidCallback onPressed) {
+    void addToolbarButton(IconData icon, String text, VoidCallback onPressed) {
       items.add(
         _ArnaTextSelectionToolbarButton(
+          icon: icon,
           label: text,
           onPressed: onPressed,
         ),
@@ -153,16 +154,32 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
     }
 
     if (widget.handleCut != null) {
-      addToolbarButton(localizations.cutButtonLabel, widget.handleCut!);
+      addToolbarButton(
+        Icons.cut_outlined,
+        localizations.cutButtonLabel,
+        widget.handleCut!,
+      );
     }
     if (widget.handleCopy != null) {
-      addToolbarButton(localizations.copyButtonLabel, widget.handleCopy!);
+      addToolbarButton(
+        Icons.copy_outlined,
+        localizations.copyButtonLabel,
+        widget.handleCopy!,
+      );
     }
     if (widget.handlePaste != null && widget.clipboardStatus?.value == ClipboardStatus.pasteable) {
-      addToolbarButton(localizations.pasteButtonLabel, widget.handlePaste!);
+      addToolbarButton(
+        Icons.paste_outlined,
+        localizations.pasteButtonLabel,
+        widget.handlePaste!,
+      );
     }
     if (widget.handleSelectAll != null) {
-      addToolbarButton(localizations.selectAllButtonLabel, widget.handleSelectAll!);
+      addToolbarButton(
+        Icons.select_all_outlined,
+        localizations.selectAllButtonLabel,
+        widget.handleSelectAll!,
+      );
     }
 
     // If there is no option available, build an empty widget.
@@ -222,11 +239,7 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
           anchor: anchor - localAdjustment,
         ),
         child: ArnaCard(
-          width: Styles.toolbarWidth,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: children,
-          ),
+          child: Wrap(children: children),
         ),
       ),
     );
@@ -237,9 +250,13 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
 class _ArnaTextSelectionToolbarButton extends StatelessWidget {
   /// Creates an instance of ArnaTextSelectionToolbarButton.
   const _ArnaTextSelectionToolbarButton({
+    required this.icon,
     required this.label,
     required this.onPressed,
   });
+
+  /// The icon of the button.
+  final IconData icon;
 
   /// The text label of the button.
   final String label;
@@ -249,9 +266,10 @@ class _ArnaTextSelectionToolbarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaTextButton(
-      label: label,
+    return ArnaIconButton(
+      icon: icon,
       onPressed: onPressed,
+      tooltipMessage: label,
     );
   }
 }

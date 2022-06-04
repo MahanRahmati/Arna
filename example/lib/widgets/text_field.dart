@@ -13,7 +13,11 @@ class TextField extends StatelessWidget {
         color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
       ),
       title: Strings.textField,
-      child: const ArnaTextField(),
+      child: const ArnaTextField(
+        clearButtonMode: ArnaOverlayVisibilityMode.editing,
+        maxLength: 100,
+        maxLines: null,
+      ),
     );
   }
 }

@@ -23,6 +23,7 @@
 - Update ArnaBottomBarItem
 - Update ArnaSideBarItem
 - Add ArnaPillButton
+- Update ArnaTextSelectionControls
 
 ## 1.0.2
 

@@ -143,9 +143,6 @@ abstract class Styles {
   /// Slider track minimum width
   static const double sliderTrackMinWidth = base * 25;
 
-  /// Toolbar width
-  static const double toolbarWidth = base * 30;
-
   /// Autocomplete options maximum height
   static const double optionsMaxHeight = base * 30;
 

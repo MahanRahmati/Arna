@@ -1,6 +1,7 @@
 ## 1.0.3
 
 - Update README
+- Update ROADMAP
 - Update analysis_options
 - Update ArnaSlider
 - Add ArnaLinkButton

@@ -12,17 +12,17 @@ class ArnaColors {
   /// Black with 42% opacity.
   static const Color barrierColor = Color(0x6B000000);
 
-  /// Arna blue
-  static const Color blue = Color(0xFF36AEF9);
+  /// Arna blue: HSL(203,94.2,46.6).
+  static const Color blue = Color(0xFF0791E7);
 
-  /// Arna red
-  static const Color red = Color(0xFFF44336);
+  /// Arna red: HSL(350,94.2,49.8).
+  static const Color red = Color(0xFFF7072F);
 
-  /// Arna green
-  static const Color green = Color(0xFF26A69A);
+  /// Arna green: HSL(174,62.7,39.8).
+  static const Color green = Color(0xFF26A598);
 
-  /// Arna orange
-  static const Color orange = Color(0xFFFFA726);
+  /// Arna orange: HSL(36,94.2,57.5).
+  static const Color orange = Color(0xFFF9A72D);
 
   /// HSL(0,0,0).
   static const Color shade00 = Color(0xFF000000);

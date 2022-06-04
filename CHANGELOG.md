@@ -26,6 +26,7 @@
 - Update ArnaTextSelectionControls
 - Update ArnaTextField
 - Add ArnaSelectableText
+- Add ArnaPageTransitionSwitcher
 
 ## 1.0.2
 

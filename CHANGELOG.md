@@ -21,6 +21,7 @@
 - Add ArnaTabItem
 - Update ArnaBottomBarItem
 - Update ArnaSideBarItem
+- Add ArnaPillButton
 
 ## 1.0.2
 

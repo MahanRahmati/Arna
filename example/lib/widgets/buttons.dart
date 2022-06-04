@@ -98,6 +98,10 @@ class _ButtonsState extends State<Buttons> {
               label: Strings.add,
               onPressed: () {},
             ),
+            ArnaPillButton(
+              label: Strings.add,
+              onPressed: () {},
+            ),
           ],
         ),
       ),

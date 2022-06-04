@@ -260,6 +260,9 @@ abstract class Styles {
   /// Super large Padding
   static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
 
+  /// Super large horizontal Padding
+  static const EdgeInsets superLargeHorizontal = EdgeInsets.symmetric(horizontal: largePadding * 2);
+
   /// Menu Margin
   static const EdgeInsetsDirectional menuMargin = EdgeInsetsDirectional.only(
     start: Styles.padding,

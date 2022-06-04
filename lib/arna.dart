@@ -41,6 +41,7 @@ export 'package:arna/src/buttons/color_button.dart';
 export 'package:arna/src/buttons/icon_button.dart';
 export 'package:arna/src/buttons/link_button.dart';
 export 'package:arna/src/buttons/linked_buttons.dart';
+export 'package:arna/src/buttons/pill_button.dart';
 export 'package:arna/src/buttons/text_button.dart';
 export 'package:arna/src/containers/badge.dart';
 export 'package:arna/src/containers/card.dart';

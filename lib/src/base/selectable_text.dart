@@ -412,6 +412,7 @@ class ArnaSelectableText extends StatefulWidget {
   }
 }
 
+/// The [State] for an [ArnaSelectableText].
 class _ArnaSelectableTextState extends State<ArnaSelectableText>
     implements TextSelectionGestureDetectorBuilderDelegate {
   EditableTextState? get _editableText => editableTextKey.currentState;

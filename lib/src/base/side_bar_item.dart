@@ -11,7 +11,7 @@ class ArnaSideBarItem extends StatelessWidget {
     required this.onPressed,
     this.badge,
     this.compact = false,
-    this.selected = false,
+    this.active = false,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -37,8 +37,8 @@ class ArnaSideBarItem extends StatelessWidget {
   /// Whether this item is compact or not.
   final bool compact;
 
-  /// Whether this item is selected or not.
-  final bool selected;
+  /// Whether this item is activated or not.
+  final bool active;
 
   /// Whether this item is focusable or not.
   final bool isFocusable;
@@ -58,15 +58,14 @@ class ArnaSideBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
-    final bool buttonSelected = selected;
     return Semantics(
-      selected: selected,
+      selected: active,
       container: true,
       child: Padding(
         padding: Styles.small,
         child: ArnaBaseWidget(
           builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
-            selected = buttonSelected;
+            selected = active;
             return Stack(
               alignment: compact ? Alignment.topRight : Alignment.centerRight,
               children: <Widget>[

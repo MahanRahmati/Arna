@@ -19,6 +19,8 @@
 - Update ArnaBadge
 - Add ArnaTabView
 - Add ArnaTabItem
+- Update ArnaBottomBarItem
+- Update ArnaSideBarItem
 
 ## 1.0.2
 

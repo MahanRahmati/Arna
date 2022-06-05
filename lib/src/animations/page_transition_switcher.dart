@@ -211,7 +211,7 @@ class ArnaPageTransitionSwitcher extends StatefulWidget {
   ///
   /// See [ArnaPageTransitionSwitcherTransitionBuilder] for more information on the function signature.
   static Widget defaultLayoutBuilder(List<Widget> entries) {
-    return Stack(alignment: Alignment.center, children: entries);
+    return Stack(children: entries);
   }
 
   @override

@@ -156,7 +156,25 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               children: <Widget>[
                 Expanded(
                   child: FocusTraversalGroup(
-                    child: widget.items[_currentIndex].builder(context),
+                    child: ArnaPageTransitionSwitcher(
+                      transitionBuilder: (
+                        Widget child,
+                        Animation<double> primaryAnimation,
+                        Animation<double> secondaryAnimation,
+                      ) {
+                        return ArnaFadeThroughTransition(
+                          animation: primaryAnimation,
+                          secondaryAnimation: secondaryAnimation,
+                          child: child,
+                        );
+                      },
+                      child: Builder(
+                        key: widget.items[_currentIndex].key,
+                        builder: (BuildContext context) {
+                          return widget.items[_currentIndex].builder(context);
+                        },
+                      ),
+                    ),
                   ),
                 ),
                 if (compact && widget.items.length < 5)

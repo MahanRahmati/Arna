@@ -27,6 +27,7 @@
 - Update ArnaTextField
 - Add ArnaSelectableText
 - Add ArnaPageTransitionSwitcher
+- Add ArnaFadeThroughTransition
 
 ## 1.0.2
 

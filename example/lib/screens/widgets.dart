@@ -24,7 +24,7 @@ class Widgets extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        ArnaSearchField(showSearch: ref.watch(searchProvider)),
+        // ArnaSearchField(showSearch: ref.watch(searchProvider)),
         ArnaBanner(
           showBanner: ref.watch(bannerProvider),
           title: Strings.bannerTitle,

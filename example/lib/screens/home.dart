@@ -19,10 +19,11 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
-    final bool showSearch = ref.watch(searchProvider);
+    // final bool showSearch = ref.watch(searchProvider);
     final bool showBlur = ref.watch(blurProvider);
 
     final NavigationItem hello = NavigationItem(
+      key: UniqueKey(),
       title: Strings.hello,
       icon: Icons.emoji_emotions_outlined,
       selectedIcon: Icons.emoji_emotions,
@@ -35,6 +36,7 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final MasterNavigationItem helloMaster = MasterNavigationItem(
+      key: UniqueKey(),
       title: Strings.hello,
       leading: const Icon(Icons.emoji_emotions_outlined),
       headerBarLeading: ArnaIconButton(
@@ -46,29 +48,32 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final NavigationItem widgets = NavigationItem(
+      key: UniqueKey(),
       title: Strings.widgets,
       icon: Icons.widgets_outlined,
       selectedIcon: Icons.widgets,
-      headerBarLeading: ArnaIconButton(
-        icon: Icons.search_outlined,
-        onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
-        tooltipMessage: Strings.search,
-      ),
+      // headerBarLeading: ArnaIconButton(
+      //   icon: Icons.search_outlined,
+      //   onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
+      //   tooltipMessage: Strings.search,
+      // ),
       builder: (_) => const Widgets(),
     );
 
     final MasterNavigationItem widgetsMaster = MasterNavigationItem(
+      key: UniqueKey(),
       title: Strings.widgets,
       leading: const Icon(Icons.widgets_outlined),
-      headerBarLeading: ArnaIconButton(
-        icon: Icons.search_outlined,
-        onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
-        tooltipMessage: Strings.search,
-      ),
+      // headerBarLeading: ArnaIconButton(
+      //   icon: Icons.search_outlined,
+      //   onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
+      //   tooltipMessage: Strings.search,
+      // ),
       builder: (_) => const Widgets(),
     );
 
     final NavigationItem typography = NavigationItem(
+      key: UniqueKey(),
       title: Strings.typography,
       icon: Icons.font_download_outlined,
       selectedIcon: Icons.font_download,
@@ -76,12 +81,14 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final MasterNavigationItem typographyMaster = MasterNavigationItem(
+      key: UniqueKey(),
       title: Strings.typography,
       leading: const Icon(Icons.font_download_outlined),
       builder: (_) => const Typography(),
     );
 
     final NavigationItem tabs = NavigationItem(
+      key: UniqueKey(),
       title: Strings.tabs,
       icon: Icons.tab_outlined,
       selectedIcon: Icons.tab,
@@ -89,6 +96,7 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final MasterNavigationItem tabsMaster = MasterNavigationItem(
+      key: UniqueKey(),
       title: Strings.tabs,
       leading: const Icon(Icons.tab_outlined),
       builder: (_) => const Tabs(),

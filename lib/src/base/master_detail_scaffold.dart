@@ -248,7 +248,25 @@ class _LateralPageState extends State<_LateralPage> {
                   headerBarLeading: widget.items[_currentIndex].headerBarLeading,
                   title: widget.items[_currentIndex].title,
                   actions: widget.items[_currentIndex].actions,
-                  body: widget.items[_currentIndex].builder(context),
+                  body: ArnaPageTransitionSwitcher(
+                    transitionBuilder: (
+                      Widget child,
+                      Animation<double> primaryAnimation,
+                      Animation<double> secondaryAnimation,
+                    ) {
+                      return ArnaFadeThroughTransition(
+                        animation: primaryAnimation,
+                        secondaryAnimation: secondaryAnimation,
+                        child: child,
+                      );
+                    },
+                    child: Builder(
+                      key: widget.items[_currentIndex].key,
+                      builder: (BuildContext context) {
+                        return widget.items[_currentIndex].builder(context);
+                      },
+                    ),
+                  ),
                   resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
                 )
               : widget.emptyBody != null

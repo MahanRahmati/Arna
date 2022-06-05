@@ -13,6 +13,7 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
     this.title,
     this.headerBarMiddle,
     this.actions,
+    this.headerBarBottom,
     this.leading,
     required this.items,
     this.trailing,
@@ -40,6 +41,9 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The leading widget in the master that is placed above the items.
   ///
@@ -98,6 +102,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 title: widget.title,
                 headerBarMiddle: widget.headerBarMiddle,
                 actions: widget.actions,
+                headerBarBottom: widget.headerBarBottom,
                 leading: widget.leading,
                 items: widget.items,
                 trailing: widget.trailing,
@@ -112,6 +117,7 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
                 title: widget.title,
                 headerBarMiddle: widget.headerBarMiddle,
                 actions: widget.actions,
+                headerBarBottom: widget.headerBarBottom,
                 leading: widget.leading,
                 items: widget.items,
                 trailing: widget.trailing,
@@ -134,6 +140,7 @@ class _LateralPage extends StatefulWidget {
     this.title,
     this.headerBarMiddle,
     this.actions,
+    this.headerBarBottom,
     this.leading,
     required this.items,
     this.trailing,
@@ -161,6 +168,9 @@ class _LateralPage extends StatefulWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The leading widget in the master that is placed above the items.
   ///
@@ -225,6 +235,7 @@ class _LateralPageState extends State<_LateralPage> {
             title: widget.title,
             headerBarMiddle: widget.headerBarMiddle,
             actions: widget.actions,
+            headerBarBottom: widget.headerBarBottom,
             body: _MasterItemBuilder(
               leading: widget.leading,
               items: widget.items,
@@ -248,6 +259,7 @@ class _LateralPageState extends State<_LateralPage> {
                   headerBarLeading: widget.items[_currentIndex].headerBarLeading,
                   title: widget.items[_currentIndex].title,
                   actions: widget.items[_currentIndex].actions,
+                  headerBarBottom: widget.items[_currentIndex].headerBarBottom,
                   body: ArnaPageTransitionSwitcher(
                     transitionBuilder: (
                       Widget child,
@@ -279,6 +291,7 @@ class _LateralPageState extends State<_LateralPage> {
                       headerBarLeading: widget.items[0].headerBarLeading,
                       title: widget.items[0].title,
                       actions: widget.items[0].actions,
+                      headerBarBottom: widget.items[0].headerBarBottom,
                       body: widget.items[0].builder(context),
                       resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
                     ),
@@ -296,6 +309,7 @@ class _NestedPage extends StatefulWidget {
     this.title,
     this.headerBarMiddle,
     this.actions,
+    this.headerBarBottom,
     this.leading,
     required this.items,
     this.trailing,
@@ -323,6 +337,9 @@ class _NestedPage extends StatefulWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The leading widget in the master that is placed above the items.
   ///
@@ -405,6 +422,7 @@ class _NestedPageState extends State<_NestedPage> {
               ),
               title: page.title,
               actions: page.actions,
+              headerBarBottom: page.headerBarBottom,
               body: page.builder(context),
               resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
             ),
@@ -429,6 +447,7 @@ class _NestedPageState extends State<_NestedPage> {
                   title: widget.title,
                   headerBarMiddle: widget.headerBarMiddle,
                   actions: widget.actions,
+                  headerBarBottom: widget.headerBarBottom,
                   body: _MasterItemBuilder(
                     leading: widget.leading,
                     items: widget.items,
@@ -538,6 +557,7 @@ class MasterNavigationItem {
     required this.builder,
     this.headerBarLeading,
     this.actions,
+    this.headerBarBottom,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -575,6 +595,9 @@ class MasterNavigationItem {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

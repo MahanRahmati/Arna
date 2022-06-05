@@ -15,6 +15,7 @@ class ArnaHeaderBar extends StatelessWidget {
     this.leading,
     this.middle,
     this.actions,
+    this.bottom,
   });
 
   /// The leading widget laid out within the header bar.
@@ -30,6 +31,9 @@ class ArnaHeaderBar extends StatelessWidget {
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget.
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? bottom;
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +66,7 @@ class ArnaHeaderBar extends StatelessWidget {
                   ),
                 ),
               ),
+              if (bottom != null) bottom!,
               const ArnaDivider(),
             ],
           ),

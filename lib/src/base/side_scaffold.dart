@@ -14,6 +14,7 @@ class ArnaSideScaffold extends StatefulWidget {
     this.title,
     this.headerBarMiddle,
     this.actions,
+    this.headerBarBottom,
     this.leading,
     required this.items,
     this.trailing,
@@ -39,6 +40,9 @@ class ArnaSideScaffold extends StatefulWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The leading widget in the side bar that is placed above the items.
   ///
@@ -152,6 +156,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               ...?widget.items[_currentIndex].actions,
               ...?widget.actions,
             ],
+            headerBarBottom: widget.headerBarBottom,
             body: Column(
               children: <Widget>[
                 Expanded(
@@ -232,6 +237,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   ...?widget.items[0].actions,
                   ...?widget.actions,
                 ],
+                headerBarBottom: widget.headerBarBottom,
                 body: widget.items[0].builder(context),
                 resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               );

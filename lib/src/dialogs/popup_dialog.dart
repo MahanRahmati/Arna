@@ -42,6 +42,7 @@ class _ArnaPopupDialog extends StatelessWidget {
     required this.title,
     required this.headerBarMiddle,
     required this.actions,
+    required this.headerBarBottom,
     required this.body,
   });
 
@@ -62,6 +63,9 @@ class _ArnaPopupDialog extends StatelessWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The body widget of the popup dialog.
   final Widget body;
@@ -97,6 +101,7 @@ class _ArnaPopupDialog extends StatelessWidget {
                   title: title,
                   headerBarMiddle: headerBarMiddle,
                   actions: actions,
+                  headerBarBottom: headerBarBottom,
                   body: body,
                   isDialog: true,
                 ),
@@ -148,6 +153,7 @@ class _ArnaPopupPage extends StatelessWidget {
     required this.title,
     required this.headerBarMiddle,
     required this.actions,
+    required this.headerBarBottom,
     required this.body,
     required this.resizeToAvoidBottomInset,
   });
@@ -169,6 +175,9 @@ class _ArnaPopupPage extends StatelessWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The body widget of the popup dialog page.
   final Widget body;
@@ -194,6 +203,7 @@ class _ArnaPopupPage extends StatelessWidget {
       title: title,
       headerBarMiddle: headerBarMiddle,
       actions: actions,
+      headerBarBottom: headerBarBottom,
       body: body,
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
     );
@@ -252,6 +262,7 @@ Future<T?> showArnaPopupDialog<T>({
   String? title,
   Widget? headerBarMiddle,
   List<Widget>? actions,
+  Widget? headerBarBottom,
   required WidgetBuilder builder,
   bool resizeToAvoidBottomInset = true,
   bool barrierDismissible = false,
@@ -271,6 +282,7 @@ Future<T?> showArnaPopupDialog<T>({
               title: title,
               headerBarMiddle: headerBarMiddle,
               actions: actions,
+              headerBarBottom: headerBarBottom,
               body: Builder(builder: builder),
               resizeToAvoidBottomInset: resizeToAvoidBottomInset,
             ),
@@ -284,6 +296,7 @@ Future<T?> showArnaPopupDialog<T>({
               title: title,
               headerBarMiddle: headerBarMiddle,
               actions: actions,
+              headerBarBottom: headerBarBottom,
               body: Builder(builder: builder),
             );
             return useSafeArea ? SafeArea(child: dialog) : dialog;

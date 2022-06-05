@@ -1,3 +1,11 @@
+## 1.0.4
+
+- Update ArnaHeaderBar
+- Update ArnaScaffold
+- Update ArnaSideScaffold
+- Update ArnaMasterDetailScaffold
+- Update ArnaPopupDialog
+
 ## 1.0.3
 
 - Update README

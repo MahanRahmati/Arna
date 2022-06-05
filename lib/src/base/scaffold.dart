@@ -13,6 +13,7 @@ class ArnaScaffold extends StatelessWidget {
     this.title,
     this.headerBarMiddle,
     this.actions,
+    this.headerBarBottom,
     required this.body,
     this.isDialog = false,
     this.resizeToAvoidBottomInset = true,
@@ -35,6 +36,9 @@ class ArnaScaffold extends StatelessWidget {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The body widget of the scaffold.
   /// The primary content of the scaffold.
@@ -82,6 +86,7 @@ class ArnaScaffold extends StatelessWidget {
                       ? Text(title!, style: ArnaTheme.of(context).textTheme.title)
                       : null,
               actions: actions,
+              bottom: headerBarBottom,
             ),
             Flexible(
               child: Padding(

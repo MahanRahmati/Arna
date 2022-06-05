@@ -128,8 +128,7 @@ class ArnaBottomBarItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
+                      Flexible(
                         child: Text(
                           label,
                           style: ArnaTheme.of(context).textTheme.button!.copyWith(

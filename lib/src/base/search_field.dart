@@ -145,39 +145,33 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final Widget search = Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        ColoredBox(
-          color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
-          child: Padding(
-            padding: Styles.small,
-            child: Center(
-              child: SizedBox(
-                width: Styles.searchWidth,
-                child: ArnaTextField(
-                  controller: widget.controller ?? _textcontroller!.value,
-                  hintText: widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel,
-                  prefix: Icon(
-                    Icons.search_outlined,
-                    color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
-                  ),
-                  enabled: widget.enabled && widget.showSearch,
-                  onTap: widget.onTap,
-                  clearButtonMode: ArnaOverlayVisibilityMode.editing,
-                  onChanged: widget.onChanged,
-                  onSubmitted: widget.onSubmitted,
-                  focusNode: focusNode,
-                  autofocus: widget.autofocus && widget.showSearch,
-                  autocorrect: widget.autocorrect,
-                  textInputAction: TextInputAction.search,
-                ),
+    final Widget search = ColoredBox(
+      color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+      child: Padding(
+        padding: Styles.small,
+        child: Center(
+          child: SizedBox(
+            width: Styles.searchWidth,
+            child: ArnaTextField(
+              controller: widget.controller ?? _textcontroller!.value,
+              hintText: widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel,
+              prefix: Icon(
+                Icons.search_outlined,
+                color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
               ),
+              enabled: widget.enabled && widget.showSearch,
+              onTap: widget.onTap,
+              clearButtonMode: ArnaOverlayVisibilityMode.editing,
+              onChanged: widget.onChanged,
+              onSubmitted: widget.onSubmitted,
+              focusNode: focusNode,
+              autofocus: widget.autofocus && widget.showSearch,
+              autocorrect: widget.autocorrect,
+              textInputAction: TextInputAction.search,
             ),
           ),
         ),
-        const ArnaDivider(),
-      ],
+      ),
     );
 
     return Hero(

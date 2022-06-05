@@ -5,6 +5,7 @@
 - Update ArnaSideScaffold
 - Update ArnaMasterDetailScaffold
 - Update ArnaPopupDialog
+- Update ArnaSearchField
 
 ## 1.0.3
 

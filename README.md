@@ -85,7 +85,6 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaCloseButton           | CloseButton                   | -                                     |
 | ArnaColorButton           | -                             | -                                     |
 | ArnaIconButton            | IconButton                    | -                                     |
-| ArnaLinkButton            | -                             | -                                     |
 | ArnaLinkedButtons         | -                             | -                                     |
 | ArnaTextButton            | TextButton                    | -                                     |
 | ArnaPillButton            | FloatingActionButton          | -                                     |

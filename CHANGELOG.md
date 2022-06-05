@@ -29,6 +29,7 @@
 - Add ArnaPageTransitionSwitcher
 - Add ArnaFadeThroughTransition
 - [BREAKING] Update ArnaTypography
+- [BREAKING] Remove ArnaLinkButton
 
 ## 1.0.2
 

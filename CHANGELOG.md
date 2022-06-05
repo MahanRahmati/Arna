@@ -28,6 +28,7 @@
 - Add ArnaSelectableText
 - Add ArnaPageTransitionSwitcher
 - Add ArnaFadeThroughTransition
+- [BREAKING] Update ArnaTypography
 
 ## 1.0.2
 

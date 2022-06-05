@@ -17,7 +17,11 @@ class Typography extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.titleLarge),
+                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.display),
+              ),
+              Padding(
+                padding: Styles.normal,
+                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.headline),
               ),
               Padding(
                 padding: Styles.normal,

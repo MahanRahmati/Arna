@@ -13,14 +13,16 @@ class ArnaTextTheme with Diagnosticable {
   /// If you do decide to create your own text theme, consider using one of those predefined themes as a starting point
   /// for [copyWith] or [apply].
   const ArnaTextTheme({
-    TextStyle? titleLargeTextStyle,
+    TextStyle? displayTextStyle,
+    TextStyle? headlineTextStyle,
     TextStyle? titleTextStyle,
     TextStyle? bodyTextStyle,
     TextStyle? subtitleTextStyle,
     TextStyle? buttonTextStyle,
     TextStyle? captionTextStyle,
   }) : this._raw(
-          titleLargeTextStyle,
+          displayTextStyle,
+          headlineTextStyle,
           titleTextStyle,
           bodyTextStyle,
           subtitleTextStyle,
@@ -30,7 +32,8 @@ class ArnaTextTheme with Diagnosticable {
 
   /// Creates a text theme that uses the given values.
   const ArnaTextTheme._raw(
-    this._titleLargeTextStyle,
+    this._displayTextStyle,
+    this._headlineTextStyle,
     this._titleTextStyle,
     this._bodyTextStyle,
     this._subtitleTextStyle,
@@ -38,8 +41,11 @@ class ArnaTextTheme with Diagnosticable {
     this._captionTextStyle,
   );
 
-  /// The [TextStyle] of large titles.
-  final TextStyle? _titleLargeTextStyle;
+  /// The [TextStyle] of displays.
+  final TextStyle? _displayTextStyle;
+
+  /// The [TextStyle] of headlines.
+  final TextStyle? _headlineTextStyle;
 
   /// The [TextStyle] of titles.
   final TextStyle? _titleTextStyle;
@@ -56,8 +62,11 @@ class ArnaTextTheme with Diagnosticable {
   /// The [TextStyle] of captions.
   final TextStyle? _captionTextStyle;
 
-  /// The [TextStyle] of large titles.
-  TextStyle? get titleLarge => _titleLargeTextStyle;
+  /// The [TextStyle] of displays.
+  TextStyle? get display => _displayTextStyle;
+
+  /// The [TextStyle] of headlines.
+  TextStyle? get headline => _headlineTextStyle;
 
   /// The [TextStyle] of titles.
   TextStyle? get title => _titleTextStyle;
@@ -83,7 +92,8 @@ class ArnaTextTheme with Diagnosticable {
   ///  * [merge] is used instead of [copyWith] when you want to merge all of the fields of a TextTheme instead of
   ///    individual fields.
   ArnaTextTheme copyWith({
-    TextStyle? titleLargeTextStyle,
+    TextStyle? displayTextStyle,
+    TextStyle? headlineTextStyle,
     TextStyle? titleTextStyle,
     TextStyle? bodyTextStyle,
     TextStyle? subtitleTextStyle,
@@ -91,7 +101,8 @@ class ArnaTextTheme with Diagnosticable {
     TextStyle? captionTextStyle,
   }) {
     return ArnaTextTheme(
-      titleLargeTextStyle: titleLargeTextStyle ?? _titleLargeTextStyle,
+      displayTextStyle: displayTextStyle ?? _displayTextStyle,
+      headlineTextStyle: headlineTextStyle ?? _headlineTextStyle,
       titleTextStyle: titleTextStyle ?? _titleTextStyle,
       bodyTextStyle: bodyTextStyle ?? _bodyTextStyle,
       subtitleTextStyle: subtitleTextStyle ?? _subtitleTextStyle,
@@ -124,7 +135,8 @@ class ArnaTextTheme with Diagnosticable {
       return this;
     }
     return copyWith(
-      titleLargeTextStyle: _titleLargeTextStyle?.merge(other._titleLargeTextStyle) ?? other._titleLargeTextStyle,
+      displayTextStyle: _displayTextStyle?.merge(other._displayTextStyle) ?? other._displayTextStyle,
+      headlineTextStyle: _headlineTextStyle?.merge(other._headlineTextStyle) ?? other._headlineTextStyle,
       titleTextStyle: _titleTextStyle?.merge(other._titleTextStyle) ?? other._titleTextStyle,
       bodyTextStyle: _bodyTextStyle?.merge(other._bodyTextStyle) ?? other._bodyTextStyle,
       subtitleTextStyle: _subtitleTextStyle?.merge(other._subtitleTextStyle) ?? other._subtitleTextStyle,
@@ -147,7 +159,16 @@ class ArnaTextTheme with Diagnosticable {
     TextDecorationStyle? decorationStyle,
   }) {
     return ArnaTextTheme(
-      titleLargeTextStyle: _titleLargeTextStyle?.apply(
+      displayTextStyle: _displayTextStyle?.apply(
+        color: bodyColor,
+        decoration: decoration,
+        decorationColor: decorationColor,
+        decorationStyle: decorationStyle,
+        fontFamily: fontFamily,
+        fontSizeFactor: fontSizeFactor,
+        fontSizeDelta: fontSizeDelta,
+      ),
+      headlineTextStyle: _headlineTextStyle?.apply(
         color: bodyColor,
         decoration: decoration,
         decorationColor: decorationColor,
@@ -209,7 +230,8 @@ class ArnaTextTheme with Diagnosticable {
   /// {@macro dart.ui.shadow.lerp}
   static ArnaTextTheme lerp(ArnaTextTheme? a, ArnaTextTheme? b, double t) {
     return ArnaTextTheme(
-      titleLargeTextStyle: TextStyle.lerp(a?._titleLargeTextStyle, b?._titleLargeTextStyle, t),
+      displayTextStyle: TextStyle.lerp(a?._displayTextStyle, b?._displayTextStyle, t),
+      headlineTextStyle: TextStyle.lerp(a?._headlineTextStyle, b?._headlineTextStyle, t),
       titleTextStyle: TextStyle.lerp(a?._titleTextStyle, b?._titleTextStyle, t),
       bodyTextStyle: TextStyle.lerp(a?._bodyTextStyle, b?._bodyTextStyle, t),
       subtitleTextStyle: TextStyle.lerp(a?._subtitleTextStyle, b?._subtitleTextStyle, t),
@@ -227,7 +249,8 @@ class ArnaTextTheme with Diagnosticable {
       return false;
     }
     return other is ArnaTextTheme &&
-        _titleLargeTextStyle == other._titleLargeTextStyle &&
+        _displayTextStyle == other._displayTextStyle &&
+        _headlineTextStyle == other._headlineTextStyle &&
         _titleTextStyle == other._titleTextStyle &&
         _bodyTextStyle == other._bodyTextStyle &&
         _subtitleTextStyle == other._subtitleTextStyle &&
@@ -238,7 +261,8 @@ class ArnaTextTheme with Diagnosticable {
   @override
   int get hashCode {
     return Object.hash(
-      _titleLargeTextStyle,
+      _displayTextStyle,
+      _headlineTextStyle,
       _titleTextStyle,
       _bodyTextStyle,
       _subtitleTextStyle,
@@ -253,9 +277,16 @@ class ArnaTextTheme with Diagnosticable {
     const ArnaTextTheme defaultTheme = ArnaTypography.light;
     properties.add(
       DiagnosticsProperty<TextStyle>(
-        'titleLargeTextStyle',
-        _titleLargeTextStyle,
-        defaultValue: defaultTheme._titleLargeTextStyle,
+        'displayTextStyle',
+        _displayTextStyle,
+        defaultValue: defaultTheme._displayTextStyle,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<TextStyle>(
+        'headlineTextStyle',
+        _headlineTextStyle,
+        defaultValue: defaultTheme._headlineTextStyle,
       ),
     );
     properties.add(

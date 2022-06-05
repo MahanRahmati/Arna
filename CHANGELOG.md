@@ -7,6 +7,7 @@
 - Update ArnaPopupDialog
 - Update ArnaSearchField
 - [Example] Update Example
+- Update ArnaRouteTransitionMixin
 
 ## 1.0.3
 

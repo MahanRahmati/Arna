@@ -328,6 +328,7 @@ class NavigationItem {
     required this.builder,
     this.headerBarLeading,
     this.actions,
+    this.headerBarBottom,
     this.badge,
     this.isFocusable = true,
     this.autofocus = false,
@@ -362,6 +363,9 @@ class NavigationItem {
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
   /// action is constrained to be no bigger than the [Styles.headerBarHeight].
   final List<Widget>? actions;
+
+  /// This widget appears across the bottom of the header bar.
+  final Widget? headerBarBottom;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

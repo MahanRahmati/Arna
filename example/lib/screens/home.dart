@@ -19,7 +19,7 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
-    // final bool showSearch = ref.watch(searchProvider);
+    final bool showSearch = ref.watch(searchProvider);
     final bool showBlur = ref.watch(blurProvider);
 
     final NavigationItem hello = NavigationItem(
@@ -52,11 +52,12 @@ class _HomeState extends ConsumerState<Home> {
       title: Strings.widgets,
       icon: Icons.widgets_outlined,
       selectedIcon: Icons.widgets,
-      // headerBarLeading: ArnaIconButton(
-      //   icon: Icons.search_outlined,
-      //   onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
-      //   tooltipMessage: Strings.search,
-      // ),
+      headerBarLeading: ArnaIconButton(
+        icon: Icons.search_outlined,
+        onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
+        tooltipMessage: Strings.search,
+      ),
+      headerBarBottom: ArnaSearchField(showSearch: ref.watch(searchProvider)),
       builder: (_) => const Widgets(),
     );
 
@@ -64,11 +65,12 @@ class _HomeState extends ConsumerState<Home> {
       key: UniqueKey(),
       title: Strings.widgets,
       leading: const Icon(Icons.widgets_outlined),
-      // headerBarLeading: ArnaIconButton(
-      //   icon: Icons.search_outlined,
-      //   onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
-      //   tooltipMessage: Strings.search,
-      // ),
+      headerBarLeading: ArnaIconButton(
+        icon: Icons.search_outlined,
+        onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
+        tooltipMessage: Strings.search,
+      ),
+      headerBarBottom: ArnaSearchField(showSearch: ref.watch(searchProvider)),
       builder: (_) => const Widgets(),
     );
 

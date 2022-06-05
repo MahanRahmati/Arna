@@ -6,7 +6,6 @@
 - [ ] ArnaDropdownMenuPainter [Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35]
 - [ ] ArnaProgressIndicator [Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35]
 - [ ] ArnaSearchField [Remove focus node when showSearch is false.]
-- [ ] ArnaSearchField [Add ArnaSearchField to Example]
 - [ ] ArnaSnackBar [Refactor ArnaSnackBar.]
 - [ ] ArnaTextSelectionControls [Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35]
 - [ ] ArnaPopupMenu [Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35]

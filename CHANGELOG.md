@@ -6,6 +6,7 @@
 - Update ArnaMasterDetailScaffold
 - Update ArnaPopupDialog
 - Update ArnaSearchField
+- [Example] Update Example
 
 ## 1.0.3
 

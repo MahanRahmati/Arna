@@ -138,6 +138,7 @@ class _ArnaLinkedItem extends StatelessWidget {
       onLongPress: button.onLongPress,
       tooltipMessage: button.onPressed != null || button.onLongPress != null ? button.tooltipMessage : null,
       isFocusable: button.isFocusable,
+      showAnimation: button.onPressed != null || button.onLongPress != null,
       autofocus: button.autofocus,
       cursor: button.cursor,
       semanticLabel: button.semanticLabel,

@@ -108,6 +108,7 @@ class ArnaPillButton extends StatelessWidget {
         onLongPress: onLongPress,
         tooltipMessage: onPressed != null || onLongPress != null ? tooltipMessage : null,
         isFocusable: isFocusable,
+        showAnimation: onPressed != null || onLongPress != null,
         autofocus: autofocus,
         cursor: cursor,
         semanticLabel: semanticLabel,

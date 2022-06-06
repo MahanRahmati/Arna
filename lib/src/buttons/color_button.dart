@@ -109,6 +109,7 @@ class ArnaColorButton<T> extends StatelessWidget {
         },
         onPressed: onPressed,
         isFocusable: isFocusable,
+        showAnimation: onPressed != null,
         autofocus: autofocus,
         cursor: cursor,
         semanticLabel: semanticLabel,

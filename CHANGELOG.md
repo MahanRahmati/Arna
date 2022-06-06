@@ -12,6 +12,11 @@
 - Update ArnaLogo
 - Update ArnaAvatar
 - Update ArnaBaseWidget
+- Update ArnaBorderlessButton
+- Update ArnaButton
+- Update ArnaColorButton
+- Update ArnaLinkedButtons
+- Update ArnaPillButton
 
 ## 1.0.3
 

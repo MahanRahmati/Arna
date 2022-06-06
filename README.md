@@ -17,6 +17,10 @@ NOTE: Since this package is formatted with `flutter format -l 120` therefore the
 
 You can check the web version [here](https://mahanrahmati.github.io/arna_demo/).
 
+## Made with Arna
+
+- [Arna Translate](https://github.com/MahanRahmati/translate) - Alternative front-end for Google Translate.
+
 ## Getting Started
 
 Add Arna as a dependency in your pubspec.yaml
@@ -34,14 +38,9 @@ import 'package:arna/arna.dart';
 
 ## Platform Support
 
-| Platform | Supported |
-| -------- | --------- |
-| Android  | ✅        |
-| iOS      | ✅        |
-| Linux    | ✅        |
-| MacOS    | ✅        |
-| Web      | ✅        |
-| Windows  | ✅        |
+| Platform  | Android | iOS | Linux | MacOS | Windows |
+| --------- | ------- | --- | ----- | ----- | ------- |
+| Supported | ✅      | ✅  | ✅    | ✅    | ✅      |
 
 ## Feature roadmap
 

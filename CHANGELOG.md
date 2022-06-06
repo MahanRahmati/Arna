@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Update README
+
 ## 1.0.4+1
 
 - Update ArnaBaseWidget

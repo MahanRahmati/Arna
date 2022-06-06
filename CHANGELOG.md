@@ -11,6 +11,7 @@
 - Update ArnaApp
 - Update ArnaLogo
 - Update ArnaAvatar
+- Update ArnaBaseWidget
 
 ## 1.0.3
 

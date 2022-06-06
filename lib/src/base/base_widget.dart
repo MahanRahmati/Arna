@@ -171,6 +171,12 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
       }
     }
     _effectiveFocusNode.canRequestFocus = _isEnabled;
+    if (_pressed && mounted) {
+      if (widget.showAnimation) {
+        _controller.forward();
+      }
+      setState(() => _pressed = false);
+    }
   }
 
   @override
@@ -192,11 +198,11 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   }
 
   Future<void> _handleTap() async {
-    if (_isEnabled && widget.onPressed != null) {
+    if (_isEnabled) {
       if (mounted) {
         setState(() => _pressed = true);
       }
-      widget.onPressed!();
+      widget.onPressed?.call();
       if (widget.showAnimation) {
         _controller.reverse().then((_) {
           if (mounted) {
@@ -211,11 +217,11 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   }
 
   void _handleLongPress() {
-    if (_isEnabled && widget.onLongPress != null) {
+    if (_isEnabled) {
       if (widget.enableFeedback) {
         ArnaFeedback.forLongPress(context);
       }
-      widget.onLongPress!();
+      widget.onLongPress?.call();
     }
   }
 

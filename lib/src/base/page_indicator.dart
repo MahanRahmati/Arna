@@ -5,10 +5,11 @@ class ArnaPageIndicator extends StatelessWidget {
   /// Creates a page indicator.
   const ArnaPageIndicator({
     super.key,
-    this.count = 1,
+    required this.count,
     this.position = 0,
     this.accentColor,
-  });
+  })  : assert(count > 0),
+        assert(position >= 0);
 
   /// The number of indicators.
   final int count;

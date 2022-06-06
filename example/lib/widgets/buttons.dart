@@ -94,10 +94,6 @@ class _ButtonsState extends State<Buttons> {
                 setState(() => dropdownvalue = newValue!);
               },
             ),
-            ArnaPillButton(
-              label: Strings.add,
-              onPressed: () {},
-            ),
           ],
         ),
       ),

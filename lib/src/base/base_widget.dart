@@ -139,16 +139,14 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    if (widget.showAnimation) {
-      _controller = AnimationController(
-        value: 1.0,
-        duration: Styles.baseWidgetDuration,
-        debugLabel: 'ArnaBaseWidget',
-        lowerBound: 0.7,
-        vsync: this,
-      );
-      _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
-    }
+    _controller = AnimationController(
+      value: 1.0,
+      duration: Styles.baseWidgetDuration,
+      debugLabel: 'ArnaBaseWidget',
+      lowerBound: 0.7,
+      vsync: this,
+    );
+    _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
 
     _focusNode = FocusNode(canRequestFocus: _isEnabled);
     _effectiveFocusNode.canRequestFocus = _isEnabled;
@@ -171,18 +169,6 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
       }
     }
     _effectiveFocusNode.canRequestFocus = _isEnabled;
-
-    if (widget.showAnimation != oldWidget.showAnimation) {
-      _controller = AnimationController(
-        value: 1.0,
-        duration: Styles.baseWidgetDuration,
-        debugLabel: 'ArnaBaseWidget',
-        lowerBound: 0.7,
-        vsync: this,
-      );
-      _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
-    }
-
     if (_pressed && mounted) {
       if (widget.showAnimation) {
         _controller.forward();

@@ -10,6 +10,7 @@
 - Update ArnaRouteTransitionMixin
 - Update ArnaApp
 - Update ArnaLogo
+- Update ArnaAvatar
 
 ## 1.0.3
 

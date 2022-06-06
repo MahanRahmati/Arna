@@ -35,7 +35,7 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 /// ```dart
 /// const ArnaApp(
 ///   home: ArnaScaffold(
-///     body: Container(),
+///     body: ArnaBody(),
 ///   ),
 ///   debugShowCheckedModeBanner: false,
 /// )
@@ -51,12 +51,12 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 ///   routes: <String, WidgetBuilder>{
 ///     '/': (BuildContext context) {
 ///       return const ArnaScaffold(
-///         body: Container(),
+///         body: ArnaBody(),
 ///       );
 ///     },
 ///     '/about': (BuildContext context) {
 ///       return const ArnaScaffold(
-///         body: Container(),
+///         body: ArnaBody(),
 ///       );
 ///     }
 ///   },
@@ -73,7 +73,7 @@ import 'package:flutter/services.dart' show LogicalKeyboardKey, RawKeyDownEvent;
 ///     brightness: Brightness.dark,
 ///   ),
 ///   home: ArnaScaffold(
-///     body: Container(),
+///     body: ArnaBody(),
 ///   ),
 /// )
 /// ```
@@ -332,7 +332,6 @@ class ArnaApp extends StatefulWidget {
   ///  * [localizationsDelegates], which must be specified for localized applications.
   ///  * [GlobalMaterialLocalizations], a [localizationsDelegates] value which provides material localizations for many
   ///    languages.
-  ///  * The Flutter Internationalization Tutorial,
   ///  * The Flutter Internationalization Tutorial, <https://flutter.dev/tutorials/internationalization/>.
   final Iterable<Locale> supportedLocales;
 
@@ -452,7 +451,6 @@ class ArnaScrollBehavior extends ScrollBehavior {
 
   @override
   Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
-    // When modifying this function, consider modifying the implementation in the base class as well.
     switch (axisDirectionToAxis(details.direction)) {
       case Axis.horizontal:
         return child;

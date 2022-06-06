@@ -8,6 +8,7 @@
 - Update ArnaSearchField
 - [Example] Update Example
 - Update ArnaRouteTransitionMixin
+- Update ArnaApp
 
 ## 1.0.3
 

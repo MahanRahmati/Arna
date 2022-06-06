@@ -9,6 +9,7 @@
 - [Example] Update Example
 - Update ArnaRouteTransitionMixin
 - Update ArnaApp
+- Update ArnaLogo
 
 ## 1.0.3
 

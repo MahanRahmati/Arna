@@ -53,7 +53,7 @@ class ArnaLogoPainter extends CustomPainter {
     path_0.close();
 
     final Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = const Color(0xff1fbcfd).withOpacity(1.0);
+    paint0Fill.color = const Color(0xff1fbcfd);
     canvas.drawPath(path_0, paint0Fill);
 
     final Path path_1 = Path();
@@ -78,7 +78,7 @@ class ArnaLogoPainter extends CustomPainter {
     path_1.close();
 
     final Paint paint1Fill = Paint()..style = PaintingStyle.fill;
-    paint1Fill.color = const Color(0xff44d1fd).withOpacity(1.0);
+    paint1Fill.color = const Color(0xff44d1fd);
     canvas.drawPath(path_1, paint1Fill);
 
     final Path path_2 = Path();
@@ -184,12 +184,10 @@ class ArnaLogoPainter extends CustomPainter {
     path_2.close();
 
     final Paint paint2Fill = Paint()..style = PaintingStyle.fill;
-    paint2Fill.color = const Color(0xff255698).withOpacity(1.0);
+    paint2Fill.color = const Color(0xff255698);
     canvas.drawPath(path_2, paint2Fill);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

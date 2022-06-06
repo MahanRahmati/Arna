@@ -18,7 +18,6 @@
 
   - [ ] ArnaChip
   - [ ] ArnaDataTable
-  - [ ] ArnaPageIndicator
   - [ ] ArnaPaginatedDataTable
   - [ ] ArnaPicker
   - [ ] ArnaRangeSlider

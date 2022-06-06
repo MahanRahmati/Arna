@@ -1,5 +1,6 @@
 ## 1.0.4
 
+- Update ROADMAP
 - Update ArnaHeaderBar
 - Update ArnaScaffold
 - Update ArnaSideScaffold
@@ -17,6 +18,7 @@
 - Update ArnaColorButton
 - Update ArnaLinkedButtons
 - Update ArnaPillButton
+- Add ArnaPageIndicator
 
 ## 1.0.3
 

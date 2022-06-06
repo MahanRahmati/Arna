@@ -26,6 +26,9 @@ abstract class Styles {
   /// Scrollbar thickness
   static const double scrollBarThickness = base;
 
+  /// Indicator height
+  static const double indicatorHeight = base;
+
   /// Slider track size
   static const double sliderTrackSize = base * 1.25;
 

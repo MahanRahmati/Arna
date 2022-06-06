@@ -23,6 +23,7 @@ export 'package:arna/src/base/licenses.dart';
 export 'package:arna/src/base/master_detail_scaffold.dart';
 export 'package:arna/src/base/master_item.dart';
 export 'package:arna/src/base/page.dart';
+export 'package:arna/src/base/page_indicator.dart';
 export 'package:arna/src/base/progress_indicator.dart';
 export 'package:arna/src/base/route.dart';
 export 'package:arna/src/base/scaffold.dart';

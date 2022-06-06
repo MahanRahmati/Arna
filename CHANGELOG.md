@@ -1,5 +1,6 @@
 ## 1.0.4
 
+- Update README
 - Update ROADMAP
 - Update ArnaHeaderBar
 - Update ArnaScaffold

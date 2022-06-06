@@ -65,6 +65,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaLicensePage           | LicensePage                   | -                                     |
 | ArnaMasterDetailScaffold  | -                             | -                                     |
 | ArnaMasterItem            | -                             | -                                     |
+| ArnaPageIndicator         | -                             | -                                     |
 | ArnaPage                  | MaterialPage                  | CupertinoPage                         |
 | ArnaProgressIndicator     | ProgressIndicator             | CupertinoActivityIndicator            |
 | ArnaPageRoute             | MaterialPageRoute             | CupertinoPageRoute                    |

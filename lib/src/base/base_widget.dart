@@ -171,6 +171,18 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
       }
     }
     _effectiveFocusNode.canRequestFocus = _isEnabled;
+
+    if (widget.showAnimation != oldWidget.showAnimation) {
+      _controller = AnimationController(
+        value: 1.0,
+        duration: Styles.baseWidgetDuration,
+        debugLabel: 'ArnaBaseWidget',
+        lowerBound: 0.7,
+        vsync: this,
+      );
+      _animation = CurvedAnimation(parent: _controller, curve: Styles.basicCurve);
+    }
+
     if (_pressed && mounted) {
       if (widget.showAnimation) {
         _controller.forward();

@@ -128,7 +128,8 @@ class ArnaBottomBarItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Flexible(
+                      Align(
+                        alignment: Alignment.bottomCenter,
                         child: Text(
                           label,
                           style: ArnaTheme.of(context).textTheme.button!.copyWith(
@@ -137,6 +138,8 @@ class ArnaBottomBarItem extends StatelessWidget {
                                   context,
                                 ),
                               ),
+                          softWrap: false,
+                          maxLines: 1,
                         ),
                       ),
                     ],

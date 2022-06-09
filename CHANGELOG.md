@@ -1,6 +1,7 @@
 ## 1.0.5
 
 - Update README
+- Fix ArnaBottomBarItem
 
 ## 1.0.4+1
 

@@ -555,29 +555,35 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
 
     final FocusNode focusNode = _effectiveFocusNode;
 
-    final TextSelectionControls textSelectionControls = widget.selectionControls ?? arnaTextSelectionControls;
+    TextSelectionControls? textSelectionControls = widget.selectionControls;
     final bool paintCursorAboveText;
     Offset? cursorOffset;
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
+        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
         break;
       case TargetPlatform.android:
+        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.fuchsia:
+        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.linux:
+        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.macOS:
+        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
         break;
       case TargetPlatform.windows:
+        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         break;
     }

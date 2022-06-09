@@ -1008,23 +1008,27 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         ),
     ];
 
-    final TextSelectionControls textSelectionControls = widget.selectionControls ?? arnaTextSelectionControls;
+    TextSelectionControls? textSelectionControls = widget.selectionControls;
     final bool paintCursorAboveText;
     VoidCallback? handleDidGainAccessibilityFocus;
     Offset? cursorOffset;
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
+        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
         break;
       case TargetPlatform.android:
+        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.fuchsia:
+        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.linux:
+        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         handleDidGainAccessibilityFocus = () {
           // Automatically activate the TextField when it receives accessibility focus.
@@ -1034,6 +1038,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         };
         break;
       case TargetPlatform.macOS:
+        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
         handleDidGainAccessibilityFocus = () {
@@ -1044,6 +1049,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         };
         break;
       case TargetPlatform.windows:
+        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         handleDidGainAccessibilityFocus = () {
           // Automatically activate the TextField when it receives accessibility focus.

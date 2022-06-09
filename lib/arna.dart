@@ -15,6 +15,7 @@ export 'package:arna/src/base/body.dart';
 export 'package:arna/src/base/bottom_bar.dart';
 export 'package:arna/src/base/bottom_bar_item.dart';
 export 'package:arna/src/base/date.dart';
+export 'package:arna/src/base/desktop_text_selection.dart';
 export 'package:arna/src/base/divider.dart';
 export 'package:arna/src/base/drawer.dart';
 export 'package:arna/src/base/feedback.dart';

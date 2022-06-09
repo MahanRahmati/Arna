@@ -2,6 +2,7 @@
 
 - Update README
 - Fix ArnaBottomBarItem
+- Refactor ArnaTextSelectionControls
 
 ## 1.0.4+1
 

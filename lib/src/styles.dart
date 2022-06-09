@@ -65,6 +65,9 @@ abstract class Styles {
   /// Switch thumb size
   static const double switchThumbSize = base * 3;
 
+  /// Handle size
+  static const double handleSize = base * 3;
+
   /// Switch height
   static const double switchHeight = base * 4;
 

@@ -145,7 +145,7 @@ class _ArnaDesktopTextSelectionControlsToolbarState extends State<_ArnaDesktopTe
 
     void addToolbarButton(IconData icon, String text, VoidCallback onPressed) {
       items.add(
-        _ArnaDesktopTextSelectionToolbarButton(
+        ArnaTextSelectionToolbarButton(
           icon: icon,
           label: text,
           onPressed: onPressed,
@@ -216,7 +216,7 @@ class _ArnaDesktopTextSelectionToolbar extends StatelessWidget {
   /// {@macro flutter.material.TextSelectionToolbar.children}
   ///
   /// See also:
-  ///   * [_ArnaDesktopTextSelectionToolbarButton], which builds a default Arna-style text selection toolbar text button.
+  ///   * [ArnaTextSelectionToolbarButton], which builds a default Arna-style text selection toolbar button.
   final List<Widget> children;
 
   @override
@@ -242,34 +242,6 @@ class _ArnaDesktopTextSelectionToolbar extends StatelessWidget {
           child: Wrap(children: children),
         ),
       ),
-    );
-  }
-}
-
-/// An [ArnaTextButton] for the Arna text selection toolbar.
-class _ArnaDesktopTextSelectionToolbarButton extends StatelessWidget {
-  /// Creates an instance of ArnaDesktopTextSelectionToolbarButton.
-  const _ArnaDesktopTextSelectionToolbarButton({
-    required this.icon,
-    required this.label,
-    required this.onPressed,
-  });
-
-  /// The icon of the button.
-  final IconData icon;
-
-  /// The text label of the button.
-  final String label;
-
-  /// The callback that is called when a button is tapped.
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return ArnaIconButton(
-      icon: icon,
-      onPressed: onPressed,
-      tooltipMessage: label,
     );
   }
 }

@@ -188,7 +188,7 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
 
     void addToolbarButton(IconData icon, String text, VoidCallback onPressed) {
       items.add(
-        _ArnaTextSelectionToolbarButton(
+        ArnaTextSelectionToolbarButton(
           icon: icon,
           label: text,
           onPressed: onPressed,
@@ -235,26 +235,12 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
       anchorBelow: anchorBelow,
       children: items,
     );
-
-    // return ArnaTextSelectionToolbar(
-    //   anchorAbove: anchorAbove,
-    //   anchorBelow: anchorBelow,
-    //   children: itemDatas.asMap().entries.map((MapEntry<int, _TextSelectionToolbarItemData> entry) {
-    //     return TextSelectionToolbarTextButton(
-    //       padding: TextSelectionToolbarTextButton.getPadding(entry.key, itemDatas.length),
-    //       onPressed: entry.value.onPressed,
-    //       child: Text(entry.value.label),
-    //     );
-    //   }).toList(),
-    // );
   }
 }
 
 /// An Arna-style text selection toolbar.
 ///
 /// Typically displays buttons for text manipulation, e.g. copying and pasting text.
-///
-/// Tries to position itself as closely as possible to [anchor] while remaining fully on-screen.
 class _ArnaTextSelectionToolbar extends StatelessWidget {
   /// Creates an instance of _ArnaTextSelectionToolbar.
   const _ArnaTextSelectionToolbar({
@@ -275,7 +261,7 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
   /// {@macro flutter.material.TextSelectionToolbar.children}
   ///
   /// See also:
-  ///   * [_ArnaTextSelectionToolbarButton], which builds a default Arna-style text selection toolbar text button.
+  ///   * [ArnaTextSelectionToolbarButton], which builds a default Arna-style text selection toolbar button.
   final List<Widget> children;
 
   @override
@@ -309,10 +295,11 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
   }
 }
 
-/// An [ArnaTextButton] for the Arna text selection toolbar.
-class _ArnaTextSelectionToolbarButton extends StatelessWidget {
+/// An [ArnaBorderlessButton] for the Arna text selection toolbar.
+class ArnaTextSelectionToolbarButton extends StatelessWidget {
   /// Creates an instance of ArnaTextSelectionToolbarButton.
-  const _ArnaTextSelectionToolbarButton({
+  const ArnaTextSelectionToolbarButton({
+    super.key,
     required this.icon,
     required this.label,
     required this.onPressed,
@@ -329,7 +316,7 @@ class _ArnaTextSelectionToolbarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaIconButton(
+    return ArnaBorderlessButton(
       icon: icon,
       onPressed: onPressed,
       tooltipMessage: label,

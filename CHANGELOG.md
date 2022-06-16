@@ -3,6 +3,7 @@
 - Update README
 - Fix ArnaBottomBarItem
 - Refactor ArnaTextSelectionControls
+- Update ArnaTextFormField
 
 ## 1.0.4+1
 

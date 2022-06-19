@@ -4,7 +4,13 @@
 version: 2
 enable-beta-ecosystems: true
 updates:
-  - package-ecosystem: "pub" #"github-actions"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "MahanRahmati"
+  - package-ecosystem: "pub"
     directory: "/"
     schedule:
       interval: "weekly"

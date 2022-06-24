@@ -13,10 +13,15 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 ///
 /// The licenses shown on the [ArnaLicensePage] are those returned by the [LicenseRegistry] API, which can be used to
 /// add more licenses to the list.
-void showArnaLicensePage({required BuildContext context, bool useRootNavigator = false}) {
-  Navigator.of(context, rootNavigator: useRootNavigator).push(ArnaPageRoute<void>(
-    builder: (BuildContext context) => const ArnaLicensePage(),
-  ));
+void showArnaLicensePage({
+  required BuildContext context,
+  bool useRootNavigator = false,
+}) {
+  Navigator.of(context, rootNavigator: useRootNavigator).push(
+    ArnaPageRoute<void>(
+      builder: (BuildContext context) => const ArnaLicensePage(),
+    ),
+  );
 }
 
 /// A page that shows licenses for software used by the application.
@@ -36,7 +41,10 @@ class ArnaLicensePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder<_LicenseData>(
       future: LicenseRegistry.licenses
-          .fold<_LicenseData>(_LicenseData(), (_LicenseData prev, LicenseEntry license) => prev..addLicense(license))
+          .fold<_LicenseData>(
+            _LicenseData(),
+            (_LicenseData prev, LicenseEntry license) => prev..addLicense(license),
+          )
           .then((_LicenseData licenseData) => licenseData..sortPackages()),
       builder: (BuildContext context, AsyncSnapshot<_LicenseData> snapshot) {
         switch (snapshot.connectionState) {
@@ -84,7 +92,12 @@ class ArnaLicensePage extends StatelessWidget {
           case ConnectionState.active:
           case ConnectionState.waiting:
             return DecoratedBox(
-              decoration: BoxDecoration(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)),
+              decoration: BoxDecoration(
+                color: ArnaDynamicColor.resolve(
+                  ArnaColors.backgroundColor,
+                  context,
+                ),
+              ),
               child: const Center(child: ArnaProgressIndicator()),
             );
         }
@@ -128,18 +141,20 @@ class _LicenseData {
   /// Sort the packages using some comparison method, or by the default manner, which is to put the application package
   /// first, followed by every other package in case-insensitive alphabetical order.
   void sortPackages([int Function(String a, String b)? compare]) {
-    packages.sort(compare ??
-        (String a, String b) {
-          // Based on how LicenseRegistry currently behaves, the first package returned is the end user application
-          // license. This should be presented first in the list. So here we make sure that first package remains at
-          // the front regardless of alphabetical sorting.
-          if (a == firstPackage) {
-            return -1;
-          }
-          if (b == firstPackage) {
-            return 1;
-          }
-          return a.toLowerCase().compareTo(b.toLowerCase());
-        });
+    packages.sort(
+      compare ??
+          (String a, String b) {
+            // Based on how LicenseRegistry currently behaves, the first package returned is the end user application
+            // license. This should be presented first in the list. So here we make sure that first package remains at
+            // the front regardless of alphabetical sorting.
+            if (a == firstPackage) {
+              return -1;
+            }
+            if (b == firstPackage) {
+              return 1;
+            }
+            return a.toLowerCase().compareTo(b.toLowerCase());
+          },
+    );
   }
 }

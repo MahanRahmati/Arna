@@ -271,7 +271,10 @@ class ArnaTextField extends StatefulWidget {
           !expands || (maxLines == null && minLines == null),
           'minLines and maxLines must be null when expands is true.',
         ),
-        assert(!obscureText || maxLines == 1, 'Obscured fields cannot be multiline.'),
+        assert(
+          !obscureText || maxLines == 1,
+          'Obscured fields cannot be multiline.',
+        ),
         assert(maxLength == null || maxLength > 0),
         // Assert the following instead of setting it directly to avoid surprising the user by silently changing the value they set.
         assert(
@@ -284,17 +287,22 @@ class ArnaTextField extends StatefulWidget {
         enableInteractiveSelection = enableInteractiveSelection ?? (!readOnly || !obscureText),
         toolbarOptions = toolbarOptions ??
             (obscureText
-                ? (readOnly
+                ? readOnly
                     // No point in even offering "Select All" in a read-only obscured
                     // field.
                     ? const ToolbarOptions()
                     // Writable, but obscured.
-                    : const ToolbarOptions(selectAll: true, paste: true))
-                : (readOnly
+                    : const ToolbarOptions(selectAll: true, paste: true)
+                : readOnly
                     // Read-only, not obscured.
                     ? const ToolbarOptions(selectAll: true, copy: true)
                     // Writable, not obscured.
-                    : const ToolbarOptions(copy: true, cut: true, selectAll: true, paste: true)));
+                    : const ToolbarOptions(
+                        copy: true,
+                        cut: true,
+                        selectAll: true,
+                        paste: true,
+                      ));
 
   /// Controls the text being edited.
   ///
@@ -591,52 +599,187 @@ class ArnaTextField extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<TextEditingController>('controller', controller, defaultValue: null));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode, defaultValue: null));
+    properties.add(
+      DiagnosticsProperty<TextEditingController>(
+        'controller',
+        controller,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<FocusNode>(
+        'focusNode',
+        focusNode,
+        defaultValue: null,
+      ),
+    );
     properties.add(DiagnosticsProperty<bool>('enabled', enabled, defaultValue: null));
-    properties.add(DiagnosticsProperty<TextInputType>('keyboardType', keyboardType, defaultValue: TextInputType.text));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus, defaultValue: false));
-    properties.add(DiagnosticsProperty<String>('obscuringCharacter', obscuringCharacter, defaultValue: '•'));
-    properties.add(DiagnosticsProperty<bool>('obscureText', obscureText, defaultValue: false));
-    properties.add(DiagnosticsProperty<bool>('autocorrect', autocorrect, defaultValue: true));
-    properties.add(EnumProperty<SmartDashesType>('smartDashesType', smartDashesType,
-        defaultValue: obscureText ? SmartDashesType.disabled : SmartDashesType.enabled));
-    properties.add(EnumProperty<SmartQuotesType>('smartQuotesType', smartQuotesType,
-        defaultValue: obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled));
-    properties.add(DiagnosticsProperty<bool>('enableSuggestions', enableSuggestions, defaultValue: true));
+    properties.add(
+      DiagnosticsProperty<TextInputType>(
+        'keyboardType',
+        keyboardType,
+        defaultValue: TextInputType.text,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>('autofocus', autofocus, defaultValue: false),
+    );
+    properties.add(
+      DiagnosticsProperty<String>(
+        'obscuringCharacter',
+        obscuringCharacter,
+        defaultValue: '•',
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>(
+        'obscureText',
+        obscureText,
+        defaultValue: false,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>(
+        'autocorrect',
+        autocorrect,
+        defaultValue: true,
+      ),
+    );
+    properties.add(
+      EnumProperty<SmartDashesType>(
+        'smartDashesType',
+        smartDashesType,
+        defaultValue: obscureText ? SmartDashesType.disabled : SmartDashesType.enabled,
+      ),
+    );
+    properties.add(
+      EnumProperty<SmartQuotesType>(
+        'smartQuotesType',
+        smartQuotesType,
+        defaultValue: obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>(
+        'enableSuggestions',
+        enableSuggestions,
+        defaultValue: true,
+      ),
+    );
     properties.add(IntProperty('maxLines', maxLines, defaultValue: 1));
     properties.add(IntProperty('minLines', minLines, defaultValue: null));
-    properties.add(DiagnosticsProperty<bool>('expands', expands, defaultValue: false));
+    properties.add(
+      DiagnosticsProperty<bool>('expands', expands, defaultValue: false),
+    );
     properties.add(IntProperty('maxLength', maxLength, defaultValue: null));
     properties.add(
-      EnumProperty<MaxLengthEnforcement>('maxLengthEnforcement', maxLengthEnforcement, defaultValue: null),
+      EnumProperty<MaxLengthEnforcement>(
+        'maxLengthEnforcement',
+        maxLengthEnforcement,
+        defaultValue: null,
+      ),
     );
-    properties.add(EnumProperty<TextInputAction>('textInputAction', textInputAction, defaultValue: null));
     properties.add(
-      EnumProperty<TextCapitalization>('textCapitalization', textCapitalization, defaultValue: TextCapitalization.none),
+      EnumProperty<TextInputAction>(
+        'textInputAction',
+        textInputAction,
+        defaultValue: null,
+      ),
     );
-    properties.add(EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: TextAlign.start));
-    properties.add(DiagnosticsProperty<TextAlignVertical>('textAlignVertical', textAlignVertical, defaultValue: null));
-    properties.add(EnumProperty<TextDirection>('textDirection', textDirection, defaultValue: null));
+    properties.add(
+      EnumProperty<TextCapitalization>(
+        'textCapitalization',
+        textCapitalization,
+        defaultValue: TextCapitalization.none,
+      ),
+    );
+    properties.add(
+      EnumProperty<TextAlign>(
+        'textAlign',
+        textAlign,
+        defaultValue: TextAlign.start,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<TextAlignVertical>(
+        'textAlignVertical',
+        textAlignVertical,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      EnumProperty<TextDirection>(
+        'textDirection',
+        textDirection,
+        defaultValue: null,
+      ),
+    );
     properties.add(DoubleProperty('cursorWidth', cursorWidth, defaultValue: 2.0));
     properties.add(DoubleProperty('cursorHeight', cursorHeight, defaultValue: null));
-    properties.add(DiagnosticsProperty<Radius>('cursorRadius', cursorRadius, defaultValue: null));
-    properties.add(DiagnosticsProperty<Brightness>('keyboardAppearance', keyboardAppearance, defaultValue: null));
     properties.add(
-      DiagnosticsProperty<EdgeInsetsGeometry>('scrollPadding', scrollPadding, defaultValue: Styles.normal),
+      DiagnosticsProperty<Radius>(
+        'cursorRadius',
+        cursorRadius,
+        defaultValue: null,
+      ),
     );
     properties.add(
-      FlagProperty('selectionEnabled', value: selectionEnabled, defaultValue: true, ifFalse: 'selection disabled'),
+      DiagnosticsProperty<Brightness>(
+        'keyboardAppearance',
+        keyboardAppearance,
+        defaultValue: null,
+      ),
     );
     properties.add(
-      DiagnosticsProperty<TextSelectionControls>('selectionControls', selectionControls, defaultValue: null),
+      DiagnosticsProperty<EdgeInsetsGeometry>(
+        'scrollPadding',
+        scrollPadding,
+        defaultValue: Styles.normal,
+      ),
     );
-    properties.add(DiagnosticsProperty<ScrollController>('scrollController', scrollController, defaultValue: null));
-    properties.add(DiagnosticsProperty<ScrollPhysics>('scrollPhysics', scrollPhysics, defaultValue: null));
-    properties.add(DiagnosticsProperty<bool>('scribbleEnabled', scribbleEnabled, defaultValue: true));
+    properties.add(
+      FlagProperty(
+        'selectionEnabled',
+        value: selectionEnabled,
+        defaultValue: true,
+        ifFalse: 'selection disabled',
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<TextSelectionControls>(
+        'selectionControls',
+        selectionControls,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<ScrollController>(
+        'scrollController',
+        scrollController,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<ScrollPhysics>(
+        'scrollPhysics',
+        scrollPhysics,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>(
+        'scribbleEnabled',
+        scribbleEnabled,
+        defaultValue: true,
+      ),
+    );
     properties.add(ColorProperty('accentColor', accentColor, defaultValue: null));
     properties.add(
-      DiagnosticsProperty<bool>('enableIMEPersonalizedLearning', enableIMEPersonalizedLearning, defaultValue: true),
+      DiagnosticsProperty<bool>(
+        'enableIMEPersonalizedLearning',
+        enableIMEPersonalizedLearning,
+        defaultValue: true,
+      ),
     );
   }
 }
@@ -798,7 +941,10 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   // Rebuild the widget on focus change to show/hide the text selection highlight.
   void _handleFocusChanged() => setState(() {});
 
-  void _handleSelectionChanged(TextSelection selection, SelectionChangedCause? cause) {
+  void _handleSelectionChanged(
+    TextSelection selection,
+    SelectionChangedCause? cause,
+  ) {
     final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
     if (willShowSelectionHandles != _showSelectionHandles) {
       setState(() => _showSelectionHandles = willShowSelectionHandles);
@@ -838,7 +984,10 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   @override
   bool get wantKeepAlive => _controller?.value.text.isNotEmpty ?? false;
 
-  bool _shouldShowAttachment({required ArnaOverlayVisibilityMode attachment, required bool hasText}) {
+  bool _shouldShowAttachment({
+    required ArnaOverlayVisibilityMode attachment,
+    required bool hasText,
+  }) {
     switch (attachment) {
       case ArnaOverlayVisibilityMode.never:
         return false;
@@ -1107,14 +1256,20 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             cursorWidth: widget.cursorWidth,
             cursorHeight: widget.cursorHeight,
             cursorRadius: widget.cursorRadius,
-            cursorColor: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+            cursorColor: ArnaDynamicColor.matchingColor(
+              accent,
+              ArnaTheme.brightnessOf(context),
+            ),
             cursorOpacityAnimates: true,
             cursorOffset: cursorOffset,
             paintCursorAboveText: paintCursorAboveText,
             autocorrectionTextRectColor: accent.withOpacity(0.21),
             selectionHeightStyle: widget.selectionHeightStyle,
             selectionWidthStyle: widget.selectionWidthStyle,
-            backgroundCursorColor: ArnaDynamicColor.resolve(ArnaColors.secondaryTextColor, context),
+            backgroundCursorColor: ArnaDynamicColor.resolve(
+              ArnaColors.secondaryTextColor,
+              context,
+            ),
             scrollPadding: widget.scrollPadding,
             keyboardAppearance: keyboardAppearance,
             dragStartBehavior: widget.dragStartBehavior,
@@ -1163,11 +1318,20 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                 borderRadius: Styles.borderRadius,
                 border: Border.all(
                   color: _effectiveFocusNode.hasFocus
-                      ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
-                      : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+                      ? ArnaDynamicColor.matchingColor(
+                          accent,
+                          ArnaTheme.brightnessOf(context),
+                        )
+                      : ArnaDynamicColor.resolve(
+                          ArnaColors.borderColor,
+                          context,
+                        ),
                 ),
                 color: !_isEnabled
-                    ? ArnaDynamicColor.resolve(ArnaColors.disabledColor, context)
+                    ? ArnaDynamicColor.resolve(
+                        ArnaColors.disabledColor,
+                        context,
+                      )
                     : _isHovering
                         ? ArnaDynamicColor.applyOverlay(textFieldColor)
                         : textFieldColor,

@@ -116,7 +116,10 @@ class _ArnaListTileState extends State<ArnaListTile> {
               curve: Styles.basicCurve,
               color: !_isEnabled
                   ? widget.actionable
-                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      ? ArnaDynamicColor.resolve(
+                          ArnaColors.backgroundColor,
+                          context,
+                        )
                       : ArnaColors.transparent
                   : _hover
                       ? ArnaDynamicColor.applyOverlay(cardColor)
@@ -221,7 +224,10 @@ class _ArnaListTile extends RenderObjectWidget with SlottedMultiChildRenderObjec
   }
 
   @override
-  void updateRenderObject(BuildContext context, _RenderArnaListTile renderObject) {
+  void updateRenderObject(
+    BuildContext context,
+    _RenderArnaListTile renderObject,
+  ) {
     renderObject.textDirection = textDirection;
   }
 }
@@ -336,9 +342,11 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
 
   @override
   Size computeDryLayout(BoxConstraints constraints) {
-    assert(debugCannotComputeDryLayout(
-      reason: 'Layout requires baseline metrics, which are only available after a full layout.',
-    ));
+    assert(
+      debugCannotComputeDryLayout(
+        reason: 'Layout requires baseline metrics, which are only available after a full layout.',
+      ),
+    );
     return Size.zero;
   }
 
@@ -392,7 +400,10 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
     double titleY;
     double? subtitleY;
     if (!hasSubtitle) {
-      tileHeight = math.max(defaultTileHeight, titleSize.height + 2.0 * _minVerticalPadding);
+      tileHeight = math.max(
+        defaultTileHeight,
+        titleSize.height + 2.0 * _minVerticalPadding,
+      );
       titleY = (tileHeight - titleSize.height) / 2.0;
     } else {
       titleY = titleBaseline! - _boxBaseline(title!, _titleBaselineType)!;
@@ -436,7 +447,10 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
       case TextDirection.rtl:
         {
           if (hasLeading) {
-            _positionBox(leading!, Offset(tileWidth - leadingSize.width, leadingY));
+            _positionBox(
+              leading!,
+              Offset(tileWidth - leadingSize.width, leadingY),
+            );
           }
           _positionBox(title!, Offset(adjustedTrailingWidth, titleY));
           if (hasSubtitle) {
@@ -457,7 +471,10 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
             _positionBox(subtitle!, Offset(titleStart, subtitleY!));
           }
           if (hasTrailing) {
-            _positionBox(trailing!, Offset(tileWidth - trailingSize.width, trailingY));
+            _positionBox(
+              trailing!,
+              Offset(tileWidth - trailingSize.width, trailingY),
+            );
           }
           break;
         }

@@ -416,7 +416,10 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     final Color foregroundColor = colorLuminance < 0.2 && brightness == Brightness.dark
         ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.49), color)
         : colorLuminance > 0.8 && brightness == Brightness.light
-            ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.28), color)
+            ? Color.alphaBlend(
+                onBackgroundColor(color).withOpacity(0.28),
+                color,
+              )
             : color;
     return Color.alphaBlend(foregroundColor, color);
   }
@@ -466,10 +469,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
             : darkColor;
 
     Element? debugContext;
-    assert(() {
-      debugContext = context as Element;
-      return true;
-    }());
+    assert(
+      () {
+        debugContext = context as Element;
+        return true;
+      }(),
+    );
     return ArnaDynamicColor._(
       resolved,
       color,
@@ -498,7 +503,13 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   @override
-  int get hashCode => Object.hash(value, color, darkColor, highContrastColor, darkHighContrastColor);
+  int get hashCode => Object.hash(
+        value,
+        color,
+        darkColor,
+        highContrastColor,
+        darkHighContrastColor,
+      );
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -532,10 +543,17 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       properties.add(createArnaColorProperty('highContrastColor', highContrastColor));
     }
     if (_isPlatformBrightnessDependent && _isHighContrastDependent) {
-      properties.add(createArnaColorProperty('darkHighContrastColor', darkHighContrastColor));
+      properties.add(
+        createArnaColorProperty(
+          'darkHighContrastColor',
+          darkHighContrastColor,
+        ),
+      );
     }
     if (_debugResolveContext != null) {
-      properties.add(DiagnosticsProperty<Element>('last resolved', _debugResolveContext));
+      properties.add(
+        DiagnosticsProperty<Element>('last resolved', _debugResolveContext),
+      );
     }
   }
 }

@@ -243,14 +243,16 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
 
   Widget _itemBuilder(BuildContext context, int index) {
     final Widget item = widget.itemBuilder(context, index);
-    assert(() {
-      if (item.key == null) {
-        throw FlutterError(
-          'Every item of ArnaReorderableList must have a key.',
-        );
-      }
-      return true;
-    }());
+    assert(
+      () {
+        if (item.key == null) {
+          throw FlutterError(
+            'Every item of ArnaReorderableList must have a key.',
+          );
+        }
+        return true;
+      }(),
+    );
 
     final Widget itemWithSemantics = _wrapWithSemantics(item, index);
     final Key itemGlobalKey = _ArnaReorderableListChildGlobalKey(item.key!, this);
@@ -277,7 +279,10 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
                         index: index,
                         child: Icon(
                           Icons.drag_indicator_outlined,
-                          color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                          color: ArnaDynamicColor.resolve(
+                            ArnaColors.iconColor,
+                            context,
+                          ),
                         ),
                       ),
                     ),
@@ -300,7 +305,10 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
                         index: index,
                         child: Icon(
                           Icons.drag_indicator_outlined,
-                          color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                          color: ArnaDynamicColor.resolve(
+                            ArnaColors.iconColor,
+                            context,
+                          ),
                         ),
                       ),
                     ),
@@ -361,7 +369,9 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
     );
 
     return widget.showBackground
-        ? ArnaCard(child: ClipRRect(borderRadius: Styles.listBorderRadius, child: child))
+        ? ArnaCard(
+            child: ClipRRect(borderRadius: Styles.listBorderRadius, child: child),
+          )
         : child;
   }
 }

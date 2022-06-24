@@ -109,18 +109,24 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
     final Widget result = buildContent(context);
-    assert(() {
-      // ignore: unnecessary_null_comparison
-      if (result == null) {
-        throw FlutterError(
-          'The builder for route "${settings.name}" returned null.\n'
-          'Route builders must never return null.',
-        );
-      }
-      return true;
-    }());
+    assert(
+      () {
+        // ignore: unnecessary_null_comparison
+        if (result == null) {
+          throw FlutterError(
+            'The builder for route "${settings.name}" returned null.\n'
+            'Route builders must never return null.',
+          );
+        }
+        return true;
+      }(),
+    );
     return Semantics(
       scopesRoute: true,
       explicitChildNodes: true,
@@ -186,7 +192,9 @@ class ArnaPageTransition extends StatelessWidget {
                     curve: Curves.linearToEaseOut,
                     reverseCurve: Curves.easeInToLinear,
                   ))
-            .drive(Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero)),
+            .drive(
+          Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero),
+        ),
         _secondaryPositionAnimation = (linearTransition
                 ? secondaryRouteAnimation
                 : CurvedAnimation(
@@ -194,7 +202,12 @@ class ArnaPageTransition extends StatelessWidget {
                     curve: Curves.linearToEaseOut,
                     reverseCurve: Curves.easeInToLinear,
                   ))
-            .drive(Tween<Offset>(begin: Offset.zero, end: const Offset(-1.0 / 3.0, 0.0)));
+            .drive(
+          Tween<Offset>(
+            begin: Offset.zero,
+            end: const Offset(-1.0 / 3.0, 0.0),
+          ),
+        );
 
   // When this page is coming in to cover another page.
   final Animation<Offset> _primaryPositionAnimation;
@@ -279,13 +292,19 @@ class _ArnaBackGestureDetectorState<T> extends State<_ArnaBackGestureDetector<T>
   void _handleDragUpdate(DragUpdateDetails details) {
     assert(mounted);
     assert(_backGestureController != null);
-    _backGestureController!.dragUpdate(_convertToLogical(details.primaryDelta! / context.size!.width));
+    _backGestureController!.dragUpdate(
+      _convertToLogical(details.primaryDelta! / context.size!.width),
+    );
   }
 
   void _handleDragEnd(DragEndDetails details) {
     assert(mounted);
     assert(_backGestureController != null);
-    _backGestureController!.dragEnd(_convertToLogical(details.velocity.pixelsPerSecond.dx / context.size!.width));
+    _backGestureController!.dragEnd(
+      _convertToLogical(
+        details.velocity.pixelsPerSecond.dx / context.size!.width,
+      ),
+    );
     _backGestureController = null;
   }
 

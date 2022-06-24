@@ -17,6 +17,7 @@ import 'package:arna/arna.dart';
 ///  * [ArnaRadio], for selecting among a set of explicit values.
 ///  * [ArnaSlider], for selecting a value in a range.
 class ArnaSwitch extends StatelessWidget {
+  /// Constructor
   const ArnaSwitch({
     super.key,
     required this.value,
@@ -72,12 +73,14 @@ class ArnaSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     final Brightness brightness = ArnaTheme.brightnessOf(context);
-    final Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
+    final Color borderColor =
+        ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
 
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (BuildContext context, bool enabled, bool hover, bool focused,
+            bool pressed, bool selected) {
           enabled = onChanged != null;
           return Stack(
             alignment: Alignment.center,
@@ -97,26 +100,31 @@ class ArnaSwitch extends StatelessWidget {
                             : value
                                 ? ArnaDynamicColor.outerColor(accent)
                                 : hover
-                                    ? ArnaDynamicColor.matchingColor(accent, brightness)
+                                    ? ArnaDynamicColor.matchingColor(
+                                        accent, brightness)
                                     : borderColor,
                   ),
                   color: !enabled
-                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      ? ArnaDynamicColor.resolve(
+                          ArnaColors.backgroundColor, context)
                       : value
                           ? hover || focused
                               ? ArnaDynamicColor.applyOverlay(accent)
                               : accent
                           : hover
                               ? ArnaDynamicColor.applyOverlay(
-                                  ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
+                                  ArnaDynamicColor.resolve(
+                                      ArnaColors.buttonColor, context),
                                 )
-                              : ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+                              : ArnaDynamicColor.resolve(
+                                  ArnaColors.backgroundColor, context),
                 ),
               ),
               AnimatedPositioned(
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
-                left: value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
+                left:
+                    value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
                 child: AnimatedContainer(
                   height: Styles.switchThumbSize,
                   width: Styles.switchThumbSize,
@@ -132,7 +140,8 @@ class ArnaSwitch extends StatelessWidget {
                               : ArnaDynamicColor.outerColor(borderColor),
                     ),
                     color: !enabled
-                        ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                        ? ArnaDynamicColor.resolve(
+                            ArnaColors.backgroundColor, context)
                         : value
                             ? ArnaDynamicColor.onBackgroundColor(accent)
                             : ArnaColors.shade255,

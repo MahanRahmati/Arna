@@ -4,6 +4,7 @@
 - Fix ArnaBottomBarItem
 - Refactor ArnaTextSelectionControls
 - Update ArnaTextFormField
+- Update ArnaTooltip
 
 ## 1.0.4+1
 

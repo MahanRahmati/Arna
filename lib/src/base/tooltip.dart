@@ -270,7 +270,7 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   ///
   /// Returns `false` when the tooltip shouldn't be shown or when the tooltip was already visible.
   bool ensureTooltipVisible() {
-    if (!_visible) {
+    if (!_visible || !mounted) {
       return false;
     }
     _showTimer?.cancel();

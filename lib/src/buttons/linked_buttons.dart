@@ -32,8 +32,8 @@ class ArnaLinkedButtons extends StatelessWidget {
               final TextDirection textDirection = Directionality.of(context);
               return _ArnaLinkedItem(
                 button: button,
-                first: isFirstButton(index, length, textDirection),
-                last: isLastButton(index, length, textDirection),
+                first: ArnaHelpers.isFirstButton(index, length, textDirection),
+                last: ArnaHelpers.isLastButton(index, length, textDirection),
               );
             }).toList(),
             const SizedBox(height: Styles.buttonSize, width: 0.5),

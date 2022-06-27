@@ -28,6 +28,8 @@ class ArnaDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width =
+        ArnaHelpers.isCompact(context) ? ArnaHelpers.deviceWidth(context) - Styles.largePadding : Styles.dialogSize;
     return Padding(
       padding: Styles.large,
       child: MediaQuery.removeViewInsets(
@@ -37,12 +39,9 @@ class ArnaDialog extends StatelessWidget {
         removeBottom: true,
         context: context,
         child: Align(
-          alignment: isCompact(context) ? Alignment.bottomCenter : Alignment.center,
+          alignment: ArnaHelpers.isCompact(context) ? Alignment.bottomCenter : Alignment.center,
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minWidth: isCompact(context) ? deviceWidth(context) - Styles.largePadding : Styles.dialogSize,
-              maxWidth: isCompact(context) ? deviceWidth(context) - Styles.largePadding : Styles.dialogSize,
-            ),
+            constraints: BoxConstraints(minWidth: width, maxWidth: width),
             child: ArnaCard(
               padding: EdgeInsets.zero,
               child: ClipRRect(
@@ -139,7 +138,7 @@ Future<T?> showArnaDialog<T>({
         child: child,
       );
 
-      return isCompact(context)
+      return ArnaHelpers.isCompact(context)
           ? useBlur
               ? BackdropFilter(
                   filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),

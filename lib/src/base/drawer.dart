@@ -44,7 +44,7 @@ class ArnaDrawer extends StatelessWidget {
       label: semanticLabel ?? MaterialLocalizations.of(context).drawerLabel,
       child: Container(
         constraints: BoxConstraints.expand(
-          width: min(Styles.sideBarWidth, deviceWidth(context) * 0.7),
+          width: min(Styles.sideBarWidth, ArnaHelpers.deviceWidth(context) * 0.7),
         ),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(

@@ -259,7 +259,8 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
   Widget build(BuildContext context) {
     return ArnaDialog(
       child: SizedBox(
-        width: isCompact(context) ? deviceWidth(context) - Styles.largePadding : Styles.dialogSize,
+        width:
+            ArnaHelpers.isCompact(context) ? ArnaHelpers.deviceWidth(context) - Styles.largePadding : Styles.dialogSize,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[

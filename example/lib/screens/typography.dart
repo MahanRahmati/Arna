@@ -11,7 +11,7 @@ class Typography extends StatelessWidget {
       child: Padding(
         padding: Styles.normal,
         child: SizedBox(
-          width: deviceWidth(context),
+          width: ArnaHelpers.deviceWidth(context),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[

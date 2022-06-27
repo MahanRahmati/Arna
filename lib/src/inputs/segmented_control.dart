@@ -114,8 +114,8 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
                 label: widget.children[item],
                 itemSelected: widget.groupValue == item,
                 onPressed: () => _onPressed(item),
-                first: isFirstButton(index, length, textDirection),
-                last: isLastButton(index, length, textDirection),
+                first: ArnaHelpers.isFirstButton(index, length, textDirection),
+                last: ArnaHelpers.isLastButton(index, length, textDirection),
                 accentColor: accent,
                 cursor: widget.cursor,
               );

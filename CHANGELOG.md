@@ -5,6 +5,7 @@
 - Refactor ArnaTextSelectionControls
 - Update ArnaTextFormField
 - Update ArnaTooltip
+- Refactor Helpers
 
 ## 1.0.4+1
 

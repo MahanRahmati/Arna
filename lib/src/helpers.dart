@@ -1,42 +1,48 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/services.dart' show Clipboard, ClipboardData;
 
-/// Get device height.
-double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
+/// Helper functions
+class ArnaHelpers {
+  /// This class is not meant to be instantiated or extended; this constructor prevents instantiation and extension.
+  ArnaHelpers._();
 
-/// Get device width.
-double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
+  /// Get device height.
+  static double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-/// Is device compact?
-bool isCompact(BuildContext context) => deviceWidth(context) < Styles.compact;
+  /// Get device width.
+  static double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
 
-/// Is device medium?
-bool isMedium(BuildContext context) => !isCompact(context) && !isExpanded(context);
+  /// Is device compact?
+  static bool isCompact(BuildContext context) => deviceWidth(context) < Styles.compact;
 
-/// Is device expanded?
-bool isExpanded(BuildContext context) => deviceWidth(context) > Styles.expanded;
+  /// Is device medium?
+  static bool isMedium(BuildContext context) => !isCompact(context) && !isExpanded(context);
 
-/// Determines if this is the first child that is being laid out.
-bool isFirstButton(int index, int length, TextDirection textDirection) {
-  return (index == 0 && textDirection == TextDirection.ltr) ||
-      (index == length - 1 && textDirection == TextDirection.rtl);
-}
+  /// Is device expanded?
+  static bool isExpanded(BuildContext context) => deviceWidth(context) > Styles.expanded;
 
-/// Determines if this is the last child that is being laid out.
-bool isLastButton(int index, int length, TextDirection textDirection) {
-  return (index == length - 1 && textDirection == TextDirection.ltr) ||
-      (index == 0 && textDirection == TextDirection.rtl);
-}
-
-/// Copy text to clipboard.
-Future<void> copyToClipboard(String text) async {
-  if (text.isNotEmpty) {
-    Clipboard.setData(ClipboardData(text: text));
+  /// Determines if this is the first child that is being laid out.
+  static bool isFirstButton(int index, int length, TextDirection textDirection) {
+    return (index == 0 && textDirection == TextDirection.ltr) ||
+        (index == length - 1 && textDirection == TextDirection.rtl);
   }
-}
 
-/// Paste text from clipboard.
-Future<String?> pasteTextFromClipboard() async {
-  final ClipboardData? data = await Clipboard.getData('text/plain');
-  return data?.text;
+  /// Determines if this is the last child that is being laid out.
+  static bool isLastButton(int index, int length, TextDirection textDirection) {
+    return (index == length - 1 && textDirection == TextDirection.ltr) ||
+        (index == 0 && textDirection == TextDirection.rtl);
+  }
+
+  /// Copy text to clipboard.
+  static Future<void> copyToClipboard(String text) async {
+    if (text.isNotEmpty) {
+      Clipboard.setData(ClipboardData(text: text));
+    }
+  }
+
+  /// Paste text from clipboard.
+  static Future<String?> pasteFromClipboard() async {
+    final ClipboardData? data = await Clipboard.getData('text/plain');
+    return data?.text;
+  }
 }

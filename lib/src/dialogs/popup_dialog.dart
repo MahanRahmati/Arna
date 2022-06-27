@@ -72,6 +72,7 @@ class _ArnaPopupDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double size = ArnaHelpers.deviceHeight(context) * 0.84;
     return Padding(
       padding: Styles.large,
       child: MediaQuery.removeViewInsets(
@@ -82,10 +83,7 @@ class _ArnaPopupDialog extends StatelessWidget {
         context: context,
         child: Align(
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: deviceHeight(context) * 0.84,
-              maxWidth: deviceWidth(context) * 0.84,
-            ),
+            constraints: BoxConstraints(maxHeight: size, maxWidth: size),
             child: ArnaCard(
               padding: EdgeInsets.zero,
               child: ClipRRect(
@@ -274,7 +272,7 @@ Future<T?> showArnaPopupDialog<T>({
   Offset? anchorPoint,
   bool useBlur = true,
 }) {
-  return isCompact(context)
+  return ArnaHelpers.isCompact(context)
       ? Navigator.of(context).push(
           ArnaPageRoute<T>(
             builder: (BuildContext context) => _ArnaPopupPage(

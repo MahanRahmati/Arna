@@ -83,11 +83,11 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   }
 
   void onTap(int index) {
-    if (isCompact(context)) {
+    if (ArnaHelpers.isCompact(context)) {
       showDrawer = false;
     }
     widget.onItemSelected?.call(index);
-    if (isCompact(context)) {
+    if (ArnaHelpers.isCompact(context)) {
       _drawerOpenedCallback(false);
     }
     setState(() => _currentIndex = index);
@@ -101,11 +101,11 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 
   @override
   Widget build(BuildContext context) {
-    final bool compact = isCompact(context);
+    final bool compact = ArnaHelpers.isCompact(context);
     if (!compact && showDrawer) {
       _drawerOpenedCallback(false);
     }
-    final double padding = isExpanded(context) ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
+    final double padding = ArnaHelpers.isExpanded(context) ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
     final String tooltip = MaterialLocalizations.of(context).drawerLabel;
 
     final Widget sideItemBuilder = _SideItemBuilder(
@@ -272,7 +272,7 @@ class _SideItemBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool compact = isMedium(context);
+    final bool compact = ArnaHelpers.isMedium(context);
     return Semantics(
       explicitChildNodes: true,
       child: FocusTraversalGroup(

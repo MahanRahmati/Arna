@@ -8,6 +8,7 @@
 - Refactor Helpers
 - Update ArnaTextField
 - Update ArnaSelectableText
+- Update ArnaSearchField
 
 ## 1.0.4+1
 

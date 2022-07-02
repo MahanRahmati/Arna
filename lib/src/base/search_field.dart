@@ -14,6 +14,8 @@ class ArnaSearchField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.hintText,
+    this.smartQuotesType,
+    this.smartDashesType,
     this.restorationId,
     this.autofocus = false,
     this.onTap,
@@ -38,6 +40,12 @@ class ArnaSearchField extends StatefulWidget {
 
   /// The hint text that appears when the text entry is empty.
   final String? hintText;
+
+  /// {@macro flutter.services.TextInputConfiguration.smartDashesType}
+  final SmartDashesType? smartDashesType;
+
+  /// {@macro flutter.services.TextInputConfiguration.smartQuotesType}
+  final SmartQuotesType? smartQuotesType;
 
   /// {@macro flutter.material.textfield.restorationId}
   final String? restorationId;
@@ -164,6 +172,8 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
               clearButtonMode: ArnaOverlayVisibilityMode.editing,
               onChanged: widget.onChanged,
               onSubmitted: widget.onSubmitted,
+              smartDashesType: widget.smartDashesType,
+              smartQuotesType: widget.smartQuotesType,
               focusNode: focusNode,
               autofocus: widget.autofocus && widget.showSearch,
               autocorrect: widget.autocorrect,

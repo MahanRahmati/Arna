@@ -1260,7 +1260,6 @@ class _ArnaTextFieldState extends State<ArnaTextField>
               accent,
               ArnaTheme.brightnessOf(context),
             ),
-            cursorOpacityAnimates: true,
             cursorOffset: cursorOffset,
             paintCursorAboveText: paintCursorAboveText,
             autocorrectionTextRectColor: accent.withOpacity(0.21),

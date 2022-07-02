@@ -629,7 +629,6 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         cursorColor: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
         selectionHeightStyle: widget.selectionHeightStyle,
         selectionWidthStyle: widget.selectionWidthStyle,
-        cursorOpacityAnimates: true,
         cursorOffset: cursorOffset,
         paintCursorAboveText: paintCursorAboveText,
         backgroundCursorColor: ArnaDynamicColor.resolve(ArnaColors.secondaryTextColor, context),

@@ -9,6 +9,7 @@
 - Update ArnaTextField
 - Update ArnaSelectableText
 - Update ArnaSearchField
+- Update ArnaSelectableText
 
 ## 1.0.4+1
 

@@ -109,7 +109,10 @@ class ArnaAboutDialog extends StatelessWidget {
                     color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
                   ),
                 ),
-                onTap: () async => launchUrl(applicationUri!),
+                onTap: () async => launchUrl(
+                  applicationUri!,
+                  mode: LaunchMode.externalApplication,
+                ),
               ),
             ArnaListTile(
               title: 'Licenses',

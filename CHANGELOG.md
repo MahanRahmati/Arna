@@ -10,6 +10,7 @@
 - Update ArnaSelectableText
 - Update ArnaSearchField
 - Update ArnaSelectableText
+- Update ArnaAboutDialog
 
 ## 1.0.4+1
 

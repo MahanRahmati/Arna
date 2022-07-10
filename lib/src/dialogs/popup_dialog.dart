@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 

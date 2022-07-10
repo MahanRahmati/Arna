@@ -270,7 +270,6 @@ Future<T?> showArnaPopupDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
-  bool useBlur = true,
 }) {
   return ArnaHelpers.isCompact(context)
       ? Navigator.of(context).push(
@@ -304,7 +303,7 @@ Future<T?> showArnaPopupDialog<T>({
           barrierColor: barrierColor ?? ArnaColors.barrierColor,
           transitionDuration: Styles.basicDuration,
           transitionBuilder: (BuildContext context, Animation<double> animation, _, Widget child) {
-            final Widget childWidget = ScaleTransition(
+            return ScaleTransition(
               scale: CurvedAnimation(
                 parent: animation,
                 curve: Styles.basicCurve,
@@ -317,13 +316,6 @@ Future<T?> showArnaPopupDialog<T>({
                 child: child,
               ),
             );
-
-            return useBlur
-                ? BackdropFilter(
-                    filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
-                    child: childWidget,
-                  )
-                : childWidget;
           },
           useRootNavigator: useRootNavigator,
           routeSettings: routeSettings,

@@ -1,5 +1,3 @@
-import 'dart:ui' as ui;
-
 import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 
@@ -117,7 +115,6 @@ Future<T?> showArnaDialog<T>({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
-  bool useBlur = true,
 }) {
   return showGeneralDialog(
     context: context,
@@ -139,36 +136,17 @@ Future<T?> showArnaDialog<T>({
       );
 
       return ArnaHelpers.isCompact(context)
-          ? useBlur
-              ? BackdropFilter(
-                  filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
-                  child: SlideTransition(
-                    position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
-                    child: childWidget,
-                  ),
-                )
-              : SlideTransition(
-                  position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
-                  child: childWidget,
-                )
-          : useBlur
-              ? BackdropFilter(
-                  filter: ui.ImageFilter.blur(sigmaX: animation.value * 5, sigmaY: animation.value * 5),
-                  child: ScaleTransition(
-                    scale: CurvedAnimation(
-                      parent: animation,
-                      curve: Styles.basicCurve,
-                    ),
-                    child: childWidget,
-                  ),
-                )
-              : ScaleTransition(
-                  scale: CurvedAnimation(
-                    parent: animation,
-                    curve: Styles.basicCurve,
-                  ),
-                  child: childWidget,
-                );
+          ? SlideTransition(
+              position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+              child: childWidget,
+            )
+          : ScaleTransition(
+              scale: CurvedAnimation(
+                parent: animation,
+                curve: Styles.basicCurve,
+              ),
+              child: childWidget,
+            );
     },
     useRootNavigator: useRootNavigator,
     routeSettings: routeSettings,

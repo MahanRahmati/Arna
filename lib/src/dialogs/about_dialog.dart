@@ -21,7 +21,6 @@ void showArnaAboutDialog({
   bool useRootNavigator = true,
   RouteSettings? routeSettings,
   Offset? anchorPoint,
-  bool useBlur = true,
 }) {
   showArnaPopupDialog<void>(
     context: context,
@@ -38,7 +37,6 @@ void showArnaAboutDialog({
     },
     routeSettings: routeSettings,
     anchorPoint: anchorPoint,
-    useBlur: useBlur,
   );
 }
 

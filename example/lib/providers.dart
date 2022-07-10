@@ -13,10 +13,6 @@ final AutoDisposeStateProvider<Color> accentProvider = StateProvider.autoDispose
   (AutoDisposeStateProviderRef<Color> ref) => ArnaColors.blue,
 );
 
-final AutoDisposeStateProvider<bool> blurProvider = StateProvider.autoDispose<bool>(
-  (AutoDisposeStateProviderRef<bool> ref) => !kIsWeb,
-);
-
 final AutoDisposeStateProvider<bool> bannerProvider = StateProvider.autoDispose<bool>(
   (AutoDisposeStateProviderRef<bool> ref) => false,
 );

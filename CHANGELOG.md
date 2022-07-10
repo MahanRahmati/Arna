@@ -11,6 +11,7 @@
 - Update ArnaSearchField
 - Update ArnaSelectableText
 - Update ArnaAboutDialog
+- [BREAKING] Remove blur
 
 ## 1.0.4+1
 

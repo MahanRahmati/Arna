@@ -19,7 +19,6 @@ abstract class Strings {
   static const String light = 'Light';
   static const String options = 'Options';
   static const String masterMode = 'Use Master-Detail';
-  static const String blurMode = 'Show blur on dialogs';
   static const String accent = 'Accent';
   static const String lorem = 'Lorem ipsum dolor';
   static const String bannerTitle = 'This is a banner.';

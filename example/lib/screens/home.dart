@@ -20,7 +20,6 @@ class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
     final bool showSearch = ref.watch(searchProvider);
-    final bool showBlur = ref.watch(blurProvider);
 
     final NavigationItem hello = NavigationItem(
       key: UniqueKey(),
@@ -114,7 +113,6 @@ class _HomeState extends ConsumerState<Home> {
           developerName: 'Mahan Rahmati',
           applicationVersion: Strings.version,
           applicationUri: Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna/issues'),
-          useBlur: showBlur,
         ),
         tooltipMessage: Strings.about,
       ),
@@ -124,7 +122,6 @@ class _HomeState extends ConsumerState<Home> {
           context: context,
           title: Strings.settings,
           builder: (BuildContext context) => const Settings(),
-          useBlur: showBlur,
         ),
         tooltipMessage: Strings.settings,
       )

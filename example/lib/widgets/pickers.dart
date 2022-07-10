@@ -1,7 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers.dart';
 import '/strings.dart';
 
 class Pickers extends ConsumerWidget {
@@ -9,7 +8,6 @@ class Pickers extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool showBlur = ref.watch(blurProvider);
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.calendar_today_outlined,
@@ -27,7 +25,6 @@ class Pickers extends ConsumerWidget {
                 initialDate: DateTime.now(),
                 firstDate: DateTime(DateTime.now().year - 5),
                 lastDate: DateTime(DateTime.now().year + 5),
-                useBlur: showBlur,
               );
               if (pickedDate != null) {
                 showArnaSnackbar(

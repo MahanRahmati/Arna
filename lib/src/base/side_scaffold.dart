@@ -83,11 +83,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   }
 
   void onTap(int index) {
-    if (ArnaHelpers.isCompact(context)) {
+    final bool compact = ArnaHelpers.isCompact(context);
+    if (compact) {
       showDrawer = false;
     }
     widget.onItemSelected?.call(index);
-    if (ArnaHelpers.isCompact(context)) {
+    if (compact) {
       _drawerOpenedCallback(false);
     }
     setState(() => _currentIndex = index);
@@ -102,10 +103,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   @override
   Widget build(BuildContext context) {
     final bool compact = ArnaHelpers.isCompact(context);
-    if (!compact && showDrawer) {
+    final bool medium = ArnaHelpers.isMedium(context);
+    final bool expanded = ArnaHelpers.isExpanded(context);
+    if (expanded && showDrawer) {
       _drawerOpenedCallback(false);
     }
-    final double padding = ArnaHelpers.isExpanded(context) ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
+    final double padding = expanded ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
     final String tooltip = MaterialLocalizations.of(context).drawerLabel;
 
     final Widget sideItemBuilder = _SideItemBuilder(
@@ -118,7 +121,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
 
     final Widget sideScaffold = Stack(
       children: <Widget>[
-        if (!compact) ...<Widget>[
+        if (expanded) ...<Widget>[
           Container(
             width: padding,
             color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
@@ -130,12 +133,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
           ),
         ],
         Padding(
-          padding: EdgeInsetsDirectional.only(start: !compact ? padding + 1 : 0),
+          padding: EdgeInsetsDirectional.only(start: expanded ? padding + 1 : 0),
           child: ArnaScaffold(
             headerBarLeading: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                if (compact && widget.items.length > 4)
+                if (compact && widget.items.length > 4 || medium)
                   ArnaIconButton(
                     icon: Icons.menu_outlined,
                     onPressed: () => _drawerOpenedCallback(true),
@@ -207,7 +210,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
             resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
           ),
         ),
-        if (compact && widget.items.length > 4)
+        if (compact && widget.items.length > 4 || medium)
           ArnaDrawerController(
             drawer: ArnaDrawer(child: sideItemBuilder),
             drawerCallback: _drawerOpenedCallback,
@@ -272,7 +275,6 @@ class _SideItemBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool compact = ArnaHelpers.isMedium(context);
     return Semantics(
       explicitChildNodes: true,
       child: FocusTraversalGroup(
@@ -293,7 +295,6 @@ class _SideItemBuilder extends StatelessWidget {
                       selectedIcon: items[index].selectedIcon,
                       onPressed: () => onTap(index),
                       badge: items[index].badge,
-                      compact: compact,
                       active: index == currentIndex,
                       isFocusable: items[index].isFocusable,
                       autofocus: items[index].autofocus,

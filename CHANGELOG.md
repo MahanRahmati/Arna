@@ -12,6 +12,8 @@
 - Update ArnaSelectableText
 - Update ArnaAboutDialog
 - [BREAKING] Remove blur
+- Update ArnaSideScaffold
+- Update ArnaSideBarItem
 
 ## 1.0.4+1
 

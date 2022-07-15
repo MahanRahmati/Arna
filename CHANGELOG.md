@@ -5,7 +5,7 @@
 - Refactor ArnaTextSelectionControls
 - Update ArnaTextFormField
 - Update ArnaTooltip
-- Refactor Helpers
+- [BREAKING] Refactor Helpers
 - Update ArnaTextField
 - Update ArnaSelectableText
 - Update ArnaSearchField

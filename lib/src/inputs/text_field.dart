@@ -904,9 +904,9 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     super.dispose();
   }
 
-  EditableTextState? get _editableText => editableTextKey.currentState!;
+  EditableTextState get _editableText => editableTextKey.currentState!;
 
-  void _requestKeyboard() => _editableText?.requestKeyboard();
+  void _requestKeyboard() => _editableText.requestKeyboard();
 
   bool _shouldShowSelectionHandles(SelectionChangedCause? cause) {
     // When the text field is activated by something that doesn't trigger the selection overlay, we shouldn't show the
@@ -954,24 +954,38 @@ class _ArnaTextFieldState extends State<ArnaTextField>
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
         if (cause == SelectionChangedCause.longPress || cause == SelectionChangedCause.drag) {
-          _editableText?.bringIntoView(selection.extent);
+          _editableText.bringIntoView(selection.extent);
         }
-        return;
+        break;
       case TargetPlatform.linux:
       case TargetPlatform.windows:
       case TargetPlatform.fuchsia:
       case TargetPlatform.android:
         if (cause == SelectionChangedCause.drag) {
-          _editableText?.bringIntoView(selection.extent);
+          _editableText.bringIntoView(selection.extent);
         }
-        return;
+        break;
+    }
+
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.android:
+        break;
+      case TargetPlatform.macOS:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        if (cause == SelectionChangedCause.drag) {
+          _editableText.hideToolbar();
+        }
+        break;
     }
   }
 
   /// Toggle the toolbar when a selection handle is tapped.
   void _handleSelectionHandleTapped() {
     if (_effectiveController.selection.isCollapsed) {
-      _editableText!.toggleToolbar();
+      _editableText.toggleToolbar();
     }
   }
 
@@ -1121,10 +1135,10 @@ class _ArnaTextFieldState extends State<ArnaTextField>
 
   // AutofillClient implementation start.
   @override
-  String get autofillId => _editableText!.autofillId;
+  String get autofillId => _editableText.autofillId;
 
   @override
-  void autofill(TextEditingValue newEditingValue) => _editableText!.autofill(newEditingValue);
+  void autofill(TextEditingValue newEditingValue) => _editableText.autofill(newEditingValue);
 
   @override
   TextInputConfiguration get textInputConfiguration {
@@ -1138,7 +1152,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
           )
         : AutofillConfiguration.disabled;
 
-    return _editableText!.textInputConfiguration.copyWith(autofillConfiguration: autofillConfiguration);
+    return _editableText.textInputConfiguration.copyWith(autofillConfiguration: autofillConfiguration);
   }
   // AutofillClient implementation end.
 

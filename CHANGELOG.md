@@ -14,6 +14,8 @@
 - [BREAKING] Remove blur
 - Update ArnaSideScaffold
 - Update ArnaSideBarItem
+- Update ArnaTextField
+- Update ArnaSelectableText
 
 ## 1.0.4+1
 

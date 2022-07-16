@@ -415,7 +415,7 @@ class ArnaSelectableText extends StatefulWidget {
 /// The [State] for an [ArnaSelectableText].
 class _ArnaSelectableTextState extends State<ArnaSelectableText>
     implements TextSelectionGestureDetectorBuilderDelegate {
-  EditableTextState? get _editableText => editableTextKey.currentState;
+  EditableTextState get _editableText => editableTextKey.currentState!;
 
   late _ArnaTextSpanEditingController _controller;
 
@@ -521,24 +521,38 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
         if (cause == SelectionChangedCause.longPress || cause == SelectionChangedCause.drag) {
-          _editableText?.bringIntoView(selection.extent);
+          _editableText.bringIntoView(selection.extent);
         }
-        return;
+        break;
       case TargetPlatform.linux:
       case TargetPlatform.windows:
       case TargetPlatform.fuchsia:
       case TargetPlatform.android:
         if (cause == SelectionChangedCause.drag) {
-          _editableText?.bringIntoView(selection.extent);
+          _editableText.bringIntoView(selection.extent);
         }
-        return;
+        break;
+    }
+
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.android:
+        break;
+      case TargetPlatform.macOS:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        if (cause == SelectionChangedCause.drag) {
+          _editableText.hideToolbar();
+        }
+        break;
     }
   }
 
   /// Toggle the toolbar when a selection handle is tapped.
   void _handleSelectionHandleTapped() {
     if (_controller.selection.isCollapsed) {
-      _editableText!.toggleToolbar();
+      _editableText.toggleToolbar();
     }
   }
 

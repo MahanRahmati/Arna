@@ -331,16 +331,9 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double unit = 1.0 / (route.items.length + 1.5); // 1.0 for the width and 0.5 for the last item's fade.
     final List<Widget> children = <Widget>[];
 
     for (int i = 0; i < route.items.length; i += 1) {
-      final double start = (i + 1) * unit;
-      final double end = (start + 1.5 * unit).clamp(0.0, 1.0);
-      final CurvedAnimation opacity = CurvedAnimation(
-        parent: route.animation!,
-        curve: Interval(start, end),
-      );
       Widget item = route.items[i];
       if (route.initialValue != null && route.items[i].represents(route.initialValue)) {
         item = ColoredBox(
@@ -351,49 +344,48 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
       children.add(
         _ArnaMenuItem(
           onLayout: (Size size) => route.itemSizes[i] = size,
-          child: FadeTransition(
-            opacity: opacity,
-            child: item,
-          ),
+          child: item,
         ),
       );
     }
 
     final CurveTween opacity = CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
-    final CurveTween width = CurveTween(curve: Interval(0.0, unit));
-    final CurveTween height = CurveTween(curve: Interval(0.0, unit * route.items.length));
 
     return AnimatedBuilder(
       animation: route.animation!,
       builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: opacity.animate(route.animation!),
-          child: ArnaCard(
-            padding: EdgeInsets.zero,
-            child: Align(
-              alignment: AlignmentDirectional.topEnd,
-              widthFactor: width.evaluate(route.animation!),
-              heightFactor: height.evaluate(route.animation!),
-              child: child,
+          child: ScaleTransition(
+            alignment: Alignment.topRight,
+            scale: Tween<double>(begin: 0.7, end: 1.0).animate(
+              CurvedAnimation(
+                parent: route.animation!,
+                curve: Styles.basicCurve,
+              ),
             ),
+            child: child,
           ),
         );
       },
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(
-          minWidth: Styles.menuMinWidth,
-          maxWidth: Styles.menuMaxWidth,
-        ),
-        child: IntrinsicWidth(
-          stepWidth: Styles.menuItemSize,
-          child: Semantics(
-            scopesRoute: true,
-            namesRoute: true,
-            explicitChildNodes: true,
-            label: semanticLabel,
-            child: SingleChildScrollView(
-              padding: Styles.small,
-              child: ListBody(children: children),
+      child: ArnaCard(
+        padding: EdgeInsets.zero,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: Styles.menuMinWidth,
+            maxWidth: Styles.menuMaxWidth,
+          ),
+          child: IntrinsicWidth(
+            stepWidth: Styles.menuItemSize,
+            child: Semantics(
+              scopesRoute: true,
+              namesRoute: true,
+              explicitChildNodes: true,
+              label: semanticLabel,
+              child: SingleChildScrollView(
+                padding: Styles.small,
+                child: ListBody(children: children),
+              ),
             ),
           ),
         ),

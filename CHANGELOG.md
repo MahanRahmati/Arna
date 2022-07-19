@@ -16,6 +16,7 @@
 - Update ArnaSideBarItem
 - Update ArnaTextField
 - Update ArnaSelectableText
+- Update ArnaPopupMenu
 
 ## 1.0.4+1
 

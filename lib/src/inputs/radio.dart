@@ -97,7 +97,14 @@ class ArnaRadio<T> extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           selected = value == groupValue;
           enabled = onChanged != null;
           return Stack(
@@ -118,7 +125,10 @@ class ArnaRadio<T> extends StatelessWidget {
                             : selected && hover
                                 ? ArnaDynamicColor.outerColor(accent)
                                 : hover
-                                    ? ArnaDynamicColor.matchingColor(accent, brightness)
+                                    ? ArnaDynamicColor.matchingColor(
+                                        accent,
+                                        brightness,
+                                      )
                                     : selected
                                         ? ArnaDynamicColor.outerColor(accent)
                                         : borderColor,
@@ -146,7 +156,9 @@ class ArnaRadio<T> extends StatelessWidget {
                       : selected && enabled
                           ? ArnaDynamicColor.onBackgroundColor(accent)
                           : ArnaDynamicColor.resolve(
-                              hover ? ArnaDynamicColor.applyOverlay(buttonColor) : ArnaColors.backgroundColor,
+                              hover
+                                  ? ArnaDynamicColor.applyOverlay(buttonColor)
+                                  : ArnaColors.backgroundColor,
                               context,
                             ),
                 ),

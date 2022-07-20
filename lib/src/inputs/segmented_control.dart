@@ -73,11 +73,13 @@ class ArnaSegmentedControl<T extends Object> extends StatefulWidget {
   final MouseCursor cursor;
 
   @override
-  State<ArnaSegmentedControl<T>> createState() => _ArnaSegmentedControlState<T>();
+  State<ArnaSegmentedControl<T>> createState() =>
+      _ArnaSegmentedControlState<T>();
 }
 
 /// The [State] for an [ArnaSegmentedControl].
-class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedControl<T>> {
+class _ArnaSegmentedControlState<T extends Object>
+    extends State<ArnaSegmentedControl<T>> {
   T? _pressedKey;
 
   void _onPressed(T currentKey) {
@@ -91,7 +93,8 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
 
   @override
   Widget build(BuildContext context) {
-    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent =
+        widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return Padding(
       padding: Styles.small,
@@ -168,7 +171,14 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     return ArnaBaseWidget(
-      builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+      builder: (
+        BuildContext context,
+        bool enabled,
+        bool hover,
+        bool focused,
+        bool pressed,
+        bool selected,
+      ) {
         selected = itemSelected;
         return AnimatedContainer(
           height: Styles.buttonSize - 2,
@@ -177,14 +187,21 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.horizontal(
-              left: first ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
-              right: last ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
+              left: first
+                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  : Radius.zero,
+              right: last
+                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  : Radius.zero,
             ),
             border: Border.all(
               color: selected
                   ? ArnaDynamicColor.outerColor(accentColor)
                   : focused
-                      ? ArnaDynamicColor.matchingColor(accentColor, ArnaTheme.brightnessOf(context))
+                      ? ArnaDynamicColor.matchingColor(
+                          accentColor,
+                          ArnaTheme.brightnessOf(context),
+                        )
                       : ArnaColors.transparent,
             ),
             color: selected
@@ -209,7 +226,9 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
                             !enabled
                                 ? ArnaColors.disabledColor
                                 : selected
-                                    ? ArnaDynamicColor.onBackgroundColor(accentColor)
+                                    ? ArnaDynamicColor.onBackgroundColor(
+                                        accentColor,
+                                      )
                                     : ArnaColors.primaryTextColor,
                             context,
                           ),

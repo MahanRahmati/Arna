@@ -19,8 +19,14 @@ class ArnaThemeData with Diagnosticable {
   ///
   ///  * [ArnaThemeData.light], which creates a light theme.
   ///  * [ArnaThemeData.dark], which creates dark theme.
-  factory ArnaThemeData({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
-    final ArnaTextTheme defaultTextTheme = brightness == Brightness.dark ? ArnaTypography.dark : ArnaTypography.light;
+  factory ArnaThemeData({
+    Brightness? brightness,
+    Color? accentColor,
+    ArnaTextTheme? textTheme,
+  }) {
+    final ArnaTextTheme defaultTextTheme = brightness == Brightness.dark
+        ? ArnaTypography.dark
+        : ArnaTypography.light;
 
     return ArnaThemeData.raw(
       accentColor: accentColor ?? ArnaColors.blue,
@@ -41,10 +47,16 @@ class ArnaThemeData with Diagnosticable {
   });
 
   /// A default light theme.
-  factory ArnaThemeData.light() => ArnaThemeData(brightness: Brightness.light, textTheme: ArnaTypography.light);
+  factory ArnaThemeData.light() => ArnaThemeData(
+        brightness: Brightness.light,
+        textTheme: ArnaTypography.light,
+      );
 
   /// A default dark theme.
-  factory ArnaThemeData.dark() => ArnaThemeData(brightness: Brightness.dark, textTheme: ArnaTypography.dark);
+  factory ArnaThemeData.dark() => ArnaThemeData(
+        brightness: Brightness.dark,
+        textTheme: ArnaTypography.dark,
+      );
 
   /// A color used on interactive elements of the theme.
   ///
@@ -64,7 +76,11 @@ class ArnaThemeData with Diagnosticable {
   final ArnaTextTheme textTheme;
 
   /// Creates a copy of this theme but with the given fields replaced with the new values.
-  ArnaThemeData copyWith({Brightness? brightness, Color? accentColor, ArnaTextTheme? textTheme}) {
+  ArnaThemeData copyWith({
+    Brightness? brightness,
+    Color? accentColor,
+    ArnaTextTheme? textTheme,
+  }) {
     return ArnaThemeData.raw(
       accentColor: accentColor ?? this.accentColor,
       brightness: brightness ?? this.brightness,
@@ -107,7 +123,12 @@ class ArnaThemeData with Diagnosticable {
     super.debugFillProperties(properties);
     final ArnaThemeData defaultData = ArnaThemeData.light();
     properties.add(
-      ColorProperty('accentColor', accentColor, defaultValue: defaultData.accentColor, level: DiagnosticLevel.debug),
+      ColorProperty(
+        'accentColor',
+        accentColor,
+        defaultValue: defaultData.accentColor,
+        level: DiagnosticLevel.debug,
+      ),
     );
     properties.add(
       EnumProperty<Brightness>(
@@ -117,6 +138,12 @@ class ArnaThemeData with Diagnosticable {
         level: DiagnosticLevel.debug,
       ),
     );
-    properties.add(DiagnosticsProperty<ArnaTextTheme>('textTheme', textTheme, level: DiagnosticLevel.debug));
+    properties.add(
+      DiagnosticsProperty<ArnaTextTheme>(
+        'textTheme',
+        textTheme,
+        level: DiagnosticLevel.debug,
+      ),
+    );
   }
 }

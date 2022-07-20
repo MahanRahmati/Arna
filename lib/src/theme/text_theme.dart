@@ -135,13 +135,20 @@ class ArnaTextTheme with Diagnosticable {
       return this;
     }
     return copyWith(
-      displayTextStyle: _displayTextStyle?.merge(other._displayTextStyle) ?? other._displayTextStyle,
-      headlineTextStyle: _headlineTextStyle?.merge(other._headlineTextStyle) ?? other._headlineTextStyle,
-      titleTextStyle: _titleTextStyle?.merge(other._titleTextStyle) ?? other._titleTextStyle,
-      bodyTextStyle: _bodyTextStyle?.merge(other._bodyTextStyle) ?? other._bodyTextStyle,
-      subtitleTextStyle: _subtitleTextStyle?.merge(other._subtitleTextStyle) ?? other._subtitleTextStyle,
-      buttonTextStyle: _buttonTextStyle?.merge(other._buttonTextStyle) ?? other._buttonTextStyle,
-      captionTextStyle: _captionTextStyle?.merge(other._captionTextStyle) ?? other._captionTextStyle,
+      displayTextStyle: _displayTextStyle?.merge(other._displayTextStyle) ??
+          other._displayTextStyle,
+      headlineTextStyle: _headlineTextStyle?.merge(other._headlineTextStyle) ??
+          other._headlineTextStyle,
+      titleTextStyle: _titleTextStyle?.merge(other._titleTextStyle) ??
+          other._titleTextStyle,
+      bodyTextStyle:
+          _bodyTextStyle?.merge(other._bodyTextStyle) ?? other._bodyTextStyle,
+      subtitleTextStyle: _subtitleTextStyle?.merge(other._subtitleTextStyle) ??
+          other._subtitleTextStyle,
+      buttonTextStyle: _buttonTextStyle?.merge(other._buttonTextStyle) ??
+          other._buttonTextStyle,
+      captionTextStyle: _captionTextStyle?.merge(other._captionTextStyle) ??
+          other._captionTextStyle,
     );
   }
 
@@ -230,13 +237,41 @@ class ArnaTextTheme with Diagnosticable {
   /// {@macro dart.ui.shadow.lerp}
   static ArnaTextTheme lerp(ArnaTextTheme? a, ArnaTextTheme? b, double t) {
     return ArnaTextTheme(
-      displayTextStyle: TextStyle.lerp(a?._displayTextStyle, b?._displayTextStyle, t),
-      headlineTextStyle: TextStyle.lerp(a?._headlineTextStyle, b?._headlineTextStyle, t),
-      titleTextStyle: TextStyle.lerp(a?._titleTextStyle, b?._titleTextStyle, t),
-      bodyTextStyle: TextStyle.lerp(a?._bodyTextStyle, b?._bodyTextStyle, t),
-      subtitleTextStyle: TextStyle.lerp(a?._subtitleTextStyle, b?._subtitleTextStyle, t),
-      buttonTextStyle: TextStyle.lerp(a?._buttonTextStyle, b?._buttonTextStyle, t),
-      captionTextStyle: TextStyle.lerp(a?._captionTextStyle, b?._captionTextStyle, t),
+      displayTextStyle: TextStyle.lerp(
+        a?._displayTextStyle,
+        b?._displayTextStyle,
+        t,
+      ),
+      headlineTextStyle: TextStyle.lerp(
+        a?._headlineTextStyle,
+        b?._headlineTextStyle,
+        t,
+      ),
+      titleTextStyle: TextStyle.lerp(
+        a?._titleTextStyle,
+        b?._titleTextStyle,
+        t,
+      ),
+      bodyTextStyle: TextStyle.lerp(
+        a?._bodyTextStyle,
+        b?._bodyTextStyle,
+        t,
+      ),
+      subtitleTextStyle: TextStyle.lerp(
+        a?._subtitleTextStyle,
+        b?._subtitleTextStyle,
+        t,
+      ),
+      buttonTextStyle: TextStyle.lerp(
+        a?._buttonTextStyle,
+        b?._buttonTextStyle,
+        t,
+      ),
+      captionTextStyle: TextStyle.lerp(
+        a?._captionTextStyle,
+        b?._captionTextStyle,
+        t,
+      ),
     );
   }
 
@@ -290,10 +325,18 @@ class ArnaTextTheme with Diagnosticable {
       ),
     );
     properties.add(
-      DiagnosticsProperty<TextStyle>('titleTextStyle', _titleTextStyle, defaultValue: defaultTheme._titleTextStyle),
+      DiagnosticsProperty<TextStyle>(
+        'titleTextStyle',
+        _titleTextStyle,
+        defaultValue: defaultTheme._titleTextStyle,
+      ),
     );
     properties.add(
-      DiagnosticsProperty<TextStyle>('bodyTextStyle', _bodyTextStyle, defaultValue: defaultTheme._bodyTextStyle),
+      DiagnosticsProperty<TextStyle>(
+        'bodyTextStyle',
+        _bodyTextStyle,
+        defaultValue: defaultTheme._bodyTextStyle,
+      ),
     );
     properties.add(
       DiagnosticsProperty<TextStyle>(
@@ -303,7 +346,11 @@ class ArnaTextTheme with Diagnosticable {
       ),
     );
     properties.add(
-      DiagnosticsProperty<TextStyle>('buttonTextStyle', _buttonTextStyle, defaultValue: defaultTheme._buttonTextStyle),
+      DiagnosticsProperty<TextStyle>(
+        'buttonTextStyle',
+        _buttonTextStyle,
+        defaultValue: defaultTheme._buttonTextStyle,
+      ),
     );
     properties.add(
       DiagnosticsProperty<TextStyle>(

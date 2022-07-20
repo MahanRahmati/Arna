@@ -27,7 +27,8 @@ class _SlidersState extends State<Sliders> {
             title: '${Strings.title} 1',
             value: _sliderValue1,
             max: 100,
-            onChanged: (double newValue) => setState(() => _sliderValue1 = newValue),
+            onChanged: (double newValue) =>
+                setState(() => _sliderValue1 = newValue),
           ),
           const ArnaSliderListTile(
             title: '${Strings.title} 2',

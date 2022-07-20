@@ -23,7 +23,10 @@ class _TabsState extends State<Tabs> {
         icon: const ArnaLogo(),
         builder: (BuildContext context) {
           return Center(
-            child: Text('New ${Strings.tab}', style: ArnaTheme.of(context).textTheme.body),
+            child: Text(
+              'New ${Strings.tab}',
+              style: ArnaTheme.of(context).textTheme.body,
+            ),
           );
         },
       );

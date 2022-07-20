@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/foundation.dart' show LicenseEntry, LicenseParagraph, LicenseRegistry;
+import 'package:flutter/foundation.dart'
+    show LicenseEntry, LicenseParagraph, LicenseRegistry;
 import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// Displays an [ArnaLicensePage], which shows licenses for software used by the application.
@@ -43,7 +44,8 @@ class ArnaLicensePage extends StatelessWidget {
       future: LicenseRegistry.licenses
           .fold<_LicenseData>(
             _LicenseData(),
-            (_LicenseData prev, LicenseEntry license) => prev..addLicense(license),
+            (_LicenseData prev, LicenseEntry license) =>
+                prev..addLicense(license),
           )
           .then((_LicenseData licenseData) => licenseData..sortPackages()),
       builder: (BuildContext context, AsyncSnapshot<_LicenseData> snapshot) {
@@ -58,12 +60,19 @@ class ArnaLicensePage extends StatelessWidget {
                 onPressed: () => Navigator.pop(context),
               ),
               items: <MasterNavigationItem>[
-                ...snapshot.data!.packages.asMap().entries.map<MasterNavigationItem>((MapEntry<int, String> entry) {
+                ...snapshot.data!.packages
+                    .asMap()
+                    .entries
+                    .map<MasterNavigationItem>((MapEntry<int, String> entry) {
                   final String packageName = entry.value;
-                  final List<int> bindings = snapshot.data!.packageLicenseBindings[packageName]!;
+                  final List<int> bindings =
+                      snapshot.data!.packageLicenseBindings[packageName]!;
 
-                  final Iterable<LicenseParagraph> paragraphs =
-                      bindings.map((int i) => snapshot.data!.licenses[i]).toList(growable: false).first.paragraphs;
+                  final Iterable<LicenseParagraph> paragraphs = bindings
+                      .map((int i) => snapshot.data!.licenses[i])
+                      .toList(growable: false)
+                      .first
+                      .paragraphs;
                   final List<Widget> details = <Widget>[];
 
                   for (final LicenseParagraph paragraph in paragraphs) {
@@ -82,7 +91,8 @@ class ArnaLicensePage extends StatelessWidget {
                   return MasterNavigationItem(
                     leading: const Icon(Icons.info_outline),
                     title: packageName,
-                    subtitle: MaterialLocalizations.of(context).licensesPackageDetailText(bindings.length),
+                    subtitle: MaterialLocalizations.of(context)
+                        .licensesPackageDetailText(bindings.length),
                     builder: (_) => ListView(children: details),
                   );
                 }),

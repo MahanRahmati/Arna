@@ -362,7 +362,9 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   ///  * [maybeResolve], which is similar to this function, but will allow a null `resolvable` color.
   static Color resolve(Color resolvable, BuildContext context) {
-    return (resolvable is ArnaDynamicColor) ? resolvable.resolveFrom(context) : resolvable;
+    return (resolvable is ArnaDynamicColor)
+        ? resolvable.resolveFrom(context)
+        : resolvable;
   }
 
   /// Resolves the given [Color] by calling [resolveFrom].
@@ -380,19 +382,26 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     if (resolvable == null) {
       return null;
     }
-    return (resolvable is ArnaDynamicColor) ? resolvable.resolveFrom(context) : resolvable;
+    return (resolvable is ArnaDynamicColor)
+        ? resolvable.resolveFrom(context)
+        : resolvable;
   }
 
   /// Determines whether the given [Color] is [Brightness.light] or [Brightness.dark].
   static Brightness estimateBrightnessForColor(Color color) {
     final double relativeLuminance = color.computeLuminance();
     const double kThreshold = 0.098;
-    return ((relativeLuminance + 0.05) * (relativeLuminance + 0.05) > kThreshold) ? Brightness.light : Brightness.dark;
+    return ((relativeLuminance + 0.05) * (relativeLuminance + 0.05) >
+            kThreshold)
+        ? Brightness.light
+        : Brightness.dark;
   }
 
   /// A color that's clearly legible when drawn on [backgroundColor].
   static Color onBackgroundColor(Color backgroundColor) {
-    return estimateBrightnessForColor(backgroundColor) == Brightness.light ? ArnaColors.shade32 : ArnaColors.shade243;
+    return estimateBrightnessForColor(backgroundColor) == Brightness.light
+        ? ArnaColors.shade32
+        : ArnaColors.shade243;
   }
 
   /// Applies an overlay color to a [backgroundColor].
@@ -413,7 +422,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// Computes the color that matches with [color] and [brightness].
   static Color matchingColor(Color color, Brightness brightness) {
     final double colorLuminance = color.computeLuminance();
-    final Color foregroundColor = colorLuminance < 0.2 && brightness == Brightness.dark
+    final Color foregroundColor = colorLuminance < 0.2 &&
+            brightness == Brightness.dark
         ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.49), color)
         : colorLuminance > 0.8 && brightness == Brightness.light
             ? Color.alphaBlend(
@@ -425,10 +435,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// Is platform brightness dependent?
-  bool get _isPlatformBrightnessDependent => color != darkColor || highContrastColor != darkHighContrastColor;
+  bool get _isPlatformBrightnessDependent =>
+      color != darkColor || highContrastColor != darkHighContrastColor;
 
   /// Is high contrast dependent?
-  bool get _isHighContrastDependent => color != highContrastColor || darkColor != darkHighContrastColor;
+  bool get _isHighContrastDependent =>
+      color != highContrastColor || darkColor != darkHighContrastColor;
 
   /// Resolves this [ArnaDynamicColor] using the provided [BuildContext].
   ///
@@ -457,7 +469,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 
     bool isHighContrastEnabled = false;
     if (_isHighContrastDependent) {
-      isHighContrastEnabled = MediaQuery.maybeOf(context)?.highContrast ?? false;
+      isHighContrastEnabled =
+          MediaQuery.maybeOf(context)?.highContrast ?? false;
     }
 
     final Color resolved = brightness == Brightness.light
@@ -521,7 +534,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
     final List<String> xs = <String>[
       toString('color', color),
       if (_isPlatformBrightnessDependent) toString('darkColor', darkColor),
-      if (_isHighContrastDependent) toString('highContrastColor', highContrastColor),
+      if (_isHighContrastDependent)
+        toString('highContrastColor', highContrastColor),
       if (_isPlatformBrightnessDependent && _isHighContrastDependent)
         toString('darkHighContrastColor', darkHighContrastColor),
     ];
@@ -533,14 +547,34 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     if (_debugLabel != null) {
-      properties.add(MessageProperty('debugLabel', _debugLabel!));
+      properties.add(
+        MessageProperty(
+          'debugLabel',
+          _debugLabel!,
+        ),
+      );
     }
-    properties.add(createArnaColorProperty('color', color));
+    properties.add(
+      createArnaColorProperty(
+        'color',
+        color,
+      ),
+    );
     if (_isPlatformBrightnessDependent) {
-      properties.add(createArnaColorProperty('darkColor', darkColor));
+      properties.add(
+        createArnaColorProperty(
+          'darkColor',
+          darkColor,
+        ),
+      );
     }
     if (_isHighContrastDependent) {
-      properties.add(createArnaColorProperty('highContrastColor', highContrastColor));
+      properties.add(
+        createArnaColorProperty(
+          'highContrastColor',
+          highContrastColor,
+        ),
+      );
     }
     if (_isPlatformBrightnessDependent && _isHighContrastDependent) {
       properties.add(

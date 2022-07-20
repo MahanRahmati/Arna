@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/strings.dart';
 
-final StateProvider<int> counterProvider = StateProvider<int>((StateProviderRef<int> ref) => 0);
+final StateProvider<int> counterProvider =
+    StateProvider<int>((StateProviderRef<int> ref) => 0);
 
 class HelloWorld extends ConsumerWidget {
   const HelloWorld({super.key});
@@ -16,7 +17,10 @@ class HelloWorld extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(Strings.buttonPushed, style: ArnaTheme.of(context).textTheme.body),
+          Text(
+            Strings.buttonPushed,
+            style: ArnaTheme.of(context).textTheme.body,
+          ),
           const SizedBox(height: Styles.padding),
           Consumer(
             builder: (BuildContext context, WidgetRef ref, _) => Text(

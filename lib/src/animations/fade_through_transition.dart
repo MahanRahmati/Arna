@@ -101,10 +101,18 @@ class _ZoomedFadeInFadeOut extends StatelessWidget {
   Widget build(BuildContext context) {
     return DualTransitionBuilder(
       animation: animation,
-      forwardBuilder: (BuildContext context, Animation<double> animation, Widget? child) {
+      forwardBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Widget? child,
+      ) {
         return _ZoomedFadeIn(animation: animation, child: child);
       },
-      reverseBuilder: (BuildContext context, Animation<double> animation, Widget? child) {
+      reverseBuilder: (
+        BuildContext context,
+        Animation<double> animation,
+        Widget? child,
+      ) {
         return _FadeOut(animation: animation, child: child);
       },
       child: child,

@@ -23,7 +23,9 @@ class ArnaBadge extends StatelessWidget {
       child: DecoratedBox(
         decoration: ShapeDecoration(
           shape: StadiumBorder(
-            side: BorderSide(color: ArnaDynamicColor.outerColor(accent).withOpacity(0.28)),
+            side: BorderSide(
+              color: ArnaDynamicColor.outerColor(accent).withOpacity(0.28),
+            ),
           ),
           color: accent.withOpacity(0.28),
         ),

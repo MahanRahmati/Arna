@@ -67,7 +67,8 @@ class ArnaSearchField extends StatefulWidget {
 }
 
 /// The [State] for an [ArnaSearchField].
-class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProviderStateMixin, RestorationMixin {
+class _ArnaSearchFieldState extends State<ArnaSearchField>
+    with SingleTickerProviderStateMixin, RestorationMixin {
   RestorableTextEditingController? _textcontroller;
   FocusNode? focusNode;
   late AnimationController _controller;
@@ -141,8 +142,9 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
 
   void _createLocalController([TextEditingValue? value]) {
     assert(_textcontroller == null);
-    _textcontroller =
-        value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
+    _textcontroller = value == null
+        ? RestorableTextEditingController()
+        : RestorableTextEditingController.fromValue(value);
     if (!restorePending) {
       _registerController();
     }
@@ -162,7 +164,8 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
             width: Styles.searchWidth,
             child: ArnaTextField(
               controller: widget.controller ?? _textcontroller!.value,
-              hintText: widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel,
+              hintText: widget.hintText ??
+                  MaterialLocalizations.of(context).searchFieldLabel,
               prefix: Icon(
                 Icons.search_outlined,
                 color: ArnaColors.iconColor.resolveFrom(context),
@@ -185,10 +188,15 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
     );
 
     return Hero(
-      tag: '<ArnaSearchField Hero tag - ${widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel}>',
+      tag:
+          '<ArnaSearchField Hero tag - ${widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel}>',
       child: MediaQuery.of(context).accessibleNavigation
           ? search
-          : SizeTransition(axisAlignment: 1, sizeFactor: _animation, child: search),
+          : SizeTransition(
+              axisAlignment: 1,
+              sizeFactor: _animation,
+              child: search,
+            ),
     );
   }
 }

@@ -68,11 +68,14 @@ class ArnaScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData metrics = MediaQuery.of(context);
-    final double bottomPadding = resizeToAvoidBottomInset ? metrics.viewInsets.bottom : 0.0;
+    final double bottomPadding =
+        resizeToAvoidBottomInset ? metrics.viewInsets.bottom : 0.0;
 
     return MediaQuery(
       data: metrics.copyWith(
-        padding: metrics.padding.copyWith(top: isDialog ? 0 : metrics.padding.top),
+        padding: metrics.padding.copyWith(
+          top: isDialog ? 0 : metrics.padding.top,
+        ),
       ),
       child: DecoratedBox(
         decoration: BoxDecoration(
@@ -85,7 +88,10 @@ class ArnaScaffold extends StatelessWidget {
               middle: headerBarMiddle != null
                   ? headerBarMiddle!
                   : title != null
-                      ? Text(title!, style: ArnaTheme.of(context).textTheme.title)
+                      ? Text(
+                          title!,
+                          style: ArnaTheme.of(context).textTheme.title,
+                        )
                       : null,
               actions: actions,
               bottom: headerBarBottom,

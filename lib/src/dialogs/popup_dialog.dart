@@ -285,7 +285,11 @@ Future<T?> showArnaPopupDialog<T>({
         )
       : showGeneralDialog(
           context: context,
-          pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) {
             final Widget dialog = _ArnaPopupDialog(
               headerBarLeading: headerBarLeading,
               title: title,
@@ -297,10 +301,16 @@ Future<T?> showArnaPopupDialog<T>({
             return useSafeArea ? SafeArea(child: dialog) : dialog;
           },
           barrierDismissible: barrierDismissible,
-          barrierLabel: barrierLabel ?? MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          barrierLabel: barrierLabel ??
+              MaterialLocalizations.of(context).modalBarrierDismissLabel,
           barrierColor: barrierColor ?? ArnaColors.barrierColor,
           transitionDuration: Styles.basicDuration,
-          transitionBuilder: (BuildContext context, Animation<double> animation, _, Widget child) {
+          transitionBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            _,
+            Widget child,
+          ) {
             return ScaleTransition(
               scale: CurvedAnimation(
                 parent: animation,

@@ -135,10 +135,17 @@ class _ArnaListTileState extends State<ArnaListTile> {
                 subtitle: (widget.subtitle != null)
                     ? Text(
                         widget.subtitle!,
-                        style: ArnaTheme.of(context).textTheme.subtitle!.copyWith(
+                        style: ArnaTheme.of(context)
+                            .textTheme
+                            .subtitle!
+                            .copyWith(
                               color: !_isEnabled && widget.actionable
-                                  ? ArnaColors.disabledColor.resolveFrom(context)
-                                  : ArnaColors.secondaryTextColor.resolveFrom(context),
+                                  ? ArnaColors.disabledColor.resolveFrom(
+                                      context,
+                                    )
+                                  : ArnaColors.secondaryTextColor.resolveFrom(
+                                      context,
+                                    ),
                             ),
                       )
                     : null,
@@ -169,7 +176,8 @@ enum _ArnaListTileSlot {
 }
 
 /// _ArnaListTile class.
-class _ArnaListTile extends RenderObjectWidget with SlottedMultiChildRenderObjectWidgetMixin<_ArnaListTileSlot> {
+class _ArnaListTile extends RenderObjectWidget
+    with SlottedMultiChildRenderObjectWidgetMixin<_ArnaListTileSlot> {
   /// Creates an ArnaListTile.
   const _ArnaListTile({
     required this.leading,
@@ -226,7 +234,8 @@ class _ArnaListTile extends RenderObjectWidget with SlottedMultiChildRenderObjec
 }
 
 /// _RenderArnaListTile class.
-class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMixin<_ArnaListTileSlot> {
+class _RenderArnaListTile extends RenderBox
+    with SlottedContainerRenderObjectMixin<_ArnaListTileSlot> {
   /// Renders an ArnaListTile.
   _RenderArnaListTile({
     required TextDirection textDirection,
@@ -281,27 +290,38 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
 
   @override
   double computeMinIntrinsicWidth(double height) {
-    final double leadingWidth =
-        leading != null ? math.max(leading!.getMinIntrinsicWidth(height), _minLeadingWidth) + _horizontalTitleGap : 0.0;
-    return leadingWidth + math.max(_minWidth(title, height), _minWidth(subtitle, height)) + _maxWidth(trailing, height);
+    final double leadingWidth = leading != null
+        ? math.max(leading!.getMinIntrinsicWidth(height), _minLeadingWidth) +
+            _horizontalTitleGap
+        : 0.0;
+    return leadingWidth +
+        math.max(_minWidth(title, height), _minWidth(subtitle, height)) +
+        _maxWidth(trailing, height);
   }
 
   @override
   double computeMaxIntrinsicWidth(double height) {
-    final double leadingWidth =
-        leading != null ? math.max(leading!.getMaxIntrinsicWidth(height), _minLeadingWidth) + _horizontalTitleGap : 0.0;
-    return leadingWidth + math.max(_maxWidth(title, height), _maxWidth(subtitle, height)) + _maxWidth(trailing, height);
+    final double leadingWidth = leading != null
+        ? math.max(leading!.getMaxIntrinsicWidth(height), _minLeadingWidth) +
+            _horizontalTitleGap
+        : 0.0;
+    return leadingWidth +
+        math.max(_maxWidth(title, height), _maxWidth(subtitle, height)) +
+        _maxWidth(trailing, height);
   }
 
   double get _defaultTileHeight {
-    return subtitle != null ? Styles.listTileTwoLineHeight : Styles.listTileHeight;
+    return subtitle != null
+        ? Styles.listTileTwoLineHeight
+        : Styles.listTileHeight;
   }
 
   @override
   double computeMinIntrinsicHeight(double width) {
     return math.max(
       _defaultTileHeight,
-      title!.getMinIntrinsicHeight(width) + (subtitle?.getMinIntrinsicHeight(width) ?? 0.0),
+      title!.getMinIntrinsicHeight(width) +
+          (subtitle?.getMinIntrinsicHeight(width) ?? 0.0),
     );
   }
 
@@ -337,7 +357,8 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
   Size computeDryLayout(BoxConstraints constraints) {
     assert(
       debugCannotComputeDryLayout(
-        reason: 'Layout requires baseline metrics, which are only available after a full layout.',
+        reason:
+            'Layout requires baseline metrics, which are only available after a full layout.',
       ),
     );
     return Size.zero;
@@ -352,9 +373,13 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
     final bool isTwoLine = hasSubtitle;
     final bool isOneLine = !hasSubtitle;
 
-    const BoxConstraints maxIconHeightConstraint = BoxConstraints(maxHeight: Styles.listTileHeight);
+    const BoxConstraints maxIconHeightConstraint = BoxConstraints(
+      maxHeight: Styles.listTileHeight,
+    );
     final BoxConstraints looseConstraints = constraints.loosen();
-    final BoxConstraints iconConstraints = looseConstraints.enforce(maxIconHeightConstraint);
+    final BoxConstraints iconConstraints = looseConstraints.enforce(
+      maxIconHeightConstraint,
+    );
 
     final double tileWidth = looseConstraints.maxWidth;
     final Size leadingSize = _layoutBox(leading, iconConstraints);
@@ -370,8 +395,11 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
       'or consider replacing ListTile with a custom widget',
     );
 
-    final double titleStart = hasLeading ? math.max(_minLeadingWidth, leadingSize.width) + _horizontalTitleGap : 0.0;
-    final double adjustedTrailingWidth = hasTrailing ? trailingSize.width + _horizontalTitleGap : 0.0;
+    final double titleStart = hasLeading
+        ? math.max(_minLeadingWidth, leadingSize.width) + _horizontalTitleGap
+        : 0.0;
+    final double adjustedTrailingWidth =
+        hasTrailing ? trailingSize.width + _horizontalTitleGap : 0.0;
     final BoxConstraints textConstraints = looseConstraints.tighten(
       width: tileWidth - titleStart - adjustedTrailingWidth,
     );
@@ -400,7 +428,8 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
       titleY = (tileHeight - titleSize.height) / 2.0;
     } else {
       titleY = titleBaseline! - _boxBaseline(title!, _titleBaselineType)!;
-      subtitleY = subtitleBaseline! - _boxBaseline(subtitle!, _subtitleBaselineType)!;
+      subtitleY =
+          subtitleBaseline! - _boxBaseline(subtitle!, _subtitleBaselineType)!;
       tileHeight = defaultTileHeight;
 
       // If the title and subtitle overlap, move the title upwards by half the overlap and the subtitle down by the
@@ -413,8 +442,11 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
 
       // If the title or subtitle overflow tileHeight then punt: title and subtitle are arranged in a column,
       // tileHeight = column height plus _minVerticalPadding on top and bottom.
-      if (titleY < _minVerticalPadding || (subtitleY + subtitleSize.height + _minVerticalPadding) > tileHeight) {
-        tileHeight = titleSize.height + subtitleSize.height + 2.0 * _minVerticalPadding;
+      if (titleY < _minVerticalPadding ||
+          (subtitleY + subtitleSize.height + _minVerticalPadding) >
+              tileHeight) {
+        tileHeight =
+            titleSize.height + subtitleSize.height + 2.0 * _minVerticalPadding;
         titleY = _minVerticalPadding;
         subtitleY = titleSize.height + _minVerticalPadding;
       }
@@ -432,7 +464,8 @@ class _RenderArnaListTile extends RenderBox with SlottedContainerRenderObjectMix
       leadingY = Styles.base * 2;
       trailingY = Styles.base * 2;
     } else {
-      leadingY = math.min((tileHeight - leadingSize.height) / 2.0, Styles.base * 2);
+      leadingY =
+          math.min((tileHeight - leadingSize.height) / 2.0, Styles.base * 2);
       trailingY = (tileHeight - trailingSize.height) / 2.0;
     }
 

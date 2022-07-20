@@ -30,13 +30,15 @@ class Settings extends ConsumerWidget {
                 value: Brightness.dark,
                 groupValue: themeMode,
                 title: Strings.dark,
-                onChanged: (_) => ref.read(themeProvider.notifier).state = Brightness.dark,
+                onChanged: (_) =>
+                    ref.read(themeProvider.notifier).state = Brightness.dark,
               ),
               ArnaRadioListTile<Brightness?>(
                 value: Brightness.light,
                 groupValue: themeMode,
                 title: Strings.light,
-                onChanged: (_) => ref.read(themeProvider.notifier).state = Brightness.light,
+                onChanged: (_) =>
+                    ref.read(themeProvider.notifier).state = Brightness.light,
               ),
             ],
           ),
@@ -49,25 +51,29 @@ class Settings extends ConsumerWidget {
               ArnaColorButton<Color>(
                 value: ArnaColors.blue,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.blue,
+                onPressed: () =>
+                    ref.read(accentProvider.notifier).state = ArnaColors.blue,
                 color: ArnaColors.blue,
               ),
               ArnaColorButton<Color>(
                 value: ArnaColors.green,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.green,
+                onPressed: () =>
+                    ref.read(accentProvider.notifier).state = ArnaColors.green,
                 color: ArnaColors.green,
               ),
               ArnaColorButton<Color>(
                 value: ArnaColors.red,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.red,
+                onPressed: () =>
+                    ref.read(accentProvider.notifier).state = ArnaColors.red,
                 color: ArnaColors.red,
               ),
               ArnaColorButton<Color>(
                 value: ArnaColors.orange,
                 groupValue: accentColor,
-                onPressed: () => ref.read(accentProvider.notifier).state = ArnaColors.orange,
+                onPressed: () =>
+                    ref.read(accentProvider.notifier).state = ArnaColors.orange,
                 color: ArnaColors.orange,
               ),
             ],
@@ -80,7 +86,8 @@ class Settings extends ConsumerWidget {
               ArnaSwitchListTile(
                 value: masterMode,
                 title: Strings.masterMode,
-                onChanged: (_) => ref.read(masterProvider.notifier).state = !masterMode,
+                onChanged: (_) =>
+                    ref.read(masterProvider.notifier).state = !masterMode,
               ),
             ],
           ),

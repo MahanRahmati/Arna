@@ -60,7 +60,14 @@ class ArnaSideBarItem extends StatelessWidget {
       child: Padding(
         padding: Styles.small,
         child: ArnaBaseWidget(
-          builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+          builder: (
+            BuildContext context,
+            bool enabled,
+            bool hover,
+            bool focused,
+            bool pressed,
+            bool selected,
+          ) {
             selected = active;
             return Stack(
               alignment: Alignment.centerRight,
@@ -77,10 +84,16 @@ class ArnaSideBarItem extends StatelessWidget {
                       color: ArnaDynamicColor.resolve(
                         selected
                             ? focused
-                                ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                ? ArnaDynamicColor.matchingColor(
+                                    accent,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
                                 : ArnaColors.borderColor
                             : focused
-                                ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                ? ArnaDynamicColor.matchingColor(
+                                    accent,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
                                 : ArnaColors.transparent,
                         context,
                       ),
@@ -91,8 +104,12 @@ class ArnaSideBarItem extends StatelessWidget {
                           : pressed || hover
                               ? ArnaDynamicColor.applyOverlay(
                                   selected
-                                      ? ArnaColors.buttonColor.resolveFrom(context)
-                                      : ArnaColors.sideColor.resolveFrom(context),
+                                      ? ArnaColors.buttonColor.resolveFrom(
+                                          context,
+                                        )
+                                      : ArnaColors.sideColor.resolveFrom(
+                                          context,
+                                        ),
                                 )
                               : selected
                                   ? ArnaColors.buttonColor
@@ -100,7 +117,9 @@ class ArnaSideBarItem extends StatelessWidget {
                       context,
                     ),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: Styles.padding - 1),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Styles.padding - 1,
+                  ),
                   child: Row(
                     children: <Widget>[
                       Padding(
@@ -112,7 +131,10 @@ class ArnaSideBarItem extends StatelessWidget {
                             !enabled
                                 ? ArnaColors.disabledColor
                                 : selected
-                                    ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                    ? ArnaDynamicColor.matchingColor(
+                                        accent,
+                                        ArnaTheme.brightnessOf(context),
+                                      )
                                     : ArnaColors.iconColor,
                             context,
                           ),
@@ -122,17 +144,28 @@ class ArnaSideBarItem extends StatelessWidget {
                       Flexible(
                         child: Text(
                           label,
-                          style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                          style: ArnaTheme.of(context)
+                              .textTheme
+                              .button!
+                              .copyWith(
                                 color: !enabled
-                                    ? ArnaColors.disabledColor.resolveFrom(context)
-                                    : ArnaColors.primaryTextColor.resolveFrom(context),
+                                    ? ArnaColors.disabledColor.resolveFrom(
+                                        context,
+                                      )
+                                    : ArnaColors.primaryTextColor.resolveFrom(
+                                        context,
+                                      ),
                               ),
                         ),
                       ),
                     ],
                   ),
                 ),
-                if (badge != null) Padding(padding: Styles.horizontal, child: badge),
+                if (badge != null)
+                  Padding(
+                    padding: Styles.horizontal,
+                    child: badge,
+                  ),
               ],
             );
           },

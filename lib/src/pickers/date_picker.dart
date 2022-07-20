@@ -193,7 +193,8 @@ class ArnaDatePickerDialog extends StatefulWidget {
       'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.',
     );
     assert(
-      selectableDayPredicate == null || selectableDayPredicate!(this.initialDate),
+      selectableDayPredicate == null ||
+          selectableDayPredicate!(this.initialDate),
       'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate',
     );
   }
@@ -241,9 +242,12 @@ class ArnaDatePickerDialog extends StatefulWidget {
 }
 
 /// The [State] for an [ArnaDatePickerDialog].
-class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with RestorationMixin {
+class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog>
+    with RestorationMixin {
   final GlobalKey _calendarPickerKey = GlobalKey();
-  late final RestorableDateTime _selectedDate = RestorableDateTime(widget.initialDate);
+  late final RestorableDateTime _selectedDate = RestorableDateTime(
+    widget.initialDate,
+  );
 
   @override
   String? get restorationId => widget.restorationId;
@@ -257,15 +261,17 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
   Widget build(BuildContext context) {
     return ArnaDialog(
       child: SizedBox(
-        width:
-            ArnaHelpers.isCompact(context) ? ArnaHelpers.deviceWidth(context) - Styles.largePadding : Styles.dialogSize,
+        width: ArnaHelpers.isCompact(context)
+            ? ArnaHelpers.deviceWidth(context) - Styles.largePadding
+            : Styles.dialogSize,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ArnaHeaderBar(
               leading: const ArnaCloseButton(),
               middle: Text(
-                widget.helpText ?? MaterialLocalizations.of(context).datePickerHelpText,
+                widget.helpText ??
+                    MaterialLocalizations.of(context).datePickerHelpText,
                 style: ArnaTheme.of(context).textTheme.title,
               ),
             ),
@@ -275,7 +281,8 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
               firstDate: widget.firstDate,
               lastDate: widget.lastDate,
               currentDate: widget.currentDate,
-              onDateChanged: (DateTime date) => setState(() => _selectedDate.value = date),
+              onDateChanged: (DateTime date) =>
+                  setState(() => _selectedDate.value = date),
               selectableDayPredicate: widget.selectableDayPredicate,
               initialCalendarMode: widget.initialCalendarMode,
             ),
@@ -287,7 +294,8 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
                 child: ArnaTextButton(
                   onPressed: () => Navigator.pop(context, _selectedDate.value),
                   buttonSize: ButtonSize.huge,
-                  label: widget.confirmText ?? MaterialLocalizations.of(context).okButtonLabel,
+                  label: widget.confirmText ??
+                      MaterialLocalizations.of(context).okButtonLabel,
                 ),
               ),
             ),
@@ -358,7 +366,8 @@ class ArnaCalendarDatePicker extends StatefulWidget {
       'initialDate ${this.initialDate} must be on or before lastDate ${this.lastDate}.',
     );
     assert(
-      selectableDayPredicate == null || selectableDayPredicate!(this.initialDate),
+      selectableDayPredicate == null ||
+          selectableDayPredicate!(this.initialDate),
       'Provided initialDate ${this.initialDate} must satisfy provided selectableDayPredicate.',
     );
   }
@@ -406,7 +415,10 @@ class _ArnaCalendarDatePickerState extends State<ArnaCalendarDatePicker> {
   void initState() {
     super.initState();
     _mode = widget.initialCalendarMode;
-    _currentDisplayedMonthDate = DateTime(widget.initialDate.year, widget.initialDate.month);
+    _currentDisplayedMonthDate = DateTime(
+      widget.initialDate.year,
+      widget.initialDate.month,
+    );
     _selectedDate = widget.initialDate;
   }
 
@@ -417,7 +429,10 @@ class _ArnaCalendarDatePickerState extends State<ArnaCalendarDatePicker> {
       _mode = widget.initialCalendarMode;
     }
     if (!ArnaDateUtils.isSameDay(widget.initialDate, oldWidget.initialDate)) {
-      _currentDisplayedMonthDate = DateTime(widget.initialDate.year, widget.initialDate.month);
+      _currentDisplayedMonthDate = DateTime(
+        widget.initialDate.year,
+        widget.initialDate.month,
+      );
       _selectedDate = widget.initialDate;
     }
   }
@@ -452,7 +467,8 @@ class _ArnaCalendarDatePickerState extends State<ArnaCalendarDatePicker> {
 
   void _handleMonthChanged(DateTime date) {
     setState(() {
-      if (_currentDisplayedMonthDate.year != date.year || _currentDisplayedMonthDate.month != date.month) {
+      if (_currentDisplayedMonthDate.year != date.year ||
+          _currentDisplayedMonthDate.month != date.month) {
         _currentDisplayedMonthDate = DateTime(date.year, date.month);
         widget.onDisplayedMonthChanged?.call(_currentDisplayedMonthDate);
       }
@@ -526,7 +542,9 @@ class _ArnaCalendarDatePickerState extends State<ArnaCalendarDatePicker> {
           label: _localizations.formatMonthYear(_currentDisplayedMonthDate),
           onPressed: () {
             _handleModeChanged(
-              _mode == ArnaDatePickerMode.day ? ArnaDatePickerMode.year : ArnaDatePickerMode.day,
+              _mode == ArnaDatePickerMode.day
+                  ? ArnaDatePickerMode.year
+                  : ArnaDatePickerMode.day,
             );
           },
         )
@@ -608,13 +626,23 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
       initialPage: ArnaDateUtils.monthDelta(widget.firstDate, _currentMonth),
     );
     _shortcutMap = const <ShortcutActivator, Intent>{
-      SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(TraversalDirection.left),
-      SingleActivator(LogicalKeyboardKey.arrowRight): DirectionalFocusIntent(TraversalDirection.right),
-      SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(TraversalDirection.down),
-      SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(TraversalDirection.up),
+      SingleActivator(LogicalKeyboardKey.arrowLeft): DirectionalFocusIntent(
+        TraversalDirection.left,
+      ),
+      SingleActivator(LogicalKeyboardKey.arrowRight): DirectionalFocusIntent(
+        TraversalDirection.right,
+      ),
+      SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(
+        TraversalDirection.down,
+      ),
+      SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(
+        TraversalDirection.up,
+      ),
     };
     _actionMap = <Type, Action<Intent>>{
-      NextFocusIntent: CallbackAction<NextFocusIntent>(onInvoke: _handleGridNextFocus),
+      NextFocusIntent: CallbackAction<NextFocusIntent>(
+        onInvoke: _handleGridNextFocus,
+      ),
       PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(
         onInvoke: _handleGridPreviousFocus,
       ),
@@ -635,7 +663,8 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
   @override
   void didUpdateWidget(_ArnaMonthPicker oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.initialMonth != oldWidget.initialMonth && widget.initialMonth != _currentMonth) {
+    if (widget.initialMonth != oldWidget.initialMonth &&
+        widget.initialMonth != _currentMonth) {
       // We can't interrupt this widget build with a scroll, so do it next frame
       WidgetsBinding.instance.addPostFrameCallback(
         (Duration timeStamp) => _showMonth(widget.initialMonth, jump: true),
@@ -657,11 +686,15 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
 
   void _handleMonthPageChanged(int monthPage) {
     setState(() {
-      final DateTime monthDate = ArnaDateUtils.addMonthsToMonthDate(widget.firstDate, monthPage);
+      final DateTime monthDate = ArnaDateUtils.addMonthsToMonthDate(
+        widget.firstDate,
+        monthPage,
+      );
       if (!ArnaDateUtils.isSameMonth(_currentMonth, monthDate)) {
         _currentMonth = DateTime(monthDate.year, monthDate.month);
         widget.onDisplayedMonthChanged(_currentMonth);
-        if (_focusedDay != null && !ArnaDateUtils.isSameMonth(_focusedDay, _currentMonth)) {
+        if (_focusedDay != null &&
+            !ArnaDateUtils.isSameMonth(_focusedDay, _currentMonth)) {
           // We have navigated to a new month with the grid focused, but the focused day is not in this month. Choose a
           // new one trying to keep the same day of the month.
           _focusedDay = _focusableDayForMonth(_currentMonth, _focusedDay!.day);
@@ -679,7 +712,10 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
   /// If the preferredDay is available in the month it will be returned, otherwise the first selectable day in the
   /// month will be returned. If no dates are selectable in the month, then it will return null.
   DateTime? _focusableDayForMonth(DateTime month, int preferredDay) {
-    final int daysInMonth = ArnaDateUtils.getDaysInMonth(month.year, month.month);
+    final int daysInMonth = ArnaDateUtils.getDaysInMonth(
+      month.year,
+      month.month,
+    );
 
     // Can we use the preferred day in this month?
     if (preferredDay <= daysInMonth) {
@@ -735,12 +771,22 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
 
   /// True if the earliest allowable month is displayed.
   bool get _isDisplayingFirstMonth {
-    return !_currentMonth.isAfter(DateTime(widget.firstDate.year, widget.firstDate.month));
+    return !_currentMonth.isAfter(
+      DateTime(
+        widget.firstDate.year,
+        widget.firstDate.month,
+      ),
+    );
   }
 
   /// True if the latest allowable month is displayed.
   bool get _isDisplayingLastMonth {
-    return !_currentMonth.isBefore(DateTime(widget.lastDate.year, widget.lastDate.month));
+    return !_currentMonth.isBefore(
+      DateTime(
+        widget.lastDate.year,
+        widget.lastDate.month,
+      ),
+    );
   }
 
   /// Handler for when the overall day grid obtains or loses focus.
@@ -753,7 +799,10 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
           widget.currentDate,
           _currentMonth,
         )) {
-          _focusedDay = _focusableDayForMonth(_currentMonth, widget.currentDate.day);
+          _focusedDay = _focusableDayForMonth(
+            _currentMonth,
+            widget.currentDate.day,
+          );
         } else {
           _focusedDay = _focusableDayForMonth(_currentMonth, 1);
         }
@@ -783,7 +832,10 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
   void _handleDirectionFocus(DirectionalFocusIntent intent) {
     assert(_focusedDay != null);
     setState(() {
-      final DateTime? nextDate = _nextDateInDirection(_focusedDay!, intent.direction);
+      final DateTime? nextDate = _nextDateInDirection(
+        _focusedDay!,
+        intent.direction,
+      );
       if (nextDate != null) {
         _focusedDay = nextDate;
         if (!ArnaDateUtils.isSameMonth(_focusedDay, _currentMonth)) {
@@ -793,7 +845,8 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
     });
   }
 
-  static const Map<TraversalDirection, int> _directionOffset = <TraversalDirection, int>{
+  static const Map<TraversalDirection, int> _directionOffset =
+      <TraversalDirection, int>{
     TraversalDirection.up: -DateTime.daysPerWeek,
     TraversalDirection.right: 1,
     TraversalDirection.down: DateTime.daysPerWeek,
@@ -821,7 +874,8 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
       date,
       _dayDirectionOffset(direction, textDirection),
     );
-    while (!nextDate.isBefore(widget.firstDate) && !nextDate.isAfter(widget.lastDate)) {
+    while (!nextDate.isBefore(widget.firstDate) &&
+        !nextDate.isAfter(widget.lastDate)) {
       if (_isSelectable(nextDate)) {
         return nextDate;
       }
@@ -834,11 +888,15 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
   }
 
   bool _isSelectable(DateTime date) {
-    return widget.selectableDayPredicate == null || widget.selectableDayPredicate!.call(date);
+    return widget.selectableDayPredicate == null ||
+        widget.selectableDayPredicate!.call(date);
   }
 
   Widget _buildItems(BuildContext context, int index) {
-    final DateTime month = ArnaDateUtils.addMonthsToMonthDate(widget.firstDate, index);
+    final DateTime month = ArnaDateUtils.addMonthsToMonthDate(
+      widget.firstDate,
+      index,
+    );
     return _ArnaDayPicker(
       key: ValueKey<DateTime>(month),
       selectedDate: widget.selectedDate,
@@ -863,13 +921,18 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
               children: <Widget>[
                 ArnaIconButton(
                   icon: Icons.chevron_left,
-                  tooltipMessage: _isDisplayingFirstMonth ? null : _localizations.previousMonthTooltip,
-                  onPressed: _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                  tooltipMessage: _isDisplayingFirstMonth
+                      ? null
+                      : _localizations.previousMonthTooltip,
+                  onPressed:
+                      _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
                 const Spacer(),
                 ArnaIconButton(
                   icon: Icons.chevron_right,
-                  tooltipMessage: _isDisplayingLastMonth ? null : _localizations.nextMonthTooltip,
+                  tooltipMessage: _isDisplayingLastMonth
+                      ? null
+                      : _localizations.nextMonthTooltip,
                   onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
                 ),
               ],
@@ -918,7 +981,11 @@ class _ArnaFocusedDate extends InheritedWidget {
   final DateTime? date;
 
   @override
-  bool updateShouldNotify(_ArnaFocusedDate oldWidget) => !ArnaDateUtils.isSameDay(date, oldWidget.date);
+  bool updateShouldNotify(_ArnaFocusedDate oldWidget) =>
+      !ArnaDateUtils.isSameDay(
+        date,
+        oldWidget.date,
+      );
 
   static DateTime? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<_ArnaFocusedDate>()?.date;
@@ -988,7 +1055,10 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
     );
     _dayFocusNodes = List<FocusNode>.generate(
       daysInMonth,
-      (int index) => FocusNode(skipTraversal: true, debugLabel: 'Day ${index + 1}'),
+      (int index) => FocusNode(
+        skipTraversal: true,
+        debugLabel: 'Day ${index + 1}',
+      ),
     );
   }
 
@@ -997,7 +1067,8 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
     super.didChangeDependencies();
     // Check to see if the focused date is in this month, if so focus it.
     final DateTime? focusedDate = _ArnaFocusedDate.of(context);
-    if (focusedDate != null && ArnaDateUtils.isSameMonth(widget.displayedMonth, focusedDate)) {
+    if (focusedDate != null &&
+        ArnaDateUtils.isSameMonth(widget.displayedMonth, focusedDate)) {
       _dayFocusNodes[focusedDate.day - 1].requestFocus();
     }
   }
@@ -1048,7 +1119,8 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
   }
 
   List<Widget> _buildDayItems(BuildContext context) {
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
     final TextStyle? headerStyle = ArnaTheme.of(context).textTheme.body?.apply(
           color: ArnaColors.disabledColor.resolveFrom(context),
         );
@@ -1057,7 +1129,11 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
     final int month = widget.displayedMonth.month;
 
     final int daysInMonth = ArnaDateUtils.getDaysInMonth(year, month);
-    final int dayOffset = ArnaDateUtils.firstDayOffset(year, month, localizations);
+    final int dayOffset = ArnaDateUtils.firstDayOffset(
+      year,
+      month,
+      localizations,
+    );
 
     final List<Widget> dayItems = _dayHeaders(headerStyle, localizations);
 
@@ -1072,9 +1148,16 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
         final DateTime dayToBuild = DateTime(year, month, i);
         final bool isDisabled = dayToBuild.isAfter(widget.lastDate) ||
             dayToBuild.isBefore(widget.firstDate) ||
-            (widget.selectableDayPredicate != null && !widget.selectableDayPredicate!(dayToBuild));
-        final bool isSelectedDay = ArnaDateUtils.isSameDay(widget.selectedDate, dayToBuild);
-        final bool isToday = ArnaDateUtils.isSameDay(widget.currentDate, dayToBuild);
+            (widget.selectableDayPredicate != null &&
+                !widget.selectableDayPredicate!(dayToBuild));
+        final bool isSelectedDay = ArnaDateUtils.isSameDay(
+          widget.selectedDate,
+          dayToBuild,
+        );
+        final bool isToday = ArnaDateUtils.isSameDay(
+          widget.currentDate,
+          dayToBuild,
+        );
 
         final Color accentColor = ArnaTheme.of(context).accentColor;
 
@@ -1085,7 +1168,8 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                     child: Text(
                       localizations.formatDecimal(i),
                       style: ArnaTheme.of(context).textTheme.body!.apply(
-                            color: ArnaColors.primaryTextColor.resolveFrom(context),
+                            color: ArnaColors.primaryTextColor
+                                .resolveFrom(context),
                           ),
                     ),
                   ),
@@ -1104,13 +1188,16 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                       // TextDirection. This is because an accessibility user is more likely to be interested in the day of
                       // month before the rest of the date, as they are looking for the day of month. To do that we prepend
                       // day of month to the formatted full date.
-                      label: '${localizations.formatDecimal(i)}, ${localizations.formatFullDate(dayToBuild)}',
+                      label:
+                          '${localizations.formatDecimal(i)}, ${localizations.formatFullDate(dayToBuild)}',
                       selected: isSelectedDay,
                       excludeSemantics: true,
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: isToday || focused ? accentColor : ArnaColors.transparent,
+                            color: isToday || focused
+                                ? accentColor
+                                : ArnaColors.transparent,
                           ),
                           color: isDisabled
                               ? ArnaColors.transparent
@@ -1118,7 +1205,9 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                                   ? accentColor
                                   : pressed || hover || focused
                                       ? ArnaDynamicColor.applyOverlay(
-                                          ArnaColors.cardColor.resolveFrom(context),
+                                          ArnaColors.cardColor.resolveFrom(
+                                            context,
+                                          ),
                                         )
                                       : ArnaColors.transparent,
                           shape: BoxShape.circle,
@@ -1128,14 +1217,19 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                             localizations.formatDecimal(i),
                             style: ArnaTheme.of(context).textTheme.body!.apply(
                                   color: isDisabled
-                                      ? ArnaColors.disabledColor.resolveFrom(context)
+                                      ? ArnaColors.disabledColor.resolveFrom(
+                                          context,
+                                        )
                                       : isSelectedDay
                                           ? ArnaDynamicColor.onBackgroundColor(
                                               accentColor,
                                             )
                                           : isToday
                                               ? accentColor
-                                              : ArnaColors.primaryTextColor.resolveFrom(context),
+                                              : ArnaColors.primaryTextColor
+                                                  .resolveFrom(
+                                                  context,
+                                                ),
                                 ),
                           ),
                         ),
@@ -1193,7 +1287,8 @@ class _ArnaDayPickerGridDelegate extends SliverGridDelegate {
 }
 
 /// _dayPickerGridDelegate.
-const _ArnaDayPickerGridDelegate _dayPickerGridDelegate = _ArnaDayPickerGridDelegate();
+const _ArnaDayPickerGridDelegate _dayPickerGridDelegate =
+    _ArnaDayPickerGridDelegate();
 
 /// A scrollable grid of years to allow picking a year.
 ///
@@ -1286,7 +1381,8 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
     final int year = widget.firstDate.year + index - offset;
     final bool isSelected = year == widget.selectedDate.year;
     final bool isCurrentYear = year == widget.currentDate.year;
-    final bool isDisabled = year < widget.firstDate.year || year > widget.lastDate.year;
+    final bool isDisabled =
+        year < widget.firstDate.year || year > widget.lastDate.year;
 
     final Color textColor;
     if (isSelected) {
@@ -1298,7 +1394,9 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
     } else {
       textColor = ArnaColors.primaryTextColor.resolveFrom(context);
     }
-    final TextStyle? itemStyle = ArnaTheme.of(context).textTheme.body?.apply(color: textColor);
+    final TextStyle? itemStyle = ArnaTheme.of(context).textTheme.body?.apply(
+          color: textColor,
+        );
 
     return isDisabled
         ? ExcludeSemantics(
@@ -1331,7 +1429,9 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
-                      color: focused ? ArnaDynamicColor.outerColor(accentColor) : ArnaColors.transparent,
+                      color: focused
+                          ? ArnaDynamicColor.outerColor(accentColor)
+                          : ArnaColors.transparent,
                     ),
                     color: isSelected
                         ? accentColor
@@ -1352,7 +1452,12 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
                 ),
               );
             },
-            onPressed: () => widget.onChanged(DateTime(year, widget.initialDate.month)),
+            onPressed: () => widget.onChanged(
+              DateTime(
+                year,
+                widget.initialDate.month,
+              ),
+            ),
           );
   }
 
@@ -1383,7 +1488,8 @@ class _ArnaYearPickerGridDelegate extends SliverGridDelegate {
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
-    final double tileWidth = (constraints.crossAxisExtent - (3 - 1) * Styles.padding) / 3;
+    final double tileWidth =
+        (constraints.crossAxisExtent - (3 - 1) * Styles.padding) / 3;
     return SliverGridRegularTileLayout(
       childCrossAxisExtent: tileWidth,
       childMainAxisExtent: Styles.pickerRowHeight,
@@ -1399,4 +1505,5 @@ class _ArnaYearPickerGridDelegate extends SliverGridDelegate {
 }
 
 /// _yearPickerGridDelegate.
-const _ArnaYearPickerGridDelegate _yearPickerGridDelegate = _ArnaYearPickerGridDelegate();
+const _ArnaYearPickerGridDelegate _yearPickerGridDelegate =
+    _ArnaYearPickerGridDelegate();

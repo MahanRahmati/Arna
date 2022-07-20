@@ -83,7 +83,10 @@ class ArnaAboutDialog extends StatelessWidget {
         if (applicationIcon != null) applicationIcon!,
         if (applicationName != null) ...<Widget>[
           const SizedBox(height: Styles.padding),
-          Text(applicationName!, style: ArnaTheme.of(context).textTheme.display),
+          Text(
+            applicationName!,
+            style: ArnaTheme.of(context).textTheme.display,
+          ),
           const SizedBox(height: Styles.padding),
         ],
         if (developerName != null) ...<Widget>[

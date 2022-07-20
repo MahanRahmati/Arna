@@ -64,7 +64,14 @@ class ArnaPillButton extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           return AnimatedContainer(
             height: Styles.hugeButtonSize,
             duration: Styles.basicDuration,
@@ -73,11 +80,16 @@ class ArnaPillButton extends StatelessWidget {
             decoration: ShapeDecoration(
               shape: StadiumBorder(
                 side: BorderSide(
-                  color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.borderColor.resolveFrom(context),
+                  color: focused
+                      ? ArnaDynamicColor.outerColor(accent)
+                      : ArnaColors.borderColor.resolveFrom(context),
                 ),
               ),
               color: !enabled
-                  ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                  ? ArnaDynamicColor.resolve(
+                      ArnaColors.backgroundColor,
+                      context,
+                    )
                   : pressed || hover || focused
                       ? ArnaDynamicColor.applyOverlay(accent)
                       : accent,
@@ -92,7 +104,9 @@ class ArnaPillButton extends StatelessWidget {
                     label,
                     style: ArnaTheme.of(context).textTheme.button!.copyWith(
                           color: ArnaDynamicColor.resolve(
-                            !enabled ? ArnaColors.disabledColor : ArnaDynamicColor.onBackgroundColor(accent),
+                            !enabled
+                                ? ArnaColors.disabledColor
+                                : ArnaDynamicColor.onBackgroundColor(accent),
                             context,
                           ),
                         ),
@@ -104,7 +118,8 @@ class ArnaPillButton extends StatelessWidget {
         },
         onPressed: onPressed,
         onLongPress: onLongPress,
-        tooltipMessage: onPressed != null || onLongPress != null ? tooltipMessage : null,
+        tooltipMessage:
+            onPressed != null || onLongPress != null ? tooltipMessage : null,
         isFocusable: isFocusable,
         showAnimation: onPressed != null || onLongPress != null,
         autofocus: autofocus,

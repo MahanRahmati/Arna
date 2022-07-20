@@ -57,7 +57,8 @@ class _ButtonsState extends State<Buttons> {
               tooltipMessage: Strings.add,
             ),
             ArnaPopupMenuButton<String>(
-              itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry<String>>[
+              itemBuilder: (BuildContext context) =>
+                  <ArnaPopupMenuEntry<String>>[
                 const ArnaPopupMenuItem<String>(
                   value: Strings.first,
                   child: Text(Strings.first),

@@ -118,7 +118,8 @@ class ArnaBaseWidget extends StatefulWidget {
 }
 
 /// The [State] for an [ArnaBaseWidget].
-class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProviderStateMixin {
+class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
+    with SingleTickerProviderStateMixin {
   FocusNode? _focusNode;
   bool _hover = false;
   bool _focused = false;
@@ -134,7 +135,8 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   /// To enable a widget, set its [onPressed] or [onLongPress] property to a non-null value.
   bool get _isEnabled => widget.onPressed != null || widget.onLongPress != null;
 
-  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode());
+  FocusNode get _effectiveFocusNode =>
+      widget.focusNode ?? (_focusNode ??= FocusNode());
 
   @override
   void initState() {
@@ -153,7 +155,9 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
     if (widget.autofocus) {
       _effectiveFocusNode.requestFocus();
     }
-    _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
+    _actions = <Type, Action<Intent>>{
+      ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
+    };
     _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
       SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
@@ -163,7 +167,8 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
   @override
   void didUpdateWidget(ArnaBaseWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.onPressed != oldWidget.onPressed || widget.onLongPress != oldWidget.onLongPress) {
+    if (widget.onPressed != oldWidget.onPressed ||
+        widget.onLongPress != oldWidget.onLongPress) {
       if (!_isEnabled) {
         _hover = _pressed = false;
       }
@@ -284,7 +289,14 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    final Widget child = widget.builder(context, _isEnabled, _hover, _focused, _pressed, _selected);
+    final Widget child = widget.builder(
+      context,
+      _isEnabled,
+      _hover,
+      _focused,
+      _pressed,
+      _selected,
+    );
 
     return ArnaTooltip(
       message: widget.tooltipMessage,
@@ -316,7 +328,9 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget> with SingleTickerProvid
               onFocusChange: _handleFocusChange,
               actions: _actions,
               shortcuts: _shortcuts,
-              child: widget.showAnimation ? ScaleTransition(scale: _animation, child: child) : child,
+              child: widget.showAnimation
+                  ? ScaleTransition(scale: _animation, child: child)
+                  : child,
             ),
           ),
         ),

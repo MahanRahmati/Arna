@@ -48,7 +48,14 @@ class ArnaTabItem extends StatelessWidget {
       child: Padding(
         padding: Styles.small,
         child: ArnaBaseWidget(
-          builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+          builder: (
+            BuildContext context,
+            bool enabled,
+            bool hover,
+            bool focused,
+            bool pressed,
+            bool selected,
+          ) {
             selected = active;
             return AnimatedContainer(
               height: Styles.tabHeight,
@@ -62,10 +69,16 @@ class ArnaTabItem extends StatelessWidget {
                   color: ArnaDynamicColor.resolve(
                     selected
                         ? focused
-                            ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                            ? ArnaDynamicColor.matchingColor(
+                                accent,
+                                ArnaTheme.brightnessOf(context),
+                              )
                             : ArnaColors.borderColor
                         : focused
-                            ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                            ? ArnaDynamicColor.matchingColor(
+                                accent,
+                                ArnaTheme.brightnessOf(context),
+                              )
                             : ArnaColors.transparent,
                     context,
                   ),
@@ -85,12 +98,16 @@ class ArnaTabItem extends StatelessWidget {
                   context,
                 ),
               ),
-              padding: const EdgeInsetsDirectional.only(start: Styles.largePadding),
+              padding: const EdgeInsetsDirectional.only(
+                start: Styles.largePadding,
+              ),
               child: Row(
                 children: <Widget>[
                   if (icon != null)
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(end: Styles.padding),
+                      padding: const EdgeInsetsDirectional.only(
+                        end: Styles.padding,
+                      ),
                       child: icon,
                     ),
                   Expanded(
@@ -100,11 +117,14 @@ class ArnaTabItem extends StatelessWidget {
                       style: ArnaTheme.of(context).textTheme.button!.copyWith(
                             color: !enabled
                                 ? ArnaColors.disabledColor.resolveFrom(context)
-                                : ArnaColors.primaryTextColor.resolveFrom(context),
+                                : ArnaColors.primaryTextColor.resolveFrom(
+                                    context,
+                                  ),
                           ),
                     ),
                   ),
-                  if (onClosed != null && !pinned) ArnaCloseButton(onPressed: onClosed),
+                  if (onClosed != null && !pinned)
+                    ArnaCloseButton(onPressed: onClosed),
                 ],
               ),
             );

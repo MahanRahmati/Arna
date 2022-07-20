@@ -65,10 +65,18 @@ class _ArnaLinkedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
-    final Color accent = button.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent =
+        button.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return ArnaBaseWidget(
-      builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+      builder: (
+        BuildContext context,
+        bool enabled,
+        bool hover,
+        bool focused,
+        bool pressed,
+        bool selected,
+      ) {
         return AnimatedContainer(
           height: Styles.buttonSize - 2,
           duration: Styles.basicDuration,
@@ -76,10 +84,17 @@ class _ArnaLinkedItem extends StatelessWidget {
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.horizontal(
-              left: first ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
-              right: last ? const Radius.circular(Styles.borderRadiusSize - 1) : Radius.zero,
+              left: first
+                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  : Radius.zero,
+              right: last
+                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  : Radius.zero,
             ),
-            border: Border.all(color: ArnaDynamicColor.outerColor(accent).withAlpha(focused ? 255 : 0)),
+            border: Border.all(
+              color: ArnaDynamicColor.outerColor(accent)
+                  .withAlpha(focused ? 255 : 0),
+            ),
             color: !enabled
                 ? ArnaColors.backgroundColor.resolveFrom(context)
                 : button.buttonType == ButtonType.normal
@@ -91,15 +106,18 @@ class _ArnaLinkedItem extends StatelessWidget {
                         : accent,
           ),
           margin: const EdgeInsets.all(0.5),
-          padding:
-              button.icon != null ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1) : Styles.largeHorizontal,
+          padding: button.icon != null
+              ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
+              : Styles.largeHorizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               if (button.icon != null)
                 Padding(
-                  padding: EdgeInsetsDirectional.only(end: button.label != null ? Styles.padding : 0),
+                  padding: EdgeInsetsDirectional.only(
+                    end: button.label != null ? Styles.padding : 0,
+                  ),
                   child: Icon(
                     button.icon,
                     size: Styles.iconSize,
@@ -123,20 +141,25 @@ class _ArnaLinkedItem extends StatelessWidget {
                                 ? ArnaColors.disabledColor
                                 : button.buttonType == ButtonType.normal
                                     ? ArnaColors.primaryTextColor
-                                    : ArnaDynamicColor.onBackgroundColor(accent),
+                                    : ArnaDynamicColor.onBackgroundColor(
+                                        accent,
+                                      ),
                             context,
                           ),
                         ),
                   ),
                 ),
-              if (button.icon != null && button.label != null) const SizedBox(width: Styles.padding),
+              if (button.icon != null && button.label != null)
+                const SizedBox(width: Styles.padding),
             ],
           ),
         );
       },
       onPressed: button.onPressed,
       onLongPress: button.onLongPress,
-      tooltipMessage: button.onPressed != null || button.onLongPress != null ? button.tooltipMessage : null,
+      tooltipMessage: button.onPressed != null || button.onLongPress != null
+          ? button.tooltipMessage
+          : null,
       isFocusable: button.isFocusable,
       showAnimation: button.onPressed != null || button.onLongPress != null,
       autofocus: button.autofocus,

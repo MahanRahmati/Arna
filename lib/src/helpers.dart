@@ -7,22 +7,31 @@ class ArnaHelpers {
   ArnaHelpers._();
 
   /// Get device height.
-  static double deviceHeight(BuildContext context) => MediaQuery.of(context).size.height;
+  static double deviceHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height;
 
   /// Get device width.
-  static double deviceWidth(BuildContext context) => MediaQuery.of(context).size.width;
+  static double deviceWidth(BuildContext context) =>
+      MediaQuery.of(context).size.width;
 
   /// Is device compact?
-  static bool isCompact(BuildContext context) => deviceWidth(context) < Styles.compact;
+  static bool isCompact(BuildContext context) =>
+      deviceWidth(context) < Styles.compact;
 
   /// Is device medium?
-  static bool isMedium(BuildContext context) => !isCompact(context) && !isExpanded(context);
+  static bool isMedium(BuildContext context) =>
+      !isCompact(context) && !isExpanded(context);
 
   /// Is device expanded?
-  static bool isExpanded(BuildContext context) => deviceWidth(context) > Styles.expanded;
+  static bool isExpanded(BuildContext context) =>
+      deviceWidth(context) > Styles.expanded;
 
   /// Determines if this is the first child that is being laid out.
-  static bool isFirstButton(int index, int length, TextDirection textDirection) {
+  static bool isFirstButton(
+    int index,
+    int length,
+    TextDirection textDirection,
+  ) {
     return (index == 0 && textDirection == TextDirection.ltr) ||
         (index == length - 1 && textDirection == TextDirection.rtl);
   }

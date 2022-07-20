@@ -109,7 +109,10 @@ class _ArnaMenuItem extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, covariant _RenderArnaMenuItem renderObject) {
+  void updateRenderObject(
+    BuildContext context,
+    covariant _RenderArnaMenuItem renderObject,
+  ) {
     renderObject.onLayout = onLayout;
   }
 }
@@ -221,7 +224,8 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
   bool represents(T? value) => value == this.value;
 
   @override
-  ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>> createState() => ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>>();
+  ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>> createState() =>
+      ArnaPopupMenuItemState<T, ArnaPopupMenuItem<T>>();
 }
 
 // The [State] for [ArnaPopupMenuItem] subclasses.
@@ -235,7 +239,8 @@ class ArnaPopupMenuItem<T> extends ArnaPopupMenuEntry<T> {
 /// This class takes two type arguments. The second, [W], is the exact type of the [Widget] that is using this [State].
 /// It must be a subclass of [ArnaPopupMenuItem]. The first, [T], must match the type argument of that widget class,
 /// and is the type of values returned from this menu.
-class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W> {
+class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>>
+    extends State<W> {
   /// The menu item contents.
   ///
   /// Used by the [build] method.
@@ -288,7 +293,14 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W>
         enabled: widget.enabled,
         button: true,
         child: ArnaBaseWidget(
-          builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+          builder: (
+            BuildContext context,
+            bool enabled,
+            bool hover,
+            bool focused,
+            bool pressed,
+            bool selected,
+          ) {
             enabled = widget.enabled;
             return AnimatedContainer(
               height: widget.height,
@@ -335,7 +347,8 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
 
     for (int i = 0; i < route.items.length; i += 1) {
       Widget item = route.items[i];
-      if (route.initialValue != null && route.items[i].represents(route.initialValue)) {
+      if (route.initialValue != null &&
+          route.items[i].represents(route.initialValue)) {
         item = ColoredBox(
           color: ArnaTheme.of(context).accentColor,
           child: item,
@@ -349,7 +362,9 @@ class _ArnaPopupMenu<T> extends StatelessWidget {
       );
     }
 
-    final CurveTween opacity = CurveTween(curve: const Interval(0.0, 1.0 / 3.0));
+    final CurveTween opacity = CurveTween(
+      curve: const Interval(0.0, 1.0 / 3.0),
+    );
 
     return AnimatedBuilder(
       animation: route.animation!,
@@ -473,7 +488,11 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
     }
     final Offset wantedPosition = Offset(x, y);
     final Offset originCenter = position.toRect(Offset.zero & size).center;
-    final Iterable<Rect> subScreens = DisplayFeatureSubScreen.subScreensInBounds(Offset.zero & size, avoidBounds);
+    final Iterable<Rect> subScreens =
+        DisplayFeatureSubScreen.subScreensInBounds(
+      Offset.zero & size,
+      avoidBounds,
+    );
     final Rect subScreen = _closestScreen(subScreens, originCenter);
     return _fitInsideScreen(subScreen, childSize, wantedPosition);
   }
@@ -481,7 +500,8 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
   Rect _closestScreen(Iterable<Rect> screens, Offset point) {
     Rect closest = screens.first;
     for (final Rect screen in screens) {
-      if ((screen.center - point).distance < (closest.center - point).distance) {
+      if ((screen.center - point).distance <
+          (closest.center - point).distance) {
         closest = screen;
       }
     }
@@ -494,12 +514,14 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
     // Avoid going outside an area defined as the rectangle 8.0 pixels from the edge of the screen in every direction.
     if (x < screen.left + Styles.padding + padding.left) {
       x = screen.left + Styles.padding + padding.left;
-    } else if (x + childSize.width > screen.right - Styles.padding - padding.right) {
+    } else if (x + childSize.width >
+        screen.right - Styles.padding - padding.right) {
       x = screen.right - childSize.width - Styles.padding - padding.right;
     }
     if (y < screen.top + Styles.padding + padding.top) {
       y = Styles.padding + padding.top;
-    } else if (y + childSize.height > screen.bottom - Styles.padding - padding.bottom) {
+    } else if (y + childSize.height >
+        screen.bottom - Styles.padding - padding.bottom) {
       y = screen.bottom - childSize.height - Styles.padding - padding.bottom;
     }
 
@@ -575,14 +597,19 @@ class _ArnaPopupMenuRoute<T> extends PopupRoute<T> {
   Widget buildPage(BuildContext context, Animation<double> animation, _) {
     int? selectedItemIndex;
     if (initialValue != null) {
-      for (int index = 0; selectedItemIndex == null && index < items.length; index += 1) {
+      for (int index = 0;
+          selectedItemIndex == null && index < items.length;
+          index += 1) {
         if (items[index].represents(initialValue)) {
           selectedItemIndex = index;
         }
       }
     }
 
-    final Widget menu = _ArnaPopupMenu<T>(route: this, semanticLabel: semanticLabel);
+    final Widget menu = _ArnaPopupMenu<T>(
+      route: this,
+      semanticLabel: semanticLabel,
+    );
     final MediaQueryData mediaQuery = MediaQuery.of(context);
     return MediaQuery.removePadding(
       context: context,
@@ -668,7 +695,8 @@ Future<T?> showArnaMenu<T>({
       position: position,
       items: items,
       initialValue: initialValue,
-      semanticLabel: semanticLabel ?? MaterialLocalizations.of(context).popupMenuLabel,
+      semanticLabel:
+          semanticLabel ?? MaterialLocalizations.of(context).popupMenuLabel,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       color: color,
     ),
@@ -689,7 +717,9 @@ typedef ArnaPopupMenuCanceled = void Function();
 /// Signature used by [ArnaPopupMenuButton] to lazily construct the items shown when the button is pressed.
 ///
 /// Used by [ArnaPopupMenuButton.itemBuilder].
-typedef ArnaPopupMenuItemBuilder<T> = List<ArnaPopupMenuEntry<T>> Function(BuildContext context);
+typedef ArnaPopupMenuItemBuilder<T> = List<ArnaPopupMenuEntry<T>> Function(
+  BuildContext context,
+);
 
 /// Displays a menu when pressed and calls [onSelected] when the menu is dismissed because an item was selected. The
 /// value passed to [onSelected] is the value of the selected menu item.
@@ -806,7 +836,8 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
   /// `globalKey.currentState.showArnaButtonMenu`.
   void showArnaButtonMenu() {
     final RenderBox button = context.findRenderObject()! as RenderBox;
-    final RenderBox overlay = Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
+    final RenderBox overlay =
+        Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
     final Offset offset;
     switch (widget.position) {
       case ArnaPopupMenuPosition.over:
@@ -819,7 +850,10 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
     final RelativeRect position = RelativeRect.fromRect(
       Rect.fromPoints(
         button.localToGlobal(offset, ancestor: overlay),
-        button.localToGlobal(button.size.bottomRight(Offset.zero) + offset, ancestor: overlay),
+        button.localToGlobal(
+          button.size.bottomRight(Offset.zero) + offset,
+          ancestor: overlay,
+        ),
       ),
       Offset.zero & overlay.size,
     );
@@ -850,7 +884,8 @@ class ArnaPopupMenuButtonState<T> extends State<ArnaPopupMenuButton<T>> {
     return ArnaIconButton(
       icon: widget.icon ?? Icons.more_vert_outlined,
       onPressed: widget.enabled ? showArnaButtonMenu : null,
-      tooltipMessage: widget.tooltipMessage ?? MaterialLocalizations.of(context).showMenuTooltip,
+      tooltipMessage: widget.tooltipMessage ??
+          MaterialLocalizations.of(context).showMenuTooltip,
       buttonType: widget.buttonType,
       isFocusable: widget.isFocusable,
       autofocus: widget.autofocus,

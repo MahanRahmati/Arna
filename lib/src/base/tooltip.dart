@@ -4,7 +4,8 @@ import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart' show GestureBinding;
 import 'package:flutter/rendering.dart' show RendererBinding, SemanticsService;
-import 'package:flutter/services.dart' show PointerEnterEventListener, PointerExitEventListener;
+import 'package:flutter/services.dart'
+    show PointerEnterEventListener, PointerExitEventListener;
 
 /// Signature for when a tooltip is triggered.
 typedef ArnaTooltipTriggeredCallback = void Function();
@@ -137,14 +138,37 @@ class ArnaTooltip extends StatefulWidget {
         defaultValue: richMessage == null ? null : kNoDefaultValue,
       ),
     );
-    properties.add(FlagProperty('position', value: preferBelow, ifTrue: 'below', ifFalse: 'above', showName: true));
-    properties.add(FlagProperty('semantics', value: excludeFromSemantics, ifTrue: 'excluded', showName: true));
-    properties.add(FlagProperty('enableFeedback', value: enableFeedback, ifTrue: 'true', showName: true));
+    properties.add(
+      FlagProperty(
+        'position',
+        value: preferBelow,
+        ifTrue: 'below',
+        ifFalse: 'above',
+        showName: true,
+      ),
+    );
+    properties.add(
+      FlagProperty(
+        'semantics',
+        value: excludeFromSemantics,
+        ifTrue: 'excluded',
+        showName: true,
+      ),
+    );
+    properties.add(
+      FlagProperty(
+        'enableFeedback',
+        value: enableFeedback,
+        ifTrue: 'true',
+        showName: true,
+      ),
+    );
   }
 }
 
 /// The [State] for an [ArnaTooltip].
-class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStateMixin {
+class _ArnaTooltipState extends State<ArnaTooltip>
+    with SingleTickerProviderStateMixin {
   late bool _preferBelow;
   late bool _excludeFromSemantics;
   late AnimationController _controller;
@@ -160,7 +184,8 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   /// The plain text message for this tooltip.
   ///
   /// This value will either come from [widget.message] or [widget.richMessage].
-  String get _tooltipMessage => widget.message ?? widget.richMessage!.toPlainText();
+  String get _tooltipMessage =>
+      widget.message ?? widget.richMessage!.toPlainText();
 
   @override
   void initState() {
@@ -175,7 +200,9 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
       vsync: this,
     )..addStatusListener(_handleStatusChanged);
     // Listen to see when a mouse is added.
-    RendererBinding.instance.mouseTracker.addListener(_handleMouseTrackerChange);
+    RendererBinding.instance.mouseTracker.addListener(
+      _handleMouseTrackerChange,
+    );
     // Listen to global pointer events so that we can hide a tooltip immediately if some other control is clicked on.
     GestureBinding.instance.pointerRouter.addGlobalRoute(_handlePointerEvent);
   }
@@ -191,7 +218,8 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     if (!mounted) {
       return;
     }
-    final bool mouseIsConnected = RendererBinding.instance.mouseTracker.mouseIsConnected;
+    final bool mouseIsConnected =
+        RendererBinding.instance.mouseTracker.mouseIsConnected;
     if (mouseIsConnected != _mouseIsConnected) {
       setState(() => _mouseIsConnected = mouseIsConnected);
     }
@@ -200,7 +228,8 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   void _handleStatusChanged(AnimationStatus status) {
     // If this tip is concealed, don't remove it, even if it is dismissed, so that we can reveal it later, unless it
     // has explicitly been hidden with _dismissTooltip.
-    if (status == AnimationStatus.dismissed && (_forceRemoval || !_isConcealed)) {
+    if (status == AnimationStatus.dismissed &&
+        (_forceRemoval || !_isConcealed)) {
       _removeEntry();
     }
   }
@@ -217,7 +246,10 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     if (_pressActivated) {
       _dismissTimer ??= Timer(Styles.tooltipDuration, _controller.reverse);
     } else {
-      _dismissTimer ??= Timer(Styles.tooltipHoverShowDuration, _controller.reverse);
+      _dismissTimer ??= Timer(
+        Styles.tooltipHoverShowDuration,
+        _controller.reverse,
+      );
     }
     _pressActivated = false;
   }
@@ -259,7 +291,10 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
     _showTimer?.cancel();
     _showTimer = null;
     if (!_entry!.mounted) {
-      final OverlayState overlayState = Overlay.of(context, debugRequiredFor: widget)!;
+      final OverlayState overlayState = Overlay.of(
+        context,
+        debugRequiredFor: widget,
+      )!;
       overlayState.insert(_entry!);
     }
     SemanticsService.tooltip(_tooltipMessage);
@@ -311,7 +346,10 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
   }
 
   void _createNewEntry() {
-    final OverlayState overlayState = Overlay.of(context, debugRequiredFor: widget)!;
+    final OverlayState overlayState = Overlay.of(
+      context,
+      debugRequiredFor: widget,
+    )!;
     final RenderBox box = context.findRenderObject()! as RenderBox;
     final Offset target = box.localToGlobal(
       box.size.center(Offset.zero),
@@ -326,7 +364,10 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
         richMessage: widget.richMessage ?? TextSpan(text: widget.message),
         onEnter: _mouseIsConnected ? (_) => _handleMouseEnter() : null,
         onExit: _mouseIsConnected ? (_) => _handleMouseExit() : null,
-        animation: CurvedAnimation(parent: _controller, curve: Styles.basicCurve),
+        animation: CurvedAnimation(
+          parent: _controller,
+          curve: Styles.basicCurve,
+        ),
         target: target,
         preferBelow: _preferBelow,
       ),
@@ -383,8 +424,12 @@ class _ArnaTooltipState extends State<ArnaTooltip> with SingleTickerProviderStat
 
   @override
   void dispose() {
-    GestureBinding.instance.pointerRouter.removeGlobalRoute(_handlePointerEvent);
-    RendererBinding.instance.mouseTracker.removeListener(_handleMouseTrackerChange);
+    GestureBinding.instance.pointerRouter.removeGlobalRoute(
+      _handlePointerEvent,
+    );
+    RendererBinding.instance.mouseTracker.removeListener(
+      _handleMouseTrackerChange,
+    );
     _removeEntry();
     _controller.dispose();
     super.dispose();
@@ -462,7 +507,8 @@ class _ArnaTooltipPositionDelegate extends SingleChildLayoutDelegate {
   final bool preferBelow;
 
   @override
-  BoxConstraints getConstraintsForChild(BoxConstraints constraints) => constraints.loosen();
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
+      constraints.loosen();
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {
@@ -526,7 +572,9 @@ class _ArnaTooltipOverlay extends StatelessWidget {
                 child: Text.rich(
                   richMessage,
                   style: ArnaTheme.of(context).textTheme.caption!.copyWith(
-                        color: ArnaColors.primaryTextColorDark.resolveFrom(context),
+                        color: ArnaColors.primaryTextColorDark.resolveFrom(
+                          context,
+                        ),
                       ),
                 ),
               ),
@@ -565,7 +613,8 @@ class _ArnaTooltipVisibilityScope extends InheritedWidget {
   final bool visible;
 
   @override
-  bool updateShouldNotify(_ArnaTooltipVisibilityScope old) => old.visible != visible;
+  bool updateShouldNotify(_ArnaTooltipVisibilityScope old) =>
+      old.visible != visible;
 }
 
 /// Overrides the visibility of descendant [ArnaTooltip] widgets.
@@ -596,8 +645,8 @@ class ArnaTooltipVisibility extends StatelessWidget {
   /// The [visible] of the closest instance of this class that encloses the given context. Defaults to `true` if none
   /// are found.
   static bool of(BuildContext context) {
-    final _ArnaTooltipVisibilityScope? visibility =
-        context.dependOnInheritedWidgetOfExactType<_ArnaTooltipVisibilityScope>();
+    final _ArnaTooltipVisibilityScope? visibility = context
+        .dependOnInheritedWidgetOfExactType<_ArnaTooltipVisibilityScope>();
     return visibility?.visible ?? true;
   }
 

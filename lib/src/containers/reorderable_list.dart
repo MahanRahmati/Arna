@@ -192,7 +192,8 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
     }
 
     // First, determine which semantics actions apply.
-    final Map<CustomSemanticsAction, VoidCallback> semanticsActions = <CustomSemanticsAction, VoidCallback>{};
+    final Map<CustomSemanticsAction, VoidCallback> semanticsActions =
+        <CustomSemanticsAction, VoidCallback>{};
 
     // Create the appropriate semantics actions.
     void moveToStart() => reorder(index, 0);
@@ -202,18 +203,22 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
     // at index+1.
     void moveAfter() => reorder(index, index + 2);
 
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
 
     // If the item can move to before its current position in the list.
     if (index > 0) {
-      semanticsActions[CustomSemanticsAction(label: localizations.reorderItemToStart)] = moveToStart;
+      semanticsActions[
+              CustomSemanticsAction(label: localizations.reorderItemToStart)] =
+          moveToStart;
       String reorderItemBefore = localizations.reorderItemUp;
       if (widget.scrollDirection == Axis.horizontal) {
         reorderItemBefore = Directionality.of(context) == TextDirection.ltr
             ? localizations.reorderItemLeft
             : localizations.reorderItemRight;
       }
-      semanticsActions[CustomSemanticsAction(label: reorderItemBefore)] = moveBefore;
+      semanticsActions[CustomSemanticsAction(label: reorderItemBefore)] =
+          moveBefore;
     }
 
     // If the item can move to after its current position in the list.
@@ -224,8 +229,11 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
             ? localizations.reorderItemRight
             : localizations.reorderItemLeft;
       }
-      semanticsActions[CustomSemanticsAction(label: reorderItemAfter)] = moveAfter;
-      semanticsActions[CustomSemanticsAction(label: localizations.reorderItemToEnd)] = moveToEnd;
+      semanticsActions[CustomSemanticsAction(label: reorderItemAfter)] =
+          moveAfter;
+      semanticsActions[
+              CustomSemanticsAction(label: localizations.reorderItemToEnd)] =
+          moveToEnd;
     }
 
     // We pass toWrap with a GlobalKey into the item so that when it gets dragged, the accessibility framework can
@@ -255,7 +263,10 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
     );
 
     final Widget itemWithSemantics = _wrapWithSemantics(item, index);
-    final Key itemGlobalKey = _ArnaReorderableListChildGlobalKey(item.key!, this);
+    final Key itemGlobalKey = _ArnaReorderableListChildGlobalKey(
+      item.key!,
+      this,
+    );
 
     if (widget.buildDefaultDragHandles) {
       switch (defaultTargetPlatform) {
@@ -364,7 +375,10 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
 
     return widget.showBackground
         ? ArnaCard(
-            child: ClipRRect(borderRadius: Styles.listBorderRadius, child: child),
+            child: ClipRRect(
+              borderRadius: Styles.listBorderRadius,
+              child: child,
+            ),
           )
         : child;
   }
@@ -376,7 +390,10 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
 /// widgets.
 @optionalTypeArgs
 class _ArnaReorderableListChildGlobalKey extends GlobalObjectKey {
-  const _ArnaReorderableListChildGlobalKey(this.subKey, this.state) : super(subKey);
+  const _ArnaReorderableListChildGlobalKey(
+    this.subKey,
+    this.state,
+  ) : super(subKey);
 
   final Key subKey;
   final State state;
@@ -386,7 +403,9 @@ class _ArnaReorderableListChildGlobalKey extends GlobalObjectKey {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is _ArnaReorderableListChildGlobalKey && other.subKey == subKey && other.state == state;
+    return other is _ArnaReorderableListChildGlobalKey &&
+        other.subKey == subKey &&
+        other.state == state;
   }
 
   @override

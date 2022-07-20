@@ -76,10 +76,19 @@ class ArnaMasterItem extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           selected = itemSelected;
           return AnimatedContainer(
-            constraints: const BoxConstraints(minHeight: Styles.masterItemMinHeight),
+            constraints: const BoxConstraints(
+              minHeight: Styles.masterItemMinHeight,
+            ),
             width: double.infinity,
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,
@@ -91,7 +100,7 @@ class ArnaMasterItem extends StatelessWidget {
                     ? ArnaColors.transparent
                     : focused
                         ? accent
-                        : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+                        : ArnaColors.borderColor.resolveFrom(context),
               ),
               color: !enabled
                   ? ArnaColors.transparent
@@ -111,7 +120,10 @@ class ArnaMasterItem extends StatelessWidget {
                           !enabled
                               ? ArnaColors.disabledColor
                               : selected
-                                  ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                  ? ArnaDynamicColor.matchingColor(
+                                      accent,
+                                      ArnaTheme.brightnessOf(context),
+                                    )
                                   : ArnaColors.iconColor,
                           context,
                         ),
@@ -128,18 +140,28 @@ class ArnaMasterItem extends StatelessWidget {
                           width: Styles.sideBarWidth,
                           child: Padding(
                             padding: Styles.tileTextPadding,
-                            child: Text(title!, style: ArnaTheme.of(context).textTheme.button),
+                            child: Text(
+                              title!,
+                              style: ArnaTheme.of(context).textTheme.button,
+                            ),
                           ),
                         ),
                       if (subtitle != null)
                         Padding(
                           padding: Styles.tileTextPadding,
-                          child: Text(subtitle!, style: ArnaTheme.of(context).textTheme.subtitle),
+                          child: Text(
+                            subtitle!,
+                            style: ArnaTheme.of(context).textTheme.subtitle,
+                          ),
                         ),
                     ],
                   ),
                 ),
-                if (trailing != null) Padding(padding: Styles.normal, child: trailing),
+                if (trailing != null)
+                  Padding(
+                    padding: Styles.normal,
+                    child: trailing,
+                  ),
               ],
             ),
           );

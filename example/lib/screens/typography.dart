@@ -17,31 +17,52 @@ class Typography extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.display),
+                child: Text(
+                  Strings.lorem,
+                  style: ArnaTheme.of(context).textTheme.display,
+                ),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.headline),
+                child: Text(
+                  Strings.lorem,
+                  style: ArnaTheme.of(context).textTheme.headline,
+                ),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.title),
+                child: Text(
+                  Strings.lorem,
+                  style: ArnaTheme.of(context).textTheme.title,
+                ),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.body),
+                child: Text(
+                  Strings.lorem,
+                  style: ArnaTheme.of(context).textTheme.body,
+                ),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.button),
+                child: Text(
+                  Strings.lorem,
+                  style: ArnaTheme.of(context).textTheme.button,
+                ),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.subtitle),
+                child: Text(
+                  Strings.lorem,
+                  style: ArnaTheme.of(context).textTheme.subtitle,
+                ),
               ),
               Padding(
                 padding: Styles.normal,
-                child: Text(Strings.lorem, style: ArnaTheme.of(context).textTheme.caption),
+                child: Text(
+                  Strings.lorem,
+                  style: ArnaTheme.of(context).textTheme.caption,
+                ),
               ),
             ],
           ),

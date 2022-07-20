@@ -49,7 +49,8 @@ class ArnaTabController extends ChangeNotifier {
 ///
 /// The [ArnaTabController] is accessible via the [value] getter. During state restoration, the property will restore
 /// [ArnaTabController.index] to the value it had when the restoration data it is getting restored from was collected.
-class RestorableArnaTabController extends RestorableChangeNotifier<ArnaTabController> {
+class RestorableArnaTabController
+    extends RestorableChangeNotifier<ArnaTabController> {
   /// Creates a [RestorableArnaTabController] to control the tab index of [ArnaTabView].
   ///
   /// The [initialIndex] must not be null and defaults to 0. The value must be greater than or equal to 0, and less
@@ -61,7 +62,9 @@ class RestorableArnaTabController extends RestorableChangeNotifier<ArnaTabContro
   final int _initialIndex;
 
   @override
-  ArnaTabController createDefaultValue() => ArnaTabController(initialIndex: _initialIndex);
+  ArnaTabController createDefaultValue() => ArnaTabController(
+        initialIndex: _initialIndex,
+      );
 
   @override
   ArnaTabController fromPrimitives(Object? data) {
@@ -147,13 +150,15 @@ class ArnaTabView extends StatefulWidget {
 /// The [State] for an [ArnaTabView].
 class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
   RestorableArnaTabController? _internalController;
-  ArnaTabController get _controller => widget.controller ?? _internalController!.value;
+  ArnaTabController get _controller =>
+      widget.controller ?? _internalController!.value;
 
   @override
   String? get restorationId => widget.restorationId;
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) => _restoreInternalController();
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) =>
+      _restoreInternalController();
 
   void _restoreInternalController() {
     if (_internalController != null) {
@@ -171,7 +176,9 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
   void _updateTabController([ArnaTabController? oldWidgetController]) {
     if (widget.controller == null && _internalController == null) {
       // No widget-provided controller: create an internal controller.
-      _internalController = RestorableArnaTabController(initialIndex: widget.currentIndex);
+      _internalController = RestorableArnaTabController(
+        initialIndex: widget.currentIndex,
+      );
       if (!restorePending) {
         _restoreInternalController(); // Also adds the listener to the controller.
       }
@@ -252,7 +259,9 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
                               // Chain the user's original callback.
                               widget.onTap?.call(index);
                             },
-                            onClosed: widget.onTabClosed == null ? null : () => widget.onTabClosed!(index),
+                            onClosed: widget.onTabClosed == null
+                                ? null
+                                : () => widget.onTabClosed!(index),
                             active: index == _controller.index,
                             pinned: widget.tabs[index].pinned,
                             accentColor: widget.tabs[index].accentColor,
@@ -285,7 +294,9 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
             child: ArnaDivider(),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.only(top: Styles.tabBarHeight + 1),
+            padding: const EdgeInsetsDirectional.only(
+              top: Styles.tabBarHeight + 1,
+            ),
             child: FocusTraversalGroup(
               child: Builder(
                 builder: (BuildContext context) {

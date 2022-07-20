@@ -27,13 +27,15 @@ class _RadiosState extends State<Radios> {
             value: '1',
             groupValue: _selectedType,
             title: '${Strings.radio} 1',
-            onChanged: (String? value) => setState(() => _selectedType = value!),
+            onChanged: (String? value) =>
+                setState(() => _selectedType = value!),
           ),
           ArnaRadioListTile<String>(
             value: '2',
             groupValue: _selectedType,
             title: '${Strings.radio} 2',
-            onChanged: (String? value) => setState(() => _selectedType = value!),
+            onChanged: (String? value) =>
+                setState(() => _selectedType = value!),
           ),
           ArnaRadioListTile<String>(
             value: '3',

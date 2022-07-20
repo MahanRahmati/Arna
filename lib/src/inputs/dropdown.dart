@@ -100,8 +100,8 @@ class _ArnaDropdownMenuItemButtonState<T> extends State<_ArnaDropdownMenuItemBut
 
   @override
   Widget build(BuildContext context) {
-    final Color cardColor = ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
-    final Color disabledColor = ArnaDynamicColor.resolve(ArnaColors.disabledColor, context);
+    final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
+    final Color disabledColor = ArnaColors.disabledColor.resolveFrom(context);
     TextStyle style = ArnaTheme.of(context).textTheme.button!;
     final ArnaDropdownMenuItem<T> dropdownMenuItem = widget.route.items[widget.itemIndex].item!;
     final CurvedAnimation opacity;
@@ -1012,9 +1012,9 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
       );
     }
 
-    final Color disabledColor = ArnaDynamicColor.resolve(ArnaColors.disabledColor, context);
-    final Color iconColor = ArnaDynamicColor.resolve(ArnaColors.iconColor, context);
-    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color disabledColor = ArnaColors.disabledColor.resolveFrom(context);
+    final Color iconColor = ArnaColors.iconColor.resolveFrom(context);
+    final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return Semantics(
@@ -1039,18 +1039,10 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
                 border: Border.all(
-                  color: focused
-                      ? ArnaDynamicColor.outerColor(accent)
-                      : ArnaDynamicColor.resolve(
-                          ArnaColors.borderColor,
-                          context,
-                        ),
+                  color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.borderColor.resolveFrom(context),
                 ),
                 color: !enabled
-                    ? ArnaDynamicColor.resolve(
-                        ArnaColors.backgroundColor,
-                        context,
-                      )
+                    ? ArnaColors.backgroundColor.resolveFrom(context)
                     : pressed || hover
                         ? ArnaDynamicColor.applyOverlay(buttonColor)
                         : buttonColor,

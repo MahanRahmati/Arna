@@ -95,7 +95,7 @@ class ArnaButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     Color accent;
     switch (buttonType) {
       case ButtonType.destructive:
@@ -122,12 +122,10 @@ class ArnaButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
-                color: focused
-                    ? ArnaDynamicColor.outerColor(accent)
-                    : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+                color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.borderColor.resolveFrom(context),
               ),
               color: !enabled
-                  ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                  ? ArnaColors.backgroundColor.resolveFrom(context)
                   : buttonType == ButtonType.normal
                       ? pressed || hover
                           ? ArnaDynamicColor.applyOverlay(buttonColor)

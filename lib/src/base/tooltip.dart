@@ -511,12 +511,12 @@ class _ArnaTooltipOverlay extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: Styles.tooltipHeight),
           child: DefaultTextStyle(
             style: ArnaTheme.of(context).textTheme.caption!.copyWith(
-                  color: ArnaDynamicColor.resolve(ArnaColors.primaryTextColorDark, context),
+                  color: ArnaColors.primaryTextColorDark.resolveFrom(context),
                 ),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
-                color: ArnaDynamicColor.resolve(ArnaColors.reverseBackgroundColor, context),
+                color: ArnaColors.reverseBackgroundColor.resolveFrom(context),
               ),
               padding: Styles.tooltipPadding,
               margin: Styles.normal,
@@ -526,7 +526,7 @@ class _ArnaTooltipOverlay extends StatelessWidget {
                 child: Text.rich(
                   richMessage,
                   style: ArnaTheme.of(context).textTheme.caption!.copyWith(
-                        color: ArnaDynamicColor.resolve(ArnaColors.primaryTextColorDark, context),
+                        color: ArnaColors.primaryTextColorDark.resolveFrom(context),
                       ),
                 ),
               ),

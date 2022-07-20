@@ -10,7 +10,7 @@ class Indicators extends StatelessWidget {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.refresh_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.indicator,
       child: Row(

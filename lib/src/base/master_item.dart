@@ -71,7 +71,7 @@ class ArnaMasterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,

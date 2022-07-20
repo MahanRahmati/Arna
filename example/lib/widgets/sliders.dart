@@ -16,7 +16,7 @@ class _SlidersState extends State<Sliders> {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.linear_scale_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.slider,
       child: ArnaList(

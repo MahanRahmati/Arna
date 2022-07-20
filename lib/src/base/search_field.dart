@@ -154,7 +154,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     final Widget search = ColoredBox(
-      color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+      color: ArnaColors.headerColor.resolveFrom(context),
       child: Padding(
         padding: Styles.small,
         child: Center(
@@ -165,7 +165,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField> with SingleTickerProv
               hintText: widget.hintText ?? MaterialLocalizations.of(context).searchFieldLabel,
               prefix: Icon(
                 Icons.search_outlined,
-                color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                color: ArnaColors.iconColor.resolveFrom(context),
               ),
               enabled: widget.enabled && widget.showSearch,
               onTap: widget.onTap,

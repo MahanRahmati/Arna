@@ -10,7 +10,7 @@ class TextField extends StatelessWidget {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.text_fields_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.textField,
       child: const ArnaTextField(

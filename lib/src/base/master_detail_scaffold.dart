@@ -284,7 +284,7 @@ class _LateralPageState extends State<_LateralPage> {
               : widget.emptyBody != null
                   ? Container(
                       constraints: const BoxConstraints.expand(),
-                      color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+                      color: ArnaColors.backgroundColor.resolveFrom(context),
                       child: widget.emptyBody,
                     )
                   : ArnaScaffold(

@@ -73,7 +73,7 @@ class ArnaSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     final Brightness brightness = ArnaTheme.brightnessOf(context);
-    final Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
+    final Color borderColor = ArnaColors.borderColor.resolveFrom(context);
 
     return Padding(
       padding: Styles.small,
@@ -102,16 +102,16 @@ class ArnaSwitch extends StatelessWidget {
                                     : borderColor,
                   ),
                   color: !enabled
-                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      ? ArnaColors.backgroundColor.resolveFrom(context)
                       : value
                           ? hover || focused
                               ? ArnaDynamicColor.applyOverlay(accent)
                               : accent
                           : hover
                               ? ArnaDynamicColor.applyOverlay(
-                                  ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
+                                  ArnaColors.buttonColor.resolveFrom(context),
                                 )
-                              : ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+                              : ArnaColors.backgroundColor.resolveFrom(context),
                 ),
               ),
               AnimatedPositioned(
@@ -133,7 +133,7 @@ class ArnaSwitch extends StatelessWidget {
                               : ArnaDynamicColor.outerColor(borderColor),
                     ),
                     color: !enabled
-                        ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                        ? ArnaColors.backgroundColor.resolveFrom(context)
                         : value
                             ? ArnaDynamicColor.onBackgroundColor(accent)
                             : ArnaColors.shade255,

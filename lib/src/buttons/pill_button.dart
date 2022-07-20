@@ -73,9 +73,7 @@ class ArnaPillButton extends StatelessWidget {
             decoration: ShapeDecoration(
               shape: StadiumBorder(
                 side: BorderSide(
-                  color: focused
-                      ? ArnaDynamicColor.outerColor(accent)
-                      : ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+                  color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.borderColor.resolveFrom(context),
                 ),
               ),
               color: !enabled

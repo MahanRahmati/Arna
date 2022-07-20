@@ -17,6 +17,7 @@
 - Update ArnaTextField
 - Update ArnaSelectableText
 - Update ArnaPopupMenu
+- Use resolveFrom in widgets
 
 ## 1.0.4+1
 

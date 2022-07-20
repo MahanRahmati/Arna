@@ -11,7 +11,7 @@ class Pickers extends ConsumerWidget {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.calendar_today_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.pickers,
       child: Row(

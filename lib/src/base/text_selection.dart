@@ -39,7 +39,7 @@ class ArnaTextSelectionControls extends TextSelectionControls {
   /// Builder for Arna-style text selection handles.
   @override
   Widget buildHandle(BuildContext context, TextSelectionHandleType type, double textHeight, [VoidCallback? onTap]) {
-    final Color handleColor = ArnaDynamicColor.resolve(ArnaColors.iconColor, context);
+    final Color handleColor = ArnaColors.iconColor.resolveFrom(context);
     final Widget handle = SizedBox(
       width: Styles.handleSize,
       height: Styles.handleSize,

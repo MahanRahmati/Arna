@@ -112,8 +112,8 @@ class ArnaCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
-    final Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
+    final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
+    final Color borderColor = ArnaColors.borderColor.resolveFrom(context);
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     final Brightness brightness = ArnaTheme.brightnessOf(context);
 

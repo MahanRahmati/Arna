@@ -56,7 +56,7 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
             height: Styles.headerBarHeight,
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
-              color: ArnaDynamicColor.resolve(ArnaColors.reverseBackgroundColor, context),
+              color: ArnaColors.reverseBackgroundColor.resolveFrom(context),
             ),
             padding: Styles.horizontal,
             child: Row(
@@ -68,7 +68,7 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
                   child: Text(
                     widget.message,
                     style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                          color: ArnaDynamicColor.resolve(ArnaColors.primaryTextColorDark, context),
+                          color: ArnaColors.primaryTextColorDark.resolveFrom(context),
                         ),
                   ),
                 ),

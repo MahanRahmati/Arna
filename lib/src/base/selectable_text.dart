@@ -645,7 +645,7 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         selectionWidthStyle: widget.selectionWidthStyle,
         cursorOffset: cursorOffset,
         paintCursorAboveText: paintCursorAboveText,
-        backgroundCursorColor: ArnaDynamicColor.resolve(ArnaColors.secondaryTextColor, context),
+        backgroundCursorColor: ArnaColors.secondaryTextColor.resolveFrom(context),
         enableInteractiveSelection: widget.enableInteractiveSelection,
         dragStartBehavior: widget.dragStartBehavior,
         scrollPhysics: widget.scrollPhysics,

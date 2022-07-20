@@ -136,7 +136,7 @@ class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateM
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ColoredBox(
-            color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+            color: ArnaColors.headerColor.resolveFrom(context),
             child: ArnaListTile(
               leading: Icon(icon, color: ArnaDynamicColor.resolve(accent, context)),
               title: widget.title,

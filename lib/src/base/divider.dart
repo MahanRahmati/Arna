@@ -16,7 +16,7 @@ class ArnaDivider extends StatelessWidget {
     final Widget container = Center(
       // ignore: use_colored_box
       child: Container(
-        color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+        color: ArnaColors.borderColor.resolveFrom(context),
       ),
     );
     return direction == Axis.horizontal

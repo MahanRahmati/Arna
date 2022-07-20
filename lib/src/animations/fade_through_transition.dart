@@ -78,7 +78,7 @@ class ArnaFadeThroughTransition extends StatelessWidget {
     return _ZoomedFadeInFadeOut(
       animation: animation,
       child: ColoredBox(
-        color: fillColor ?? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+        color: fillColor ?? ArnaColors.backgroundColor.resolveFrom(context),
         child: _ZoomedFadeInFadeOut(
           animation: ReverseAnimation(secondaryAnimation),
           child: child,

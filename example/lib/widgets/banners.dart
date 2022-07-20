@@ -13,7 +13,7 @@ class Banners extends ConsumerWidget {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.ad_units_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.banners,
       child: Row(

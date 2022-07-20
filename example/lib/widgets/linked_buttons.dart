@@ -10,7 +10,7 @@ class LinkedButtons extends StatelessWidget {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.more_horiz_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.linkedButtons,
       child: Row(

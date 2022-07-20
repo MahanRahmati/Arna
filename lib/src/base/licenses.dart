@@ -93,10 +93,7 @@ class ArnaLicensePage extends StatelessWidget {
           case ConnectionState.waiting:
             return DecoratedBox(
               decoration: BoxDecoration(
-                color: ArnaDynamicColor.resolve(
-                  ArnaColors.backgroundColor,
-                  context,
-                ),
+                color: ArnaColors.backgroundColor.resolveFrom(context),
               ),
               child: const Center(child: ArnaProgressIndicator()),
             );

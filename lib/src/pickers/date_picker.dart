@@ -281,7 +281,7 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog> with Restor
             ),
             const ArnaDivider(),
             ColoredBox(
-              color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+              color: ArnaColors.backgroundColor.resolveFrom(context),
               child: Padding(
                 padding: Styles.normal,
                 child: ArnaTextButton(
@@ -1050,7 +1050,7 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
   List<Widget> _buildDayItems(BuildContext context) {
     final MaterialLocalizations localizations = MaterialLocalizations.of(context);
     final TextStyle? headerStyle = ArnaTheme.of(context).textTheme.body?.apply(
-          color: ArnaDynamicColor.resolve(ArnaColors.disabledColor, context),
+          color: ArnaColors.disabledColor.resolveFrom(context),
         );
 
     final int year = widget.displayedMonth.year;
@@ -1085,10 +1085,7 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                     child: Text(
                       localizations.formatDecimal(i),
                       style: ArnaTheme.of(context).textTheme.body!.apply(
-                            color: ArnaDynamicColor.resolve(
-                              ArnaColors.primaryTextColor,
-                              context,
-                            ),
+                            color: ArnaColors.primaryTextColor.resolveFrom(context),
                           ),
                     ),
                   ),
@@ -1121,10 +1118,7 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                                   ? accentColor
                                   : pressed || hover || focused
                                       ? ArnaDynamicColor.applyOverlay(
-                                          ArnaDynamicColor.resolve(
-                                            ArnaColors.cardColor,
-                                            context,
-                                          ),
+                                          ArnaColors.cardColor.resolveFrom(context),
                                         )
                                       : ArnaColors.transparent,
                           shape: BoxShape.circle,
@@ -1134,20 +1128,14 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                             localizations.formatDecimal(i),
                             style: ArnaTheme.of(context).textTheme.body!.apply(
                                   color: isDisabled
-                                      ? ArnaDynamicColor.resolve(
-                                          ArnaColors.disabledColor,
-                                          context,
-                                        )
+                                      ? ArnaColors.disabledColor.resolveFrom(context)
                                       : isSelectedDay
                                           ? ArnaDynamicColor.onBackgroundColor(
                                               accentColor,
                                             )
                                           : isToday
                                               ? accentColor
-                                              : ArnaDynamicColor.resolve(
-                                                  ArnaColors.primaryTextColor,
-                                                  context,
-                                                ),
+                                              : ArnaColors.primaryTextColor.resolveFrom(context),
                                 ),
                           ),
                         ),
@@ -1304,11 +1292,11 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
     if (isSelected) {
       textColor = ArnaDynamicColor.onBackgroundColor(accentColor);
     } else if (isDisabled) {
-      textColor = ArnaDynamicColor.resolve(ArnaColors.disabledColor, context);
+      textColor = ArnaColors.disabledColor.resolveFrom(context);
     } else if (isCurrentYear) {
       textColor = accentColor;
     } else {
-      textColor = ArnaDynamicColor.resolve(ArnaColors.primaryTextColor, context);
+      textColor = ArnaColors.primaryTextColor.resolveFrom(context);
     }
     final TextStyle? itemStyle = ArnaTheme.of(context).textTheme.body?.apply(color: textColor);
 
@@ -1349,10 +1337,7 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
                         ? accentColor
                         : pressed || hover
                             ? ArnaDynamicColor.applyOverlay(
-                                ArnaDynamicColor.resolve(
-                                  ArnaColors.cardColor,
-                                  context,
-                                ),
+                                ArnaColors.cardColor.resolveFrom(context),
                               )
                             : ArnaColors.transparent,
                     // borderRadius: Styles.borderRadius,

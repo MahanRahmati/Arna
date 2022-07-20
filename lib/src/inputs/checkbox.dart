@@ -120,7 +120,14 @@ class ArnaCheckbox extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           selected = value ?? true;
           enabled = onChanged != null;
           return Stack(
@@ -141,13 +148,16 @@ class ArnaCheckbox extends StatelessWidget {
                             : selected && hover
                                 ? ArnaDynamicColor.outerColor(accent)
                                 : hover
-                                    ? ArnaDynamicColor.matchingColor(accent, brightness)
+                                    ? ArnaDynamicColor.matchingColor(
+                                        accent,
+                                        brightness,
+                                      )
                                     : selected
                                         ? ArnaDynamicColor.outerColor(accent)
                                         : borderColor,
                   ),
                   color: !enabled
-                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      ? ArnaColors.backgroundColor.resolveFrom(context)
                       : selected && enabled
                           ? hover || focused
                               ? ArnaDynamicColor.applyOverlay(accent)
@@ -165,7 +175,9 @@ class ArnaCheckbox extends StatelessWidget {
                 child: Opacity(
                   opacity: selected && enabled ? 1.0 : 0.0,
                   child: Icon(
-                    value != null ? Icons.check_outlined : Icons.remove_outlined,
+                    value != null
+                        ? Icons.check_outlined
+                        : Icons.remove_outlined,
                     size: Styles.checkBoxIconSize,
                     color: ArnaDynamicColor.onBackgroundColor(accent),
                   ),

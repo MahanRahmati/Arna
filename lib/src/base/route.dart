@@ -258,11 +258,13 @@ class _ArnaBackGestureDetector<T> extends StatefulWidget {
   final ValueGetter<_ArnaBackGestureController<T>> onStartPopGesture;
 
   @override
-  _ArnaBackGestureDetectorState<T> createState() => _ArnaBackGestureDetectorState<T>();
+  _ArnaBackGestureDetectorState<T> createState() =>
+      _ArnaBackGestureDetectorState<T>();
 }
 
 /// The [State] for an [_ArnaBackGestureDetector].
-class _ArnaBackGestureDetectorState<T> extends State<_ArnaBackGestureDetector<T>> {
+class _ArnaBackGestureDetectorState<T>
+    extends State<_ArnaBackGestureDetector<T>> {
   _ArnaBackGestureController<T>? _backGestureController;
 
   late HorizontalDragGestureRecognizer _recognizer;
@@ -404,7 +406,10 @@ class _ArnaBackGestureController<T> {
     if (animateForward) {
       // The closer the panel is to dismissing, the shorter the animation is.
       // We want to cap the animation time, but we want to use a linear curve to determine it.
-      final int droppedPageForwardAnimationTime = min(lerpDouble(700, 0, controller.value)!.floor(), 350);
+      final int droppedPageForwardAnimationTime = min(
+        lerpDouble(700, 0, controller.value)!.floor(),
+        350,
+      );
       controller.animateTo(
         1.0,
         duration: Duration(milliseconds: droppedPageForwardAnimationTime),
@@ -417,7 +422,8 @@ class _ArnaBackGestureController<T> {
       // The popping may have finished inline if already at the target destination.
       if (controller.isAnimating) {
         // Otherwise, use a custom popping animation duration and curve.
-        final int droppedPageBackAnimationTime = lerpDouble(0, 700, controller.value)!.floor();
+        final int droppedPageBackAnimationTime =
+            lerpDouble(0, 700, controller.value)!.floor();
         controller.animateBack(
           0.0,
           duration: Duration(milliseconds: droppedPageBackAnimationTime),

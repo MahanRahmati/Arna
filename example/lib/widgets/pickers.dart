@@ -29,7 +29,8 @@ class Pickers extends ConsumerWidget {
               if (pickedDate != null) {
                 showArnaSnackbar(
                   context: context,
-                  message: '${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
+                  message:
+                      '${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
                 );
               }
             },

@@ -43,17 +43,26 @@ class ArnaDrawer extends StatelessWidget {
       label: semanticLabel ?? MaterialLocalizations.of(context).drawerLabel,
       child: Container(
         constraints: BoxConstraints.expand(
-          width: min(Styles.sideBarWidth, ArnaHelpers.deviceWidth(context) * 0.7),
+          width: min(
+            Styles.sideBarWidth,
+            ArnaHelpers.deviceWidth(context) * 0.7,
+          ),
         ),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.horizontal(
-            left: ltr ? Radius.zero : const Radius.circular(Styles.drawerBorderRadiusSize),
-            right: ltr ? const Radius.circular(Styles.drawerBorderRadiusSize) : Radius.zero,
+            left: ltr
+                ? Radius.zero
+                : const Radius.circular(Styles.drawerBorderRadiusSize),
+            right: ltr
+                ? const Radius.circular(Styles.drawerBorderRadiusSize)
+                : Radius.zero,
           ),
           color: ArnaColors.sideColor.resolveFrom(context),
         ),
-        child: FocusTraversalGroup(child: SafeArea(child: child ?? const SizedBox.shrink())),
+        child: FocusTraversalGroup(
+          child: SafeArea(child: child ?? const SizedBox.shrink()),
+        ),
       ),
     );
   }
@@ -104,7 +113,8 @@ class ArnaDrawerController extends StatefulWidget {
 /// State for an [ArnaDrawerController].
 ///
 /// Used by [ArnaSideScaffold] to [open] and [close] the drawer.
-class _ArnaDrawerControllerState extends State<ArnaDrawerController> with SingleTickerProviderStateMixin {
+class _ArnaDrawerControllerState extends State<ArnaDrawerController>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late ColorTween _scrimColorTween;
 
@@ -153,7 +163,10 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
   // The animation controller's state is our build state, and it changed already.
   void _animationChanged() => setState(() {});
 
-  ColorTween _buildScrimColorTween() => ColorTween(begin: ArnaColors.transparent, end: ArnaColors.barrierColor);
+  ColorTween _buildScrimColorTween() => ColorTween(
+        begin: ArnaColors.transparent,
+        end: ArnaColors.barrierColor,
+      );
 
   /// Starts an animation to open the drawer.
   void open() {
@@ -178,9 +191,12 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
                   child: GestureDetector(
                     onTap: close,
                     child: Semantics(
-                      label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+                      label: MaterialLocalizations.of(context)
+                          .modalBarrierDismissLabel,
                       // ignore: use_colored_box
-                      child: Container(color: _scrimColorTween.evaluate(_controller)),
+                      child: Container(
+                        color: _scrimColorTween.evaluate(_controller),
+                      ),
                     ),
                   ),
                 ),
@@ -188,7 +204,10 @@ class _ArnaDrawerControllerState extends State<ArnaDrawerController> with Single
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: SlideTransition(
-                      position: Tween<Offset>(begin: const Offset(-1, 0), end: Offset.zero).animate(_controller),
+                      position: Tween<Offset>(
+                        begin: const Offset(-1, 0),
+                        end: Offset.zero,
+                      ).animate(_controller),
                       child: widget.drawer,
                     ),
                   ),

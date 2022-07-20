@@ -14,7 +14,11 @@ class _ArnaTextSpanEditingController extends TextEditingController {
   final TextSpan _textSpan;
 
   @override
-  TextSpan buildTextSpan({required BuildContext context, TextStyle? style, required bool withComposing}) {
+  TextSpan buildTextSpan({
+    required BuildContext context,
+    TextStyle? style,
+    required bool withComposing,
+  }) {
     // This does not care about composing.
     return TextSpan(style: style, children: <TextSpan>[_textSpan]);
   }
@@ -27,7 +31,8 @@ class _ArnaTextSpanEditingController extends TextEditingController {
 }
 
 /// ArnaSelectableTextSelectionGestureDetectorBuilder class.
-class _ArnaSelectableTextSelectionGestureDetectorBuilder extends TextSelectionGestureDetectorBuilder {
+class _ArnaSelectableTextSelectionGestureDetectorBuilder
+    extends TextSelectionGestureDetectorBuilder {
   /// Creates an ArnaSelectableTextSelectionGestureDetectorBuilder.
   _ArnaSelectableTextSelectionGestureDetectorBuilder({
     required _ArnaSelectableTextState state,
@@ -196,7 +201,11 @@ class ArnaSelectableText extends StatefulWidget {
           "minLines can't be greater than maxLines",
         ),
         textSpan = null,
-        toolbarOptions = toolbarOptions ?? const ToolbarOptions(selectAll: true, copy: true);
+        toolbarOptions = toolbarOptions ??
+            const ToolbarOptions(
+              selectAll: true,
+              copy: true,
+            );
 
   /// Creates a selectable text widget with a [TextSpan].
   ///
@@ -240,7 +249,11 @@ class ArnaSelectableText extends StatefulWidget {
           "minLines can't be greater than maxLines",
         ),
         data = null,
-        toolbarOptions = toolbarOptions ?? const ToolbarOptions(selectAll: true, copy: true);
+        toolbarOptions = toolbarOptions ??
+            const ToolbarOptions(
+              selectAll: true,
+              copy: true,
+            );
 
   /// The text to display.
   ///
@@ -384,30 +397,139 @@ class ArnaSelectableText extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<String>('data', data, defaultValue: null));
-    properties.add(DiagnosticsProperty<String>('semanticsLabel', semanticsLabel, defaultValue: null));
-    properties.add(DiagnosticsProperty<FocusNode>('focusNode', focusNode, defaultValue: null));
-    properties.add(DiagnosticsProperty<TextStyle>('style', style, defaultValue: null));
-    properties.add(DiagnosticsProperty<bool>('autofocus', autofocus, defaultValue: false));
-    properties.add(DiagnosticsProperty<bool>('showCursor', showCursor, defaultValue: false));
-    properties.add(IntProperty('minLines', minLines, defaultValue: null));
-    properties.add(IntProperty('maxLines', maxLines, defaultValue: null));
-    properties.add(EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: null));
-    properties.add(EnumProperty<TextDirection>('textDirection', textDirection, defaultValue: null));
-    properties.add(DoubleProperty('textScaleFactor', textScaleFactor, defaultValue: null));
-    properties.add(DoubleProperty('cursorWidth', cursorWidth, defaultValue: 2.0));
-    properties.add(DoubleProperty('cursorHeight', cursorHeight, defaultValue: null));
-    properties.add(DiagnosticsProperty<Radius>('cursorRadius', cursorRadius, defaultValue: null));
-    properties.add(DiagnosticsProperty<Color>('accentColor', accentColor, defaultValue: null));
     properties.add(
-      FlagProperty('selectionEnabled', value: selectionEnabled, defaultValue: true, ifFalse: 'selection disabled'),
+      DiagnosticsProperty<String>(
+        'data',
+        data,
+        defaultValue: null,
+      ),
     );
     properties.add(
-      DiagnosticsProperty<TextSelectionControls>('selectionControls', selectionControls, defaultValue: null),
+      DiagnosticsProperty<String>(
+        'semanticsLabel',
+        semanticsLabel,
+        defaultValue: null,
+      ),
     );
-    properties.add(DiagnosticsProperty<ScrollPhysics>('scrollPhysics', scrollPhysics, defaultValue: null));
     properties.add(
-      DiagnosticsProperty<TextHeightBehavior>('textHeightBehavior', textHeightBehavior, defaultValue: null),
+      DiagnosticsProperty<FocusNode>(
+        'focusNode',
+        focusNode,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<TextStyle>(
+        'style',
+        style,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>(
+        'autofocus',
+        autofocus,
+        defaultValue: false,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>(
+        'showCursor',
+        showCursor,
+        defaultValue: false,
+      ),
+    );
+    properties.add(
+      IntProperty(
+        'minLines',
+        minLines,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      IntProperty(
+        'maxLines',
+        maxLines,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      EnumProperty<TextAlign>(
+        'textAlign',
+        textAlign,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      EnumProperty<TextDirection>(
+        'textDirection',
+        textDirection,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DoubleProperty(
+        'textScaleFactor',
+        textScaleFactor,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DoubleProperty(
+        'cursorWidth',
+        cursorWidth,
+        defaultValue: 2.0,
+      ),
+    );
+    properties.add(
+      DoubleProperty(
+        'cursorHeight',
+        cursorHeight,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<Radius>(
+        'cursorRadius',
+        cursorRadius,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<Color>(
+        'accentColor',
+        accentColor,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      FlagProperty(
+        'selectionEnabled',
+        value: selectionEnabled,
+        defaultValue: true,
+        ifFalse: 'selection disabled',
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<TextSelectionControls>(
+        'selectionControls',
+        selectionControls,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<ScrollPhysics>(
+        'scrollPhysics',
+        scrollPhysics,
+        defaultValue: null,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<TextHeightBehavior>(
+        'textHeightBehavior',
+        textHeightBehavior,
+        defaultValue: null,
+      ),
     );
   }
 }
@@ -420,18 +542,21 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   late _ArnaTextSpanEditingController _controller;
 
   FocusNode? _focusNode;
-  FocusNode get _effectiveFocusNode => widget.focusNode ?? (_focusNode ??= FocusNode(skipTraversal: true));
+  FocusNode get _effectiveFocusNode =>
+      widget.focusNode ?? (_focusNode ??= FocusNode(skipTraversal: true));
 
   bool _showSelectionHandles = false;
 
-  late _ArnaSelectableTextSelectionGestureDetectorBuilder _selectionGestureDetectorBuilder;
+  late _ArnaSelectableTextSelectionGestureDetectorBuilder
+      _selectionGestureDetectorBuilder;
 
   // API for TextSelectionGestureDetectorBuilderDelegate.
   @override
   bool get forcePressEnabled => true;
 
   @override
-  final GlobalKey<EditableTextState> editableTextKey = GlobalKey<EditableTextState>();
+  final GlobalKey<EditableTextState> editableTextKey =
+      GlobalKey<EditableTextState>();
 
   @override
   bool get selectionEnabled => widget.selectionEnabled;
@@ -440,7 +565,8 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   @override
   void initState() {
     super.initState();
-    _selectionGestureDetectorBuilder = _ArnaSelectableTextSelectionGestureDetectorBuilder(state: this);
+    _selectionGestureDetectorBuilder =
+        _ArnaSelectableTextSelectionGestureDetectorBuilder(state: this);
     _controller = _ArnaTextSpanEditingController(
       textSpan: widget.textSpan ?? TextSpan(text: widget.data),
     );
@@ -450,7 +576,8 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   @override
   void didUpdateWidget(ArnaSelectableText oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.data != oldWidget.data || widget.textSpan != oldWidget.textSpan) {
+    if (widget.data != oldWidget.data ||
+        widget.textSpan != oldWidget.textSpan) {
       _controller.removeListener(_onControllerChanged);
       _controller = _ArnaTextSpanEditingController(
         textSpan: widget.textSpan ?? TextSpan(text: widget.data),
@@ -472,7 +599,8 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   }
 
   void _onControllerChanged() {
-    final bool showSelectionHandles = !_effectiveFocusNode.hasFocus || !_controller.selection.isCollapsed;
+    final bool showSelectionHandles =
+        !_effectiveFocusNode.hasFocus || !_controller.selection.isCollapsed;
     if (showSelectionHandles == _showSelectionHandles) {
       return;
     }
@@ -494,7 +622,8 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
       return false;
     }
 
-    if (cause == SelectionChangedCause.longPress || cause == SelectionChangedCause.scribble) {
+    if (cause == SelectionChangedCause.longPress ||
+        cause == SelectionChangedCause.scribble) {
       return true;
     }
 
@@ -507,12 +636,16 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
 
   TextSelection? _lastSeenTextSelection;
 
-  void _handleSelectionChanged(TextSelection selection, SelectionChangedCause? cause) {
+  void _handleSelectionChanged(
+    TextSelection selection,
+    SelectionChangedCause? cause,
+  ) {
     final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
     if (willShowSelectionHandles != _showSelectionHandles) {
       setState(() => _showSelectionHandles = willShowSelectionHandles);
     }
-    if (widget.onSelectionChanged != null && _lastSeenTextSelection != selection) {
+    if (widget.onSelectionChanged != null &&
+        _lastSeenTextSelection != selection) {
       widget.onSelectionChanged!(selection, cause);
     }
     _lastSeenTextSelection = selection;
@@ -520,7 +653,8 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
       case TargetPlatform.macOS:
-        if (cause == SelectionChangedCause.longPress || cause == SelectionChangedCause.drag) {
+        if (cause == SelectionChangedCause.longPress ||
+            cause == SelectionChangedCause.drag) {
           _editableText.bringIntoView(selection.extent);
         }
         break;
@@ -563,7 +697,8 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
     assert(
       !(widget.style != null &&
           widget.style!.inherit == false &&
-          (widget.style!.fontSize == null || widget.style!.textBaseline == null)),
+          (widget.style!.fontSize == null ||
+              widget.style!.textBaseline == null)),
       'inherit false style must supply fontSize and textBaseline',
     );
 
@@ -577,7 +712,10 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
       case TargetPlatform.iOS:
         textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = true;
-        cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
+        cursorOffset = Offset(
+          (-2) / MediaQuery.of(context).devicePixelRatio,
+          0,
+        );
         break;
       case TargetPlatform.android:
         textSelectionControls ??= arnaTextSelectionControls;
@@ -594,7 +732,10 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
       case TargetPlatform.macOS:
         textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = true;
-        cursorOffset = Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
+        cursorOffset = Offset(
+          (-2) / MediaQuery.of(context).devicePixelRatio,
+          0,
+        );
         break;
       case TargetPlatform.windows:
         textSelectionControls ??= arnaDesktopTextSelectionControls;
@@ -602,29 +743,39 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         break;
     }
 
-    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent =
+        widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
     TextStyle? effectiveTextStyle = widget.style;
     if (effectiveTextStyle == null || effectiveTextStyle.inherit) {
-      effectiveTextStyle = defaultTextStyle.style.merge(widget.style ?? _controller._textSpan.style);
+      effectiveTextStyle = defaultTextStyle.style.merge(
+        widget.style ?? _controller._textSpan.style,
+      );
     }
     if (MediaQuery.boldTextOverride(context)) {
-      effectiveTextStyle = effectiveTextStyle.merge(const TextStyle(fontWeight: FontWeight.bold));
+      effectiveTextStyle = effectiveTextStyle.merge(
+        const TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      );
     }
     final Widget child = RepaintBoundary(
       child: EditableText(
         key: editableTextKey,
         style: effectiveTextStyle,
         readOnly: true,
-        textWidthBasis: widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
-        textHeightBehavior: widget.textHeightBehavior ?? defaultTextStyle.textHeightBehavior,
+        textWidthBasis:
+            widget.textWidthBasis ?? defaultTextStyle.textWidthBasis,
+        textHeightBehavior:
+            widget.textHeightBehavior ?? defaultTextStyle.textHeightBehavior,
         showSelectionHandles: _showSelectionHandles,
         showCursor: widget.showCursor,
         controller: _controller,
         focusNode: focusNode,
         strutStyle: widget.strutStyle ?? const StrutStyle(),
-        textAlign: widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
+        textAlign:
+            widget.textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: widget.textDirection,
         textScaleFactor: widget.textScaleFactor,
         autofocus: widget.autofocus,
@@ -633,19 +784,25 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         minLines: widget.minLines,
         maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         selectionColor: accent.withOpacity(0.42),
-        selectionControls: widget.selectionEnabled ? textSelectionControls : null,
+        selectionControls:
+            widget.selectionEnabled ? textSelectionControls : null,
         onSelectionChanged: _handleSelectionChanged,
         onSelectionHandleTapped: _handleSelectionHandleTapped,
         rendererIgnoresPointer: true,
         cursorWidth: widget.cursorWidth,
         cursorHeight: widget.cursorHeight,
         cursorRadius: widget.cursorRadius,
-        cursorColor: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+        cursorColor: ArnaDynamicColor.matchingColor(
+          accent,
+          ArnaTheme.brightnessOf(context),
+        ),
         selectionHeightStyle: widget.selectionHeightStyle,
         selectionWidthStyle: widget.selectionWidthStyle,
         cursorOffset: cursorOffset,
         paintCursorAboveText: paintCursorAboveText,
-        backgroundCursorColor: ArnaColors.secondaryTextColor.resolveFrom(context),
+        backgroundCursorColor: ArnaColors.secondaryTextColor.resolveFrom(
+          context,
+        ),
         enableInteractiveSelection: widget.enableInteractiveSelection,
         dragStartBehavior: widget.dragStartBehavior,
         scrollPhysics: widget.scrollPhysics,

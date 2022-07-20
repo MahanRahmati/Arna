@@ -59,7 +59,8 @@ class ArnaBanner extends StatefulWidget {
 }
 
 /// The [State] for an [ArnaBanner].
-class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateMixin {
+class _ArnaBannerState extends State<ArnaBanner>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -138,10 +139,16 @@ class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateM
           ColoredBox(
             color: ArnaColors.headerColor.resolveFrom(context),
             child: ArnaListTile(
-              leading: Icon(icon, color: ArnaDynamicColor.resolve(accent, context)),
+              leading:
+                  Icon(icon, color: ArnaDynamicColor.resolve(accent, context)),
               title: widget.title,
               subtitle: widget.subtitle,
-              trailing: widget.actions != null ? Row(mainAxisSize: MainAxisSize.min, children: widget.actions!) : null,
+              trailing: widget.actions != null
+                  ? Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: widget.actions!,
+                    )
+                  : null,
             ),
           ),
           const ArnaDivider(),
@@ -153,7 +160,11 @@ class _ArnaBannerState extends State<ArnaBanner> with SingleTickerProviderStateM
       tag: '<ArnaBanner Hero tag - ${widget.title}>',
       child: MediaQuery.of(context).accessibleNavigation
           ? banner
-          : SizeTransition(axisAlignment: 1, sizeFactor: _animation, child: banner),
+          : SizeTransition(
+              axisAlignment: 1,
+              sizeFactor: _animation,
+              child: banner,
+            ),
     );
   }
 }

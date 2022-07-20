@@ -67,7 +67,14 @@ class ArnaBottomBarItem extends StatelessWidget {
       child: Padding(
         padding: Styles.small,
         child: ArnaBaseWidget(
-          builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+          builder: (
+            BuildContext context,
+            bool enabled,
+            bool hover,
+            bool focused,
+            bool pressed,
+            bool selected,
+          ) {
             selected = active;
             return Stack(
               alignment: Alignment.topRight,
@@ -83,10 +90,16 @@ class ArnaBottomBarItem extends StatelessWidget {
                       color: ArnaDynamicColor.resolve(
                         selected
                             ? focused
-                                ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                ? ArnaDynamicColor.matchingColor(
+                                    accent,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
                                 : ArnaColors.borderColor
                             : focused
-                                ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                ? ArnaDynamicColor.matchingColor(
+                                    accent,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
                                 : ArnaColors.transparent,
                         context,
                       ),
@@ -97,8 +110,12 @@ class ArnaBottomBarItem extends StatelessWidget {
                           : pressed || hover
                               ? ArnaDynamicColor.applyOverlay(
                                   selected
-                                      ? ArnaColors.buttonColor.resolveFrom(context)
-                                      : ArnaColors.headerColor.resolveFrom(context),
+                                      ? ArnaColors.buttonColor.resolveFrom(
+                                          context,
+                                        )
+                                      : ArnaColors.headerColor.resolveFrom(
+                                          context,
+                                        ),
                                 )
                               : selected
                                   ? ArnaColors.buttonColor
@@ -121,7 +138,10 @@ class ArnaBottomBarItem extends StatelessWidget {
                             !enabled
                                 ? ArnaColors.disabledColor
                                 : selected
-                                    ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                    ? ArnaDynamicColor.matchingColor(
+                                        accent,
+                                        ArnaTheme.brightnessOf(context),
+                                      )
                                     : ArnaColors.iconColor,
                             context,
                           ),
@@ -131,10 +151,17 @@ class ArnaBottomBarItem extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           label,
-                          style: ArnaTheme.of(context).textTheme.button!.copyWith(
+                          style: ArnaTheme.of(context)
+                              .textTheme
+                              .button!
+                              .copyWith(
                                 color: !enabled
-                                    ? ArnaColors.disabledColor.resolveFrom(context)
-                                    : ArnaColors.primaryTextColor.resolveFrom(context),
+                                    ? ArnaColors.disabledColor.resolveFrom(
+                                        context,
+                                      )
+                                    : ArnaColors.primaryTextColor.resolveFrom(
+                                        context,
+                                      ),
                               ),
                           softWrap: false,
                           maxLines: 1,

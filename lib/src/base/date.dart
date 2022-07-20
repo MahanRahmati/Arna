@@ -6,11 +6,14 @@ class ArnaDateUtils {
   ArnaDateUtils._();
 
   /// Returns a [DateTime] with the date of the original, but time set to midnight.
-  static DateTime dateOnly(DateTime date) => DateTime(date.year, date.month, date.day);
+  static DateTime dateOnly(DateTime date) =>
+      DateTime(date.year, date.month, date.day);
 
   /// Returns true if the two [DateTime] objects have the same day, month, and year, or are both null.
   static bool isSameDay(DateTime? dateA, DateTime? dateB) {
-    return dateA?.year == dateB?.year && dateA?.month == dateB?.month && dateA?.day == dateB?.day;
+    return dateA?.year == dateB?.year &&
+        dateA?.month == dateB?.month &&
+        dateA?.day == dateB?.day;
   }
 
   /// Returns true if the two [DateTime] objects have the same month and year, or are both null.
@@ -29,7 +32,9 @@ class ArnaDateUtils {
   ///
   /// The value for `delta` would be `7`.
   static int monthDelta(DateTime startDate, DateTime endDate) {
-    return (endDate.year - startDate.year) * 12 + endDate.month - startDate.month;
+    return (endDate.year - startDate.year) * 12 +
+        endDate.month -
+        startDate.month;
   }
 
   /// Returns a [DateTime] that is [monthDate] with the added number of months and the day set to 1 and time set to
@@ -48,7 +53,11 @@ class ArnaDateUtils {
   }
 
   /// Returns a [DateTime] with the added number of days and time set to midnight.
-  static DateTime addDaysToDate(DateTime date, int days) => DateTime(date.year, date.month, date.day + days);
+  static DateTime addDaysToDate(DateTime date, int days) => DateTime(
+        date.year,
+        date.month,
+        date.day + days,
+      );
 
   /// Computes the offset from the first day of the week that the first day of the [month] falls on.
   ///
@@ -79,7 +88,11 @@ class ArnaDateUtils {
   ///   [MaterialLocalizations.narrowWeekdays] list.
   /// - [MaterialLocalizations.narrowWeekdays] list provides localized names of days of week, always starting with
   ///   Sunday and ending with Saturday.
-  static int firstDayOffset(int year, int month, MaterialLocalizations localizations) {
+  static int firstDayOffset(
+    int year,
+    int month,
+    MaterialLocalizations localizations,
+  ) {
     /// 0-based day of week for the month and year, with 0 representing Monday.
     final int weekdayFromMonday = DateTime(year, month).weekday - 1;
 
@@ -100,10 +113,24 @@ class ArnaDateUtils {
   /// dates prior to that time.
   static int getDaysInMonth(int year, int month) {
     if (month == DateTime.february) {
-      final bool isLeapYear = (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
+      final bool isLeapYear =
+          (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
       return isLeapYear ? 29 : 28;
     }
-    const List<int> daysInMonth = <int>[31, -1, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    const List<int> daysInMonth = <int>[
+      31,
+      -1,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31
+    ];
     return daysInMonth[month - 1];
   }
 }

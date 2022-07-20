@@ -55,7 +55,14 @@ class ArnaColorButton<T> extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           selected = value == groupValue;
           return AnimatedContainer(
             height: Styles.buttonSize,
@@ -65,7 +72,9 @@ class ArnaColorButton<T> extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.colorButtonBorderRadius,
               border: Border.all(
-                color: selected ? ArnaDynamicColor.outerColor(color) : ArnaColors.transparent,
+                color: selected
+                    ? ArnaDynamicColor.outerColor(color)
+                    : ArnaColors.transparent,
               ),
             ),
             padding: Styles.small,
@@ -81,12 +90,16 @@ class ArnaColorButton<T> extends StatelessWidget {
                     border: Border.all(
                       color: ArnaDynamicColor.resolve(
                         !enabled
-                            ? ArnaDynamicColor.applyOverlay(ArnaDynamicColor.onBackgroundColor(color))
+                            ? ArnaDynamicColor.applyOverlay(
+                                ArnaDynamicColor.onBackgroundColor(color),
+                              )
                             : ArnaDynamicColor.outerColor(color),
                         context,
                       ),
                     ),
-                    color: pressed || hover || focused ? ArnaDynamicColor.applyOverlay(color) : color,
+                    color: pressed || hover || focused
+                        ? ArnaDynamicColor.applyOverlay(color)
+                        : color,
                   ),
                 ),
                 AnimatedContainer(

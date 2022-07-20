@@ -29,7 +29,8 @@ class _SegmentedControlState extends State<SegmentedControl> {
               1: Strings.second,
               2: Strings.third,
             },
-            onValueChanged: (int i) => setState(() => segmentedControlGroupValue = i),
+            onValueChanged: (int i) =>
+                setState(() => segmentedControlGroupValue = i),
           ),
         ],
       ),

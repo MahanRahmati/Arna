@@ -62,7 +62,8 @@ class ArnaExpansionPanel extends StatefulWidget {
 }
 
 /// The [State] for an [ArnaExpansionPanel].
-class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTickerProviderStateMixin {
+class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
+    with SingleTickerProviderStateMixin {
   FocusNode? focusNode;
   late bool expanded;
   bool _focused = false;
@@ -96,7 +97,9 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
     if (widget.autofocus) {
       focusNode!.requestFocus();
     }
-    _actions = <Type, Action<Intent>>{ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())};
+    _actions = <Type, Action<Intent>>{
+      ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
+    };
     _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
       SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
@@ -157,7 +160,8 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
 
   @override
   Widget build(BuildContext context) {
-    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent =
+        widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return AnimatedBuilder(
       animation: _controller.view,
@@ -183,19 +187,26 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                     actions: _actions,
                     shortcuts: _shortcuts,
                     child: AnimatedContainer(
-                      constraints: const BoxConstraints(minHeight: Styles.expansionPanelMinHeight),
+                      constraints: const BoxConstraints(
+                        minHeight: Styles.expansionPanelMinHeight,
+                      ),
                       duration: Styles.basicDuration,
                       curve: Styles.basicCurve,
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.vertical(
                           top: const Radius.circular(Styles.borderRadiusSize),
-                          bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize),
+                          bottom: expanded
+                              ? Radius.zero
+                              : const Radius.circular(Styles.borderRadiusSize),
                         ),
                         border: Border.all(
                           color: ArnaDynamicColor.resolve(
                             _focused
-                                ? ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context))
+                                ? ArnaDynamicColor.matchingColor(
+                                    accent,
+                                    ArnaTheme.brightnessOf(context),
+                                  )
                                 : ArnaColors.borderColor,
                             context,
                           ),
@@ -203,8 +214,14 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.vertical(
-                          top: const Radius.circular(Styles.borderRadiusSize - 1),
-                          bottom: expanded ? Radius.zero : const Radius.circular(Styles.borderRadiusSize - 1),
+                          top: const Radius.circular(
+                            Styles.borderRadiusSize - 1,
+                          ),
+                          bottom: expanded
+                              ? Radius.zero
+                              : const Radius.circular(
+                                  Styles.borderRadiusSize - 1,
+                                ),
                         ),
                         child: ArnaListTile(
                           leading: widget.leading,
@@ -222,14 +239,20 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                                     Icons.expand_more_outlined,
                                     size: Styles.iconSize,
                                     color: _isEnabled
-                                        ? ArnaColors.iconColor.resolveFrom(context)
-                                        : ArnaColors.disabledColor.resolveFrom(context),
+                                        ? ArnaColors.iconColor.resolveFrom(
+                                            context,
+                                          )
+                                        : ArnaColors.disabledColor.resolveFrom(
+                                            context,
+                                          ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          onTap: _isEnabled && widget.isFocusable ? _handleTap : null,
+                          onTap: _isEnabled && widget.isFocusable
+                              ? _handleTap
+                              : null,
                           actionable: _isEnabled && widget.isFocusable,
                           cursor: widget.cursor,
                         ),
@@ -261,7 +284,11 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
               ),
               color: ArnaColors.expansionPanelColor.resolveFrom(context),
             ),
-            margin: const EdgeInsetsDirectional.only(start: 1, end: 1, bottom: 1),
+            margin: const EdgeInsetsDirectional.only(
+              start: 1,
+              end: 1,
+              bottom: 1,
+            ),
             child: SizeTransition(
               axisAlignment: 1,
               sizeFactor: _animation,

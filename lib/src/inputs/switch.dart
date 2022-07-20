@@ -78,7 +78,14 @@ class ArnaSwitch extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           enabled = onChanged != null;
           return Stack(
             alignment: Alignment.center,
@@ -98,7 +105,10 @@ class ArnaSwitch extends StatelessWidget {
                             : value
                                 ? ArnaDynamicColor.outerColor(accent)
                                 : hover
-                                    ? ArnaDynamicColor.matchingColor(accent, brightness)
+                                    ? ArnaDynamicColor.matchingColor(
+                                        accent,
+                                        brightness,
+                                      )
                                     : borderColor,
                   ),
                   color: !enabled
@@ -117,7 +127,8 @@ class ArnaSwitch extends StatelessWidget {
               AnimatedPositioned(
                 duration: Styles.basicDuration,
                 curve: Styles.basicCurve,
-                left: value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
+                left:
+                    value ? Styles.switchWidth - Styles.switchThumbSize - 4 : 4,
                 child: AnimatedContainer(
                   height: Styles.switchThumbSize,
                   width: Styles.switchThumbSize,

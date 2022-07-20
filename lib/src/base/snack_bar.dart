@@ -27,13 +27,18 @@ class ArnaSnackBar extends StatefulWidget {
 }
 
 /// The [State] for an [ArnaSnackBar].
-class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderStateMixin {
+class _ArnaSnackBarState extends State<ArnaSnackBar>
+    with SingleTickerProviderStateMixin {
   late AnimationController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(duration: Styles.basicDuration, debugLabel: 'ArnaSnackBar', vsync: this);
+    controller = AnimationController(
+      duration: Styles.basicDuration,
+      debugLabel: 'ArnaSnackBar',
+      vsync: this,
+    );
     controller.forward();
   }
 
@@ -68,7 +73,8 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
                   child: Text(
                     widget.message,
                     style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                          color: ArnaColors.primaryTextColorDark.resolveFrom(context),
+                          color: ArnaColors.primaryTextColorDark
+                              .resolveFrom(context),
                         ),
                   ),
                 ),
@@ -86,9 +92,14 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
       child: MediaQuery.of(context).accessibleNavigation
           ? snackBar
           : SlideTransition(
-              position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(controller),
+              position:
+                  Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
+                      .animate(controller),
               child: FadeTransition(
-                opacity: CurvedAnimation(parent: controller, curve: Styles.basicCurve),
+                opacity: CurvedAnimation(
+                  parent: controller,
+                  curve: Styles.basicCurve,
+                ),
                 child: snackBar,
               ),
             ),
@@ -97,10 +108,19 @@ class _ArnaSnackBarState extends State<ArnaSnackBar> with SingleTickerProviderSt
 }
 
 /// Shows [ArnaSnackBar].
-OverlayEntry showArnaSnackbar({required BuildContext context, required String message, Widget? action}) {
-  final GlobalKey<_ArnaSnackBarState> snackBarKey = GlobalKey<_ArnaSnackBarState>();
+OverlayEntry showArnaSnackbar({
+  required BuildContext context,
+  required String message,
+  Widget? action,
+}) {
+  final GlobalKey<_ArnaSnackBarState> snackBarKey =
+      GlobalKey<_ArnaSnackBarState>();
   final OverlayEntry overlayEntry = OverlayEntry(
-    builder: (BuildContext context) => ArnaSnackBar(key: snackBarKey, message: message, action: action),
+    builder: (BuildContext context) => ArnaSnackBar(
+      key: snackBarKey,
+      message: message,
+      action: action,
+    ),
   );
   Overlay.of(context)!.insert(overlayEntry);
   Future<dynamic>.delayed(Styles.snackbarDuration).then((_) async {

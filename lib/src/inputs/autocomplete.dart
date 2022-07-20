@@ -65,7 +65,11 @@ class ArnaAutocomplete<T extends Object> extends StatelessWidget {
       initialValue: initialValue,
       optionsBuilder: optionsBuilder,
       optionsViewBuilder: optionsViewBuilder ??
-          (BuildContext context, AutocompleteOnSelected<T> onSelected, Iterable<T> options) {
+          (
+            BuildContext context,
+            AutocompleteOnSelected<T> onSelected,
+            Iterable<T> options,
+          ) {
             return _AutocompleteOptions<T>(
               displayStringForOption: displayStringForOption,
               onSelected: onSelected,
@@ -121,10 +125,18 @@ class _AutocompleteOptions<T extends Object> extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               final T option = options.elementAt(index);
               return ArnaBaseWidget(
-                builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+                builder: (
+                  BuildContext context,
+                  bool enabled,
+                  bool hover,
+                  bool focused,
+                  bool pressed,
+                  bool selected,
+                ) {
                   focused = AutocompleteHighlightedOption.of(context) == index;
                   if (focused) {
-                    SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
+                    SchedulerBinding.instance
+                        .addPostFrameCallback((Duration timeStamp) {
                       Scrollable.ensureVisible(context, alignment: 0.5);
                     });
                   }
@@ -134,7 +146,9 @@ class _AutocompleteOptions<T extends Object> extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       borderRadius: Styles.borderRadius,
-                      color: pressed || hover || focused ? ArnaDynamicColor.applyOverlay(cardColor) : cardColor,
+                      color: pressed || hover || focused
+                          ? ArnaDynamicColor.applyOverlay(cardColor)
+                          : cardColor,
                     ),
                     child: Text(displayStringForOption(option)),
                   );

@@ -119,14 +119,19 @@ class ArnaTextFormField extends FormField<String> {
           !expands || (maxLines == null && minLines == null),
           'minLines and maxLines must be null when expands is true.',
         ),
-        assert(!obscureText || maxLines == 1, 'Obscured fields cannot be multiline.'),
+        assert(
+          !obscureText || maxLines == 1,
+          'Obscured fields cannot be multiline.',
+        ),
         assert(maxLength == null || maxLength > 0),
         super(
-          initialValue: controller != null ? controller.text : (initialValue ?? ''),
+          initialValue:
+              controller != null ? controller.text : (initialValue ?? ''),
           enabled: enabled ?? true,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
           builder: (FormFieldState<String> field) {
-            final _ArnaTextFormFieldState state = field as _ArnaTextFormFieldState;
+            final _ArnaTextFormFieldState state =
+                field as _ArnaTextFormFieldState;
             void onChangedHandler(String value) {
               field.didChange(value);
               if (onChanged != null) {
@@ -159,8 +164,14 @@ class ArnaTextFormField extends FormField<String> {
                 obscuringCharacter: obscuringCharacter,
                 obscureText: obscureText,
                 autocorrect: autocorrect,
-                smartDashesType: smartDashesType ?? (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
-                smartQuotesType: smartQuotesType ?? (obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+                smartDashesType: smartDashesType ??
+                    (obscureText
+                        ? SmartDashesType.disabled
+                        : SmartDashesType.enabled),
+                smartQuotesType: smartQuotesType ??
+                    (obscureText
+                        ? SmartQuotesType.disabled
+                        : SmartQuotesType.enabled),
                 enableSuggestions: enableSuggestions,
                 maxLines: maxLines,
                 minLines: minLines,
@@ -178,7 +189,8 @@ class ArnaTextFormField extends FormField<String> {
                 accentColor: accentColor,
                 keyboardAppearance: keyboardAppearance,
                 scrollPadding: scrollPadding,
-                enableInteractiveSelection: enableInteractiveSelection ?? (!obscureText || !readOnly),
+                enableInteractiveSelection:
+                    enableInteractiveSelection ?? (!obscureText || !readOnly),
                 selectionControls: selectionControls,
                 onTap: onTap,
                 cursor: cursor,
@@ -206,7 +218,8 @@ class ArnaTextFormField extends FormField<String> {
 class _ArnaTextFormFieldState extends FormFieldState<String> {
   RestorableTextEditingController? _controller;
 
-  TextEditingController get _effectiveController => _textFormField.controller ?? _controller!.value;
+  TextEditingController get _effectiveController =>
+      _textFormField.controller ?? _controller!.value;
 
   ArnaTextFormField get _textFormField => super.widget as ArnaTextFormField;
 
@@ -227,7 +240,9 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
 
   void _createLocalController([TextEditingValue? value]) {
     assert(_controller == null);
-    _controller = value == null ? RestorableTextEditingController() : RestorableTextEditingController.fromValue(value);
+    _controller = value == null
+        ? RestorableTextEditingController()
+        : RestorableTextEditingController.fromValue(value);
     if (!restorePending) {
       _registerController();
     }
@@ -237,7 +252,11 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
   void initState() {
     super.initState();
     if (_textFormField.controller == null) {
-      _createLocalController(widget.initialValue != null ? TextEditingValue(text: widget.initialValue!) : null);
+      _createLocalController(
+        widget.initialValue != null
+            ? TextEditingValue(text: widget.initialValue!)
+            : null,
+      );
     } else {
       _textFormField.controller!.addListener(_handleControllerChanged);
     }

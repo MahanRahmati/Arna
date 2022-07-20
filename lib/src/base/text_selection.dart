@@ -8,7 +8,10 @@ import 'package:flutter/rendering.dart' show TextSelectionPoint;
 class ArnaTextSelectionControls extends TextSelectionControls {
   /// Returns the size of the handle.
   @override
-  Size getHandleSize(double textLineHeight) => const Size(Styles.handleSize, Styles.handleSize);
+  Size getHandleSize(double textLineHeight) => const Size(
+        Styles.handleSize,
+        Styles.handleSize,
+      );
 
   /// Builder for Arna-style copy/paste text selection toolbar.
   @override
@@ -32,13 +35,19 @@ class ArnaTextSelectionControls extends TextSelectionControls {
       handleCut: canCut(delegate) ? () => handleCut(delegate) : null,
       handleCopy: canCopy(delegate) ? () => handleCopy(delegate) : null,
       handlePaste: canPaste(delegate) ? () => handlePaste(delegate) : null,
-      handleSelectAll: canSelectAll(delegate) ? () => handleSelectAll(delegate) : null,
+      handleSelectAll:
+          canSelectAll(delegate) ? () => handleSelectAll(delegate) : null,
     );
   }
 
   /// Builder for Arna-style text selection handles.
   @override
-  Widget buildHandle(BuildContext context, TextSelectionHandleType type, double textHeight, [VoidCallback? onTap]) {
+  Widget buildHandle(
+    BuildContext context,
+    TextSelectionHandleType type,
+    double textHeight, [
+    VoidCallback? onTap,
+  ]) {
     final Color handleColor = ArnaColors.iconColor.resolveFrom(context);
     final Widget handle = SizedBox(
       width: Styles.handleSize,
@@ -85,12 +94,14 @@ class ArnaTextSelectionControls extends TextSelectionControls {
     final TextEditingValue value = delegate.textEditingValue;
     return delegate.selectAllEnabled &&
         value.text.isNotEmpty &&
-        !(value.selection.start == 0 && value.selection.end == value.text.length);
+        !(value.selection.start == 0 &&
+            value.selection.end == value.text.length);
   }
 }
 
 /// Text selection controls.
-final TextSelectionControls arnaTextSelectionControls = ArnaTextSelectionControls();
+final TextSelectionControls arnaTextSelectionControls =
+    ArnaTextSelectionControls();
 
 // The highest level toolbar widget, built directly by buildToolbar.
 class _ArnaTextSelectionControlsToolbar extends StatefulWidget {
@@ -120,11 +131,13 @@ class _ArnaTextSelectionControlsToolbar extends StatefulWidget {
   final double textLineHeight;
 
   @override
-  _ArnaTextSelectionControlsToolbarState createState() => _ArnaTextSelectionControlsToolbarState();
+  _ArnaTextSelectionControlsToolbarState createState() =>
+      _ArnaTextSelectionControlsToolbarState();
 }
 
 /// The [State] for an [_ArnaTextSelectionControlsToolbar].
-class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionControlsToolbar>
+class _ArnaTextSelectionControlsToolbarState
+    extends State<_ArnaTextSelectionControlsToolbar>
     with TickerProviderStateMixin {
   // Inform the widget that the value of clipboardStatus has changed.
   void _onChangedClipboardStatus() => setState(() {});
@@ -161,7 +174,8 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
     }
     // If the paste button is desired, don't render anything until the state of the clipboard is known, since it's used
     // to determine if paste is shown.
-    if (widget.handlePaste != null && widget.clipboardStatus?.value == ClipboardStatus.unknown) {
+    if (widget.handlePaste != null &&
+        widget.clipboardStatus?.value == ClipboardStatus.unknown) {
       return const SizedBox.shrink();
     }
 
@@ -170,8 +184,11 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
     final TextSelectionPoint startTextSelectionPoint = widget.endpoints[0];
     final TextSelectionPoint endTextSelectionPoint =
         widget.endpoints.length > 1 ? widget.endpoints[1] : widget.endpoints[0];
-    final double topAmountInEditableRegion = startTextSelectionPoint.point.dy - widget.textLineHeight;
-    final double anchorTop = math.max(topAmountInEditableRegion, 0) + widget.globalEditableRegion.top - Styles.padding;
+    final double topAmountInEditableRegion =
+        startTextSelectionPoint.point.dy - widget.textLineHeight;
+    final double anchorTop = math.max(topAmountInEditableRegion, 0) +
+        widget.globalEditableRegion.top -
+        Styles.padding;
 
     final Offset anchorAbove = Offset(
       widget.globalEditableRegion.left + widget.selectionMidpoint.dx,
@@ -179,10 +196,14 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
     );
     final Offset anchorBelow = Offset(
       widget.globalEditableRegion.left + widget.selectionMidpoint.dx,
-      widget.globalEditableRegion.top + endTextSelectionPoint.point.dy + Styles.handleSize - 2,
+      widget.globalEditableRegion.top +
+          endTextSelectionPoint.point.dy +
+          Styles.handleSize -
+          2,
     );
 
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
 
     final List<Widget> items = <Widget>[];
 
@@ -210,7 +231,8 @@ class _ArnaTextSelectionControlsToolbarState extends State<_ArnaTextSelectionCon
         widget.handleCopy!,
       );
     }
-    if (widget.handlePaste != null && widget.clipboardStatus?.value == ClipboardStatus.pasteable) {
+    if (widget.handlePaste != null &&
+        widget.clipboardStatus?.value == ClipboardStatus.pasteable) {
       addToolbarButton(
         Icons.paste_outlined,
         localizations.pasteButtonLabel,
@@ -335,7 +357,10 @@ class _ArnaTextSelectionHandlePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()..color = color;
     final double radius = size.width / 2.0;
-    final Rect circle = Rect.fromCircle(center: Offset(radius, radius), radius: radius);
+    final Rect circle = Rect.fromCircle(
+      center: Offset(radius, radius),
+      radius: radius,
+    );
     final Rect point = Rect.fromLTWH(0.0, 0.0, radius, radius);
     final Path path = Path()
       ..addOval(circle)
@@ -344,5 +369,6 @@ class _ArnaTextSelectionHandlePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_ArnaTextSelectionHandlePainter oldPainter) => color != oldPainter.color;
+  bool shouldRepaint(_ArnaTextSelectionHandlePainter oldPainter) =>
+      color != oldPainter.color;
 }

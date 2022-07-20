@@ -36,7 +36,8 @@ class ArnaTheme extends StatelessWidget {
   ///
   /// Resolves all the colors defined in that [ArnaThemeData] against the given [BuildContext] on a best-effort basis.
   static ArnaThemeData of(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
+    final _InheritedArnaTheme? inheritedTheme =
+        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
     return inheritedTheme?.theme.data ?? ArnaThemeData.light();
   }
 
@@ -54,8 +55,10 @@ class ArnaTheme extends StatelessWidget {
   /// * [ArnaThemeData.brightness], the property takes precedence over [MediaQueryData.platformBrightness] for
   ///   descendant Arna widgets.
   static Brightness brightnessOf(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return inheritedTheme?.theme.data.brightness ?? MediaQuery.of(context).platformBrightness;
+    final _InheritedArnaTheme? inheritedTheme =
+        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
+    return inheritedTheme?.theme.data.brightness ??
+        MediaQuery.of(context).platformBrightness;
   }
 
   /// Retrieves the [Brightness] to use for descendant Arna widgets, based on the value of [ArnaThemeData.brightness]
@@ -71,8 +74,10 @@ class ArnaTheme extends StatelessWidget {
   ///   descendant Arna widgets.
   /// * [brightnessOf], which throws if no valid [ArnaTheme] or [MediaQuery] exists, instead of returning null.
   static Brightness? maybeBrightnessOf(BuildContext context) {
-    final _InheritedArnaTheme? inheritedTheme = context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
-    return inheritedTheme?.theme.data.brightness ?? MediaQuery.maybeOf(context)?.platformBrightness;
+    final _InheritedArnaTheme? inheritedTheme =
+        context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
+    return inheritedTheme?.theme.data.brightness ??
+        MediaQuery.maybeOf(context)?.platformBrightness;
   }
 
   @override
@@ -99,7 +104,8 @@ class _InheritedArnaTheme extends InheritedWidget {
   final ArnaTheme theme;
 
   @override
-  bool updateShouldNotify(_InheritedArnaTheme old) => theme.data != old.theme.data;
+  bool updateShouldNotify(_InheritedArnaTheme old) =>
+      theme.data != old.theme.data;
 }
 
 /// An interpolation between two [ArnaThemeData]s.
@@ -148,11 +154,13 @@ class AnimatedArnaTheme extends ImplicitlyAnimatedWidget {
   final Widget child;
 
   @override
-  AnimatedWidgetBaseState<AnimatedArnaTheme> createState() => _AnimatedArnaThemeState();
+  AnimatedWidgetBaseState<AnimatedArnaTheme> createState() =>
+      _AnimatedArnaThemeState();
 }
 
 /// The [State] for an [AnimatedArnaTheme].
-class _AnimatedArnaThemeState extends AnimatedWidgetBaseState<AnimatedArnaTheme> {
+class _AnimatedArnaThemeState
+    extends AnimatedWidgetBaseState<AnimatedArnaTheme> {
   ArnaThemeDataTween? _data;
 
   @override
@@ -172,6 +180,13 @@ class _AnimatedArnaThemeState extends AnimatedWidgetBaseState<AnimatedArnaTheme>
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder description) {
     super.debugFillProperties(description);
-    description.add(DiagnosticsProperty<ArnaThemeDataTween>('data', _data, showName: false, defaultValue: null));
+    description.add(
+      DiagnosticsProperty<ArnaThemeDataTween>(
+        'data',
+        _data,
+        showName: false,
+        defaultValue: null,
+      ),
+    );
   }
 }

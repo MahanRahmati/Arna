@@ -201,16 +201,69 @@ class ArnaSlider extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('value', value));
-    properties.add(ObjectFlagProperty<ValueChanged<double>>('onChanged', onChanged, ifNull: 'disabled'));
-    properties.add(ObjectFlagProperty<ValueChanged<double>>.has('onChangeStart', onChangeStart));
-    properties.add(ObjectFlagProperty<ValueChanged<double>>.has('onChangeEnd', onChangeEnd));
-    properties.add(DoubleProperty('min', min));
-    properties.add(DoubleProperty('max', max));
-    properties.add(IntProperty('divisions', divisions));
-    properties.add(FlagProperty('isFocusable', value: isFocusable, ifTrue: 'isFocusable'));
-    properties.add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'));
-    properties.add(ColorProperty('accentColor', accentColor));
+    properties.add(
+      DoubleProperty(
+        'value',
+        value,
+      ),
+    );
+    properties.add(
+      ObjectFlagProperty<ValueChanged<double>>(
+        'onChanged',
+        onChanged,
+        ifNull: 'disabled',
+      ),
+    );
+    properties.add(
+      ObjectFlagProperty<ValueChanged<double>>.has(
+        'onChangeStart',
+        onChangeStart,
+      ),
+    );
+    properties.add(
+      ObjectFlagProperty<ValueChanged<double>>.has(
+        'onChangeEnd',
+        onChangeEnd,
+      ),
+    );
+    properties.add(
+      DoubleProperty(
+        'min',
+        min,
+      ),
+    );
+    properties.add(
+      DoubleProperty(
+        'max',
+        max,
+      ),
+    );
+    properties.add(
+      IntProperty(
+        'divisions',
+        divisions,
+      ),
+    );
+    properties.add(
+      FlagProperty(
+        'isFocusable',
+        value: isFocusable,
+        ifTrue: 'isFocusable',
+      ),
+    );
+    properties.add(
+      FlagProperty(
+        'autofocus',
+        value: autofocus,
+        ifTrue: 'autofocus',
+      ),
+    );
+    properties.add(
+      ColorProperty(
+        'accentColor',
+        accentColor,
+      ),
+    );
   }
 }
 
@@ -229,7 +282,8 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   late Map<Type, Action<Intent>> _actions;
 
   // Keyboard mapping for a focused slider.
-  static const Map<ShortcutActivator, Intent> _traditionalNavShortcutMap = <ShortcutActivator, Intent>{
+  static const Map<ShortcutActivator, Intent> _traditionalNavShortcutMap =
+      <ShortcutActivator, Intent>{
     SingleActivator(LogicalKeyboardKey.arrowUp): _AdjustSliderIntent.up(),
     SingleActivator(LogicalKeyboardKey.arrowDown): _AdjustSliderIntent.down(),
     SingleActivator(LogicalKeyboardKey.arrowLeft): _AdjustSliderIntent.left(),
@@ -238,7 +292,8 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
 
   // Keyboard mapping for a focused slider when using directional navigation.
   // The vertical inputs are not handled to allow navigating out of the slider.
-  static const Map<ShortcutActivator, Intent> _directionalNavShortcutMap = <ShortcutActivator, Intent>{
+  static const Map<ShortcutActivator, Intent> _directionalNavShortcutMap =
+      <ShortcutActivator, Intent>{
     SingleActivator(LogicalKeyboardKey.arrowLeft): _AdjustSliderIntent.left(),
     SingleActivator(LogicalKeyboardKey.arrowRight): _AdjustSliderIntent.right(),
   };
@@ -265,7 +320,9 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
       focusNode!.requestFocus();
     }
     _actions = <Type, Action<Intent>>{
-      _AdjustSliderIntent: CallbackAction<_AdjustSliderIntent>(onInvoke: _actionHandler),
+      _AdjustSliderIntent: CallbackAction<_AdjustSliderIntent>(
+        onInvoke: _actionHandler,
+      ),
     };
   }
 
@@ -298,8 +355,11 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   void _handleDragEnd(double value) => widget.onChangeEnd!(_lerp(value));
 
   void _actionHandler(_AdjustSliderIntent intent) {
-    final _RenderArnaSlider renderSlider = _renderObjectKey.currentContext!.findRenderObject()! as _RenderArnaSlider;
-    final TextDirection textDirection = Directionality.of(_renderObjectKey.currentContext!);
+    final _RenderArnaSlider renderSlider = _renderObjectKey.currentContext!
+        .findRenderObject()! as _RenderArnaSlider;
+    final TextDirection textDirection = Directionality.of(
+      _renderObjectKey.currentContext!,
+    );
     switch (intent.type) {
       case _SliderAdjustmentType.right:
         switch (textDirection) {
@@ -368,12 +428,15 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   double _unlerp(double value) {
     assert(value <= widget.max);
     assert(value >= widget.min);
-    return widget.max > widget.min ? (value - widget.min) / (widget.max - widget.min) : 0.0;
+    return widget.max > widget.min
+        ? (value - widget.min) / (widget.max - widget.min)
+        : 0.0;
   }
 
   @override
   Widget build(BuildContext context) {
-    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent =
+        widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return Semantics(
       container: true,
@@ -388,17 +451,23 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
           onShowFocusHighlight: _handleFocus,
           onFocusChange: _handleFocusChange,
           actions: _actions,
-          shortcuts: MediaQuery.of(context).navigationMode == NavigationMode.directional
+          shortcuts: MediaQuery.of(context).navigationMode ==
+                  NavigationMode.directional
               ? _directionalNavShortcutMap
               : _traditionalNavShortcutMap,
           child: _ArnaSliderRenderObjectWidget(
             key: _renderObjectKey,
             value: _convert(widget.value),
             divisions: widget.divisions,
-            onChanged: _isEnabled && (widget.max > widget.min) ? _handleChanged : null,
-            onChangeStart: widget.onChangeStart != null ? _handleDragStart : null,
+            onChanged:
+                _isEnabled && (widget.max > widget.min) ? _handleChanged : null,
+            onChangeStart:
+                widget.onChangeStart != null ? _handleDragStart : null,
             onChangeEnd: widget.onChangeEnd != null ? _handleDragEnd : null,
-            accent: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+            accent: ArnaDynamicColor.matchingColor(
+              accent,
+              ArnaTheme.brightnessOf(context),
+            ),
             borderColor: ArnaColors.borderColor.resolveFrom(context),
             trackColor: ArnaColors.backgroundColor.resolveFrom(context),
             thumbColor: ArnaDynamicColor.onBackgroundColor(accent),
@@ -476,7 +545,10 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, _RenderArnaSlider renderObject) {
+  void updateRenderObject(
+    BuildContext context,
+    _RenderArnaSlider renderObject,
+  ) {
     renderObject
       // We should update the `divisions` ahead of `value`, because the `value` setter dependent on the `divisions`.
       ..divisions = divisions
@@ -496,7 +568,8 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
 }
 
 /// _RenderArnaSlider class.
-class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixin {
+class _RenderArnaSlider extends RenderBox
+    with RelayoutWhenSystemFontsChangeMixin {
   /// Renders an ArnaSlider.
   _RenderArnaSlider({
     required double value,
@@ -584,8 +657,13 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
     _value = convertedValue;
     if (isDiscrete) {
       final double distance = (_value - _state.positionController.value).abs();
-      _state.positionController.duration = distance != 0.0 ? Styles.basicDuration * (1.0 / distance) : Duration.zero;
-      _state.positionController.animateTo(convertedValue, curve: Styles.basicCurve);
+      _state.positionController.duration = distance != 0.0
+          ? Styles.basicDuration * (1.0 / distance)
+          : Duration.zero;
+      _state.positionController.animateTo(
+        convertedValue,
+        curve: Styles.basicCurve,
+      );
     } else {
       _state.positionController.value = convertedValue;
     }
@@ -704,7 +782,8 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
   }
 
   double _getValueFromGlobalPosition(Offset globalPosition) {
-    final double visualPosition = (globalToLocal(globalPosition).dx - _trackLeft) / _trackRight;
+    final double visualPosition =
+        (globalToLocal(globalPosition).dx - _trackLeft) / _trackRight;
     return _getValueFromVisualPosition(visualPosition);
   }
 
@@ -805,8 +884,12 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
   @override
   Size computeDryLayout(BoxConstraints constraints) {
     return Size(
-      constraints.hasBoundedWidth ? constraints.maxWidth : Styles.sliderTrackMinWidth,
-      constraints.hasBoundedHeight ? constraints.maxHeight : Styles.sliderTrackSize,
+      constraints.hasBoundedWidth
+          ? constraints.maxWidth
+          : Styles.sliderTrackMinWidth,
+      constraints.hasBoundedHeight
+          ? constraints.maxHeight
+          : Styles.sliderTrackSize,
     );
   }
 
@@ -855,7 +938,8 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
     );
 
     if (visualPosition > 0.0) {
-      final Paint paint = Paint()..color = isInteractive ? leftColor : trackColor;
+      final Paint paint = Paint()
+        ..color = isInteractive ? leftColor : trackColor;
       if (visualPosition != 1.0) {
         canvas.drawRRect(
           RRect.fromRectAndCorners(
@@ -877,7 +961,8 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
     }
 
     if (visualPosition < 1.0) {
-      final Paint paint = Paint()..color = isInteractive ? rightColor : trackColor;
+      final Paint paint = Paint()
+        ..color = isInteractive ? rightColor : trackColor;
       if (visualPosition != 0.0) {
         canvas.drawRRect(
           RRect.fromRectAndCorners(
@@ -903,7 +988,9 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
     final RRect rrect = RRect.fromRectAndRadius(
       Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize),
       Radius.circular(
-        Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize).shortestSide / 2.0,
+        Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize)
+                .shortestSide /
+            2.0,
       ),
     );
 
@@ -919,7 +1006,9 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
         RRect.fromRectAndRadius(
           Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2),
           Radius.circular(
-            Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2).shortestSide / 2.0,
+            Rect.fromCircle(center: thumbCenter, radius: Styles.sliderSize / 2)
+                    .shortestSide /
+                2.0,
           ),
         ),
         Paint()..color = thumbColor,
@@ -946,8 +1035,10 @@ class _RenderArnaSlider extends RenderBox with RelayoutWhenSystemFontsChangeMixi
       config.onDecrease = decreaseAction;
     }
     config.value = '${(value * 100).round()}%';
-    config.increasedValue = '${((value + _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%';
-    config.decreasedValue = '${((value - _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%';
+    config.increasedValue =
+        '${((value + _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%';
+    config.decreasedValue =
+        '${((value - _semanticActionUnit).clamp(0.0, 1.0) * 100).round()}%';
   }
 
   double get _semanticActionUnit => divisions != null ? 1.0 / divisions! : 0.1;

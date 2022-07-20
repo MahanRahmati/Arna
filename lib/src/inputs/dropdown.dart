@@ -40,7 +40,10 @@ class _ArnaDropdownMenuPainter extends CustomPainter {
     );
 
     final Tween<double> bottom = Tween<double>(
-      begin: (top.begin! + Styles.menuItemSize).clamp(math.min(Styles.menuItemSize, size.height), size.height),
+      begin: (top.begin! + Styles.menuItemSize).clamp(
+        math.min(Styles.menuItemSize, size.height),
+        size.height,
+      ),
       end: size.height,
     );
 
@@ -56,7 +59,8 @@ class _ArnaDropdownMenuPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_ArnaDropdownMenuPainter oldPainter) {
-    return oldPainter.selectedIndex != selectedIndex || oldPainter.resize != resize;
+    return oldPainter.selectedIndex != selectedIndex ||
+        oldPainter.resize != resize;
   }
 }
 
@@ -81,21 +85,29 @@ class _ArnaDropdownMenuItemButton<T> extends StatefulWidget {
   final bool enableFeedback;
 
   @override
-  State<_ArnaDropdownMenuItemButton<T>> createState() => _ArnaDropdownMenuItemButtonState<T>();
+  State<_ArnaDropdownMenuItemButton<T>> createState() =>
+      _ArnaDropdownMenuItemButtonState<T>();
 }
 
 /// The [State] for an [_ArnaDropdownMenuItemButton].
-class _ArnaDropdownMenuItemButtonState<T> extends State<_ArnaDropdownMenuItemButton<T>> {
+class _ArnaDropdownMenuItemButtonState<T>
+    extends State<_ArnaDropdownMenuItemButton<T>> {
   void _handleOnTap() {
-    final ArnaDropdownMenuItem<T> dropdownMenuItem = widget.route.items[widget.itemIndex].item!;
+    final ArnaDropdownMenuItem<T> dropdownMenuItem =
+        widget.route.items[widget.itemIndex].item!;
     dropdownMenuItem.onTap?.call();
     Navigator.pop(context, _ArnaDropdownRouteResult<T>(dropdownMenuItem.value));
   }
 
   // On the web, up/down don't change focus, *except* in a <select> element, which is what a dropdown emulates.
-  static const Map<ShortcutActivator, Intent> _webShortcuts = <ShortcutActivator, Intent>{
-    SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(TraversalDirection.down),
-    SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(TraversalDirection.up),
+  static const Map<ShortcutActivator, Intent> _webShortcuts =
+      <ShortcutActivator, Intent>{
+    SingleActivator(LogicalKeyboardKey.arrowDown): DirectionalFocusIntent(
+      TraversalDirection.down,
+    ),
+    SingleActivator(LogicalKeyboardKey.arrowUp): DirectionalFocusIntent(
+      TraversalDirection.up,
+    ),
   };
 
   @override
@@ -103,7 +115,8 @@ class _ArnaDropdownMenuItemButtonState<T> extends State<_ArnaDropdownMenuItemBut
     final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
     final Color disabledColor = ArnaColors.disabledColor.resolveFrom(context);
     TextStyle style = ArnaTheme.of(context).textTheme.button!;
-    final ArnaDropdownMenuItem<T> dropdownMenuItem = widget.route.items[widget.itemIndex].item!;
+    final ArnaDropdownMenuItem<T> dropdownMenuItem =
+        widget.route.items[widget.itemIndex].item!;
     final CurvedAnimation opacity;
     final double unit = 0.5 / (widget.route.items.length + 1.5);
 
@@ -113,7 +126,8 @@ class _ArnaDropdownMenuItemButtonState<T> extends State<_ArnaDropdownMenuItemBut
         curve: const Threshold(0.0),
       );
     } else {
-      final double start = (0.5 + (widget.itemIndex + 1) * unit).clamp(0.0, 1.0);
+      final double start =
+          (0.5 + (widget.itemIndex + 1) * unit).clamp(0.0, 1.0);
       final double end = (start + 1.5 * unit).clamp(0.0, 1.0);
       opacity = CurvedAnimation(
         parent: widget.route.animation!,
@@ -237,7 +251,8 @@ class _ArnaDropdownMenuState<T> extends State<_ArnaDropdownMenu<T>> {
     // [0.5s - 1.0s] Fade in the remaining visible items from top to bottom.
     //
     // When the menu is dismissed we just fade the entire thing out in the first 0.25s.
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
     final _ArnaDropdownRoute<T> route = widget.route;
     final List<Widget> children = <Widget>[
       for (int itemIndex = 0; itemIndex < route.items.length; ++itemIndex)
@@ -311,7 +326,10 @@ class _ArnaDropdownMenuRouteLayout<T> extends SingleChildLayoutDelegate {
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     // The maximum height of a simple menu should be one or more rows less than the view height. This ensures a
     // tappable area outside of the simple menu with which to dismiss the menu.
-    final double maxHeight = math.max(0.0, constraints.maxHeight - 2 * Styles.menuItemSize);
+    final double maxHeight = math.max(
+      0.0,
+      constraints.maxHeight - 2 * Styles.menuItemSize,
+    );
 
     // The width of a menu should be at most the view width. This ensures that the menu does not extend past the left
     // and right edges of the screen.
@@ -325,7 +343,11 @@ class _ArnaDropdownMenuRouteLayout<T> extends SingleChildLayoutDelegate {
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {
-    final _ArnaMenuLimits menuLimits = route.getMenuLimits(buttonRect, size.height, route.selectedIndex);
+    final _ArnaMenuLimits menuLimits = route.getMenuLimits(
+      buttonRect,
+      size.height,
+      route.selectedIndex,
+    );
 
     assert(
       () {
@@ -355,7 +377,8 @@ class _ArnaDropdownMenuRouteLayout<T> extends SingleChildLayoutDelegate {
 
   @override
   bool shouldRelayout(_ArnaDropdownMenuRouteLayout<T> oldDelegate) {
-    return buttonRect != oldDelegate.buttonRect || textDirection != oldDelegate.textDirection;
+    return buttonRect != oldDelegate.buttonRect ||
+        textDirection != oldDelegate.textDirection;
   }
 }
 
@@ -452,7 +475,9 @@ class _ArnaDropdownRoute<T> extends PopupRoute<_ArnaDropdownRouteResult<T>> {
     double offset = 0;
     if (items.isNotEmpty && index > 0) {
       assert(items.length == itemHeights.length);
-      offset += itemHeights.sublist(0, index).reduce((double total, double height) => total + height);
+      offset += itemHeights
+          .sublist(0, index)
+          .reduce((double total, double height) => total + height);
     }
     return offset;
   }
@@ -465,7 +490,8 @@ class _ArnaDropdownRoute<T> extends PopupRoute<_ArnaDropdownRouteResult<T>> {
     double availableHeight,
     int index,
   ) {
-    final double computedMaxHeight = availableHeight - 2.0 * Styles.menuItemSize;
+    final double computedMaxHeight =
+        availableHeight - 2.0 * Styles.menuItemSize;
     final double buttonTop = buttonRect.top;
     final double buttonBottom = math.min(buttonRect.bottom, availableHeight);
     final double selectedItemOffset = getItemOffset(index);
@@ -474,12 +500,16 @@ class _ArnaDropdownRoute<T> extends PopupRoute<_ArnaDropdownRouteResult<T>> {
     // [Styles.menuItemSize] from the edge of the screen. In this case, we want to change the menu limits to align with
     // the top or bottom edge of the button.
     final double topLimit = math.min(Styles.menuItemSize, buttonTop);
-    final double bottomLimit = math.max(availableHeight - Styles.menuItemSize, buttonBottom);
+    final double bottomLimit = math.max(
+      availableHeight - Styles.menuItemSize,
+      buttonBottom,
+    );
 
     double menuTop = buttonBottom;
     double preferredMenuHeight = Styles.padding;
     if (items.isNotEmpty) {
-      preferredMenuHeight += itemHeights.reduce((double total, double height) => total + height);
+      preferredMenuHeight +=
+          itemHeights.reduce((double total, double height) => total + height);
     }
 
     // If there are too many elements in the menu, we need to shrink it down so it is at most the computedMaxHeight.
@@ -499,7 +529,8 @@ class _ArnaDropdownRoute<T> extends PopupRoute<_ArnaDropdownRouteResult<T>> {
       menuTop = menuBottom - menuHeight;
     }
 
-    if (menuBottom - itemHeights[selectedIndex] / 2.0 < buttonBottom - buttonRect.height / 2.0) {
+    if (menuBottom - itemHeights[selectedIndex] / 2.0 <
+        buttonBottom - buttonRect.height / 2.0) {
       menuBottom = math.max(buttonBottom, bottomLimit);
       menuTop = menuBottom - menuHeight;
     }
@@ -553,8 +584,14 @@ class _ArnaDropdownRoutePage<T> extends StatelessWidget {
 
     // Computing the initialScrollOffset now, before the items have been laid out.
     if (route.scrollController == null) {
-      final _ArnaMenuLimits menuLimits = route.getMenuLimits(buttonRect, constraints.maxHeight, selectedIndex);
-      route.scrollController = ScrollController(initialScrollOffset: menuLimits.scrollOffset);
+      final _ArnaMenuLimits menuLimits = route.getMenuLimits(
+        buttonRect,
+        constraints.maxHeight,
+        selectedIndex,
+      );
+      route.scrollController = ScrollController(
+        initialScrollOffset: menuLimits.scrollOffset,
+      );
     }
 
     return MediaQuery.removePadding(
@@ -814,7 +851,8 @@ class ArnaDropdownButton<T> extends StatefulWidget {
   State<ArnaDropdownButton<T>> createState() => _ArnaDropdownButtonState<T>();
 }
 
-class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with WidgetsBindingObserver {
+class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>>
+    with WidgetsBindingObserver {
   int? _selectedIndex;
   _ArnaDropdownRoute<T>? _dropdownRoute;
   Orientation? _lastOrientation;
@@ -878,7 +916,8 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
         (widget.value == null &&
             widget.items!
                 .where(
-                  (ArnaDropdownMenuItem<T> item) => item.enabled && item.value == widget.value,
+                  (ArnaDropdownMenuItem<T> item) =>
+                      item.enabled && item.value == widget.value,
                 )
                 .isEmpty)) {
       _selectedIndex = null;
@@ -935,7 +974,8 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
         itemBox.size;
     _dropdownRoute = _ArnaDropdownRoute<T>(
       items: menuItems,
-      buttonRect: Styles.menuMargin.resolve(textDirection).inflateRect(itemRect),
+      buttonRect:
+          Styles.menuMargin.resolve(textDirection).inflateRect(itemRect),
       selectedIndex: _selectedIndex ?? 0,
       accentColor: accentColor,
       style: _textStyle!,
@@ -944,7 +984,9 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
     );
 
     focusNode?.requestFocus();
-    navigator.push(_dropdownRoute!).then<void>((_ArnaDropdownRouteResult<T>? newValue) {
+    navigator
+        .push(_dropdownRoute!)
+        .then<void>((_ArnaDropdownRouteResult<T>? newValue) {
       _removeDropdownRoute();
       if (!mounted || newValue == null) {
         return;
@@ -955,14 +997,19 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
     widget.onTap?.call();
   }
 
-  bool get _enabled => widget.items != null && widget.items!.isNotEmpty && widget.onChanged != null;
+  bool get _enabled =>
+      widget.items != null &&
+      widget.items!.isNotEmpty &&
+      widget.onChanged != null;
 
   Orientation _getOrientation(BuildContext context) {
     Orientation? result = MediaQuery.maybeOf(context)?.orientation;
     if (result == null) {
       // If there's no MediaQuery, then use the window aspect to determine orientation.
       final Size size = WidgetsBinding.instance.window.physicalSize;
-      result = size.width > size.height ? Orientation.landscape : Orientation.portrait;
+      result = size.width > size.height
+          ? Orientation.landscape
+          : Orientation.portrait;
     }
     return result;
   }
@@ -979,11 +1026,13 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
     // The width of the button and the menu are defined by the widest item and the width of the hint.
     // We should explicitly type the items list to be a list of <Widget>, otherwise, no explicit type adding items
     // maybe trigger a crash/failure when hint and selectedItemBuilder are provided.
-    final List<Widget> items = widget.items != null ? List<Widget>.of(widget.items!) : <Widget>[];
+    final List<Widget> items =
+        widget.items != null ? List<Widget>.of(widget.items!) : <Widget>[];
 
     int? hintIndex;
     if (widget.hint != null || (!_enabled && widget.disabledHint != null)) {
-      Widget displayedHint = _enabled ? widget.hint! : widget.disabledHint ?? widget.hint!;
+      Widget displayedHint =
+          _enabled ? widget.hint! : widget.disabledHint ?? widget.hint!;
       displayedHint = _ArnaDropdownMenuItemContainer(child: displayedHint);
 
       hintIndex = items.length;
@@ -1015,7 +1064,8 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
     final Color disabledColor = ArnaColors.disabledColor.resolveFrom(context);
     final Color iconColor = ArnaColors.iconColor.resolveFrom(context);
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
-    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent =
+        widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return Semantics(
       button: true,
@@ -1039,7 +1089,9 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
                 border: Border.all(
-                  color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.borderColor.resolveFrom(context),
+                  color: focused
+                      ? ArnaDynamicColor.outerColor(accent)
+                      : ArnaColors.borderColor.resolveFrom(context),
                 ),
                 color: !enabled
                     ? ArnaColors.backgroundColor.resolveFrom(context)
@@ -1051,14 +1103,18 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>> with Widg
               child: IconTheme(
                 data: IconThemeData(color: enabled ? iconColor : disabledColor),
                 child: DefaultTextStyle(
-                  style: enabled ? _textStyle! : _textStyle!.copyWith(color: disabledColor),
+                  style: enabled
+                      ? _textStyle!
+                      : _textStyle!.copyWith(color: disabledColor),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       innerItemsWidget,
                       const Padding(
-                        padding: EdgeInsetsDirectional.only(start: Styles.padding),
+                        padding: EdgeInsetsDirectional.only(
+                          start: Styles.padding,
+                        ),
                         child: Icon(Icons.arrow_drop_down_outlined),
                       ),
                     ],

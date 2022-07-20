@@ -26,8 +26,9 @@ class ArnaDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width =
-        ArnaHelpers.isCompact(context) ? ArnaHelpers.deviceWidth(context) - Styles.largePadding : Styles.dialogSize;
+    final double width = ArnaHelpers.isCompact(context)
+        ? ArnaHelpers.deviceWidth(context) - Styles.largePadding
+        : Styles.dialogSize;
     return Padding(
       padding: Styles.large,
       child: MediaQuery.removeViewInsets(
@@ -37,7 +38,9 @@ class ArnaDialog extends StatelessWidget {
         removeBottom: true,
         context: context,
         child: Align(
-          alignment: ArnaHelpers.isCompact(context) ? Alignment.bottomCenter : Alignment.center,
+          alignment: ArnaHelpers.isCompact(context)
+              ? Alignment.bottomCenter
+              : Alignment.center,
           child: ConstrainedBox(
             constraints: BoxConstraints(minWidth: width, maxWidth: width),
             child: ArnaCard(
@@ -118,15 +121,25 @@ Future<T?> showArnaDialog<T>({
 }) {
   return showGeneralDialog(
     context: context,
-    pageBuilder: (BuildContext buildContext, Animation<double> animation, Animation<double> secondaryAnimation) {
+    pageBuilder: (
+      BuildContext buildContext,
+      Animation<double> animation,
+      Animation<double> secondaryAnimation,
+    ) {
       final Widget dialog = Builder(builder: builder);
       return useSafeArea ? SafeArea(child: dialog) : dialog;
     },
     barrierDismissible: barrierDismissible,
-    barrierLabel: barrierLabel ?? MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    barrierLabel: barrierLabel ??
+        MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: barrierColor ?? ArnaColors.barrierColor,
     transitionDuration: Styles.basicDuration,
-    transitionBuilder: (BuildContext context, Animation<double> animation, _, Widget child) {
+    transitionBuilder: (
+      BuildContext context,
+      Animation<double> animation,
+      _,
+      Widget child,
+    ) {
       final Widget childWidget = FadeTransition(
         opacity: CurvedAnimation(
           parent: animation,
@@ -137,7 +150,10 @@ Future<T?> showArnaDialog<T>({
 
       return ArnaHelpers.isCompact(context)
           ? SlideTransition(
-              position: Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero).animate(animation),
+              position: Tween<Offset>(
+                begin: const Offset(0, 1),
+                end: Offset.zero,
+              ).animate(animation),
               child: childWidget,
             )
           : ScaleTransition(

@@ -108,7 +108,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     if (expanded && showDrawer) {
       _drawerOpenedCallback(false);
     }
-    final double padding = expanded ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
+    final double padding =
+        expanded ? Styles.sideBarWidth : Styles.sideBarCompactWidth;
     final String tooltip = MaterialLocalizations.of(context).drawerLabel;
 
     final Widget sideItemBuilder = _SideItemBuilder(
@@ -133,7 +134,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
           ),
         ],
         Padding(
-          padding: EdgeInsetsDirectional.only(start: expanded ? padding + 1 : 0),
+          padding:
+              EdgeInsetsDirectional.only(start: expanded ? padding + 1 : 0),
           child: ArnaScaffold(
             headerBarLeading: Row(
               mainAxisSize: MainAxisSize.min,
@@ -146,7 +148,8 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                     semanticLabel: tooltip,
                   ),
                 if (widget.headerBarLeading != null) widget.headerBarLeading!,
-                if (widget.items[_currentIndex].headerBarLeading != null) widget.items[_currentIndex].headerBarLeading!,
+                if (widget.items[_currentIndex].headerBarLeading != null)
+                  widget.items[_currentIndex].headerBarLeading!,
               ],
             ),
             title: widget.title,
@@ -228,8 +231,10 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
             : ArnaScaffold(
                 headerBarLeading: Row(
                   children: <Widget>[
-                    if (widget.headerBarLeading != null) widget.headerBarLeading!,
-                    if (widget.items[0].headerBarLeading != null) widget.items[0].headerBarLeading!,
+                    if (widget.headerBarLeading != null)
+                      widget.headerBarLeading!,
+                    if (widget.items[0].headerBarLeading != null)
+                      widget.items[0].headerBarLeading!,
                   ],
                 ),
                 title: widget.title,

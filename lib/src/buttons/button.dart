@@ -113,16 +113,27 @@ class ArnaButton extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           return AnimatedContainer(
-            height: (buttonSize == ButtonSize.huge) ? Styles.hugeButtonSize : Styles.buttonSize,
+            height: (buttonSize == ButtonSize.huge)
+                ? Styles.hugeButtonSize
+                : Styles.buttonSize,
             duration: Styles.basicDuration,
             curve: Styles.basicCurve,
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
-                color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.borderColor.resolveFrom(context),
+                color: focused
+                    ? ArnaDynamicColor.outerColor(accent)
+                    : ArnaColors.borderColor.resolveFrom(context),
               ),
               color: !enabled
                   ? ArnaColors.backgroundColor.resolveFrom(context)
@@ -134,14 +145,20 @@ class ArnaButton extends StatelessWidget {
                           ? ArnaDynamicColor.applyOverlay(accent)
                           : accent,
             ),
-            padding: icon != null ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1) : Styles.largeHorizontal,
+            padding: icon != null
+                ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
+                : Styles.largeHorizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: buttonSize == ButtonSize.huge ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisSize: buttonSize == ButtonSize.huge
+                  ? MainAxisSize.max
+                  : MainAxisSize.min,
               children: <Widget>[
                 if (icon != null)
                   Padding(
-                    padding: EdgeInsetsDirectional.only(end: label != null ? Styles.padding : 0),
+                    padding: EdgeInsetsDirectional.only(
+                      end: label != null ? Styles.padding : 0,
+                    ),
                     child: Icon(
                       icon,
                       size: Styles.iconSize,
@@ -165,20 +182,24 @@ class ArnaButton extends StatelessWidget {
                                   ? ArnaColors.disabledColor
                                   : buttonType == ButtonType.normal
                                       ? ArnaColors.primaryTextColor
-                                      : ArnaDynamicColor.onBackgroundColor(accent),
+                                      : ArnaDynamicColor.onBackgroundColor(
+                                          accent,
+                                        ),
                               context,
                             ),
                           ),
                     ),
                   ),
-                if (icon != null && label != null) const SizedBox(width: Styles.padding),
+                if (icon != null && label != null)
+                  const SizedBox(width: Styles.padding),
               ],
             ),
           );
         },
         onPressed: onPressed,
         onLongPress: onLongPress,
-        tooltipMessage: onPressed != null || onLongPress != null ? tooltipMessage : null,
+        tooltipMessage:
+            onPressed != null || onLongPress != null ? tooltipMessage : null,
         isFocusable: isFocusable,
         showAnimation: onPressed != null || onLongPress != null,
         autofocus: autofocus,

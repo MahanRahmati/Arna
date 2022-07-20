@@ -66,7 +66,8 @@ class ArnaProgressIndicator extends StatefulWidget {
 }
 
 /// The [State] for an [ArnaProgressIndicator].
-class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with SingleTickerProviderStateMixin {
+class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
+    with SingleTickerProviderStateMixin {
   static final Animatable<double> _headTween = CurveTween(
     curve: const Interval(0.0, 0.5, curve: Styles.basicCurve),
   );
@@ -107,7 +108,8 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with Sing
 
   @override
   Widget build(BuildContext context) {
-    final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    final Color accent =
+        widget.accentColor ?? ArnaTheme.of(context).accentColor;
     String? expandedSemanticsValue = widget.semanticsValue;
     if (widget.value != null) {
       expandedSemanticsValue ??= '${(widget.value! * 100).round()}%';
@@ -122,13 +124,21 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator> with Sing
           child: Container(
             height: widget.size,
             width: widget.size,
-            constraints: const BoxConstraints(minWidth: Styles.indicatorSize, minHeight: Styles.indicatorSize),
+            constraints: const BoxConstraints(
+              minWidth: Styles.indicatorSize,
+              minHeight: Styles.indicatorSize,
+            ),
             child: CustomPaint(
               painter: _ProgressPainter(
-                color: ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+                color: ArnaDynamicColor.matchingColor(
+                  accent,
+                  ArnaTheme.brightnessOf(context),
+                ),
                 value: widget.value,
-                headValue: widget.value != null ? 0 : _headTween.evaluate(_controller),
-                tailValue: widget.value != null ? 0 : _tailTween.evaluate(_controller),
+                headValue:
+                    widget.value != null ? 0 : _headTween.evaluate(_controller),
+                tailValue:
+                    widget.value != null ? 0 : _tailTween.evaluate(_controller),
               ),
             ),
           ),
@@ -146,7 +156,8 @@ class _ProgressPainter extends CustomPainter {
     required this.value,
     required this.headValue,
     required this.tailValue,
-  })  : arcStart = value != null ? _startAngle : _startAngle + tailValue * _twoPi,
+  })  : arcStart =
+            value != null ? _startAngle : _startAngle + tailValue * _twoPi,
         arcSweep = value != null
             ? value.clamp(0.0, 1.0) * _sweep
             : math.max(headValue * _twoPi - tailValue * _twoPi, _epsilon);

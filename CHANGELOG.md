@@ -18,6 +18,7 @@
 - Update ArnaSelectableText
 - Update ArnaPopupMenu
 - Use resolveFrom in widgets
+- Change dart.lineLength to 80
 
 ## 1.0.4+1
 

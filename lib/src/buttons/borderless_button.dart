@@ -84,7 +84,14 @@ class ArnaBorderlessButton extends StatelessWidget {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
-        builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
+        builder: (
+          BuildContext context,
+          bool enabled,
+          bool hover,
+          bool focused,
+          bool pressed,
+          bool selected,
+        ) {
           return AnimatedContainer(
             height: Styles.buttonSize,
             duration: Styles.basicDuration,
@@ -93,7 +100,9 @@ class ArnaBorderlessButton extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
-                color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.transparent,
+                color: focused
+                    ? ArnaDynamicColor.outerColor(accent)
+                    : ArnaColors.transparent,
               ),
               color: ArnaDynamicColor.applyOverlay(
                 ArnaColors.buttonColor.resolveFrom(context),
@@ -105,14 +114,18 @@ class ArnaBorderlessButton extends StatelessWidget {
                         : 0,
               ),
             ),
-            padding: icon != null ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1) : Styles.largeHorizontal,
+            padding: icon != null
+                ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
+                : Styles.largeHorizontal,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 if (icon != null)
                   Padding(
-                    padding: EdgeInsetsDirectional.only(end: label != null ? Styles.padding : 0),
+                    padding: EdgeInsetsDirectional.only(
+                      end: label != null ? Styles.padding : 0,
+                    ),
                     child: Icon(
                       icon,
                       size: Styles.iconSize,
@@ -121,7 +134,10 @@ class ArnaBorderlessButton extends StatelessWidget {
                             ? ArnaColors.disabledColor
                             : buttonType == ButtonType.normal
                                 ? ArnaColors.iconColor
-                                : ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+                                : ArnaDynamicColor.matchingColor(
+                                    accent,
+                                    ArnaTheme.brightnessOf(context),
+                                  ),
                         context,
                       ),
                     ),
@@ -136,20 +152,25 @@ class ArnaBorderlessButton extends StatelessWidget {
                                   ? ArnaColors.disabledColor
                                   : buttonType == ButtonType.normal
                                       ? ArnaColors.primaryTextColor
-                                      : ArnaDynamicColor.matchingColor(accent, ArnaTheme.brightnessOf(context)),
+                                      : ArnaDynamicColor.matchingColor(
+                                          accent,
+                                          ArnaTheme.brightnessOf(context),
+                                        ),
                               context,
                             ),
                           ),
                     ),
                   ),
-                if (icon != null && label != null) const SizedBox(width: Styles.padding),
+                if (icon != null && label != null)
+                  const SizedBox(width: Styles.padding),
               ],
             ),
           );
         },
         onPressed: onPressed,
         onLongPress: onLongPress,
-        tooltipMessage: onPressed != null || onLongPress != null ? tooltipMessage : null,
+        tooltipMessage:
+            onPressed != null || onLongPress != null ? tooltipMessage : null,
         isFocusable: isFocusable,
         showAnimation: onPressed != null || onLongPress != null,
         autofocus: autofocus,

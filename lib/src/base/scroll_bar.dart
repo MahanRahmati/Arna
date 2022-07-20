@@ -37,7 +37,8 @@ class ArnaScrollbar extends RawScrollbar {
     super.thumbColor,
   }) : super(
           pressDuration: Duration.zero,
-          notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
+          notificationPredicate:
+              notificationPredicate ?? defaultScrollNotificationPredicate,
         );
 
   @override
@@ -75,7 +76,9 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
       )
       ..trackBorderColor = ArnaColors.transparent
       ..textDirection = Directionality.of(context)
-      ..thickness = _hoverIsActive ? Styles.scrollBarHoverThickness : Styles.scrollBarThickness
+      ..thickness = _hoverIsActive
+          ? Styles.scrollBarHoverThickness
+          : Styles.scrollBarThickness
       ..radius = const Radius.circular(Styles.borderRadiusSize)
       ..crossAxisMargin = Styles.smallPadding
       ..mainAxisMargin = Styles.smallPadding

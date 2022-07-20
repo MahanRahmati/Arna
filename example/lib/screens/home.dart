@@ -112,7 +112,11 @@ class _HomeState extends ConsumerState<Home> {
           applicationName: Strings.appName,
           developerName: 'Mahan Rahmati',
           applicationVersion: Strings.version,
-          applicationUri: Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/Arna/issues'),
+          applicationUri: Uri(
+            scheme: 'https',
+            host: 'github.com',
+            path: 'MahanRahmati/Arna/issues',
+          ),
         ),
         tooltipMessage: Strings.about,
       ),

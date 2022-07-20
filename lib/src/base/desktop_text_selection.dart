@@ -29,7 +29,8 @@ class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
       handleCut: canCut(delegate) ? () => handleCut(delegate) : null,
       handleCopy: canCopy(delegate) ? () => handleCopy(delegate) : null,
       handlePaste: canPaste(delegate) ? () => handlePaste(delegate) : null,
-      handleSelectAll: canSelectAll(delegate) ? () => handleSelectAll(delegate) : null,
+      handleSelectAll:
+          canSelectAll(delegate) ? () => handleSelectAll(delegate) : null,
       selectionMidpoint: selectionMidpoint,
       lastSecondaryTapDownPosition: lastSecondaryTapDownPosition,
       textLineHeight: textLineHeight,
@@ -38,13 +39,19 @@ class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
 
   /// Builds the text selection handles, but desktop has none.
   @override
-  Widget buildHandle(BuildContext context, TextSelectionHandleType type, double textLineHeight, [VoidCallback? onTap]) {
+  Widget buildHandle(
+    BuildContext context,
+    TextSelectionHandleType type,
+    double textLineHeight, [
+    VoidCallback? onTap,
+  ]) {
     return const SizedBox.shrink();
   }
 
   /// Gets the position for the text selection handles, but desktop has none.
   @override
-  Offset getHandleAnchor(TextSelectionHandleType type, double textLineHeight) => Offset.zero;
+  Offset getHandleAnchor(TextSelectionHandleType type, double textLineHeight) =>
+      Offset.zero;
 
   @override
   bool canSelectAll(TextSelectionDelegate delegate) {
@@ -52,7 +59,8 @@ class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
     final TextEditingValue value = delegate.textEditingValue;
     return delegate.selectAllEnabled &&
         value.text.isNotEmpty &&
-        !(value.selection.start == 0 && value.selection.end == value.text.length);
+        !(value.selection.start == 0 &&
+            value.selection.end == value.text.length);
   }
 
   @override
@@ -63,7 +71,8 @@ class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
 }
 
 /// Text selection controls.
-final TextSelectionControls arnaDesktopTextSelectionControls = _ArnaDesktopTextSelectionControls();
+final TextSelectionControls arnaDesktopTextSelectionControls =
+    _ArnaDesktopTextSelectionControls();
 
 // Generates the child that's passed into ArnaDesktopTextSelectionToolbar.
 class _ArnaDesktopTextSelectionControlsToolbar extends StatefulWidget {
@@ -93,11 +102,13 @@ class _ArnaDesktopTextSelectionControlsToolbar extends StatefulWidget {
   final double textLineHeight;
 
   @override
-  _ArnaDesktopTextSelectionControlsToolbarState createState() => _ArnaDesktopTextSelectionControlsToolbarState();
+  _ArnaDesktopTextSelectionControlsToolbarState createState() =>
+      _ArnaDesktopTextSelectionControlsToolbarState();
 }
 
 /// The [State] for an [_ArnaDesktopTextSelectionControlsToolbar].
-class _ArnaDesktopTextSelectionControlsToolbarState extends State<_ArnaDesktopTextSelectionControlsToolbar> {
+class _ArnaDesktopTextSelectionControlsToolbarState
+    extends State<_ArnaDesktopTextSelectionControlsToolbar> {
   // Inform the widget that the value of clipboardStatus has changed.
   void _onChangedClipboardStatus() => setState(() {});
 
@@ -125,7 +136,8 @@ class _ArnaDesktopTextSelectionControlsToolbarState extends State<_ArnaDesktopTe
   @override
   Widget build(BuildContext context) {
     // Don't render the menu until the state of the clipboard is known.
-    if (widget.handlePaste != null && widget.clipboardStatus?.value == ClipboardStatus.unknown) {
+    if (widget.handlePaste != null &&
+        widget.clipboardStatus?.value == ClipboardStatus.unknown) {
       return const SizedBox(width: 0.0, height: 0.0);
     }
 
@@ -140,7 +152,8 @@ class _ArnaDesktopTextSelectionControlsToolbarState extends State<_ArnaDesktopTe
       widget.selectionMidpoint.dy - widget.globalEditableRegion.top,
     );
 
-    final MaterialLocalizations localizations = MaterialLocalizations.of(context);
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
     final List<Widget> items = <Widget>[];
 
     void addToolbarButton(IconData icon, String text, VoidCallback onPressed) {
@@ -167,7 +180,8 @@ class _ArnaDesktopTextSelectionControlsToolbarState extends State<_ArnaDesktopTe
         widget.handleCopy!,
       );
     }
-    if (widget.handlePaste != null && widget.clipboardStatus?.value == ClipboardStatus.pasteable) {
+    if (widget.handlePaste != null &&
+        widget.clipboardStatus?.value == ClipboardStatus.pasteable) {
       addToolbarButton(
         Icons.paste_outlined,
         localizations.pasteButtonLabel,

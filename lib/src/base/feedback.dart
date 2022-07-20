@@ -70,7 +70,9 @@ class ArnaFeedback {
   ///
   ///  * [wrapForLongPress] to trigger platform-specific feedback before executing a [GestureLongPressCallback].
   static Future<void> forLongPress(BuildContext context) {
-    context.findRenderObject()!.sendSemanticsEvent(const LongPressSemanticsEvent());
+    context
+        .findRenderObject()!
+        .sendSemanticsEvent(const LongPressSemanticsEvent());
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
@@ -92,7 +94,10 @@ class ArnaFeedback {
   /// See also:
   ///
   ///  * [forLongPress] to just trigger the platform-specific feedback without wrapping a [GestureLongPressCallback].
-  static GestureLongPressCallback? wrapForLongPress(GestureLongPressCallback? callback, BuildContext context) {
+  static GestureLongPressCallback? wrapForLongPress(
+    GestureLongPressCallback? callback,
+    BuildContext context,
+  ) {
     if (callback == null) {
       return null;
     }

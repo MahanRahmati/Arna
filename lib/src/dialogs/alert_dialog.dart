@@ -100,7 +100,8 @@ class ArnaAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String label = semanticLabel ?? MaterialLocalizations.of(context).alertDialogLabel;
+    final String label =
+        semanticLabel ?? MaterialLocalizations.of(context).alertDialogLabel;
     Widget? titleWidget;
     Widget? contentWidget;
     Widget? actionsWidget;

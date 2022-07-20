@@ -79,7 +79,8 @@ class ArnaMasterDetailScaffold extends StatefulWidget {
   final bool resizeToAvoidBottomInset;
 
   @override
-  State<ArnaMasterDetailScaffold> createState() => _ArnaMasterDetailScaffoldState();
+  State<ArnaMasterDetailScaffold> createState() =>
+      _ArnaMasterDetailScaffoldState();
 }
 
 /// The [State] for an [ArnaMasterDetailScaffold].
@@ -253,10 +254,13 @@ class _LateralPageState extends State<_LateralPage> {
           child: ArnaDivider(direction: Axis.vertical),
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.only(start: Styles.masterSideWidth + 1),
+          padding: const EdgeInsetsDirectional.only(
+            start: Styles.masterSideWidth + 1,
+          ),
           child: widget.items.length > _currentIndex
               ? ArnaScaffold(
-                  headerBarLeading: widget.items[_currentIndex].headerBarLeading,
+                  headerBarLeading:
+                      widget.items[_currentIndex].headerBarLeading,
                   title: widget.items[_currentIndex].title,
                   actions: widget.items[_currentIndex].actions,
                   headerBarBottom: widget.items[_currentIndex].headerBarBottom,
@@ -438,7 +442,10 @@ class _NestedPageState extends State<_NestedPage> {
       onWillPop: () async => !await _navigatorKey.currentState!.maybePop(),
       child: Navigator(
         key: _navigatorKey,
-        onGenerateInitialRoutes: (NavigatorState navigator, String initialRoute) {
+        onGenerateInitialRoutes: (
+          NavigatorState navigator,
+          String initialRoute,
+        ) {
           return <Route<dynamic>>[
             ArnaPageRoute<dynamic>(
               builder: (BuildContext context) {

@@ -104,7 +104,8 @@ class ArnaApp extends StatefulWidget {
     this.onGenerateRoute,
     this.onGenerateInitialRoutes,
     this.onUnknownRoute,
-    List<NavigatorObserver> this.navigatorObservers = const <NavigatorObserver>[],
+    List<NavigatorObserver> this.navigatorObservers =
+        const <NavigatorObserver>[],
     this.builder,
     this.title = '',
     this.onGenerateTitle,
@@ -450,7 +451,11 @@ class ArnaScrollBehavior extends ScrollBehavior {
   const ArnaScrollBehavior();
 
   @override
-  Widget buildScrollbar(BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildScrollbar(
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
     switch (axisDirectionToAxis(details.direction)) {
       case Axis.horizontal:
         return child;
@@ -469,7 +474,11 @@ class ArnaScrollBehavior extends ScrollBehavior {
   }
 
   @override
-  Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
+  Widget buildOverscrollIndicator(
+    BuildContext context,
+    Widget child,
+    ScrollableDetails details,
+  ) {
     return StretchingOverscrollIndicator(
       axisDirection: details.direction,
       child: child,
@@ -494,13 +503,17 @@ class _ArnaAppState extends State<ArnaApp> {
   // parameter can be used to override _MaterialLocalizationsDelegate.
   Iterable<LocalizationsDelegate<dynamic>> get _localizationsDelegates {
     return <LocalizationsDelegate<dynamic>>[
-      if (widget.localizationsDelegates != null) ...widget.localizationsDelegates!,
+      if (widget.localizationsDelegates != null)
+        ...widget.localizationsDelegates!,
       DefaultMaterialLocalizations.delegate,
       DefaultCupertinoLocalizations.delegate,
     ];
   }
 
-  Widget _inspectorSelectButtonBuilder(BuildContext context, VoidCallback onPressed) {
+  Widget _inspectorSelectButtonBuilder(
+    BuildContext context,
+    VoidCallback onPressed,
+  ) {
     return ArnaButton(icon: Icons.search, onPressed: onPressed);
   }
 
@@ -510,8 +523,12 @@ class _ArnaAppState extends State<ArnaApp> {
     if (widget.theme != null) {
       if (widget.theme!.brightness == null) {
         theme = MediaQuery.platformBrightnessOf(context) == Brightness.dark
-            ? ArnaThemeData.dark().copyWith(accentColor: widget.theme!.accentColor)
-            : ArnaThemeData.light().copyWith(accentColor: widget.theme!.accentColor);
+            ? ArnaThemeData.dark().copyWith(
+                accentColor: widget.theme!.accentColor,
+              )
+            : ArnaThemeData.light().copyWith(
+                accentColor: widget.theme!.accentColor,
+              );
       }
     }
 
@@ -538,7 +555,10 @@ class _ArnaAppState extends State<ArnaApp> {
 
   WidgetsApp _buildWidgetApp(BuildContext context) {
     final ArnaThemeData effectiveThemeData = ArnaTheme.of(context);
-    final Color color = ArnaDynamicColor.resolve(widget.color ?? effectiveThemeData.accentColor, context);
+    final Color color = ArnaDynamicColor.resolve(
+      widget.color ?? effectiveThemeData.accentColor,
+      context,
+    );
 
     if (_usesRouter) {
       return WidgetsApp.router(
@@ -614,10 +634,13 @@ class _ArnaAppState extends State<ArnaApp> {
         child: Focus(
           canRequestFocus: false,
           onKey: (FocusNode node, RawKeyEvent event) {
-            if (event is! RawKeyDownEvent || event.logicalKey != LogicalKeyboardKey.escape) {
+            if (event is! RawKeyDownEvent ||
+                event.logicalKey != LogicalKeyboardKey.escape) {
               return KeyEventResult.ignored;
             }
-            return ArnaTooltip.dismissAllToolTips() ? KeyEventResult.handled : KeyEventResult.ignored;
+            return ArnaTooltip.dismissAllToolTips()
+                ? KeyEventResult.handled
+                : KeyEventResult.ignored;
           },
           child: _buildWidgetApp(context),
         ),

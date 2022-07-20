@@ -92,12 +92,19 @@ class ArnaAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
-    final TextStyle textStyle = ArnaTheme.of(context).textTheme.subtitle!.copyWith(color: foregroundColor);
+    final TextStyle textStyle = ArnaTheme.of(context)
+        .textTheme
+        .subtitle!
+        .copyWith(color: foregroundColor);
     Color? effectiveBackgroundColor = backgroundColor;
     if (effectiveBackgroundColor == null) {
-      effectiveBackgroundColor = ArnaDynamicColor.onBackgroundColor(textStyle.color!);
+      effectiveBackgroundColor = ArnaDynamicColor.onBackgroundColor(
+        textStyle.color!,
+      );
     } else if (foregroundColor == null) {
-      effectiveBackgroundColor = ArnaDynamicColor.onBackgroundColor(backgroundColor!);
+      effectiveBackgroundColor = ArnaDynamicColor.onBackgroundColor(
+        backgroundColor!,
+      );
     }
 
     return AnimatedContainer(

@@ -19,7 +19,7 @@ class _ButtonsState extends State<Buttons> {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.adjust_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.buttons,
       child: Center(

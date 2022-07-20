@@ -226,13 +226,15 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)),
+      decoration: BoxDecoration(
+        color: ArnaColors.backgroundColor.resolveFrom(context),
+      ),
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: <Widget>[
           Container(
             height: Styles.tabBarHeight,
-            color: ArnaDynamicColor.resolve(ArnaColors.sideColor, context),
+            color: ArnaColors.sideColor.resolveFrom(context),
             child: Semantics(
               explicitChildNodes: true,
               child: Row(

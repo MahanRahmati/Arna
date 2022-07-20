@@ -20,7 +20,7 @@ class ArnaLinkedButtons extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+          color: ArnaColors.borderColor.resolveFrom(context),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -64,7 +64,7 @@ class _ArnaLinkedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     final Color accent = button.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return ArnaBaseWidget(
@@ -81,7 +81,7 @@ class _ArnaLinkedItem extends StatelessWidget {
             ),
             border: Border.all(color: ArnaDynamicColor.outerColor(accent).withAlpha(focused ? 255 : 0)),
             color: !enabled
-                ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                ? ArnaColors.backgroundColor.resolveFrom(context)
                 : button.buttonType == ButtonType.normal
                     ? pressed || hover
                         ? ArnaDynamicColor.applyOverlay(buttonColor)

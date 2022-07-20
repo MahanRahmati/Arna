@@ -42,7 +42,7 @@ class ArnaHeaderBar extends StatelessWidget {
       container: true,
       child: Container(
         alignment: Alignment.topCenter,
-        color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+        color: ArnaColors.headerColor.resolveFrom(context),
         child: SafeArea(
           bottom: false,
           child: Column(

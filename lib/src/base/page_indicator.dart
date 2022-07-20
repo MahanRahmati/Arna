@@ -39,7 +39,7 @@ class ArnaPageIndicator extends StatelessWidget {
               width: isActive ? Styles.indicatorHeight * 3 : Styles.indicatorHeight,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Styles.indicatorHeight / 2),
-                color: isActive ? accent : ArnaDynamicColor.resolve(ArnaColors.disabledColor, context),
+                color: isActive ? accent : ArnaColors.disabledColor.resolveFrom(context),
               ),
             ),
           );

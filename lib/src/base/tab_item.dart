@@ -75,10 +75,9 @@ class ArnaTabItem extends StatelessWidget {
                       ? ArnaColors.backgroundColor
                       : pressed || hover
                           ? ArnaDynamicColor.applyOverlay(
-                              ArnaDynamicColor.resolve(
-                                selected ? ArnaColors.buttonColor : ArnaColors.sideColor,
-                                context,
-                              ),
+                              selected
+                                  ? ArnaColors.buttonColor.resolveFrom(context)
+                                  : ArnaColors.sideColor.resolveFrom(context),
                             )
                           : selected
                               ? ArnaColors.buttonColor
@@ -99,10 +98,9 @@ class ArnaTabItem extends StatelessWidget {
                       label,
                       softWrap: false,
                       style: ArnaTheme.of(context).textTheme.button!.copyWith(
-                            color: ArnaDynamicColor.resolve(
-                              !enabled ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
-                              context,
-                            ),
+                            color: !enabled
+                                ? ArnaColors.disabledColor.resolveFrom(context)
+                                : ArnaColors.primaryTextColor.resolveFrom(context),
                           ),
                     ),
                   ),

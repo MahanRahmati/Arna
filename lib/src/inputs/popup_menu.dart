@@ -255,8 +255,8 @@ class ArnaPopupMenuItemState<T, W extends ArnaPopupMenuItem<T>> extends State<W>
 
   @override
   Widget build(BuildContext context) {
-    final Color cardColor = ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
-    final Color disabledColor = ArnaDynamicColor.resolve(ArnaColors.disabledColor, context);
+    final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
+    final Color disabledColor = ArnaColors.disabledColor.resolveFrom(context);
 
     TextStyle style = ArnaTheme.of(context).textTheme.button!;
 

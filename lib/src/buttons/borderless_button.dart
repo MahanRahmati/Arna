@@ -96,7 +96,7 @@ class ArnaBorderlessButton extends StatelessWidget {
                 color: focused ? ArnaDynamicColor.outerColor(accent) : ArnaColors.transparent,
               ),
               color: ArnaDynamicColor.applyOverlay(
-                ArnaDynamicColor.resolve(ArnaColors.buttonColor, context),
+                ArnaColors.buttonColor.resolveFrom(context),
               ).withAlpha(
                 !enabled
                     ? 0

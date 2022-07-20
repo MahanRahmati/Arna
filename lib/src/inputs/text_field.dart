@@ -1087,10 +1087,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                           maxLines: widget.maxLines,
                           overflow: TextOverflow.fade,
                           style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                                color: ArnaDynamicColor.resolve(
-                                  ArnaColors.secondaryTextColor,
-                                  context,
-                                ),
+                                color: ArnaColors.secondaryTextColor.resolveFrom(context),
                               ),
                           textAlign: widget.textAlign,
                         ),
@@ -1123,7 +1120,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                   child: Icon(
                     Icons.clear_outlined,
                     size: Styles.iconSize,
-                    color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                    color: ArnaColors.iconColor.resolveFrom(context),
                   ),
                 ),
               ),
@@ -1224,7 +1221,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     }
 
     final Color accent = widget.accentColor ?? ArnaTheme.of(context).accentColor;
-    final Color textFieldColor = ArnaDynamicColor.resolve(ArnaColors.textFieldColor, context);
+    final Color textFieldColor = ArnaColors.textFieldColor.resolveFrom(context);
 
     final Widget paddedEditable = Padding(
       padding: Styles.normal,
@@ -1279,10 +1276,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             autocorrectionTextRectColor: accent.withOpacity(0.21),
             selectionHeightStyle: widget.selectionHeightStyle,
             selectionWidthStyle: widget.selectionWidthStyle,
-            backgroundCursorColor: ArnaDynamicColor.resolve(
-              ArnaColors.secondaryTextColor,
-              context,
-            ),
+            backgroundCursorColor: ArnaColors.secondaryTextColor.resolveFrom(context),
             scrollPadding: widget.scrollPadding,
             keyboardAppearance: keyboardAppearance,
             dragStartBehavior: widget.dragStartBehavior,
@@ -1335,16 +1329,10 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                           accent,
                           ArnaTheme.brightnessOf(context),
                         )
-                      : ArnaDynamicColor.resolve(
-                          ArnaColors.borderColor,
-                          context,
-                        ),
+                      : ArnaColors.borderColor.resolveFrom(context),
                 ),
                 color: !_isEnabled
-                    ? ArnaDynamicColor.resolve(
-                        ArnaColors.disabledColor,
-                        context,
-                      )
+                    ? ArnaColors.disabledColor.resolveFrom(context)
                     : _isHovering
                         ? ArnaDynamicColor.applyOverlay(textFieldColor)
                         : textFieldColor,

@@ -17,7 +17,7 @@ class _CheckBoxsState extends State<CheckBoxs> {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.check_box_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.checkBox,
       child: ArnaList(

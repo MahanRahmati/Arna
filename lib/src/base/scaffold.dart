@@ -75,7 +75,9 @@ class ArnaScaffold extends StatelessWidget {
         padding: metrics.padding.copyWith(top: isDialog ? 0 : metrics.padding.top),
       ),
       child: DecoratedBox(
-        decoration: BoxDecoration(color: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)),
+        decoration: BoxDecoration(
+          color: ArnaColors.backgroundColor.resolveFrom(context),
+        ),
         child: Column(
           children: <Widget>[
             ArnaHeaderBar(

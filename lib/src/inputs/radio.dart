@@ -89,8 +89,8 @@ class ArnaRadio<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
-    final Color borderColor = ArnaDynamicColor.resolve(ArnaColors.borderColor, context);
+    final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
+    final Color borderColor = ArnaColors.borderColor.resolveFrom(context);
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     final Brightness brightness = ArnaTheme.brightnessOf(context);
 
@@ -124,7 +124,7 @@ class ArnaRadio<T> extends StatelessWidget {
                                         : borderColor,
                   ),
                   color: !enabled
-                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      ? ArnaColors.backgroundColor.resolveFrom(context)
                       : selected && enabled
                           ? hover || focused
                               ? ArnaDynamicColor.applyOverlay(accent)
@@ -142,7 +142,7 @@ class ArnaRadio<T> extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.radioBorderRadius,
                   color: !enabled
-                      ? ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context)
+                      ? ArnaColors.backgroundColor.resolveFrom(context)
                       : selected && enabled
                           ? ArnaDynamicColor.onBackgroundColor(accent)
                           : ArnaDynamicColor.resolve(

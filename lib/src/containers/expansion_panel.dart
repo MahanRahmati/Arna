@@ -221,10 +221,9 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
                                   child: Icon(
                                     Icons.expand_more_outlined,
                                     size: Styles.iconSize,
-                                    color: ArnaDynamicColor.resolve(
-                                      _isEnabled ? ArnaColors.iconColor : ArnaColors.disabledColor,
-                                      context,
-                                    ),
+                                    color: _isEnabled
+                                        ? ArnaColors.iconColor.resolveFrom(context)
+                                        : ArnaColors.disabledColor.resolveFrom(context),
                                   ),
                                 ),
                               ),
@@ -252,7 +251,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
             borderRadius: const BorderRadius.vertical(
               bottom: Radius.circular(Styles.borderRadiusSize + 1),
             ),
-            color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+            color: ArnaColors.borderColor.resolveFrom(context),
           ),
           child: Container(
             clipBehavior: Clip.antiAlias,
@@ -260,7 +259,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel> with SingleTick
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(Styles.borderRadiusSize),
               ),
-              color: ArnaDynamicColor.resolve(ArnaColors.expansionPanelColor, context),
+              color: ArnaColors.expansionPanelColor.resolveFrom(context),
             ),
             margin: const EdgeInsetsDirectional.only(start: 1, end: 1, bottom: 1),
             child: SizeTransition(

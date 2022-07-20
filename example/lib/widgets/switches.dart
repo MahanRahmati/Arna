@@ -18,7 +18,7 @@ class _SwitchesState extends State<Switches> {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.toggle_on_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.switchText,
       child: ArnaList(

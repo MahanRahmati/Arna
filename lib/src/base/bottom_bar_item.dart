@@ -96,10 +96,9 @@ class ArnaBottomBarItem extends StatelessWidget {
                           ? ArnaColors.backgroundColor
                           : pressed || hover
                               ? ArnaDynamicColor.applyOverlay(
-                                  ArnaDynamicColor.resolve(
-                                    selected ? ArnaColors.buttonColor : ArnaColors.headerColor,
-                                    context,
-                                  ),
+                                  selected
+                                      ? ArnaColors.buttonColor.resolveFrom(context)
+                                      : ArnaColors.headerColor.resolveFrom(context),
                                 )
                               : selected
                                   ? ArnaColors.buttonColor
@@ -133,10 +132,9 @@ class ArnaBottomBarItem extends StatelessWidget {
                         child: Text(
                           label,
                           style: ArnaTheme.of(context).textTheme.button!.copyWith(
-                                color: ArnaDynamicColor.resolve(
-                                  !enabled ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
-                                  context,
-                                ),
+                                color: !enabled
+                                    ? ArnaColors.disabledColor.resolveFrom(context)
+                                    : ArnaColors.primaryTextColor.resolveFrom(context),
                               ),
                           softWrap: false,
                           maxLines: 1,

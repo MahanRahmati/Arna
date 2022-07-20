@@ -16,7 +16,7 @@ class _RadiosState extends State<Radios> {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.radio_button_checked_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.radio,
       child: ArnaList(

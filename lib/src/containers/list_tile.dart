@@ -97,7 +97,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
 
   @override
   Widget build(BuildContext context) {
-    final Color cardColor = ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
+    final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
     return MergeSemantics(
       child: Semantics(
         label: widget.semanticLabel,
@@ -116,10 +116,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
               curve: Styles.basicCurve,
               color: !_isEnabled
                   ? widget.actionable
-                      ? ArnaDynamicColor.resolve(
-                          ArnaColors.backgroundColor,
-                          context,
-                        )
+                      ? ArnaColors.backgroundColor.resolveFrom(context)
                       : ArnaColors.transparent
                   : _hover
                       ? ArnaDynamicColor.applyOverlay(cardColor)
@@ -130,22 +127,18 @@ class _ArnaListTileState extends State<ArnaListTile> {
                 title: Text(
                   widget.title,
                   style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                        color: ArnaDynamicColor.resolve(
-                          !_isEnabled && widget.actionable ? ArnaColors.disabledColor : ArnaColors.primaryTextColor,
-                          context,
-                        ),
+                        color: !_isEnabled && widget.actionable
+                            ? ArnaColors.disabledColor.resolveFrom(context)
+                            : ArnaColors.primaryTextColor.resolveFrom(context),
                       ),
                 ),
                 subtitle: (widget.subtitle != null)
                     ? Text(
                         widget.subtitle!,
                         style: ArnaTheme.of(context).textTheme.subtitle!.copyWith(
-                              color: ArnaDynamicColor.resolve(
-                                !_isEnabled && widget.actionable
-                                    ? ArnaColors.disabledColor
-                                    : ArnaColors.secondaryTextColor,
-                                context,
-                              ),
+                              color: !_isEnabled && widget.actionable
+                                  ? ArnaColors.disabledColor.resolveFrom(context)
+                                  : ArnaColors.secondaryTextColor.resolveFrom(context),
                             ),
                       )
                     : null,

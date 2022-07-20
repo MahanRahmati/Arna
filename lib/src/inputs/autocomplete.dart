@@ -107,7 +107,8 @@ class _AutocompleteOptions<T extends Object> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color cardColor = ArnaDynamicColor.resolve(ArnaColors.cardColor, context);
+    final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
+
     return Align(
       alignment: Alignment.topLeft,
       child: ArnaCard(

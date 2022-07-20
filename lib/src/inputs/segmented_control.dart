@@ -100,7 +100,7 @@ class _ArnaSegmentedControlState<T extends Object> extends State<ArnaSegmentedCo
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
-          color: ArnaDynamicColor.resolve(ArnaColors.borderColor, context),
+          color: ArnaColors.borderColor.resolveFrom(context),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -166,7 +166,7 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonColor = ArnaDynamicColor.resolve(ArnaColors.buttonColor, context);
+    final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     return ArnaBaseWidget(
       builder: (BuildContext context, bool enabled, bool hover, bool focused, bool pressed, bool selected) {
         selected = itemSelected;

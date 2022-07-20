@@ -10,7 +10,7 @@ class ListTiles extends StatelessWidget {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.view_list_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.listTile,
       child: const ArnaList(

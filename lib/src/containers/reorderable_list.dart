@@ -279,10 +279,7 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
                         index: index,
                         child: Icon(
                           Icons.drag_indicator_outlined,
-                          color: ArnaDynamicColor.resolve(
-                            ArnaColors.iconColor,
-                            context,
-                          ),
+                          color: ArnaColors.iconColor.resolveFrom(context),
                         ),
                       ),
                     ),
@@ -305,10 +302,7 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
                         index: index,
                         child: Icon(
                           Icons.drag_indicator_outlined,
-                          color: ArnaDynamicColor.resolve(
-                            ArnaColors.iconColor,
-                            context,
-                          ),
+                          color: ArnaColors.iconColor.resolveFrom(context),
                         ),
                       ),
                     ),

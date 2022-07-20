@@ -20,7 +20,7 @@ class ArnaBottomBar extends StatelessWidget {
       container: true,
       child: Container(
         alignment: Alignment.bottomCenter,
-        color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+        color: ArnaColors.headerColor.resolveFrom(context),
         child: SafeArea(
           top: false,
           child: Column(

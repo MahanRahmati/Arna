@@ -104,7 +104,7 @@ class ArnaAboutDialog extends StatelessWidget {
                   child: Icon(
                     Icons.launch_outlined,
                     size: Styles.iconSize,
-                    color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                    color: ArnaColors.iconColor.resolveFrom(context),
                   ),
                 ),
                 onTap: () async => launchUrl(
@@ -119,7 +119,7 @@ class ArnaAboutDialog extends StatelessWidget {
                 child: Icon(
                   Icons.arrow_forward_ios_outlined,
                   size: Styles.iconSize,
-                  color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+                  color: ArnaColors.iconColor.resolveFrom(context),
                 ),
               ),
               onTap: () => showArnaLicensePage(context: context),

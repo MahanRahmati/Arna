@@ -16,7 +16,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
     return ArnaExpansionPanel(
       leading: Icon(
         Icons.calendar_view_week_outlined,
-        color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+        color: ArnaColors.iconColor.resolveFrom(context),
       ),
       title: Strings.segmentedControl,
       child: Row(

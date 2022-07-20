@@ -5,7 +5,7 @@
 
 ## Pre-launch Checklist
 
-- [ ] I have run `flutter format -l 120` on all changed files <!-- THIS IS REQUIRED -->
+- [ ] I have run `flutter format` on all changed files <!-- THIS IS REQUIRED -->
 - [ ] I have updated `CHANGELOG.md` with my changes <!-- THIS IS REQUIRED -->
 - [ ] I have added/updated relevant documentation <!-- If relevant -->
 - [ ] I have run "optimize/organize imports" on all changed files

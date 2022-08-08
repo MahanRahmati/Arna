@@ -83,12 +83,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   }
 
   void onTap(int index) {
-    final bool compact = ArnaHelpers.isCompact(context);
-    if (compact) {
+    final bool expanded = ArnaHelpers.isExpanded(context);
+    if (!expanded) {
       showDrawer = false;
     }
     widget.onItemSelected?.call(index);
-    if (compact) {
+    if (!expanded) {
       _drawerOpenedCallback(false);
     }
     setState(() => _currentIndex = index);

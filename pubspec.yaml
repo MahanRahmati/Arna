@@ -1,6 +1,6 @@
 name: arna
 description: Arna is a set of widgets designed to be simple and easy to use for building applications with Flutter.
-version: 1.0.4+1
+version: 1.0.5
 homepage: https://github.com/MahanRahmati/Arna
 
 environment:
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  url_launcher: ^6.1.4
+  url_launcher: ^6.1.5
 
 dev_dependencies:
   flutter_test:

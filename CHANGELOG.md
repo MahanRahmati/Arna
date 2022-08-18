@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Update ArnaTextField
+
 ## 1.0.5
 
 - Update README

@@ -206,90 +206,92 @@ abstract class Styles {
   /// Basic curve
   static const Curve basicCurve = Curves.ease;
 
-  /// Small Padding
-  static const EdgeInsets small = EdgeInsets.all(smallPadding);
+  /// Small padding
+  static const EdgeInsets small = ArnaEdgeInsets.all(smallPadding);
 
-  /// Normal Padding
-  static const EdgeInsets normal = EdgeInsets.all(padding);
+  /// Normal padding
+  static const EdgeInsets normal = ArnaEdgeInsets.all(padding);
 
-  /// Large Padding
-  static const EdgeInsets large = EdgeInsets.all(largePadding);
+  /// Large padding
+  static const EdgeInsets large = ArnaEdgeInsets.all(largePadding);
 
-  /// Small horizontal Padding
-  static const EdgeInsets smallHorizontal = EdgeInsets.symmetric(
+  /// Small horizontal padding
+  static const EdgeInsets smallHorizontal = ArnaEdgeInsets.symmetric(
     horizontal: smallPadding,
   );
 
-  /// Normal horizontal Padding
-  static const EdgeInsets horizontal = EdgeInsets.symmetric(
+  /// Normal horizontal padding
+  static const EdgeInsets horizontal = ArnaEdgeInsets.symmetric(
     horizontal: padding,
   );
 
-  /// Large horizontal Padding
-  static const EdgeInsets largeHorizontal = EdgeInsets.symmetric(
+  /// Large horizontal padding
+  static const EdgeInsets largeHorizontal = ArnaEdgeInsets.symmetric(
     horizontal: largePadding,
   );
 
-  /// Small vertical Padding
-  static const EdgeInsets smallVertical = EdgeInsets.symmetric(
+  /// Small vertical padding
+  static const EdgeInsets smallVertical = ArnaEdgeInsets.symmetric(
     vertical: smallPadding,
   );
 
-  /// Normal vertical Padding
-  static const EdgeInsets vertical = EdgeInsets.symmetric(vertical: padding);
+  /// Normal vertical padding
+  static const EdgeInsets vertical = ArnaEdgeInsets.symmetric(
+    vertical: padding,
+  );
 
-  /// Large vertical Padding
-  static const EdgeInsets largeVertical = EdgeInsets.symmetric(
+  /// Large vertical padding
+  static const EdgeInsets largeVertical = ArnaEdgeInsets.symmetric(
     vertical: largePadding,
   );
 
-  /// Left vertical Padding
-  static const EdgeInsets left = EdgeInsets.only(left: padding);
+  /// Left padding
+  static const EdgeInsets left = ArnaEdgeInsets.left(padding);
 
-  /// Top vertical Padding
-  static const EdgeInsets top = EdgeInsets.only(top: padding);
+  /// Top padding
+  static const EdgeInsets top = ArnaEdgeInsets.top(padding);
 
-  /// Right vertical Padding
-  static const EdgeInsets right = EdgeInsets.only(right: padding);
+  /// Right padding
+  static const EdgeInsets right = ArnaEdgeInsets.right(padding);
 
-  /// Bottom vertical Padding
-  static const EdgeInsets bottom = EdgeInsets.only(bottom: padding);
+  /// Bottom padding
+  static const EdgeInsets bottom = ArnaEdgeInsets.bottom(padding);
 
   /// Tile Padding
-  static const EdgeInsets tilePadding = EdgeInsets.symmetric(
+  static const EdgeInsets tilePadding = ArnaEdgeInsets.symmetric(
     horizontal: largePadding,
     vertical: smallPadding,
   );
 
-  /// Tooltip Padding
-  static const EdgeInsets tooltipPadding = EdgeInsets.symmetric(
+  /// Tooltip padding
+  static const EdgeInsets tooltipPadding = ArnaEdgeInsets.symmetric(
     horizontal: largePadding,
     vertical: padding,
   );
 
-  /// Tile text Padding
-  static const EdgeInsets tileTextPadding = EdgeInsets.symmetric(
+  /// Tile text padding
+  static const EdgeInsets tileTextPadding = ArnaEdgeInsets.symmetric(
     horizontal: padding,
     vertical: smallPadding,
   );
 
-  /// Bottom bar item Padding
-  static const EdgeInsets bottomBarItemPadding = EdgeInsets.symmetric(
+  /// Bottom bar item padding
+  static const EdgeInsets bottomBarItemPadding = ArnaEdgeInsets.symmetric(
     horizontal: smallPadding,
     vertical: padding,
   );
 
-  /// Popup menu divider Padding
-  static const EdgeInsets popupMenuDividerPadding = EdgeInsets.symmetric(
+  /// Popup menu divider padding
+  static const EdgeInsets popupMenuDividerPadding = ArnaEdgeInsets.symmetric(
     horizontal: padding,
     vertical: smallPadding,
   );
 
-  /// Super large Padding
-  static const EdgeInsets superLarge = EdgeInsets.all(largePadding * 2);
+  /// Super large padding
+  static const EdgeInsets superLarge = ArnaEdgeInsets.all(largePadding * 2);
 
-  /// Super large horizontal Padding
-  static const EdgeInsets superLargeHorizontal = EdgeInsets.symmetric(
+  /// Super large horizontal padding
+  static const EdgeInsets superLargeHorizontal = ArnaEdgeInsets.symmetric(
     horizontal: largePadding * 2,
   );
 

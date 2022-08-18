@@ -594,7 +594,7 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   @override
   void dispose() {
     _focusNode?.dispose();
-    _controller.removeListener(_onControllerChanged);
+    _controller.dispose();
     super.dispose();
   }
 

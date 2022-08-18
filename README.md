@@ -138,3 +138,4 @@ Arna is [BSD 3-Clause licensed](./LICENSE).
 - [WangYng](https://github.com/WangYng) for [better_cupertino_slider](https://github.com/WangYng/better_cupertino_slider).
 - [MingSern](https://github.com/MingSern) for [flutter_bounceable](https://github.com/MingSern/flutter_bounceable).
 - [jhyns](https://github.com/jhyns) for [one_ui](https://github.com/jhyns/one_ui)
+- [seel-channel](https://github.com/seel-channel) for [helpers](https://github.com/seel-channel/helpers)

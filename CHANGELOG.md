@@ -2,6 +2,10 @@
 
 - Update ArnaTextField
 - Update ArnaSelectableText
+- Update ArnaHelpers
+- Add ArnaEdgeInsets
+- Add ArnaDeviceOrientation
+- Add ArnaStringExtension
 
 ## 1.0.5
 

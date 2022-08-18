@@ -1,6 +1,7 @@
 ## 1.0.6
 
 - Update ArnaTextField
+- Update ArnaSelectableText
 
 ## 1.0.5
 

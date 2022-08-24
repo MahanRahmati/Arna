@@ -70,7 +70,7 @@ class _ButtonsState extends State<Buttons> {
                   title: Strings.second,
                 ),
                 const ArnaPopupMenuDivider(),
-                 ArnaPopupMenuItem(
+                ArnaPopupMenuItem(
                   title: Strings.third,
                   onTap: () => showArnaSnackbar(
                     context: context,

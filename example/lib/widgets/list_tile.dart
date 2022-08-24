@@ -7,13 +7,10 @@ class ListTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.view_list_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+    return const ArnaExpansionPanel(
+      leading: Icon(Icons.view_list_outlined),
       title: Strings.listTile,
-      child: const ArnaList(
+      child: ArnaList(
         showBackground: true,
         showDividers: true,
         children: <Widget>[

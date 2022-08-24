@@ -14,10 +14,7 @@ class _SegmentedControlState extends State<SegmentedControl> {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.calendar_view_week_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.calendar_view_week_outlined),
       title: Strings.segmentedControl,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

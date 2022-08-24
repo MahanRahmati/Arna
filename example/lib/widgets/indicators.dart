@@ -8,10 +8,7 @@ class Indicators extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.refresh_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.refresh_outlined),
       title: Strings.indicator,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

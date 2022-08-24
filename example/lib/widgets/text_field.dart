@@ -7,13 +7,10 @@ class TextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.text_fields_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+    return const ArnaExpansionPanel(
+      leading: Icon(Icons.text_fields_outlined),
       title: Strings.textField,
-      child: const ArnaTextField(
+      child: ArnaTextField(
         clearButtonMode: ArnaOverlayVisibilityMode.editing,
         maxLength: 100,
         maxLines: null,

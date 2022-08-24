@@ -14,6 +14,7 @@ class ArnaExpansionPanel extends StatefulWidget {
     this.trailing,
     this.child,
     this.isExpanded = false,
+    this.showArrow = true,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
@@ -40,6 +41,9 @@ class ArnaExpansionPanel extends StatefulWidget {
 
   /// Whether this panel is expanded or not.
   final bool isExpanded;
+
+  /// Whether to show the arrow of this panel or not.
+  final bool showArrow;
 
   /// Whether this panel is focusable or not.
   final bool isFocusable;
@@ -163,6 +167,20 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     final Color accent =
         widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
+    final Widget arrow = Padding(
+      padding: Styles.horizontal,
+      child: RotationTransition(
+        turns: _rotateAnimation,
+        child: Icon(
+          Icons.expand_more_outlined,
+          size: Styles.iconSize,
+          color: _isEnabled
+              ? ArnaColors.iconColor.resolveFrom(context)
+              : ArnaColors.disabledColor.resolveFrom(context),
+        ),
+      ),
+    );
+
     return AnimatedBuilder(
       animation: _controller.view,
       builder: (BuildContext context, Widget? child) {
@@ -231,23 +249,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               if (widget.trailing != null) widget.trailing!,
-                              Padding(
-                                padding: Styles.horizontal,
-                                child: RotationTransition(
-                                  turns: _rotateAnimation,
-                                  child: Icon(
-                                    Icons.expand_more_outlined,
-                                    size: Styles.iconSize,
-                                    color: _isEnabled
-                                        ? ArnaColors.iconColor.resolveFrom(
-                                            context,
-                                          )
-                                        : ArnaColors.disabledColor.resolveFrom(
-                                            context,
-                                          ),
-                                  ),
-                                ),
-                              ),
+                              if (widget.showArrow) arrow,
                             ],
                           ),
                           onTap: _isEnabled && widget.isFocusable

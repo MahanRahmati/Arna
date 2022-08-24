@@ -14,10 +14,7 @@ class _SlidersState extends State<Sliders> {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.linear_scale_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.linear_scale_outlined),
       title: Strings.slider,
       child: ArnaList(
         showBackground: true,

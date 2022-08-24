@@ -14,10 +14,7 @@ class _RadiosState extends State<Radios> {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.radio_button_checked_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.radio_button_checked_outlined),
       title: Strings.radio,
       child: ArnaList(
         showBackground: true,

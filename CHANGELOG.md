@@ -14,6 +14,7 @@
 - Update ArnaSliderListTile
 - Update ArnaSwitchListTile
 - [BREAKING] Update ArnaPopupMenu
+- Update ArnaExpansionPanel
 
 ## 1.0.5
 

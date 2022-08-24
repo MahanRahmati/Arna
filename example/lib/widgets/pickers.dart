@@ -9,10 +9,7 @@ class Pickers extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.calendar_today_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.calendar_today_outlined),
       title: Strings.pickers,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -15,10 +15,7 @@ class _CheckBoxsState extends State<CheckBoxs> {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.check_box_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.check_box_outlined),
       title: Strings.checkBox,
       child: ArnaList(
         showBackground: true,

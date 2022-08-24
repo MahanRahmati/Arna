@@ -17,10 +17,7 @@ class _ButtonsState extends State<Buttons> {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.adjust_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.adjust_outlined),
       title: Strings.buttons,
       child: Center(
         child: Wrap(
@@ -59,6 +56,7 @@ class _ButtonsState extends State<Buttons> {
             ArnaPopupMenuButton(
               itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry>[
                 ArnaPopupMenuItem(
+                  leading: const Icon(Icons.add_outlined),
                   title: Strings.first,
                   onTap: () => showArnaSnackbar(
                     context: context,
@@ -66,7 +64,6 @@ class _ButtonsState extends State<Buttons> {
                   ),
                 ),
                 const ArnaPopupMenuItem(
-                  enabled: false,
                   title: Strings.second,
                 ),
                 const ArnaPopupMenuDivider(),

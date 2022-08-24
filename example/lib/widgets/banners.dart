@@ -11,10 +11,7 @@ class Banners extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bool showBanner = ref.watch(bannerProvider);
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.ad_units_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.ad_units_outlined),
       title: Strings.banners,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

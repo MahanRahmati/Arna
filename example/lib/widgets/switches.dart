@@ -16,10 +16,7 @@ class _SwitchesState extends State<Switches> {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.toggle_on_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.toggle_on_outlined),
       title: Strings.switchText,
       child: ArnaList(
         showBackground: true,

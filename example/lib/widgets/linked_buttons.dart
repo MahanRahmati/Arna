@@ -8,10 +8,7 @@ class LinkedButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaExpansionPanel(
-      leading: Icon(
-        Icons.more_horiz_outlined,
-        color: ArnaColors.iconColor.resolveFrom(context),
-      ),
+      leading: const Icon(Icons.more_horiz_outlined),
       title: Strings.linkedButtons,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -255,13 +255,11 @@ abstract class Styles {
   /// Bottom padding
   static const EdgeInsetsDirectional bottom = ArnaEdgeInsets.bottom(padding);
 
-  /// List tile without leading padding
-  static const EdgeInsetsDirectional listTileWithoutLeadingPadding =
-      ArnaEdgeInsets.steb(largePadding * 2, padding, largePadding, padding);
-
   /// List tile padding
-  static const EdgeInsetsDirectional listTilePadding =
-      ArnaEdgeInsets.horizontal(largePadding);
+  static const EdgeInsetsDirectional listTilePadding = ArnaEdgeInsets.symmetric(
+    largePadding,
+    smallPadding,
+  );
 
   /// Tooltip padding
   static const EdgeInsetsDirectional tooltipPadding = ArnaEdgeInsets.symmetric(
@@ -282,6 +280,10 @@ abstract class Styles {
   /// Popup menu divider padding
   static const EdgeInsetsDirectional popupMenuDividerPadding =
       ArnaEdgeInsets.symmetric(padding, smallPadding);
+
+  /// Popup menu item padding
+  static const EdgeInsetsDirectional popupItemPadding =
+      ArnaEdgeInsets.horizontal(Styles.largePadding);
 
   /// Super large padding
   static const EdgeInsetsDirectional superLarge =

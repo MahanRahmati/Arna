@@ -2,8 +2,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart';
-
-// TODO: Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35
+import 'package:flutter/services.dart' show LogicalKeyboardKey;
 
 /// Used to configure how the [ArnaPopupMenuButton] positions its popup menu.
 enum ArnaPopupMenuPosition {
@@ -89,9 +88,11 @@ class ArnaPopupMenuItem extends ArnaPopupMenuEntry {
     this.subtitle,
     this.trailing,
     this.onTap,
-    this.padding = Styles.menuMargin,
+    this.padding = Styles.popupItemPadding,
     this.leadingToTitle = Styles.largePadding,
     this.enabled = true,
+    this.isFocusable = true,
+    this.autofocus = false,
     this.accentColor,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
@@ -127,6 +128,12 @@ class ArnaPopupMenuItem extends ArnaPopupMenuEntry {
   /// touches.
   final bool enabled;
 
+  /// Whether this item is focusable or not.
+  final bool isFocusable;
+
+  /// Whether this item should focus itself if nothing else is already focused.
+  final bool autofocus;
+
   /// The color of the button's focused border.
   final Color? accentColor;
 
@@ -143,6 +150,48 @@ class ArnaPopupMenuItem extends ArnaPopupMenuEntry {
 
 // The [State] for [ArnaPopupMenuItem] subclasses.
 class _ArnaPopupMenuItemState extends State<ArnaPopupMenuItem> {
+  FocusNode? focusNode;
+  bool _focused = false;
+  late Map<Type, Action<Intent>> _actions;
+  late Map<ShortcutActivator, Intent> _shortcuts;
+
+  bool get _isEnabled => widget.enabled && widget.onTap != null;
+
+  @override
+  void initState() {
+    super.initState();
+    _actions = <Type, Action<Intent>>{
+      ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => handleTap())
+    };
+    _shortcuts = const <ShortcutActivator, Intent>{
+      SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+      SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+    };
+    focusNode = FocusNode(canRequestFocus: _isEnabled);
+    if (widget.autofocus) {
+      focusNode!.requestFocus();
+    }
+  }
+
+  @override
+  void dispose() {
+    focusNode!.dispose();
+    focusNode = null;
+    super.dispose();
+  }
+
+  void _handleFocusChange(bool hasFocus) {
+    if (mounted) {
+      setState(() => _focused = hasFocus);
+    }
+  }
+
+  void _handleFocus(bool focus) {
+    if (focus != _focused && mounted) {
+      setState(() => _focused = focus);
+    }
+  }
+
   /// The handler for when the user selects the menu item.
   ///
   /// By default, uses [Navigator.pop].
@@ -153,15 +202,50 @@ class _ArnaPopupMenuItemState extends State<ArnaPopupMenuItem> {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaListTile(
-      leading: widget.leading,
-      title: widget.title,
-      subtitle: widget.subtitle,
-      onTap: widget.enabled ? handleTap : null,
-      padding: widget.padding,
-      leadingToTitle: widget.leadingToTitle,
-      cursor: widget.cursor,
-      semanticLabel: widget.semanticLabel,
+    final Color accent =
+        widget.accentColor ?? ArnaTheme.of(context).accentColor;
+    return FocusableActionDetector(
+      enabled: _isEnabled && widget.isFocusable,
+      focusNode: focusNode,
+      autofocus: _isEnabled && widget.autofocus,
+      onShowFocusHighlight: _handleFocus,
+      onFocusChange: _handleFocusChange,
+      actions: _actions,
+      shortcuts: _shortcuts,
+      child: AnimatedContainer(
+        duration: Styles.basicDuration,
+        curve: Styles.basicCurve,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          borderRadius: Styles.borderRadius,
+          border: Border.all(
+            color: _isEnabled && _focused
+                ? ArnaDynamicColor.resolve(
+                    ArnaDynamicColor.matchingColor(
+                      accent,
+                      ArnaTheme.brightnessOf(context),
+                    ),
+                    context,
+                  )
+                : ArnaColors.transparent,
+          ),
+        ),
+        child: ClipRRect(
+          borderRadius: Styles.listBorderRadius,
+          child: ArnaListTile(
+            leading: widget.leading ??
+                const SizedBox.square(dimension: Styles.iconSize),
+            title: widget.title,
+            subtitle: widget.subtitle,
+            trailing: widget.trailing,
+            onTap: _isEnabled ? handleTap : null,
+            padding: widget.padding,
+            leadingToTitle: widget.leadingToTitle,
+            cursor: widget.cursor,
+            semanticLabel: widget.semanticLabel,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -148,16 +148,34 @@ class _ArnaListTileState extends State<ArnaListTile> {
 
   @override
   Widget build(BuildContext context) {
-    EdgeInsetsGeometry? padding = widget.padding;
-    if (padding == null) {
-      if (widget.leading == null) {
-        padding = Styles.listTileWithoutLeadingPadding;
-      } else {
-        padding = Styles.listTilePadding;
-      }
-    }
-
     final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
+
+    final Widget title = Text(
+      widget.title,
+      maxLines: 1,
+      style: ArnaTheme.of(context).textTheme.body!.copyWith(
+            color: widget.showBackground
+                ? !_isEnabled && widget.enabled
+                    ? ArnaColors.disabledColor.resolveFrom(context)
+                    : ArnaColors.primaryTextColor.resolveFrom(context)
+                : ArnaColors.primaryTextColor.resolveFrom(context),
+          ),
+    );
+
+    final Widget? subtitle = (widget.subtitle != null)
+        ? Text(
+            widget.subtitle!,
+            maxLines: 1,
+            style: ArnaTheme.of(context).textTheme.subtitle!.copyWith(
+                  color: widget.showBackground
+                      ? !_isEnabled && widget.enabled
+                          ? ArnaColors.disabledColor.resolveFrom(context)
+                          : ArnaColors.secondaryTextColor.resolveFrom(context)
+                      : ArnaColors.secondaryTextColor.resolveFrom(context),
+                ),
+          )
+        : null;
+
     return MergeSemantics(
       child: Semantics(
         label: widget.semanticLabel,
@@ -177,55 +195,27 @@ class _ArnaListTileState extends State<ArnaListTile> {
               ),
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
-              color: !_isEnabled
-                  ? widget.showBackground
-                      ? ArnaColors.backgroundColor.resolveFrom(context)
-                      : ArnaColors.transparent
+              color: !_isEnabled && widget.showBackground
+                  ? ArnaColors.transparent
                   : _hover
                       ? ArnaDynamicColor.applyOverlay(cardColor)
                       : cardColor,
-              padding: padding,
+              padding: widget.padding ?? Styles.listTilePadding,
               alignment: Alignment.center,
-              child: _ArnaListTile(
-                leading: widget.leading,
-                title: Text(
-                  widget.title,
-                  maxLines: 1,
-                  style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                        color: widget.showBackground
-                            ? !_isEnabled && widget.enabled
-                                ? ArnaColors.disabledColor.resolveFrom(context)
-                                : ArnaColors.primaryTextColor
-                                    .resolveFrom(context)
-                            : ArnaColors.primaryTextColor.resolveFrom(context),
-                      ),
+              child: IconTheme.merge(
+                data: IconThemeData(
+                  color: !_isEnabled && widget.enabled
+                      ? ArnaColors.disabledColor.resolveFrom(context)
+                      : ArnaColors.iconColor.resolveFrom(context),
                 ),
-                subtitle: (widget.subtitle != null)
-                    ? Text(
-                        widget.subtitle!,
-                        maxLines: 1,
-                        style: ArnaTheme.of(context)
-                            .textTheme
-                            .subtitle!
-                            .copyWith(
-                              color: widget.showBackground
-                                  ? !_isEnabled && widget.enabled
-                                      ? ArnaColors.disabledColor.resolveFrom(
-                                          context,
-                                        )
-                                      : ArnaColors.secondaryTextColor
-                                          .resolveFrom(
-                                          context,
-                                        )
-                                  : ArnaColors.secondaryTextColor.resolveFrom(
-                                      context,
-                                    ),
-                            ),
-                      )
-                    : null,
-                trailing: widget.trailing,
-                textDirection: Directionality.of(context),
-                leadingToTitle: widget.leadingToTitle,
+                child: _ArnaListTile(
+                  leading: widget.leading,
+                  title: title,
+                  subtitle: subtitle,
+                  trailing: widget.trailing,
+                  textDirection: Directionality.of(context),
+                  leadingToTitle: widget.leadingToTitle,
+                ),
               ),
             ),
           ),

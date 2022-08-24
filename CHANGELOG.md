@@ -6,6 +6,14 @@
 - Add ArnaEdgeInsets
 - Add ArnaDeviceOrientation
 - Add ArnaStringExtension
+- Update ArnaListTile
+- Update ArnaBanner
+- Update ArnaExpansionPanel
+- Update ArnaCheckboxListTile
+- Update ArnaRadioListTile
+- Update ArnaSliderListTile
+- Update ArnaSwitchListTile
+- Update ArnaEdgeInsets
 
 ## 1.0.5
 

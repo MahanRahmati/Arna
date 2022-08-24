@@ -125,9 +125,6 @@ abstract class Styles {
   /// Expansion panel minimum height
   static const double expansionPanelMinHeight = base * 8;
 
-  /// List tile with subtitle height
-  static const double listTileTwoLineHeight = base * 8;
-
   /// Tab bar height
   static const double tabBarHeight = base * 8;
 
@@ -136,6 +133,9 @@ abstract class Styles {
 
   /// Bottom navigation bar item height
   static const double bottomNavigationBarItemHeight = base * 9;
+
+  /// List tile with subtitle height
+  static const double listTileTwoLineHeight = base * 9;
 
   /// Year picker row width
   static const double yearPickerRowWidth = base * 10;
@@ -207,93 +207,94 @@ abstract class Styles {
   static const Curve basicCurve = Curves.ease;
 
   /// Small padding
-  static const EdgeInsets small = ArnaEdgeInsets.all(smallPadding);
+  static const EdgeInsetsDirectional small = ArnaEdgeInsets.all(smallPadding);
 
   /// Normal padding
-  static const EdgeInsets normal = ArnaEdgeInsets.all(padding);
+  static const EdgeInsetsDirectional normal = ArnaEdgeInsets.all(padding);
 
   /// Large padding
-  static const EdgeInsets large = ArnaEdgeInsets.all(largePadding);
+  static const EdgeInsetsDirectional large = ArnaEdgeInsets.all(largePadding);
 
   /// Small horizontal padding
-  static const EdgeInsets smallHorizontal = ArnaEdgeInsets.symmetric(
-    horizontal: smallPadding,
-  );
+  static const EdgeInsetsDirectional smallHorizontal =
+      ArnaEdgeInsets.horizontal(smallPadding);
 
   /// Normal horizontal padding
-  static const EdgeInsets horizontal = ArnaEdgeInsets.symmetric(
-    horizontal: padding,
+  static const EdgeInsetsDirectional horizontal = ArnaEdgeInsets.horizontal(
+    padding,
   );
 
   /// Large horizontal padding
-  static const EdgeInsets largeHorizontal = ArnaEdgeInsets.symmetric(
-    horizontal: largePadding,
-  );
+  static const EdgeInsetsDirectional largeHorizontal =
+      ArnaEdgeInsets.horizontal(largePadding);
 
   /// Small vertical padding
-  static const EdgeInsets smallVertical = ArnaEdgeInsets.symmetric(
-    vertical: smallPadding,
+  static const EdgeInsetsDirectional smallVertical = ArnaEdgeInsets.vertical(
+    smallPadding,
   );
 
   /// Normal vertical padding
-  static const EdgeInsets vertical = ArnaEdgeInsets.symmetric(
-    vertical: padding,
+  static const EdgeInsetsDirectional vertical = ArnaEdgeInsets.vertical(
+    padding,
   );
 
   /// Large vertical padding
-  static const EdgeInsets largeVertical = ArnaEdgeInsets.symmetric(
-    vertical: largePadding,
+  static const EdgeInsetsDirectional largeVertical = ArnaEdgeInsets.vertical(
+    largePadding,
   );
 
-  /// Left padding
-  static const EdgeInsets left = ArnaEdgeInsets.left(padding);
+  /// start padding
+  static const EdgeInsetsDirectional start = ArnaEdgeInsets.start(padding);
 
   /// Top padding
-  static const EdgeInsets top = ArnaEdgeInsets.top(padding);
+  static const EdgeInsetsDirectional top = ArnaEdgeInsets.top(padding);
 
-  /// Right padding
-  static const EdgeInsets right = ArnaEdgeInsets.right(padding);
+  /// end padding
+  static const EdgeInsetsDirectional end = ArnaEdgeInsets.end(padding);
 
   /// Bottom padding
-  static const EdgeInsets bottom = ArnaEdgeInsets.bottom(padding);
+  static const EdgeInsetsDirectional bottom = ArnaEdgeInsets.bottom(padding);
 
-  /// Tile Padding
-  static const EdgeInsets tilePadding = ArnaEdgeInsets.symmetric(
-    horizontal: largePadding,
-    vertical: smallPadding,
+  /// List tile without leading padding
+  static const EdgeInsetsDirectional listTileWithoutLeadingPadding =
+      EdgeInsetsDirectional.fromSTEB(
+    largePadding * 2,
+    padding,
+    largePadding,
+    padding,
   );
 
+  /// List tile padding
+  static const EdgeInsetsDirectional listTilePadding =
+      ArnaEdgeInsets.horizontal(largePadding);
+
   /// Tooltip padding
-  static const EdgeInsets tooltipPadding = ArnaEdgeInsets.symmetric(
-    horizontal: largePadding,
-    vertical: padding,
+  static const EdgeInsetsDirectional tooltipPadding = ArnaEdgeInsets.symmetric(
+    largePadding,
+    padding,
   );
 
   /// Tile text padding
-  static const EdgeInsets tileTextPadding = ArnaEdgeInsets.symmetric(
-    horizontal: padding,
-    vertical: smallPadding,
+  static const EdgeInsetsDirectional tileTextPadding = ArnaEdgeInsets.symmetric(
+    padding,
+    smallPadding,
   );
 
   /// Bottom bar item padding
-  static const EdgeInsets bottomBarItemPadding = ArnaEdgeInsets.symmetric(
-    horizontal: smallPadding,
-    vertical: padding,
-  );
+  static const EdgeInsetsDirectional bottomBarItemPadding =
+      ArnaEdgeInsets.symmetric(smallPadding, padding);
 
   /// Popup menu divider padding
-  static const EdgeInsets popupMenuDividerPadding = ArnaEdgeInsets.symmetric(
-    horizontal: padding,
-    vertical: smallPadding,
-  );
+  static const EdgeInsetsDirectional popupMenuDividerPadding =
+      ArnaEdgeInsets.symmetric(padding, smallPadding);
 
   /// Super large padding
-  static const EdgeInsets superLarge = ArnaEdgeInsets.all(largePadding * 2);
+  static const EdgeInsetsDirectional superLarge =
+      ArnaEdgeInsets.all(largePadding * 2);
 
   /// Super large horizontal padding
-  static const EdgeInsets superLargeHorizontal = ArnaEdgeInsets.symmetric(
-    horizontal: largePadding * 2,
-  );
+  static const EdgeInsetsDirectional superLargeHorizontal =
+      ArnaEdgeInsets.horizontal(largePadding * 2);
 
   /// Menu Margin
   static const EdgeInsetsDirectional menuMargin = EdgeInsetsDirectional.only(

@@ -249,7 +249,7 @@ class ArnaTextField extends StatefulWidget {
     this.selectionHeightStyle = ui.BoxHeightStyle.tight,
     this.selectionWidthStyle = ui.BoxWidthStyle.tight,
     this.keyboardAppearance,
-    this.scrollPadding = Styles.normal,
+    this.scrollPadding = const EdgeInsets.all(Styles.padding),
     this.dragStartBehavior = DragStartBehavior.start,
     bool? enableInteractiveSelection,
     this.selectionControls,

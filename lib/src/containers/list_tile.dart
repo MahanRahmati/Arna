@@ -3,15 +3,48 @@ import 'dart:math' as math;
 import 'package:arna/arna.dart';
 import 'package:flutter/rendering.dart' show BoxParentData, BoxHitTestResult;
 
-/// A single fixed-height row that typically contains some text as well as a leading or trailing icon.
+/// A single fixed-height row that typically contains some text as well as a
+/// leading or trailing icon.
+///
 /// List tiles are typically used in [ListView]s, or arranged in [Column]s.
+///
+/// The [title] and [subtitle] are all limited to one line so it is a
+/// responsibility of the caller to take care of text wrapping.
+///
+/// The [trailing] widget is not constrained and is therefore a responsibility
+/// of the caller to ensure reasonable size of the [trailing] widget.
+///
+/// The [padding] and [leadingToTitle] can be overwritten if necessary.
 ///
 /// See also:
 ///
-///  * [ArnaCheckboxListTile], [ArnaRadioListTile], and [ArnaSwitchListTile], widgets that combine [ArnaListTile] with
-///    other controls.
+///  * [ArnaCheckboxListTile], [ArnaRadioListTile], and [ArnaSwitchListTile],
+///    widgets that combine [ArnaListTile] with other controls.
 class ArnaListTile extends StatefulWidget {
   /// Creates a list tile.
+  ///
+  /// The [title] parameter is required. It is used to convey the most important
+  /// information of list tile.
+  ///
+  /// The [subtitle] parameter is used to display additional information. It is
+  /// placed below the [title].
+  ///
+  /// The [leading] parameter is typically an [Icon] or an [Image] and it comes
+  /// at the start of the tile.
+  ///
+  /// The [trailing] parameter is typically an [Icon], or an [ArnaButton].
+  /// It is placed at the very end of the tile.
+  ///
+  /// The [onTap] parameter is used to provide an action that is called when the
+  /// tile is tapped.
+  ///
+  /// The [onLongPress] parameter is used to provide an action that is called
+  /// when the tile is long-pressed.
+  ///
+  /// The [padding] parameter sets the padding of the content inside the tile.
+  ///
+  /// The [leadingToTitle] specifies the horizontal space between [leading] and
+  /// [title] widgets.
   const ArnaListTile({
     super.key,
     this.leading,
@@ -20,22 +53,28 @@ class ArnaListTile extends StatefulWidget {
     this.trailing,
     this.onTap,
     this.onLongPress,
-    this.actionable = false,
+    this.padding,
+    this.leadingToTitle = Styles.largePadding,
+    this.enabled = true,
+    this.showBackground = true,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
     this.enableFeedback = true,
   });
 
-  /// A widget to display before the title.
+  /// A widget displayed at the start of the [ArnaListTile]. This is typically
+  /// [Icon] or an [Image].
   final Widget? leading;
 
-  /// The primary content of the list tile.
+  /// A [title] is used to convey the central information.
   final String title;
 
-  /// Additional content displayed below the title.
+  /// A [subtitle] is used to display additional information. It is located
+  /// below [title].
   final String? subtitle;
 
-  /// A widget to display after the title.
+  /// A widget displayed at the end of the [ArnaListTile]. This is usually an
+  /// [Icon].
   final Widget? trailing;
 
   /// Called when the user taps this list tile.
@@ -44,8 +83,20 @@ class ArnaListTile extends StatefulWidget {
   /// Called when the user long-presses on this list tile.
   final GestureLongPressCallback? onLongPress;
 
-  /// Whether to show disable state or not.
-  final bool actionable;
+  /// Padding of the content inside [ArnaListTile].
+  final EdgeInsetsGeometry? padding;
+
+  /// The horizontal space between [leading] widget and [title].
+  final double leadingToTitle;
+
+  /// Whether this list tile is interactive.
+  ///
+  /// If false, this list tile is styled with the disabled color and the
+  /// [onTap] and [onLongPress] callbacks are inoperative.
+  final bool enabled;
+
+  /// Whether to show background or not.
+  final bool showBackground;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the list tile.
   final MouseCursor cursor;
@@ -84,19 +135,28 @@ class _ArnaListTileState extends State<ArnaListTile> {
   }
 
   void _handleEnter(dynamic event) {
-    if (!_hover && mounted) {
+    if (!_hover && widget.showBackground && mounted) {
       setState(() => _hover = true);
     }
   }
 
   void _handleExit(dynamic event) {
-    if (_hover && mounted) {
+    if (_hover && widget.showBackground && mounted) {
       setState(() => _hover = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    EdgeInsetsGeometry? padding = widget.padding;
+    if (padding == null) {
+      if (widget.leading == null) {
+        padding = Styles.listTileWithoutLeadingPadding;
+      } else {
+        padding = Styles.listTilePadding;
+      }
+    }
+
     final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
     return MergeSemantics(
       child: Semantics(
@@ -112,37 +172,51 @@ class _ArnaListTileState extends State<ArnaListTile> {
             onTap: _handleTap,
             onLongPress: _handleLongPress,
             child: AnimatedContainer(
+              constraints: const BoxConstraints(
+                minHeight: Styles.listTileHeight,
+              ),
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
               color: !_isEnabled
-                  ? widget.actionable
+                  ? widget.showBackground
                       ? ArnaColors.backgroundColor.resolveFrom(context)
                       : ArnaColors.transparent
                   : _hover
                       ? ArnaDynamicColor.applyOverlay(cardColor)
                       : cardColor,
-              padding: Styles.tilePadding,
+              padding: padding,
+              alignment: Alignment.center,
               child: _ArnaListTile(
                 leading: widget.leading,
                 title: Text(
                   widget.title,
+                  maxLines: 1,
                   style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                        color: !_isEnabled && widget.actionable
-                            ? ArnaColors.disabledColor.resolveFrom(context)
+                        color: widget.showBackground
+                            ? !_isEnabled && widget.enabled
+                                ? ArnaColors.disabledColor.resolveFrom(context)
+                                : ArnaColors.primaryTextColor
+                                    .resolveFrom(context)
                             : ArnaColors.primaryTextColor.resolveFrom(context),
                       ),
                 ),
                 subtitle: (widget.subtitle != null)
                     ? Text(
                         widget.subtitle!,
+                        maxLines: 1,
                         style: ArnaTheme.of(context)
                             .textTheme
                             .subtitle!
                             .copyWith(
-                              color: !_isEnabled && widget.actionable
-                                  ? ArnaColors.disabledColor.resolveFrom(
-                                      context,
-                                    )
+                              color: widget.showBackground
+                                  ? !_isEnabled && widget.enabled
+                                      ? ArnaColors.disabledColor.resolveFrom(
+                                          context,
+                                        )
+                                      : ArnaColors.secondaryTextColor
+                                          .resolveFrom(
+                                          context,
+                                        )
                                   : ArnaColors.secondaryTextColor.resolveFrom(
                                       context,
                                     ),
@@ -151,6 +225,7 @@ class _ArnaListTileState extends State<ArnaListTile> {
                     : null,
                 trailing: widget.trailing,
                 textDirection: Directionality.of(context),
+                leadingToTitle: widget.leadingToTitle,
               ),
             ),
           ),
@@ -185,6 +260,7 @@ class _ArnaListTile extends RenderObjectWidget
     required this.subtitle,
     required this.trailing,
     required this.textDirection,
+    required this.leadingToTitle,
   });
 
   /// A widget to display before the title.
@@ -201,6 +277,9 @@ class _ArnaListTile extends RenderObjectWidget
 
   /// A direction in which text flows.
   final TextDirection textDirection;
+
+  /// The horizontal space between [leading] widget and [title].
+  final double leadingToTitle;
 
   @override
   Iterable<_ArnaListTileSlot> get slots => _ArnaListTileSlot.values;
@@ -221,7 +300,10 @@ class _ArnaListTile extends RenderObjectWidget
 
   @override
   _RenderArnaListTile createRenderObject(BuildContext context) {
-    return _RenderArnaListTile(textDirection: textDirection);
+    return _RenderArnaListTile(
+      textDirection: textDirection,
+      leadingToTitle: leadingToTitle,
+    );
   }
 
   @override
@@ -229,7 +311,9 @@ class _ArnaListTile extends RenderObjectWidget
     BuildContext context,
     _RenderArnaListTile renderObject,
   ) {
-    renderObject.textDirection = textDirection;
+    renderObject
+      ..textDirection = textDirection
+      ..leadingToTitle = leadingToTitle;
   }
 }
 
@@ -239,7 +323,9 @@ class _RenderArnaListTile extends RenderBox
   /// Renders an ArnaListTile.
   _RenderArnaListTile({
     required TextDirection textDirection,
-  }) : _textDirection = textDirection;
+    required double leadingToTitle,
+  })  : _textDirection = textDirection,
+        _leadingToTitle = leadingToTitle;
 
   RenderBox? get leading => childForSlot(_ArnaListTileSlot.leading);
   RenderBox? get title => childForSlot(_ArnaListTileSlot.title);
@@ -267,13 +353,23 @@ class _RenderArnaListTile extends RenderBox
     markNeedsLayout();
   }
 
+  double get leadingToTitle => _leadingToTitle;
+  double _leadingToTitle;
+
+  set leadingToTitle(double value) {
+    assert(value != null);
+    if (_leadingToTitle == value) {
+      return;
+    }
+    _leadingToTitle = value;
+    markNeedsLayout();
+  }
+
   final TextBaseline _titleBaselineType = TextBaseline.alphabetic;
 
   final TextBaseline _subtitleBaselineType = TextBaseline.alphabetic;
 
-  final double _horizontalTitleGap = Styles.largePadding;
-
-  final double _minVerticalPadding = Styles.padding;
+  final double _minVerticalPadding = Styles.smallPadding;
 
   final double _minLeadingWidth = Styles.largePadding;
 
@@ -292,7 +388,7 @@ class _RenderArnaListTile extends RenderBox
   double computeMinIntrinsicWidth(double height) {
     final double leadingWidth = leading != null
         ? math.max(leading!.getMinIntrinsicWidth(height), _minLeadingWidth) +
-            _horizontalTitleGap
+            _leadingToTitle
         : 0.0;
     return leadingWidth +
         math.max(_minWidth(title, height), _minWidth(subtitle, height)) +
@@ -303,7 +399,7 @@ class _RenderArnaListTile extends RenderBox
   double computeMaxIntrinsicWidth(double height) {
     final double leadingWidth = leading != null
         ? math.max(leading!.getMaxIntrinsicWidth(height), _minLeadingWidth) +
-            _horizontalTitleGap
+            _leadingToTitle
         : 0.0;
     return leadingWidth +
         math.max(_maxWidth(title, height), _maxWidth(subtitle, height)) +
@@ -396,10 +492,10 @@ class _RenderArnaListTile extends RenderBox
     );
 
     final double titleStart = hasLeading
-        ? math.max(_minLeadingWidth, leadingSize.width) + _horizontalTitleGap
+        ? math.max(_minLeadingWidth, leadingSize.width) + _leadingToTitle
         : 0.0;
     final double adjustedTrailingWidth =
-        hasTrailing ? trailingSize.width + _horizontalTitleGap : 0.0;
+        hasTrailing ? trailingSize.width + _leadingToTitle : 0.0;
     final BoxConstraints textConstraints = looseConstraints.tighten(
       width: tileWidth - titleStart - adjustedTrailingWidth,
     );

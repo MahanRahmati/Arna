@@ -97,7 +97,7 @@ class ArnaTextFormField extends FormField<String> {
     Radius? cursorRadius = const Radius.circular(Styles.cursorRadius),
     Color? accentColor,
     Brightness? keyboardAppearance,
-    EdgeInsets scrollPadding = Styles.normal,
+    EdgeInsets scrollPadding = const EdgeInsets.all(Styles.padding),
     bool? enableInteractiveSelection,
     TextSelectionControls? selectionControls,
     GestureTapCallback? onTap,

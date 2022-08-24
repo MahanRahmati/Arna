@@ -1112,9 +1112,7 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>>
                     children: <Widget>[
                       innerItemsWidget,
                       const Padding(
-                        padding: EdgeInsetsDirectional.only(
-                          start: Styles.padding,
-                        ),
+                        padding: ArnaEdgeInsets.start(Styles.padding),
                         child: Icon(Icons.arrow_drop_down_outlined),
                       ),
                     ],

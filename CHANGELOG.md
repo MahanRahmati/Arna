@@ -13,8 +13,7 @@
 - Update ArnaRadioListTile
 - Update ArnaSliderListTile
 - Update ArnaSwitchListTile
-- Update ArnaEdgeInsets
-- Update ArnaPopupMenu
+- [BREAKING] Update ArnaPopupMenu
 
 ## 1.0.5
 

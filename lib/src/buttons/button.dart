@@ -156,8 +156,8 @@ class ArnaButton extends StatelessWidget {
               children: <Widget>[
                 if (icon != null)
                   Padding(
-                    padding: EdgeInsetsDirectional.only(
-                      end: label != null ? Styles.padding : 0,
+                    padding: ArnaEdgeInsets.end(
+                      label != null ? Styles.padding : 0,
                     ),
                     child: Icon(
                       icon,

@@ -98,16 +98,12 @@ class ArnaTabItem extends StatelessWidget {
                   context,
                 ),
               ),
-              padding: const EdgeInsetsDirectional.only(
-                start: Styles.largePadding,
-              ),
+              padding: const ArnaEdgeInsets.start(Styles.largePadding),
               child: Row(
                 children: <Widget>[
                   if (icon != null)
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                        end: Styles.padding,
-                      ),
+                      padding: const ArnaEdgeInsets.start(Styles.padding),
                       child: icon,
                     ),
                   Expanded(

@@ -290,13 +290,11 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
             ),
           ),
           const Padding(
-            padding: EdgeInsetsDirectional.only(top: Styles.tabBarHeight),
+            padding: ArnaEdgeInsets.top(Styles.tabBarHeight),
             child: ArnaDivider(),
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.only(
-              top: Styles.tabBarHeight + 1,
-            ),
+            padding: const ArnaEdgeInsets.top(Styles.tabBarHeight + 1),
             child: FocusTraversalGroup(
               child: Builder(
                 builder: (BuildContext context) {

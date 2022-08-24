@@ -147,8 +147,8 @@ class _ArnaPopupMenuItemState extends State<ArnaPopupMenuItem> {
   ///
   /// By default, uses [Navigator.pop].
   void handleTap() {
-    widget.onTap?.call();
     Navigator.pop(context);
+    widget.onTap?.call();
   }
 
   @override

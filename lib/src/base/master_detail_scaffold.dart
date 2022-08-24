@@ -250,13 +250,11 @@ class _LateralPageState extends State<_LateralPage> {
           ),
         ),
         const Padding(
-          padding: EdgeInsetsDirectional.only(start: Styles.masterSideWidth),
+          padding: ArnaEdgeInsets.start(Styles.masterSideWidth),
           child: ArnaDivider(direction: Axis.vertical),
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.only(
-            start: Styles.masterSideWidth + 1,
-          ),
+          padding: const ArnaEdgeInsets.start(Styles.masterSideWidth + 1),
           child: widget.items.length > _currentIndex
               ? ArnaScaffold(
                   headerBarLeading:

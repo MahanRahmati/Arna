@@ -129,13 +129,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
             child: sideItemBuilder,
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(start: padding),
+            padding: ArnaEdgeInsets.start(padding),
             child: const ArnaDivider(direction: Axis.vertical),
           ),
         ],
         Padding(
-          padding:
-              EdgeInsetsDirectional.only(start: expanded ? padding + 1 : 0),
+          padding: ArnaEdgeInsets.start(expanded ? padding + 1 : 0),
           child: ArnaScaffold(
             headerBarLeading: Row(
               mainAxisSize: MainAxisSize.min,

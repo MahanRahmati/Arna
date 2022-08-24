@@ -3,12 +3,8 @@ import 'package:arna/arna.dart';
 /// An immutable set of offsets in each of the four cardinal directions.
 class ArnaEdgeInsets extends EdgeInsetsDirectional {
   /// Creates insets from offsets from the start, top, end, and bottom.
-  const ArnaEdgeInsets.steb({
-    required double start,
-    required double top,
-    required double end,
-    required double bottom,
-  }) : super.fromSTEB(start, top, end, bottom);
+  const ArnaEdgeInsets.steb(super.start, super.top, super.end, super.bottom)
+      : super.fromSTEB();
 
   /// Creates insets with only the start value non-zero.
   const ArnaEdgeInsets.start(double amount) : super.only(start: amount);
@@ -37,6 +33,14 @@ class ArnaEdgeInsets extends EdgeInsetsDirectional {
   /// Creates insets with only the start and bottom values non-zero.
   const ArnaEdgeInsets.sb(double start, double bottom)
       : super.only(start: start, bottom: bottom);
+
+  /// Creates insets with only the start and end values non-zero.
+  const ArnaEdgeInsets.se(double start, double end)
+      : super.only(start: start, end: end);
+
+  /// Creates insets with only the top and bottom values non-zero.
+  const ArnaEdgeInsets.tb(double top, double bottom)
+      : super.only(top: top, bottom: bottom);
 
   /// Creates insets with vertical offsets.
   const ArnaEdgeInsets.vertical(double amount)

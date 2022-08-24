@@ -115,8 +115,8 @@ class _ArnaLinkedItem extends StatelessWidget {
             children: <Widget>[
               if (button.icon != null)
                 Padding(
-                  padding: EdgeInsetsDirectional.only(
-                    end: button.label != null ? Styles.padding : 0,
+                  padding: ArnaEdgeInsets.end(
+                    button.label != null ? Styles.padding : 0,
                   ),
                   child: Icon(
                     button.icon,

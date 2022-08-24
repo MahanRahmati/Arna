@@ -257,12 +257,7 @@ abstract class Styles {
 
   /// List tile without leading padding
   static const EdgeInsetsDirectional listTileWithoutLeadingPadding =
-      EdgeInsetsDirectional.fromSTEB(
-    largePadding * 2,
-    padding,
-    largePadding,
-    padding,
-  );
+      ArnaEdgeInsets.steb(largePadding * 2, padding, largePadding, padding);
 
   /// List tile padding
   static const EdgeInsetsDirectional listTilePadding =
@@ -297,9 +292,9 @@ abstract class Styles {
       ArnaEdgeInsets.horizontal(largePadding * 2);
 
   /// Menu Margin
-  static const EdgeInsetsDirectional menuMargin = EdgeInsetsDirectional.only(
-    start: Styles.padding,
-    end: Styles.largePadding,
+  static const EdgeInsetsDirectional menuMargin = ArnaEdgeInsets.se(
+    Styles.padding,
+    Styles.largePadding,
   );
 
   /// Normal border radius

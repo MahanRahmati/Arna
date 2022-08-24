@@ -284,11 +284,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
               ),
               color: ArnaColors.expansionPanelColor.resolveFrom(context),
             ),
-            margin: const EdgeInsetsDirectional.only(
-              start: 1,
-              end: 1,
-              bottom: 1,
-            ),
+            margin: const ArnaEdgeInsets.seb(1, 1, 1),
             child: SizeTransition(
               axisAlignment: 1,
               sizeFactor: _animation,

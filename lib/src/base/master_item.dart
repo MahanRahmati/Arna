@@ -108,7 +108,7 @@ class ArnaMasterItem extends StatelessWidget {
                       ? ArnaDynamicColor.applyOverlay(buttonColor)
                       : buttonColor,
             ),
-            padding: Styles.tilePadding,
+            padding: Styles.listTilePadding,
             child: Row(
               children: <Widget>[
                 if (leading != null)

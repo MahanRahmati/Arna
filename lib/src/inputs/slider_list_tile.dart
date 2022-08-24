@@ -34,6 +34,7 @@ class ArnaSliderListTile extends StatelessWidget {
     super.key,
     required this.value,
     required this.onChanged,
+    this.leading,
     required this.title,
     this.subtitle,
     this.trailing,
@@ -45,6 +46,9 @@ class ArnaSliderListTile extends StatelessWidget {
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
+    this.padding,
+    this.leadingToTitle = Styles.largePadding,
+    this.enabled = true,
     this.cursor = MouseCursor.defer,
   }) : assert(value >= min && value <= max);
 
@@ -84,13 +88,19 @@ class ArnaSliderListTile extends StatelessWidget {
   ///  * [onChangeEnd] for a callback that is called when the user stops changing the value.
   final ValueChanged<double>? onChanged;
 
-  /// The primary content of the list tile.
+  /// A widget displayed at the start of the [ArnaSliderListTile]. This is
+  /// typically [Icon] or an [Image].
+  final Widget? leading;
+
+  /// A [title] is used to convey the central information.
   final String title;
 
-  /// Additional content displayed below the title.
+  /// A [subtitle] is used to display additional information. It is located
+  /// below [title].
   final String? subtitle;
 
-  /// A widget to display after the slider.
+  /// A widget displayed at the end of the [ArnaSliderListTile]. This is
+  /// usually an [Icon].
   final Widget? trailing;
 
   /// Called when the user starts selecting a new value for the slider.
@@ -181,12 +191,22 @@ class ArnaSliderListTile extends StatelessWidget {
   /// The color of the slider's progress.
   final Color? accentColor;
 
+  /// Padding of the content inside [ArnaSliderListTile].
+  final EdgeInsetsGeometry? padding;
+
+  /// The horizontal space between [leading] widget and [title].
+  final double leadingToTitle;
+
+  /// Whether this list tile is interactive.
+  final bool enabled;
+
   /// The cursor for a mouse pointer when it enters or is hovering over the slider.
   final MouseCursor cursor;
 
   @override
   Widget build(BuildContext context) {
     return ArnaListTile(
+      leading: leading,
       title: title,
       subtitle: subtitle,
       trailing: Row(
@@ -194,7 +214,7 @@ class ArnaSliderListTile extends StatelessWidget {
         children: <Widget>[
           ArnaSlider(
             value: value,
-            onChanged: onChanged,
+            onChanged: enabled ? onChanged : null,
             onChangeStart: onChangeStart,
             onChangeEnd: onChangeEnd,
             min: min,
@@ -209,7 +229,9 @@ class ArnaSliderListTile extends StatelessWidget {
         ],
       ),
       onTap: onChanged != null ? () {} : null,
-      actionable: true,
+      padding: padding,
+      leadingToTitle: leadingToTitle,
+      enabled: enabled,
       cursor: cursor,
     );
   }

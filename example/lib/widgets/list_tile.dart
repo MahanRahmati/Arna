@@ -20,6 +20,7 @@ class ListTiles extends StatelessWidget {
           ArnaListTile(
             title: '${Strings.title} 1',
             trailing: ArnaBadge(label: '1'),
+            showBackground: false,
           ),
           ArnaListTile(
             title: '${Strings.title} 2',

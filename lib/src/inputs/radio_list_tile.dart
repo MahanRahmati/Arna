@@ -41,6 +41,9 @@ class ArnaRadioListTile<T> extends StatelessWidget {
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
+    this.padding,
+    this.leadingToTitle = Styles.largePadding,
+    this.enabled = true,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
@@ -80,13 +83,15 @@ class ArnaRadioListTile<T> extends StatelessWidget {
   /// ```
   final ValueChanged<T?>? onChanged;
 
-  /// The primary content of the list tile.
+  /// A [title] is used to convey the central information.
   final String title;
 
-  /// Additional content displayed below the title.
+  /// A [subtitle] is used to display additional information. It is located
+  /// below [title].
   final String? subtitle;
 
-  /// A widget to display after the title.
+  /// A widget displayed at the end of the [ArnaRadioListTile]. This is usually
+  /// an [Icon].
   final Widget? trailing;
 
   /// Whether this radio button is focusable or not.
@@ -97,6 +102,15 @@ class ArnaRadioListTile<T> extends StatelessWidget {
 
   /// The color of the radio button's focused border and selected state.
   final Color? accentColor;
+
+  /// Padding of the content inside [ArnaRadioListTile].
+  final EdgeInsetsGeometry? padding;
+
+  /// The horizontal space between [ArnaRadio] widget and [title].
+  final double leadingToTitle;
+
+  /// Whether this list tile is interactive.
+  final bool enabled;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the radio button.
   final MouseCursor cursor;
@@ -110,7 +124,7 @@ class ArnaRadioListTile<T> extends StatelessWidget {
       leading: ArnaRadio<T>(
         value: value,
         groupValue: groupValue,
-        onChanged: onChanged,
+        onChanged: enabled ? onChanged : null,
         isFocusable: isFocusable,
         autofocus: autofocus,
         accentColor: accentColor,
@@ -121,7 +135,9 @@ class ArnaRadioListTile<T> extends StatelessWidget {
       subtitle: subtitle,
       trailing: trailing,
       onTap: onChanged != null ? () => onChanged!(value) : null,
-      actionable: true,
+      padding: padding,
+      leadingToTitle: leadingToTitle,
+      enabled: enabled,
       cursor: cursor,
     );
   }

@@ -36,12 +36,16 @@ class ArnaSwitchListTile extends StatelessWidget {
     super.key,
     required this.value,
     required this.onChanged,
+    this.leading,
     required this.title,
     this.subtitle,
     this.trailing,
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
+    this.padding,
+    this.leadingToTitle = Styles.largePadding,
+    this.enabled = true,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
@@ -72,13 +76,19 @@ class ArnaSwitchListTile extends StatelessWidget {
   /// ```
   final ValueChanged<bool>? onChanged;
 
-  /// The primary content of the list tile.
+  /// A widget displayed at the start of the [ArnaSwitchListTile]. This is
+  /// typically [Icon] or an [Image].
+  final Widget? leading;
+
+  /// A [title] is used to convey the central information.
   final String title;
 
-  /// Additional content displayed below the title.
+  /// A [subtitle] is used to display additional information. It is located
+  /// below [title].
   final String? subtitle;
 
-  /// A widget to display after the switch.
+  /// A widget displayed at the end of the [ArnaSwitchListTile]. This is
+  /// usually an [Icon].
   final Widget? trailing;
 
   /// Whether this switch is focusable or not.
@@ -90,6 +100,15 @@ class ArnaSwitchListTile extends StatelessWidget {
   /// The color of the switch's focused border and selected state.
   final Color? accentColor;
 
+  /// Padding of the content inside [ArnaSwitchListTile].
+  final EdgeInsetsGeometry? padding;
+
+  /// The horizontal space between [leading] widget and [title].
+  final double leadingToTitle;
+
+  /// Whether this list tile is interactive.
+  final bool enabled;
+
   /// The cursor for a mouse pointer when it enters or is hovering over the switch.
   final MouseCursor cursor;
 
@@ -99,6 +118,7 @@ class ArnaSwitchListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ArnaListTile(
+      leading: leading,
       title: title,
       subtitle: subtitle,
       trailing: Row(
@@ -106,7 +126,7 @@ class ArnaSwitchListTile extends StatelessWidget {
         children: <Widget>[
           ArnaSwitch(
             value: value,
-            onChanged: onChanged,
+            onChanged: enabled ? onChanged : null,
             isFocusable: isFocusable,
             autofocus: autofocus,
             accentColor: accentColor,
@@ -117,7 +137,9 @@ class ArnaSwitchListTile extends StatelessWidget {
         ],
       ),
       onTap: onChanged != null ? () => onChanged!(!value) : null,
-      actionable: true,
+      padding: padding,
+      leadingToTitle: leadingToTitle,
+      enabled: enabled,
       cursor: cursor,
     );
   }

@@ -253,7 +253,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
                           onTap: _isEnabled && widget.isFocusable
                               ? _handleTap
                               : null,
-                          actionable: _isEnabled && widget.isFocusable,
+                          enabled: _isEnabled && widget.isFocusable,
                           cursor: widget.cursor,
                         ),
                       ),

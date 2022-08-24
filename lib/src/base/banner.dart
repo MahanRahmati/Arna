@@ -39,10 +39,11 @@ class ArnaBanner extends StatefulWidget {
   /// Whether to show banner or not.
   final bool showBanner;
 
-  /// The primary content of the banner.
+  /// A [title] is used to convey the central information.
   final String title;
 
-  /// Additional content displayed below the title.
+  /// A [subtitle] is used to display additional information. It is located
+  /// below [title].
   final String? subtitle;
 
   /// The set of actions that are displayed at the trailing side of the banner.
@@ -139,8 +140,10 @@ class _ArnaBannerState extends State<ArnaBanner>
           ColoredBox(
             color: ArnaColors.headerColor.resolveFrom(context),
             child: ArnaListTile(
-              leading:
-                  Icon(icon, color: ArnaDynamicColor.resolve(accent, context)),
+              leading: Icon(
+                icon,
+                color: ArnaDynamicColor.resolve(accent, context),
+              ),
               title: widget.title,
               subtitle: widget.subtitle,
               trailing: widget.actions != null

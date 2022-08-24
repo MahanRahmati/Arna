@@ -42,6 +42,9 @@ class ArnaCheckboxListTile extends StatelessWidget {
     this.isFocusable = true,
     this.autofocus = false,
     this.accentColor,
+    this.padding,
+    this.leadingToTitle = Styles.largePadding,
+    this.enabled = true,
     this.cursor = MouseCursor.defer,
     this.semanticLabel,
   });
@@ -75,13 +78,15 @@ class ArnaCheckboxListTile extends StatelessWidget {
   /// ```
   final ValueChanged<bool?>? onChanged;
 
-  /// The primary content of the list tile.
+  /// A [title] is used to convey the central information.
   final String title;
 
-  /// Additional content displayed below the title.
+  /// A [subtitle] is used to display additional information. It is located
+  /// below [title].
   final String? subtitle;
 
-  /// A widget to display after the title.
+  /// A widget displayed at the end of the [ArnaCheckboxListTile]. This is
+  /// usually an [Icon].
   final Widget? trailing;
 
   /// If true the checkbox's [value] can be true, false, or null.
@@ -103,6 +108,15 @@ class ArnaCheckboxListTile extends StatelessWidget {
 
   /// The color of the checkbox's focused border and selected state.
   final Color? accentColor;
+
+  /// Padding of the content inside [ArnaCheckboxListTile].
+  final EdgeInsetsGeometry? padding;
+
+  /// The horizontal space between [ArnaCheckbox] widget and [title].
+  final double leadingToTitle;
+
+  /// Whether this list tile is interactive.
+  final bool enabled;
 
   /// The cursor for a mouse pointer when it enters or is hovering over the checkbox.
   final MouseCursor cursor;
@@ -132,7 +146,7 @@ class ArnaCheckboxListTile extends StatelessWidget {
       leading: ArnaCheckbox(
         value: value,
         tristate: tristate,
-        onChanged: onChanged,
+        onChanged: enabled ? onChanged : null,
         isFocusable: isFocusable,
         autofocus: autofocus,
         accentColor: accentColor,
@@ -143,7 +157,9 @@ class ArnaCheckboxListTile extends StatelessWidget {
       subtitle: subtitle,
       trailing: trailing,
       onTap: onChanged != null ? _handleTap : null,
-      actionable: true,
+      padding: padding,
+      leadingToTitle: leadingToTitle,
+      enabled: enabled,
       cursor: cursor,
     );
   }

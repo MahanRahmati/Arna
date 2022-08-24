@@ -56,28 +56,28 @@ class _ButtonsState extends State<Buttons> {
               onPressed: () {},
               tooltipMessage: Strings.add,
             ),
-            ArnaPopupMenuButton<String>(
-              itemBuilder: (BuildContext context) =>
-                  <ArnaPopupMenuEntry<String>>[
-                const ArnaPopupMenuItem<String>(
-                  value: Strings.first,
-                  child: Text(Strings.first),
+            ArnaPopupMenuButton(
+              itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry>[
+                ArnaPopupMenuItem(
+                  title: Strings.first,
+                  onTap: () => showArnaSnackbar(
+                    context: context,
+                    message: '${Strings.selected} ${Strings.first}',
+                  ),
                 ),
-                const ArnaPopupMenuItem<String>(
+                const ArnaPopupMenuItem(
                   enabled: false,
-                  value: Strings.second,
-                  child: Text(Strings.second),
+                  title: Strings.second,
                 ),
                 const ArnaPopupMenuDivider(),
-                const ArnaPopupMenuItem<String>(
-                  value: Strings.third,
-                  child: Text(Strings.third),
+                ArnaPopupMenuItem(
+                  title: Strings.third,
+                  onTap: () => showArnaSnackbar(
+                    context: context,
+                    message: '${Strings.selected} ${Strings.third}',
+                  ),
                 ),
               ],
-              onSelected: (String value) => showArnaSnackbar(
-                context: context,
-                message: '${Strings.selected} $value',
-              ),
             ),
             ArnaDropdownButton<String>(
               value: dropdownvalue,

@@ -8,7 +8,7 @@ import 'package:arna/arna.dart';
 ///
 /// Scale is only applied to incoming elements to emphasize new content over old.
 class ArnaFadeThroughPageTransitionsBuilder {
-  /// Creates a [ArnaFadeThroughPageTransitionsBuilder].
+  /// Creates an [ArnaFadeThroughPageTransitionsBuilder].
   const ArnaFadeThroughPageTransitionsBuilder({this.fillColor});
 
   /// The color to use for the background color during the transition.
@@ -38,7 +38,7 @@ class ArnaFadeThroughPageTransitionsBuilder {
 ///
 /// Scale is only applied to incoming elements to emphasize new content over old.
 class ArnaFadeThroughTransition extends StatelessWidget {
-  /// Creates a [ArnaFadeThroughTransition].
+  /// Creates an [ArnaFadeThroughTransition].
   ///
   /// The [animation] and [secondaryAnimation] argument are required and must not be null.
   const ArnaFadeThroughTransition({

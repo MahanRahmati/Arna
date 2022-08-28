@@ -482,7 +482,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
   }
 }
 
-/// A delegate for computing the layout of a tooltip to be displayed above or bellow a target specified in the global
+/// A delegate for computing the layout of a tooltip to be displayed above or below a target specified in the global
 /// coordinate system.
 class _ArnaTooltipPositionDelegate extends SingleChildLayoutDelegate {
   /// Creates a delegate for computing the layout of a tooltip.

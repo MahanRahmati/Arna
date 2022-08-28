@@ -6,9 +6,6 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 
-// TODO: Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35
-// TODO: Updating PrimaryScrollController for Desktop when it is landed. https://github.com/flutter/flutter/commit/784520bd04292eb5f6ee6cdac03a98712f4cd71d
-
 /// Painter of [_ArnaDropdownMenu].
 class _ArnaDropdownMenuPainter extends CustomPainter {
   /// Creates an ArnaDropdownMenu painter.

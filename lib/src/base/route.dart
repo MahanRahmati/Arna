@@ -18,7 +18,7 @@ import 'package:flutter/gestures.dart' show HorizontalDragGestureRecognizer;
 ///
 ///  * [ArnaRouteTransitionMixin], which provides the transition for this route.
 class ArnaPageRoute<T> extends PageRoute<T> with ArnaRouteTransitionMixin<T> {
-  /// Construct a ArnaPageRoute whose contents are defined by [builder].
+  /// Construct an ArnaPageRoute whose contents are defined by [builder].
   ///
   /// The values of [builder], [maintainState], and [PageRoute.fullscreenDialog] must not be null.
   ArnaPageRoute({

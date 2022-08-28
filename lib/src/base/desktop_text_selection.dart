@@ -2,8 +2,6 @@ import 'package:arna/arna.dart';
 import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart' show TextSelectionPoint;
 
-// TODO: Convert clamp to clampDouble when it is landed. https://github.com/flutter/flutter/commit/64a0c19652a63292f7587a52f5f24656291ffd35
-
 /// Desktop text selection controls.
 class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
   /// Desktop has no text selection handles.

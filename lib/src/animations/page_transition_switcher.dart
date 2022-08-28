@@ -55,7 +55,7 @@ typedef ArnaPageTransitionSwitcherLayoutBuilder = Widget Function(
 ///
 /// The function should return a widget which wraps the given [child].
 ///
-/// When a [ArnaPageTransitionSwitcher]'s [child] is replaced, the new child's [primaryAnimation] runs forward and the
+/// When an [ArnaPageTransitionSwitcher]'s [child] is replaced, the new child's [primaryAnimation] runs forward and the
 /// value of its [secondaryAnimation] is usually fixed at 0.0. At the same time, the old child's [secondaryAnimation]
 /// runs forward, and the value of its primaryAnimation is usually fixed at 1.0.
 ///
@@ -128,7 +128,7 @@ typedef ArnaPageTransitionSwitcherTransitionBuilder = Widget Function(
 /// [defaultLayoutBuilder] is used. See the documentation for [layoutBuilder] for suggestions on how to configure the
 /// layout of the incoming and outgoing child widgets if [defaultLayoutBuilder] is not your desired layout.
 class ArnaPageTransitionSwitcher extends StatefulWidget {
-  /// Creates a [ArnaPageTransitionSwitcher].
+  /// Creates an [ArnaPageTransitionSwitcher].
   ///
   /// The [duration], [reverse], and [transitionBuilder] parameters must not be null.
   const ArnaPageTransitionSwitcher({

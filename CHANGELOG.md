@@ -1,5 +1,6 @@
 ## 1.0.6
 
+- Update ROADMAP
 - Update ArnaTextField
 - Update ArnaSelectableText
 - Update ArnaHelpers

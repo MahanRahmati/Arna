@@ -16,6 +16,8 @@
 - Update ArnaSwitchListTile
 - [BREAKING] Update ArnaPopupMenu
 - Update ArnaExpansionPanel
+- Add ArnaSliverHeaderBar
+- [BREAKING] Update ArnaHeaderBar
 
 ## 1.0.5
 

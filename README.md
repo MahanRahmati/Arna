@@ -59,6 +59,7 @@ See [ROADMAP](./ROADMAP.md).
 | ArnaDivider               | Divider                       | -                                     |
 | ArnaDrawer                | Drawer                        | -                                     |
 | ArnaHeaderBar             | AppBar                        | CupertinoNavigationBar                |
+| ArnaSliverHeaderBar       | SliverAppBar                  | CupertinoSliverNavigationBar          |
 | ArnaLicensePage           | LicensePage                   | -                                     |
 | ArnaMasterDetailScaffold  | -                             | -                                     |
 | ArnaMasterItem            | -                             | -                                     |

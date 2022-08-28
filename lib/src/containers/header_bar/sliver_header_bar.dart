@@ -28,7 +28,6 @@ class ArnaSliverHeaderBar extends StatelessWidget {
     this.actions,
     this.border,
     this.backgroundColor,
-    this.padding,
   });
 
   /// The leading widget laid out within the header bar.
@@ -62,9 +61,6 @@ class ArnaSliverHeaderBar extends StatelessWidget {
 
   /// The background color of the header bar.
   final Color? backgroundColor;
-
-  /// Padding for the contents of the header bar.
-  final EdgeInsetsDirectional? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +86,9 @@ class ArnaSliverHeaderBar extends StatelessWidget {
         actions: actions,
         border: border,
         backgroundColor: backgroundColor,
-        padding: padding ?? Styles.small,
-        persistentHeight:
-            Styles.headerBarHeight + MediaQuery.of(context).padding.top,
+        height: Styles.headerBarHeight +
+            Styles.padding +
+            MediaQuery.of(context).padding.top,
       ),
     );
   }
@@ -108,8 +104,7 @@ class _ArnaHeaderBarSliverDelegate extends SliverPersistentHeaderDelegate {
     required this.actions,
     required this.border,
     required this.backgroundColor,
-    required this.padding,
-    required this.persistentHeight,
+    required this.height,
   });
 
   /// The leading widget laid out within the header bar.
@@ -144,16 +139,13 @@ class _ArnaHeaderBarSliverDelegate extends SliverPersistentHeaderDelegate {
   /// The background color of the header bar.
   final Color? backgroundColor;
 
-  /// Padding for the contents of the header bar.
-  final EdgeInsetsDirectional padding;
-
-  final double persistentHeight;
+  final double height;
 
   @override
-  double get minExtent => persistentHeight;
+  double get minExtent => height;
 
   @override
-  double get maxExtent => persistentHeight;
+  double get maxExtent => height;
 
   @override
   OverScrollHeaderStretchConfiguration? stretchConfiguration;
@@ -190,10 +182,10 @@ class _ArnaHeaderBarSliverDelegate extends SliverPersistentHeaderDelegate {
         child: SafeArea(
           bottom: false,
           child: FocusTraversalGroup(
-            child: SizedBox(
-              height: Styles.headerBarHeight,
-              child: Padding(
-                padding: padding,
+            child: Padding(
+              padding: Styles.small,
+              child: SizedBox(
+                height: Styles.headerBarHeight,
                 child: NavigationToolbar(
                   leading: leading,
                   middle: middle,
@@ -219,7 +211,6 @@ class _ArnaHeaderBarSliverDelegate extends SliverPersistentHeaderDelegate {
         middle != oldDelegate.middle ||
         actions != oldDelegate.actions ||
         border != oldDelegate.border ||
-        backgroundColor != oldDelegate.backgroundColor ||
-        padding != oldDelegate.padding;
+        backgroundColor != oldDelegate.backgroundColor;
   }
 }

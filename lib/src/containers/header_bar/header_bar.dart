@@ -18,10 +18,8 @@ class ArnaHeaderBar extends StatelessWidget {
     this.automaticallyImplyLeading = true,
     this.middle,
     this.actions,
-    this.bottom,
     this.border,
     this.backgroundColor,
-    this.padding,
   });
 
   /// The leading widget laid out within the header bar.
@@ -47,9 +45,6 @@ class ArnaHeaderBar extends StatelessWidget {
   /// built by this widget.
   final List<Widget>? actions;
 
-  /// This widget appears across the bottom of the header bar.
-  final Widget? bottom;
-
   /// The border of the header bar.
   ///
   /// If a border is null, the header bar will not display a border.
@@ -57,9 +52,6 @@ class ArnaHeaderBar extends StatelessWidget {
 
   /// The background color of the header bar.
   final Color? backgroundColor;
-
-  /// Padding for the contents of the header bar.
-  final EdgeInsetsDirectional? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -88,29 +80,23 @@ class ArnaHeaderBar extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: SafeArea(
           bottom: false,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              FocusTraversalGroup(
-                child: SizedBox(
-                  height: Styles.headerBarHeight,
-                  child: Padding(
-                    padding: padding ?? Styles.small,
-                    child: NavigationToolbar(
-                      leading: leadingContent,
-                      middle: middle,
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[...?actions],
-                      ),
-                      middleSpacing: Styles.smallPadding,
-                    ),
+          child: FocusTraversalGroup(
+            child: Padding(
+              padding: Styles.small,
+              child: SizedBox(
+                height: Styles.headerBarHeight,
+                child: NavigationToolbar(
+                  leading: leadingContent,
+                  middle: middle,
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[...?actions],
                   ),
+                  middleSpacing: Styles.smallPadding,
                 ),
               ),
-              if (bottom != null) bottom!,
-            ],
+            ),
           ),
         ),
       ),

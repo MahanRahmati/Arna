@@ -14,7 +14,7 @@ class Pickers extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ArnaTextButton(
+          ArnaButton.text(
             label: Strings.datePicker,
             onPressed: () async {
               final DateTime? pickedDate = await showArnaDatePicker(

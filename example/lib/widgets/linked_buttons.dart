@@ -36,7 +36,7 @@ class LinkedButtons extends StatelessWidget {
               ),
               ArnaLinkedButton(
                 icon: Icons.add_outlined,
-                buttonType: ButtonType.colored,
+                buttonType: ButtonType.filled,
                 onPressed: () {},
                 tooltipMessage: Strings.add,
               ),

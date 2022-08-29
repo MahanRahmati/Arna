@@ -24,20 +24,16 @@ class ArnaLinkedButtons extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const SizedBox(height: Styles.buttonSize, width: 0.5),
-            ...buttons.map((ArnaLinkedButton button) {
-              final int index = buttons.indexOf(button);
-              final int length = buttons.length;
-              final TextDirection textDirection = Directionality.of(context);
-              return _ArnaLinkedItem(
-                button: button,
-                first: ArnaHelpers.isFirstButton(index, length, textDirection),
-                last: ArnaHelpers.isLastButton(index, length, textDirection),
-              );
-            }).toList(),
-            const SizedBox(height: Styles.buttonSize, width: 0.5),
-          ],
+          children: buttons.map((ArnaLinkedButton button) {
+            final int index = buttons.indexOf(button);
+            final int length = buttons.length;
+            final TextDirection textDirection = Directionality.of(context);
+            return _ArnaLinkedItem(
+              button: button,
+              first: ArnaHelpers.isFirstButton(index, length, textDirection),
+              last: ArnaHelpers.isLastButton(index, length, textDirection),
+            );
+          }).toList(),
         ),
       ),
     );
@@ -78,20 +74,21 @@ class _ArnaLinkedItem extends StatelessWidget {
         bool selected,
       ) {
         return AnimatedContainer(
-          height: Styles.buttonSize - 2,
+          height: Styles.buttonSize,
           duration: Styles.basicDuration,
           curve: Styles.basicCurve,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.horizontal(
               left: first
-                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  ? const Radius.circular(Styles.borderRadiusSize)
                   : Radius.zero,
               right: last
-                  ? const Radius.circular(Styles.borderRadiusSize - 1)
+                  ? const Radius.circular(Styles.borderRadiusSize)
                   : Radius.zero,
             ),
             border: Border.all(
+              width: 0.0,
               color: ArnaDynamicColor.outerColor(accent)
                   .withAlpha(focused ? 255 : 0),
             ),
@@ -106,9 +103,8 @@ class _ArnaLinkedItem extends StatelessWidget {
                         : accent,
           ),
           margin: const EdgeInsets.all(0.5),
-          padding: button.icon != null
-              ? const EdgeInsets.symmetric(horizontal: Styles.padding - 1)
-              : Styles.largeHorizontal,
+          padding:
+              button.icon != null ? Styles.horizontal : Styles.largeHorizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -196,12 +192,14 @@ class ArnaLinkedButton {
 
   /// The callback that is called when a button is tapped.
   ///
-  /// If this callback and [onLongPress] are null, then the button will be disabled.
+  /// If this callback and [onLongPress] are null, then the button will be
+  /// disabled.
   final VoidCallback? onPressed;
 
   /// The callback that is called when a button is long-pressed.
   ///
-  /// If this callback and [onPressed] are null, then the button will be disabled.
+  /// If this callback and [onPressed] are null, then the button will be
+  /// disabled.
   final VoidCallback? onLongPress;
 
   /// Text that describes the action that will occur when the button is pressed.
@@ -213,13 +211,15 @@ class ArnaLinkedButton {
   /// Whether this button is focusable or not.
   final bool isFocusable;
 
-  /// Whether this button should focus itself if nothing else is already focused.
+  /// Whether this button should focus itself if nothing else is already
+  /// focused.
   final bool autofocus;
 
   /// The color of the button's focused border.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the button.
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// button.
   final MouseCursor cursor;
 
   /// The semantic label of the button.
@@ -227,10 +227,12 @@ class ArnaLinkedButton {
 
   /// Whether detected gestures should provide acoustic and/or haptic feedback.
   ///
-  /// For example, on Android a long-press will produce a short vibration, when feedback is enabled.
+  /// For example, on Android a long-press will produce a short vibration, when
+  /// feedback is enabled.
   ///
   /// See also:
   ///
-  ///  * [ArnaFeedback] for providing platform-specific feedback to certain actions.
+  ///  * [ArnaFeedback] for providing platform-specific feedback to certain
+  ///    actions.
   final bool enableFeedback;
 }

@@ -22,12 +22,12 @@ class _ButtonsState extends State<Buttons> {
       child: Center(
         child: Wrap(
           children: <Widget>[
-            ArnaIconButton(
+            ArnaButton.icon(
               icon: Icons.add_outlined,
               onPressed: () {},
               tooltipMessage: Strings.add,
             ),
-            ArnaTextButton(
+            ArnaButton.text(
               label: Strings.add,
               onPressed: () {},
             ),
@@ -42,16 +42,31 @@ class _ButtonsState extends State<Buttons> {
               onPressed: null,
               tooltipMessage: Strings.add,
             ),
-            ArnaIconButton(
+            ArnaButton.icon(
               icon: Icons.add_outlined,
-              buttonType: ButtonType.colored,
+              buttonType: ButtonType.filled,
               onPressed: () {},
               tooltipMessage: Strings.add,
             ),
-            ArnaBorderlessButton(
-              icon: Icons.add_outlined,
+            ArnaButton(
+              label: Strings.add,
+              buttonType: ButtonType.pill,
               onPressed: () {},
-              tooltipMessage: Strings.add,
+            ),
+            const ArnaButton(
+              label: Strings.add,
+              buttonType: ButtonType.pill,
+              onPressed: null,
+            ),
+            ArnaButton(
+              label: Strings.add,
+              buttonType: ButtonType.borderless,
+              onPressed: () {},
+            ),
+            const ArnaButton(
+              label: Strings.add,
+              buttonType: ButtonType.borderless,
+              onPressed: null,
             ),
             ArnaPopupMenuButton(
               itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry>[

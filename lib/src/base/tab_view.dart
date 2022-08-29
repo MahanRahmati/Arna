@@ -278,7 +278,7 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
                     const ArnaDivider(direction: Axis.vertical),
                     Padding(
                       padding: Styles.smallHorizontal,
-                      child: ArnaIconButton(
+                      child: ArnaButton.icon(
                         icon: Icons.add_outlined,
                         onPressed: widget.onAddPressed,
                         tooltipMessage: 'Add',

@@ -40,7 +40,7 @@ class _TabsState extends State<Tabs> {
             onAddPressed: () => setState(() => tabs.add(tab(context))),
           )
         : Center(
-            child: ArnaTextButton(
+            child: ArnaButton.text(
               label: 'Add Tab',
               onPressed: () => setState(() => tabs.add(tab(context))),
             ),

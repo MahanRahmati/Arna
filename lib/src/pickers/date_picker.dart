@@ -291,7 +291,7 @@ class _ArnaDatePickerDialogState extends State<ArnaDatePickerDialog>
               color: ArnaColors.backgroundColor.resolveFrom(context),
               child: Padding(
                 padding: Styles.normal,
-                child: ArnaTextButton(
+                child: ArnaButton.text(
                   onPressed: () => Navigator.pop(context, _selectedDate.value),
                   buttonSize: ButtonSize.huge,
                   label: widget.confirmText ??
@@ -538,7 +538,7 @@ class _ArnaCalendarDatePickerState extends State<ArnaCalendarDatePicker> {
           height: Styles.pickerTopRowHeight + Styles.pickerRowHeight * (8),
           child: _buildPicker(),
         ),
-        ArnaTextButton(
+        ArnaButton.text(
           label: _localizations.formatMonthYear(_currentDisplayedMonthDate),
           onPressed: () {
             _handleModeChanged(
@@ -919,7 +919,7 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
             padding: Styles.smallHorizontal,
             child: Row(
               children: <Widget>[
-                ArnaIconButton(
+                ArnaButton.icon(
                   icon: Icons.chevron_left,
                   tooltipMessage: _isDisplayingFirstMonth
                       ? null
@@ -928,7 +928,7 @@ class _ArnaMonthPickerState extends State<_ArnaMonthPicker> {
                       _isDisplayingFirstMonth ? null : _handlePreviousMonth,
                 ),
                 const Spacer(),
-                ArnaIconButton(
+                ArnaButton.icon(
                   icon: Icons.chevron_right,
                   tooltipMessage: _isDisplayingLastMonth
                       ? null

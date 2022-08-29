@@ -22,12 +22,12 @@ class _HomeState extends ConsumerState<Home> {
     // final bool showSearch = ref.watch(searchProvider);
 
     final NavigationItem hello = NavigationItem(
-      key: UniqueKey(),
       title: Strings.hello,
       icon: Icons.emoji_emotions_outlined,
       selectedIcon: Icons.emoji_emotions,
-      headerBarLeading: ArnaIconButton(
+      headerBarLeading: ArnaButton.icon(
         icon: Icons.add_outlined,
+        buttonType: ButtonType.borderless,
         onPressed: () => ref.read(counterProvider.state).state++,
         tooltipMessage: Strings.add,
       ),
@@ -35,11 +35,11 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final MasterNavigationItem helloMaster = MasterNavigationItem(
-      key: UniqueKey(),
       title: Strings.hello,
       leading: const Icon(Icons.emoji_emotions_outlined),
-      headerBarLeading: ArnaIconButton(
+      headerBarLeading: ArnaButton.icon(
         icon: Icons.add_outlined,
+        buttonType: ButtonType.borderless,
         onPressed: () => ref.read(counterProvider.state).state++,
         tooltipMessage: Strings.add,
       ),
@@ -47,11 +47,10 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final NavigationItem widgets = NavigationItem(
-      key: UniqueKey(),
       title: Strings.widgets,
       icon: Icons.widgets_outlined,
       selectedIcon: Icons.widgets,
-      // headerBarLeading: ArnaIconButton(
+      // headerBarLeading: ArnaButton.icon(
       //   icon: Icons.search_outlined,
       //   onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
       //   tooltipMessage: Strings.search,
@@ -60,10 +59,9 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final MasterNavigationItem widgetsMaster = MasterNavigationItem(
-      key: UniqueKey(),
       title: Strings.widgets,
       leading: const Icon(Icons.widgets_outlined),
-      // headerBarLeading: ArnaIconButton(
+      // headerBarLeading: ArnaButton.icon(
       //   icon: Icons.search_outlined,
       //   onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
       //   tooltipMessage: Strings.search,
@@ -72,7 +70,6 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final NavigationItem typography = NavigationItem(
-      key: UniqueKey(),
       title: Strings.typography,
       icon: Icons.font_download_outlined,
       selectedIcon: Icons.font_download,
@@ -80,14 +77,12 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final MasterNavigationItem typographyMaster = MasterNavigationItem(
-      key: UniqueKey(),
       title: Strings.typography,
       leading: const Icon(Icons.font_download_outlined),
       builder: (_) => const Typography(),
     );
 
     final NavigationItem tabs = NavigationItem(
-      key: UniqueKey(),
       title: Strings.tabs,
       icon: Icons.tab_outlined,
       selectedIcon: Icons.tab,
@@ -95,15 +90,15 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final MasterNavigationItem tabsMaster = MasterNavigationItem(
-      key: UniqueKey(),
       title: Strings.tabs,
       leading: const Icon(Icons.tab_outlined),
       builder: (_) => const Tabs(),
     );
 
     final List<Widget> actions = <Widget>[
-      ArnaIconButton(
+      ArnaButton.icon(
         icon: Icons.info_outlined,
+        buttonType: ButtonType.borderless,
         onPressed: () => showArnaAboutDialog(
           context: context,
           applicationIcon: const ArnaLogo(size: Styles.base * 30),
@@ -118,8 +113,9 @@ class _HomeState extends ConsumerState<Home> {
         ),
         tooltipMessage: Strings.about,
       ),
-      ArnaIconButton(
+      ArnaButton.icon(
         icon: Icons.settings_outlined,
+        buttonType: ButtonType.borderless,
         onPressed: () => showArnaPopupDialog(
           context: context,
           title: Strings.settings,

@@ -338,9 +338,10 @@ class ArnaTextSelectionToolbarButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaBorderlessButton(
+    return ArnaButton(
       icon: icon,
       onPressed: onPressed,
+      buttonType: ButtonType.borderless,
       tooltipMessage: label,
     );
   }

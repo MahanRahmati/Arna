@@ -16,7 +16,7 @@ class Banners extends ConsumerWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          ArnaTextButton(
+          ArnaButton.text(
             label: Strings.showBanner,
             onPressed: () {
               if (!showBanner) {
@@ -24,7 +24,7 @@ class Banners extends ConsumerWidget {
               }
             },
           ),
-          ArnaTextButton(
+          ArnaButton.text(
             label: Strings.showSnackBar,
             onPressed: () {
               showArnaSnackbar(

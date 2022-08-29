@@ -45,7 +45,7 @@ class ArnaSliverHeaderBar extends StatelessWidget {
 
   /// A list of Widgets to display in a row after the [middle] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// Typically these widgets are [ArnaButton.icon]s representing common
   /// operations. For less common operations, consider using an
   /// [ArnaPopupMenuButton] as the last action.
   ///
@@ -122,7 +122,7 @@ class _ArnaHeaderBarSliverDelegate extends SliverPersistentHeaderDelegate {
 
   /// A list of Widgets to display in a row after the [middle] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common
+  /// Typically these widgets are [ArnaButton.icon]s representing common
   /// operations. For less common operations, consider using an
   /// [ArnaPopupMenuButton] as the last action.
   ///

@@ -24,7 +24,7 @@ class ArnaGridTileBar extends StatelessWidget {
 
   /// A widget to display before the title.
   ///
-  /// Typically an [Icon] or an [ArnaIconButton] widget.
+  /// Typically an [Icon] or an [ArnaButton.icon] widget.
   final Widget? leading;
 
   /// The primary content of the list item.
@@ -35,7 +35,7 @@ class ArnaGridTileBar extends StatelessWidget {
 
   /// A widget to display after the title.
   ///
-  /// Typically an [Icon] or an [ArnaIconButton] widget.
+  /// Typically an [Icon] or an [ArnaButton.icon] widget.
   final Widget? trailing;
 
   @override

@@ -42,6 +42,8 @@ export 'package:arna/src/containers/expansion_panel.dart';
 export 'package:arna/src/containers/grid_tile.dart';
 export 'package:arna/src/containers/grid_tile_bar.dart';
 export 'package:arna/src/containers/header_bar/header_bar.dart';
+export 'package:arna/src/containers/header_bar/header_bar_item.dart';
+export 'package:arna/src/containers/header_bar/overflow_handler.dart';
 export 'package:arna/src/containers/header_bar/sliver_header_bar.dart';
 export 'package:arna/src/containers/list.dart';
 export 'package:arna/src/containers/list_tile.dart';

@@ -737,7 +737,7 @@ class ArnaDropdownMenuItem<T> extends _ArnaDropdownMenuItemContainer {
 /// See also:
 ///
 ///  * [ArnaDropdownMenuItem], the class used to represent the [items].
-///  * [ArnaButton], [ArnaTextButton], ordinary buttons that trigger a single action.
+///  * [ArnaButton] ordinary button that triggers a single action.
 class ArnaDropdownButton<T> extends StatefulWidget {
   /// Creates a dropdown button.
   ///

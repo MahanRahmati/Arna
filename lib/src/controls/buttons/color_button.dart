@@ -4,13 +4,16 @@ import 'package:arna/arna.dart';
 class ArnaColorButton<T> extends StatelessWidget {
   /// Creates An Arna-styled color button.
   ///
-  /// The color button itself does not maintain any state. Instead, when the color button is selected, the widget calls
-  /// the [onPressed] callback. Most widgets that use a color button will listen for the [onPressed] callback and
-  /// rebuild the color button with a new [groupValue] to update the visual appearance of the color button.
+  /// The color button itself does not maintain any state. Instead, when the
+  /// color button is selected, the widget calls the [onPressed] callback. Most
+  /// widgets that use a color button will listen for the [onPressed] callback
+  /// and rebuild the color button with a new [groupValue] to update the visual
+  /// appearance of the color button.
   ///
   /// The following arguments are required:
   ///
-  /// * [value] and [groupValue] together determine whether the color button is selected.
+  /// * [value] and [groupValue] together determine whether the color button is
+  ///   selected.
   /// * [onPressed] is called when the user selects this color button.
   const ArnaColorButton({
     super.key,
@@ -29,7 +32,8 @@ class ArnaColorButton<T> extends StatelessWidget {
 
   /// The currently selected value for a group of color buttons.
   ///
-  /// This color button is considered selected if its [value] matches the [groupValue].
+  /// This color button is considered selected if its [value] matches the
+  /// [groupValue].
   final T? groupValue;
 
   /// The callback that is called when a button is tapped.
@@ -41,10 +45,12 @@ class ArnaColorButton<T> extends StatelessWidget {
   /// Whether this button is focusable or not.
   final bool isFocusable;
 
-  /// Whether this button should focus itself if nothing else is already focused.
+  /// Whether this button should focus itself if nothing else is already
+  /// focused.
   final bool autofocus;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the button.
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// button.
   final MouseCursor cursor;
 
   /// The semantic label of the button.
@@ -88,6 +94,7 @@ class ArnaColorButton<T> extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.colorButtonBorderRadius,
                     border: Border.all(
+                      width: 0.0,
                       color: ArnaDynamicColor.resolve(
                         !enabled
                             ? ArnaDynamicColor.applyOverlay(
@@ -103,15 +110,15 @@ class ArnaColorButton<T> extends StatelessWidget {
                   ),
                 ),
                 AnimatedContainer(
-                  height: Styles.checkBoxSize,
-                  width: Styles.checkBoxSize,
+                  height: Styles.colorButtonCheckBoxSize,
+                  width: Styles.colorButtonCheckBoxSize,
                   duration: Styles.basicDuration,
                   curve: Styles.basicCurve,
                   child: Opacity(
                     opacity: selected && enabled ? 1.0 : 0.0,
                     child: Icon(
                       Icons.check_outlined,
-                      size: Styles.checkBoxIconSize,
+                      size: Styles.iconSize,
                       color: ArnaDynamicColor.onBackgroundColor(color),
                     ),
                   ),

@@ -18,6 +18,15 @@
 - Update ArnaExpansionPanel
 - Add ArnaSliverHeaderBar
 - [BREAKING] Update ArnaHeaderBar
+- Update ArnaButton
+- Update ArnaBackButton
+- Update ArnaCloseButton
+- Update ArnaColorButton
+- Update ArnaLinkedButtons
+- [BREAKING] Remove ArnaBorderlessButton
+- [BREAKING] Remove ArnaIconButton
+- [BREAKING] Remove ArnaPillButton
+- [BREAKING] Remove ArnaTextButton
 
 ## 1.0.5
 

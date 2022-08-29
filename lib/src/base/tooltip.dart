@@ -14,7 +14,7 @@ typedef ArnaTooltipTriggeredCallback = void Function();
 ///
 /// Tooltips provide text labels which help explain the function of a button or other user interface action.
 ///
-/// Many widgets, such as [ArnaButton], [ArnaIconButton], and [ArnaTextButton] have a `tooltipMessage` property that,
+/// Many widgets, such as [ArnaButton] have a `tooltipMessage` property that,
 /// when non-null, causes the widget to include an [ArnaTooltip] in its build.
 ///
 /// Tooltips improve the accessibility of visual widgets by proving a textual representation of the widget, which, for

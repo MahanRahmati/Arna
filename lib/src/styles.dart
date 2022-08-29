@@ -54,7 +54,7 @@ abstract class Styles {
   static const double drawerBorderRadiusSize = base * 2.5;
 
   /// Icon size
-  static const double iconSize = base * 3;
+  static const double iconSize = base * 3.5;
 
   /// Checkbox size
   static const double checkBoxSize = base * 3;
@@ -68,6 +68,9 @@ abstract class Styles {
   /// Handle size
   static const double handleSize = base * 3;
 
+  /// Color button checkbox size
+  static const double colorButtonCheckBoxSize = base * 3.5;
+
   /// Switch height
   static const double switchHeight = base * 4;
 
@@ -76,9 +79,6 @@ abstract class Styles {
 
   /// Title baseline
   static const double titleBaseline = base * 4;
-
-  /// Button size
-  static const double buttonSize = base * 5;
 
   /// Indicator size
   static const double indicatorSize = base * 5;
@@ -92,14 +92,14 @@ abstract class Styles {
   /// Year picker row height
   static const double yearPickerRowHeight = base * 5;
 
+  /// Button size
+  static const double buttonSize = base * 6;
+
   /// Picker top row height
   static const double pickerTopRowHeight = base * 6;
 
   /// Avatar size
   static const double avatarSize = base * 6;
-
-  /// Huge button size
-  static const double hugeButtonSize = base * 6.5;
 
   /// Switch width
   static const double switchWidth = base * 7;
@@ -121,6 +121,9 @@ abstract class Styles {
 
   /// Tab height
   static const double tabHeight = base * 7;
+
+  /// Huge button size
+  static const double hugeButtonSize = base * 7.5;
 
   /// Expansion panel minimum height
   static const double expansionPanelMinHeight = base * 8;
@@ -322,6 +325,11 @@ abstract class Styles {
   /// Switch border radius
   static BorderRadius switchBorderRadius = const BorderRadius.all(
     Radius.circular(switchHeight),
+  );
+
+  /// Pill button border radius
+  static BorderRadius pillButtonBorderRadius = const BorderRadius.all(
+    Radius.circular(buttonSize),
   );
 
   /// Color button border radius

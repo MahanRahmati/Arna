@@ -37,7 +37,7 @@ import 'package:flutter/material.dart' show MaterialLocalizations;
 ///           ),
 ///         ),
 ///         actions: <Widget>[
-///           ArnaTextButton(
+///           ArnaButton.text(
 ///             label: 'Approve',
 ///             onPressed: () {
 ///               Navigator.of(context).pop();
@@ -79,7 +79,7 @@ class ArnaAlertDialog extends StatelessWidget {
 
   /// The (optional) set of actions that are displayed at the bottom of the dialog with an [OverflowBar].
   ///
-  /// Typically this is a list of [ArnaTextButton] widgets.
+  /// Typically this is a list of [ArnaButton.text] widgets.
   final List<Widget>? actions;
 
   /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the dialog

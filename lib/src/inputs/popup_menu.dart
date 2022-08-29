@@ -27,7 +27,7 @@ enum ArnaPopupMenuPosition {
 ///    line.
 ///  * [showArnaMenu], a method to dynamically show a popup menu at a given
 ///    location.
-///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a
+///  * [ArnaPopupMenuButton], an [ArnaButton.icon] that automatically shows a
 ///    menu when it is tapped.
 abstract class ArnaPopupMenuEntry extends StatefulWidget {
   /// Abstract const constructor. This constructor enables subclasses to
@@ -44,7 +44,7 @@ abstract class ArnaPopupMenuEntry extends StatefulWidget {
 ///  * [ArnaPopupMenuItem], for the kinds of items that this widget divides.
 ///  * [showArnaMenu], a method to dynamically show a popup menu at a given
 ///    location.
-///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a
+///  * [ArnaPopupMenuButton], an [ArnaButton.icon] that automatically shows a
 ///    menu when it is tapped.
 class ArnaPopupMenuDivider extends ArnaPopupMenuEntry {
   /// Creates a horizontal divider for a popup menu.
@@ -75,7 +75,7 @@ class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
 ///  * [ArnaPopupMenuDivider], which can be used to divide items from each other.
 ///  * [showArnaMenu], a method to dynamically show a popup menu at a given
 ///    location.
-///  * [ArnaPopupMenuButton], an [ArnaIconButton] that automatically shows a
+///  * [ArnaPopupMenuButton], an [ArnaButton.icon] that automatically shows a
 ///    menu when it is tapped.
 class ArnaPopupMenuItem extends ArnaPopupMenuEntry {
   /// Creates an item for a popup menu.
@@ -564,7 +564,7 @@ class _ArnaPopupMenuRoute extends PopupRoute<Never> {
 ///  * [ArnaPopupMenuItem], a popup menu entry for a single value.
 ///  * [ArnaPopupMenuDivider], a popup menu entry that is just a horizontal
 ///    line.
-///  * [ArnaPopupMenuButton], which provides an [ArnaIconButton] that shows a
+///  * [ArnaPopupMenuButton], which provides an [ArnaButton.icon] that shows a
 ///    menu by  calling this method automatically.
 ///  * [SemanticsConfiguration.namesRoute], for a description of edge triggered
 ///    semantics.
@@ -752,7 +752,7 @@ class ArnaPopupMenuButtonState extends State<ArnaPopupMenuButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaIconButton(
+    return ArnaButton.icon(
       icon: widget.icon ?? Icons.more_vert_outlined,
       onPressed: widget.enabled ? showArnaButtonMenu : null,
       tooltipMessage: widget.tooltipMessage ??

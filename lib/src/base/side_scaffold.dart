@@ -33,7 +33,7 @@ class ArnaSideScaffold extends StatefulWidget {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// Typically these widgets are [ArnaButton.icon]s representing common operations. For less common operations,
   /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
@@ -140,8 +140,9 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 if (compact && widget.items.length > 4 || medium)
-                  ArnaIconButton(
+                  ArnaButton.icon(
                     icon: Icons.menu_outlined,
+                    buttonType: ButtonType.borderless,
                     onPressed: () => _drawerOpenedCallback(true),
                     tooltipMessage: tooltip,
                     semanticLabel: tooltip,
@@ -357,7 +358,7 @@ class NavigationItem {
 
   /// A list of Widgets to display in a row after the [title] widget.
   ///
-  /// Typically these widgets are [ArnaIconButton]s representing common operations. For less common operations,
+  /// Typically these widgets are [ArnaButton.icon]s representing common operations. For less common operations,
   /// consider using an [ArnaPopupMenuButton] as the last action.
   ///
   /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each

@@ -1,7 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart' show defaultTargetPlatform;
 import 'package:flutter/gestures.dart' show DragStartBehavior;
-import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart' show CustomSemanticsAction;
 
 /// A list whose items the user can interactively reorder by dragging.

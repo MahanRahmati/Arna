@@ -1,7 +1,6 @@
 import 'dart:math' as math;
 
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart' show TextSelectionPoint;
 
 /// text selection controls.

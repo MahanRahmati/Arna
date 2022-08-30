@@ -1,7 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart'
     show LicenseEntry, LicenseParagraph, LicenseRegistry;
-import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// Displays an [ArnaLicensePage], which shows licenses for software used by the application.
 ///

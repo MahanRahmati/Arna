@@ -27,6 +27,8 @@
 - [BREAKING] Remove ArnaIconButton
 - [BREAKING] Remove ArnaPillButton
 - [BREAKING] Remove ArnaTextButton
+- [BREAKING] Update ArnaScaffold
+- [BREAKING] Update ArnaPopupDialog
 
 ## 1.0.5
 

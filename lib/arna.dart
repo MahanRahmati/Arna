@@ -81,6 +81,6 @@ export 'package:arna/src/utils/edge_insets.dart';
 export 'package:arna/src/utils/helpers.dart';
 export 'package:arna/src/utils/string_extensions.dart';
 export 'package:flutter/foundation.dart' show kIsWeb;
-export 'package:flutter/material.dart' show Icons;
+export 'package:flutter/material.dart' show Icons, MaterialLocalizations;
 export 'package:flutter/services.dart' show Brightness;
 export 'package:flutter/widgets.dart';

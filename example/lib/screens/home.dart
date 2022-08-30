@@ -95,10 +95,10 @@ class _HomeState extends ConsumerState<Home> {
       builder: (_) => const Tabs(),
     );
 
-    final List<Widget> actions = <Widget>[
-      ArnaButton.icon(
+    final List<ArnaHeaderBarItem> actions = <ArnaHeaderBarItem>[
+      ArnaHeaderBarButton(
         icon: Icons.info_outlined,
-        buttonType: ButtonType.borderless,
+        label: Strings.about,
         onPressed: () => showArnaAboutDialog(
           context: context,
           applicationIcon: const ArnaLogo(size: Styles.base * 30),
@@ -111,18 +111,16 @@ class _HomeState extends ConsumerState<Home> {
             path: 'MahanRahmati/Arna/issues',
           ),
         ),
-        tooltipMessage: Strings.about,
       ),
-      ArnaButton.icon(
+      ArnaHeaderBarButton(
         icon: Icons.settings_outlined,
-        buttonType: ButtonType.borderless,
+        label: Strings.settings,
         onPressed: () => showArnaPopupDialog(
           context: context,
           title: Strings.settings,
           builder: (BuildContext context) => const Settings(),
         ),
-        tooltipMessage: Strings.settings,
-      )
+      ),
     ];
 
     const Widget leadingWidget = ArnaLogo(size: Styles.base * 10);

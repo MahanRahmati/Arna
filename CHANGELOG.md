@@ -29,6 +29,10 @@
 - [BREAKING] Remove ArnaTextButton
 - [BREAKING] Update ArnaScaffold
 - [BREAKING] Update ArnaPopupDialog
+- Add ArnaHeaderBarButton
+- Add ArnaHeaderBarDivider
+- Add ArnaHeaderBarItem
+- Add OverflowHandler
 
 ## 1.0.5
 

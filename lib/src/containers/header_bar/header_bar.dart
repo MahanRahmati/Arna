@@ -10,7 +10,7 @@ import 'package:arna/arna.dart';
 ///
 ///  * [ArnaScaffold], which displays the [ArnaHeaderBar].
 ///  * [ArnaSliverHeaderBar] for a header bar to be placed in a scrolling list.
-class ArnaHeaderBar extends StatelessWidget implements PreferredSizeWidget {
+class ArnaHeaderBar extends StatefulWidget implements PreferredSizeWidget {
   /// Creates a header bar in the Arna style.
   const ArnaHeaderBar({
     super.key,
@@ -39,15 +39,13 @@ class ArnaHeaderBar extends StatelessWidget implements PreferredSizeWidget {
   /// The middle widget laid out within the header bar.
   final Widget? middle;
 
-  /// A list of Widgets to display in a row after the [middle] widget.
+  /// A list of [ArnaHeaderBarItem] widgets to display in a row after the
+  /// [middle] widget, as the header bar actions.
   ///
-  /// Typically these widgets are [ArnaButton.icon]s representing common
-  /// operations. For less common operations, consider using an
-  /// [ArnaPopupMenuButton] as the last action.
-  ///
-  /// The [actions] become the trailing component of the [NavigationToolbar]
-  /// built by this widget.
-  final List<Widget>? actions;
+  /// If the header bar actions exceed the available header bar width (e.g. when
+  /// the window is resized), the overflowed actions can be opened from the
+  /// [ArnaPopupMenuButton] at the end of the header bar.
+  final List<ArnaHeaderBarItem>? actions;
 
   /// The border of the header bar.
   ///
@@ -63,6 +61,23 @@ class ArnaHeaderBar extends StatelessWidget implements PreferredSizeWidget {
       );
 
   @override
+  State<ArnaHeaderBar> createState() => _ArnaHeaderBarState();
+}
+
+/// The [State] for an [ArnaHeaderBar].
+class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
+  int overflowedActionsCount = 0;
+
+  @override
+  void didUpdateWidget(ArnaHeaderBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.actions != null &&
+        widget.actions!.length != oldWidget.actions!.length) {
+      overflowedActionsCount = 0;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ArnaScaffoldState? scaffold = ArnaScaffold.maybeOf(context);
     final ModalRoute<Object?>? route = ModalRoute.of(context);
@@ -72,13 +87,12 @@ class ArnaHeaderBar extends StatelessWidget implements PreferredSizeWidget {
     final bool useCloseButton =
         route is ArnaPageRoute && route.fullscreenDialog;
 
-    Widget? leadingContent;
-
-    if (leading != null) {
-      leadingContent = leading;
-    } else if (leading == null && automaticallyImplyLeading) {
+    Widget? leading;
+    if (widget.leading != null) {
+      leading = widget.leading;
+    } else if (widget.leading == null && widget.automaticallyImplyLeading) {
       if (hasDrawer) {
-        leadingContent = ArnaButton.icon(
+        leading = ArnaButton.icon(
           icon: Icons.menu_outlined,
           buttonType: ButtonType.borderless,
           onPressed: () => ArnaScaffold.of(context).openDrawer(),
@@ -87,18 +101,45 @@ class ArnaHeaderBar extends StatelessWidget implements PreferredSizeWidget {
           semanticLabel: MaterialLocalizations.of(context).drawerLabel,
         );
       } else if (canPop) {
-        leadingContent =
+        leading =
             useCloseButton ? const ArnaCloseButton() : const ArnaBackButton();
       }
     }
+
+    // Collect the header bar action widgets that can be shown inside the
+    // header bar and the ones that have overflowed.
+    List<ArnaHeaderBarItem>? inHeaderBarActions = <ArnaHeaderBarItem>[];
+    List<ArnaHeaderBarItem> overflowedActions = <ArnaHeaderBarItem>[];
+    if (widget.actions != null && widget.actions!.isNotEmpty) {
+      inHeaderBarActions = widget.actions ?? <ArnaHeaderBarItem>[];
+      overflowedActions = inHeaderBarActions
+          .sublist(inHeaderBarActions.length - overflowedActionsCount)
+          .toList();
+    }
+
+    final Widget trailing = OverflowHandler(
+      overflowBreakpoint: Styles.menuMaxWidth,
+      overflowWidget: ArnaPopupMenuButton(
+        buttonType: ButtonType.borderless,
+        itemBuilder: (BuildContext context) => overflowedActions
+            .map((ArnaHeaderBarItem action) => action.overflowed(context))
+            .toList(),
+      ),
+      children: inHeaderBarActions
+          .map((ArnaHeaderBarItem e) => e.inHeaderBar(context))
+          .toList(),
+      overflowChangedCallback: (List<int> hiddenItems) {
+        setState(() => overflowedActionsCount = hiddenItems.length);
+      },
+    );
 
     return Semantics(
       explicitChildNodes: true,
       container: true,
       child: Container(
         decoration: BoxDecoration(
-          border: border,
-          color: backgroundColor ??
+          border: widget.border,
+          color: widget.backgroundColor ??
               ArnaColors.backgroundColor.resolveFrom(context),
         ),
         alignment: Alignment.topCenter,
@@ -110,20 +151,16 @@ class ArnaHeaderBar extends StatelessWidget implements PreferredSizeWidget {
               child: SizedBox(
                 height: Styles.headerBarHeight,
                 child: NavigationToolbar(
-                  leading: leadingContent,
-                  middle: middle != null
-                      ? middle!
-                      : title != null
+                  leading: leading,
+                  middle: widget.middle != null
+                      ? widget.middle!
+                      : widget.title != null
                           ? Text(
-                              title!,
+                              widget.title!,
                               style: ArnaTheme.of(context).textTheme.title,
                             )
                           : null,
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[...?actions],
-                  ),
+                  trailing: trailing,
                   middleSpacing: Styles.smallPadding,
                 ),
               ),

@@ -6,14 +6,12 @@ class ArnaHeaderBarDivider extends ArnaHeaderBarItem {
   const ArnaHeaderBarDivider({super.key});
 
   @override
-  Widget build(BuildContext context, ArnaHeaderBarItemDisplayMode displayMode) {
-    if (displayMode == ArnaHeaderBarItemDisplayMode.inHeaderBar) {
-      return const SizedBox.shrink();
-    } else {
-      return const Padding(
-        padding: Styles.popupMenuDividerPadding,
-        child: ArnaDivider(),
-      );
-    }
+  Widget inHeaderBar(BuildContext context) {
+    return const SizedBox.shrink();
+  }
+
+  @override
+  ArnaPopupMenuEntry overflowed(BuildContext context) {
+    return const ArnaPopupMenuDivider();
   }
 }

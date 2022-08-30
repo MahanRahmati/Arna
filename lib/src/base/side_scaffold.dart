@@ -30,14 +30,13 @@ class ArnaSideScaffold extends StatefulWidget {
   /// The middle widget laid out within the header bar.
   final Widget? headerBarMiddle;
 
-  /// A list of Widgets to display in a row after the [title] widget.
+  /// A list of [ArnaHeaderBarItem] widgets to display in a row after the
+  /// [middle] widget, as the header bar actions.
   ///
-  /// Typically these widgets are [ArnaButton.icon]s representing common operations. For less common operations,
-  /// consider using an [ArnaPopupMenuButton] as the last action.
-  ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
-  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
-  final List<Widget>? actions;
+  /// If the header bar actions exceed the available header bar width (e.g. when
+  /// the window is resized), the overflowed actions can be opened from the
+  /// [ArnaPopupMenuButton] at the end of the header bar.
+  final List<ArnaHeaderBarItem>? actions;
 
   /// The leading widget in the side bar that is placed above the items.
   ///
@@ -154,7 +153,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               ),
               title: widget.title,
               middle: widget.headerBarMiddle,
-              actions: <Widget>[
+              actions: <ArnaHeaderBarItem>[
                 ...?widget.items[_currentIndex].actions,
                 ...?widget.actions,
               ],
@@ -240,7 +239,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   ),
                   title: widget.title,
                   middle: widget.headerBarMiddle,
-                  actions: <Widget>[
+                  actions: <ArnaHeaderBarItem>[
                     ...?widget.items[0].actions,
                     ...?widget.actions,
                   ],
@@ -359,14 +358,13 @@ class NavigationItem {
   /// The leading widget laid out within the header bar.
   final Widget? headerBarLeading;
 
-  /// A list of Widgets to display in a row after the [title] widget.
+  /// A list of [ArnaHeaderBarItem] widgets to display in a row after the
+  /// [middle] widget, as the header bar actions.
   ///
-  /// Typically these widgets are [ArnaButton.icon]s representing common operations. For less common operations,
-  /// consider using an [ArnaPopupMenuButton] as the last action.
-  ///
-  /// The [actions] become the trailing component of the [NavigationToolbar] built by this widget. The height of each
-  /// action is constrained to be no bigger than the [Styles.headerBarHeight].
-  final List<Widget>? actions;
+  /// If the header bar actions exceed the available header bar width (e.g. when
+  /// the window is resized), the overflowed actions can be opened from the
+  /// [ArnaPopupMenuButton] at the end of the header bar.
+  final List<ArnaHeaderBarItem>? actions;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

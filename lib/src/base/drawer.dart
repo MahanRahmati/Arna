@@ -1,7 +1,6 @@
 import 'dart:math' show min;
 
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// A panel that slides in horizontally from the edge of a screen to show navigation links in an application.
 ///
@@ -107,13 +106,13 @@ class ArnaDrawerController extends StatefulWidget {
   final bool isDrawerOpen;
 
   @override
-  State<ArnaDrawerController> createState() => _ArnaDrawerControllerState();
+  ArnaDrawerControllerState createState() => ArnaDrawerControllerState();
 }
 
 /// State for an [ArnaDrawerController].
 ///
 /// Used by [ArnaSideScaffold] to [open] and [close] the drawer.
-class _ArnaDrawerControllerState extends State<ArnaDrawerController>
+class ArnaDrawerControllerState extends State<ArnaDrawerController>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late ColorTween _scrimColorTween;

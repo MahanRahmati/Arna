@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/services.dart' show TextInputAction;
 
 // TODO: Remove focus node when showSearch is false.

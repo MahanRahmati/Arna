@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 
 /// Implements the side view layout structure.
 ///
@@ -136,28 +135,30 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
         Padding(
           padding: ArnaEdgeInsets.start(expanded ? padding + 1 : 0),
           child: ArnaScaffold(
-            headerBarLeading: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                if (compact && widget.items.length > 4 || medium)
-                  ArnaButton.icon(
-                    icon: Icons.menu_outlined,
-                    buttonType: ButtonType.borderless,
-                    onPressed: () => _drawerOpenedCallback(true),
-                    tooltipMessage: tooltip,
-                    semanticLabel: tooltip,
-                  ),
-                if (widget.headerBarLeading != null) widget.headerBarLeading!,
-                if (widget.items[_currentIndex].headerBarLeading != null)
-                  widget.items[_currentIndex].headerBarLeading!,
+            headerBar: ArnaHeaderBar(
+              leading: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  if (compact && widget.items.length > 4 || medium)
+                    ArnaButton.icon(
+                      icon: Icons.menu_outlined,
+                      buttonType: ButtonType.borderless,
+                      onPressed: () => _drawerOpenedCallback(true),
+                      tooltipMessage: tooltip,
+                      semanticLabel: tooltip,
+                    ),
+                  if (widget.headerBarLeading != null) widget.headerBarLeading!,
+                  if (widget.items[_currentIndex].headerBarLeading != null)
+                    widget.items[_currentIndex].headerBarLeading!,
+                ],
+              ),
+              title: widget.title,
+              middle: widget.headerBarMiddle,
+              actions: <Widget>[
+                ...?widget.items[_currentIndex].actions,
+                ...?widget.actions,
               ],
             ),
-            title: widget.title,
-            headerBarMiddle: widget.headerBarMiddle,
-            actions: <Widget>[
-              ...?widget.items[_currentIndex].actions,
-              ...?widget.actions,
-            ],
             body: Column(
               children: <Widget>[
                 Expanded(
@@ -228,20 +229,22 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
         : widget.items.length > 1
             ? sideScaffold
             : ArnaScaffold(
-                headerBarLeading: Row(
-                  children: <Widget>[
-                    if (widget.headerBarLeading != null)
-                      widget.headerBarLeading!,
-                    if (widget.items[0].headerBarLeading != null)
-                      widget.items[0].headerBarLeading!,
+                headerBar: ArnaHeaderBar(
+                  leading: Row(
+                    children: <Widget>[
+                      if (widget.headerBarLeading != null)
+                        widget.headerBarLeading!,
+                      if (widget.items[0].headerBarLeading != null)
+                        widget.items[0].headerBarLeading!,
+                    ],
+                  ),
+                  title: widget.title,
+                  middle: widget.headerBarMiddle,
+                  actions: <Widget>[
+                    ...?widget.items[0].actions,
+                    ...?widget.actions,
                   ],
                 ),
-                title: widget.title,
-                headerBarMiddle: widget.headerBarMiddle,
-                actions: <Widget>[
-                  ...?widget.items[0].actions,
-                  ...?widget.actions,
-                ],
                 body: widget.items[0].builder(context),
                 resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
               );

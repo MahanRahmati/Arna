@@ -1,5 +1,4 @@
 import 'package:arna/arna.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart' show TextSelectionPoint;
 
 /// Desktop text selection controls.

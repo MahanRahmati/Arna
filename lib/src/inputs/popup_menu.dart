@@ -1,6 +1,5 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 

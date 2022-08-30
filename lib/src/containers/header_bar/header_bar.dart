@@ -10,12 +10,13 @@ import 'package:arna/arna.dart';
 ///
 ///  * [ArnaScaffold], which displays the [ArnaHeaderBar].
 ///  * [ArnaSliverHeaderBar] for a header bar to be placed in a scrolling list.
-class ArnaHeaderBar extends StatelessWidget {
+class ArnaHeaderBar extends StatelessWidget implements PreferredSizeWidget {
   /// Creates a header bar in the Arna style.
   const ArnaHeaderBar({
     super.key,
     this.leading,
     this.automaticallyImplyLeading = true,
+    this.title,
     this.middle,
     this.actions,
     this.border,
@@ -31,6 +32,9 @@ class ArnaHeaderBar extends StatelessWidget {
   /// leading widget should be.
   /// If leading widget is not null, this parameter has no effect.
   final bool automaticallyImplyLeading;
+
+  /// The title displayed in the header bar.
+  final String? title;
 
   /// The middle widget laid out within the header bar.
   final Widget? middle;
@@ -54,18 +58,38 @@ class ArnaHeaderBar extends StatelessWidget {
   final Color? backgroundColor;
 
   @override
+  Size get preferredSize => const Size.fromHeight(
+        Styles.headerBarHeight + Styles.padding,
+      );
+
+  @override
   Widget build(BuildContext context) {
-    Widget? leadingContent;
+    final ArnaScaffoldState? scaffold = ArnaScaffold.maybeOf(context);
     final ModalRoute<Object?>? route = ModalRoute.of(context);
+
+    final bool hasDrawer = scaffold?.hasDrawer ?? false;
+    final bool canPop = route?.canPop ?? false;
     final bool useCloseButton =
         route is ArnaPageRoute && route.fullscreenDialog;
-    final bool canPop = route?.canPop ?? false;
+
+    Widget? leadingContent;
 
     if (leading != null) {
       leadingContent = leading;
-    } else if (automaticallyImplyLeading && canPop) {
-      leadingContent =
-          useCloseButton ? const ArnaCloseButton() : const ArnaBackButton();
+    } else if (leading == null && automaticallyImplyLeading) {
+      if (hasDrawer) {
+        leadingContent = ArnaButton.icon(
+          icon: Icons.menu_outlined,
+          buttonType: ButtonType.borderless,
+          onPressed: () => ArnaScaffold.of(context).openDrawer(),
+          tooltipMessage:
+              MaterialLocalizations.of(context).openAppDrawerTooltip,
+          semanticLabel: MaterialLocalizations.of(context).drawerLabel,
+        );
+      } else if (canPop) {
+        leadingContent =
+            useCloseButton ? const ArnaCloseButton() : const ArnaBackButton();
+      }
     }
 
     return Semantics(
@@ -87,7 +111,14 @@ class ArnaHeaderBar extends StatelessWidget {
                 height: Styles.headerBarHeight,
                 child: NavigationToolbar(
                   leading: leadingContent,
-                  middle: middle,
+                  middle: middle != null
+                      ? middle!
+                      : title != null
+                          ? Text(
+                              title!,
+                              style: ArnaTheme.of(context).textTheme.title,
+                            )
+                          : null,
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,

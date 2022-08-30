@@ -222,10 +222,12 @@ class _LateralPageState extends State<_LateralPage> {
         SizedBox(
           width: Styles.masterSideWidth,
           child: ArnaScaffold(
-            headerBarLeading: widget.headerBarLeading,
-            title: widget.title,
-            headerBarMiddle: widget.headerBarMiddle,
-            actions: widget.actions,
+            headerBar: ArnaHeaderBar(
+              leading: widget.headerBarLeading,
+              title: widget.title,
+              middle: widget.headerBarMiddle,
+              actions: widget.actions,
+            ),
             body: _MasterItemBuilder(
               leading: widget.leading,
               items: widget.items,
@@ -246,10 +248,11 @@ class _LateralPageState extends State<_LateralPage> {
           padding: const ArnaEdgeInsets.start(Styles.masterSideWidth + 1),
           child: widget.items.length > _currentIndex
               ? ArnaScaffold(
-                  headerBarLeading:
-                      widget.items[_currentIndex].headerBarLeading,
-                  title: widget.items[_currentIndex].title,
-                  actions: widget.items[_currentIndex].actions,
+                  headerBar: ArnaHeaderBar(
+                    leading: widget.items[_currentIndex].headerBarLeading,
+                    title: widget.items[_currentIndex].title,
+                    actions: widget.items[_currentIndex].actions,
+                  ),
                   body: ArnaPageTransitionSwitcher(
                     transitionBuilder: (
                       Widget child,
@@ -278,9 +281,11 @@ class _LateralPageState extends State<_LateralPage> {
                       child: widget.emptyBody,
                     )
                   : ArnaScaffold(
-                      headerBarLeading: widget.items[0].headerBarLeading,
-                      title: widget.items[0].title,
-                      actions: widget.items[0].actions,
+                      headerBar: ArnaHeaderBar(
+                        leading: widget.items[0].headerBarLeading,
+                        title: widget.items[0].title,
+                        actions: widget.items[0].actions,
+                      ),
                       body: widget.items[0].builder(context),
                       resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
                     ),
@@ -398,15 +403,17 @@ class _NestedPageState extends State<_NestedPage> {
           },
           child: BlockSemantics(
             child: ArnaScaffold(
-              headerBarLeading: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  ArnaBackButton(onPressed: _goBack),
-                  if (page.headerBarLeading != null) page.headerBarLeading!,
-                ],
+              headerBar: ArnaHeaderBar(
+                leading: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ArnaBackButton(onPressed: _goBack),
+                    if (page.headerBarLeading != null) page.headerBarLeading!,
+                  ],
+                ),
+                title: page.title,
+                actions: page.actions,
               ),
-              title: page.title,
-              actions: page.actions,
               body: page.builder(context),
               resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
             ),
@@ -430,10 +437,12 @@ class _NestedPageState extends State<_NestedPage> {
             ArnaPageRoute<dynamic>(
               builder: (BuildContext context) {
                 return ArnaScaffold(
-                  headerBarLeading: widget.headerBarLeading,
-                  title: widget.title,
-                  headerBarMiddle: widget.headerBarMiddle,
-                  actions: widget.actions,
+                  headerBar: ArnaHeaderBar(
+                    leading: widget.headerBarLeading,
+                    title: widget.title,
+                    middle: widget.headerBarMiddle,
+                    actions: widget.actions,
+                  ),
                   body: _MasterItemBuilder(
                     leading: widget.leading,
                     items: widget.items,

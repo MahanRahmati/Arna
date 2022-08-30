@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:arna/arna.dart';
 import 'package:flutter/foundation.dart' show precisionErrorTolerance;
-import 'package:flutter/material.dart' show MaterialLocalizations;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart' show LogicalKeyboardKey;
 

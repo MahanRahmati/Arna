@@ -36,38 +36,42 @@ class ArnaBottomNavigationBar extends StatelessWidget {
     return Semantics(
       explicitChildNodes: true,
       container: true,
-      child: Container(
-        alignment: Alignment.bottomCenter,
-        color: ArnaColors.headerColor.resolveFrom(context),
-        child: SafeArea(
-          top: false,
+      child: SafeArea(
+        top: false,
+        child: ColoredBox(
+          color: ArnaColors.headerColor.resolveFrom(context),
           child: FocusTraversalGroup(
-            child: SizedBox(
-              height: Styles.bottomNavigationBarHeight,
-              child: Padding(
-                padding: Styles.small,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    for (int i = 0; i < destinations.length; i += 1)
-                      ArnaBottomNavigationBarItem(
-                        label: destinations[i].label,
-                        icon: destinations[i].icon,
-                        selectedIcon: destinations[i].selectedIcon,
-                        active: selectedIndex == i,
-                        onPressed: () {
-                          if (onDestinationSelected != null) {
-                            onDestinationSelected?.call(i);
-                          }
-                        },
-                        semanticLabel: localizations.tabLabel(
-                          tabIndex: i + 1,
-                          tabCount: destinations.length,
-                        ),
-                      ),
-                  ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const ArnaDivider(),
+                SizedBox(
+                  height: Styles.bottomNavigationBarHeight,
+                  child: Padding(
+                    padding: Styles.small,
+                    child: Row(
+                      children: <Widget>[
+                        for (int i = 0; i < destinations.length; i += 1)
+                          ArnaBottomNavigationBarItem(
+                            label: destinations[i].label,
+                            icon: destinations[i].icon,
+                            selectedIcon: destinations[i].selectedIcon,
+                            active: selectedIndex == i,
+                            onPressed: () {
+                              if (onDestinationSelected != null) {
+                                onDestinationSelected?.call(i);
+                              }
+                            },
+                            semanticLabel: localizations.tabLabel(
+                              tabIndex: i + 1,
+                              tabCount: destinations.length,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),

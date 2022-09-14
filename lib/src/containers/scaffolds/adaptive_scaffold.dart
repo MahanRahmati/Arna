@@ -108,8 +108,28 @@ class ArnaAdaptiveScaffold extends StatefulWidget {
 }
 
 class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
+  SlotLayoutConfig? checkSlot({
+    required Key key,
+    required WidgetBuilder? builder,
+    bool secondary = false,
+  }) {
+    return (builder != ArnaAdaptiveScaffold.emptyBuilder)
+        ? SlotLayout.from(
+            key: key,
+            inAnimation: secondary ? ArnaAdaptiveScaffold.fadeIn : null,
+            outAnimation: secondary
+                ? ArnaAdaptiveScaffold.fadeOut
+                : ArnaAdaptiveScaffold.stayOnScreen,
+            builder: builder,
+          )
+        : null;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final ArnaNavigationDestination destination =
+        widget.destinations[widget.selectedIndex];
+
     return ArnaScaffold(
       drawer:
           Breakpoints.small.isActive(context) && widget.destinations.length > 4
@@ -187,43 +207,23 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
               key: const Key('body'),
               inAnimation: ArnaAdaptiveScaffold.fadeIn,
               outAnimation: ArnaAdaptiveScaffold.fadeOut,
-              builder: widget.destinations[widget.selectedIndex].body,
+              builder: destination.body,
             ),
-            if (widget.destinations[widget.selectedIndex].smallBody != null)
-              Breakpoints.small: (widget
-                          .destinations[widget.selectedIndex].smallBody !=
-                      ArnaAdaptiveScaffold.emptyBuilder)
-                  ? SlotLayout.from(
-                      key: const Key('smallBody'),
-                      inAnimation: ArnaAdaptiveScaffold.fadeIn,
-                      outAnimation: ArnaAdaptiveScaffold.fadeOut,
-                      builder:
-                          widget.destinations[widget.selectedIndex].smallBody,
-                    )
-                  : null,
-            if (widget.destinations[widget.selectedIndex].body != null)
-              Breakpoints.medium: (widget
-                          .destinations[widget.selectedIndex].body !=
-                      ArnaAdaptiveScaffold.emptyBuilder)
-                  ? SlotLayout.from(
-                      key: const Key('body'),
-                      inAnimation: ArnaAdaptiveScaffold.fadeIn,
-                      outAnimation: ArnaAdaptiveScaffold.fadeOut,
-                      builder: widget.destinations[widget.selectedIndex].body,
-                    )
-                  : null,
-            if (widget.destinations[widget.selectedIndex].largeBody != null)
-              Breakpoints.large: (widget
-                          .destinations[widget.selectedIndex].largeBody !=
-                      ArnaAdaptiveScaffold.emptyBuilder)
-                  ? SlotLayout.from(
-                      key: const Key('largeBody'),
-                      inAnimation: ArnaAdaptiveScaffold.fadeIn,
-                      outAnimation: ArnaAdaptiveScaffold.fadeOut,
-                      builder:
-                          widget.destinations[widget.selectedIndex].largeBody,
-                    )
-                  : null,
+            if (destination.smallBody != null)
+              Breakpoints.small: checkSlot(
+                key: const Key('smallBody'),
+                builder: destination.smallBody,
+              ),
+            if (destination.body != null)
+              Breakpoints.medium: checkSlot(
+                key: const Key('body'),
+                builder: destination.body,
+              ),
+            if (destination.largeBody != null)
+              Breakpoints.large: checkSlot(
+                key: const Key('largeBody'),
+                builder: destination.largeBody,
+              ),
           },
         ),
         secondaryBody: SlotLayout(
@@ -231,43 +231,26 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
             Breakpoints.standard: SlotLayout.from(
               key: const Key('secondaryBody'),
               outAnimation: ArnaAdaptiveScaffold.stayOnScreen,
-              builder: widget.destinations[widget.selectedIndex].secondaryBody,
+              builder: destination.secondaryBody,
             ),
-            if (widget.destinations[widget.selectedIndex].smallSecondaryBody !=
-                null)
-              Breakpoints.small: (widget.destinations[widget.selectedIndex]
-                          .smallSecondaryBody !=
-                      ArnaAdaptiveScaffold.emptyBuilder)
-                  ? SlotLayout.from(
-                      key: const Key('smallSecondaryBody'),
-                      outAnimation: ArnaAdaptiveScaffold.stayOnScreen,
-                      builder: widget.destinations[widget.selectedIndex]
-                          .smallSecondaryBody,
-                    )
-                  : null,
-            if (widget.destinations[widget.selectedIndex].secondaryBody != null)
-              Breakpoints.medium:
-                  (widget.destinations[widget.selectedIndex].secondaryBody !=
-                          ArnaAdaptiveScaffold.emptyBuilder)
-                      ? SlotLayout.from(
-                          key: const Key('secondaryBody'),
-                          outAnimation: ArnaAdaptiveScaffold.stayOnScreen,
-                          builder: widget
-                              .destinations[widget.selectedIndex].secondaryBody,
-                        )
-                      : null,
-            if (widget.destinations[widget.selectedIndex].largeSecondaryBody !=
-                null)
-              Breakpoints.large: (widget.destinations[widget.selectedIndex]
-                          .largeSecondaryBody !=
-                      ArnaAdaptiveScaffold.emptyBuilder)
-                  ? SlotLayout.from(
-                      key: const Key('largeSecondaryBody'),
-                      outAnimation: ArnaAdaptiveScaffold.stayOnScreen,
-                      builder: widget.destinations[widget.selectedIndex]
-                          .largeSecondaryBody,
-                    )
-                  : null,
+            if (destination.smallSecondaryBody != null)
+              Breakpoints.small: checkSlot(
+                key: const Key('smallSecondaryBody'),
+                builder: destination.smallSecondaryBody,
+                secondary: true,
+              ),
+            if (destination.secondaryBody != null)
+              Breakpoints.medium: checkSlot(
+                key: const Key('secondaryBody'),
+                builder: destination.secondaryBody,
+                secondary: true,
+              ),
+            if (destination.largeSecondaryBody != null)
+              Breakpoints.large: checkSlot(
+                key: const Key('largeSecondaryBody'),
+                builder: destination.largeSecondaryBody,
+                secondary: true,
+              ),
           },
         ),
       ),

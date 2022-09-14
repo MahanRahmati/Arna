@@ -27,14 +27,14 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
     );
     final double bottom = size.height;
     double contentTop = 0.0;
-    double appBarHeight = 0.0;
+    double headerBarHeight = 0.0;
 
     if (hasChild(_ArnaScaffoldSlot.headerBar)) {
-      appBarHeight = layoutChild(
+      headerBarHeight = layoutChild(
         _ArnaScaffoldSlot.headerBar,
         fullWidthConstraints,
       ).height;
-      contentTop = appBarHeight;
+      contentTop = headerBarHeight;
       positionChild(_ArnaScaffoldSlot.headerBar, Offset.zero);
     }
 

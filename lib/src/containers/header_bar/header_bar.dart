@@ -145,7 +145,7 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
             ),
           ),
           color: widget.backgroundColor ??
-              ArnaColors.backgroundColor.resolveFrom(context),
+              ArnaColors.headerColor.resolveFrom(context),
         ),
         alignment: Alignment.topCenter,
         child: SafeArea(

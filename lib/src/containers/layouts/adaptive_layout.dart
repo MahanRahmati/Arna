@@ -55,7 +55,6 @@ class ArnaAdaptiveLayout extends StatefulWidget {
     this.bottomNavigation,
     this.bodyRatio,
     this.internalAnimations = true,
-    this.bodyOrientation = Axis.horizontal,
   });
 
   /// The slot placed on the beginning side of the app window.
@@ -102,12 +101,6 @@ class ArnaAdaptiveLayout extends StatefulWidget {
   ///
   /// Defaults to true.
   final bool internalAnimations;
-
-  /// The orientation of the body and secondaryBody. Either horizontal (side by
-  /// side) or vertical (top to bottom).
-  ///
-  /// Defaults to Axis.horizontal.
-  final Axis bodyOrientation;
 
   @override
   State<ArnaAdaptiveLayout> createState() => _ArnaAdaptiveLayoutState();
@@ -225,7 +218,6 @@ class _ArnaAdaptiveLayoutState extends State<ArnaAdaptiveLayout>
         bodyRatio: widget.bodyRatio,
         isAnimating: isAnimating,
         internalAnimations: widget.internalAnimations,
-        bodyOrientation: widget.bodyOrientation,
         textDirection: Directionality.of(context) == TextDirection.ltr,
         hinge: hinge,
       ),
@@ -245,7 +237,6 @@ class _ArnaAdaptiveLayoutDelegate extends MultiChildLayoutDelegate {
     required this.bodyRatio,
     required this.isAnimating,
     required this.internalAnimations,
-    required this.bodyOrientation,
     required this.textDirection,
     this.hinge,
   }) : super(relayout: controller);
@@ -257,7 +248,6 @@ class _ArnaAdaptiveLayoutDelegate extends MultiChildLayoutDelegate {
   final AnimationController controller;
   final double? bodyRatio;
   final bool internalAnimations;
-  final Axis bodyOrientation;
   final bool textDirection;
   final Rect? hinge;
 
@@ -347,7 +337,6 @@ class _ArnaAdaptiveLayoutDelegate extends MultiChildLayoutDelegate {
     final double remainingWidth = size.width - rightMargin - leftMargin;
     final double remainingHeight = size.height - bottomMargin;
     final double halfWidth = size.width / 2;
-    final double halfHeight = size.height / 2;
     final double hingeWidth = hinge != null ? hinge!.right - hinge!.left : 0;
 
     if (hasChild(_SlotIds.body.name) && hasChild(_SlotIds.secondaryBody.name)) {
@@ -362,7 +351,7 @@ class _ArnaAdaptiveLayoutDelegate extends MultiChildLayoutDelegate {
               Size(remainingWidth, remainingHeight),
             ),
           );
-        } else if (bodyOrientation == Axis.horizontal) {
+        } else {
           double beginWidth;
           if (bodyRatio == null) {
             beginWidth = halfWidth - leftMargin;
@@ -375,118 +364,71 @@ class _ArnaAdaptiveLayoutDelegate extends MultiChildLayoutDelegate {
               Size(animatedSize(beginWidth, remainingWidth), remainingHeight),
             ),
           );
-        } else {
-          double beginHeight;
-          if (bodyRatio == null) {
-            beginHeight = halfHeight;
-          } else {
-            beginHeight = remainingHeight * bodyRatio!;
-          }
-          currentBodySize = layoutChild(
-            _SlotIds.body.name,
-            BoxConstraints.tight(
-              Size(
-                remainingWidth,
-                animatedSize(beginHeight, remainingHeight),
-              ),
-            ),
-          );
         }
         layoutChild(_SlotIds.secondaryBody.name, BoxConstraints.loose(size));
       } else {
-        if (bodyOrientation == Axis.horizontal) {
-          // Take this path if the body and secondaryBody are laid out
-          // horizontally.
-          if (textDirection) {
-            // Take this path if the textDirection is LTR.
-            double finalBodySize;
-            double finalSBodySize;
-            if (hinge != null) {
-              finalBodySize = hinge!.left - leftMargin;
-              finalSBodySize =
-                  size.width - (hinge!.left + hingeWidth) - rightMargin;
-            } else if (bodyRatio != null) {
-              finalBodySize = remainingWidth * bodyRatio!;
-              finalSBodySize = remainingWidth * (1 - bodyRatio!);
-            } else {
-              finalBodySize = halfWidth - leftMargin;
-              finalSBodySize = halfWidth - rightMargin;
-            }
-
-            currentBodySize = layoutChild(
-              _SlotIds.body.name,
-              BoxConstraints.tight(
-                Size(
-                  animatedSize(remainingWidth, finalBodySize),
-                  remainingHeight,
-                ),
-              ),
-            );
-            layoutChild(
-              _SlotIds.secondaryBody.name,
-              BoxConstraints.tight(
-                Size(finalSBodySize, remainingHeight),
-              ),
-            );
+        if (textDirection) {
+          // Take this path if the textDirection is LTR.
+          double finalBodySize;
+          double finalSBodySize;
+          if (hinge != null) {
+            finalBodySize = hinge!.left - leftMargin;
+            finalSBodySize =
+                size.width - (hinge!.left + hingeWidth) - rightMargin;
+          } else if (bodyRatio != null) {
+            finalBodySize = remainingWidth * bodyRatio!;
+            finalSBodySize = remainingWidth * (1 - bodyRatio!);
           } else {
-            // Take this path if the textDirection is RTL.
-            double finalBodySize;
-            double finalSBodySize;
-            if (hinge != null) {
-              finalBodySize =
-                  size.width - (hinge!.left + hingeWidth) - rightMargin;
-              finalSBodySize = hinge!.left - leftMargin;
-            } else if (bodyRatio != null) {
-              finalBodySize = remainingWidth * bodyRatio!;
-              finalSBodySize = remainingWidth * (1 - bodyRatio!);
-            } else {
-              finalBodySize = halfWidth - rightMargin;
-              finalSBodySize = halfWidth - leftMargin;
-            }
-            currentSBodySize = layoutChild(
-              _SlotIds.secondaryBody.name,
-              BoxConstraints.tight(
-                Size(animatedSize(0, finalSBodySize), remainingHeight),
-              ),
-            );
-            layoutChild(
-              _SlotIds.body.name,
-              BoxConstraints.tight(
-                Size(finalBodySize, remainingHeight),
-              ),
-            );
+            finalBodySize = halfWidth - leftMargin;
+            finalSBodySize = halfWidth - rightMargin;
           }
-        } else {
-          // Take this path if the body and secondaryBody are laid out
-          // vertically.
+
           currentBodySize = layoutChild(
             _SlotIds.body.name,
             BoxConstraints.tight(
               Size(
-                remainingWidth,
-                animatedSize(
-                  remainingHeight,
-                  bodyRatio == null ? halfHeight : remainingHeight * bodyRatio!,
-                ),
+                animatedSize(remainingWidth, finalBodySize),
+                remainingHeight,
               ),
             ),
           );
           layoutChild(
             _SlotIds.secondaryBody.name,
             BoxConstraints.tight(
-              Size(
-                remainingWidth,
-                bodyRatio == null
-                    ? halfHeight - bottomMargin
-                    : remainingHeight * (1 - bodyRatio!),
-              ),
+              Size(finalSBodySize, remainingHeight),
+            ),
+          );
+        } else {
+          // Take this path if the textDirection is RTL.
+          double finalBodySize;
+          double finalSBodySize;
+          if (hinge != null) {
+            finalBodySize =
+                size.width - (hinge!.left + hingeWidth) - rightMargin;
+            finalSBodySize = hinge!.left - leftMargin;
+          } else if (bodyRatio != null) {
+            finalBodySize = remainingWidth * bodyRatio!;
+            finalSBodySize = remainingWidth * (1 - bodyRatio!);
+          } else {
+            finalBodySize = halfWidth - rightMargin;
+            finalSBodySize = halfWidth - leftMargin;
+          }
+          currentSBodySize = layoutChild(
+            _SlotIds.secondaryBody.name,
+            BoxConstraints.tight(
+              Size(animatedSize(0, finalSBodySize), remainingHeight),
+            ),
+          );
+          layoutChild(
+            _SlotIds.body.name,
+            BoxConstraints.tight(
+              Size(finalBodySize, remainingHeight),
             ),
           );
         }
       }
       // Handle positioning for the body and secondaryBody.
-      if (bodyOrientation == Axis.horizontal &&
-          !textDirection &&
+      if (!textDirection &&
           chosenWidgets[_SlotIds.secondaryBody.name] != null) {
         if (hinge != null) {
           positionChild(
@@ -503,22 +445,15 @@ class _ArnaAdaptiveLayoutDelegate extends MultiChildLayoutDelegate {
         }
       } else {
         positionChild(_SlotIds.body.name, Offset(leftMargin, 0));
-        if (bodyOrientation == Axis.horizontal) {
-          if (hinge != null) {
-            positionChild(
-              _SlotIds.secondaryBody.name,
-              Offset(currentBodySize.width + leftMargin + hingeWidth, 0),
-            );
-          } else {
-            positionChild(
-              _SlotIds.secondaryBody.name,
-              Offset(currentBodySize.width + leftMargin, 0),
-            );
-          }
+        if (hinge != null) {
+          positionChild(
+            _SlotIds.secondaryBody.name,
+            Offset(currentBodySize.width + leftMargin + hingeWidth, 0),
+          );
         } else {
           positionChild(
             _SlotIds.secondaryBody.name,
-            Offset(leftMargin, currentBodySize.height),
+            Offset(currentBodySize.width + leftMargin, 0),
           );
         }
       }

@@ -22,7 +22,6 @@ class ArnaAdaptiveScaffold extends StatefulWidget {
     this.navigationPaneTrailing,
     this.bodyRatio,
     this.internalAnimations = true,
-    this.bodyOrientation = Axis.horizontal,
     this.onDestinationSelected,
   });
 
@@ -60,12 +59,6 @@ class ArnaAdaptiveScaffold extends StatefulWidget {
   ///
   /// Defaults to true.
   final bool internalAnimations;
-
-  /// The orientation of the body and secondaryBody. Either horizontal (side by
-  /// side) or vertical (top to bottom).
-  ///
-  /// Defaults to Axis.horizontal.
-  final Axis bodyOrientation;
 
   /// Callback function for when the index of a [ArnaNavigationPane] changes.
   final Function(int)? onDestinationSelected;
@@ -140,7 +133,6 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
                 )
               : null,
       body: ArnaAdaptiveLayout(
-        bodyOrientation: widget.bodyOrientation,
         bodyRatio: widget.bodyRatio,
         internalAnimations: widget.internalAnimations,
         primaryNavigation: SlotLayout(

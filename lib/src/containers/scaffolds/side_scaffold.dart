@@ -5,11 +5,15 @@ class ArnaSideScaffold extends StatefulWidget {
   /// Creates a side view structure in the Arna style.
   const ArnaSideScaffold({
     super.key,
+    this.headerBar,
     required this.destinations,
     this.selectedIndex = 0,
     this.navigationPaneLeading,
     this.navigationPaneTrailing,
   });
+
+  /// A header bar to display at the top of the scaffold.
+  final PreferredSizeWidget? headerBar;
 
   /// The destinations to be used in navigation items.
   final List<ArnaNavigationDestination> destinations;
@@ -48,6 +52,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
   @override
   Widget build(BuildContext context) {
     return ArnaAdaptiveScaffold(
+      headerBar: widget.headerBar,
       destinations: widget.destinations,
       selectedIndex: _selectedIndex,
       navigationPaneLeading: widget.navigationPaneLeading,

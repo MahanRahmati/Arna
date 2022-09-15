@@ -99,6 +99,10 @@ class _HomeState extends ConsumerState<Home> {
             ],
           )
         : ArnaSideScaffold(
+            headerBar: ArnaHeaderBar(
+              title: Strings.appName,
+              actions: actions,
+            ),
             destinations: <ArnaNavigationDestination>[
               ArnaNavigationDestination(
                 label: Strings.hello,

@@ -204,8 +204,10 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
                                 selectedIcon:
                                     widget.destinations[i].selectedIcon,
                                 active: widget.selectedIndex == i,
-                                onPressed: () =>
-                                    widget.onDestinationSelected?.call(i),
+                                onPressed: () {
+                                  widget.onDestinationSelected?.call(i);
+                                  ArnaScaffold.of(context).closeDrawer();
+                                },
                                 semanticLabel: localizations.tabLabel(
                                   tabIndex: i + 1,
                                   tabCount: widget.destinations.length,

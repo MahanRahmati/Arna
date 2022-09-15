@@ -16,6 +16,7 @@ class ArnaAdaptiveScaffold extends StatefulWidget {
   /// variety of screens.
   const ArnaAdaptiveScaffold({
     super.key,
+    this.headerBar,
     required this.destinations,
     this.selectedIndex = 0,
     this.navigationPaneLeading,
@@ -24,6 +25,9 @@ class ArnaAdaptiveScaffold extends StatefulWidget {
     this.internalAnimations = true,
     this.onDestinationSelected,
   });
+
+  /// A header bar to display at the top of the scaffold.
+  final PreferredSizeWidget? headerBar;
 
   /// The destinations to be used in navigation items.
   final List<ArnaNavigationDestination> destinations;
@@ -92,10 +96,14 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
         widget.destinations[widget.selectedIndex];
 
     return ArnaScaffold(
+      headerBar: widget.headerBar,
       drawer: Breakpoints.medium.isActive(context) ||
               (Breakpoints.small.isActive(context) &&
                   widget.destinations.length > 4)
           ? ArnaDrawer(
+              padding: widget.headerBar != null
+                  ? ArnaEdgeInsets.top(widget.headerBar!.preferredSize.height)
+                  : null,
               child: ArnaNavigationPane(
                 extended: true,
                 selectedIndex: widget.selectedIndex,

@@ -158,8 +158,24 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
       animation: _extendedAnimation,
       child: Semantics(
         explicitChildNodes: true,
-        child: ColoredBox(
-          color: ArnaColors.sideColor.resolveFrom(context),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border(
+              left: isRTLDirection
+                  ? BorderSide(
+                      color: ArnaColors.borderColor.resolveFrom(context),
+                      width: 0.0,
+                    )
+                  : BorderSide.none,
+              right: !isRTLDirection
+                  ? BorderSide(
+                      color: ArnaColors.borderColor.resolveFrom(context),
+                      width: 0.0,
+                    )
+                  : BorderSide.none,
+            ),
+            color: ArnaColors.sideColor.resolveFrom(context),
+          ),
           child: SafeArea(
             right: isRTLDirection,
             left: !isRTLDirection,

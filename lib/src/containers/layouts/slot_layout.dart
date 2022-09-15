@@ -82,13 +82,14 @@ class SlotLayout extends StatefulWidget {
     Widget Function(Widget, Animation<double>)? inAnimation,
     Widget Function(Widget, Animation<double>)? outAnimation,
     required Key key,
-  }) =>
-      SlotLayoutConfig._(
-        builder: builder,
-        inAnimation: inAnimation,
-        outAnimation: outAnimation,
-        key: key,
-      );
+  }) {
+    return SlotLayoutConfig._(
+      builder: builder,
+      inAnimation: inAnimation,
+      outAnimation: outAnimation,
+      key: key,
+    );
+  }
 
   @override
   State<SlotLayout> createState() => _SlotLayoutState();

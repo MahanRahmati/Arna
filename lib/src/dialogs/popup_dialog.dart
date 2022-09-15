@@ -284,13 +284,7 @@ Future<T?> showArnaPopupDialog<T>({
                 parent: animation,
                 curve: Styles.basicCurve,
               ),
-              child: FadeTransition(
-                opacity: CurvedAnimation(
-                  parent: animation,
-                  curve: Styles.basicCurve,
-                ),
-                child: child,
-              ),
+              child: ArnaFadeTransition.fadeIn(child, animation),
             );
           },
           useRootNavigator: useRootNavigator,

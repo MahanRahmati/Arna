@@ -202,12 +202,9 @@ class ArnaDrawerControllerState extends State<ArnaDrawerController>
                 RepaintBoundary(
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
-                    child: SlideTransition(
-                      position: Tween<Offset>(
-                        begin: const Offset(-1, 0),
-                        end: Offset.zero,
-                      ).animate(_controller),
-                      child: widget.drawer,
+                    child: ArnaSlideTransition.fromLeft(
+                      widget.drawer,
+                      _controller,
                     ),
                   ),
                 )

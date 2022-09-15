@@ -63,36 +63,6 @@ class ArnaAdaptiveScaffold extends StatefulWidget {
   /// Callback function for when the index of a [ArnaNavigationPane] changes.
   final Function(int)? onDestinationSelected;
 
-  /// Fade in animation.
-  static Widget fadeIn(Widget child, Animation<double> animation) {
-    return FadeTransition(
-      opacity: CurvedAnimation(
-        parent: animation,
-        curve: Styles.basicCurve,
-      ),
-      child: child,
-    );
-  }
-
-  /// Fade out animation.
-  static Widget fadeOut(Widget child, Animation<double> animation) {
-    return FadeTransition(
-      opacity: CurvedAnimation(
-        parent: ReverseAnimation(animation),
-        curve: Styles.basicCurve,
-      ),
-      child: child,
-    );
-  }
-
-  /// Keep widget on screen while it is leaving
-  static Widget stayOnScreen(Widget child, Animation<double> animation) {
-    return FadeTransition(
-      opacity: Tween<double>(begin: 1.0, end: 1.0).animate(animation),
-      child: child,
-    );
-  }
-
   @override
   State<ArnaAdaptiveScaffold> createState() => _ArnaAdaptiveScaffoldState();
 }
@@ -103,13 +73,14 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
     required WidgetBuilder? builder,
     bool secondary = false,
   }) {
-    return (builder != (_) => const SizedBox())
+    SizedBox emptyBuilder(_) => const SizedBox.shrink();
+    return (builder != emptyBuilder)
         ? SlotLayout.from(
             key: key,
-            inAnimation: secondary ? ArnaAdaptiveScaffold.fadeIn : null,
+            inAnimation: secondary ? ArnaFadeTransition.fadeIn : null,
             outAnimation: secondary
-                ? ArnaAdaptiveScaffold.fadeOut
-                : ArnaAdaptiveScaffold.stayOnScreen,
+                ? ArnaFadeTransition.fadeOut
+                : ArnaFadeTransition.stayOnScreen,
             builder: builder,
           )
         : null;
@@ -120,18 +91,21 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
     final ArnaNavigationDestination destination =
         widget.destinations[widget.selectedIndex];
 
+    final ArnaDrawer drawer = ArnaDrawer(
+      child: ArnaNavigationPane(
+        extended: true,
+        selectedIndex: widget.selectedIndex,
+        destinations: widget.destinations,
+        onDestinationSelected: widget.onDestinationSelected,
+      ),
+    );
+
     return ArnaScaffold(
-      drawer:
-          Breakpoints.small.isActive(context) && widget.destinations.length > 4
-              ? ArnaDrawer(
-                  child: ArnaNavigationPane(
-                    extended: true,
-                    selectedIndex: widget.selectedIndex,
-                    destinations: widget.destinations,
-                    onDestinationSelected: widget.onDestinationSelected,
-                  ),
-                )
-              : null,
+      drawer: Breakpoints.medium.isActive(context) ||
+              (Breakpoints.small.isActive(context) &&
+                  widget.destinations.length > 4)
+          ? drawer
+          : null,
       body: ArnaAdaptiveLayout(
         bodyRatio: widget.bodyRatio,
         internalAnimations: widget.internalAnimations,
@@ -139,8 +113,8 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.large: SlotLayout.from(
               key: const Key('primaryNavigation'),
-              inAnimation: ArnaAnimatedWidgets.leftOutIn,
-              outAnimation: ArnaAnimatedWidgets.leftInOut,
+              inAnimation: ArnaSlideTransition.fromLeft,
+              outAnimation: ArnaSlideTransition.toLeft,
               builder: (_) => Builder(
                 builder: (BuildContext context) {
                   return SizedBox(
@@ -182,8 +156,8 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
                 config: <Breakpoint, SlotLayoutConfig>{
                   Breakpoints.small: SlotLayout.from(
                     key: const Key('bottomNavigation'),
-                    inAnimation: ArnaAnimatedWidgets.bottomToTop,
-                    outAnimation: ArnaAnimatedWidgets.topToBottom,
+                    inAnimation: ArnaSlideTransition.fromBottom,
+                    outAnimation: ArnaSlideTransition.toBottom,
                     builder: (_) => ArnaBottomNavigationBar(
                       onDestinationSelected: widget.onDestinationSelected,
                       selectedIndex: widget.selectedIndex,
@@ -197,8 +171,8 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
           config: <Breakpoint, SlotLayoutConfig?>{
             Breakpoints.standard: SlotLayout.from(
               key: const Key('body'),
-              inAnimation: ArnaAdaptiveScaffold.fadeIn,
-              outAnimation: ArnaAdaptiveScaffold.fadeOut,
+              inAnimation: ArnaFadeTransition.fadeIn,
+              outAnimation: ArnaFadeTransition.fadeOut,
               builder: destination.body,
             ),
             if (destination.smallBody != null)
@@ -222,7 +196,7 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
           config: <Breakpoint, SlotLayoutConfig?>{
             Breakpoints.standard: SlotLayout.from(
               key: const Key('secondaryBody'),
-              outAnimation: ArnaAdaptiveScaffold.stayOnScreen,
+              outAnimation: ArnaFadeTransition.stayOnScreen,
               builder: destination.secondaryBody,
             ),
             if (destination.smallSecondaryBody != null)

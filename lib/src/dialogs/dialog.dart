@@ -139,22 +139,9 @@ Future<T?> showArnaDialog<T>({
       _,
       Widget child,
     ) {
-      final Widget childWidget = FadeTransition(
-        opacity: CurvedAnimation(
-          parent: animation,
-          curve: Styles.basicCurve,
-        ),
-        child: child,
-      );
-
+      final Widget childWidget = ArnaFadeTransition.fadeIn(child, animation);
       return ArnaHelpers.isCompact(context)
-          ? SlideTransition(
-              position: Tween<Offset>(
-                begin: const Offset(0, 1),
-                end: Offset.zero,
-              ).animate(animation),
-              child: childWidget,
-            )
+          ? ArnaSlideTransition.fromBottom(childWidget, animation)
           : ScaleTransition(
               scale: CurvedAnimation(
                 parent: animation,

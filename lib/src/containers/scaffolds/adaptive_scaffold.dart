@@ -91,20 +91,18 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
     final ArnaNavigationDestination destination =
         widget.destinations[widget.selectedIndex];
 
-    final ArnaDrawer drawer = ArnaDrawer(
-      child: ArnaNavigationPane(
-        extended: true,
-        selectedIndex: widget.selectedIndex,
-        destinations: widget.destinations,
-        onDestinationSelected: widget.onDestinationSelected,
-      ),
-    );
-
     return ArnaScaffold(
       drawer: Breakpoints.medium.isActive(context) ||
               (Breakpoints.small.isActive(context) &&
                   widget.destinations.length > 4)
-          ? drawer
+          ? ArnaDrawer(
+              child: ArnaNavigationPane(
+                extended: true,
+                selectedIndex: widget.selectedIndex,
+                destinations: widget.destinations,
+                onDestinationSelected: widget.onDestinationSelected,
+              ),
+            )
           : null,
       body: ArnaAdaptiveLayout(
         bodyRatio: widget.bodyRatio,

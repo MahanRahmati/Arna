@@ -13,8 +13,9 @@ class ArnaDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: use_decorated_box
     return Container(
+      height: direction == Axis.horizontal ? 0.0 : null,
+      width: direction == Axis.vertical ? 0.0 : null,
       decoration: BoxDecoration(
         border: Border.all(
           width: 0.0,

@@ -22,28 +22,14 @@ class ArnaNavigationPane extends StatefulWidget {
   /// [ArnaNavigationDestination] values.
   const ArnaNavigationPane({
     super.key,
-    required this.destinations,
-    required this.selectedIndex,
     this.extended = false,
     this.leading,
     this.trailing,
+    required this.destinations,
+    required this.selectedIndex,
     this.onDestinationSelected,
   })  : assert(destinations != null && destinations.length >= 2),
-        assert(
-          selectedIndex == null ||
-              (0 <= selectedIndex && selectedIndex < destinations.length),
-        );
-
-  /// Defines the appearance of the button items that are arrayed within the
-  /// navigation pane.
-  ///
-  /// The value must be a list of two or more [ArnaNavigationDestination]
-  /// values.
-  final List<ArnaNavigationDestination> destinations;
-
-  /// The index into [destinations] for the current selected
-  /// [ArnaNavigationDestination].
-  final int selectedIndex;
+        assert(0 <= selectedIndex && selectedIndex < destinations.length);
 
   /// Indicates that the [ArnaNavigationPane] should be in the extended state.
   ///
@@ -65,6 +51,17 @@ class ArnaNavigationPane extends StatefulWidget {
   ///
   /// The default value is null.
   final Widget? trailing;
+
+  /// Defines the appearance of the button items that are arrayed within the
+  /// navigation pane.
+  ///
+  /// The value must be a list of two or more [ArnaNavigationDestination]
+  /// values.
+  final List<ArnaNavigationDestination> destinations;
+
+  /// The index into [destinations] for the current selected
+  /// [ArnaNavigationDestination].
+  final int selectedIndex;
 
   /// Called when one of the [destinations] is selected.
   ///
@@ -91,8 +88,6 @@ class ArnaNavigationPane extends StatefulWidget {
 
 class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
     with TickerProviderStateMixin {
-  late List<AnimationController> _destinationControllers;
-  late List<Animation<double>> _destinationAnimations;
   late AnimationController _extendedController;
   late Animation<double> _extendedAnimation;
 
@@ -103,17 +98,6 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
   }
 
   void _initControllers() {
-    _destinationControllers = List<AnimationController>.generate(
-        widget.destinations.length, (int index) {
-      return AnimationController(
-        duration: Styles.basicDuration,
-        vsync: this,
-      )..addListener(_rebuild);
-    });
-    _destinationAnimations = _destinationControllers
-        .map((AnimationController controller) => controller.view)
-        .toList();
-    _destinationControllers[widget.selectedIndex].value = 1.0;
     _extendedController = AnimationController(
       duration: Styles.basicDuration,
       vsync: this,
@@ -121,7 +105,7 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
     );
     _extendedAnimation = CurvedAnimation(
       parent: _extendedController,
-      curve: Curves.easeInOut,
+      curve: Styles.basicCurve,
     );
     _extendedController.addListener(() => _rebuild());
   }
@@ -137,9 +121,6 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
   }
 
   void _disposeControllers() {
-    for (final AnimationController controller in _destinationControllers) {
-      controller.dispose();
-    }
     _extendedController.dispose();
   }
 
@@ -158,16 +139,6 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
     // No animated segue if the length of the items list changes.
     if (widget.destinations.length != oldWidget.destinations.length) {
       _resetState();
-      return;
-    }
-
-    if (widget.selectedIndex != oldWidget.selectedIndex) {
-      if (oldWidget.selectedIndex != null) {
-        _destinationControllers[oldWidget.selectedIndex].reverse();
-      }
-      if (widget.selectedIndex != null) {
-        _destinationControllers[widget.selectedIndex].forward();
-      }
       return;
     }
   }
@@ -202,31 +173,30 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
                 Expanded(
                   child: Align(
                     alignment: Alignment.topCenter,
-                    child: FocusTraversalGroup(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          for (int i = 0;
-                              i < widget.destinations.length;
-                              i += 1)
-                            ArnaNavigationPaneItem(
-                              label: widget.destinations[i].label,
-                              icon: widget.destinations[i].icon,
-                              selectedIcon: widget.destinations[i].selectedIcon,
-                              active: widget.selectedIndex == i,
-                              onPressed: () {
-                                if (widget.onDestinationSelected != null) {
-                                  widget.onDestinationSelected?.call(i);
-                                }
-                              },
-                              extendedTransitionAnimation: _extendedAnimation,
-                              destinationAnimation: _destinationAnimations[i],
-                              semanticLabel: localizations.tabLabel(
-                                tabIndex: i + 1,
-                                tabCount: widget.destinations.length,
+                    child: Padding(
+                      padding: Styles.smallHorizontal,
+                      child: FocusTraversalGroup(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            for (int i = 0;
+                                i < widget.destinations.length;
+                                i += 1)
+                              ArnaNavigationPaneItem(
+                                label: widget.destinations[i].label,
+                                icon: widget.destinations[i].icon,
+                                selectedIcon:
+                                    widget.destinations[i].selectedIcon,
+                                active: widget.selectedIndex == i,
+                                onPressed: () =>
+                                    widget.onDestinationSelected?.call(i),
+                                semanticLabel: localizations.tabLabel(
+                                  tabIndex: i + 1,
+                                  tabCount: widget.destinations.length,
+                                ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

@@ -9,8 +9,6 @@ class ArnaNavigationPaneItem extends StatelessWidget {
     required this.icon,
     this.selectedIcon,
     required this.onPressed,
-    required this.destinationAnimation,
-    required this.extendedTransitionAnimation,
     this.badge,
     this.active = false,
     this.isFocusable = true,
@@ -31,10 +29,6 @@ class ArnaNavigationPaneItem extends StatelessWidget {
 
   /// The callback that is called when an item is tapped.
   final VoidCallback? onPressed;
-
-  final Animation<double> destinationAnimation;
-
-  final Animation<double> extendedTransitionAnimation;
 
   /// The [ArnaBadge] of the item.
   final ArnaBadge? badge;

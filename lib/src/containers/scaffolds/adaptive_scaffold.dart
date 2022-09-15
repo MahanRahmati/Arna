@@ -70,9 +70,6 @@ class ArnaAdaptiveScaffold extends StatefulWidget {
   /// Callback function for when the index of a [ArnaNavigationPane] changes.
   final Function(int)? onDestinationSelected;
 
-  /// Callback function for when the index of a [ArnaNavigationPane] changes.
-  static WidgetBuilder emptyBuilder = (_) => const SizedBox();
-
   /// Fade in animation.
   static Widget fadeIn(Widget child, Animation<double> animation) {
     return FadeTransition(
@@ -113,7 +110,7 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
     required WidgetBuilder? builder,
     bool secondary = false,
   }) {
-    return (builder != ArnaAdaptiveScaffold.emptyBuilder)
+    return (builder != (_) => const SizedBox())
         ? SlotLayout.from(
             key: key,
             inAnimation: secondary ? ArnaAdaptiveScaffold.fadeIn : null,
@@ -150,6 +147,8 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
           config: <Breakpoint, SlotLayoutConfig>{
             Breakpoints.large: SlotLayout.from(
               key: const Key('primaryNavigation'),
+              inAnimation: ArnaAnimatedWidgets.leftOutIn,
+              outAnimation: ArnaAnimatedWidgets.leftInOut,
               builder: (_) => Builder(
                 builder: (BuildContext context) {
                   return SizedBox(
@@ -186,12 +185,13 @@ class _ArnaAdaptiveScaffoldState extends State<ArnaAdaptiveScaffold> {
             ),
           },
         ),
-        bottomNavigation: Breakpoints.small.isActive(context) &&
-                widget.destinations.length < 5
+        bottomNavigation: widget.destinations.length < 5
             ? SlotLayout(
                 config: <Breakpoint, SlotLayoutConfig>{
                   Breakpoints.small: SlotLayout.from(
                     key: const Key('bottomNavigation'),
+                    inAnimation: ArnaAnimatedWidgets.bottomToTop,
+                    outAnimation: ArnaAnimatedWidgets.topToBottom,
                     builder: (_) => ArnaBottomNavigationBar(
                       onDestinationSelected: widget.onDestinationSelected,
                       selectedIndex: widget.selectedIndex,

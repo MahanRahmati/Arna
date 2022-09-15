@@ -47,8 +47,9 @@ class ArnaBottomNavigationBar extends StatelessWidget {
           ),
           color: ArnaColors.headerColor.resolveFrom(context),
         ),
+        padding: ArnaEdgeInsets.bottom(bottomPadding),
         child: Padding(
-          padding: ArnaEdgeInsets.bottom(bottomPadding),
+          padding: Styles.bottomNavigationBarPadding,
           child: Semantics(
             explicitChildNodes: true,
             child: Row(

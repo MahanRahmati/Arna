@@ -87,6 +87,7 @@ class ArnaBottomNavigationBarItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
+                      width: 0.0,
                       color: ArnaDynamicColor.resolve(
                         selected
                             ? focused
@@ -123,7 +124,7 @@ class ArnaBottomNavigationBarItem extends StatelessWidget {
                       context,
                     ),
                   ),
-                  padding: Styles.bottomBarItemPadding,
+                  padding: Styles.bottomNavigationBarItemPadding,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,

@@ -94,10 +94,10 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
   @override
   void initState() {
     super.initState();
-    _initControllers();
+    _initController();
   }
 
-  void _initControllers() {
+  void _initController() {
     _extendedController = AnimationController(
       duration: Styles.basicDuration,
       vsync: this,
@@ -116,11 +116,11 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
 
   @override
   void dispose() {
-    _disposeControllers();
+    _disposeController();
     super.dispose();
   }
 
-  void _disposeControllers() {
+  void _disposeController() {
     _extendedController.dispose();
   }
 
@@ -144,8 +144,8 @@ class _ArnaNavigationPaneState extends State<ArnaNavigationPane>
   }
 
   void _resetState() {
-    _disposeControllers();
-    _initControllers();
+    _disposeController();
+    _initController();
   }
 
   @override

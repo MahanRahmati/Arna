@@ -15,6 +15,7 @@ class ArnaDrawer extends StatelessWidget {
     super.key,
     this.child,
     this.semanticLabel,
+    this.padding,
   });
 
   /// The widget below this widget in the tree.
@@ -32,9 +33,11 @@ class ArnaDrawer extends StatelessWidget {
   ///  * [SemanticsConfiguration.namesRoute], for a description of how this value is used.
   final String? semanticLabel;
 
+  /// Empty space to surround the drawer.
+  final EdgeInsetsGeometry? padding;
+
   @override
   Widget build(BuildContext context) {
-    final bool ltr = Directionality.of(context) == TextDirection.ltr;
     return Semantics(
       scopesRoute: true,
       namesRoute: true,
@@ -49,16 +52,9 @@ class ArnaDrawer extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.horizontal(
-            left: ltr
-                ? Radius.zero
-                : const Radius.circular(Styles.drawerBorderRadiusSize),
-            right: ltr
-                ? const Radius.circular(Styles.drawerBorderRadiusSize)
-                : Radius.zero,
-          ),
           color: ArnaColors.sideColor.resolveFrom(context),
         ),
+        margin: padding,
         child: FocusTraversalGroup(
           child: SafeArea(child: child ?? const SizedBox.shrink()),
         ),

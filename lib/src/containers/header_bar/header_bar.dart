@@ -19,7 +19,7 @@ class ArnaHeaderBar extends StatefulWidget implements PreferredSizeWidget {
     this.title,
     this.middle,
     this.actions,
-    this.border,
+    this.showBorder = true,
     this.backgroundColor,
   });
 
@@ -47,10 +47,8 @@ class ArnaHeaderBar extends StatefulWidget implements PreferredSizeWidget {
   /// [ArnaPopupMenuButton] at the end of the header bar.
   final List<ArnaHeaderBarItem>? actions;
 
-  /// The border of the header bar.
-  ///
-  /// If a border is null, the header bar will not display a border.
-  final Border? border;
+  /// Whether to show border of the header bar or not.
+  final bool showBorder;
 
   /// The background color of the header bar.
   final Color? backgroundColor;
@@ -138,9 +136,16 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
       container: true,
       child: Container(
         decoration: BoxDecoration(
-          border: widget.border,
+          border: Border(
+            bottom: BorderSide(
+              color: widget.showBorder
+                  ? ArnaColors.borderColor.resolveFrom(context)
+                  : ArnaColors.transparent,
+              width: 0.0,
+            ),
+          ),
           color: widget.backgroundColor ??
-              ArnaColors.backgroundColor.resolveFrom(context),
+              ArnaColors.headerColor.resolveFrom(context),
         ),
         alignment: Alignment.topCenter,
         child: SafeArea(

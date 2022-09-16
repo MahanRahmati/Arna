@@ -1,16 +1,9 @@
 import 'package:arna/arna.dart';
 
-/// An interactive button within [ArnaBottomBar].
-///
-/// This class is rarely used in isolation. It is typically embedded
-/// in [ArnaBottomBar].
-///
-/// See also:
-///
-///  * [ArnaBottomBar]
-class ArnaBottomBarItem extends StatelessWidget {
-  /// Creates a bottom bar item.
-  const ArnaBottomBarItem({
+/// A navigation item used inside [ArnaSideScaffold].
+class ArnaNavigationPaneItem extends StatelessWidget {
+  /// Creates a side bar item.
+  const ArnaNavigationPaneItem({
     super.key,
     required this.label,
     required this.icon,
@@ -77,16 +70,18 @@ class ArnaBottomBarItem extends StatelessWidget {
           ) {
             selected = active;
             return Stack(
-              alignment: Alignment.topRight,
+              alignment: Alignment.centerRight,
               children: <Widget>[
                 AnimatedContainer(
-                  height: Styles.bottomNavigationBarItemHeight,
+                  height: Styles.sideBarItemHeight,
+                  width: Styles.sideBarWidth,
                   duration: Styles.basicDuration,
                   curve: Styles.basicCurve,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
+                      width: 0.0,
                       color: ArnaDynamicColor.resolve(
                         selected
                             ? focused
@@ -113,24 +108,21 @@ class ArnaBottomBarItem extends StatelessWidget {
                                       ? ArnaColors.buttonColor.resolveFrom(
                                           context,
                                         )
-                                      : ArnaColors.headerColor.resolveFrom(
+                                      : ArnaColors.sideColor.resolveFrom(
                                           context,
                                         ),
                                 )
                               : selected
                                   ? ArnaColors.buttonColor
-                                  : ArnaColors.headerColor,
+                                  : ArnaColors.sideColor,
                       context,
                     ),
                   ),
-                  padding: Styles.bottomBarItemPadding,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisSize: MainAxisSize.min,
+                  padding: Styles.horizontal,
+                  child: Row(
                     children: <Widget>[
-                      Align(
-                        alignment: Alignment.topCenter,
-                        heightFactor: 1.0,
+                      Padding(
+                        padding: Styles.normal,
                         child: Icon(
                           selected ? selectedIcon ?? icon : icon,
                           size: Styles.iconSize,
@@ -147,8 +139,8 @@ class ArnaBottomBarItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
+                      const SizedBox(width: Styles.padding),
+                      Flexible(
                         child: Text(
                           label,
                           style: ArnaTheme.of(context)
@@ -163,14 +155,16 @@ class ArnaBottomBarItem extends StatelessWidget {
                                         context,
                                       ),
                               ),
-                          softWrap: false,
-                          maxLines: 1,
                         ),
                       ),
                     ],
                   ),
                 ),
-                if (badge != null) badge!,
+                if (badge != null)
+                  Padding(
+                    padding: Styles.horizontal,
+                    child: badge,
+                  ),
               ],
             );
           },

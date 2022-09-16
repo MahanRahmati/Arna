@@ -1,9 +1,16 @@
 import 'package:arna/arna.dart';
 
-/// A navigation item used inside [ArnaSideScaffold].
-class ArnaSideBarItem extends StatelessWidget {
-  /// Creates a side bar item.
-  const ArnaSideBarItem({
+/// An interactive button within [ArnaBottomNavigationBar].
+///
+/// This class is rarely used in isolation. It is typically embedded
+/// in [ArnaBottomNavigationBar].
+///
+/// See also:
+///
+///  * [ArnaBottomNavigationBar]
+class ArnaBottomNavigationBarItem extends StatelessWidget {
+  /// Creates a bottom navigation bar item.
+  const ArnaBottomNavigationBarItem({
     super.key,
     required this.label,
     required this.icon,
@@ -70,17 +77,17 @@ class ArnaSideBarItem extends StatelessWidget {
           ) {
             selected = active;
             return Stack(
-              alignment: Alignment.centerRight,
+              alignment: Alignment.topRight,
               children: <Widget>[
                 AnimatedContainer(
-                  height: Styles.sideBarItemHeight,
-                  width: Styles.sideBarWidth,
+                  height: Styles.bottomNavigationBarItemHeight,
                   duration: Styles.basicDuration,
                   curve: Styles.basicCurve,
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
+                      width: 0.0,
                       color: ArnaDynamicColor.resolve(
                         selected
                             ? focused
@@ -107,23 +114,24 @@ class ArnaSideBarItem extends StatelessWidget {
                                       ? ArnaColors.buttonColor.resolveFrom(
                                           context,
                                         )
-                                      : ArnaColors.sideColor.resolveFrom(
+                                      : ArnaColors.headerColor.resolveFrom(
                                           context,
                                         ),
                                 )
                               : selected
                                   ? ArnaColors.buttonColor
-                                  : ArnaColors.sideColor,
+                                  : ArnaColors.headerColor,
                       context,
                     ),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Styles.padding - 1,
-                  ),
-                  child: Row(
+                  padding: Styles.bottomNavigationBarItemPadding,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Padding(
-                        padding: Styles.normal,
+                      Align(
+                        alignment: Alignment.topCenter,
+                        heightFactor: 1.0,
                         child: Icon(
                           selected ? selectedIcon ?? icon : icon,
                           size: Styles.iconSize,
@@ -140,8 +148,8 @@ class ArnaSideBarItem extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: Styles.padding),
-                      Flexible(
+                      Align(
+                        alignment: Alignment.bottomCenter,
                         child: Text(
                           label,
                           style: ArnaTheme.of(context)
@@ -156,16 +164,14 @@ class ArnaSideBarItem extends StatelessWidget {
                                         context,
                                       ),
                               ),
+                          softWrap: false,
+                          maxLines: 1,
                         ),
                       ),
                     ],
                   ),
                 ),
-                if (badge != null)
-                  Padding(
-                    padding: Styles.horizontal,
-                    child: badge,
-                  ),
+                if (badge != null) badge!,
               ],
             );
           },

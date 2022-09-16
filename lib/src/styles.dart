@@ -276,8 +276,12 @@ abstract class Styles {
     smallPadding,
   );
 
-  /// Bottom bar item padding
-  static const EdgeInsetsDirectional bottomBarItemPadding =
+  /// Bottom navigation bar padding
+  static const EdgeInsetsDirectional bottomNavigationBarPadding =
+      ArnaEdgeInsets.horizontal(smallPadding);
+
+  /// Bottom navigation bar item padding
+  static const EdgeInsetsDirectional bottomNavigationBarItemPadding =
       ArnaEdgeInsets.symmetric(smallPadding, padding);
 
   /// Popup menu divider padding

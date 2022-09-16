@@ -10,9 +10,6 @@ enum _ArnaScaffoldSlot {
   /// The [ArnaScaffold]'s headerBar.
   headerBar,
 
-  /// The [ArnaScaffold]'s bottom navigation bar.
-  bottomNavigationBar,
-
   /// The [ArnaScaffold]'s drawer.
   drawer,
 }
@@ -30,36 +27,19 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
     );
     final double bottom = size.height;
     double contentTop = 0.0;
-    double bottomWidgetsHeight = 0.0;
-    double appBarHeight = 0.0;
+    double headerBarHeight = 0.0;
 
     if (hasChild(_ArnaScaffoldSlot.headerBar)) {
-      appBarHeight = layoutChild(
+      headerBarHeight = layoutChild(
         _ArnaScaffoldSlot.headerBar,
         fullWidthConstraints,
       ).height;
-      contentTop = appBarHeight;
+      contentTop = headerBarHeight;
       positionChild(_ArnaScaffoldSlot.headerBar, Offset.zero);
     }
 
-    double? bottomNavigationBarTop;
-    if (hasChild(_ArnaScaffoldSlot.bottomNavigationBar)) {
-      final double bottomNavigationBarHeight = layoutChild(
-        _ArnaScaffoldSlot.bottomNavigationBar,
-        fullWidthConstraints,
-      ).height;
-      bottomWidgetsHeight += bottomNavigationBarHeight;
-      bottomNavigationBarTop = math.max(0.0, bottom - bottomWidgetsHeight);
-      positionChild(
-        _ArnaScaffoldSlot.bottomNavigationBar,
-        Offset(0.0, bottomNavigationBarTop),
-      );
-    }
-
-    final double contentBottom = math.max(0.0, bottom - bottomWidgetsHeight);
-
     if (hasChild(_ArnaScaffoldSlot.body)) {
-      final double bodyMaxHeight = math.max(0.0, contentBottom - contentTop);
+      final double bodyMaxHeight = math.max(0.0, bottom - contentTop);
       final BoxConstraints bodyConstraints = BoxConstraints(
         maxWidth: fullWidthConstraints.maxWidth,
         maxHeight: bodyMaxHeight,
@@ -93,7 +73,6 @@ class ArnaScaffold extends StatefulWidget {
     this.body,
     this.drawer,
     this.onDrawerChanged,
-    this.bottomNavigationBar,
     this.resizeToAvoidBottomInset,
     this.restorationId,
   });
@@ -131,11 +110,6 @@ class ArnaScaffold extends StatefulWidget {
   /// Optional callback that is called when the [ArnaScaffold.drawer] is opened
   /// or closed.
   final ArnaDrawerCallback? onDrawerChanged;
-
-  /// A bottom navigation bar to display at the bottom of the scaffold.
-  ///
-  /// The [bottomNavigationBar] is rendered below the [body].
-  final Widget? bottomNavigationBar;
 
   /// If true the [body] should size itself to avoid the onscreen keyboard
   /// whose height is defined by the ambient [MediaQuery]'s
@@ -387,7 +361,7 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
       removeLeftPadding: false,
       removeTopPadding: widget.headerBar != null,
       removeRightPadding: false,
-      removeBottomPadding: widget.bottomNavigationBar != null,
+      removeBottomPadding: false,
       removeBottomInset: _resizeToAvoidBottomInset,
     );
 
@@ -406,19 +380,6 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
         removeTopPadding: false,
         removeRightPadding: false,
         removeBottomPadding: true,
-      );
-    }
-
-    if (widget.bottomNavigationBar != null) {
-      _addIfNonNull(
-        children,
-        widget.bottomNavigationBar,
-        _ArnaScaffoldSlot.bottomNavigationBar,
-        removeLeftPadding: false,
-        removeTopPadding: true,
-        removeRightPadding: false,
-        removeBottomPadding: false,
-        maintainBottomViewPadding: !_resizeToAvoidBottomInset,
       );
     }
 

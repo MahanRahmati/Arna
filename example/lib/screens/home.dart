@@ -21,29 +21,10 @@ class _HomeState extends ConsumerState<Home> {
   Widget build(BuildContext context) {
     // final bool showSearch = ref.watch(searchProvider);
 
-    final NavigationItem hello = NavigationItem(
-      title: Strings.hello,
-      icon: Icons.emoji_emotions_outlined,
-      selectedIcon: Icons.emoji_emotions,
-      builder: (_) => const HelloWorld(),
-    );
-
     final MasterNavigationItem helloMaster = MasterNavigationItem(
       title: Strings.hello,
       leading: const Icon(Icons.emoji_emotions_outlined),
       builder: (_) => const HelloWorld(),
-    );
-
-    final NavigationItem widgets = NavigationItem(
-      title: Strings.widgets,
-      icon: Icons.widgets_outlined,
-      selectedIcon: Icons.widgets,
-      // headerBarLeading: ArnaButton.icon(
-      //   icon: Icons.search_outlined,
-      //   onPressed: () => ref.read(searchProvider.notifier).state = !showSearch,
-      //   tooltipMessage: Strings.search,
-      // ),
-      builder: (_) => const Widgets(),
     );
 
     final MasterNavigationItem widgetsMaster = MasterNavigationItem(
@@ -57,24 +38,10 @@ class _HomeState extends ConsumerState<Home> {
       builder: (_) => const Widgets(),
     );
 
-    final NavigationItem typography = NavigationItem(
-      title: Strings.typography,
-      icon: Icons.font_download_outlined,
-      selectedIcon: Icons.font_download,
-      builder: (_) => const Typography(),
-    );
-
     final MasterNavigationItem typographyMaster = MasterNavigationItem(
       title: Strings.typography,
       leading: const Icon(Icons.font_download_outlined),
       builder: (_) => const Typography(),
-    );
-
-    final NavigationItem tabs = NavigationItem(
-      title: Strings.tabs,
-      icon: Icons.tab_outlined,
-      selectedIcon: Icons.tab,
-      builder: (_) => const Tabs(),
     );
 
     final MasterNavigationItem tabsMaster = MasterNavigationItem(
@@ -126,15 +93,37 @@ class _HomeState extends ConsumerState<Home> {
             ],
           )
         : ArnaSideScaffold(
-            title: Strings.appName,
-            actions: actions,
-            leading: leadingWidget,
-            items: <NavigationItem>[
-              hello,
-              widgets,
-              typography,
-              tabs,
+            headerBar: ArnaHeaderBar(
+              title: Strings.appName,
+              actions: actions,
+            ),
+            destinations: <ArnaNavigationDestination>[
+              ArnaNavigationDestination(
+                label: Strings.hello,
+                icon: Icons.emoji_emotions_outlined,
+                selectedIcon: Icons.emoji_emotions,
+                body: (_) => const HelloWorld(),
+              ),
+              ArnaNavigationDestination(
+                label: Strings.widgets,
+                icon: Icons.widgets_outlined,
+                selectedIcon: Icons.widgets,
+                body: (_) => const Widgets(),
+              ),
+              ArnaNavigationDestination(
+                label: Strings.typography,
+                icon: Icons.font_download_outlined,
+                selectedIcon: Icons.font_download,
+                body: (_) => const Typography(),
+              ),
+              ArnaNavigationDestination(
+                label: Strings.tabs,
+                icon: Icons.tab_outlined,
+                selectedIcon: Icons.tab,
+                body: (_) => const Tabs(),
+              ),
             ],
+            navigationPaneLeading: leadingWidget,
           );
   }
 }

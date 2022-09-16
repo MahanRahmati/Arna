@@ -347,7 +347,6 @@ class _RenderArnaListTile extends RenderBox
   double _leadingToTitle;
 
   set leadingToTitle(double value) {
-    assert(value != null);
     if (_leadingToTitle == value) {
       return;
     }

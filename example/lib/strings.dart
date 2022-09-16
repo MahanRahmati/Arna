@@ -1,6 +1,6 @@
 abstract class Strings {
   static const String appName = 'Arna Gallery';
-  static const String version = '1.0.5';
+  static const String version = '1.0.6';
   static const String arna = 'Arna';
   static const String about = 'About';
   static const String settings = 'Settings';

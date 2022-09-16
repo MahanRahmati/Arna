@@ -34,11 +34,19 @@ And import it
 import 'package:arna/arna.dart';
 ```
 
+## Donation
+
+If you like Arna you can support developer with [monero](https://github.com/monero-project/monero). Thank you!
+
+![monero](.github/monero.png)
+
+`89nMEk2ZhypZDMkniyBiTsP1UrzMzEV9oNcAzdrxKo5HVuwB7kXA78iC9HaFLhdTBfHPzGrHL4ww9faGfvWFvxZo8kDkqcG`
+
 ## Platform Support
 
-| Platform  | Android | iOS | Linux | MacOS | Windows |
-| --------- | ------- | --- | ----- | ----- | ------- |
-| Supported | ✅      | ✅  | ✅    | ✅    | ✅      |
+| Platform  | Android | iOS | Linux | MacOS | Web | Windows |
+| --------- | ------- | --- | ----- | ----- | --- | ------- |
+| Supported | ✅      | ✅  | ✅    | ✅    | ✅  | ✅      |
 
 ## Feature roadmap
 

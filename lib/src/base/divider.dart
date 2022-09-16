@@ -13,14 +13,15 @@ class ArnaDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Widget container = Center(
-      // ignore: use_colored_box
-      child: Container(
-        color: ArnaColors.borderColor.resolveFrom(context),
+    return Container(
+      height: direction == Axis.horizontal ? 0.0 : null,
+      width: direction == Axis.vertical ? 0.0 : null,
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 0.0,
+          color: ArnaColors.borderColor.resolveFrom(context),
+        ),
       ),
     );
-    return direction == Axis.horizontal
-        ? SizedBox(height: 1.0, child: container)
-        : SizedBox(width: 1.0, child: container);
   }
 }

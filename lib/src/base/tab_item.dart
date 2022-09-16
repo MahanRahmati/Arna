@@ -90,11 +90,12 @@ class ArnaTabItem extends StatelessWidget {
                           ? ArnaDynamicColor.applyOverlay(
                               selected
                                   ? ArnaColors.buttonColor.resolveFrom(context)
-                                  : ArnaColors.sideColor.resolveFrom(context),
+                                  : ArnaColors.backgroundColor
+                                      .resolveFrom(context),
                             )
                           : selected
                               ? ArnaColors.buttonColor
-                              : ArnaColors.sideColor,
+                              : ArnaColors.backgroundColor,
                   context,
                 ),
               ),

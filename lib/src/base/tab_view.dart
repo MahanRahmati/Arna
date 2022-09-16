@@ -241,7 +241,18 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
         children: <Widget>[
           Container(
             height: Styles.tabBarHeight,
-            color: ArnaColors.sideColor.resolveFrom(context),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: ArnaColors.borderColor.resolveFrom(context),
+                  width: 0.0,
+                ),
+                bottom: BorderSide(
+                  color: ArnaColors.borderColor.resolveFrom(context),
+                  width: 0.0,
+                ),
+              ),
+            ),
             child: Semantics(
               explicitChildNodes: true,
               child: Row(
@@ -289,12 +300,8 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
               ),
             ),
           ),
-          const Padding(
-            padding: ArnaEdgeInsets.top(Styles.tabBarHeight),
-            child: ArnaDivider(),
-          ),
           Padding(
-            padding: const ArnaEdgeInsets.top(Styles.tabBarHeight + 1),
+            padding: const ArnaEdgeInsets.top(Styles.tabBarHeight),
             child: FocusTraversalGroup(
               child: Builder(
                 builder: (BuildContext context) {

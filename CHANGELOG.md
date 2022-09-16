@@ -37,6 +37,9 @@
 - Add ArnaSlideTransition 
 - Add ArnaFadeTransition  
 - Update ArnaDivider
+- Update ArnaTabView
+- Update ArnaTabItem
+- Update ArnaBanner
 
 ## 1.0.5
 

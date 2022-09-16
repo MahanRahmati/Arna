@@ -134,28 +134,26 @@ class _ArnaBannerState extends State<ArnaBanner>
     final Widget banner = Semantics(
       container: true,
       liveRegion: true,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ColoredBox(
-            color: ArnaColors.headerColor.resolveFrom(context),
-            child: ArnaListTile(
-              leading: Icon(
-                icon,
-                color: ArnaDynamicColor.resolve(accent, context),
-              ),
-              title: widget.title,
-              subtitle: widget.subtitle,
-              trailing: widget.actions != null
-                  ? Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: widget.actions!,
-                    )
-                  : null,
+      child: Padding(
+        padding: Styles.normal,
+        child: ClipRRect(
+          borderRadius: Styles.borderRadius,
+          child: ArnaListTile(
+            leading: Icon(
+              icon,
+              color: ArnaDynamicColor.resolve(accent, context),
             ),
+            title: widget.title,
+            subtitle: widget.subtitle,
+            trailing: widget.actions != null
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: widget.actions!,
+                  )
+                : null,
+            showBackground: false,
           ),
-          const ArnaDivider(),
-        ],
+        ),
       ),
     );
 

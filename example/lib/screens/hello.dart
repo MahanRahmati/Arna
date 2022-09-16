@@ -33,7 +33,6 @@ class HelloWorld extends ConsumerWidget {
             icon: Icons.add_outlined,
             buttonType: ButtonType.pill,
             onPressed: () => ref.read(counterProvider.state).state++,
-            tooltipMessage: Strings.add,
           ),
         ],
       ),

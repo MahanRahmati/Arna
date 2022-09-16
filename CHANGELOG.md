@@ -33,6 +33,10 @@
 - Add ArnaHeaderBarDivider
 - Add ArnaHeaderBarItem
 - Add OverflowHandler
+- [Example] Update Home
+- Add ArnaSlideTransition 
+- Add ArnaFadeTransition  
+- Update ArnaDivider
 
 ## 1.0.5
 

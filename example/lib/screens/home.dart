@@ -24,12 +24,6 @@ class _HomeState extends ConsumerState<Home> {
     final MasterNavigationItem helloMaster = MasterNavigationItem(
       title: Strings.hello,
       leading: const Icon(Icons.emoji_emotions_outlined),
-      headerBarLeading: ArnaButton.icon(
-        icon: Icons.add_outlined,
-        buttonType: ButtonType.borderless,
-        onPressed: () => ref.read(counterProvider.state).state++,
-        tooltipMessage: Strings.add,
-      ),
       builder: (_) => const HelloWorld(),
     );
 

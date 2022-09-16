@@ -4,7 +4,9 @@
 library arna;
 
 export 'package:arna/src/animations/fade_through_transition.dart';
+export 'package:arna/src/animations/fade_transition.dart';
 export 'package:arna/src/animations/page_transition_switcher.dart';
+export 'package:arna/src/animations/slide_transition.dart';
 export 'package:arna/src/base/app.dart';
 export 'package:arna/src/base/arna_logo.dart';
 export 'package:arna/src/base/avatar.dart';

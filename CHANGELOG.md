@@ -34,6 +34,8 @@
 - Add ArnaHeaderBarItem
 - Add OverflowHandler
 - [Example] Update Home
+- Add ArnaSlideTransition 
+- Add ArnaFadeTransition  
 
 ## 1.0.5
 

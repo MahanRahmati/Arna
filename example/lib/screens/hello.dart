@@ -28,6 +28,12 @@ class HelloWorld extends ConsumerWidget {
               style: ArnaTheme.of(context).textTheme.title,
             ),
           ),
+          const SizedBox(height: Styles.padding),
+          ArnaButton(
+            icon: Icons.add_outlined,
+            buttonType: ButtonType.pill,
+            onPressed: () => ref.read(counterProvider.state).state++,
+          ),
         ],
       ),
     );

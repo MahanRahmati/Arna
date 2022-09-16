@@ -25,24 +25,12 @@ class _HomeState extends ConsumerState<Home> {
       title: Strings.hello,
       icon: Icons.emoji_emotions_outlined,
       selectedIcon: Icons.emoji_emotions,
-      headerBarLeading: ArnaButton.icon(
-        icon: Icons.add_outlined,
-        buttonType: ButtonType.borderless,
-        onPressed: () => ref.read(counterProvider.state).state++,
-        tooltipMessage: Strings.add,
-      ),
       builder: (_) => const HelloWorld(),
     );
 
     final MasterNavigationItem helloMaster = MasterNavigationItem(
       title: Strings.hello,
       leading: const Icon(Icons.emoji_emotions_outlined),
-      headerBarLeading: ArnaButton.icon(
-        icon: Icons.add_outlined,
-        buttonType: ButtonType.borderless,
-        onPressed: () => ref.read(counterProvider.state).state++,
-        tooltipMessage: Strings.add,
-      ),
       builder: (_) => const HelloWorld(),
     );
 

@@ -3,6 +3,17 @@
 - Update ArnaListTile
 - Update ArnaCard
 - Update ArnaSearchField
+- Update ArnaBottomBarItem
+- Update ArnaMasterItem
+- Update ArnaSideBarItem
+- Update ArnaTabItem
+- Update ArnaCheckbox
+- Update ArnaDropdownButton
+- Update ArnaPopupMenu
+- Update ArnaRadio
+- Update ArnaSwitch
+- Update ArnaTextField
+- Update ArnaDatePicker
 
 ## 1.0.6
 

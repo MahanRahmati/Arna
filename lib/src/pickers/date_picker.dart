@@ -1194,6 +1194,7 @@ class _ArnaDayPickerState extends State<_ArnaDayPicker> {
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           border: Border.all(
+                            width: 0.0,
                             color: isToday || focused
                                 ? accentColor
                                 : ArnaColors.transparent,
@@ -1428,6 +1429,7 @@ class _ArnaYearPickerState extends State<_ArnaYearPicker> {
                   decoration: BoxDecoration(
                     borderRadius: Styles.borderRadius,
                     border: Border.all(
+                      width: 0.0,
                       color: focused
                           ? ArnaDynamicColor.outerColor(accentColor)
                           : ArnaColors.transparent,

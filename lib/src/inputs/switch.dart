@@ -98,6 +98,7 @@ class ArnaSwitch extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.switchBorderRadius,
                   border: Border.all(
+                    width: 0.0,
                     color: focused
                         ? ArnaDynamicColor.outerColor(accent)
                         : !enabled
@@ -137,6 +138,7 @@ class ArnaSwitch extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.radioBorderRadius,
                     border: Border.all(
+                      width: 0.0,
                       color: !enabled
                           ? borderColor
                           : !value

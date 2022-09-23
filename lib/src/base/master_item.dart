@@ -96,6 +96,7 @@ class ArnaMasterItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: Styles.borderRadius,
               border: Border.all(
+                width: 0.0,
                 color: !enabled
                     ? ArnaColors.transparent
                     : focused

@@ -17,6 +17,7 @@
 - Add ArnaState
 - Add ArnaStateMixin
 - Update ArnaApp
+- [BREAKING] Update ArnaBody
 
 ## 1.0.6
 

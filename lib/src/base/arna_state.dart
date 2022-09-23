@@ -65,16 +65,6 @@ abstract class ArnaStateProperty<T> {
     return _ArnaStatePropertyWith<T>(callback);
   }
 
-  /// Convenience method for creating a [ArnaStateProperty] that resolves
-  /// to a single value for all states.
-  ///
-  /// If you need a const value, use [ArnaStatePropertyAll] directly.
-  ///
-  // TODO: Deprecate this when we have the ability to create a dart fix that
-  // will replace this with ArnaStatePropertyAll:
-  // https://github.com/dart-lang/sdk/issues/49056.
-  static ArnaStateProperty<T> all<T>(T value) => ArnaStatePropertyAll<T>(value);
-
   /// Linearly interpolate between two [ArnaStateProperty]s.
   static ArnaStateProperty<T?>? lerp<T>(
     ArnaStateProperty<T>? a,

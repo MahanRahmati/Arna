@@ -14,15 +14,6 @@ void main() {
     expect(value.resolve(<ArnaState>{ArnaState.disabled}), ArnaState.disabled);
   });
 
-  test('ArnaStateProperty.all()', () {
-    final ArnaStateProperty<int> value = ArnaStateProperty.all<int>(123);
-    expect(value.resolve(<ArnaState>{ArnaState.hovered}), 123);
-    expect(value.resolve(<ArnaState>{ArnaState.focused}), 123);
-    expect(value.resolve(<ArnaState>{ArnaState.pressed}), 123);
-    expect(value.resolve(<ArnaState>{ArnaState.selected}), 123);
-    expect(value.resolve(<ArnaState>{ArnaState.disabled}), 123);
-  });
-
   test('ArnaStatePropertyAll', () {
     const ArnaStatePropertyAll<int> value = ArnaStatePropertyAll<int>(123);
     expect(value.resolve(<ArnaState>{}), 123);

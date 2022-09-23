@@ -31,7 +31,6 @@
 
 ### Widgets
 
-- [ ] ArnaApp [Add routerConfig when it is landed.]
 - [ ] ArnaSearchField [Remove focus node when showSearch is false.]
 - [ ] ArnaSnackBar [Refactor ArnaSnackBar.]
 

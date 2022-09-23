@@ -16,6 +16,7 @@
 - Update ArnaDatePicker
 - Add ArnaState
 - Add ArnaStateMixin
+- Update ArnaApp
 
 ## 1.0.6
 

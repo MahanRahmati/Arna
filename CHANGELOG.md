@@ -14,6 +14,8 @@
 - Update ArnaSwitch
 - Update ArnaTextField
 - Update ArnaDatePicker
+- Add ArnaState
+- Add ArnaStateMixin
 
 ## 1.0.6
 

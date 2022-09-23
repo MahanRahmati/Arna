@@ -9,6 +9,8 @@ export 'package:arna/src/animations/page_transition_switcher.dart';
 export 'package:arna/src/animations/slide_transition.dart';
 export 'package:arna/src/base/app.dart';
 export 'package:arna/src/base/arna_logo.dart';
+export 'package:arna/src/base/arna_state.dart';
+export 'package:arna/src/base/arna_state_mixin.dart';
 export 'package:arna/src/base/avatar.dart';
 export 'package:arna/src/base/banner.dart';
 export 'package:arna/src/base/base_widget.dart';

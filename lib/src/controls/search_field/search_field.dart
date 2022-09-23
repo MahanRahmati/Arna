@@ -155,7 +155,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
   @override
   Widget build(BuildContext context) {
     final Widget search = ColoredBox(
-      color: ArnaColors.headerColor.resolveFrom(context),
+      color: ArnaColors.backgroundColor.resolveFrom(context),
       child: Padding(
         padding: Styles.small,
         child: Center(

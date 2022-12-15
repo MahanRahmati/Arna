@@ -9,7 +9,7 @@ final StateProvider<int> counterProvider =
 class HelloWorld extends ConsumerWidget {
   const HelloWorld({super.key});
 
-  void add(WidgetRef ref) => ref.read(counterProvider.state).state++;
+  void add(WidgetRef ref) => ref.read(counterProvider.notifier).state++;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +24,7 @@ class HelloWorld extends ConsumerWidget {
           const SizedBox(height: Styles.padding),
           Consumer(
             builder: (BuildContext context, WidgetRef ref, _) => Text(
-              '${ref.watch(counterProvider.state).state}',
+              '${ref.watch(counterProvider)}',
               style: ArnaTheme.of(context).textTheme.title,
             ),
           ),
@@ -32,7 +32,7 @@ class HelloWorld extends ConsumerWidget {
           ArnaButton(
             icon: Icons.add_outlined,
             buttonType: ButtonType.pill,
-            onPressed: () => ref.read(counterProvider.state).state++,
+            onPressed: () => ref.read(counterProvider.notifier).state++,
           ),
         ],
       ),

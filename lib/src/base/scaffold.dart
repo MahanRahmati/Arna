@@ -442,13 +442,15 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
 
     return _ArnaScaffoldScope(
       hasDrawer: hasDrawer,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: ArnaColors.backgroundColor.resolveFrom(context),
-        ),
-        child: CustomMultiChildLayout(
-          delegate: _ArnaScaffoldLayout(),
-          children: children,
+      child: ScrollNotificationObserver(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: ArnaColors.backgroundColor.resolveFrom(context),
+          ),
+          child: CustomMultiChildLayout(
+            delegate: _ArnaScaffoldLayout(),
+            children: children,
+          ),
         ),
       ),
     );

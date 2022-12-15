@@ -1,10 +1,23 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
+
+class _PreferredHeaderBarSize extends Size {
+  _PreferredHeaderBarSize(this.headerBarHeight, this.bottomHeight)
+      : super.fromHeight(
+          (headerBarHeight ?? Styles.headerBarHeight + Styles.padding) +
+              (bottomHeight ?? 0),
+        );
+
+  final double? headerBarHeight;
+  final double? bottomHeight;
+}
 
 /// An Arna-styled header bar.
 ///
-/// The HeaderBar displays [leading], [middle], and [actions] widgets.
-/// [leading] widget is in the top left, the [actions] are in the top right,
-/// the [middle] is between them.
+/// The HeaderBar displays [leading], [middle], and [actions] widgets, above
+/// the [bottom] (if any).
+/// The [leading] widget is in the top left, the [actions] are in the top
+/// right, the [middle] is between them.
 ///
 /// See also:
 ///
@@ -12,16 +25,24 @@ import 'package:arna/arna.dart';
 ///  * [ArnaSliverHeaderBar] for a header bar to be placed in a scrolling list.
 class ArnaHeaderBar extends StatefulWidget implements PreferredSizeWidget {
   /// Creates a header bar in the Arna style.
-  const ArnaHeaderBar({
+  ArnaHeaderBar({
     super.key,
     this.leading,
     this.automaticallyImplyLeading = true,
     this.title,
     this.middle,
     this.actions,
-    this.border,
+    this.bottom,
+    this.notificationPredicate = defaultScrollNotificationPredicate,
     this.backgroundColor,
-  });
+    this.primary = true,
+    this.excludeHeaderSemantics = false,
+    this.headerBarHeight,
+    this.systemOverlayStyle,
+  }) : preferredSize = _PreferredHeaderBarSize(
+          headerBarHeight,
+          bottom?.preferredSize.height,
+        );
 
   /// The leading widget laid out within the header bar.
   final Widget? leading;
@@ -47,18 +68,56 @@ class ArnaHeaderBar extends StatefulWidget implements PreferredSizeWidget {
   /// [ArnaPopupMenuButton] at the end of the header bar.
   final List<ArnaHeaderBarItem>? actions;
 
-  /// The border of the header bar.
+  /// This widget appears across the bottom of the header bar.
   ///
-  /// If a border is null, the header bar will not display a border.
-  final Border? border;
+  /// See also:
+  ///
+  ///  * [PreferredSize], which can be used to give an arbitrary widget a
+  ///    preferred size.
+  final PreferredSizeWidget? bottom;
+
+  /// A check that specifies which child's [ScrollNotification]s should be
+  /// listened to.
+  ///
+  /// By default, checks whether `notification.depth == 0`. Set it to something
+  /// else for more complicated layouts.
+  final ScrollNotificationPredicate notificationPredicate;
 
   /// The background color of the header bar.
   final Color? backgroundColor;
 
+  /// Whether this header bar is being displayed at the top of the screen.
+  ///
+  /// If true, the header bar's elements and [bottom] widget will be padded on
+  /// top by the height of the system status bar.
+  final bool primary;
+
+  /// Whether the title should be wrapped with header [Semantics].
+  ///
+  /// Defaults to false.
+  final bool excludeHeaderSemantics;
+
+  /// A size whose height is the sum of [toolbarHeight] and the [bottom] widget's
+  /// preferred height.
   @override
-  Size get preferredSize => const Size.fromHeight(
-        Styles.headerBarHeight + Styles.padding,
-      );
+  final Size preferredSize;
+
+  /// Defines the height of the header bar.
+  ///
+  /// By default, the value of [headerBarHeight] is [Styles.headerBarHeight].
+  final double? headerBarHeight;
+
+  /// Specifies the style to use for the system overlays that overlap the
+  /// HeaderBar.
+  ///
+  /// The HeaderBar's descendants are built within a
+  /// `AnnotatedRegion<SystemUiOverlayStyle>` widget, which causes
+  /// [SystemChrome.setSystemUIOverlayStyle] to be called automatically.
+  /// Apps should not enclose a HeaderBar with their own [AnnotatedRegion].
+  //
+  /// See also:
+  ///  * [SystemChrome.setSystemUIOverlayStyle]
+  final SystemUiOverlayStyle? systemOverlayStyle;
 
   @override
   State<ArnaHeaderBar> createState() => _ArnaHeaderBarState();
@@ -66,7 +125,26 @@ class ArnaHeaderBar extends StatefulWidget implements PreferredSizeWidget {
 
 /// The [State] for an [ArnaHeaderBar].
 class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
+  ScrollNotificationObserverState? _scrollNotificationObserver;
+  bool _scrolledUnder = false;
   int overflowedActionsCount = 0;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _scrollNotificationObserver?.removeListener(_handleScrollNotification);
+    _scrollNotificationObserver = ScrollNotificationObserver.of(context);
+    _scrollNotificationObserver?.addListener(_handleScrollNotification);
+  }
+
+  @override
+  void dispose() {
+    if (_scrollNotificationObserver != null) {
+      _scrollNotificationObserver!.removeListener(_handleScrollNotification);
+      _scrollNotificationObserver = null;
+    }
+    super.dispose();
+  }
 
   @override
   void didUpdateWidget(ArnaHeaderBar oldWidget) {
@@ -77,8 +155,50 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
     }
   }
 
+  void _handleScrollNotification(ScrollNotification notification) {
+    if (notification is ScrollUpdateNotification &&
+        widget.notificationPredicate(notification)) {
+      final bool oldScrolledUnder = _scrolledUnder;
+      final ScrollMetrics metrics = notification.metrics;
+      switch (metrics.axisDirection) {
+        case AxisDirection.up:
+          // Scroll view is reversed
+          _scrolledUnder = metrics.extentAfter > 0;
+          break;
+        case AxisDirection.down:
+          _scrolledUnder = metrics.extentBefore > 0;
+          break;
+        case AxisDirection.right:
+        case AxisDirection.left:
+          // Scrolled under is only supported in the vertical axis.
+          _scrolledUnder = false;
+          break;
+      }
+      if (_scrolledUnder != oldScrolledUnder) {
+        setState(() {});
+      }
+    }
+  }
+
+  SystemUiOverlayStyle _systemOverlayStyleForBrightness(
+    Brightness brightness, [
+    Color? backgroundColor,
+  ]) {
+    final SystemUiOverlayStyle style = brightness == Brightness.dark
+        ? SystemUiOverlayStyle.light
+        : SystemUiOverlayStyle.dark;
+    // For backward compatibility, create an overlay style without system navigation bar settings.
+    return SystemUiOverlayStyle(
+      statusBarColor: backgroundColor,
+      statusBarBrightness: style.statusBarBrightness,
+      statusBarIconBrightness: style.statusBarIconBrightness,
+      systemStatusBarContrastEnforced: style.systemStatusBarContrastEnforced,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    assert(debugCheckHasMediaQuery(context));
     final ArnaScaffoldState? scaffold = ArnaScaffold.maybeOf(context);
     final ModalRoute<Object?>? route = ModalRoute.of(context);
 
@@ -86,6 +206,12 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
     final bool canPop = route?.canPop ?? false;
     final bool useCloseButton =
         route is ArnaPageRoute && route.fullscreenDialog;
+
+    final double headerBarHeight =
+        widget.headerBarHeight ?? Styles.headerBarHeight + Styles.padding;
+
+    final Color backgroundColor = widget.backgroundColor ??
+        ArnaColors.backgroundColor.resolveFrom(context);
 
     Widget? leading;
     if (widget.leading != null) {
@@ -106,6 +232,25 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
       }
     }
 
+    Widget? middle;
+    if (widget.middle != null) {
+      middle = widget.middle;
+    } else {
+      if (widget.title != null) {
+        final Widget title = Text(
+          widget.title!,
+          style: ArnaTheme.of(context).textTheme.title,
+        );
+        if (!widget.excludeHeaderSemantics) {
+          middle = Semantics(
+            header: true,
+            child: title,
+          );
+        } else {
+          middle = title;
+        }
+      }
+    }
     // Collect the header bar action widgets that can be shown inside the
     // header bar and the ones that have overflowed.
     List<ArnaHeaderBarItem>? inHeaderBarActions = <ArnaHeaderBarItem>[];
@@ -133,37 +278,64 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
       },
     );
 
+    Widget headerBar = SizedBox(
+      height: headerBarHeight,
+      child: NavigationToolbar(
+        leading: leading,
+        middle: middle,
+        trailing: trailing,
+        middleSpacing: Styles.smallPadding,
+      ),
+    );
+
+    headerBar = Column(
+      children: <Widget>[
+        Flexible(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: headerBarHeight),
+            child: Padding(
+              padding: const ArnaEdgeInsets.horizontal(Styles.smallPadding),
+              child: headerBar,
+            ),
+          ),
+        ),
+        if (widget.bottom != null)
+          Padding(
+            padding: const ArnaEdgeInsets.horizontal(Styles.smallPadding),
+            child: widget.bottom,
+          ),
+        if (_scrolledUnder) const ArnaDivider(),
+      ],
+    );
+
+    if (widget.primary) {
+      headerBar = SafeArea(
+        bottom: false,
+        child: headerBar,
+      );
+    }
+
+    headerBar = Align(
+      alignment: Alignment.topCenter,
+      child: headerBar,
+    );
+
+    final SystemUiOverlayStyle overlayStyle = _systemOverlayStyleForBrightness(
+      ArnaDynamicColor.estimateBrightnessForColor(backgroundColor),
+      ArnaColors.transparent,
+    );
+
     return Semantics(
-      explicitChildNodes: true,
       container: true,
-      child: Container(
-        decoration: BoxDecoration(
-          border: widget.border,
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: overlayStyle,
+        child: ColoredBox(
           color: widget.backgroundColor ??
               ArnaColors.backgroundColor.resolveFrom(context),
-        ),
-        alignment: Alignment.topCenter,
-        child: SafeArea(
-          bottom: false,
-          child: FocusTraversalGroup(
-            child: Padding(
-              padding: Styles.small,
-              child: SizedBox(
-                height: Styles.headerBarHeight,
-                child: NavigationToolbar(
-                  leading: leading,
-                  middle: widget.middle != null
-                      ? widget.middle!
-                      : widget.title != null
-                          ? Text(
-                              widget.title!,
-                              style: ArnaTheme.of(context).textTheme.title,
-                            )
-                          : null,
-                  trailing: trailing,
-                  middleSpacing: Styles.smallPadding,
-                ),
-              ),
+          child: Semantics(
+            explicitChildNodes: true,
+            child: FocusTraversalGroup(
+              child: headerBar,
             ),
           ),
         ),

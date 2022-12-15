@@ -18,6 +18,7 @@
 - Add ArnaStateMixin
 - Update ArnaApp
 - [BREAKING] Update ArnaBody
+- Update ArnaHeaderBar
 
 ## 1.0.6
 

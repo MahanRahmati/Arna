@@ -122,7 +122,7 @@ class _ArnaSegmentedControlState<T extends Object>
                 accentColor: accent,
                 cursor: widget.cursor,
               );
-            }).toList(),
+            }),
             const SizedBox(height: Styles.buttonSize, width: 0.5),
           ],
         ),

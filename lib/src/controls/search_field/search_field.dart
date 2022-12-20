@@ -1,7 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter/services.dart' show TextInputAction;
 
-// TODO: Remove focus node when showSearch is false.
+// TODO(Mahan): Remove focus node when showSearch is false.
 
 /// An Arna-styled search field.
 class ArnaSearchField extends StatefulWidget {

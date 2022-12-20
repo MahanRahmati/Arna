@@ -1,6 +1,6 @@
 import 'package:arna/arna.dart';
 
-//TODO: Refactor ArnaSnackBar.
+// TODO(Mahan): Refactor ArnaSnackBar.
 
 /// A message with an optional action which briefly displays at the bottom of the screen.
 ///

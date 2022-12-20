@@ -34,7 +34,7 @@ class ArnaPageRoute<T> extends PageRoute<T> with ArnaRouteTransitionMixin<T> {
   final WidgetBuilder builder;
 
   @override
-  Widget buildContent(BuildContext context) => builder(context);
+  Widget buildContent(final BuildContext context) => builder(context);
 
   @override
   final bool maintainState;
@@ -47,7 +47,7 @@ class ArnaPageRoute<T> extends PageRoute<T> with ArnaRouteTransitionMixin<T> {
 mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
   /// Builds the primary contents of the route.
   @protected
-  Widget buildContent(BuildContext context);
+  Widget buildContent(final BuildContext context);
 
   @override
   Duration get transitionDuration => Styles.routeDuration;
@@ -59,7 +59,7 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
   String? get barrierLabel => null;
 
   @override
-  bool canTransitionTo(TransitionRoute<dynamic> nextRoute) {
+  bool canTransitionTo(final TransitionRoute<dynamic> nextRoute) {
     // Don't perform outgoing animation if the next route is a fullscreen dialog.
     return nextRoute is ArnaRouteTransitionMixin && !nextRoute.fullscreenDialog;
   }
@@ -67,11 +67,11 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
   /// True if a back swipe pop gesture is currently underway for [route].
   ///
   /// This just check the route's [NavigatorState.userGestureInProgress].
-  static bool isPopGestureInProgress(PageRoute<dynamic> route) {
+  static bool isPopGestureInProgress(final PageRoute<dynamic> route) {
     return route.navigator!.userGestureInProgress;
   }
 
-  static bool _isPopGestureEnabled<T>(PageRoute<T> route) {
+  static bool _isPopGestureEnabled<T>(final PageRoute<T> route) {
     // If there's nothing to go back to, then obviously we don't support the back gesture.
     if (route.isFirst) {
       return false;
@@ -110,9 +110,9 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
 
   @override
   Widget buildPage(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
+    final BuildContext context,
+    final Animation<double> animation,
+    final Animation<double> secondaryAnimation,
   ) {
     final Widget result = buildContent(context);
     assert(
@@ -136,7 +136,9 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
 
   // Called by [_ArnaBackGestureDetector] when a pop ("back") drag start gesture is detected. The returned controller
   // handles all of the subsequent drag events.
-  static _ArnaBackGestureController<T> _startPopGesture<T>(PageRoute<T> route) {
+  static _ArnaBackGestureController<T> _startPopGesture<T>(
+    final PageRoute<T> route,
+  ) {
     assert(_isPopGestureEnabled(route));
 
     return _ArnaBackGestureController<T>(
@@ -147,10 +149,10 @@ mixin ArnaRouteTransitionMixin<T> on PageRoute<T> {
 
   @override
   Widget buildTransitions(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
+    final BuildContext context,
+    final Animation<double> animation,
+    final Animation<double> secondaryAnimation,
+    final Widget child,
   ) {
     // Check if the route has an animation that's currently participating in a back swipe gesture.
     // In the middle of a back gesture drag, let the transition be linear to match finger motions.
@@ -181,10 +183,10 @@ class ArnaPageTransition extends StatelessWidget {
   ///  * [linearTransition] is whether to perform the transitions linearly. Used to precisely track back gesture drags.
   ArnaPageTransition({
     super.key,
-    required Animation<double> primaryRouteAnimation,
-    required Animation<double> secondaryRouteAnimation,
+    required final Animation<double> primaryRouteAnimation,
+    required final Animation<double> secondaryRouteAnimation,
     required this.child,
-    required bool linearTransition,
+    required final bool linearTransition,
   })  : _primaryPositionAnimation = (linearTransition
                 ? primaryRouteAnimation
                 : CurvedAnimation(
@@ -218,7 +220,7 @@ class ArnaPageTransition extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasDirectionality(context));
     final TextDirection textDirection = Directionality.of(context);
     return SlideTransition(
@@ -285,13 +287,13 @@ class _ArnaBackGestureDetectorState<T>
     super.dispose();
   }
 
-  void _handleDragStart(DragStartDetails details) {
+  void _handleDragStart(final DragStartDetails details) {
     assert(mounted);
     assert(_backGestureController == null);
     _backGestureController = widget.onStartPopGesture();
   }
 
-  void _handleDragUpdate(DragUpdateDetails details) {
+  void _handleDragUpdate(final DragUpdateDetails details) {
     assert(mounted);
     assert(_backGestureController != null);
     _backGestureController!.dragUpdate(
@@ -299,7 +301,7 @@ class _ArnaBackGestureDetectorState<T>
     );
   }
 
-  void _handleDragEnd(DragEndDetails details) {
+  void _handleDragEnd(final DragEndDetails details) {
     assert(mounted);
     assert(_backGestureController != null);
     _backGestureController!.dragEnd(
@@ -317,13 +319,13 @@ class _ArnaBackGestureDetectorState<T>
     _backGestureController = null;
   }
 
-  void _handlePointerDown(PointerDownEvent event) {
+  void _handlePointerDown(final PointerDownEvent event) {
     if (widget.enabledCallback()) {
       _recognizer.addPointer(event);
     }
   }
 
-  double _convertToLogical(double value) {
+  double _convertToLogical(final double value) {
     switch (Directionality.of(context)) {
       case TextDirection.rtl:
         return -value;
@@ -333,7 +335,7 @@ class _ArnaBackGestureDetectorState<T>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasDirectionality(context));
     // For devices with notches, the drag area needs to be larger on the side that has the notch.
     double dragAreaWidth = Directionality.of(context) == TextDirection.ltr
@@ -383,13 +385,13 @@ class _ArnaBackGestureController<T> {
   final NavigatorState navigator;
 
   /// The drag gesture has changed by [fractionalDelta]. The total range of the drag should be 0.0 to 1.0.
-  void dragUpdate(double delta) {
+  void dragUpdate(final double delta) {
     controller.value -= delta;
   }
 
   /// The drag gesture has ended with a horizontal motion of [fractionalVelocity] as a fraction of screen width per
   /// second.
-  void dragEnd(double velocity) {
+  void dragEnd(final double velocity) {
     // Fling in the appropriate direction.
     // AnimationController.fling is guaranteed to take at least one frame.
     const Curve animationCurve = Curves.fastLinearToSlowEaseIn;
@@ -436,7 +438,7 @@ class _ArnaBackGestureController<T> {
       // Keep the userGestureInProgress in true state so we don't change the curve of the page transition mid-flight
       // since ArnaPageTransition depends on userGestureInProgress.
       late AnimationStatusListener animationStatusCallback;
-      animationStatusCallback = (AnimationStatus status) {
+      animationStatusCallback = (final AnimationStatus status) {
         navigator.didStopUserGesture();
         controller.removeStatusListener(animationStatusCallback);
       };

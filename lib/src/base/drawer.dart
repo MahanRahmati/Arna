@@ -33,7 +33,7 @@ class ArnaDrawer extends StatelessWidget {
   final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final bool ltr = Directionality.of(context) == TextDirection.ltr;
     return Semantics(
       scopesRoute: true,
@@ -86,7 +86,7 @@ typedef ArnaDrawerCallback = void Function(
 class ArnaDrawerController extends StatefulWidget {
   /// Creates a controller for an [ArnaDrawer].
   const ArnaDrawerController({
-    GlobalKey? key,
+    final GlobalKey? key,
     required this.drawer,
     this.drawerCallback,
     this.isDrawerOpen = false,
@@ -138,7 +138,7 @@ class ArnaDrawerControllerState extends State<ArnaDrawerController>
   }
 
   @override
-  void didUpdateWidget(ArnaDrawerController oldWidget) {
+  void didUpdateWidget(final ArnaDrawerController oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isDrawerOpen != oldWidget.isDrawerOpen) {
       switch (_controller.status) {
@@ -180,7 +180,7 @@ class ArnaDrawerControllerState extends State<ArnaDrawerController>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return _controller.status == AnimationStatus.dismissed
         ? const SizedBox.shrink()
         : RepaintBoundary(

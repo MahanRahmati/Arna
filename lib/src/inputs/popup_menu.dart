@@ -56,7 +56,7 @@ class ArnaPopupMenuDivider extends ArnaPopupMenuEntry {
 /// The [State] for an [ArnaPopupMenuDivider].
 class _ArnaPopupMenuDividerState extends State<ArnaPopupMenuDivider> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return const Padding(
       padding: Styles.popupMenuDividerPadding,
       child: ArnaDivider(),
@@ -160,7 +160,7 @@ class _ArnaPopupMenuItemState extends State<ArnaPopupMenuItem> {
   void initState() {
     super.initState();
     _actions = <Type, Action<Intent>>{
-      ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => handleTap())
+      ActivateIntent: CallbackAction<Intent>(onInvoke: (final _) => handleTap())
     };
     _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
@@ -179,13 +179,13 @@ class _ArnaPopupMenuItemState extends State<ArnaPopupMenuItem> {
     super.dispose();
   }
 
-  void _handleFocusChange(bool hasFocus) {
+  void _handleFocusChange(final bool hasFocus) {
     if (mounted) {
       setState(() => _focused = hasFocus);
     }
   }
 
-  void _handleFocus(bool focus) {
+  void _handleFocus(final bool focus) {
     if (focus != _focused && mounted) {
       setState(() => _focused = focus);
     }
@@ -200,7 +200,7 @@ class _ArnaPopupMenuItemState extends State<ArnaPopupMenuItem> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent =
         widget.accentColor ?? ArnaTheme.of(context).accentColor;
     return FocusableActionDetector(
@@ -265,7 +265,7 @@ class _ArnaPopupMenu extends StatelessWidget {
   final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final List<Widget> children = <Widget>[];
 
     for (int i = 0; i < route.items.length; i += 1) {
@@ -280,7 +280,7 @@ class _ArnaPopupMenu extends StatelessWidget {
 
     return AnimatedBuilder(
       animation: route.animation!,
-      builder: (BuildContext context, Widget? child) {
+      builder: (final BuildContext context, final Widget? child) {
         return FadeTransition(
           opacity: opacity.animate(route.animation!),
           child: ScaleTransition(
@@ -355,7 +355,7 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
   /// necessary, we adjust the child's position so that it fits.
 
   @override
-  BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
+  BoxConstraints getConstraintsForChild(final BoxConstraints constraints) {
     // The menu can be at most the size of the overlay minus [Styles.padding]
     // pixels in each direction.
     return BoxConstraints.loose(constraints.biggest).deflate(
@@ -364,7 +364,7 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
   }
 
   @override
-  Offset getPositionForChild(Size size, Size childSize) {
+  Offset getPositionForChild(final Size size, final Size childSize) {
     // size: The size of the overlay.
     // childSize: The size of the menu, when fully open, as determined by
     // getConstraintsForChild.
@@ -404,7 +404,7 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
     return _fitInsideScreen(subScreen, childSize, wantedPosition);
   }
 
-  Rect _closestScreen(Iterable<Rect> screens, Offset point) {
+  Rect _closestScreen(final Iterable<Rect> screens, final Offset point) {
     Rect closest = screens.first;
     for (final Rect screen in screens) {
       if ((screen.center - point).distance <
@@ -415,7 +415,11 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
     return closest;
   }
 
-  Offset _fitInsideScreen(Rect screen, Size childSize, Offset wantedPosition) {
+  Offset _fitInsideScreen(
+    final Rect screen,
+    final Size childSize,
+    final Offset wantedPosition,
+  ) {
     double x = wantedPosition.dx;
     double y = wantedPosition.dy;
     // Avoid going outside an area defined as the rectangle 8.0 pixels from the
@@ -437,7 +441,7 @@ class _ArnaPopupMenuRouteLayout extends SingleChildLayoutDelegate {
   }
 
   @override
-  bool shouldRelayout(_ArnaPopupMenuRouteLayout oldDelegate) {
+  bool shouldRelayout(final _ArnaPopupMenuRouteLayout oldDelegate) {
     // If called when the old and new itemSizes have been initialized then we
     // expect them to have the same length because there's no practical way to
     // change length of the items list once the menu has been shown.
@@ -499,7 +503,11 @@ class _ArnaPopupMenuRoute extends PopupRoute<Never> {
   final String barrierLabel;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, _) {
+  Widget buildPage(
+    final BuildContext context,
+    final Animation<double> animation,
+    final _,
+  ) {
     final Widget menu = _ArnaPopupMenu(
       route: this,
       semanticLabel: semanticLabel,
@@ -512,7 +520,7 @@ class _ArnaPopupMenuRoute extends PopupRoute<Never> {
       removeLeft: true,
       removeRight: true,
       child: Builder(
-        builder: (BuildContext context) {
+        builder: (final BuildContext context) {
           return CustomSingleChildLayout(
             delegate: _ArnaPopupMenuRouteLayout(
               position,
@@ -528,7 +536,7 @@ class _ArnaPopupMenuRoute extends PopupRoute<Never> {
     );
   }
 
-  Set<Rect> _avoidBounds(MediaQueryData mediaQuery) {
+  Set<Rect> _avoidBounds(final MediaQueryData mediaQuery) {
     return DisplayFeatureSubScreen.avoidBounds(mediaQuery).toSet();
   }
 }
@@ -569,12 +577,12 @@ class _ArnaPopupMenuRoute extends PopupRoute<Never> {
 ///  * [SemanticsConfiguration.namesRoute], for a description of edge triggered
 ///    semantics.
 Future<T?> showArnaMenu<T>({
-  required BuildContext context,
-  required RelativeRect position,
-  required List<ArnaPopupMenuEntry> items,
-  String? semanticLabel,
-  Color? color,
-  bool useRootNavigator = false,
+  required final BuildContext context,
+  required final RelativeRect position,
+  required final List<ArnaPopupMenuEntry> items,
+  final String? semanticLabel,
+  final Color? color,
+  final bool useRootNavigator = false,
 }) {
   assert(items.isNotEmpty);
 
@@ -751,7 +759,7 @@ class ArnaPopupMenuButtonState extends State<ArnaPopupMenuButton> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaButton.icon(
       icon: widget.icon ?? Icons.more_vert_outlined,
       onPressed: widget.enabled ? showArnaButtonMenu : null,

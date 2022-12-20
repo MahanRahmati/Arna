@@ -57,7 +57,7 @@ class _ArnaPopupDialog extends StatelessWidget {
   final Widget body;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final double size = ArnaHelpers.deviceHeight(context) * 0.84;
     return Padding(
       padding: Styles.large,
@@ -159,7 +159,7 @@ class _ArnaPopupPage extends StatelessWidget {
   final bool resizeToAvoidBottomInset;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaScaffold(
       headerBar: ArnaHeaderBar(
         leading: const ArnaBackButton(),
@@ -230,23 +230,23 @@ class _ArnaPopupPage extends StatelessWidget {
 ///  * [DisplayFeatureSubScreen], which documents the specifics of how
 ///    [DisplayFeature]s can split the screen into sub-screens.
 Future<T?> showArnaPopupDialog<T>({
-  required BuildContext context,
-  String? title,
-  List<ArnaHeaderBarItem>? actions,
-  required WidgetBuilder builder,
-  bool resizeToAvoidBottomInset = true,
-  bool barrierDismissible = false,
-  Color? barrierColor,
-  String? barrierLabel,
-  bool useSafeArea = true,
-  bool useRootNavigator = true,
-  RouteSettings? routeSettings,
-  Offset? anchorPoint,
+  required final BuildContext context,
+  final String? title,
+  final List<ArnaHeaderBarItem>? actions,
+  required final WidgetBuilder builder,
+  final bool resizeToAvoidBottomInset = true,
+  final bool barrierDismissible = false,
+  final Color? barrierColor,
+  final String? barrierLabel,
+  final bool useSafeArea = true,
+  final bool useRootNavigator = true,
+  final RouteSettings? routeSettings,
+  final Offset? anchorPoint,
 }) {
   return ArnaHelpers.isCompact(context)
       ? Navigator.of(context).push(
           ArnaPageRoute<T>(
-            builder: (BuildContext context) => _ArnaPopupPage(
+            builder: (final BuildContext context) => _ArnaPopupPage(
               title: title,
               actions: actions,
               body: Builder(builder: builder),
@@ -257,9 +257,9 @@ Future<T?> showArnaPopupDialog<T>({
       : showGeneralDialog(
           context: context,
           pageBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
+            final BuildContext context,
+            final Animation<double> animation,
+            final Animation<double> secondaryAnimation,
           ) {
             final Widget dialog = _ArnaPopupDialog(
               title: title,
@@ -274,10 +274,10 @@ Future<T?> showArnaPopupDialog<T>({
           barrierColor: barrierColor ?? ArnaColors.barrierColor,
           transitionDuration: Styles.basicDuration,
           transitionBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            _,
-            Widget child,
+            final BuildContext context,
+            final Animation<double> animation,
+            final _,
+            final Widget child,
           ) {
             return ScaleTransition(
               scale: CurvedAnimation(

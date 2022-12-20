@@ -32,8 +32,8 @@ class OverflowHandler extends MultiChildRenderObjectWidget {
     this.overflowBreakpoint = 0.0,
     this.overflowWidgetAlignment = MainAxisAlignment.end,
     this.overflowChangedCallback,
-    required List<Widget> children,
-    required Widget overflowWidget,
+    required final List<Widget> children,
+    required final Widget overflowWidget,
   }) : super(children: <Widget>[...children, overflowWidget]);
 
   /// {@macro flutter.widgets.wrap.alignment}
@@ -72,7 +72,7 @@ class OverflowHandler extends MultiChildRenderObjectWidget {
   final OverflowHandlerChangedCallback? overflowChangedCallback;
 
   @override
-  RenderOverflowHandler createRenderObject(BuildContext context) {
+  RenderOverflowHandler createRenderObject(final BuildContext context) {
     return RenderOverflowHandler(
       alignment: alignment,
       crossAxisAlignment: crossAxisAlignment,
@@ -87,8 +87,8 @@ class OverflowHandler extends MultiChildRenderObjectWidget {
 
   @override
   void updateRenderObject(
-    BuildContext context,
-    RenderOverflowHandler renderObject,
+    final BuildContext context,
+    final RenderOverflowHandler renderObject,
   ) {
     renderObject
       ..alignment = alignment
@@ -102,7 +102,7 @@ class OverflowHandler extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(EnumProperty<MainAxisAlignment>('alignment', alignment));
     properties.add(
@@ -152,13 +152,13 @@ class RenderOverflowHandler extends RenderBox
         RenderBoxContainerDefaultsMixin<RenderBox, OverflowHandlerParentData> {
   /// {@macro renderOverflowHandler}
   RenderOverflowHandler({
-    required MainAxisAlignment alignment,
-    required CrossAxisAlignment crossAxisAlignment,
-    required TextDirection? textDirection,
-    required Clip clipBehavior,
-    required double overflowBreakpoint,
-    required MainAxisAlignment overflowWidgetAlignment,
-    required bool alwaysDisplayOverflowWidget,
+    required final MainAxisAlignment alignment,
+    required final CrossAxisAlignment crossAxisAlignment,
+    required final TextDirection? textDirection,
+    required final Clip clipBehavior,
+    required final double overflowBreakpoint,
+    required final MainAxisAlignment overflowWidgetAlignment,
+    required final bool alwaysDisplayOverflowWidget,
     required this.overflowChangedCallback,
   })  : _alignment = alignment,
         _crossAxisAlignment = crossAxisAlignment,
@@ -172,7 +172,7 @@ class RenderOverflowHandler extends RenderBox
 
   /// The breakpoint at which the items should overflow.
   double get overflowBreakpoint => _overflowBreakpoint;
-  set overflowBreakpoint(double value) {
+  set overflowBreakpoint(final double value) {
     if (_overflowBreakpoint != value) {
       _overflowBreakpoint = value;
       markNeedsLayout();
@@ -183,7 +183,7 @@ class RenderOverflowHandler extends RenderBox
 
   /// {@macro flutter.widgets.wrap.alignment}
   MainAxisAlignment get alignment => _alignment;
-  set alignment(MainAxisAlignment value) {
+  set alignment(final MainAxisAlignment value) {
     if (_alignment != value) {
       _alignment = value;
       markNeedsLayout();
@@ -194,7 +194,7 @@ class RenderOverflowHandler extends RenderBox
 
   /// {@macro flutter.widgets.wrap.crossAxisAlignment}
   CrossAxisAlignment get crossAxisAlignment => _crossAxisAlignment;
-  set crossAxisAlignment(CrossAxisAlignment value) {
+  set crossAxisAlignment(final CrossAxisAlignment value) {
     if (_crossAxisAlignment != value) {
       _crossAxisAlignment = value;
       markNeedsLayout();
@@ -205,7 +205,7 @@ class RenderOverflowHandler extends RenderBox
 
   /// {@macro flutter.widgets.wrap.textDirection}
   TextDirection? get textDirection => _textDirection;
-  set textDirection(TextDirection? value) {
+  set textDirection(final TextDirection? value) {
     if (_textDirection != value) {
       _textDirection = value;
       markNeedsLayout();
@@ -216,7 +216,7 @@ class RenderOverflowHandler extends RenderBox
 
   /// {@macro flutter.material.Material.clipBehavior}
   Clip get clipBehavior => _clipBehavior;
-  set clipBehavior(Clip value) {
+  set clipBehavior(final Clip value) {
     if (_clipBehavior != value) {
       _clipBehavior = value;
       markNeedsPaint();
@@ -228,7 +228,7 @@ class RenderOverflowHandler extends RenderBox
 
   /// {@macro overflowWidgetAlignment}
   MainAxisAlignment get overflowWidgetAlignment => _overflowWidgetAlignment;
-  set overflowWidgetAlignment(MainAxisAlignment value) {
+  set overflowWidgetAlignment(final MainAxisAlignment value) {
     if (_overflowWidgetAlignment != value) {
       _overflowWidgetAlignment = value;
       markNeedsLayout();
@@ -239,7 +239,7 @@ class RenderOverflowHandler extends RenderBox
 
   /// {@macro alwaysDisplayOverflowWidget}
   bool get alwaysDisplayOverflowWidget => _alwaysDisplayOverflowWidget;
-  set alwaysDisplayOverflowWidget(bool value) {
+  set alwaysDisplayOverflowWidget(final bool value) {
     if (_alwaysDisplayOverflowWidget != value) {
       _alwaysDisplayOverflowWidget = value;
       markNeedsLayout();
@@ -275,14 +275,14 @@ class RenderOverflowHandler extends RenderBox
   }
 
   @override
-  void setupParentData(RenderBox child) {
+  void setupParentData(final RenderBox child) {
     if (child.parentData is! OverflowHandlerParentData) {
       child.parentData = OverflowHandlerParentData();
     }
   }
 
   @override
-  double computeMinIntrinsicWidth(double height) {
+  double computeMinIntrinsicWidth(final double height) {
     // The min intrinsic width is the width of the last child, which must
     // be the renderbox of the "overflow widget"
     double width = 0.0;
@@ -294,7 +294,7 @@ class RenderOverflowHandler extends RenderBox
   }
 
   @override
-  double computeMaxIntrinsicWidth(double height) {
+  double computeMaxIntrinsicWidth(final double height) {
     // The max intrinsic width is the width of all children, except
     // potentially the last child if we do not always display the
     // "overflow widget"
@@ -315,36 +315,36 @@ class RenderOverflowHandler extends RenderBox
   }
 
   @override
-  double computeMinIntrinsicHeight(double width) {
+  double computeMinIntrinsicHeight(final double width) {
     return computeDryLayout(BoxConstraints(maxWidth: width)).height;
   }
 
   @override
-  double computeMaxIntrinsicHeight(double width) {
+  double computeMaxIntrinsicHeight(final double width) {
     return computeDryLayout(BoxConstraints(maxWidth: width)).height;
   }
 
   @override
-  double? computeDistanceToActualBaseline(TextBaseline baseline) {
+  double? computeDistanceToActualBaseline(final TextBaseline baseline) {
     return defaultComputeDistanceToHighestActualBaseline(baseline);
   }
 
-  double _getMainAxisExtent(Size childSize) {
+  double _getMainAxisExtent(final Size childSize) {
     return childSize.width;
   }
 
-  double _getCrossAxisExtent(Size childSize) {
+  double _getCrossAxisExtent(final Size childSize) {
     return childSize.height;
   }
 
-  Offset _getOffset(double mainAxisOffset, double crossAxisOffset) {
+  Offset _getOffset(final double mainAxisOffset, final double crossAxisOffset) {
     return Offset(mainAxisOffset, crossAxisOffset);
   }
 
   double _getChildCrossAxisOffset(
-    bool flipCrossAxis,
-    double crossAxisExtent,
-    double childCrossAxisExtent,
+    final bool flipCrossAxis,
+    final double crossAxisExtent,
+    final double childCrossAxisExtent,
   ) {
     final double freeSpace = crossAxisExtent - childCrossAxisExtent;
     switch (crossAxisAlignment) {
@@ -370,13 +370,13 @@ class RenderOverflowHandler extends RenderBox
   List<int> _hiddenChildren = <int>[];
 
   @override
-  Size computeDryLayout(BoxConstraints constraints) {
+  Size computeDryLayout(final BoxConstraints constraints) {
     return _computeDryLayout(constraints);
   }
 
   Size _computeDryLayout(
-    BoxConstraints constraints, [
-    ChildLayouter layoutChild = ChildLayoutHelper.dryLayoutChild,
+    final BoxConstraints constraints, [
+    final ChildLayouter layoutChild = ChildLayoutHelper.dryLayoutChild,
   ]) {
     final BoxConstraints childConstraints;
     double mainAxisLimit = 0.0;
@@ -534,7 +534,7 @@ class RenderOverflowHandler extends RenderBox
       if (overflowChangedCallback != null) {
         // This will likely trigger setState in a parent widget,
         // so schedule to happen at the end of the frame...
-        SchedulerBinding.instance.addPostFrameCallback((_) {
+        SchedulerBinding.instance.addPostFrameCallback((final _) {
           overflowChangedCallback!(hiddenChildren);
         });
       }
@@ -647,7 +647,10 @@ class RenderOverflowHandler extends RenderBox
   }
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
+  bool hitTestChildren(
+    final BoxHitTestResult result, {
+    required final Offset position,
+  }) {
     RenderBox? child = lastChild;
     while (child != null) {
       final OverflowHandlerParentData childParentData =
@@ -658,7 +661,7 @@ class RenderOverflowHandler extends RenderBox
         final bool isHit = result.addWithPaintOffset(
           offset: childParentData.offset,
           position: position,
-          hitTest: (BoxHitTestResult result, Offset transformed) {
+          hitTest: (final BoxHitTestResult result, final Offset transformed) {
             assert(transformed == position - childParentData.offset);
             return child!.hitTest(result, position: transformed);
           },
@@ -673,7 +676,7 @@ class RenderOverflowHandler extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
+  void paint(final PaintingContext context, final Offset offset) {
     if (_hasVisualOverflow && clipBehavior != Clip.none) {
       _clipRectLayer.layer = context.pushClipRect(
         needsCompositing,
@@ -689,7 +692,10 @@ class RenderOverflowHandler extends RenderBox
     }
   }
 
-  void _paintSkipHiddenChildren(PaintingContext context, Offset offset) {
+  void _paintSkipHiddenChildren(
+    final PaintingContext context,
+    final Offset offset,
+  ) {
     RenderBox? child = firstChild;
     while (child != null) {
       final OverflowHandlerParentData childParentData =
@@ -711,7 +717,7 @@ class RenderOverflowHandler extends RenderBox
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(EnumProperty<MainAxisAlignment>('alignment', alignment));
     properties.add(

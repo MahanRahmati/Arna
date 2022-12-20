@@ -24,11 +24,12 @@ class ArnaCloseButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaButton(
       icon: Icons.close_outlined,
-      onPressed: () =>
-          onPressed != null ? onPressed!() : Navigator.maybePop(context),
+      onPressed: () {
+        onPressed != null ? onPressed!() : Navigator.maybePop(context);
+      },
       buttonType: ButtonType.borderless,
       tooltipMessage: MaterialLocalizations.of(context).closeButtonTooltip,
       semanticLabel: MaterialLocalizations.of(context).closeButtonTooltip,

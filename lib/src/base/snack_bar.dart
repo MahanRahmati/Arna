@@ -49,7 +49,7 @@ class _ArnaSnackBarState extends State<ArnaSnackBar>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Widget snackBar = Semantics(
       container: true,
       liveRegion: true,
@@ -109,21 +109,21 @@ class _ArnaSnackBarState extends State<ArnaSnackBar>
 
 /// Shows [ArnaSnackBar].
 OverlayEntry showArnaSnackbar({
-  required BuildContext context,
-  required String message,
-  Widget? action,
+  required final BuildContext context,
+  required final String message,
+  final Widget? action,
 }) {
   final GlobalKey<_ArnaSnackBarState> snackBarKey =
       GlobalKey<_ArnaSnackBarState>();
   final OverlayEntry overlayEntry = OverlayEntry(
-    builder: (BuildContext context) => ArnaSnackBar(
+    builder: (final BuildContext context) => ArnaSnackBar(
       key: snackBarKey,
       message: message,
       action: action,
     ),
   );
   Overlay.of(context)!.insert(overlayEntry);
-  Future<dynamic>.delayed(Styles.snackbarDuration).then((_) async {
+  Future<dynamic>.delayed(Styles.snackbarDuration).then((final _) async {
     if (overlayEntry.mounted) {
       await snackBarKey.currentState?.controller.reverse();
     }

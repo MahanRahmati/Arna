@@ -26,11 +26,13 @@ class _InnerWidgetState extends State<_InnerWidget> {
   @override
   void initState() {
     super.initState();
-    widget.controller.stream.listen((bool val) => widget.onValueChanged(val));
+    widget.controller.stream.listen(
+      (final bool val) => widget.onValueChanged(val),
+    );
   }
 
   @override
-  Widget build(BuildContext context) => Container();
+  Widget build(final BuildContext context) => Container();
 }
 
 class _MyWidget extends StatefulWidget {
@@ -57,7 +59,7 @@ class _MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<_MyWidget> with ArnaStateMixin {
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ColoredBox(
       key: key,
       color: widget.evaluator(this) ? trueColor : falseColor,
@@ -71,9 +73,9 @@ class _MyWidgetState extends State<_MyWidget> with ArnaStateMixin {
 
 void main() {
   Future<void> verify(
-    WidgetTester tester,
-    Widget widget,
-    StreamController<bool> controller,
+    final WidgetTester tester,
+    final Widget widget,
+    final StreamController<bool> controller,
   ) async {
     await tester.pumpWidget(ArnaApp(home: ArnaScaffold(body: widget)));
     // Set the value to True
@@ -87,51 +89,56 @@ void main() {
     expect(tester.widget<ColoredBox>(find.byKey(key)).color, falseColor);
   }
 
-  testWidgets('ArnaState.pressed is tracked', (WidgetTester tester) async {
+  testWidgets('ArnaState.pressed is tracked',
+      (final WidgetTester tester) async {
     final StreamController<bool> controller = StreamController<bool>();
     final _MyWidget widget = _MyWidget(
       controller: controller,
-      evaluator: (_MyWidgetState state) => state.isPressed,
+      evaluator: (final _MyWidgetState state) => state.isPressed,
       arnaState: ArnaState.pressed,
     );
     await verify(tester, widget, controller);
   });
 
-  testWidgets('ArnaState.focused is tracked', (WidgetTester tester) async {
+  testWidgets('ArnaState.focused is tracked',
+      (final WidgetTester tester) async {
     final StreamController<bool> controller = StreamController<bool>();
     final _MyWidget widget = _MyWidget(
       controller: controller,
-      evaluator: (_MyWidgetState state) => state.isFocused,
+      evaluator: (final _MyWidgetState state) => state.isFocused,
       arnaState: ArnaState.focused,
     );
     await verify(tester, widget, controller);
   });
 
-  testWidgets('ArnaState.hovered is tracked', (WidgetTester tester) async {
+  testWidgets('ArnaState.hovered is tracked',
+      (final WidgetTester tester) async {
     final StreamController<bool> controller = StreamController<bool>();
     final _MyWidget widget = _MyWidget(
       controller: controller,
-      evaluator: (_MyWidgetState state) => state.isHovered,
+      evaluator: (final _MyWidgetState state) => state.isHovered,
       arnaState: ArnaState.hovered,
     );
     await verify(tester, widget, controller);
   });
 
-  testWidgets('ArnaState.disabled is tracked', (WidgetTester tester) async {
+  testWidgets('ArnaState.disabled is tracked',
+      (final WidgetTester tester) async {
     final StreamController<bool> controller = StreamController<bool>();
     final _MyWidget widget = _MyWidget(
       controller: controller,
-      evaluator: (_MyWidgetState state) => state.isDisabled,
+      evaluator: (final _MyWidgetState state) => state.isDisabled,
       arnaState: ArnaState.disabled,
     );
     await verify(tester, widget, controller);
   });
 
-  testWidgets('ArnaState.selected is tracked', (WidgetTester tester) async {
+  testWidgets('ArnaState.selected is tracked',
+      (final WidgetTester tester) async {
     final StreamController<bool> controller = StreamController<bool>();
     final _MyWidget widget = _MyWidget(
       controller: controller,
-      evaluator: (_MyWidgetState state) => state.isSelected,
+      evaluator: (final _MyWidgetState state) => state.isSelected,
       arnaState: ArnaState.selected,
     );
     await verify(tester, widget, controller);

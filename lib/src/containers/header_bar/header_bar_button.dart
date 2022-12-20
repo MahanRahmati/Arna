@@ -68,7 +68,7 @@ class ArnaHeaderBarButton extends ArnaHeaderBarItem {
   final bool enableFeedback;
 
   @override
-  Widget inHeaderBar(BuildContext context) {
+  Widget inHeaderBar(final BuildContext context) {
     return ArnaButton(
       icon: icon,
       onPressed: onPressed,
@@ -85,7 +85,7 @@ class ArnaHeaderBarButton extends ArnaHeaderBarItem {
   }
 
   @override
-  ArnaPopupMenuEntry overflowed(BuildContext context) {
+  ArnaPopupMenuEntry overflowed(final BuildContext context) {
     return ArnaPopupMenuItem(
       leading: Icon(icon),
       title: label,

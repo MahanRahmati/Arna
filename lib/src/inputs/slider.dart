@@ -197,7 +197,7 @@ class ArnaSlider extends StatefulWidget {
   State<ArnaSlider> createState() => _ArnaSliderState();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
       DoubleProperty(
@@ -325,7 +325,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   }
 
   @override
-  void didUpdateWidget(ArnaSlider oldWidget) {
+  void didUpdateWidget(final ArnaSlider oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.onChanged != oldWidget.onChanged) {
       focusNode!.canRequestFocus = _isEnabled;
@@ -341,18 +341,19 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void _handleChanged(double value) {
+  void _handleChanged(final double value) {
     final double lerpValue = _lerp(value);
     if (lerpValue != widget.value) {
       widget.onChanged!(lerpValue);
     }
   }
 
-  void _handleDragStart(double value) => widget.onChangeStart!(_lerp(value));
+  void _handleDragStart(final double value) =>
+      widget.onChangeStart!(_lerp(value));
 
-  void _handleDragEnd(double value) => widget.onChangeEnd!(_lerp(value));
+  void _handleDragEnd(final double value) => widget.onChangeEnd!(_lerp(value));
 
-  void _actionHandler(_AdjustSliderIntent intent) {
+  void _actionHandler(final _AdjustSliderIntent intent) {
     final _RenderArnaSlider renderSlider = _renderObjectKey.currentContext!
         .findRenderObject()! as _RenderArnaSlider;
     final TextDirection textDirection = Directionality.of(
@@ -388,33 +389,33 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
     }
   }
 
-  void _handleFocusChange(bool hasFocus) {
+  void _handleFocusChange(final bool hasFocus) {
     if (hasFocus != _focused && mounted) {
       setState(() => _focused = hasFocus);
     }
   }
 
-  void _handleFocus(bool focus) {
+  void _handleFocus(final bool focus) {
     if (focus != _focused && mounted) {
       setState(() => _focused = focus);
     }
   }
 
   /// Returns a number between min and max, proportional to value, which must be between 0.0 and 1.0.
-  double _lerp(double value) {
+  double _lerp(final double value) {
     assert(value >= 0.0);
     assert(value <= 1.0);
     return value * (widget.max - widget.min) + widget.min;
   }
 
-  double _discretize(double value) {
+  double _discretize(final double value) {
     assert(value >= 0.0 && value <= 1.0);
 
     final int divisions = widget.divisions!;
     return (value * divisions).round() / divisions;
   }
 
-  double _convert(double value) {
+  double _convert(final double value) {
     double ret = _unlerp(value);
     if (widget.divisions != null) {
       ret = _discretize(ret);
@@ -423,7 +424,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   }
 
   /// Returns a number between 0.0 and 1.0, given a value between min and max.
-  double _unlerp(double value) {
+  double _unlerp(final double value) {
     assert(value <= widget.max);
     assert(value >= widget.min);
     return widget.max > widget.min
@@ -432,7 +433,7 @@ class _ArnaSliderState extends State<ArnaSlider> with TickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent =
         widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
@@ -525,7 +526,7 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
   final Color thumbColor;
 
   @override
-  _RenderArnaSlider createRenderObject(BuildContext context) {
+  _RenderArnaSlider createRenderObject(final BuildContext context) {
     return _RenderArnaSlider(
       value: value,
       divisions: divisions,
@@ -544,8 +545,8 @@ class _ArnaSliderRenderObjectWidget extends LeafRenderObjectWidget {
 
   @override
   void updateRenderObject(
-    BuildContext context,
-    _RenderArnaSlider renderObject,
+    final BuildContext context,
+    final _RenderArnaSlider renderObject,
   ) {
     renderObject
       // We should update the `divisions` ahead of `value`, because the `value` setter dependent on the `divisions`.
@@ -570,18 +571,18 @@ class _RenderArnaSlider extends RenderBox
     with RelayoutWhenSystemFontsChangeMixin {
   /// Renders an ArnaSlider.
   _RenderArnaSlider({
-    required double value,
-    required int? divisions,
-    required ValueChanged<double>? onChanged,
+    required final double value,
+    required final int? divisions,
+    required final ValueChanged<double>? onChanged,
     required this.onChangeStart,
     required this.onChangeEnd,
-    required _ArnaSliderState state,
-    required Color accent,
-    required Color borderColor,
-    required Color trackColor,
-    required Color thumbColor,
-    required TextDirection textDirection,
-    required DeviceGestureSettings gestureSettings,
+    required final _ArnaSliderState state,
+    required final Color accent,
+    required final Color borderColor,
+    required final Color trackColor,
+    required final Color thumbColor,
+    required final TextDirection textDirection,
+    required final DeviceGestureSettings gestureSettings,
   })  : assert(value >= 0.0 && value <= 1.0),
         _value = value,
         _divisions = divisions,
@@ -646,7 +647,7 @@ class _RenderArnaSlider extends RenderBox
 
   double get value => _value;
   double _value;
-  set value(double newValue) {
+  set value(final double newValue) {
     assert(newValue >= 0.0 && newValue <= 1.0);
     final double convertedValue = isDiscrete ? _discretize(newValue) : newValue;
     if (convertedValue == _value) {
@@ -669,14 +670,14 @@ class _RenderArnaSlider extends RenderBox
   }
 
   DeviceGestureSettings? get gestureSettings => _drag.gestureSettings;
-  set gestureSettings(DeviceGestureSettings? gestureSettings) {
+  set gestureSettings(final DeviceGestureSettings? gestureSettings) {
     _drag.gestureSettings = gestureSettings;
     _tap.gestureSettings = gestureSettings;
   }
 
   int? get divisions => _divisions;
   int? _divisions;
-  set divisions(int? value) {
+  set divisions(final int? value) {
     if (value == _divisions) {
       return;
     }
@@ -686,7 +687,7 @@ class _RenderArnaSlider extends RenderBox
 
   ValueChanged<double>? get onChanged => _onChanged;
   ValueChanged<double>? _onChanged;
-  set onChanged(ValueChanged<double>? value) {
+  set onChanged(final ValueChanged<double>? value) {
     if (value == _onChanged) {
       return;
     }
@@ -708,7 +709,7 @@ class _RenderArnaSlider extends RenderBox
 
   Color get accent => _accent;
   Color _accent;
-  set accent(Color value) {
+  set accent(final Color value) {
     if (value == _accent) {
       return;
     }
@@ -718,7 +719,7 @@ class _RenderArnaSlider extends RenderBox
 
   Color get borderColor => _borderColor;
   Color _borderColor;
-  set borderColor(Color value) {
+  set borderColor(final Color value) {
     if (value == _borderColor) {
       return;
     }
@@ -728,7 +729,7 @@ class _RenderArnaSlider extends RenderBox
 
   Color get trackColor => _trackColor;
   Color _trackColor;
-  set trackColor(Color value) {
+  set trackColor(final Color value) {
     if (value == _trackColor) {
       return;
     }
@@ -738,7 +739,7 @@ class _RenderArnaSlider extends RenderBox
 
   Color get thumbColor => _thumbColor;
   Color _thumbColor;
-  set thumbColor(Color value) {
+  set thumbColor(final Color value) {
     if (value == _thumbColor) {
       return;
     }
@@ -748,7 +749,7 @@ class _RenderArnaSlider extends RenderBox
 
   TextDirection get textDirection => _textDirection;
   TextDirection _textDirection;
-  set textDirection(TextDirection value) {
+  set textDirection(final TextDirection value) {
     if (_textDirection == value) {
       return;
     }
@@ -757,7 +758,7 @@ class _RenderArnaSlider extends RenderBox
   }
 
   @override
-  void attach(PipelineOwner owner) {
+  void attach(final PipelineOwner owner) {
     super.attach(owner);
     _enableAnimation.addListener(markNeedsPaint);
     _state.positionController.addListener(markNeedsPaint);
@@ -770,7 +771,7 @@ class _RenderArnaSlider extends RenderBox
     super.detach();
   }
 
-  double _getValueFromVisualPosition(double visualPosition) {
+  double _getValueFromVisualPosition(final double visualPosition) {
     switch (textDirection) {
       case TextDirection.rtl:
         return 1.0 - visualPosition;
@@ -779,13 +780,13 @@ class _RenderArnaSlider extends RenderBox
     }
   }
 
-  double _getValueFromGlobalPosition(Offset globalPosition) {
+  double _getValueFromGlobalPosition(final Offset globalPosition) {
     final double visualPosition =
         (globalToLocal(globalPosition).dx - _trackLeft) / _trackRight;
     return _getValueFromVisualPosition(visualPosition);
   }
 
-  double _discretize(double value) {
+  double _discretize(final double value) {
     double result = value.clamp(0.0, 1.0);
     if (isDiscrete) {
       result = (result * divisions!).round() / divisions!;
@@ -793,7 +794,7 @@ class _RenderArnaSlider extends RenderBox
     return result;
   }
 
-  void _startInteraction(Offset globalPosition) {
+  void _startInteraction(final Offset globalPosition) {
     if (!_active && isInteractive) {
       _active = true;
       onChangeStart?.call(_discretize(value));
@@ -813,11 +814,11 @@ class _RenderArnaSlider extends RenderBox
     }
   }
 
-  void _handleDragStart(DragStartDetails details) {
+  void _handleDragStart(final DragStartDetails details) {
     _startInteraction(details.globalPosition);
   }
 
-  void _handleDragUpdate(DragUpdateDetails details) {
+  void _handleDragUpdate(final DragUpdateDetails details) {
     if (!_state.mounted) {
       return;
     }
@@ -839,23 +840,23 @@ class _RenderArnaSlider extends RenderBox
     }
   }
 
-  void _handleDragEnd(DragEndDetails details) {
+  void _handleDragEnd(final DragEndDetails details) {
     _endInteraction();
   }
 
-  void _handleTapDown(TapDownDetails details) {
+  void _handleTapDown(final TapDownDetails details) {
     _startInteraction(details.globalPosition);
   }
 
-  void _handleTapUp(TapUpDetails details) {
+  void _handleTapUp(final TapUpDetails details) {
     _endInteraction();
   }
 
   @override
-  bool hitTestSelf(Offset position) => true;
+  bool hitTestSelf(final Offset position) => true;
 
   @override
-  void handleEvent(PointerEvent event, BoxHitTestEntry entry) {
+  void handleEvent(final PointerEvent event, final BoxHitTestEntry entry) {
     assert(debugHandleEvent(event, entry));
     if (event is PointerDownEvent && isInteractive) {
       // We need to add the drag first so that it has priority.
@@ -865,22 +866,26 @@ class _RenderArnaSlider extends RenderBox
   }
 
   @override
-  double computeMinIntrinsicWidth(double height) => Styles.sliderTrackMinWidth;
+  double computeMinIntrinsicWidth(final double height) =>
+      Styles.sliderTrackMinWidth;
 
   @override
-  double computeMaxIntrinsicWidth(double height) => Styles.sliderTrackMinWidth;
+  double computeMaxIntrinsicWidth(final double height) =>
+      Styles.sliderTrackMinWidth;
 
   @override
-  double computeMinIntrinsicHeight(double width) => Styles.sliderTrackSize;
+  double computeMinIntrinsicHeight(final double width) =>
+      Styles.sliderTrackSize;
 
   @override
-  double computeMaxIntrinsicHeight(double width) => Styles.sliderTrackSize;
+  double computeMaxIntrinsicHeight(final double width) =>
+      Styles.sliderTrackSize;
 
   @override
   bool get sizedByParent => true;
 
   @override
-  Size computeDryLayout(BoxConstraints constraints) {
+  Size computeDryLayout(final BoxConstraints constraints) {
     return Size(
       constraints.hasBoundedWidth
           ? constraints.maxWidth
@@ -892,7 +897,7 @@ class _RenderArnaSlider extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
+  void paint(final PaintingContext context, final Offset offset) {
     final double value = _state.positionController.value;
     double visualPosition;
     Color leftColor;
@@ -1015,7 +1020,7 @@ class _RenderArnaSlider extends RenderBox
   }
 
   @override
-  void describeSemanticsConfiguration(SemanticsConfiguration config) {
+  void describeSemanticsConfiguration(final SemanticsConfiguration config) {
     super.describeSemanticsConfiguration(config);
 
     // The Slider widget has its own Focus widget with semantics information, and we want that semantics node to

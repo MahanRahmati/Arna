@@ -30,7 +30,7 @@ class ArnaCard extends StatelessWidget {
   final EdgeInsetsGeometry? margin;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Padding(
       padding: padding,
       child: AnimatedContainer(

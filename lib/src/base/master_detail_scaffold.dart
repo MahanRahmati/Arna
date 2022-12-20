@@ -83,15 +83,15 @@ class _ArnaMasterDetailScaffoldState extends State<ArnaMasterDetailScaffold> {
   int _index = -1;
   int _previousIndex = 0;
 
-  void _setIndex(int index) {
+  void _setIndex(final int index) {
     _previousIndex = _index;
     _index = index;
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (final BuildContext context, final BoxConstraints constraints) {
         return constraints.maxWidth > Styles.expanded
             ? _LateralPage(
                 headerBarLeading: widget.headerBarLeading,
@@ -208,13 +208,13 @@ class _LateralPageState extends State<_LateralPage> {
     super.initState();
   }
 
-  void _onPressed(int index) {
+  void _onPressed(final int index) {
     widget.onSelected(index);
     setState(() => _currentIndex = index);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Stack(
       children: <Widget>[
         SizedBox(
@@ -253,9 +253,9 @@ class _LateralPageState extends State<_LateralPage> {
                   ),
                   body: ArnaPageTransitionSwitcher(
                     transitionBuilder: (
-                      Widget child,
-                      Animation<double> primaryAnimation,
-                      Animation<double> secondaryAnimation,
+                      final Widget child,
+                      final Animation<double> primaryAnimation,
+                      final Animation<double> secondaryAnimation,
                     ) {
                       return ArnaFadeThroughTransition(
                         animation: primaryAnimation,
@@ -265,7 +265,7 @@ class _LateralPageState extends State<_LateralPage> {
                     },
                     child: Builder(
                       key: widget.items[_currentIndex].key,
-                      builder: (BuildContext context) {
+                      builder: (final BuildContext context) {
                         return widget.items[_currentIndex].builder(context);
                       },
                     ),
@@ -378,7 +378,7 @@ class _NestedPageState extends State<_NestedPage> {
     super.initState();
   }
 
-  void _onPressed(int index) {
+  void _onPressed(final int index) {
     widget.onSelected(index);
     _navigatorKey.currentState!.push(_detailPageRoute(index));
     setState(() => _currentIndex = index);
@@ -389,9 +389,9 @@ class _NestedPageState extends State<_NestedPage> {
     _navigatorKey.currentState!.pop(context);
   }
 
-  ArnaPageRoute<void> _detailPageRoute(int index) {
+  ArnaPageRoute<void> _detailPageRoute(final int index) {
     return ArnaPageRoute<dynamic>(
-      builder: (BuildContext context) {
+      builder: (final BuildContext context) {
         final MasterNavigationItem page = widget.items[_currentIndex];
         return WillPopScope(
           onWillPop: () async {
@@ -421,18 +421,18 @@ class _NestedPageState extends State<_NestedPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return WillPopScope(
       onWillPop: () async => !await _navigatorKey.currentState!.maybePop(),
       child: Navigator(
         key: _navigatorKey,
         onGenerateInitialRoutes: (
-          NavigatorState navigator,
-          String initialRoute,
+          final NavigatorState navigator,
+          final String initialRoute,
         ) {
           return <Route<dynamic>>[
             ArnaPageRoute<dynamic>(
-              builder: (BuildContext context) {
+              builder: (final BuildContext context) {
                 return ArnaScaffold(
                   headerBar: ArnaHeaderBar(
                     leading: widget.headerBarLeading,
@@ -500,7 +500,7 @@ class _MasterItemBuilder extends StatelessWidget {
   final bool isNested;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return FocusTraversalGroup(
       child: Column(
         children: <Widget>[
@@ -510,7 +510,7 @@ class _MasterItemBuilder extends StatelessWidget {
               controller: ScrollController(),
               itemCount: items.length,
               padding: Styles.small,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (final BuildContext context, final int index) {
                 return ArnaMasterItem(
                   key: items[index].key,
                   leading: items[index].leading,

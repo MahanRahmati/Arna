@@ -18,7 +18,7 @@ class ArnaLogo extends StatelessWidget {
   final double size;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return CustomPaint(
       size: Size(size, size),
       painter: ArnaLogoPainter(),
@@ -29,7 +29,7 @@ class ArnaLogo extends StatelessWidget {
 /// The Arna logo painter.
 class ArnaLogoPainter extends CustomPainter {
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(final Canvas canvas, final Size size) {
     final Path path_0 = Path();
     path_0.moveTo(size.width * 0.5000000, size.height * 0.1708750);
     path_0.lineTo(size.width * 0.5000000, size.height * 0.8293229);
@@ -273,5 +273,5 @@ class ArnaLogoPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant final CustomPainter oldDelegate) => false;
 }

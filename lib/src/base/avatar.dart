@@ -90,7 +90,7 @@ class ArnaAvatar extends StatelessWidget {
   final double? size;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     final TextStyle textStyle = ArnaTheme.of(context)
         .textTheme

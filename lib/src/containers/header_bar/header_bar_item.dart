@@ -11,8 +11,8 @@ abstract class ArnaHeaderBarItem with Diagnosticable {
   final Key? key;
 
   /// Builds the widget when the widget is in the header bar.
-  Widget inHeaderBar(BuildContext context);
+  Widget inHeaderBar(final BuildContext context);
 
   /// Builds the widget when the widget is in the [ArnaPopupMenuButton].
-  ArnaPopupMenuEntry overflowed(BuildContext context);
+  ArnaPopupMenuEntry overflowed(final BuildContext context);
 }

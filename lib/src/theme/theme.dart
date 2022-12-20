@@ -35,7 +35,7 @@ class ArnaTheme extends StatelessWidget {
   /// [ArnaTheme] ancestor exists.
   ///
   /// Resolves all the colors defined in that [ArnaThemeData] against the given [BuildContext] on a best-effort basis.
-  static ArnaThemeData of(BuildContext context) {
+  static ArnaThemeData of(final BuildContext context) {
     final _InheritedArnaTheme? inheritedTheme =
         context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
     return inheritedTheme?.theme.data ?? ArnaThemeData.light();
@@ -54,7 +54,7 @@ class ArnaTheme extends StatelessWidget {
   /// * [maybeBrightnessOf], which returns null if no valid [ArnaTheme] or [MediaQuery] exists, instead of throwing.
   /// * [ArnaThemeData.brightness], the property takes precedence over [MediaQueryData.platformBrightness] for
   ///   descendant Arna widgets.
-  static Brightness brightnessOf(BuildContext context) {
+  static Brightness brightnessOf(final BuildContext context) {
     final _InheritedArnaTheme? inheritedTheme =
         context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
     return inheritedTheme?.theme.data.brightness ??
@@ -73,7 +73,7 @@ class ArnaTheme extends StatelessWidget {
   /// * [ArnaThemeData.brightness], the property takes precedence over [MediaQueryData.platformBrightness] for
   ///   descendant Arna widgets.
   /// * [brightnessOf], which throws if no valid [ArnaTheme] or [MediaQuery] exists, instead of returning null.
-  static Brightness? maybeBrightnessOf(BuildContext context) {
+  static Brightness? maybeBrightnessOf(final BuildContext context) {
     final _InheritedArnaTheme? inheritedTheme =
         context.dependOnInheritedWidgetOfExactType<_InheritedArnaTheme>();
     return inheritedTheme?.theme.data.brightness ??
@@ -81,12 +81,12 @@ class ArnaTheme extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return _InheritedArnaTheme(theme: this, child: child);
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     data.debugFillProperties(properties);
   }
@@ -104,7 +104,7 @@ class _InheritedArnaTheme extends InheritedWidget {
   final ArnaTheme theme;
 
   @override
-  bool updateShouldNotify(_InheritedArnaTheme old) =>
+  bool updateShouldNotify(final _InheritedArnaTheme old) =>
       theme.data != old.theme.data;
 }
 
@@ -121,7 +121,7 @@ class ArnaThemeDataTween extends Tween<ArnaThemeData> {
   ArnaThemeDataTween({super.begin, super.end});
 
   @override
-  ArnaThemeData lerp(double t) => ArnaThemeData.lerp(begin!, end!, t);
+  ArnaThemeData lerp(final double t) => ArnaThemeData.lerp(begin!, end!, t);
 }
 
 /// Animated version of [ArnaTheme] which automatically transitions the colors, etc, over a given duration whenever the
@@ -164,21 +164,22 @@ class _AnimatedArnaThemeState
   ArnaThemeDataTween? _data;
 
   @override
-  void forEachTween(TweenVisitor<dynamic> visitor) {
+  void forEachTween(final TweenVisitor<dynamic> visitor) {
     _data = visitor(
       _data,
       widget.data,
-      (dynamic value) => ArnaThemeDataTween(begin: value as ArnaThemeData),
+      (final dynamic value) =>
+          ArnaThemeDataTween(begin: value as ArnaThemeData),
     )! as ArnaThemeDataTween;
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaTheme(data: _data!.evaluate(animation), child: widget.child);
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder description) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder description) {
     super.debugFillProperties(description);
     description.add(
       DiagnosticsProperty<ArnaThemeDataTween>(

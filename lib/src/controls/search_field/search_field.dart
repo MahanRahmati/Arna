@@ -95,15 +95,17 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
   }
 
   @override
-  void didUpdateWidget(ArnaSearchField oldWidget) {
+  void didUpdateWidget(final ArnaSearchField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.showSearch != oldWidget.showSearch) {
       switch (_controller.status) {
         case AnimationStatus.completed:
         case AnimationStatus.dismissed:
           widget.showSearch
-              ? _controller.forward().then((_) => focusNode!.requestFocus())
-              : _controller.reverse().then((_) => focusNode!.unfocus());
+              ? _controller
+                  .forward()
+                  .then((final _) => focusNode!.requestFocus())
+              : _controller.reverse().then((final _) => focusNode!.unfocus());
           break;
         case AnimationStatus.forward:
         case AnimationStatus.reverse:
@@ -128,7 +130,10 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
   }
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+  void restoreState(
+    final RestorationBucket? oldBucket,
+    final bool initialRestore,
+  ) {
     if (_textcontroller != null) {
       _registerController();
     }
@@ -139,7 +144,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
     registerForRestoration(_textcontroller!, '_textcontroller');
   }
 
-  void _createLocalController([TextEditingValue? value]) {
+  void _createLocalController([final TextEditingValue? value]) {
     assert(_textcontroller == null);
     _textcontroller = value == null
         ? RestorableTextEditingController()
@@ -153,7 +158,7 @@ class _ArnaSearchFieldState extends State<ArnaSearchField>
   String? get restorationId => widget.restorationId;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Widget search = ColoredBox(
       color: ArnaColors.backgroundColor.resolveFrom(context),
       child: Padding(

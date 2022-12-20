@@ -34,7 +34,7 @@ class ArnaGridTile extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     if (header == null && footer == null) {
       return child;
     }

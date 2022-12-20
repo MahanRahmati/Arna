@@ -80,7 +80,7 @@ class ArnaTooltip extends StatefulWidget {
 
   // Causes any current tooltips to be concealed. Only called for mouse hover enter detections. Won't conceal the
   // supplied tooltip.
-  static void _concealOtherTooltips(_ArnaTooltipState current) {
+  static void _concealOtherTooltips(final _ArnaTooltipState current) {
     if (_openedTooltips.isNotEmpty) {
       // Avoid concurrent modification.
       final List<_ArnaTooltipState> openedTooltips = _openedTooltips.toList();
@@ -120,7 +120,7 @@ class ArnaTooltip extends StatefulWidget {
   State<ArnaTooltip> createState() => _ArnaTooltipState();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
       StringProperty(
@@ -225,7 +225,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
     }
   }
 
-  void _handleStatusChanged(AnimationStatus status) {
+  void _handleStatusChanged(final AnimationStatus status) {
     // If this tip is concealed, don't remove it, even if it is dismissed, so that we can reveal it later, unless it
     // has explicitly been hidden with _dismissTooltip.
     if (status == AnimationStatus.dismissed &&
@@ -234,7 +234,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
     }
   }
 
-  void _dismissTooltip({bool immediately = false}) {
+  void _dismissTooltip({final bool immediately = false}) {
     _showTimer?.cancel();
     _showTimer = null;
     if (immediately) {
@@ -254,7 +254,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
     _pressActivated = false;
   }
 
-  void _showTooltip({bool immediately = false}) {
+  void _showTooltip({final bool immediately = false}) {
     _dismissTimer?.cancel();
     _dismissTimer = null;
     if (immediately) {
@@ -338,7 +338,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
     }
   }
 
-  void _handleMouseExit({bool immediately = false}) {
+  void _handleMouseExit({final bool immediately = false}) {
     // If the tip is currently covered, we can just remove it without waiting.
     if (mounted) {
       _dismissTooltip(immediately: _isConcealed || immediately);
@@ -362,8 +362,8 @@ class _ArnaTooltipState extends State<ArnaTooltip>
       textDirection: Directionality.of(context),
       child: _ArnaTooltipOverlay(
         richMessage: widget.richMessage ?? TextSpan(text: widget.message),
-        onEnter: _mouseIsConnected ? (_) => _handleMouseEnter() : null,
-        onExit: _mouseIsConnected ? (_) => _handleMouseExit() : null,
+        onEnter: _mouseIsConnected ? (final _) => _handleMouseEnter() : null,
+        onExit: _mouseIsConnected ? (final _) => _handleMouseExit() : null,
         animation: CurvedAnimation(
           parent: _controller,
           curve: Styles.basicCurve,
@@ -372,7 +372,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
         preferBelow: _preferBelow,
       ),
     );
-    _entry = OverlayEntry(builder: (BuildContext context) => overlay);
+    _entry = OverlayEntry(builder: (final BuildContext context) => overlay);
     _isConcealed = false;
     overlayState.insert(_entry!);
     SemanticsService.tooltip(_tooltipMessage);
@@ -402,7 +402,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
     }
   }
 
-  void _handlePointerEvent(PointerEvent event) {
+  void _handlePointerEvent(final PointerEvent event) {
     if (_entry == null) {
       return;
     }
@@ -445,7 +445,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     // If message is empty then no need to create a tooltip overlay to show the empty black container so just return
     // the wrapped child as is.
     if (widget.message == null && widget.richMessage == null) {
@@ -471,8 +471,8 @@ class _ArnaTooltipState extends State<ArnaTooltip>
       // Only check for hovering if there is a mouse connected.
       if (_mouseIsConnected) {
         result = MouseRegion(
-          onEnter: (_) => _handleMouseEnter(),
-          onExit: (_) => _handleMouseExit(),
+          onEnter: (final _) => _handleMouseEnter(),
+          onExit: (final _) => _handleMouseExit(),
           child: result,
         );
       }
@@ -507,11 +507,11 @@ class _ArnaTooltipPositionDelegate extends SingleChildLayoutDelegate {
   final bool preferBelow;
 
   @override
-  BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
+  BoxConstraints getConstraintsForChild(final BoxConstraints constraints) =>
       constraints.loosen();
 
   @override
-  Offset getPositionForChild(Size size, Size childSize) {
+  Offset getPositionForChild(final Size size, final Size childSize) {
     return positionDependentBox(
       size: size,
       childSize: childSize,
@@ -522,7 +522,7 @@ class _ArnaTooltipPositionDelegate extends SingleChildLayoutDelegate {
   }
 
   @override
-  bool shouldRelayout(_ArnaTooltipPositionDelegate oldDelegate) {
+  bool shouldRelayout(final _ArnaTooltipPositionDelegate oldDelegate) {
     return target != oldDelegate.target ||
         verticalOffset != oldDelegate.verticalOffset ||
         preferBelow != oldDelegate.preferBelow;
@@ -549,7 +549,7 @@ class _ArnaTooltipOverlay extends StatelessWidget {
   final PointerExitEventListener? onExit;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     Widget result = IgnorePointer(
       child: FadeTransition(
         opacity: animation,
@@ -613,7 +613,7 @@ class _ArnaTooltipVisibilityScope extends InheritedWidget {
   final bool visible;
 
   @override
-  bool updateShouldNotify(_ArnaTooltipVisibilityScope old) =>
+  bool updateShouldNotify(final _ArnaTooltipVisibilityScope old) =>
       old.visible != visible;
 }
 
@@ -644,14 +644,14 @@ class ArnaTooltipVisibility extends StatelessWidget {
 
   /// The [visible] of the closest instance of this class that encloses the given context. Defaults to `true` if none
   /// are found.
-  static bool of(BuildContext context) {
+  static bool of(final BuildContext context) {
     final _ArnaTooltipVisibilityScope? visibility = context
         .dependOnInheritedWidgetOfExactType<_ArnaTooltipVisibilityScope>();
     return visibility?.visible ?? true;
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return _ArnaTooltipVisibilityScope(visible: visible, child: child);
   }
 }

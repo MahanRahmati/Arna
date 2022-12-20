@@ -63,7 +63,7 @@ class ArnaSliverHeaderBar extends StatelessWidget {
   final Color? backgroundColor;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     Widget? leadingContent;
     final ModalRoute<Object?>? route = ModalRoute.of(context);
     final bool useCloseButton =
@@ -152,9 +152,9 @@ class _ArnaHeaderBarSliverDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
+    final BuildContext context,
+    final double shrinkOffset,
+    final bool overlapsContent,
   ) {
     final bool expanded = shrinkOffset < Styles.base;
     final Color bgColor = expanded
@@ -205,7 +205,7 @@ class _ArnaHeaderBarSliverDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(_ArnaHeaderBarSliverDelegate oldDelegate) {
+  bool shouldRebuild(final _ArnaHeaderBarSliverDelegate oldDelegate) {
     return leading != oldDelegate.leading ||
         automaticallyImplyLeading != oldDelegate.automaticallyImplyLeading ||
         middle != oldDelegate.middle ||

@@ -37,10 +37,10 @@ mixin ArnaStateMixin<T extends StatefulWidget> on State<T> {
   ///
   @protected
   ValueChanged<bool> updateArnaState(
-    ArnaState key, {
-    ValueChanged<bool>? onChanged,
+    final ArnaState key, {
+    final ValueChanged<bool>? onChanged,
   }) {
-    return (bool value) {
+    return (final bool value) {
       if (arnaStates.contains(key) == value) {
         return;
       }
@@ -51,13 +51,13 @@ mixin ArnaStateMixin<T extends StatefulWidget> on State<T> {
 
   /// Mutator to mark a [ArnaState] value as either active or inactive.
   @protected
-  void setArnaState(ArnaState state, {required bool isSet}) {
+  void setArnaState(final ArnaState state, {required final bool isSet}) {
     return isSet ? addArnaState(state) : removeArnaState(state);
   }
 
   /// Mutator to mark a [ArnaState] value as active.
   @protected
-  void addArnaState(ArnaState state) {
+  void addArnaState(final ArnaState state) {
     if (arnaStates.add(state)) {
       setState(() {});
     }
@@ -65,7 +65,7 @@ mixin ArnaStateMixin<T extends StatefulWidget> on State<T> {
 
   /// Mutator to mark a [ArnaState] value as inactive.
   @protected
-  void removeArnaState(ArnaState state) {
+  void removeArnaState(final ArnaState state) {
     if (arnaStates.remove(state)) {
       setState(() {});
     }
@@ -89,7 +89,7 @@ mixin ArnaStateMixin<T extends StatefulWidget> on State<T> {
   bool get isSelected => arnaStates.contains(ArnaState.selected);
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
       DiagnosticsProperty<Set<ArnaState>>(

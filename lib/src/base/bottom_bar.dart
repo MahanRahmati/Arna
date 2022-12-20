@@ -14,7 +14,7 @@ class ArnaBottomBar extends StatelessWidget {
   final List<Widget> items;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Semantics(
       explicitChildNodes: true,
       container: true,

@@ -26,7 +26,7 @@ class ArnaBody extends StatelessWidget {
   final WidgetBuilder? largeBody;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     if (smallBody == null && body == null && largeBody == null) {
       return const SizedBox.shrink();
     }
@@ -43,7 +43,7 @@ class ArnaBody extends StatelessWidget {
       return largeBody!(context);
     }
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
+      builder: (final BuildContext context, final BoxConstraints constraints) {
         final double maxWidth = constraints.maxWidth;
         if (smallBody != null && body != null && largeBody == null) {
           return maxWidth < Styles.compact

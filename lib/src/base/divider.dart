@@ -12,7 +12,7 @@ class ArnaDivider extends StatelessWidget {
   final Axis direction;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Container(
       height: direction == Axis.horizontal ? 0.0 : null,
       width: direction == Axis.vertical ? 0.0 : null,

@@ -506,9 +506,9 @@ class ArnaScrollBehavior extends ScrollBehavior {
 
   @override
   Widget buildScrollbar(
-    BuildContext context,
-    Widget child,
-    ScrollableDetails details,
+    final BuildContext context,
+    final Widget child,
+    final ScrollableDetails details,
   ) {
     switch (axisDirectionToAxis(details.direction)) {
       case Axis.horizontal:
@@ -529,9 +529,9 @@ class ArnaScrollBehavior extends ScrollBehavior {
 
   @override
   Widget buildOverscrollIndicator(
-    BuildContext context,
-    Widget child,
-    ScrollableDetails details,
+    final BuildContext context,
+    final Widget child,
+    final ScrollableDetails details,
   ) {
     return StretchingOverscrollIndicator(
       axisDirection: details.direction,
@@ -568,8 +568,8 @@ class _ArnaAppState extends State<ArnaApp> {
   }
 
   Widget _inspectorSelectButtonBuilder(
-    BuildContext context,
-    VoidCallback onPressed,
+    final BuildContext context,
+    final VoidCallback onPressed,
   ) {
     return ArnaButton(
       icon: Icons.search,
@@ -578,7 +578,7 @@ class _ArnaAppState extends State<ArnaApp> {
     );
   }
 
-  Widget _arnaBuilder(BuildContext context, Widget? child) {
+  Widget _arnaBuilder(final BuildContext context, final Widget? child) {
     ArnaThemeData? theme;
 
     if (widget.theme != null) {
@@ -605,7 +605,7 @@ class _ArnaAppState extends State<ArnaApp> {
         data: theme,
         child: widget.builder != null
             ? Builder(
-                builder: (BuildContext context) {
+                builder: (final BuildContext context) {
                   // Why are we surrounding a builder with a builder?
                   //
                   // The widget.builder may contain code that invokes
@@ -625,7 +625,7 @@ class _ArnaAppState extends State<ArnaApp> {
     );
   }
 
-  WidgetsApp _buildWidgetApp(BuildContext context) {
+  WidgetsApp _buildWidgetApp(final BuildContext context) {
     final ArnaThemeData effectiveThemeData = ArnaTheme.of(context);
     final Color color = ArnaDynamicColor.resolve(
       widget.color ?? effectiveThemeData.accentColor,
@@ -666,7 +666,8 @@ class _ArnaAppState extends State<ArnaApp> {
       key: GlobalObjectKey(this),
       navigatorKey: widget.navigatorKey,
       navigatorObservers: widget.navigatorObservers!,
-      pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) {
+      pageRouteBuilder:
+          <T>(final RouteSettings settings, final WidgetBuilder builder) {
         return ArnaPageRoute<T>(settings: settings, builder: builder);
       },
       home: widget.home,
@@ -699,14 +700,14 @@ class _ArnaAppState extends State<ArnaApp> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ScrollConfiguration(
       behavior: widget.scrollBehavior ?? const ArnaScrollBehavior(),
       child: HeroControllerScope(
         controller: _heroController,
         child: Focus(
           canRequestFocus: false,
-          onKey: (FocusNode node, RawKeyEvent event) {
+          onKey: (final FocusNode node, final RawKeyEvent event) {
             if (event is! RawKeyDownEvent ||
                 event.logicalKey != LogicalKeyboardKey.escape) {
               return KeyEventResult.ignored;

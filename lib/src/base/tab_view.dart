@@ -14,7 +14,7 @@ class ArnaTabController extends ChangeNotifier {
   ///
   /// The [initialIndex] must not be null and defaults to 0. The value must be greater than or equal to 0, and less
   /// than the total number of tabs.
-  ArnaTabController({int initialIndex = 0})
+  ArnaTabController({final int initialIndex = 0})
       : _index = initialIndex,
         assert(initialIndex >= 0);
 
@@ -28,7 +28,7 @@ class ArnaTabController extends ChangeNotifier {
   /// The value must be greater than or equal to 0, and less than the total number of tabs.
   int get index => _index;
   int _index;
-  set index(int value) {
+  set index(final int value) {
     assert(value >= 0);
     if (_index == value) {
       return;
@@ -55,7 +55,7 @@ class RestorableArnaTabController
   ///
   /// The [initialIndex] must not be null and defaults to 0. The value must be greater than or equal to 0, and less
   /// than the total number of tabs.
-  RestorableArnaTabController({int initialIndex = 0})
+  RestorableArnaTabController({final int initialIndex = 0})
       : assert(initialIndex >= 0),
         _initialIndex = initialIndex;
 
@@ -67,7 +67,7 @@ class RestorableArnaTabController
       );
 
   @override
-  ArnaTabController fromPrimitives(Object? data) {
+  ArnaTabController fromPrimitives(final Object? data) {
     assert(data != null);
     return ArnaTabController(initialIndex: data! as int);
   }
@@ -157,7 +157,10 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
   String? get restorationId => widget.restorationId;
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) =>
+  void restoreState(
+    final RestorationBucket? oldBucket,
+    final bool initialRestore,
+  ) =>
       _restoreInternalController();
 
   void _restoreInternalController() {
@@ -173,7 +176,7 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
     _updateTabController();
   }
 
-  void _updateTabController([ArnaTabController? oldWidgetController]) {
+  void _updateTabController([final ArnaTabController? oldWidgetController]) {
     if (widget.controller == null && _internalController == null) {
       // No widget-provided controller: create an internal controller.
       _internalController = RestorableArnaTabController(
@@ -211,7 +214,7 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
   }
 
   @override
-  void didUpdateWidget(ArnaTabView oldWidget) {
+  void didUpdateWidget(final ArnaTabView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller) {
       _updateTabController(oldWidget.controller);
@@ -231,7 +234,7 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: ArnaColors.backgroundColor.resolveFrom(context),
@@ -260,7 +263,8 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
                   Expanded(
                     child: FocusTraversalGroup(
                       child: ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
+                        itemBuilder:
+                            (final BuildContext context, final int index) {
                           return ArnaTabItem(
                             key: ValueKey<int>(index),
                             label: widget.tabs[index].label,
@@ -304,7 +308,7 @@ class _ArnaTabViewState extends State<ArnaTabView> with RestorationMixin {
             padding: const ArnaEdgeInsets.top(Styles.tabBarHeight),
             child: FocusTraversalGroup(
               child: Builder(
-                builder: (BuildContext context) {
+                builder: (final BuildContext context) {
                   return widget.tabs[_controller.index].builder(context);
                 },
               ),

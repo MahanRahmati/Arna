@@ -34,14 +34,14 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder
     extends TextSelectionGestureDetectorBuilder {
   /// Creates an ArnaTextFieldSelectionGestureDetectorBuilder.
   _ArnaTextFieldSelectionGestureDetectorBuilder({
-    required _ArnaTextFieldState state,
+    required final _ArnaTextFieldState state,
   })  : _state = state,
         super(delegate: state);
 
   final _ArnaTextFieldState _state;
 
   @override
-  void onForcePressStart(ForcePressDetails details) {
+  void onForcePressStart(final ForcePressDetails details) {
     super.onForcePressStart(details);
     if (delegate.selectionEnabled && shouldShowSelectionToolbar) {
       editableText.showToolbar();
@@ -49,12 +49,12 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder
   }
 
   @override
-  void onForcePressEnd(ForcePressDetails details) {
+  void onForcePressEnd(final ForcePressDetails details) {
     // Not required.
   }
 
   @override
-  void onSingleLongTapMoveUpdate(LongPressMoveUpdateDetails details) {
+  void onSingleLongTapMoveUpdate(final LongPressMoveUpdateDetails details) {
     if (delegate.selectionEnabled) {
       switch (defaultTargetPlatform) {
         case TargetPlatform.iOS:
@@ -79,7 +79,7 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder
   }
 
   @override
-  void onSingleTapUp(TapUpDetails details) {
+  void onSingleTapUp(final TapUpDetails details) {
     editableText.hideToolbar();
     // Because TextSelectionGestureDetector listens to taps that happen on widgets in front of it, tapping the clear
     // button will also trigger this handler. If the clear button widget recognizes the up event, then do not handle
@@ -99,10 +99,11 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder
   }
 
   @override
-  void onDragSelectionEnd(DragEndDetails details) => _state._requestKeyboard();
+  void onDragSelectionEnd(final DragEndDetails details) =>
+      _state._requestKeyboard();
 
   @override
-  void onSingleLongTapStart(LongPressStartDetails details) {
+  void onSingleLongTapStart(final LongPressStartDetails details) {
     if (delegate.selectionEnabled) {
       switch (defaultTargetPlatform) {
         case TargetPlatform.iOS:
@@ -214,7 +215,7 @@ class ArnaTextField extends StatefulWidget {
     this.suffix,
     this.suffixMode = ArnaOverlayVisibilityMode.always,
     this.clearButtonMode = ArnaOverlayVisibilityMode.never,
-    TextInputType? keyboardType,
+    final TextInputType? keyboardType,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
     this.strutStyle,
@@ -222,14 +223,14 @@ class ArnaTextField extends StatefulWidget {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
-    ToolbarOptions? toolbarOptions,
+    final ToolbarOptions? toolbarOptions,
     this.showCursor,
     this.autofocus = false,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
-    SmartDashesType? smartDashesType,
-    SmartQuotesType? smartQuotesType,
+    final SmartDashesType? smartDashesType,
+    final SmartQuotesType? smartQuotesType,
     this.enableSuggestions = true,
     this.maxLines = 1,
     this.minLines,
@@ -251,7 +252,7 @@ class ArnaTextField extends StatefulWidget {
     this.keyboardAppearance,
     this.scrollPadding = const EdgeInsets.all(Styles.padding),
     this.dragStartBehavior = DragStartBehavior.start,
-    bool? enableInteractiveSelection,
+    final bool? enableInteractiveSelection,
     this.selectionControls,
     this.onTap,
     this.cursor = MouseCursor.defer,
@@ -604,7 +605,7 @@ class ArnaTextField extends StatefulWidget {
   State<ArnaTextField> createState() => _ArnaTextFieldState();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
       DiagnosticsProperty<TextEditingController>(
@@ -915,7 +916,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   }
 
   @override
-  void didUpdateWidget(ArnaTextField oldWidget) {
+  void didUpdateWidget(final ArnaTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller == null && oldWidget.controller != null) {
       _createLocalController(oldWidget.controller!.value);
@@ -941,7 +942,10 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   }
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+  void restoreState(
+    final RestorationBucket? oldBucket,
+    final bool initialRestore,
+  ) {
     if (_controller != null) {
       _registerController();
     }
@@ -953,7 +957,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     _controller!.value.addListener(updateKeepAlive);
   }
 
-  void _createLocalController([TextEditingValue? value]) {
+  void _createLocalController([final TextEditingValue? value]) {
     assert(_controller == null);
     _controller = value == null
         ? RestorableTextEditingController()
@@ -978,7 +982,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
 
   void _requestKeyboard() => _editableText.requestKeyboard();
 
-  bool _shouldShowSelectionHandles(SelectionChangedCause? cause) {
+  bool _shouldShowSelectionHandles(final SelectionChangedCause? cause) {
     // When the text field is activated by something that doesn't trigger the selection overlay, we shouldn't show the
     // handles either.
     if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar) {
@@ -1013,8 +1017,8 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   void _handleFocusChanged() => setState(() {});
 
   void _handleSelectionChanged(
-    TextSelection selection,
-    SelectionChangedCause? cause,
+    final TextSelection selection,
+    final SelectionChangedCause? cause,
   ) {
     final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
     if (willShowSelectionHandles != _showSelectionHandles) {
@@ -1061,7 +1065,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     }
   }
 
-  void _handleHover(bool hovering) {
+  void _handleHover(final bool hovering) {
     if (hovering != _isHovering) {
       setState(() => _isHovering = hovering);
     }
@@ -1071,8 +1075,8 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   bool get wantKeepAlive => _controller?.value.text.isNotEmpty ?? false;
 
   bool _shouldShowAttachment({
-    required ArnaOverlayVisibilityMode attachment,
-    required bool hasText,
+    required final ArnaOverlayVisibilityMode attachment,
+    required final bool hasText,
   }) {
     switch (attachment) {
       case ArnaOverlayVisibilityMode.never:
@@ -1086,7 +1090,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     }
   }
 
-  bool _showPrefixWidget(TextEditingValue text) {
+  bool _showPrefixWidget(final TextEditingValue text) {
     return widget.prefix != null &&
         _shouldShowAttachment(
           attachment: widget.prefixMode,
@@ -1094,7 +1098,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         );
   }
 
-  bool _showSuffixWidget(TextEditingValue text) {
+  bool _showSuffixWidget(final TextEditingValue text) {
     return widget.suffix != null &&
         _shouldShowAttachment(
           attachment: widget.suffixMode,
@@ -1102,7 +1106,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         );
   }
 
-  bool _showClearButton(TextEditingValue text) {
+  bool _showClearButton(final TextEditingValue text) {
     return _shouldShowAttachment(
       attachment: widget.clearButtonMode,
       hasText: text.text.isNotEmpty,
@@ -1127,7 +1131,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     return _hasDecoration ? TextAlignVertical.center : TextAlignVertical.top;
   }
 
-  Widget _addTextDependentAttachments(Widget editableText) {
+  Widget _addTextDependentAttachments(final Widget editableText) {
     // If there are no surrounding widgets, just return the core editable text
     // part.
     if (!_hasDecoration) {
@@ -1138,7 +1142,11 @@ class _ArnaTextFieldState extends State<ArnaTextField>
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: _effectiveController,
       child: editableText,
-      builder: (BuildContext context, TextEditingValue? text, Widget? child) {
+      builder: (
+        final BuildContext context,
+        final TextEditingValue? text,
+        final Widget? child,
+      ) {
         return Row(
           children: <Widget>[
             // Insert a prefix at the front if the prefix visibility mode matches
@@ -1210,7 +1218,8 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   String get autofillId => _editableText.autofillId;
 
   @override
-  void autofill(TextEditingValue newEditingValue) => _editableText.autofill(
+  void autofill(final TextEditingValue newEditingValue) =>
+      _editableText.autofill(
         newEditingValue,
       );
 
@@ -1235,7 +1244,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   // AutofillClient implementation end.
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     super.build(context); // See AutomaticKeepAliveClientMixin.
     assert(debugCheckHasDirectionality(context));
     final Brightness keyboardAppearance =
@@ -1389,13 +1398,13 @@ class _ArnaTextFieldState extends State<ArnaTextField>
       padding: Styles.small,
       child: MouseRegion(
         cursor: widget.cursor,
-        onEnter: (PointerEnterEvent event) => _handleHover(true),
-        onExit: (PointerExitEvent event) => _handleHover(false),
+        onEnter: (final PointerEnterEvent event) => _handleHover(true),
+        onExit: (final PointerExitEvent event) => _handleHover(false),
         child: IgnorePointer(
           ignoring: !_isEnabled,
           child: AnimatedBuilder(
             animation: controller,
-            builder: (BuildContext context, Widget? child) {
+            builder: (final BuildContext context, final Widget? child) {
               return Semantics(
                 currentValueLength: _currentLength,
                 onTap: widget.readOnly

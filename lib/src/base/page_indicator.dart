@@ -21,14 +21,14 @@ class ArnaPageIndicator extends StatelessWidget {
   final Color? accentColor;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: List<Widget>.generate(
         count,
-        (int i) {
+        (final int i) {
           final bool isActive = position == i;
           return Padding(
             padding: const EdgeInsets.symmetric(

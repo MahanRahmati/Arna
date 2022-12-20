@@ -20,9 +20,9 @@ class ArnaThemeData with Diagnosticable {
   ///  * [ArnaThemeData.light], which creates a light theme.
   ///  * [ArnaThemeData.dark], which creates dark theme.
   factory ArnaThemeData({
-    Brightness? brightness,
-    Color? accentColor,
-    ArnaTextTheme? textTheme,
+    final Brightness? brightness,
+    final Color? accentColor,
+    final ArnaTextTheme? textTheme,
   }) {
     final ArnaTextTheme defaultTextTheme = brightness == Brightness.dark
         ? ArnaTypography.dark
@@ -77,9 +77,9 @@ class ArnaThemeData with Diagnosticable {
 
   /// Creates a copy of this theme but with the given fields replaced with the new values.
   ArnaThemeData copyWith({
-    Brightness? brightness,
-    Color? accentColor,
-    ArnaTextTheme? textTheme,
+    final Brightness? brightness,
+    final Color? accentColor,
+    final ArnaTextTheme? textTheme,
   }) {
     return ArnaThemeData.raw(
       accentColor: accentColor ?? this.accentColor,
@@ -93,7 +93,11 @@ class ArnaThemeData with Diagnosticable {
   /// The arguments must not be null.
   ///
   /// {@macro dart.ui.shadow.lerp}
-  static ArnaThemeData lerp(ArnaThemeData a, ArnaThemeData b, double t) {
+  static ArnaThemeData lerp(
+    final ArnaThemeData a,
+    final ArnaThemeData b,
+    final double t,
+  ) {
     return ArnaThemeData.raw(
       accentColor: t < 0.5 ? a.accentColor : b.accentColor,
       brightness: t < 0.5 ? a.brightness : b.brightness,
@@ -102,7 +106,7 @@ class ArnaThemeData with Diagnosticable {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(final Object other) {
     if (other.runtimeType != runtimeType) {
       return false;
     }
@@ -119,7 +123,7 @@ class ArnaThemeData with Diagnosticable {
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     final ArnaThemeData defaultData = ArnaThemeData.light();
     properties.add(

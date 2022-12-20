@@ -88,7 +88,7 @@ class ArnaRadio<T> extends StatelessWidget {
   final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     final Color borderColor = ArnaColors.borderColor.resolveFrom(context);
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
@@ -98,11 +98,11 @@ class ArnaRadio<T> extends StatelessWidget {
       padding: Styles.small,
       child: ArnaBaseWidget(
         builder: (
-          BuildContext context,
+          final BuildContext context,
           bool enabled,
-          bool hover,
-          bool focused,
-          bool pressed,
+          final bool hover,
+          final bool focused,
+          final bool pressed,
           bool selected,
         ) {
           selected = value == groupValue;

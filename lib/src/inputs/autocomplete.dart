@@ -45,20 +45,20 @@ class ArnaAutocomplete<T extends Object> extends StatelessWidget {
   final TextEditingValue? initialValue;
 
   static Widget _defaultFieldViewBuilder(
-    BuildContext context,
-    TextEditingController textEditingController,
-    FocusNode focusNode,
-    VoidCallback onFieldSubmitted,
+    final BuildContext context,
+    final TextEditingController textEditingController,
+    final FocusNode focusNode,
+    final VoidCallback onFieldSubmitted,
   ) {
     return ArnaTextFormField(
       controller: textEditingController,
       focusNode: focusNode,
-      onFieldSubmitted: (String value) => onFieldSubmitted(),
+      onFieldSubmitted: (final String value) => onFieldSubmitted(),
     );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return RawAutocomplete<T>(
       displayStringForOption: displayStringForOption,
       fieldViewBuilder: fieldViewBuilder,
@@ -66,9 +66,9 @@ class ArnaAutocomplete<T extends Object> extends StatelessWidget {
       optionsBuilder: optionsBuilder,
       optionsViewBuilder: optionsViewBuilder ??
           (
-            BuildContext context,
-            AutocompleteOnSelected<T> onSelected,
-            Iterable<T> options,
+            final BuildContext context,
+            final AutocompleteOnSelected<T> onSelected,
+            final Iterable<T> options,
           ) {
             return _AutocompleteOptions<T>(
               displayStringForOption: displayStringForOption,
@@ -110,7 +110,7 @@ class _AutocompleteOptions<T extends Object> extends StatelessWidget {
   final double maxOptionsHeight;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
 
     return Align(
@@ -122,21 +122,21 @@ class _AutocompleteOptions<T extends Object> extends StatelessWidget {
             padding: EdgeInsets.zero,
             shrinkWrap: true,
             itemCount: options.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (final BuildContext context, final int index) {
               final T option = options.elementAt(index);
               return ArnaBaseWidget(
                 builder: (
-                  BuildContext context,
-                  bool enabled,
-                  bool hover,
+                  final BuildContext context,
+                  final bool enabled,
+                  final bool hover,
                   bool focused,
-                  bool pressed,
-                  bool selected,
+                  final bool pressed,
+                  final bool selected,
                 ) {
                   focused = AutocompleteHighlightedOption.of(context) == index;
                   if (focused) {
                     SchedulerBinding.instance
-                        .addPostFrameCallback((Duration timeStamp) {
+                        .addPostFrameCallback((final Duration timeStamp) {
                       Scrollable.ensureVisible(context, alignment: 0.5);
                     });
                   }

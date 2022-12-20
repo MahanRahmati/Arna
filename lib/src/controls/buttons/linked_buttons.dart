@@ -12,7 +12,7 @@ class ArnaLinkedButtons extends StatelessWidget {
   final List<ArnaLinkedButton> buttons;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Padding(
       padding: Styles.small,
       child: Container(
@@ -24,7 +24,7 @@ class ArnaLinkedButtons extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: buttons.map((ArnaLinkedButton button) {
+          children: buttons.map((final ArnaLinkedButton button) {
             final int index = buttons.indexOf(button);
             final int length = buttons.length;
             final TextDirection textDirection = Directionality.of(context);
@@ -59,19 +59,19 @@ class _ArnaLinkedItem extends StatelessWidget {
   final bool last;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     final Color accent =
         button.accentColor ?? ArnaTheme.of(context).accentColor;
 
     return ArnaBaseWidget(
       builder: (
-        BuildContext context,
-        bool enabled,
-        bool hover,
-        bool focused,
-        bool pressed,
-        bool selected,
+        final BuildContext context,
+        final bool enabled,
+        final bool hover,
+        final bool focused,
+        final bool pressed,
+        final bool selected,
       ) {
         return AnimatedContainer(
           height: Styles.buttonSize,

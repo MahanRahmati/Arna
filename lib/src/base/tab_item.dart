@@ -40,7 +40,7 @@ class ArnaTabItem extends StatelessWidget {
   final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Semantics(
       selected: active,
@@ -49,11 +49,11 @@ class ArnaTabItem extends StatelessWidget {
         padding: Styles.small,
         child: ArnaBaseWidget(
           builder: (
-            BuildContext context,
-            bool enabled,
-            bool hover,
-            bool focused,
-            bool pressed,
+            final BuildContext context,
+            final bool enabled,
+            final bool hover,
+            final bool focused,
+            final bool pressed,
             bool selected,
           ) {
             selected = active;

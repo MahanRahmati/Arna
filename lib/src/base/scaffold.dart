@@ -23,7 +23,7 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
   _ArnaScaffoldLayout();
 
   @override
-  void performLayout(Size size) {
+  void performLayout(final Size size) {
     final BoxConstraints looseConstraints = BoxConstraints.loose(size);
     final BoxConstraints fullWidthConstraints = looseConstraints.tighten(
       width: size.width,
@@ -75,7 +75,7 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
   }
 
   @override
-  bool shouldRelayout(_ArnaScaffoldLayout oldDelegate) => false;
+  bool shouldRelayout(final _ArnaScaffoldLayout oldDelegate) => false;
 }
 
 /// Implements the basic layout structure.
@@ -182,7 +182,7 @@ class ArnaScaffold extends StatefulWidget {
   ///
   /// If there is no [ArnaScaffold] in scope, then this will throw an exception.
   /// To return null if there is no [ArnaScaffold], use [maybeOf] instead.
-  static ArnaScaffoldState of(BuildContext context) {
+  static ArnaScaffoldState of(final BuildContext context) {
     final ArnaScaffoldState? result =
         context.findAncestorStateOfType<ArnaScaffoldState>();
     if (result != null) {
@@ -227,7 +227,7 @@ class ArnaScaffold extends StatefulWidget {
   ///
   ///  * [of], a similar function to this one that throws if no instance
   ///    encloses the given context.
-  static ArnaScaffoldState? maybeOf(BuildContext context) {
+  static ArnaScaffoldState? maybeOf(final BuildContext context) {
     return context.findAncestorStateOfType<ArnaScaffoldState>();
   }
 
@@ -247,8 +247,8 @@ class ArnaScaffold extends StatefulWidget {
   ///  * [ArnaScaffold.of], which provides access to the [ArnaScaffoldState]
   ///    object.
   static bool hasDrawer(
-    BuildContext context, {
-    bool registerForUpdates = true,
+    final BuildContext context, {
+    final bool registerForUpdates = true,
   }) {
     if (registerForUpdates) {
       final _ArnaScaffoldScope? scaffold =
@@ -274,7 +274,10 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
   String? get restorationId => widget.restorationId;
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+  void restoreState(
+    final RestorationBucket? oldBucket,
+    final bool initialRestore,
+  ) {
     registerForRestoration(_drawerOpened, 'drawer_open');
   }
 
@@ -299,7 +302,7 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
   ///    of an [ArnaScaffold].
   bool get isDrawerOpen => _drawerOpened.value;
 
-  void _drawerOpenedCallback(bool isOpened) {
+  void _drawerOpenedCallback(final bool isOpened) {
     if (_drawerOpened.value != isOpened && _drawerKey.currentState != null) {
       setState(() => _drawerOpened.value = isOpened);
       widget.onDrawerChanged?.call(isOpened);
@@ -337,15 +340,15 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
   }
 
   void _addIfNonNull(
-    List<LayoutId> children,
-    Widget? child,
-    Object childId, {
-    required bool removeLeftPadding,
-    required bool removeTopPadding,
-    required bool removeRightPadding,
-    required bool removeBottomPadding,
-    bool removeBottomInset = false,
-    bool maintainBottomViewPadding = false,
+    final List<LayoutId> children,
+    final Widget? child,
+    final Object childId, {
+    required final bool removeLeftPadding,
+    required final bool removeTopPadding,
+    required final bool removeRightPadding,
+    required final bool removeBottomPadding,
+    final bool removeBottomInset = false,
+    final bool maintainBottomViewPadding = false,
   }) {
     MediaQueryData data = MediaQuery.of(context).removePadding(
       removeLeft: removeLeftPadding,
@@ -374,7 +377,7 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final TextDirection textDirection = Directionality.of(context);
 
     final List<LayoutId> children = <LayoutId>[];
@@ -469,7 +472,7 @@ class _ArnaScaffoldScope extends InheritedWidget {
   final bool hasDrawer;
 
   @override
-  bool updateShouldNotify(_ArnaScaffoldScope oldWidget) {
+  bool updateShouldNotify(final _ArnaScaffoldScope oldWidget) {
     return hasDrawer != oldWidget.hasDrawer;
   }
 }

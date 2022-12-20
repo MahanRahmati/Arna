@@ -39,7 +39,7 @@ class ArnaGridTileBar extends StatelessWidget {
   final Widget? trailing;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaListTile(
       leading: leading,
       title: title,

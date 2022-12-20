@@ -55,58 +55,61 @@ class ArnaTextFormField extends FormField<String> {
     super.key,
     super.onSaved,
     super.validator,
-    AutovalidateMode? autovalidateMode,
+    final AutovalidateMode? autovalidateMode,
     this.controller,
-    String? initialValue,
-    FocusNode? focusNode,
-    String? hintText,
-    Widget? prefix,
-    ArnaOverlayVisibilityMode prefixMode = ArnaOverlayVisibilityMode.always,
-    Widget? suffix,
-    ArnaOverlayVisibilityMode suffixMode = ArnaOverlayVisibilityMode.always,
-    ArnaOverlayVisibilityMode clearButtonMode = ArnaOverlayVisibilityMode.never,
-    TextInputType? keyboardType,
-    TextInputAction? textInputAction,
-    TextCapitalization textCapitalization = TextCapitalization.none,
-    StrutStyle? strutStyle,
-    TextAlign textAlign = TextAlign.start,
-    TextAlignVertical? textAlignVertical,
-    TextDirection? textDirection,
-    bool readOnly = false,
-    ToolbarOptions? toolbarOptions,
-    bool? showCursor,
-    bool autofocus = false,
-    String obscuringCharacter = '•',
-    bool obscureText = false,
-    bool autocorrect = true,
-    SmartDashesType? smartDashesType,
-    SmartQuotesType? smartQuotesType,
-    bool enableSuggestions = true,
-    int? maxLines = 1,
-    int? minLines,
-    bool expands = false,
-    int? maxLength,
-    MaxLengthEnforcement? maxLengthEnforcement,
-    ValueChanged<String>? onChanged,
-    VoidCallback? onEditingComplete,
-    ValueChanged<String>? onFieldSubmitted,
-    List<TextInputFormatter>? inputFormatters,
-    bool? enabled,
-    double cursorWidth = Styles.cursorWidth,
-    double? cursorHeight,
-    Radius? cursorRadius = const Radius.circular(Styles.cursorRadius),
-    Color? accentColor,
-    Brightness? keyboardAppearance,
-    EdgeInsets scrollPadding = const EdgeInsets.all(Styles.padding),
-    bool? enableInteractiveSelection,
-    TextSelectionControls? selectionControls,
-    GestureTapCallback? onTap,
-    MouseCursor cursor = MouseCursor.defer,
-    ScrollController? scrollController,
-    ScrollPhysics? scrollPhysics,
-    Iterable<String>? autofillHints,
+    final String? initialValue,
+    final FocusNode? focusNode,
+    final String? hintText,
+    final Widget? prefix,
+    final ArnaOverlayVisibilityMode prefixMode =
+        ArnaOverlayVisibilityMode.always,
+    final Widget? suffix,
+    final ArnaOverlayVisibilityMode suffixMode =
+        ArnaOverlayVisibilityMode.always,
+    final ArnaOverlayVisibilityMode clearButtonMode =
+        ArnaOverlayVisibilityMode.never,
+    final TextInputType? keyboardType,
+    final TextInputAction? textInputAction,
+    final TextCapitalization textCapitalization = TextCapitalization.none,
+    final StrutStyle? strutStyle,
+    final TextAlign textAlign = TextAlign.start,
+    final TextAlignVertical? textAlignVertical,
+    final TextDirection? textDirection,
+    final bool readOnly = false,
+    final ToolbarOptions? toolbarOptions,
+    final bool? showCursor,
+    final bool autofocus = false,
+    final String obscuringCharacter = '•',
+    final bool obscureText = false,
+    final bool autocorrect = true,
+    final SmartDashesType? smartDashesType,
+    final SmartQuotesType? smartQuotesType,
+    final bool enableSuggestions = true,
+    final int? maxLines = 1,
+    final int? minLines,
+    final bool expands = false,
+    final int? maxLength,
+    final MaxLengthEnforcement? maxLengthEnforcement,
+    final ValueChanged<String>? onChanged,
+    final VoidCallback? onEditingComplete,
+    final ValueChanged<String>? onFieldSubmitted,
+    final List<TextInputFormatter>? inputFormatters,
+    final bool? enabled,
+    final double cursorWidth = Styles.cursorWidth,
+    final double? cursorHeight,
+    final Radius? cursorRadius = const Radius.circular(Styles.cursorRadius),
+    final Color? accentColor,
+    final Brightness? keyboardAppearance,
+    final EdgeInsets scrollPadding = const EdgeInsets.all(Styles.padding),
+    final bool? enableInteractiveSelection,
+    final TextSelectionControls? selectionControls,
+    final GestureTapCallback? onTap,
+    final MouseCursor cursor = MouseCursor.defer,
+    final ScrollController? scrollController,
+    final ScrollPhysics? scrollPhysics,
+    final Iterable<String>? autofillHints,
     super.restorationId,
-    bool enableIMEPersonalizedLearning = true,
+    final bool enableIMEPersonalizedLearning = true,
   })  : assert(initialValue == null || controller == null),
         assert(obscuringCharacter.length == 1),
         assert(maxLines == null || maxLines > 0),
@@ -129,10 +132,10 @@ class ArnaTextFormField extends FormField<String> {
               controller != null ? controller.text : (initialValue ?? ''),
           enabled: enabled ?? true,
           autovalidateMode: autovalidateMode ?? AutovalidateMode.disabled,
-          builder: (FormFieldState<String> field) {
+          builder: (final FormFieldState<String> field) {
             final _ArnaTextFormFieldState state =
                 field as _ArnaTextFormFieldState;
-            void onChangedHandler(String value) {
+            void onChangedHandler(final String value) {
               field.didChange(value);
               if (onChanged != null) {
                 onChanged(value);
@@ -224,7 +227,10 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
   ArnaTextFormField get _textFormField => super.widget as ArnaTextFormField;
 
   @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+  void restoreState(
+    final RestorationBucket? oldBucket,
+    final bool initialRestore,
+  ) {
     super.restoreState(oldBucket, initialRestore);
     if (_controller != null) {
       _registerController();
@@ -238,7 +244,7 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
     registerForRestoration(_controller!, 'controller');
   }
 
-  void _createLocalController([TextEditingValue? value]) {
+  void _createLocalController([final TextEditingValue? value]) {
     assert(_controller == null);
     _controller = value == null
         ? RestorableTextEditingController()
@@ -263,7 +269,7 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
   }
 
   @override
-  void didUpdateWidget(ArnaTextFormField oldWidget) {
+  void didUpdateWidget(final ArnaTextFormField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (_textFormField.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_handleControllerChanged);
@@ -292,7 +298,7 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
   }
 
   @override
-  void didChange(String? value) {
+  void didChange(final String? value) {
     super.didChange(value);
     if (_effectiveController.text != value) {
       _effectiveController.text = value ?? '';

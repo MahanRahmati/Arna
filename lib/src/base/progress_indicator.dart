@@ -89,7 +89,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
   }
 
   @override
-  void didUpdateWidget(ArnaProgressIndicator oldWidget) {
+  void didUpdateWidget(final ArnaProgressIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.value == null && !_controller.isAnimating) {
       _controller.repeat();
@@ -105,7 +105,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent =
         widget.accentColor ?? ArnaTheme.of(context).accentColor;
     String? expandedSemanticsValue = widget.semanticsValue;
@@ -115,7 +115,7 @@ class _ArnaProgressIndicatorState extends State<ArnaProgressIndicator>
 
     return AnimatedBuilder(
       animation: _controller,
-      builder: (BuildContext context, Widget? child) {
+      builder: (final BuildContext context, final Widget? child) {
         return Semantics(
           label: widget.semanticsLabel,
           value: expandedSemanticsValue,
@@ -191,7 +191,7 @@ class _ProgressPainter extends CustomPainter {
   static const double _startAngle = -math.pi / 2.0;
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(final Canvas canvas, final Size size) {
     final Offset center = Offset(size.width / 2, size.height / 2);
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: size.width / 4),
@@ -207,7 +207,7 @@ class _ProgressPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_ProgressPainter oldPainter) {
+  bool shouldRepaint(final _ProgressPainter oldPainter) {
     return oldPainter.color != color ||
         oldPainter.value != value ||
         oldPainter.headValue != headValue ||

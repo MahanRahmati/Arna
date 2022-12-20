@@ -6,12 +6,12 @@ class ArnaHeaderBarDivider extends ArnaHeaderBarItem {
   const ArnaHeaderBarDivider({super.key});
 
   @override
-  Widget inHeaderBar(BuildContext context) {
+  Widget inHeaderBar(final BuildContext context) {
     return const SizedBox.shrink();
   }
 
   @override
-  ArnaPopupMenuEntry overflowed(BuildContext context) {
+  ArnaPopupMenuEntry overflowed(final BuildContext context) {
     return const ArnaPopupMenuDivider();
   }
 }

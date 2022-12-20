@@ -14,12 +14,12 @@ import 'package:flutter/foundation.dart'
 /// The licenses shown on the [ArnaLicensePage] are those returned by the [LicenseRegistry] API, which can be used to
 /// add more licenses to the list.
 void showArnaLicensePage({
-  required BuildContext context,
-  bool useRootNavigator = false,
+  required final BuildContext context,
+  final bool useRootNavigator = false,
 }) {
   Navigator.of(context, rootNavigator: useRootNavigator).push(
     ArnaPageRoute<void>(
-      builder: (BuildContext context) => const ArnaLicensePage(),
+      builder: (final BuildContext context) => const ArnaLicensePage(),
     ),
   );
 }
@@ -38,16 +38,21 @@ class ArnaLicensePage extends StatelessWidget {
   const ArnaLicensePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return FutureBuilder<_LicenseData>(
       future: LicenseRegistry.licenses
           .fold<_LicenseData>(
             _LicenseData(),
-            (_LicenseData prev, LicenseEntry license) =>
+            (final _LicenseData prev, final LicenseEntry license) =>
                 prev..addLicense(license),
           )
-          .then((_LicenseData licenseData) => licenseData..sortPackages()),
-      builder: (BuildContext context, AsyncSnapshot<_LicenseData> snapshot) {
+          .then(
+            (final _LicenseData licenseData) => licenseData..sortPackages(),
+          ),
+      builder: (
+        final BuildContext context,
+        final AsyncSnapshot<_LicenseData> snapshot,
+      ) {
         switch (snapshot.connectionState) {
           case ConnectionState.done:
             if (snapshot.data!.packages.isEmpty) {
@@ -62,13 +67,14 @@ class ArnaLicensePage extends StatelessWidget {
                 ...snapshot.data!.packages
                     .asMap()
                     .entries
-                    .map<MasterNavigationItem>((MapEntry<int, String> entry) {
+                    .map<MasterNavigationItem>(
+                        (final MapEntry<int, String> entry) {
                   final String packageName = entry.value;
                   final List<int> bindings =
                       snapshot.data!.packageLicenseBindings[packageName]!;
 
                   final Iterable<LicenseParagraph> paragraphs = bindings
-                      .map((int i) => snapshot.data!.licenses[i])
+                      .map((final int i) => snapshot.data!.licenses[i])
                       .toList(growable: false)
                       .first
                       .paragraphs;
@@ -92,7 +98,7 @@ class ArnaLicensePage extends StatelessWidget {
                     title: packageName,
                     subtitle: MaterialLocalizations.of(context)
                         .licensesPackageDetailText(bindings.length),
-                    builder: (_) => ListView(children: details),
+                    builder: (final _) => ListView(children: details),
                   );
                 }),
               ],
@@ -124,7 +130,7 @@ class _LicenseData {
   String? firstPackage;
 
   /// Add the license.
-  void addLicense(LicenseEntry entry) {
+  void addLicense(final LicenseEntry entry) {
     // Before the license can be added, we must first record the packages to which it belongs.
     for (final String package in entry.packages) {
       _addPackage(package);
@@ -136,7 +142,7 @@ class _LicenseData {
   }
 
   /// Add a package and initialize package license binding. This is a no-op if the package has been seen before.
-  void _addPackage(String package) {
+  void _addPackage(final String package) {
     if (!packageLicenseBindings.containsKey(package)) {
       packageLicenseBindings[package] = <int>[];
       firstPackage ??= package;
@@ -146,10 +152,10 @@ class _LicenseData {
 
   /// Sort the packages using some comparison method, or by the default manner, which is to put the application package
   /// first, followed by every other package in case-insensitive alphabetical order.
-  void sortPackages([int Function(String a, String b)? compare]) {
+  void sortPackages([final int Function(String a, String b)? compare]) {
     packages.sort(
       compare ??
-          (String a, String b) {
+          (final String a, final String b) {
             // Based on how LicenseRegistry currently behaves, the first package returned is the end user application
             // license. This should be presented first in the list. So here we make sure that first package remains at
             // the front regardless of alphabetical sorting.

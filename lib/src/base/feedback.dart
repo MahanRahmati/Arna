@@ -69,7 +69,7 @@ class ArnaFeedback {
   /// See also:
   ///
   ///  * [wrapForLongPress] to trigger platform-specific feedback before executing a [GestureLongPressCallback].
-  static Future<void> forLongPress(BuildContext context) {
+  static Future<void> forLongPress(final BuildContext context) {
     context
         .findRenderObject()!
         .sendSemanticsEvent(const LongPressSemanticsEvent());
@@ -95,8 +95,8 @@ class ArnaFeedback {
   ///
   ///  * [forLongPress] to just trigger the platform-specific feedback without wrapping a [GestureLongPressCallback].
   static GestureLongPressCallback? wrapForLongPress(
-    GestureLongPressCallback? callback,
-    BuildContext context,
+    final GestureLongPressCallback? callback,
+    final BuildContext context,
   ) {
     if (callback == null) {
       return null;

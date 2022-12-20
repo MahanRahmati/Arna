@@ -83,7 +83,7 @@ class _ArnaBannerState extends State<ArnaBanner>
   }
 
   @override
-  void didUpdateWidget(ArnaBanner oldWidget) {
+  void didUpdateWidget(final ArnaBanner oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.showBanner != oldWidget.showBanner) {
       switch (_controller.status) {
@@ -105,7 +105,7 @@ class _ArnaBannerState extends State<ArnaBanner>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     IconData icon;
     Color accent;
     switch (widget.bannerType) {

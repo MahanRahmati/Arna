@@ -42,14 +42,14 @@ typedef ArnaPropertyResolver<T> = T Function(Set<ArnaState> states);
 ///
 abstract class ArnaStateProperty<T> {
   /// Returns a value of type `T` that depends on [states].
-  T resolve(Set<ArnaState> states);
+  T resolve(final Set<ArnaState> states);
 
   /// Resolves the value for the given set of states if `value` is a
   /// [ArnaStateProperty], otherwise returns the value itself.
   ///
   /// This is useful for widgets that have parameters which can optionally be a
   /// [ArnaStateProperty].
-  static T resolveAs<T>(T value, Set<ArnaState> states) {
+  static T resolveAs<T>(final T value, final Set<ArnaState> states) {
     if (value is ArnaStateProperty<T>) {
       final ArnaStateProperty<T> property = value;
       return property.resolve(states);
@@ -60,17 +60,17 @@ abstract class ArnaStateProperty<T> {
   /// Convenience method for creating a [ArnaStateProperty] from a
   /// [ArnaPropertyResolver] function alone.
   static ArnaStateProperty<T> resolveWith<T>(
-    ArnaPropertyResolver<T> callback,
+    final ArnaPropertyResolver<T> callback,
   ) {
     return _ArnaStatePropertyWith<T>(callback);
   }
 
   /// Linearly interpolate between two [ArnaStateProperty]s.
   static ArnaStateProperty<T?>? lerp<T>(
-    ArnaStateProperty<T>? a,
-    ArnaStateProperty<T>? b,
-    double t,
-    T? Function(T?, T?, double) lerpFunction,
+    final ArnaStateProperty<T>? a,
+    final ArnaStateProperty<T>? b,
+    final double t,
+    final T? Function(T?, T?, double) lerpFunction,
   ) {
     if (a == null && b == null) {
       return null;
@@ -88,7 +88,7 @@ class _LerpProperties<T> implements ArnaStateProperty<T?> {
   final T? Function(T?, T?, double) lerpFunction;
 
   @override
-  T? resolve(Set<ArnaState> states) {
+  T? resolve(final Set<ArnaState> states) {
     final T? resolvedA = a?.resolve(states);
     final T? resolvedB = b?.resolve(states);
     return lerpFunction(resolvedA, resolvedB, t);
@@ -101,7 +101,7 @@ class _ArnaStatePropertyWith<T> implements ArnaStateProperty<T> {
   final ArnaPropertyResolver<T> _resolve;
 
   @override
-  T resolve(Set<ArnaState> states) => _resolve(states);
+  T resolve(final Set<ArnaState> states) => _resolve(states);
 }
 
 /// Convenience class for creating a [ArnaStateProperty] that resolves to the
@@ -114,7 +114,7 @@ class ArnaStatePropertyAll<T> implements ArnaStateProperty<T> {
   final T value;
 
   @override
-  T resolve(Set<ArnaState> states) => value;
+  T resolve(final Set<ArnaState> states) => value;
 
   @override
   String toString() {
@@ -136,11 +136,12 @@ class ArnaStatePropertyAll<T> implements ArnaStateProperty<T> {
 /// with [update]; it should not be modified directly.
 class ArnaStatesController extends ValueNotifier<Set<ArnaState>> {
   /// Creates an ArnaStatesController.
-  ArnaStatesController([Set<ArnaState>? value]) : super(<ArnaState>{...?value});
+  ArnaStatesController([final Set<ArnaState>? value])
+      : super(<ArnaState>{...?value});
 
   /// Adds [state] to [value] if [add] is true, and removes it otherwise,
   /// and notifies listeners if [value] has changed.
-  void update(ArnaState state, {required bool add}) {
+  void update(final ArnaState state, {required final bool add}) {
     final bool valueChanged = add ? value.add(state) : value.remove(state);
     if (valueChanged) {
       notifyListeners();

@@ -102,7 +102,8 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
       focusNode!.requestFocus();
     }
     _actions = <Type, Action<Intent>>{
-      ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
+      ActivateIntent:
+          CallbackAction<Intent>(onInvoke: (final _) => _handleTap())
     };
     _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
@@ -115,7 +116,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
   }
 
   @override
-  void didUpdateWidget(ArnaExpansionPanel oldWidget) {
+  void didUpdateWidget(final ArnaExpansionPanel oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isExpanded != oldWidget.isExpanded) {
       switch (_controller.status) {
@@ -138,7 +139,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     super.dispose();
   }
 
-  void _handleFocusChange(bool hasFocus) {
+  void _handleFocusChange(final bool hasFocus) {
     if (mounted) {
       setState(() => _focused = hasFocus);
     }
@@ -156,14 +157,14 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     }
   }
 
-  void _handleFocus(bool focus) {
+  void _handleFocus(final bool focus) {
     if (focus != _focused && mounted) {
       setState(() => _focused = focus);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent =
         widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
@@ -183,7 +184,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
 
     return AnimatedBuilder(
       animation: _controller.view,
-      builder: (BuildContext context, Widget? child) {
+      builder: (final BuildContext context, final Widget? child) {
         return Padding(
           padding: Styles.normal,
           child: MergeSemantics(

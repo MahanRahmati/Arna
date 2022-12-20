@@ -7,7 +7,7 @@ import 'package:flutter/gestures.dart';
 /// ArnaTextSpanEditingController class.
 class _ArnaTextSpanEditingController extends TextEditingController {
   /// Creates an ArnaTextSpanEditingController.
-  _ArnaTextSpanEditingController({required TextSpan textSpan})
+  _ArnaTextSpanEditingController({required final TextSpan textSpan})
       : _textSpan = textSpan,
         super(text: textSpan.toPlainText(includeSemanticsLabels: false));
 
@@ -15,16 +15,16 @@ class _ArnaTextSpanEditingController extends TextEditingController {
 
   @override
   TextSpan buildTextSpan({
-    required BuildContext context,
-    TextStyle? style,
-    required bool withComposing,
+    required final BuildContext context,
+    final TextStyle? style,
+    required final bool withComposing,
   }) {
     // This does not care about composing.
     return TextSpan(style: style, children: <TextSpan>[_textSpan]);
   }
 
   @override
-  set text(String? newText) {
+  set text(final String? newText) {
     // This should never be reached.
     throw UnimplementedError();
   }
@@ -35,14 +35,14 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
     extends TextSelectionGestureDetectorBuilder {
   /// Creates an ArnaSelectableTextSelectionGestureDetectorBuilder.
   _ArnaSelectableTextSelectionGestureDetectorBuilder({
-    required _ArnaSelectableTextState state,
+    required final _ArnaSelectableTextState state,
   })  : _state = state,
         super(delegate: state);
 
   final _ArnaSelectableTextState _state;
 
   @override
-  void onForcePressStart(ForcePressDetails details) {
+  void onForcePressStart(final ForcePressDetails details) {
     super.onForcePressStart(details);
     if (delegate.selectionEnabled && shouldShowSelectionToolbar) {
       editableText.showToolbar();
@@ -50,12 +50,12 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
   }
 
   @override
-  void onForcePressEnd(ForcePressDetails details) {
+  void onForcePressEnd(final ForcePressDetails details) {
     // Not required.
   }
 
   @override
-  void onSingleLongTapMoveUpdate(LongPressMoveUpdateDetails details) {
+  void onSingleLongTapMoveUpdate(final LongPressMoveUpdateDetails details) {
     if (delegate.selectionEnabled) {
       switch (defaultTargetPlatform) {
         case TargetPlatform.iOS:
@@ -80,14 +80,14 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
   }
 
   @override
-  void onSingleTapUp(TapUpDetails details) {
+  void onSingleTapUp(final TapUpDetails details) {
     editableText.hideToolbar();
     super.onSingleTapUp(details);
     _state.widget.onTap?.call();
   }
 
   @override
-  void onSingleLongTapStart(LongPressStartDetails details) {
+  void onSingleLongTapStart(final LongPressStartDetails details) {
     if (delegate.selectionEnabled) {
       switch (defaultTargetPlatform) {
         case TargetPlatform.iOS:
@@ -176,7 +176,7 @@ class ArnaSelectableText extends StatefulWidget {
     this.textScaleFactor,
     this.showCursor = false,
     this.autofocus = false,
-    ToolbarOptions? toolbarOptions,
+    final ToolbarOptions? toolbarOptions,
     this.minLines,
     this.maxLines,
     this.cursorWidth = Styles.cursorWidth,
@@ -224,7 +224,7 @@ class ArnaSelectableText extends StatefulWidget {
     this.textScaleFactor,
     this.showCursor = false,
     this.autofocus = false,
-    ToolbarOptions? toolbarOptions,
+    final ToolbarOptions? toolbarOptions,
     this.minLines,
     this.maxLines,
     this.cursorWidth = Styles.cursorWidth,
@@ -395,7 +395,7 @@ class ArnaSelectableText extends StatefulWidget {
   State<ArnaSelectableText> createState() => _ArnaSelectableTextState();
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(
       DiagnosticsProperty<String>(
@@ -574,7 +574,7 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   }
 
   @override
-  void didUpdateWidget(ArnaSelectableText oldWidget) {
+  void didUpdateWidget(final ArnaSelectableText oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.data != oldWidget.data ||
         widget.textSpan != oldWidget.textSpan) {
@@ -607,7 +607,7 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
     setState(() => _showSelectionHandles = showSelectionHandles);
   }
 
-  bool _shouldShowSelectionHandles(SelectionChangedCause? cause) {
+  bool _shouldShowSelectionHandles(final SelectionChangedCause? cause) {
     // When the text field is activated by something that doesn't trigger the
     // selection overlay, we shouldn't show the handles either.
     if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar) {
@@ -637,8 +637,8 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   TextSelection? _lastSeenTextSelection;
 
   void _handleSelectionChanged(
-    TextSelection selection,
-    SelectionChangedCause? cause,
+    final TextSelection selection,
+    final SelectionChangedCause? cause,
   ) {
     final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
     if (willShowSelectionHandles != _showSelectionHandles) {
@@ -691,7 +691,7 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     assert(debugCheckHasDirectionality(context));
     assert(

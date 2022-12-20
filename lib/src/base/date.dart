@@ -6,18 +6,18 @@ class ArnaDateUtils {
   ArnaDateUtils._();
 
   /// Returns a [DateTime] with the date of the original, but time set to midnight.
-  static DateTime dateOnly(DateTime date) =>
+  static DateTime dateOnly(final DateTime date) =>
       DateTime(date.year, date.month, date.day);
 
   /// Returns true if the two [DateTime] objects have the same day, month, and year, or are both null.
-  static bool isSameDay(DateTime? dateA, DateTime? dateB) {
+  static bool isSameDay(final DateTime? dateA, final DateTime? dateB) {
     return dateA?.year == dateB?.year &&
         dateA?.month == dateB?.month &&
         dateA?.day == dateB?.day;
   }
 
   /// Returns true if the two [DateTime] objects have the same month and year, or are both null.
-  static bool isSameMonth(DateTime? dateA, DateTime? dateB) {
+  static bool isSameMonth(final DateTime? dateA, final DateTime? dateB) {
     return dateA?.year == dateB?.year && dateA?.month == dateB?.month;
   }
 
@@ -31,7 +31,7 @@ class ArnaDateUtils {
   /// ```
   ///
   /// The value for `delta` would be `7`.
-  static int monthDelta(DateTime startDate, DateTime endDate) {
+  static int monthDelta(final DateTime startDate, final DateTime endDate) {
     return (endDate.year - startDate.year) * 12 +
         endDate.month -
         startDate.month;
@@ -48,12 +48,16 @@ class ArnaDateUtils {
   ///
   /// `date` would be January 15, 2019.
   /// `futureDate` would be April 1, 2019 since it adds 3 months.
-  static DateTime addMonthsToMonthDate(DateTime monthDate, int monthsToAdd) {
+  static DateTime addMonthsToMonthDate(
+    final DateTime monthDate,
+    final int monthsToAdd,
+  ) {
     return DateTime(monthDate.year, monthDate.month + monthsToAdd);
   }
 
   /// Returns a [DateTime] with the added number of days and time set to midnight.
-  static DateTime addDaysToDate(DateTime date, int days) => DateTime(
+  static DateTime addDaysToDate(final DateTime date, final int days) =>
+      DateTime(
         date.year,
         date.month,
         date.day + days,
@@ -89,9 +93,9 @@ class ArnaDateUtils {
   /// - [MaterialLocalizations.narrowWeekdays] list provides localized names of days of week, always starting with
   ///   Sunday and ending with Saturday.
   static int firstDayOffset(
-    int year,
-    int month,
-    MaterialLocalizations localizations,
+    final int year,
+    final int month,
+    final MaterialLocalizations localizations,
   ) {
     /// 0-based day of week for the month and year, with 0 representing Monday.
     final int weekdayFromMonday = DateTime(year, month).weekday - 1;
@@ -111,7 +115,7 @@ class ArnaDateUtils {
   ///
   /// This applies the leap year logic introduced by the Gregorian reforms of 1582. It will not give valid results for
   /// dates prior to that time.
-  static int getDaysInMonth(int year, int month) {
+  static int getDaysInMonth(final int year, final int month) {
     if (month == DateTime.february) {
       final bool isLeapYear =
           (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);

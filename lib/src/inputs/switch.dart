@@ -70,7 +70,7 @@ class ArnaSwitch extends StatelessWidget {
   final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     final Brightness brightness = ArnaTheme.brightnessOf(context);
     final Color borderColor = ArnaColors.borderColor.resolveFrom(context);
@@ -79,12 +79,12 @@ class ArnaSwitch extends StatelessWidget {
       padding: Styles.small,
       child: ArnaBaseWidget(
         builder: (
-          BuildContext context,
+          final BuildContext context,
           bool enabled,
-          bool hover,
-          bool focused,
-          bool pressed,
-          bool selected,
+          final bool hover,
+          final bool focused,
+          final bool pressed,
+          final bool selected,
         ) {
           enabled = onChanged != null;
           return Stack(

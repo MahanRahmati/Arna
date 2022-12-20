@@ -16,11 +16,11 @@ class ArnaFadeThroughPageTransitionsBuilder {
 
   /// Wraps the child with [ArnaFadeThroughTransition] widgets.
   Widget buildTransitions<T>(
-    PageRoute<T>? route,
-    BuildContext? context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child,
+    final PageRoute<T>? route,
+    final BuildContext? context,
+    final Animation<double> animation,
+    final Animation<double> secondaryAnimation,
+    final Widget child,
   ) {
     return ArnaFadeThroughTransition(
       animation: animation,
@@ -74,7 +74,7 @@ class ArnaFadeThroughTransition extends StatelessWidget {
   final Widget? child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return _ZoomedFadeInFadeOut(
       animation: animation,
       child: ColoredBox(
@@ -98,20 +98,20 @@ class _ZoomedFadeInFadeOut extends StatelessWidget {
   final Widget? child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return DualTransitionBuilder(
       animation: animation,
       forwardBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Widget? child,
+        final BuildContext context,
+        final Animation<double> animation,
+        final Widget? child,
       ) {
         return _ZoomedFadeIn(animation: animation, child: child);
       },
       reverseBuilder: (
-        BuildContext context,
-        Animation<double> animation,
-        Widget? child,
+        final BuildContext context,
+        final Animation<double> animation,
+        final Widget? child,
       ) {
         return _FadeOut(animation: animation, child: child);
       },
@@ -158,7 +158,7 @@ class _ZoomedFadeIn extends StatelessWidget {
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return FadeTransition(
       opacity: _fadeInOpacity.animate(animation),
       child: ScaleTransition(
@@ -195,7 +195,7 @@ class _FadeOut extends StatelessWidget {
   );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return FadeTransition(
       opacity: _fadeOutOpacity.animate(animation),
       child: child,

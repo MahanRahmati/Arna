@@ -271,11 +271,11 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   /// All the colors must not be null.
   const ArnaDynamicColor({
-    String? debugLabel,
-    required Color color,
-    required Color darkColor,
-    required Color highContrastColor,
-    required Color darkHighContrastColor,
+    final String? debugLabel,
+    required final Color color,
+    required final Color darkColor,
+    required final Color highContrastColor,
+    required final Color darkHighContrastColor,
   }) : this._(
           color,
           color,
@@ -361,7 +361,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   /// See also:
   ///
   ///  * [maybeResolve], which is similar to this function, but will allow a null `resolvable` color.
-  static Color resolve(Color resolvable, BuildContext context) {
+  static Color resolve(final Color resolvable, final BuildContext context) {
     return (resolvable is ArnaDynamicColor)
         ? resolvable.resolveFrom(context)
         : resolvable;
@@ -378,7 +378,10 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   ///  * [resolve], which is similar to this function, but returns a non-nullable value, and does not allow a null
   ///    `resolvable` color.
-  static Color? maybeResolve(Color? resolvable, BuildContext context) {
+  static Color? maybeResolve(
+    final Color? resolvable,
+    final BuildContext context,
+  ) {
     if (resolvable == null) {
       return null;
     }
@@ -388,7 +391,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// Determines whether the given [Color] is [Brightness.light] or [Brightness.dark].
-  static Brightness estimateBrightnessForColor(Color color) {
+  static Brightness estimateBrightnessForColor(final Color color) {
     final double relativeLuminance = color.computeLuminance();
     const double kThreshold = 0.098;
     return ((relativeLuminance + 0.05) * (relativeLuminance + 0.05) >
@@ -398,20 +401,20 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// A color that's clearly legible when drawn on [backgroundColor].
-  static Color onBackgroundColor(Color backgroundColor) {
+  static Color onBackgroundColor(final Color backgroundColor) {
     return estimateBrightnessForColor(backgroundColor) == Brightness.light
         ? ArnaColors.shade32
         : ArnaColors.shade243;
   }
 
   /// Applies an overlay color to a [backgroundColor].
-  static Color applyOverlay(Color backgroundColor) {
+  static Color applyOverlay(final Color backgroundColor) {
     final Color foregroundColor = onBackgroundColor(backgroundColor);
     return Color.alphaBlend(foregroundColor.withOpacity(0.1), backgroundColor);
   }
 
   /// The color to use when drawn outside of [color].
-  static Color outerColor(Color color) {
+  static Color outerColor(final Color color) {
     final double colorLuminance = color.computeLuminance();
     final Color foregroundColor = colorLuminance < 0.2 || colorLuminance > 0.8
         ? Color.alphaBlend(onBackgroundColor(color).withOpacity(0.49), color)
@@ -420,7 +423,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   /// Computes the color that matches with [color] and [brightness].
-  static Color matchingColor(Color color, Brightness brightness) {
+  static Color matchingColor(final Color color, final Brightness brightness) {
     final double colorLuminance = color.computeLuminance();
     final Color foregroundColor = colorLuminance < 0.2 &&
             brightness == Brightness.dark
@@ -461,7 +464,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   ///
   /// If any of the required dependencies are missing from the given context, the default value of that trait will be
   /// used ([Brightness.light] platform brightness and normal contrast).
-  ArnaDynamicColor resolveFrom(BuildContext context) {
+  ArnaDynamicColor resolveFrom(final BuildContext context) {
     Brightness brightness = Brightness.light;
     if (_isPlatformBrightnessDependent) {
       brightness = ArnaTheme.maybeBrightnessOf(context) ?? Brightness.light;
@@ -500,7 +503,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(final Object other) {
     if (identical(this, other)) {
       return true;
     }
@@ -525,8 +528,8 @@ class ArnaDynamicColor extends Color with Diagnosticable {
       );
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    String toString(String name, Color color) {
+  String toString({final DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    String toString(final String name, final Color color) {
       final String marker = color == _effectiveColor ? '*' : '';
       return '$marker$name = $color$marker';
     }
@@ -544,7 +547,7 @@ class ArnaDynamicColor extends Color with Diagnosticable {
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     if (_debugLabel != null) {
       properties.add(
@@ -596,12 +599,12 @@ class ArnaDynamicColor extends Color with Diagnosticable {
 ///
 /// The [showName], [style], and [level] arguments must not be null.
 DiagnosticsProperty<Color> createArnaColorProperty(
-  String name,
-  Color? value, {
-  bool showName = true,
-  Object? defaultValue = kNoDefaultValue,
-  DiagnosticsTreeStyle style = DiagnosticsTreeStyle.singleLine,
-  DiagnosticLevel level = DiagnosticLevel.info,
+  final String name,
+  final Color? value, {
+  final bool showName = true,
+  final Object? defaultValue = kNoDefaultValue,
+  final DiagnosticsTreeStyle style = DiagnosticsTreeStyle.singleLine,
+  final DiagnosticLevel level = DiagnosticLevel.info,
 }) {
   if (value is ArnaDynamicColor) {
     return DiagnosticsProperty<ArnaDynamicColor>(

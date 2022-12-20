@@ -204,7 +204,7 @@ class ArnaSliderListTile extends StatelessWidget {
   final MouseCursor cursor;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaListTile(
       leading: leading,
       title: title,

@@ -212,7 +212,7 @@ class ArnaPageTransitionSwitcher extends StatefulWidget {
   /// previous child. The children are centered on each other.
   ///
   /// See [ArnaPageTransitionSwitcherTransitionBuilder] for more information on the function signature.
-  static Widget defaultLayoutBuilder(List<Widget> entries) {
+  static Widget defaultLayoutBuilder(final List<Widget> entries) {
     return Stack(children: entries);
   }
 
@@ -235,7 +235,7 @@ class _ArnaPageTransitionSwitcherState extends State<ArnaPageTransitionSwitcher>
   }
 
   @override
-  void didUpdateWidget(ArnaPageTransitionSwitcher oldWidget) {
+  void didUpdateWidget(final ArnaPageTransitionSwitcher oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     // If the transition builder changed, then update all of the old transitions.
@@ -262,7 +262,7 @@ class _ArnaPageTransitionSwitcherState extends State<ArnaPageTransitionSwitcher>
     }
   }
 
-  void _addEntryForNewChild({required bool shouldAnimate}) {
+  void _addEntryForNewChild({required final bool shouldAnimate}) {
     assert(shouldAnimate || _currentEntry == null);
     if (_currentEntry != null) {
       assert(shouldAnimate);
@@ -312,10 +312,10 @@ class _ArnaPageTransitionSwitcherState extends State<ArnaPageTransitionSwitcher>
   }
 
   _ChildEntry _newEntry({
-    required Widget child,
-    required ArnaPageTransitionSwitcherTransitionBuilder builder,
-    required AnimationController primaryController,
-    required AnimationController secondaryController,
+    required final Widget child,
+    required final ArnaPageTransitionSwitcherTransitionBuilder builder,
+    required final AnimationController primaryController,
+    required final AnimationController secondaryController,
   }) {
     final Widget transition = builder(
       child,
@@ -328,7 +328,7 @@ class _ArnaPageTransitionSwitcherState extends State<ArnaPageTransitionSwitcher>
       primaryController: primaryController,
       secondaryController: secondaryController,
     );
-    secondaryController.addStatusListener((AnimationStatus status) {
+    secondaryController.addStatusListener((final AnimationStatus status) {
       if (status == AnimationStatus.completed) {
         assert(mounted);
         assert(_activeEntries.contains(entry));
@@ -338,7 +338,7 @@ class _ArnaPageTransitionSwitcherState extends State<ArnaPageTransitionSwitcher>
         });
       }
     });
-    primaryController.addStatusListener((AnimationStatus status) {
+    primaryController.addStatusListener((final AnimationStatus status) {
       if (status == AnimationStatus.dismissed) {
         assert(mounted);
         assert(_activeEntries.contains(entry));
@@ -351,7 +351,7 @@ class _ArnaPageTransitionSwitcherState extends State<ArnaPageTransitionSwitcher>
     return entry;
   }
 
-  void _updateTransitionForEntry(_ChildEntry entry) {
+  void _updateTransitionForEntry(final _ChildEntry entry) {
     final Widget transition = widget.transitionBuilder(
       entry.widgetChild,
       entry.primaryController,
@@ -372,10 +372,10 @@ class _ArnaPageTransitionSwitcherState extends State<ArnaPageTransitionSwitcher>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return widget.layoutBuilder(
       _activeEntries
-          .map<Widget>((_ChildEntry entry) => entry.transition)
+          .map<Widget>((final _ChildEntry entry) => entry.transition)
           .toList(),
     );
   }

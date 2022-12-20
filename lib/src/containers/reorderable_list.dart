@@ -19,7 +19,7 @@ class ArnaReorderableList extends StatefulWidget {
   ///     needed when scrolling the list.
   ArnaReorderableList({
     super.key,
-    required List<Widget> children,
+    required final List<Widget> children,
     required this.onReorder,
     this.onReorderStart,
     this.onReorderEnd,
@@ -45,10 +45,11 @@ class ArnaReorderableList extends StatefulWidget {
           'You can only pass itemExtent or prototypeItem, not both',
         ),
         assert(
-          children.every((Widget w) => w.key != null),
+          children.every((final Widget w) => w.key != null),
           'All children of this widget must have a key.',
         ),
-        itemBuilder = ((BuildContext context, int index) => children[index]),
+        itemBuilder =
+            ((final BuildContext context, final int index) => children[index]),
         itemCount = children.length;
 
   /// Creates a reorderable list from widget items that are created on demand.
@@ -183,8 +184,8 @@ class ArnaReorderableList extends StatefulWidget {
 }
 
 class _ArnaReorderableListState extends State<ArnaReorderableList> {
-  Widget _wrapWithSemantics(Widget child, int index) {
-    void reorder(int startIndex, int endIndex) {
+  Widget _wrapWithSemantics(final Widget child, final int index) {
+    void reorder(final int startIndex, final int endIndex) {
       if (startIndex != endIndex) {
         widget.onReorder(startIndex, endIndex);
       }
@@ -248,7 +249,7 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
     );
   }
 
-  Widget _itemBuilder(BuildContext context, int index) {
+  Widget _itemBuilder(final BuildContext context, final int index) {
     final Widget item = widget.itemBuilder(context, index);
     assert(
       () {
@@ -339,7 +340,7 @@ class _ArnaReorderableListState extends State<ArnaReorderableList> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasOverlay(context));
 
     final Widget child = CustomScrollView(
@@ -398,7 +399,7 @@ class _ArnaReorderableListChildGlobalKey extends GlobalObjectKey {
   final State state;
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(final Object other) {
     if (other.runtimeType != runtimeType) {
       return false;
     }

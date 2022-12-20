@@ -82,7 +82,7 @@ class _ArnaSegmentedControlState<T extends Object>
     extends State<ArnaSegmentedControl<T>> {
   T? _pressedKey;
 
-  void _onPressed(T currentKey) {
+  void _onPressed(final T currentKey) {
     if (currentKey == _pressedKey) {
       return;
     }
@@ -92,7 +92,7 @@ class _ArnaSegmentedControlState<T extends Object>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color accent =
         widget.accentColor ?? ArnaTheme.of(context).accentColor;
 
@@ -109,7 +109,7 @@ class _ArnaSegmentedControlState<T extends Object>
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const SizedBox(height: Styles.buttonSize, width: 0.5),
-            ...widget.children.keys.map((T item) {
+            ...widget.children.keys.map((final T item) {
               final int index = widget.children.keys.toList().indexOf(item);
               final int length = widget.children.length;
               final TextDirection textDirection = Directionality.of(context);
@@ -168,15 +168,15 @@ class _ArnaSegmentedControlItem extends StatelessWidget {
   final MouseCursor cursor;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     return ArnaBaseWidget(
       builder: (
-        BuildContext context,
-        bool enabled,
-        bool hover,
-        bool focused,
-        bool pressed,
+        final BuildContext context,
+        final bool enabled,
+        final bool hover,
+        final bool focused,
+        final bool pressed,
         bool selected,
       ) {
         selected = itemSelected;

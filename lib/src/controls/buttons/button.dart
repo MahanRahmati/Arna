@@ -147,7 +147,7 @@ class ArnaButton extends StatelessWidget {
   final bool enableFeedback;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     Color accent;
     Color iconColor;
@@ -186,12 +186,12 @@ class ArnaButton extends StatelessWidget {
       padding: Styles.small,
       child: ArnaBaseWidget(
         builder: (
-          BuildContext context,
-          bool enabled,
-          bool hover,
-          bool focused,
-          bool pressed,
-          bool selected,
+          final BuildContext context,
+          final bool enabled,
+          final bool hover,
+          final bool focused,
+          final bool pressed,
+          final bool selected,
         ) {
           return AnimatedContainer(
             height: (buttonSize == ButtonSize.huge)

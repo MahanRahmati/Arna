@@ -154,7 +154,8 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
       _effectiveFocusNode.requestFocus();
     }
     _actions = <Type, Action<Intent>>{
-      ActivateIntent: CallbackAction<Intent>(onInvoke: (_) => _handleTap())
+      ActivateIntent:
+          CallbackAction<Intent>(onInvoke: (final _) => _handleTap())
     };
     _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
@@ -163,7 +164,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
   }
 
   @override
-  void didUpdateWidget(ArnaBaseWidget oldWidget) {
+  void didUpdateWidget(final ArnaBaseWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.onPressed != oldWidget.onPressed ||
         widget.onLongPress != oldWidget.onLongPress) {
@@ -189,7 +190,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
     super.dispose();
   }
 
-  void _handleFocusChange(bool hasFocus) {
+  void _handleFocusChange(final bool hasFocus) {
     setState(() {
       _focused = hasFocus;
       if (!hasFocus) {
@@ -205,7 +206,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
       }
       widget.onPressed?.call();
       if (widget.showAnimation) {
-        _controller.reverse().then((_) {
+        _controller.reverse().then((final _) {
           if (mounted) {
             _controller.forward();
           }
@@ -226,7 +227,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
     }
   }
 
-  void _handlePressDown(_) {
+  void _handlePressDown(final _) {
     if (!_pressed && mounted) {
       if (widget.showAnimation) {
         _controller.reverse();
@@ -235,7 +236,7 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
     }
   }
 
-  void _handleTapUp(_) {
+  void _handleTapUp(final _) {
     if (_pressed && mounted) {
       if (widget.showAnimation) {
         _controller.forward();
@@ -253,40 +254,40 @@ class _ArnaBaseWidgetState extends State<ArnaBaseWidget>
     }
   }
 
-  void _handleHorizontalDragStart(DragStartDetails dragStartDetails) {
+  void _handleHorizontalDragStart(final DragStartDetails dragStartDetails) {
     widget.onHorizontalDragStart?.call(dragStartDetails);
     _handlePressDown(null);
   }
 
-  void _handleHorizontalDragEnd(DragEndDetails dragEndDetails) {
+  void _handleHorizontalDragEnd(final DragEndDetails dragEndDetails) {
     widget.onHorizontalDragEnd?.call(dragEndDetails);
     _handleTapUp(null);
   }
 
-  void _handleVerticalDragStart(DragStartDetails dragStartDetails) {
+  void _handleVerticalDragStart(final DragStartDetails dragStartDetails) {
     widget.onVerticalDragStart?.call(dragStartDetails);
     _handlePressDown(null);
   }
 
-  void _handleVerticalDragEnd(DragEndDetails dragEndDetails) {
+  void _handleVerticalDragEnd(final DragEndDetails dragEndDetails) {
     widget.onVerticalDragEnd?.call(dragEndDetails);
     _handleTapUp(null);
   }
 
-  void _handleHover(bool hover) {
+  void _handleHover(final bool hover) {
     if (hover != _hover && mounted) {
       setState(() => _hover = hover);
     }
   }
 
-  void _handleFocus(bool focus) {
+  void _handleFocus(final bool focus) {
     if (focus != _focused && mounted) {
       setState(() => _focused = focus);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Widget child = widget.builder(
       context,
       _isEnabled,

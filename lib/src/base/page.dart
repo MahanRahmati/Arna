@@ -36,7 +36,7 @@ class ArnaPage<T> extends Page<T> {
   final bool fullscreenDialog;
 
   @override
-  Route<T> createRoute(BuildContext context) =>
+  Route<T> createRoute(final BuildContext context) =>
       _PageBasedArnaPageRoute<T>(page: this);
 }
 
@@ -48,7 +48,7 @@ class _PageBasedArnaPageRoute<T> extends PageRoute<T>
     with ArnaRouteTransitionMixin<T> {
   /// Creates a page-based version of [ArnaPageRoute].
   _PageBasedArnaPageRoute({
-    required ArnaPage<T> page,
+    required final ArnaPage<T> page,
   }) : super(settings: page) {
     assert(opaque);
   }
@@ -56,7 +56,7 @@ class _PageBasedArnaPageRoute<T> extends PageRoute<T>
   ArnaPage<T> get _page => settings as ArnaPage<T>;
 
   @override
-  Widget buildContent(BuildContext context) => _page.child;
+  Widget buildContent(final BuildContext context) => _page.child;
 
   @override
   bool get maintainState => _page.maintainState;

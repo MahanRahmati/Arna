@@ -33,7 +33,7 @@ extension ArnaStringExtension on String {
         'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
     return splitMapJoin(
       '',
-      onNonMatch: (String char) =>
+      onNonMatch: (final String char) =>
           char.isNotEmpty && diacriticsString.contains(char)
               ? nonDiacriticsString[diacriticsString.indexOf(char)]
               : char,
@@ -41,7 +41,7 @@ extension ArnaStringExtension on String {
   }
 
   /// remove last word from the string.
-  String removeLastWord([int amount = 1]) {
+  String removeLastWord([final int amount = 1]) {
     final int cacheLenght = length;
     if (cacheLenght > amount) {
       return substring(0, cacheLenght - amount);
@@ -51,7 +51,7 @@ extension ArnaStringExtension on String {
   }
 
   /// Remove all numbers from the string.
-  String removeAllNumbers({List<String> include = const <String>[]}) {
+  String removeAllNumbers({final List<String> include = const <String>[]}) {
     final List<String> invalid = _numbers.toList()..addAll(include);
     final StringBuffer buffer = StringBuffer();
     for (int i = 0; i < length; i++) {
@@ -64,7 +64,7 @@ extension ArnaStringExtension on String {
   }
 
   /// Remove everything except numbers from the string.
-  String removeAllNotNumber({List<String> exclude = const <String>[]}) {
+  String removeAllNotNumber({final List<String> exclude = const <String>[]}) {
     final List<String> valid = _numbers.toList()..addAll(exclude);
     final StringBuffer buffer = StringBuffer();
     for (int i = 0; i < length; i++) {

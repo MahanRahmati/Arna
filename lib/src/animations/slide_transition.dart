@@ -3,7 +3,10 @@ import 'package:arna/arna.dart';
 /// A class that provides [SlideTransition]s.
 class ArnaSlideTransition {
   /// Animation from left off the screen into the screen.
-  static SlideTransition fromLeft(Widget child, Animation<double> animation) {
+  static SlideTransition fromLeft(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(-1, 0),
@@ -14,7 +17,10 @@ class ArnaSlideTransition {
   }
 
   /// Animation from on screen to left off screen.
-  static SlideTransition toLeft(Widget child, Animation<double> animation) {
+  static SlideTransition toLeft(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: Offset.zero,
@@ -25,7 +31,10 @@ class ArnaSlideTransition {
   }
 
   /// Animation from top offscreen up onto the screen.
-  static SlideTransition fromTop(Widget child, Animation<double> animation) {
+  static SlideTransition fromTop(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(0, -1),
@@ -36,7 +45,10 @@ class ArnaSlideTransition {
   }
 
   /// Animation from on the screen to top off the screen.
-  static SlideTransition toTop(Widget child, Animation<double> animation) {
+  static SlideTransition toTop(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: Offset.zero,
@@ -47,7 +59,10 @@ class ArnaSlideTransition {
   }
 
   /// Animation from right off screen to on screen.
-  static SlideTransition fromRight(Widget child, Animation<double> animation) {
+  static SlideTransition fromRight(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(1, 0),
@@ -58,7 +73,10 @@ class ArnaSlideTransition {
   }
 
   /// Animation from on screen to right off screen.
-  static SlideTransition toRight(Widget child, Animation<double> animation) {
+  static SlideTransition toRight(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: Offset.zero,
@@ -69,7 +87,10 @@ class ArnaSlideTransition {
   }
 
   /// Animation from bottom offscreen up onto the screen.
-  static SlideTransition fromBottom(Widget child, Animation<double> animation) {
+  static SlideTransition fromBottom(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(0, 1),
@@ -80,7 +101,10 @@ class ArnaSlideTransition {
   }
 
   /// Animation from on the screen to down off the screen.
-  static SlideTransition toBottom(Widget child, Animation<double> animation) {
+  static SlideTransition toBottom(
+    final Widget child,
+    final Animation<double> animation,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: Offset.zero,

@@ -80,7 +80,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     _currentIndex = widget.currentIndex;
   }
 
-  void onTap(int index) {
+  void onTap(final int index) {
     final bool expanded = ArnaHelpers.isExpanded(context);
     if (!expanded) {
       showDrawer = false;
@@ -92,14 +92,14 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
     setState(() => _currentIndex = index);
   }
 
-  void _drawerOpenedCallback(bool isOpened) {
+  void _drawerOpenedCallback(final bool isOpened) {
     if (showDrawer != isOpened) {
       setState(() => showDrawer = isOpened);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final bool compact = ArnaHelpers.isCompact(context);
     final bool medium = ArnaHelpers.isMedium(context);
     final bool expanded = ArnaHelpers.isExpanded(context);
@@ -164,9 +164,9 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                   child: FocusTraversalGroup(
                     child: ArnaPageTransitionSwitcher(
                       transitionBuilder: (
-                        Widget child,
-                        Animation<double> primaryAnimation,
-                        Animation<double> secondaryAnimation,
+                        final Widget child,
+                        final Animation<double> primaryAnimation,
+                        final Animation<double> secondaryAnimation,
                       ) {
                         return ArnaFadeThroughTransition(
                           animation: primaryAnimation,
@@ -176,7 +176,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                       },
                       child: Builder(
                         key: widget.items[_currentIndex].key,
-                        builder: (BuildContext context) {
+                        builder: (final BuildContext context) {
                           return widget.items[_currentIndex].builder(context);
                         },
                       ),
@@ -186,7 +186,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                 if (compact && widget.items.length < 5)
                   ArnaBottomBar(
                     items: widget.items.map(
-                      (NavigationItem item) {
+                      (final NavigationItem item) {
                         final int index = widget.items.indexOf(item);
                         return Expanded(
                           child: ArnaBottomBarItem(
@@ -281,7 +281,7 @@ class _SideItemBuilder extends StatelessWidget {
   final int currentIndex;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Semantics(
       explicitChildNodes: true,
       child: FocusTraversalGroup(
@@ -294,7 +294,7 @@ class _SideItemBuilder extends StatelessWidget {
                   controller: ScrollController(),
                   itemCount: items.length,
                   padding: Styles.small,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (final BuildContext context, final int index) {
                     return ArnaSideBarItem(
                       key: items[index].key,
                       label: items[index].title,

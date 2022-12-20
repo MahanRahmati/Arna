@@ -15,43 +15,52 @@ class ArnaHelpers {
   ArnaHelpers._();
 
   /// Get device height.
-  static double deviceHeight(BuildContext context) =>
-      MediaQuery.of(context).size.height;
+  static double deviceHeight(final BuildContext context) {
+    return MediaQuery.of(context).size.height;
+  }
 
   /// Get device width.
-  static double deviceWidth(BuildContext context) =>
-      MediaQuery.of(context).size.width;
+  static double deviceWidth(final BuildContext context) {
+    return MediaQuery.of(context).size.width;
+  }
 
   /// Is device compact?
-  static bool isCompact(BuildContext context) =>
-      deviceWidth(context) < Styles.compact;
+  static bool isCompact(final BuildContext context) {
+    return deviceWidth(context) < Styles.compact;
+  }
 
   /// Is device medium?
-  static bool isMedium(BuildContext context) =>
-      !isCompact(context) && !isExpanded(context);
+  static bool isMedium(final BuildContext context) {
+    return !isCompact(context) && !isExpanded(context);
+  }
 
   /// Is device expanded?
-  static bool isExpanded(BuildContext context) =>
-      deviceWidth(context) > Styles.expanded;
+  static bool isExpanded(final BuildContext context) {
+    return deviceWidth(context) > Styles.expanded;
+  }
 
   /// Determines if this is the first child that is being laid out.
   static bool isFirstButton(
-    int index,
-    int length,
-    TextDirection textDirection,
+    final int index,
+    final int length,
+    final TextDirection textDirection,
   ) {
     return (index == 0 && textDirection == TextDirection.ltr) ||
         (index == length - 1 && textDirection == TextDirection.rtl);
   }
 
   /// Determines if this is the last child that is being laid out.
-  static bool isLastButton(int index, int length, TextDirection textDirection) {
+  static bool isLastButton(
+    final int index,
+    final int length,
+    final TextDirection textDirection,
+  ) {
     return (index == length - 1 && textDirection == TextDirection.ltr) ||
         (index == 0 && textDirection == TextDirection.rtl);
   }
 
   /// Copy text to clipboard.
-  static Future<void> copyToClipboard(String text) async {
+  static Future<void> copyToClipboard(final String text) async {
     if (text.isNotEmpty) {
       Clipboard.setData(ClipboardData(text: text));
     }
@@ -64,7 +73,7 @@ class ArnaHelpers {
   }
 
   /// Specifies the style of system bottom navigation bar.
-  static void setNavigationBarStyle(BuildContext context) {
+  static void setNavigationBarStyle(final BuildContext context) {
     Brightness? systemNavigationBarIconBrightness;
     switch (ArnaTheme.of(context).brightness) {
       case Brightness.dark:
@@ -91,13 +100,13 @@ class ArnaHelpers {
 
   /// Specifies the set of orientations the application interface can be displayed in.
   static Future<void> setOrientation(
-    List<DeviceOrientation> orientations,
+    final List<DeviceOrientation> orientations,
   ) async {
     await SystemChrome.setPreferredOrientations(orientations);
   }
 
   /// Dismiss the keyboard
-  static void dismissKeyboard(BuildContext context) {
+  static void dismissKeyboard(final BuildContext context) {
     final FocusScopeNode focus = FocusScope.of(context);
     if (focus.hasFocus) {
       focus.unfocus();
@@ -107,26 +116,26 @@ class ArnaHelpers {
   }
 
   /// Whether the text has content or not.
-  bool hasContent(String? text) {
+  bool hasContent(final String? text) {
     return text != null && text.isNotEmpty;
   }
 
   /// Whether the text is email or not.
-  static bool isEmail(String text) {
+  static bool isEmail(final String text) {
     return RegExp(
       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
     ).hasMatch(text);
   }
 
   /// Whether the text is url or not.
-  static bool isUrl(String text) {
+  static bool isUrl(final String text) {
     return RegExp(
       r"^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?))\://)?(www.|[a-zA-Z0-9].)[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,6}(\:[0-9]{1,5})*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$",
     ).hasMatch(text);
   }
 
   /// Convert dynamic to double.
-  static double? dynamicToDouble(dynamic value) {
+  static double? dynamicToDouble(final dynamic value) {
     if (value == null) {
       return null;
     }
@@ -145,7 +154,7 @@ class ArnaHelpers {
   }
 
   /// Convert dynamic to string.
-  static String? dynamicToString(dynamic value) {
+  static String? dynamicToString(final dynamic value) {
     if (value == null) {
       return null;
     }
@@ -153,7 +162,7 @@ class ArnaHelpers {
   }
 
   /// Convert dynamic to bool.
-  static bool? dynamicToBool(dynamic value) {
+  static bool? dynamicToBool(final dynamic value) {
     if (value == null) {
       return null;
     }
@@ -183,10 +192,12 @@ class ArnaHelpers {
   }
 
   /// Convert dynamic to int.
-  static int? dynamicToInt(dynamic value) => dynamicToDouble(value)?.toInt();
+  static int? dynamicToInt(final dynamic value) {
+    return dynamicToDouble(value)?.toInt();
+  }
 
   /// Convert dynamic to DateTime.
-  static DateTime? dynamicToDateTime(dynamic value) {
+  static DateTime? dynamicToDateTime(final dynamic value) {
     try {
       if (value is String) {
         return DateTime.parse(value);
@@ -199,7 +210,7 @@ class ArnaHelpers {
   }
 
   /// Convert dynamic to Map.
-  static Map<K, V>? dynamicToMap<K, V>(dynamic value) {
+  static Map<K, V>? dynamicToMap<K, V>(final dynamic value) {
     if (value == null) {
       return null;
     }
@@ -213,14 +224,14 @@ class ArnaHelpers {
   }
 
   /// Convert dynamic to Map<String, dynamic>.
-  static Map<String, dynamic>? dynamicToMapStringDynamic(dynamic value) {
+  static Map<String, dynamic>? dynamicToMapStringDynamic(final dynamic value) {
     return dynamicToMap<String, dynamic>(value);
   }
 
   /// Convert dynamic map to model.
   static T? dynamicMapToModel<T>(
-    dynamic value,
-    T Function(Map<String, dynamic> e) f,
+    final dynamic value,
+    final T Function(Map<String, dynamic> e) f,
   ) {
     final Map<String, dynamic>? map = dynamicToMapStringDynamic(value);
     if (map != null) {
@@ -230,13 +241,13 @@ class ArnaHelpers {
   }
 
   /// Convert degrees to dadians.
-  static double degreesToRadians(double degrees) {
+  static double degreesToRadians(final double degrees) {
     const double degrees2radians = math.pi / 180.0;
     return degrees * degrees2radians;
   }
 
   /// Get color from hex.
-  static Color colorFromHex(String hex) {
+  static Color colorFromHex(final String hex) {
     final StringBuffer buffer = StringBuffer();
     if (hex.length == 6 || hex.length == 7) {
       buffer.write('ff');

@@ -29,11 +29,12 @@ class ArnaBackButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaButton.icon(
       icon: Icons.arrow_back_outlined,
-      onPressed: () =>
-          onPressed != null ? onPressed!() : Navigator.maybePop(context),
+      onPressed: () {
+        onPressed != null ? onPressed!() : Navigator.maybePop(context);
+      },
       buttonType: ButtonType.borderless,
       tooltipMessage: MaterialLocalizations.of(context).backButtonTooltip,
       semanticLabel: MaterialLocalizations.of(context).backButtonTooltip,

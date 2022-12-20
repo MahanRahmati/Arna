@@ -7,7 +7,7 @@ import 'package:flutter/rendering.dart' show TextSelectionPoint;
 class ArnaTextSelectionControls extends TextSelectionControls {
   /// Returns the size of the handle.
   @override
-  Size getHandleSize(double textLineHeight) => const Size(
+  Size getHandleSize(final double textLineHeight) => const Size(
         Styles.handleSize,
         Styles.handleSize,
       );
@@ -15,14 +15,14 @@ class ArnaTextSelectionControls extends TextSelectionControls {
   /// Builder for Arna-style copy/paste text selection toolbar.
   @override
   Widget buildToolbar(
-    BuildContext context,
-    Rect globalEditableRegion,
-    double textLineHeight,
-    Offset selectionMidpoint,
-    List<TextSelectionPoint> endpoints,
-    TextSelectionDelegate delegate,
-    ClipboardStatusNotifier? clipboardStatus,
-    Offset? lastSecondaryTapDownPosition,
+    final BuildContext context,
+    final Rect globalEditableRegion,
+    final double textLineHeight,
+    final Offset selectionMidpoint,
+    final List<TextSelectionPoint> endpoints,
+    final TextSelectionDelegate delegate,
+    final ClipboardStatusNotifier? clipboardStatus,
+    final Offset? lastSecondaryTapDownPosition,
   ) {
     return _ArnaTextSelectionControlsToolbar(
       globalEditableRegion: globalEditableRegion,
@@ -42,10 +42,10 @@ class ArnaTextSelectionControls extends TextSelectionControls {
   /// Builder for Arna-style text selection handles.
   @override
   Widget buildHandle(
-    BuildContext context,
-    TextSelectionHandleType type,
-    double textHeight, [
-    VoidCallback? onTap,
+    final BuildContext context,
+    final TextSelectionHandleType type,
+    final double textHeight, [
+    final VoidCallback? onTap,
   ]) {
     final Color handleColor = ArnaColors.iconColor.resolveFrom(context);
     final Widget handle = SizedBox(
@@ -76,7 +76,10 @@ class ArnaTextSelectionControls extends TextSelectionControls {
   ///
   /// See [TextSelectionControls.getHandleAnchor].
   @override
-  Offset getHandleAnchor(TextSelectionHandleType type, double textLineHeight) {
+  Offset getHandleAnchor(
+    final TextSelectionHandleType type,
+    final double textLineHeight,
+  ) {
     switch (type) {
       case TextSelectionHandleType.left:
         return const Offset(Styles.handleSize, 0);
@@ -88,7 +91,7 @@ class ArnaTextSelectionControls extends TextSelectionControls {
   }
 
   @override
-  bool canSelectAll(TextSelectionDelegate delegate) {
+  bool canSelectAll(final TextSelectionDelegate delegate) {
     // Allow SelectAll when selection is not collapsed, unless everything has already been selected.
     final TextEditingValue value = delegate.textEditingValue;
     return delegate.selectAllEnabled &&
@@ -148,7 +151,7 @@ class _ArnaTextSelectionControlsToolbarState
   }
 
   @override
-  void didUpdateWidget(_ArnaTextSelectionControlsToolbar oldWidget) {
+  void didUpdateWidget(final _ArnaTextSelectionControlsToolbar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.clipboardStatus != oldWidget.clipboardStatus) {
       widget.clipboardStatus?.addListener(_onChangedClipboardStatus);
@@ -163,7 +166,7 @@ class _ArnaTextSelectionControlsToolbarState
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     // If there are no buttons to be shown, don't render anything.
     if (widget.handleCut == null &&
         widget.handleCopy == null &&
@@ -206,7 +209,11 @@ class _ArnaTextSelectionControlsToolbarState
 
     final List<Widget> items = <Widget>[];
 
-    void addToolbarButton(IconData icon, String text, VoidCallback onPressed) {
+    void addToolbarButton(
+      final IconData icon,
+      final String text,
+      final VoidCallback onPressed,
+    ) {
       items.add(
         ArnaTextSelectionToolbarButton(
           icon: icon,
@@ -286,7 +293,7 @@ class _ArnaTextSelectionToolbar extends StatelessWidget {
   final List<Widget> children;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     final MediaQueryData mediaQuery = MediaQuery.of(context);
 
@@ -336,7 +343,7 @@ class ArnaTextSelectionToolbarButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return ArnaButton(
       icon: icon,
       onPressed: onPressed,
@@ -354,7 +361,7 @@ class _ArnaTextSelectionHandlePainter extends CustomPainter {
   final Color color;
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(final Canvas canvas, final Size size) {
     final Paint paint = Paint()..color = color;
     final double radius = size.width / 2.0;
     final Rect circle = Rect.fromCircle(
@@ -369,6 +376,6 @@ class _ArnaTextSelectionHandlePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_ArnaTextSelectionHandlePainter oldPainter) =>
+  bool shouldRepaint(final _ArnaTextSelectionHandlePainter oldPainter) =>
       color != oldPainter.color;
 }

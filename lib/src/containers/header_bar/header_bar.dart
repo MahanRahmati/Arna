@@ -147,7 +147,7 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
   }
 
   @override
-  void didUpdateWidget(ArnaHeaderBar oldWidget) {
+  void didUpdateWidget(final ArnaHeaderBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.actions != null &&
         widget.actions!.length != oldWidget.actions!.length) {
@@ -155,7 +155,7 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
     }
   }
 
-  void _handleScrollNotification(ScrollNotification notification) {
+  void _handleScrollNotification(final ScrollNotification notification) {
     if (notification is ScrollUpdateNotification &&
         widget.notificationPredicate(notification)) {
       final bool oldScrolledUnder = _scrolledUnder;
@@ -181,8 +181,8 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
   }
 
   SystemUiOverlayStyle _systemOverlayStyleForBrightness(
-    Brightness brightness, [
-    Color? backgroundColor,
+    final Brightness brightness, [
+    final Color? backgroundColor,
   ]) {
     final SystemUiOverlayStyle style = brightness == Brightness.dark
         ? SystemUiOverlayStyle.light
@@ -197,7 +197,7 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     final ArnaScaffoldState? scaffold = ArnaScaffold.maybeOf(context);
     final ModalRoute<Object?>? route = ModalRoute.of(context);
@@ -266,14 +266,14 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
       overflowBreakpoint: Styles.menuMaxWidth,
       overflowWidget: ArnaPopupMenuButton(
         buttonType: ButtonType.borderless,
-        itemBuilder: (BuildContext context) => overflowedActions
-            .map((ArnaHeaderBarItem action) => action.overflowed(context))
+        itemBuilder: (final BuildContext context) => overflowedActions
+            .map((final ArnaHeaderBarItem action) => action.overflowed(context))
             .toList(),
       ),
       children: inHeaderBarActions
-          .map((ArnaHeaderBarItem e) => e.inHeaderBar(context))
+          .map((final ArnaHeaderBarItem e) => e.inHeaderBar(context))
           .toList(),
-      overflowChangedCallback: (List<int> hiddenItems) {
+      overflowChangedCallback: (final List<int> hiddenItems) {
         setState(() => overflowedActionsCount = hiddenItems.length);
       },
     );

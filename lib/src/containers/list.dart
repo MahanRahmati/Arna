@@ -106,7 +106,7 @@ class ArnaList extends StatelessWidget {
   final bool showBackground;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final List<Widget> items = <Widget>[];
     if (showDividers && children.isNotEmpty) {
       for (int i = 0; i < children.length; i++) {

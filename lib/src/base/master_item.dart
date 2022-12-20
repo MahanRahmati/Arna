@@ -70,18 +70,18 @@ class ArnaMasterItem extends StatelessWidget {
   final bool enableFeedback;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color buttonColor = ArnaColors.buttonColor.resolveFrom(context);
     final Color accent = accentColor ?? ArnaTheme.of(context).accentColor;
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
         builder: (
-          BuildContext context,
-          bool enabled,
-          bool hover,
-          bool focused,
-          bool pressed,
+          final BuildContext context,
+          final bool enabled,
+          final bool hover,
+          final bool focused,
+          final bool pressed,
           bool selected,
         ) {
           selected = itemSelected;

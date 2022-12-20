@@ -5,7 +5,7 @@ void main() {
   test('ArnaStateProperty.resolveWith()', () {
     final ArnaStateProperty<ArnaState> value =
         ArnaStateProperty.resolveWith<ArnaState>(
-      (Set<ArnaState> states) => states.first,
+      (final Set<ArnaState> states) => states.first,
     );
     expect(value.resolve(<ArnaState>{ArnaState.hovered}), ArnaState.hovered);
     expect(value.resolve(<ArnaState>{ArnaState.focused}), ArnaState.focused);

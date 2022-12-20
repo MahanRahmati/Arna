@@ -13,13 +13,13 @@ class ArnaTextTheme with Diagnosticable {
   /// If you do decide to create your own text theme, consider using one of those predefined themes as a starting point
   /// for [copyWith] or [apply].
   const ArnaTextTheme({
-    TextStyle? displayTextStyle,
-    TextStyle? headlineTextStyle,
-    TextStyle? titleTextStyle,
-    TextStyle? bodyTextStyle,
-    TextStyle? subtitleTextStyle,
-    TextStyle? buttonTextStyle,
-    TextStyle? captionTextStyle,
+    final TextStyle? displayTextStyle,
+    final TextStyle? headlineTextStyle,
+    final TextStyle? titleTextStyle,
+    final TextStyle? bodyTextStyle,
+    final TextStyle? subtitleTextStyle,
+    final TextStyle? buttonTextStyle,
+    final TextStyle? captionTextStyle,
   }) : this._raw(
           displayTextStyle,
           headlineTextStyle,
@@ -92,13 +92,13 @@ class ArnaTextTheme with Diagnosticable {
   ///  * [merge] is used instead of [copyWith] when you want to merge all of the fields of a TextTheme instead of
   ///    individual fields.
   ArnaTextTheme copyWith({
-    TextStyle? displayTextStyle,
-    TextStyle? headlineTextStyle,
-    TextStyle? titleTextStyle,
-    TextStyle? bodyTextStyle,
-    TextStyle? subtitleTextStyle,
-    TextStyle? buttonTextStyle,
-    TextStyle? captionTextStyle,
+    final TextStyle? displayTextStyle,
+    final TextStyle? headlineTextStyle,
+    final TextStyle? titleTextStyle,
+    final TextStyle? bodyTextStyle,
+    final TextStyle? subtitleTextStyle,
+    final TextStyle? buttonTextStyle,
+    final TextStyle? captionTextStyle,
   }) {
     return ArnaTextTheme(
       displayTextStyle: displayTextStyle ?? _displayTextStyle,
@@ -130,7 +130,7 @@ class ArnaTextTheme with Diagnosticable {
   ///
   ///  * [copyWith] is used instead of [merge] when you wish to override individual fields in the [ArnaTextTheme]
   ///    instead of merging all of the fields of two [ArnaTextTheme]s.
-  ArnaTextTheme merge(ArnaTextTheme? other) {
+  ArnaTextTheme merge(final ArnaTextTheme? other) {
     if (other == null) {
       return this;
     }
@@ -157,13 +157,13 @@ class ArnaTextTheme with Diagnosticable {
   /// Consider using [ArnaTypography.light] or [ArnaTypography.dark], which implement the typography styles in the
   /// material design specification, as a starting point.
   ArnaTextTheme apply({
-    String? fontFamily,
-    double fontSizeFactor = 1.0,
-    double fontSizeDelta = 0.0,
-    Color? bodyColor,
-    TextDecoration? decoration,
-    Color? decorationColor,
-    TextDecorationStyle? decorationStyle,
+    final String? fontFamily,
+    final double fontSizeFactor = 1.0,
+    final double fontSizeDelta = 0.0,
+    final Color? bodyColor,
+    final TextDecoration? decoration,
+    final Color? decorationColor,
+    final TextDecorationStyle? decorationStyle,
   }) {
     return ArnaTextTheme(
       displayTextStyle: _displayTextStyle?.apply(
@@ -235,7 +235,11 @@ class ArnaTextTheme with Diagnosticable {
   /// Linearly interpolate between two text themes.
   ///
   /// {@macro dart.ui.shadow.lerp}
-  static ArnaTextTheme lerp(ArnaTextTheme? a, ArnaTextTheme? b, double t) {
+  static ArnaTextTheme lerp(
+    final ArnaTextTheme? a,
+    final ArnaTextTheme? b,
+    final double t,
+  ) {
     return ArnaTextTheme(
       displayTextStyle: TextStyle.lerp(
         a?._displayTextStyle,
@@ -276,7 +280,7 @@ class ArnaTextTheme with Diagnosticable {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(final Object other) {
     if (identical(this, other)) {
       return true;
     }
@@ -307,7 +311,7 @@ class ArnaTextTheme with Diagnosticable {
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     const ArnaTextTheme defaultTheme = ArnaTypography.light;
     properties.add(

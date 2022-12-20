@@ -5,19 +5,19 @@ import 'package:flutter/rendering.dart' show TextSelectionPoint;
 class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
   /// Desktop has no text selection handles.
   @override
-  Size getHandleSize(double textLineHeight) => Size.zero;
+  Size getHandleSize(final double textLineHeight) => Size.zero;
 
   /// Builder for the Arna-style copy/paste text selection toolbar.
   @override
   Widget buildToolbar(
-    BuildContext context,
-    Rect globalEditableRegion,
-    double textLineHeight,
-    Offset selectionMidpoint,
-    List<TextSelectionPoint> endpoints,
-    TextSelectionDelegate delegate,
-    ClipboardStatusNotifier? clipboardStatus,
-    Offset? lastSecondaryTapDownPosition,
+    final BuildContext context,
+    final Rect globalEditableRegion,
+    final double textLineHeight,
+    final Offset selectionMidpoint,
+    final List<TextSelectionPoint> endpoints,
+    final TextSelectionDelegate delegate,
+    final ClipboardStatusNotifier? clipboardStatus,
+    final Offset? lastSecondaryTapDownPosition,
   ) {
     return _ArnaDesktopTextSelectionControlsToolbar(
       clipboardStatus: clipboardStatus,
@@ -37,21 +37,24 @@ class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
   /// Builds the text selection handles, but desktop has none.
   @override
   Widget buildHandle(
-    BuildContext context,
-    TextSelectionHandleType type,
-    double textLineHeight, [
-    VoidCallback? onTap,
+    final BuildContext context,
+    final TextSelectionHandleType type,
+    final double textLineHeight, [
+    final VoidCallback? onTap,
   ]) {
     return const SizedBox.shrink();
   }
 
   /// Gets the position for the text selection handles, but desktop has none.
   @override
-  Offset getHandleAnchor(TextSelectionHandleType type, double textLineHeight) =>
+  Offset getHandleAnchor(
+    final TextSelectionHandleType type,
+    final double textLineHeight,
+  ) =>
       Offset.zero;
 
   @override
-  bool canSelectAll(TextSelectionDelegate delegate) {
+  bool canSelectAll(final TextSelectionDelegate delegate) {
     // Allow SelectAll when selection is not collapsed, unless everything has already been selected.
     final TextEditingValue value = delegate.textEditingValue;
     return delegate.selectAllEnabled &&
@@ -61,7 +64,7 @@ class _ArnaDesktopTextSelectionControls extends TextSelectionControls {
   }
 
   @override
-  void handleSelectAll(TextSelectionDelegate delegate) {
+  void handleSelectAll(final TextSelectionDelegate delegate) {
     super.handleSelectAll(delegate);
     delegate.hideToolbar();
   }
@@ -116,7 +119,9 @@ class _ArnaDesktopTextSelectionControlsToolbarState
   }
 
   @override
-  void didUpdateWidget(_ArnaDesktopTextSelectionControlsToolbar oldWidget) {
+  void didUpdateWidget(
+    final _ArnaDesktopTextSelectionControlsToolbar oldWidget,
+  ) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.clipboardStatus != widget.clipboardStatus) {
       oldWidget.clipboardStatus?.removeListener(_onChangedClipboardStatus);
@@ -131,7 +136,7 @@ class _ArnaDesktopTextSelectionControlsToolbarState
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     // Don't render the menu until the state of the clipboard is known.
     if (widget.handlePaste != null &&
         widget.clipboardStatus?.value == ClipboardStatus.unknown) {
@@ -153,7 +158,11 @@ class _ArnaDesktopTextSelectionControlsToolbarState
         MaterialLocalizations.of(context);
     final List<Widget> items = <Widget>[];
 
-    void addToolbarButton(IconData icon, String text, VoidCallback onPressed) {
+    void addToolbarButton(
+      final IconData icon,
+      final String text,
+      final VoidCallback onPressed,
+    ) {
       items.add(
         ArnaTextSelectionToolbarButton(
           icon: icon,
@@ -231,7 +240,7 @@ class _ArnaDesktopTextSelectionToolbar extends StatelessWidget {
   final List<Widget> children;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
     final MediaQueryData mediaQuery = MediaQuery.of(context);
 

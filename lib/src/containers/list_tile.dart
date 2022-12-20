@@ -134,20 +134,20 @@ class _ArnaListTileState extends State<ArnaListTile> {
     }
   }
 
-  void _handleEnter(dynamic event) {
+  void _handleEnter(final dynamic event) {
     if (!_hover && widget.showBackground && mounted) {
       setState(() => _hover = true);
     }
   }
 
-  void _handleExit(dynamic event) {
+  void _handleExit(final dynamic event) {
     if (_hover && widget.showBackground && mounted) {
       setState(() => _hover = false);
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Color cardColor = ArnaColors.cardColor.resolveFrom(context);
 
     final Widget title = Text(
@@ -275,7 +275,7 @@ class _ArnaListTile extends RenderObjectWidget
   Iterable<_ArnaListTileSlot> get slots => _ArnaListTileSlot.values;
 
   @override
-  Widget? childForSlot(_ArnaListTileSlot slot) {
+  Widget? childForSlot(final _ArnaListTileSlot slot) {
     switch (slot) {
       case _ArnaListTileSlot.leading:
         return leading;
@@ -289,7 +289,7 @@ class _ArnaListTile extends RenderObjectWidget
   }
 
   @override
-  _RenderArnaListTile createRenderObject(BuildContext context) {
+  _RenderArnaListTile createRenderObject(final BuildContext context) {
     return _RenderArnaListTile(
       textDirection: textDirection,
       leadingToTitle: leadingToTitle,
@@ -298,8 +298,8 @@ class _ArnaListTile extends RenderObjectWidget
 
   @override
   void updateRenderObject(
-    BuildContext context,
-    _RenderArnaListTile renderObject,
+    final BuildContext context,
+    final _RenderArnaListTile renderObject,
   ) {
     renderObject
       ..textDirection = textDirection
@@ -312,8 +312,8 @@ class _RenderArnaListTile extends RenderBox
     with SlottedContainerRenderObjectMixin<_ArnaListTileSlot> {
   /// Renders an ArnaListTile.
   _RenderArnaListTile({
-    required TextDirection textDirection,
-    required double leadingToTitle,
+    required final TextDirection textDirection,
+    required final double leadingToTitle,
   })  : _textDirection = textDirection,
         _leadingToTitle = leadingToTitle;
 
@@ -335,7 +335,7 @@ class _RenderArnaListTile extends RenderBox
 
   TextDirection get textDirection => _textDirection;
   TextDirection _textDirection;
-  set textDirection(TextDirection value) {
+  set textDirection(final TextDirection value) {
     if (_textDirection == value) {
       return;
     }
@@ -346,7 +346,7 @@ class _RenderArnaListTile extends RenderBox
   double get leadingToTitle => _leadingToTitle;
   double _leadingToTitle;
 
-  set leadingToTitle(double value) {
+  set leadingToTitle(final double value) {
     if (_leadingToTitle == value) {
       return;
     }
@@ -365,16 +365,16 @@ class _RenderArnaListTile extends RenderBox
   @override
   bool get sizedByParent => false;
 
-  static double _minWidth(RenderBox? box, double height) {
+  static double _minWidth(final RenderBox? box, final double height) {
     return box == null ? 0.0 : box.getMinIntrinsicWidth(height);
   }
 
-  static double _maxWidth(RenderBox? box, double height) {
+  static double _maxWidth(final RenderBox? box, final double height) {
     return box == null ? 0.0 : box.getMaxIntrinsicWidth(height);
   }
 
   @override
-  double computeMinIntrinsicWidth(double height) {
+  double computeMinIntrinsicWidth(final double height) {
     final double leadingWidth = leading != null
         ? math.max(leading!.getMinIntrinsicWidth(height), _minLeadingWidth) +
             _leadingToTitle
@@ -385,7 +385,7 @@ class _RenderArnaListTile extends RenderBox
   }
 
   @override
-  double computeMaxIntrinsicWidth(double height) {
+  double computeMaxIntrinsicWidth(final double height) {
     final double leadingWidth = leading != null
         ? math.max(leading!.getMaxIntrinsicWidth(height), _minLeadingWidth) +
             _leadingToTitle
@@ -402,7 +402,7 @@ class _RenderArnaListTile extends RenderBox
   }
 
   @override
-  double computeMinIntrinsicHeight(double width) {
+  double computeMinIntrinsicHeight(final double width) {
     return math.max(
       _defaultTileHeight,
       title!.getMinIntrinsicHeight(width) +
@@ -411,21 +411,27 @@ class _RenderArnaListTile extends RenderBox
   }
 
   @override
-  double computeMaxIntrinsicHeight(double width) {
+  double computeMaxIntrinsicHeight(final double width) {
     return computeMinIntrinsicHeight(width);
   }
 
   @override
-  double computeDistanceToActualBaseline(TextBaseline baseline) {
+  double computeDistanceToActualBaseline(final TextBaseline baseline) {
     final BoxParentData parentData = title!.parentData! as BoxParentData;
     return parentData.offset.dy + title!.getDistanceToActualBaseline(baseline)!;
   }
 
-  static double? _boxBaseline(RenderBox box, TextBaseline baseline) {
+  static double? _boxBaseline(
+    final RenderBox box,
+    final TextBaseline baseline,
+  ) {
     return box.getDistanceToBaseline(baseline);
   }
 
-  static Size _layoutBox(RenderBox? box, BoxConstraints constraints) {
+  static Size _layoutBox(
+    final RenderBox? box,
+    final BoxConstraints constraints,
+  ) {
     if (box == null) {
       return Size.zero;
     }
@@ -433,13 +439,13 @@ class _RenderArnaListTile extends RenderBox
     return box.size;
   }
 
-  static void _positionBox(RenderBox box, Offset offset) {
+  static void _positionBox(final RenderBox box, final Offset offset) {
     final BoxParentData parentData = box.parentData! as BoxParentData;
     parentData.offset = offset;
   }
 
   @override
-  Size computeDryLayout(BoxConstraints constraints) {
+  Size computeDryLayout(final BoxConstraints constraints) {
     assert(
       debugCannotComputeDryLayout(
         reason:
@@ -597,8 +603,8 @@ class _RenderArnaListTile extends RenderBox
   }
 
   @override
-  void paint(PaintingContext context, Offset offset) {
-    void doPaint(RenderBox? child) {
+  void paint(final PaintingContext context, final Offset offset) {
+    void doPaint(final RenderBox? child) {
       if (child != null) {
         final BoxParentData parentData = child.parentData! as BoxParentData;
         context.paintChild(child, parentData.offset + offset);
@@ -612,16 +618,19 @@ class _RenderArnaListTile extends RenderBox
   }
 
   @override
-  bool hitTestSelf(Offset position) => true;
+  bool hitTestSelf(final Offset position) => true;
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
+  bool hitTestChildren(
+    final BoxHitTestResult result, {
+    required final Offset position,
+  }) {
     for (final RenderBox child in children) {
       final BoxParentData parentData = child.parentData! as BoxParentData;
       final bool isHit = result.addWithPaintOffset(
         offset: parentData.offset,
         position: position,
-        hitTest: (BoxHitTestResult result, Offset transformed) {
+        hitTest: (final BoxHitTestResult result, final Offset transformed) {
           assert(transformed == position - parentData.offset);
           return child.hitTest(result, position: transformed);
         },

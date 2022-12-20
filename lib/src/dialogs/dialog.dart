@@ -24,7 +24,7 @@ class ArnaDialog extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final double width = ArnaHelpers.isCompact(context)
         ? ArnaHelpers.deviceWidth(context) - Styles.largePadding
         : Styles.dialogSize;
@@ -108,22 +108,22 @@ class ArnaDialog extends StatelessWidget {
 ///  * [DisplayFeatureSubScreen], which documents the specifics of how [DisplayFeature]s can split the screen into
 ///    sub-screens.
 Future<T?> showArnaDialog<T>({
-  required BuildContext context,
-  required WidgetBuilder builder,
-  bool barrierDismissible = true,
-  String? barrierLabel,
-  Color? barrierColor,
-  bool useSafeArea = true,
-  bool useRootNavigator = true,
-  RouteSettings? routeSettings,
-  Offset? anchorPoint,
+  required final BuildContext context,
+  required final WidgetBuilder builder,
+  final bool barrierDismissible = true,
+  final String? barrierLabel,
+  final Color? barrierColor,
+  final bool useSafeArea = true,
+  final bool useRootNavigator = true,
+  final RouteSettings? routeSettings,
+  final Offset? anchorPoint,
 }) {
   return showGeneralDialog(
     context: context,
     pageBuilder: (
-      BuildContext buildContext,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
+      final BuildContext buildContext,
+      final Animation<double> animation,
+      final Animation<double> secondaryAnimation,
     ) {
       final Widget dialog = Builder(builder: builder);
       return useSafeArea ? SafeArea(child: dialog) : dialog;
@@ -134,10 +134,10 @@ Future<T?> showArnaDialog<T>({
     barrierColor: barrierColor ?? ArnaColors.barrierColor,
     transitionDuration: Styles.basicDuration,
     transitionBuilder: (
-      BuildContext context,
-      Animation<double> animation,
-      _,
-      Widget child,
+      final BuildContext context,
+      final Animation<double> animation,
+      final _,
+      final Widget child,
     ) {
       final Widget childWidget = ArnaFadeTransition.fadeIn(child, animation);
       return ArnaHelpers.isCompact(context)

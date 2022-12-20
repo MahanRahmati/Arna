@@ -12,21 +12,21 @@ import 'package:url_launcher/url_launcher.dart';
 /// The [context], [useRootNavigator], [routeSettings] and [anchorPoint] arguments are passed to [showArnaDialog], the
 /// documentation for which discusses how it is used.
 void showArnaAboutDialog({
-  required BuildContext context,
-  Widget? applicationIcon,
-  String? applicationName,
-  String? developerName,
-  String? applicationVersion,
-  Uri? applicationUri,
-  bool useRootNavigator = true,
-  RouteSettings? routeSettings,
-  Offset? anchorPoint,
+  required final BuildContext context,
+  final Widget? applicationIcon,
+  final String? applicationName,
+  final String? developerName,
+  final String? applicationVersion,
+  final Uri? applicationUri,
+  final bool useRootNavigator = true,
+  final RouteSettings? routeSettings,
+  final Offset? anchorPoint,
 }) {
   showArnaPopupDialog<void>(
     context: context,
     title: 'About',
     useRootNavigator: useRootNavigator,
-    builder: (BuildContext context) {
+    builder: (final BuildContext context) {
       return ArnaAboutDialog(
         applicationIcon: applicationIcon,
         applicationName: applicationName,
@@ -76,7 +76,7 @@ class ArnaAboutDialog extends StatelessWidget {
   final Uri? applicationUri;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

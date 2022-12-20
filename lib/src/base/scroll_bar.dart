@@ -31,7 +31,7 @@ class ArnaScrollbar extends RawScrollbar {
     required super.child,
     super.controller,
     bool super.thumbVisibility = false,
-    ScrollNotificationPredicate? notificationPredicate,
+    final ScrollNotificationPredicate? notificationPredicate,
     super.interactive,
     super.scrollbarOrientation,
     super.thumbColor,
@@ -88,7 +88,7 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   }
 
   @override
-  void handleHover(PointerHoverEvent event) {
+  void handleHover(final PointerHoverEvent event) {
     super.handleHover(event);
     // Check if the position of the pointer falls over the painted scrollbar
     if (isPointerOverScrollbar(event.position, event.kind, forHover: true)) {
@@ -103,7 +103,7 @@ class _ArnaScrollbarState extends RawScrollbarState<ArnaScrollbar> {
   }
 
   @override
-  void handleHoverExit(PointerExitEvent event) {
+  void handleHoverExit(final PointerExitEvent event) {
     super.handleHoverExit(event);
     setState(() => _hoverIsActive = false);
     _controller.reverse();

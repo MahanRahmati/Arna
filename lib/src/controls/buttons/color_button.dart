@@ -57,16 +57,16 @@ class ArnaColorButton<T> extends StatelessWidget {
   final String? semanticLabel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     return Padding(
       padding: Styles.small,
       child: ArnaBaseWidget(
         builder: (
-          BuildContext context,
-          bool enabled,
-          bool hover,
-          bool focused,
-          bool pressed,
+          final BuildContext context,
+          final bool enabled,
+          final bool hover,
+          final bool focused,
+          final bool pressed,
           bool selected,
         ) {
           selected = value == groupValue;

@@ -20,6 +20,7 @@
 - [BREAKING] Update ArnaBody
 - Update ArnaHeaderBar
 - Update ArnaScaffold
+- Add Test for ArnaApp
 
 ## 1.0.6
 

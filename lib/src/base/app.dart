@@ -588,21 +588,27 @@ class _ArnaAppState extends State<ArnaApp> {
   }
 
   Widget _arnaBuilder(final BuildContext context, final Widget? child) {
-    ArnaThemeData? theme;
+    ArnaThemeData theme;
+    final Brightness platformBrightness =
+        MediaQuery.platformBrightnessOf(context);
 
-    if (widget.theme != null) {
+    if (widget.theme == null) {
+      theme = platformBrightness == Brightness.dark
+          ? ArnaThemeData.dark()
+          : ArnaThemeData.light();
+    } else {
       if (widget.theme!.brightness == null) {
-        theme = MediaQuery.platformBrightnessOf(context) == Brightness.dark
+        theme = platformBrightness == Brightness.dark
             ? ArnaThemeData.dark().copyWith(
                 accentColor: widget.theme!.accentColor,
               )
             : ArnaThemeData.light().copyWith(
                 accentColor: widget.theme!.accentColor,
               );
+      } else {
+        theme = widget.theme!;
       }
     }
-
-    theme ??= widget.theme ?? ArnaThemeData.light();
 
     final Color effectiveSelectionColor = theme.accentColor.withOpacity(0.42);
     final Color effectiveCursorColor = theme.accentColor;
@@ -647,6 +653,7 @@ class _ArnaAppState extends State<ArnaApp> {
         routeInformationProvider: widget.routeInformationProvider,
         routeInformationParser: widget.routeInformationParser,
         routerDelegate: widget.routerDelegate,
+        routerConfig: widget.routerConfig,
         backButtonDispatcher: widget.backButtonDispatcher,
         builder: _arnaBuilder,
         title: widget.title,

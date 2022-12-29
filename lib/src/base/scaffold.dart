@@ -190,26 +190,32 @@ class ArnaScaffold extends StatefulWidget {
     }
     throw FlutterError.fromParts(<DiagnosticsNode>[
       ErrorSummary(
-        'ArnaScaffold.of() called with a context that does not contain an ArnaScaffold.',
+        'ArnaScaffold.of() called with a context that does not contain an '
+        'ArnaScaffold.',
       ),
       ErrorDescription(
-        'No ArnaScaffold ancestor could be found starting from the context that was passed to ArnaScaffold.of(). '
-        'This usually happens when the context provided is from the same StatefulWidget as that '
-        'whose build function actually creates the ArnaScaffold widget being sought.',
+        'No ArnaScaffold ancestor could be found starting from the context '
+        'that was passed to ArnaScaffold.of(). '
+        'This usually happens when the context provided is from the same '
+        'StatefulWidget as that whose build function actually creates the '
+        'ArnaScaffold widget being sought.',
       ),
       ErrorHint(
-        'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
-        'context that is "under" the ArnaScaffold. For an example of this, please see the '
-        'documentation for ArnaScaffold.of().',
+        'There are several ways to avoid this problem. The simplest is to use '
+        'a Builder to get a context that is "under" the ArnaScaffold. For an '
+        'example of this, please see the documentation for ArnaScaffold.of(). ',
       ),
       ErrorHint(
-        'A more efficient solution is to split your build function into several widgets. This '
-        'introduces a new context from which you can obtain the ArnaScaffold. In this solution, '
-        'you would have an outer widget that creates the ArnaScaffold populated by instances of '
-        'your new inner widgets, and then in these inner widgets you would use ArnaScaffold.of().\n'
-        'A less elegant but more expedient solution is assign a GlobalKey to the ArnaScaffold, '
-        'then use the key.currentState property to obtain the ArnaScaffoldState rather than '
-        'using the ArnaScaffold.of() function.',
+        'A more efficient solution is to split your build function into '
+        'several widgets. This introduces a new context from which you can '
+        'obtain the ArnaScaffold. In this solution, you would have an outer '
+        'widget that creates the ArnaScaffold populated by instances of your '
+        'new inner widgets, and then in these inner widgets you would use '
+        'ArnaScaffold.of().\n'
+        'A less elegant but more expedient solution is assign a GlobalKey to '
+        'the ArnaScaffold, then use the key.currentState property to obtain '
+        'the ArnaScaffoldState rather than using the ArnaScaffold.of() '
+        'function.',
       ),
       context.describeElement('The context used was'),
     ]);

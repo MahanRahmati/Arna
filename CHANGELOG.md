@@ -19,6 +19,7 @@
 - Update ArnaApp
 - [BREAKING] Update ArnaBody
 - Update ArnaHeaderBar
+- Update ArnaScaffold
 
 ## 1.0.6
 

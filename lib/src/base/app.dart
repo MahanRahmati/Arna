@@ -587,29 +587,30 @@ class _ArnaAppState extends State<ArnaApp> {
     );
   }
 
-  Widget _arnaBuilder(final BuildContext context, final Widget? child) {
-    ArnaThemeData theme;
+  ArnaThemeData _themeBuilder(final BuildContext context) {
     final Brightness platformBrightness =
         MediaQuery.platformBrightnessOf(context);
 
     if (widget.theme == null) {
-      theme = platformBrightness == Brightness.dark
-          ? ArnaThemeData.dark()
-          : ArnaThemeData.light();
-    } else {
-      if (widget.theme!.brightness == null) {
-        theme = platformBrightness == Brightness.dark
-            ? ArnaThemeData.dark().copyWith(
-                accentColor: widget.theme!.accentColor,
-              )
-            : ArnaThemeData.light().copyWith(
-                accentColor: widget.theme!.accentColor,
-              );
-      } else {
-        theme = widget.theme!;
-      }
+      return platformBrightness == Brightness.dark
+          ? ArnaThemeData.dark().copyWith(accentColor: widget.color)
+          : ArnaThemeData.light().copyWith(accentColor: widget.color);
     }
 
+    if (widget.theme!.brightness == null) {
+      return platformBrightness == Brightness.dark
+          ? ArnaThemeData.dark().copyWith(
+              accentColor: widget.theme!.accentColor,
+            )
+          : ArnaThemeData.light().copyWith(
+              accentColor: widget.theme!.accentColor,
+            );
+    }
+    return widget.theme!;
+  }
+
+  Widget _arnaBuilder(final BuildContext context, final Widget? child) {
+    final ArnaThemeData theme = _themeBuilder(context);
     final Color effectiveSelectionColor = theme.accentColor.withOpacity(0.42);
     final Color effectiveCursorColor = theme.accentColor;
 

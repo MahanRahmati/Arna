@@ -94,7 +94,6 @@ class ArnaColorButton<T> extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: Styles.colorButtonBorderRadius,
                     border: Border.all(
-                      width: 0.0,
                       color: ArnaDynamicColor.resolve(
                         !enabled
                             ? ArnaDynamicColor.applyOverlay(

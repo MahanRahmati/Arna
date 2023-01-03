@@ -118,7 +118,6 @@ class ArnaRadio<T> extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: Styles.radioBorderRadius,
                   border: Border.all(
-                    width: 0.0,
                     color: focused
                         ? ArnaDynamicColor.outerColor(accent)
                         : !enabled

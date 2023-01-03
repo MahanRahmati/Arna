@@ -1086,7 +1086,6 @@ class _ArnaDropdownButtonState<T> extends State<ArnaDropdownButton<T>>
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
                 border: Border.all(
-                  width: 0.0,
                   color: focused
                       ? ArnaDynamicColor.outerColor(accent)
                       : ArnaColors.borderColor.resolveFrom(context),

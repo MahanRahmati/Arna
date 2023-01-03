@@ -218,7 +218,6 @@ class _ArnaPopupMenuItemState extends State<ArnaPopupMenuItem> {
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius,
           border: Border.all(
-            width: 0.0,
             color: _isEnabled && _focused
                 ? ArnaDynamicColor.resolve(
                     ArnaDynamicColor.matchingColor(

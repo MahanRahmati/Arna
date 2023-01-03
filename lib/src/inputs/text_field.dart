@@ -1426,7 +1426,6 @@ class _ArnaTextFieldState extends State<ArnaTextField>
               decoration: BoxDecoration(
                 borderRadius: Styles.borderRadius,
                 border: Border.all(
-                  width: 0.0,
                   color: _effectiveFocusNode.hasFocus
                       ? ArnaDynamicColor.matchingColor(
                           accent,

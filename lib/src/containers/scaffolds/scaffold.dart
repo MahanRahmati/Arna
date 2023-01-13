@@ -20,7 +20,9 @@ enum _ArnaScaffoldSlot {
 /// The [ArnaScaffold]'s Layout
 class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
   /// Creates an ArnaScaffoldLayout.
-  _ArnaScaffoldLayout();
+  _ArnaScaffoldLayout({required this.minInsets});
+
+  final EdgeInsets minInsets;
 
   @override
   void performLayout(final Size size) {
@@ -56,7 +58,13 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
       );
     }
 
-    final double contentBottom = math.max(0.0, bottom - bottomWidgetsHeight);
+    // Set the content bottom to account for the greater of the height of any
+    // bottom-anchored widgets or of the keyboard or other bottom-anchored
+    // system UI.
+    final double contentBottom = math.max(
+      0.0,
+      bottom - math.max(minInsets.bottom, bottomWidgetsHeight),
+    );
 
     if (hasChild(_ArnaScaffoldSlot.body)) {
       final double bodyMaxHeight = math.max(0.0, contentBottom - contentTop);
@@ -75,7 +83,9 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
   }
 
   @override
-  bool shouldRelayout(final _ArnaScaffoldLayout oldDelegate) => false;
+  bool shouldRelayout(final _ArnaScaffoldLayout oldDelegate) {
+    return oldDelegate.minInsets != minInsets;
+  }
 }
 
 /// Implements the basic layout structure.
@@ -384,6 +394,8 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
 
   @override
   Widget build(final BuildContext context) {
+    assert(debugCheckHasMediaQuery(context));
+    assert(debugCheckHasDirectionality(context));
     final TextDirection textDirection = Directionality.of(context);
 
     final List<LayoutId> children = <LayoutId>[];
@@ -449,6 +461,13 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
       );
     }
 
+    // The minimum insets for contents of the Scaffold to keep visible.
+    final EdgeInsets minInsets = MediaQuery.of(context).padding.copyWith(
+          bottom: _resizeToAvoidBottomInset
+              ? MediaQuery.of(context).viewInsets.bottom
+              : 0.0,
+        );
+
     return _ArnaScaffoldScope(
       hasDrawer: hasDrawer,
       child: ScrollNotificationObserver(
@@ -456,9 +475,16 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
           decoration: BoxDecoration(
             color: ArnaColors.backgroundColor.resolveFrom(context),
           ),
-          child: CustomMultiChildLayout(
-            delegate: _ArnaScaffoldLayout(),
-            children: children,
+          child: Actions(
+            actions: <Type, Action<Intent>>{
+              DismissIntent: CallbackAction<Intent>(
+                onInvoke: (final _) => closeDrawer(),
+              )
+            },
+            child: CustomMultiChildLayout(
+              delegate: _ArnaScaffoldLayout(minInsets: minInsets),
+              children: children,
+            ),
           ),
         ),
       ),

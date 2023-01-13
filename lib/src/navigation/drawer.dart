@@ -2,7 +2,8 @@ import 'dart:math' show min;
 
 import 'package:arna/arna.dart';
 
-/// A panel that slides in horizontally from the edge of a screen to show navigation links in an application.
+/// A panel that slides in horizontally from the edge of a screen to show
+/// navigation links in an application.
 ///
 /// The [ArnaSideScaffold] handles when to show the drawer.
 ///
@@ -22,14 +23,16 @@ class ArnaDrawer extends StatelessWidget {
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget? child;
 
-  /// The semantic label of the dialog used by accessibility frameworks to announce screen transitions when the drawer
-  /// is opened and closed.
+  /// The semantic label of the dialog used by accessibility frameworks to
+  /// announce screen transitions when the drawer is opened and closed.
   ///
-  /// If this label is not provided, it will default to [MaterialLocalizations.drawerLabel].
+  /// If this label is not provided, it will default to
+  /// [MaterialLocalizations.drawerLabel].
   ///
   /// See also:
   ///
-  ///  * [SemanticsConfiguration.namesRoute], for a description of how this value is used.
+  ///  * [SemanticsConfiguration.namesRoute], for a description of how this
+  ///    value is used.
   final String? semanticLabel;
 
   @override
@@ -67,7 +70,8 @@ class ArnaDrawer extends StatelessWidget {
   }
 }
 
-/// Signature for the callback that's called when an [ArnaDrawerController] is opened or closed.
+/// Signature for the callback that's called when an [ArnaDrawerController] is
+/// opened or closed.
 typedef ArnaDrawerCallback = void Function(
   /// Whether or not the drawer is opened or closed.
   bool isOpened,
@@ -100,9 +104,10 @@ class ArnaDrawerController extends StatefulWidget {
 
   /// Whether or not the drawer is opened or closed.
   ///
-  /// This parameter is primarily used by the state restoration framework to restore the drawer's animation controller
-  /// to the open or closed state depending on what was last saved to the target platform before the application was
-  /// killed.
+  /// This parameter is primarily used by the state restoration framework to
+  /// restore the drawer's animation controller to the open or closed state
+  /// depending on what was last saved to the target platform before the
+  /// application was killed.
   final bool isDrawerOpen;
 
   @override
@@ -114,6 +119,8 @@ class ArnaDrawerController extends StatefulWidget {
 /// Used by [ArnaSideScaffold] to [open] and [close] the drawer.
 class ArnaDrawerControllerState extends State<ArnaDrawerController>
     with SingleTickerProviderStateMixin {
+  final GlobalKey _drawerKey = GlobalKey();
+  final FocusScopeNode _focusScopeNode = FocusScopeNode();
   late AnimationController _controller;
   late ColorTween _scrimColorTween;
 
@@ -159,7 +166,8 @@ class ArnaDrawerControllerState extends State<ArnaDrawerController>
     super.dispose();
   }
 
-  // The animation controller's state is our build state, and it changed already.
+  // The animation controller's state is our build state, and it changed
+  // already.
   void _animationChanged() => setState(() {});
 
   ColorTween _buildScrimColorTween() => ColorTween(
@@ -183,32 +191,45 @@ class ArnaDrawerControllerState extends State<ArnaDrawerController>
   Widget build(final BuildContext context) {
     return _controller.status == AnimationStatus.dismissed
         ? const SizedBox.shrink()
-        : RepaintBoundary(
-            child: Stack(
-              children: <Widget>[
-                BlockSemantics(
-                  child: GestureDetector(
-                    onTap: close,
-                    child: Semantics(
-                      label: MaterialLocalizations.of(context)
-                          .modalBarrierDismissLabel,
-                      // ignore: use_colored_box
-                      child: Container(
-                        color: _scrimColorTween.evaluate(_controller),
+        : Actions(
+            actions: <Type, Action<Intent>>{
+              DismissIntent: CallbackAction<Intent>(
+                onInvoke: (final _) => close(),
+              )
+            },
+            child: RepaintBoundary(
+              child: Stack(
+                children: <Widget>[
+                  BlockSemantics(
+                    child: GestureDetector(
+                      onTap: close,
+                      child: Semantics(
+                        label: MaterialLocalizations.of(context)
+                            .modalBarrierDismissLabel,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: _scrimColorTween.evaluate(_controller),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                RepaintBoundary(
-                  child: Align(
-                    alignment: AlignmentDirectional.centerStart,
-                    child: ArnaSlideTransition.fromLeft(
-                      widget.drawer,
-                      _controller,
+                  RepaintBoundary(
+                    child: Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: FocusScope(
+                        autofocus: true,
+                        key: _drawerKey,
+                        node: _focusScopeNode,
+                        child: ArnaSlideTransition.fromLeft(
+                          widget.drawer,
+                          _controller,
+                        ),
+                      ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           );
   }

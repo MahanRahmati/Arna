@@ -204,8 +204,7 @@ class _ArnaHeaderBarState extends State<ArnaHeaderBar> {
 
     final bool hasDrawer = scaffold?.hasDrawer ?? false;
     final bool canPop = route?.canPop ?? false;
-    final bool useCloseButton =
-        route is ArnaPageRoute && route.fullscreenDialog;
+    final bool useCloseButton = route is PageRoute && route.fullscreenDialog;
 
     final double headerBarHeight =
         widget.headerBarHeight ?? Styles.headerBarHeight + Styles.padding;

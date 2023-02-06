@@ -20,7 +20,10 @@ class _ArnaTextSpanEditingController extends TextEditingController {
     required final bool withComposing,
   }) {
     // This does not care about composing.
-    return TextSpan(style: style, children: <TextSpan>[_textSpan]);
+    return TextSpan(
+      style: style,
+      children: <TextSpan>[_textSpan],
+    );
   }
 
   @override
@@ -57,67 +60,56 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
   @override
   void onSingleLongTapMoveUpdate(final LongPressMoveUpdateDetails details) {
     if (delegate.selectionEnabled) {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.iOS:
-        case TargetPlatform.macOS:
-          renderEditable.selectPositionAt(
-            from: details.globalPosition,
-            cause: SelectionChangedCause.longPress,
-          );
-          break;
-        case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
-        case TargetPlatform.linux:
-        case TargetPlatform.windows:
-          renderEditable.selectWordsInRange(
-            from: details.globalPosition - details.offsetFromOrigin,
-            to: details.globalPosition,
-            cause: SelectionChangedCause.longPress,
-          );
-          break;
-      }
+      renderEditable.selectWordsInRange(
+        from: details.globalPosition - details.offsetFromOrigin,
+        to: details.globalPosition,
+        cause: SelectionChangedCause.longPress,
+      );
     }
   }
 
   @override
   void onSingleTapUp(final TapUpDetails details) {
     editableText.hideToolbar();
-    super.onSingleTapUp(details);
+    if (delegate.selectionEnabled) {
+      switch (defaultTargetPlatform) {
+        case TargetPlatform.iOS:
+        case TargetPlatform.macOS:
+          renderEditable.selectWordEdge(cause: SelectionChangedCause.tap);
+          break;
+        case TargetPlatform.android:
+        case TargetPlatform.fuchsia:
+        case TargetPlatform.linux:
+        case TargetPlatform.windows:
+          renderEditable.selectPosition(cause: SelectionChangedCause.tap);
+          break;
+      }
+    }
     _state.widget.onTap?.call();
   }
 
   @override
   void onSingleLongTapStart(final LongPressStartDetails details) {
     if (delegate.selectionEnabled) {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.iOS:
-        case TargetPlatform.macOS:
-          renderEditable.selectPositionAt(
-            from: details.globalPosition,
-            cause: SelectionChangedCause.longPress,
-          );
-          break;
-        case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
-        case TargetPlatform.linux:
-        case TargetPlatform.windows:
-          renderEditable.selectWord(cause: SelectionChangedCause.longPress);
-          ArnaFeedback.forLongPress(_state.context);
-      }
+      renderEditable.selectWord(cause: SelectionChangedCause.longPress);
+      ArnaFeedback.forLongPress(_state.context);
     }
   }
 }
 
 /// A run of selectable text with a single style.
 ///
-/// The [ArnaSelectableText] widget displays a string of text with a single style.
-/// The string might break across multiple lines or might all be displayed on the same line depending on the layout
-/// constraints.
+/// The [ArnaSelectableText] widget displays a string of text with a single
+/// style.
+/// The string might break across multiple lines or might all be displayed on
+/// the same line depending on the layout constraints.
 ///
-/// The [style] argument is optional. When omitted, the text will use the style from the closest enclosing
-/// [DefaultTextStyle]. If the given style's [TextStyle.inherit] property is true (the default), the given style will
-/// be merged with the closest enclosing [DefaultTextStyle]. This merging behavior is useful, for example, to make the
-/// text bold while using the default font family and size.
+/// The [style] argument is optional. When omitted, the text will use the style
+/// from the closest enclosing [DefaultTextStyle]. If the given style's
+/// [TextStyle.inherit] property is true (the default), the given style will
+/// be merged with the closest enclosing [DefaultTextStyle]. This merging
+/// behavior is useful, for example, to make the text bold while using the
+/// default font family and size.
 ///
 /// {@macro flutter.material.textfield.wantKeepAlive}
 ///
@@ -132,8 +124,10 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
 /// ```
 /// {@end-tool}
 ///
-/// Using the [SelectableText.rich] constructor, the [SelectableText] widget can display a paragraph with differently
-/// styled [TextSpan]s. The sample that follows displays "Hello beautiful world" with different styles for each word.
+/// Using the [SelectableText.rich] constructor, the [SelectableText] widget
+/// can display a paragraph with differently styled [TextSpan]s. The sample
+/// that follows displays "Hello beautiful world" with different styles for
+/// each word.
 ///
 /// {@tool snippet}
 ///
@@ -142,8 +136,14 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
 ///   TextSpan(
 ///     text: 'Hello', // default text style
 ///     children: <TextSpan>[
-///       TextSpan(text: ' beautiful ', style: TextStyle(fontStyle: FontStyle.italic)),
-///       TextSpan(text: 'world', style: TextStyle(fontWeight: FontWeight.bold)),
+///       TextSpan(
+///         text: ' beautiful ',
+///         style: TextStyle(fontStyle: FontStyle.italic),
+///       ),
+///       TextSpan(
+///         text: 'world',
+///         style: TextStyle(fontWeight: FontWeight.bold),
+///       ),
 ///     ],
 ///   ),
 /// )
@@ -152,7 +152,8 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
 ///
 /// ## Interactivity
 ///
-/// To make [ArnaSelectableText] react to touch events, use callback [onTap] to achieve the desired behavior.
+/// To make [ArnaSelectableText] react to touch events, use callback [onTap]
+/// to achieve the desired behavior.
 ///
 /// See also:
 ///
@@ -161,10 +162,13 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
 class ArnaSelectableText extends StatefulWidget {
   /// Creates a selectable text widget.
   ///
-  /// If the [style] argument is null, the text will use the style from the closest enclosing [DefaultTextStyle].
+  /// If the [style] argument is null, the text will use the style from the
+  /// closest enclosing [DefaultTextStyle].
   ///
-  /// The [showCursor], [autofocus], [dragStartBehavior], [selectionHeightStyle], [selectionWidthStyle] and [data]
-  /// parameters must not be null. If specified, the [maxLines] argument must be greater than zero.
+  /// The [showCursor], [autofocus], [dragStartBehavior],
+  /// [selectionHeightStyle], [selectionWidthStyle] and [data] parameters must
+  /// not be null. If specified, the [maxLines] argument must be greater than
+  /// zero.
   const ArnaSelectableText(
     String this.data, {
     super.key,
@@ -176,7 +180,6 @@ class ArnaSelectableText extends StatefulWidget {
     this.textScaleFactor,
     this.showCursor = false,
     this.autofocus = false,
-    final ToolbarOptions? toolbarOptions,
     this.minLines,
     this.maxLines,
     this.cursorWidth = Styles.cursorWidth,
@@ -194,23 +197,20 @@ class ArnaSelectableText extends StatefulWidget {
     this.textHeightBehavior,
     this.textWidthBasis,
     this.onSelectionChanged,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.magnifierConfiguration,
   })  : assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
           (maxLines == null) || (minLines == null) || (maxLines >= minLines),
           "minLines can't be greater than maxLines",
         ),
-        textSpan = null,
-        toolbarOptions = toolbarOptions ??
-            const ToolbarOptions(
-              selectAll: true,
-              copy: true,
-            );
+        textSpan = null;
 
   /// Creates a selectable text widget with a [TextSpan].
   ///
-  /// The [textSpan] parameter must not be null and only contain [TextSpan] in [textSpan].children. Other type of
-  /// [InlineSpan] is not allowed.
+  /// The [textSpan] parameter must not be null and only contain [TextSpan] in
+  /// [textSpan].children. Other type of [InlineSpan] is not allowed.
   ///
   /// The [autofocus] and [dragStartBehavior] arguments must not be null.
   const ArnaSelectableText.rich(
@@ -224,7 +224,6 @@ class ArnaSelectableText extends StatefulWidget {
     this.textScaleFactor,
     this.showCursor = false,
     this.autofocus = false,
-    final ToolbarOptions? toolbarOptions,
     this.minLines,
     this.maxLines,
     this.cursorWidth = Styles.cursorWidth,
@@ -242,18 +241,15 @@ class ArnaSelectableText extends StatefulWidget {
     this.textHeightBehavior,
     this.textWidthBasis,
     this.onSelectionChanged,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.magnifierConfiguration,
   })  : assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
           (maxLines == null) || (minLines == null) || (maxLines >= minLines),
           "minLines can't be greater than maxLines",
         ),
-        data = null,
-        toolbarOptions = toolbarOptions ??
-            const ToolbarOptions(
-              selectAll: true,
-              copy: true,
-            );
+        data = null;
 
   /// The text to display.
   ///
@@ -269,11 +265,11 @@ class ArnaSelectableText extends StatefulWidget {
   ///
   /// Text is only selectable when widget is focused.
   ///
-  /// The [focusNode] is a long-lived object that's typically managed by a [StatefulWidget] parent. See [FocusNode] for
-  /// more information.
+  /// The [focusNode] is a long-lived object that's typically managed by a
+  /// [StatefulWidget] parent. See [FocusNode] for more information.
   ///
-  /// To give the focus to this widget, provide a [focusNode] and then use the current [FocusScope] to request the
-  /// focus:
+  /// To give the focus to this widget, provide a [focusNode] and then use
+  /// the current [FocusScope] to request the focus:
   ///
   /// ```dart
   /// FocusScope.of(context).requestFocus(myFocusNode);
@@ -281,14 +277,16 @@ class ArnaSelectableText extends StatefulWidget {
   ///
   /// This happens automatically when the widget is tapped.
   ///
-  /// To be notified when the widget gains or loses the focus, add a listener to the [focusNode]:
+  /// To be notified when the widget gains or loses the focus, add a listener
+  /// to the [focusNode]:
   ///
   /// ```dart
   /// focusNode.addListener(() { print(myFocusNode.hasFocus); });
   /// ```
   ///
-  /// If null, this widget will create its own [FocusNode] with [FocusNode.skipTraversal] parameter set to `true`,
-  /// which causes the widget to be skipped over during focus traversal.
+  /// If null, this widget will create its own [FocusNode] with
+  /// [FocusNode.skipTraversal] parameter set to `true`, which causes the
+  /// widget to be skipped over during focus traversal.
   final FocusNode? focusNode;
 
   /// The style to use for the text.
@@ -348,29 +346,24 @@ class ArnaSelectableText extends StatefulWidget {
   /// {@macro flutter.widgets.scrollable.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
-  /// Configuration of toolbar options.
-  ///
-  /// Paste and cut will be disabled regardless.
-  ///
-  /// If not set, select all and copy will be enabled by default.
-  final ToolbarOptions toolbarOptions;
-
   /// {@macro flutter.widgets.editableText.selectionEnabled}
   bool get selectionEnabled => enableInteractiveSelection;
 
   /// Called when the user taps on this selectable text.
   ///
-  /// The selectable text builds a [GestureDetector] to handle input events like tap, to trigger focus requests, to
-  /// move the caret, adjust the selection, etc. Handling some of those events by wrapping the selectable text with a
-  /// competing GestureDetector is problematic.
+  /// The selectable text builds a [GestureDetector] to handle input events
+  /// like tap, to trigger focus requests, to move the caret, adjust the
+  /// selection, etc. Handling some of those events by wrapping the selectable
+  /// text with a competing GestureDetector is problematic.
   ///
-  /// To unconditionally handle taps, without interfering with the selectable text's internal gesture detector, provide
-  /// this callback.
+  /// To unconditionally handle taps, without interfering with the selectable
+  /// text's internal gesture detector, provide this callback.
   ///
-  /// To be notified when the text field gains or loses the focus, provide a [focusNode] and add a listener to that.
+  /// To be notified when the text field gains or loses the focus, provide a
+  /// [focusNode] and add a listener to that.
   ///
-  /// To listen to arbitrary pointer events without competing with the selectable text's internal gesture detector, use
-  /// a [Listener].
+  /// To listen to arbitrary pointer events without competing with the
+  /// selectable text's internal gesture detector, use a [Listener].
   final GestureTapCallback? onTap;
 
   /// {@macro flutter.widgets.editableText.scrollPhysics}
@@ -390,6 +383,89 @@ class ArnaSelectableText extends StatefulWidget {
 
   /// The color of the text field.
   final Color? accentColor;
+
+  /// {@macro flutter.widgets.EditableText.contextMenuBuilder}
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
+
+  /// Returns the default button icon for the button of the given
+  /// [ContextMenuButtonType] on any platform.
+  static IconData? getButtonIcon(
+    final BuildContext context,
+    final ContextMenuButtonItem buttonItem,
+  ) {
+    switch (buttonItem.type) {
+      case ContextMenuButtonType.cut:
+        return Icons.cut_outlined;
+      case ContextMenuButtonType.copy:
+        return Icons.copy_outlined;
+      case ContextMenuButtonType.paste:
+        return Icons.paste_outlined;
+      case ContextMenuButtonType.selectAll:
+        return Icons.select_all_outlined;
+      case ContextMenuButtonType.custom:
+        return null;
+    }
+  }
+
+  /// Returns the default button label String for the button of the given
+  /// [ContextMenuButtonType] on any platform.
+  static String getButtonLabel(
+    final BuildContext context,
+    final ContextMenuButtonItem buttonItem,
+  ) {
+    if (buttonItem.label != null) {
+      return buttonItem.label!;
+    }
+
+    final MaterialLocalizations localizations =
+        MaterialLocalizations.of(context);
+    switch (buttonItem.type) {
+      case ContextMenuButtonType.cut:
+        return localizations.cutButtonLabel;
+      case ContextMenuButtonType.copy:
+        return localizations.copyButtonLabel;
+      case ContextMenuButtonType.paste:
+        return localizations.pasteButtonLabel;
+      case ContextMenuButtonType.selectAll:
+        return localizations.selectAllButtonLabel;
+      case ContextMenuButtonType.custom:
+        return '';
+    }
+  }
+
+  static Widget _defaultContextMenuBuilder(
+    final BuildContext context,
+    final EditableTextState editableTextState,
+  ) {
+    final TextSelectionToolbarAnchors anchors =
+        editableTextState.contextMenuAnchors;
+    final List<ContextMenuButtonItem> buttonItems =
+        editableTextState.contextMenuButtonItems;
+    return ArnaTextSelectionToolbar(
+      anchorAbove: anchors.primaryAnchor,
+      anchorBelow: anchors.secondaryAnchor == null
+          ? anchors.primaryAnchor
+          : anchors.secondaryAnchor!,
+      children: buttonItems.map((final ContextMenuButtonItem buttonItem) {
+        return ArnaTextSelectionToolbarButton(
+          icon: getButtonIcon(context, buttonItem),
+          onPressed: buttonItem.onPressed,
+          label: getButtonLabel(context, buttonItem),
+        );
+      }).toList(),
+    );
+  }
+
+  /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.intro}
+  ///
+  /// {@macro flutter.widgets.magnifier.intro}
+  ///
+  /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.details}
+  ///
+  /// By default, builds an [ArnaTextMagnifier] on iOS and Android, and builds
+  /// nothing on all other platforms. If it is desired to suppress the
+  /// magnifier, consider passing [TextMagnifierConfiguration.disabled].
+  final TextMagnifierConfiguration? magnifierConfiguration;
 
   @override
   State<ArnaSelectableText> createState() => _ArnaSelectableTextState();
@@ -478,7 +554,7 @@ class ArnaSelectableText extends StatefulWidget {
       DoubleProperty(
         'cursorWidth',
         cursorWidth,
-        defaultValue: 2.0,
+        defaultValue: Styles.cursorWidth,
       ),
     );
     properties.add(
@@ -607,6 +683,39 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
     setState(() => _showSelectionHandles = showSelectionHandles);
   }
 
+  void _handleSelectionChanged(
+    final TextSelection selection,
+    final SelectionChangedCause? cause,
+  ) {
+    final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
+    if (willShowSelectionHandles != _showSelectionHandles) {
+      setState(() => _showSelectionHandles = willShowSelectionHandles);
+    }
+
+    widget.onSelectionChanged?.call(selection, cause);
+
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+        if (cause == SelectionChangedCause.longPress) {
+          _editableText.bringIntoView(selection.base);
+        }
+        return;
+      case TargetPlatform.android:
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+      // Do nothing.
+    }
+  }
+
+  /// Toggle the toolbar when a selection handle is tapped.
+  void _handleSelectionHandleTapped() {
+    if (_controller.selection.isCollapsed) {
+      _editableText.toggleToolbar();
+    }
+  }
+
   bool _shouldShowSelectionHandles(final SelectionChangedCause? cause) {
     // When the text field is activated by something that doesn't trigger the
     // selection overlay, we shouldn't show the handles either.
@@ -632,62 +741,6 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
     }
 
     return false;
-  }
-
-  TextSelection? _lastSeenTextSelection;
-
-  void _handleSelectionChanged(
-    final TextSelection selection,
-    final SelectionChangedCause? cause,
-  ) {
-    final bool willShowSelectionHandles = _shouldShowSelectionHandles(cause);
-    if (willShowSelectionHandles != _showSelectionHandles) {
-      setState(() => _showSelectionHandles = willShowSelectionHandles);
-    }
-    if (widget.onSelectionChanged != null &&
-        _lastSeenTextSelection != selection) {
-      widget.onSelectionChanged!(selection, cause);
-    }
-    _lastSeenTextSelection = selection;
-
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.iOS:
-      case TargetPlatform.macOS:
-        if (cause == SelectionChangedCause.longPress ||
-            cause == SelectionChangedCause.drag) {
-          _editableText.bringIntoView(selection.extent);
-        }
-        break;
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.android:
-        if (cause == SelectionChangedCause.drag) {
-          _editableText.bringIntoView(selection.extent);
-        }
-        break;
-    }
-
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.iOS:
-      case TargetPlatform.fuchsia:
-      case TargetPlatform.android:
-        break;
-      case TargetPlatform.macOS:
-      case TargetPlatform.linux:
-      case TargetPlatform.windows:
-        if (cause == SelectionChangedCause.drag) {
-          _editableText.hideToolbar();
-        }
-        break;
-    }
-  }
-
-  /// Toggle the toolbar when a selection handle is tapped.
-  void _handleSelectionHandleTapped() {
-    if (_controller.selection.isCollapsed) {
-      _editableText.toggleToolbar();
-    }
   }
 
   @override
@@ -780,7 +833,6 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         textScaleFactor: widget.textScaleFactor,
         autofocus: widget.autofocus,
         forceLine: false,
-        toolbarOptions: widget.toolbarOptions,
         minLines: widget.minLines,
         maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         selectionColor: accent.withOpacity(0.42),
@@ -804,9 +856,25 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
           context,
         ),
         enableInteractiveSelection: widget.enableInteractiveSelection,
+        magnifierConfiguration: widget.magnifierConfiguration ??
+            TextMagnifierConfiguration(
+              shouldDisplayHandlesInMagnifier:
+                  defaultTargetPlatform == TargetPlatform.iOS,
+              magnifierBuilder: (
+                final BuildContext context,
+                final MagnifierController controller,
+                final ValueNotifier<MagnifierInfo> magnifierInfo,
+              ) {
+                return ArnaTextMagnifier(
+                  controller: controller,
+                  magnifierInfo: magnifierInfo,
+                );
+              },
+            ),
         dragStartBehavior: widget.dragStartBehavior,
         scrollPhysics: widget.scrollPhysics,
         autofillHints: null,
+        contextMenuBuilder: widget.contextMenuBuilder,
       ),
     );
 

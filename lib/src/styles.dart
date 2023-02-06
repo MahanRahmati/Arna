@@ -80,6 +80,9 @@ abstract class Styles {
   /// Title baseline
   static const double titleBaseline = base * 4;
 
+  /// Magnifier above focal point
+  static const double magnifierAboveFocalPoint = base * -4;
+
   /// Indicator size
   static const double indicatorSize = base * 5;
 
@@ -139,6 +142,9 @@ abstract class Styles {
 
   /// List tile with subtitle height
   static const double listTileTwoLineHeight = base * 9;
+
+  /// Magnifier height
+  static const double magnifierHeight = base * 9;
 
   /// Year picker row width
   static const double yearPickerRowWidth = base * 10;
@@ -335,5 +341,10 @@ abstract class Styles {
   /// Color button border radius
   static BorderRadius colorButtonBorderRadius = const BorderRadius.all(
     Radius.circular(buttonSize),
+  );
+
+  /// Magnifier border radius
+  static BorderRadius magnifierBorderRadius = const BorderRadius.all(
+    Radius.circular(base * 7),
   );
 }

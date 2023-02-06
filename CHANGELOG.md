@@ -9,6 +9,9 @@
 - [BREAKING] Update ArnaBody
 - Update ArnaHeaderBar
 - Update ArnaScaffold
+- [BREAKING] Remove ArnaTextSelectionControls
+- Add ArnaMagnifier
+- Add ArnaTextMagnifier
 - Add test for ArnaApp
 - Add test for ArnaScaffold
 
@@ -48,8 +51,8 @@
 - Add ArnaHeaderBarItem
 - Add OverflowHandler
 - [Example] Update Home
-- Add ArnaSlideTransition 
-- Add ArnaFadeTransition  
+- Add ArnaSlideTransition
+- Add ArnaFadeTransition
 - Update ArnaDivider
 - Update ArnaTabView
 - Update ArnaTabItem

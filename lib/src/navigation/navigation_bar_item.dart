@@ -1,16 +1,16 @@
 import 'package:arna/arna.dart';
 
-/// An interactive button within [ArnaBottomBar].
+/// An interactive button within [ArnaNavigationBar].
 ///
 /// This class is rarely used in isolation. It is typically embedded
-/// in [ArnaBottomBar].
+/// in [ArnaNavigationBar].
 ///
 /// See also:
 ///
-///  * [ArnaBottomBar]
-class ArnaBottomBarItem extends StatelessWidget {
-  /// Creates a bottom bar item.
-  const ArnaBottomBarItem({
+///  * [ArnaNavigationBar]
+class ArnaNavigationBarItem extends StatelessWidget {
+  /// Creates a navigation bar item.
+  const ArnaNavigationBarItem({
     super.key,
     required this.label,
     required this.icon,
@@ -123,7 +123,7 @@ class ArnaBottomBarItem extends StatelessWidget {
                       context,
                     ),
                   ),
-                  padding: Styles.bottomBarItemPadding,
+                  padding: Styles.navigationBarItemPadding,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,

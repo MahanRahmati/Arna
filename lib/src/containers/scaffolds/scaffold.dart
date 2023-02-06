@@ -10,8 +10,8 @@ enum _ArnaScaffoldSlot {
   /// The [ArnaScaffold]'s headerBar.
   headerBar,
 
-  /// The [ArnaScaffold]'s bottom navigation bar.
-  bottomNavigationBar,
+  /// The [ArnaScaffold]'s navigation bar.
+  navigationBar,
 
   /// The [ArnaScaffold]'s drawer.
   drawer,
@@ -44,17 +44,17 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
       positionChild(_ArnaScaffoldSlot.headerBar, Offset.zero);
     }
 
-    double? bottomNavigationBarTop;
-    if (hasChild(_ArnaScaffoldSlot.bottomNavigationBar)) {
-      final double bottomNavigationBarHeight = layoutChild(
-        _ArnaScaffoldSlot.bottomNavigationBar,
+    double? navigationBarTop;
+    if (hasChild(_ArnaScaffoldSlot.navigationBar)) {
+      final double navigationBarHeight = layoutChild(
+        _ArnaScaffoldSlot.navigationBar,
         fullWidthConstraints,
       ).height;
-      bottomWidgetsHeight += bottomNavigationBarHeight;
-      bottomNavigationBarTop = math.max(0.0, bottom - bottomWidgetsHeight);
+      bottomWidgetsHeight += navigationBarHeight;
+      navigationBarTop = math.max(0.0, bottom - bottomWidgetsHeight);
       positionChild(
-        _ArnaScaffoldSlot.bottomNavigationBar,
-        Offset(0.0, bottomNavigationBarTop),
+        _ArnaScaffoldSlot.navigationBar,
+        Offset(0.0, navigationBarTop),
       );
     }
 
@@ -95,6 +95,13 @@ class _ArnaScaffoldLayout extends MultiChildLayoutDelegate {
 /// See also:
 ///
 ///  * [ArnaHeaderBar], which is a horizontal bar shown at the top of the app.
+///  * [ArnaDrawer], which is a vertical panel that is typically displayed to
+///    the left of the body (and often hidden on phones) using the [drawer]
+///    property.
+///  * [ArnaNavigationBar], which is a horizontal array of buttons typically
+///    shown along the bottom of the app using the [navigationBar]
+///    property.
+///  * [ArnaScaffoldState], which is the state associated with this widget.
 class ArnaScaffold extends StatefulWidget {
   /// Creates a basic layout structure in the Arna style.
   const ArnaScaffold({
@@ -103,7 +110,8 @@ class ArnaScaffold extends StatefulWidget {
     this.body,
     this.drawer,
     this.onDrawerChanged,
-    this.bottomNavigationBar,
+    this.navigationBar,
+    this.backgroundColor,
     this.resizeToAvoidBottomInset,
     this.restorationId,
   });
@@ -130,8 +138,6 @@ class ArnaScaffold extends StatefulWidget {
   /// devices. Swipes in from either left-to-right ([TextDirection.ltr]) or
   /// right-to-left ([TextDirection.rtl])
   ///
-  /// Typically an [ArnaDrawer].
-  ///
   /// To open the drawer, use the [ArnaScaffoldState.openDrawer] function.
   ///
   /// To close the drawer, use either [ArnaScaffoldState.closeDrawer],
@@ -142,10 +148,15 @@ class ArnaScaffold extends StatefulWidget {
   /// or closed.
   final ArnaDrawerCallback? onDrawerChanged;
 
-  /// A bottom navigation bar to display at the bottom of the scaffold.
+  /// The color of the widget that underlies the entire Scaffold.
   ///
-  /// The [bottomNavigationBar] is rendered below the [body].
-  final Widget? bottomNavigationBar;
+  /// [ArnaColors.backgroundColor] by default.
+  final Color? backgroundColor;
+
+  /// A navigation bar to display at the bottom of the scaffold.
+  ///
+  /// The [navigationBar] is rendered below the [body].
+  final Widget? navigationBar;
 
   /// If true the [body] should size itself to avoid the onscreen keyboard
   /// whose height is defined by the ambient [MediaQuery]'s
@@ -408,7 +419,7 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
       removeLeftPadding: false,
       removeTopPadding: widget.headerBar != null,
       removeRightPadding: false,
-      removeBottomPadding: widget.bottomNavigationBar != null,
+      removeBottomPadding: widget.navigationBar != null,
       removeBottomInset: _resizeToAvoidBottomInset,
     );
 
@@ -430,11 +441,11 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
       );
     }
 
-    if (widget.bottomNavigationBar != null) {
+    if (widget.navigationBar != null) {
       _addIfNonNull(
         children,
-        widget.bottomNavigationBar,
-        _ArnaScaffoldSlot.bottomNavigationBar,
+        widget.navigationBar,
+        _ArnaScaffoldSlot.navigationBar,
         removeLeftPadding: false,
         removeTopPadding: true,
         removeRightPadding: false,
@@ -461,7 +472,7 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
       );
     }
 
-    // The minimum insets for contents of the Scaffold to keep visible.
+    // The minimum insets for contents of the [ArnaScaffold] to keep visible.
     final EdgeInsets minInsets = MediaQuery.of(context).padding.copyWith(
           bottom: _resizeToAvoidBottomInset
               ? MediaQuery.of(context).viewInsets.bottom
@@ -473,7 +484,8 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
       child: ScrollNotificationObserver(
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: ArnaColors.backgroundColor.resolveFrom(context),
+            color: widget.backgroundColor ??
+                ArnaColors.backgroundColor.resolveFrom(context),
           ),
           child: Actions(
             actions: <Type, Action<Intent>>{

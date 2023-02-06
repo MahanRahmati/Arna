@@ -409,7 +409,7 @@ void main() {
     final WidgetTester tester,
   ) async {
     const String bodyLabel = 'I am the body';
-    const String bottomNavigationBarLabel = 'a bar in an app';
+    const String navigationBarLabel = 'a bar in an app';
     const String drawerLabel = 'I am the reason for this test';
 
     final SemanticsTester semantics = SemanticsTester(tester);
@@ -417,14 +417,14 @@ void main() {
       const ArnaApp(
         home: ArnaScaffold(
           body: Text(bodyLabel),
-          bottomNavigationBar: Text(bottomNavigationBarLabel),
+          navigationBar: Text(navigationBarLabel),
           drawer: ArnaDrawer(child: Text(drawerLabel)),
         ),
       ),
     );
 
     expect(semantics, includesNodeWith(label: bodyLabel));
-    expect(semantics, includesNodeWith(label: bottomNavigationBarLabel));
+    expect(semantics, includesNodeWith(label: navigationBarLabel));
     expect(semantics, isNot(includesNodeWith(label: drawerLabel)));
 
     final ArnaScaffoldState state = tester.firstState(
@@ -435,7 +435,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
 
     expect(semantics, isNot(includesNodeWith(label: bodyLabel)));
-    expect(semantics, isNot(includesNodeWith(label: bottomNavigationBarLabel)));
+    expect(semantics, isNot(includesNodeWith(label: navigationBarLabel)));
     expect(semantics, includesNodeWith(label: drawerLabel));
 
     semantics.dispose();
@@ -447,11 +447,11 @@ void main() {
     final Key headerBar = UniqueKey();
     final Key body = UniqueKey();
     final Key drawer = UniqueKey();
-    final Key bottomNavigationBar = UniqueKey();
+    final Key navigationBar = UniqueKey();
     final Key insideHeaderBar = UniqueKey();
     final Key insideBody = UniqueKey();
     final Key insideDrawer = UniqueKey();
-    final Key insideBottomNavigationBar = UniqueKey();
+    final Key insideNavigationBar = UniqueKey();
     await tester.pumpWidget(
       Localizations(
         locale: const Locale('en', 'us'),
@@ -493,11 +493,11 @@ void main() {
                   child: Placeholder(key: insideDrawer),
                 ),
               ),
-              bottomNavigationBar: SizedBox(
-                key: bottomNavigationBar,
+              navigationBar: SizedBox(
+                key: navigationBar,
                 height: 85.0,
                 child: SafeArea(
-                  child: Placeholder(key: insideBottomNavigationBar),
+                  child: Placeholder(key: insideNavigationBar),
                 ),
               ),
             ),
@@ -526,7 +526,7 @@ void main() {
       const Rect.fromLTRB(800.0, 0.0, 800.0, 600.0),
     );
     expect(
-      tester.getRect(find.byKey(bottomNavigationBar)),
+      tester.getRect(find.byKey(navigationBar)),
       const Rect.fromLTRB(0.0, 515.0, 800.0, 600.0),
     );
     expect(
@@ -542,7 +542,7 @@ void main() {
       const Rect.fromLTRB(800.0, 30.0, 800.0, 540.0),
     );
     expect(
-      tester.getRect(find.byKey(insideBottomNavigationBar)),
+      tester.getRect(find.byKey(insideNavigationBar)),
       const Rect.fromLTRB(20.0, 515.0, 750.0, 540.0),
     );
   });

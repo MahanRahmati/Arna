@@ -11,6 +11,7 @@
 - Update ArnaScaffold
 - Add test for ArnaApp
 - Add test for ArnaScaffold
+- Move animations out of Arna
 
 ## 1.0.6
 
@@ -48,8 +49,8 @@
 - Add ArnaHeaderBarItem
 - Add OverflowHandler
 - [Example] Update Home
-- Add ArnaSlideTransition 
-- Add ArnaFadeTransition  
+- Add ArnaSlideTransition
+- Add ArnaFadeTransition
 - Update ArnaDivider
 - Update ArnaTabView
 - Update ArnaTabItem

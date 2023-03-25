@@ -14,6 +14,7 @@
 - Add ArnaTextMagnifier
 - Add test for ArnaApp
 - Add test for ArnaScaffold
+- Move animations out of Arna
 
 ## 1.0.6
 

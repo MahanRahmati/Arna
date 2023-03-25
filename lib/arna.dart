@@ -3,10 +3,6 @@
 /// To use, import `package:arna/arna.dart`.
 library arna;
 
-export 'package:arna/src/animations/fade_through_transition.dart';
-export 'package:arna/src/animations/fade_transition.dart';
-export 'package:arna/src/animations/page_transition_switcher.dart';
-export 'package:arna/src/animations/slide_transition.dart';
 export 'package:arna/src/base/app.dart';
 export 'package:arna/src/base/arna_logo.dart';
 export 'package:arna/src/base/arna_state.dart';
@@ -91,6 +87,7 @@ export 'package:arna/src/utils/device_orientation.dart';
 export 'package:arna/src/utils/edge_insets.dart';
 export 'package:arna/src/utils/helpers.dart';
 export 'package:arna/src/utils/string_extensions.dart';
+export 'package:arna_animations/arna_animations.dart';
 export 'package:flutter/foundation.dart' show kIsWeb;
 export 'package:flutter/material.dart' show Icons, MaterialLocalizations;
 export 'package:flutter/services.dart' show Brightness;

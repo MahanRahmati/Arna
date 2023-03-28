@@ -294,7 +294,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
       final OverlayState overlayState = Overlay.of(
         context,
         debugRequiredFor: widget,
-      )!;
+      );
       overlayState.insert(_entry!);
     }
     SemanticsService.tooltip(_tooltipMessage);

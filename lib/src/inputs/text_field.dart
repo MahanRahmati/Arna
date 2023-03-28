@@ -6,23 +6,25 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-/// Visibility of text field overlays based on the state of the current text entry.
+/// Visibility of text field overlays based on the state of the current text
+/// entry.
 ///
-/// Used to toggle the visibility behavior of the optional decorating widgets surrounding the [EditableText] such as
-/// the clear text button.
+/// Used to toggle the visibility behavior of the optional decorating widgets
+/// surrounding the [EditableText] such as the clear text button.
 enum ArnaOverlayVisibilityMode {
   /// Overlay will never appear regardless of the text entry state.
   never,
 
   /// Overlay will only appear when the current text entry is not empty.
   ///
-  /// This includes prefilled text that the user did not type in manually. But does not include text in placeholders.
+  /// This includes prefilled text that the user did not type in manually. But
+  /// does not include text in placeholders.
   editing,
 
   /// Overlay will only appear when the current text entry is empty.
   ///
-  /// This also includes not having prefilled text that the user did not type in manually. Texts in placeholders are
-  /// ignored.
+  /// This also includes not having prefilled text that the user did not type
+  /// in manually. Texts in placeholders are ignored.
   notEditing,
 
   /// Always show the overlay regardless of the text entry state.
@@ -41,49 +43,11 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder
   final _ArnaTextFieldState _state;
 
   @override
-  void onForcePressStart(final ForcePressDetails details) {
-    super.onForcePressStart(details);
-    if (delegate.selectionEnabled && shouldShowSelectionToolbar) {
-      editableText.showToolbar();
-    }
-  }
-
-  @override
-  void onForcePressEnd(final ForcePressDetails details) {
-    // Not required.
-  }
-
-  @override
-  void onSingleLongTapMoveUpdate(final LongPressMoveUpdateDetails details) {
-    if (delegate.selectionEnabled) {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.iOS:
-        case TargetPlatform.macOS:
-          renderEditable.selectPositionAt(
-            from: details.globalPosition,
-            cause: SelectionChangedCause.longPress,
-          );
-          break;
-        case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
-        case TargetPlatform.linux:
-        case TargetPlatform.windows:
-          renderEditable.selectWordsInRange(
-            from: details.globalPosition - details.offsetFromOrigin,
-            to: details.globalPosition,
-            cause: SelectionChangedCause.longPress,
-          );
-          break;
-      }
-    }
-  }
-
-  @override
   void onSingleTapUp(final TapUpDetails details) {
-    editableText.hideToolbar();
-    // Because TextSelectionGestureDetector listens to taps that happen on widgets in front of it, tapping the clear
-    // button will also trigger this handler. If the clear button widget recognizes the up event, then do not handle
-    // it.
+    // Because TextSelectionGestureDetector listens to taps that happen on
+    // widgets in front of it, tapping the clear button will also trigger
+    // this handler. If the clear button widget recognizes the up event,
+    // then do not handle it.
     if (_state._clearGlobalKey.currentContext != null) {
       final RenderBox renderBox = _state._clearGlobalKey.currentContext!
           .findRenderObject()! as RenderBox;
@@ -99,53 +63,34 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder
   }
 
   @override
-  void onDragSelectionEnd(final DragEndDetails details) =>
-      _state._requestKeyboard();
-
-  @override
-  void onSingleLongTapStart(final LongPressStartDetails details) {
-    if (delegate.selectionEnabled) {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.iOS:
-        case TargetPlatform.macOS:
-          renderEditable.selectPositionAt(
-            from: details.globalPosition,
-            cause: SelectionChangedCause.longPress,
-          );
-          break;
-        case TargetPlatform.android:
-        case TargetPlatform.fuchsia:
-        case TargetPlatform.linux:
-        case TargetPlatform.windows:
-          renderEditable.selectWord(cause: SelectionChangedCause.longPress);
-          ArnaFeedback.forLongPress(_state.context);
-          break;
-      }
-    }
+  void onDragSelectionEnd(final DragEndDetails details) {
+    _state._requestKeyboard();
   }
 }
 
 /// An Arna-styled text field.
 ///
-/// A text field lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
+/// A text field lets the user enter text, either with a hardware keyboard or
+/// with an onscreen keyboard.
 ///
-/// The text field calls the [onChanged] callback whenever the user changes the text in the field. If the user
-/// indicates that they are done typing in the field (e.g., by pressing a button on the soft keyboard), the text field
+/// The text field calls the [onChanged] callback whenever the user changes the
+/// text in the field. If the user indicates that they are done typing in the
+/// field (e.g., by pressing a button on the soft keyboard), the text field
 /// calls the [onSubmitted] callback.
 ///
-/// To control the text that is displayed in the text field, use the [controller]. For example, to set the initial
-/// value of the text field, use a [controller] that already contains some text. The [controller] can also control the
-/// selection and composing region (and to observe changes to the text, selection, and composing region).
+/// The [controller] can also control the selection and composing region (and to
+/// observe changes to the text, selection, and composing region).
 ///
-/// To integrate the [ArnaTextField] into a [Form] with other [FormField] widgets,
-/// consider using [ArnaTextFormField].
+/// To integrate the [ArnaTextField] into a [Form] with other [FormField]
+/// widgets, consider using [ArnaTextFormField].
 ///
-/// When the widget has focus, it will prevent itself from disposing via its underlying [EditableText]'s
-/// [AutomaticKeepAliveClientMixin.wantKeepAlive] in order to avoid losing the selection. Removing the focus will allow
-/// it to be disposed.
+/// When the widget has focus, it will prevent itself from disposing via its
+/// underlying [EditableText]'s [AutomaticKeepAliveClientMixin.wantKeepAlive]
+/// in order to avoid losing the selection. Removing the focus will allow it to
+/// be disposed.
 ///
-/// Remember to call [TextEditingController.dispose] of the [TextEditingController] when it is no longer needed. This
-/// will ensure we discard any resources used by the object.
+/// Remember to call [TextEditingController.dispose] when it is no longer
+/// needed. This will ensure we discard any resources used by the object.
 ///
 /// {@tool snippet}
 /// This example shows how to create an [ArnaTextField] that will obscure input.
@@ -159,52 +104,65 @@ class _ArnaTextFieldSelectionGestureDetectorBuilder
 ///
 /// ## Reading values
 ///
-/// A common way to read a value from a TextField is to use the [onSubmitted] callback. This callback is applied to the
-/// text field's current value when the user finishes editing.
+/// A common way to read a value from a TextField is to use the [onSubmitted]
+/// callback. This callback is applied to the text field's current value when
+/// the user finishes editing.
 ///
-/// For most applications the [onSubmitted] callback will be sufficient for reacting to user input.
+/// For most applications the [onSubmitted] callback will be sufficient for
+/// reacting to user input.
 ///
-/// The [onEditingComplete] callback also runs when the user finishes editing. It's different from [onSubmitted]
-/// because it has a default value which updates the text controller and yields the keyboard focus. Applications that
-/// require different behavior can override the default [onEditingComplete] callback.
+/// The [onEditingComplete] callback also runs when the user finishes editing.
+/// It's different from [onSubmitted] because it has a default value which
+/// updates the text controller and yields the keyboard focus. Applications that
+/// require different behavior can override the default [onEditingComplete]
+/// callback.
 ///
-/// Keep in mind you can also always read the current string from a TextField's [TextEditingController] using
-/// [TextEditingController.text].
+/// Keep in mind you can also always read the current string from a TextField's
+/// [TextEditingController] using [TextEditingController.text].
 ///
 /// See also:
 ///
 ///  * [ArnaTextFormField], which integrates with the [Form] widget.
-///  * [EditableText], which is the raw text editing control at the heart of an [ArnaTextField].
+///  * [EditableText], which is the raw text editing control at the heart of an
+///    [ArnaTextField].
 class ArnaTextField extends StatefulWidget {
   /// Creates an Arna-styled text field.
   ///
-  /// To provide a prefilled text entry, pass in a [TextEditingController] with an initial value to the [controller]
-  /// parameter.
+  /// To provide a prefilled text entry, pass in a [TextEditingController] with
+  /// an initial value to the [controller] parameter.
   ///
-  /// To provide a hint text that appears when the text entry is empty, pass a [String] to the [hintText] parameter.
+  /// To provide a hint text that appears when the text entry is empty, pass a
+  /// [String] to the [hintText] parameter.
   ///
-  /// The [maxLines] property can be set to null to remove the restriction on the number of lines. By default, it is
-  /// one, meaning this is a single-line text field. [maxLines] must not be zero.
+  /// The [maxLines] property can be set to null to remove the restriction on
+  /// the number of lines. In this mode, the intrinsic height of the widget will
+  /// grow as the number of lines of text grows. By default, it is `1`, meaning
+  /// this is a single-line text field and will scroll horizontally when
+  /// it overflows. [maxLines] must not be zero.
   ///
-  /// The text cursor is not shown if [showCursor] is false or if [showCursor] is null (the default) and [readOnly] is
-  /// true.
+  /// The text cursor is not shown if [showCursor] is false or if [showCursor]
+  /// is null (the default) and [readOnly] is true.
   ///
   /// If specified, the [maxLength] property must be greater than zero.
   ///
-  /// The [selectionHeightStyle] and [selectionWidthStyle] properties allow changing the shape of the selection
-  /// highlighting. These properties default to [ui.BoxHeightStyle.tight] and [ui.BoxWidthStyle.tight] respectively and
+  /// The [selectionHeightStyle] and [selectionWidthStyle] properties allow
+  /// changing the shape of the selection highlighting. These properties default
+  /// to [ui.BoxHeightStyle.tight] and [ui.BoxWidthStyle.tight] respectively and
   /// must not be null.
   ///
-  /// The [autocorrect], [autofocus], [clearButtonMode], [dragStartBehavior], [expands], [obscureText], [prefixMode],
-  /// [readOnly], [suffixMode], [textAlign], [selectionHeightStyle], [selectionWidthStyle], [enableSuggestions], and
-  /// [enableIMEPersonalizedLearning] properties must not be null.
+  /// The [autocorrect], [autofocus], [clearButtonMode], [dragStartBehavior],
+  /// [expands], [obscureText], [prefixMode], [readOnly], [suffixMode],
+  /// [textAlign], [selectionHeightStyle], [selectionWidthStyle],
+  /// [enableSuggestions], and [enableIMEPersonalizedLearning] properties must
+  /// not be null.
   ///
   /// See also:
   ///
-  ///  * [minLines], which is the minimum number of lines to occupy when the content spans fewer lines.
+  ///  * [minLines], which is the minimum number of lines to occupy when the
+  ///    content spans fewer lines.
   ///  * [expands], to allow the widget to size itself to its parent's height.
-  ///  * [maxLength], which discusses the precise meaning of "number of characters" and how it may differ from the
-  ///    intuitive meaning.
+  ///  * [maxLength], which discusses the precise meaning of "number of
+  ///    characters" and how it may differ from the intuitive meaning.
   const ArnaTextField({
     super.key,
     this.controller,
@@ -223,7 +181,6 @@ class ArnaTextField extends StatefulWidget {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
-    final ToolbarOptions? toolbarOptions,
     this.showCursor,
     this.autofocus = false,
     this.obscuringCharacter = '•',
@@ -262,6 +219,9 @@ class ArnaTextField extends StatefulWidget {
     this.restorationId,
     this.scribbleEnabled = true,
     this.enableIMEPersonalizedLearning = true,
+    this.contextMenuBuilder = _defaultContextMenuBuilder,
+    this.spellCheckConfiguration,
+    this.magnifierConfiguration,
   })  : assert(obscuringCharacter.length == 1),
         smartDashesType = smartDashesType ??
             (obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
@@ -282,7 +242,8 @@ class ArnaTextField extends StatefulWidget {
           'Obscured fields cannot be multiline.',
         ),
         assert(maxLength == null || maxLength > 0),
-        // Assert the following instead of setting it directly to avoid surprising the user by silently changing the value they set.
+        // Assert the following instead of setting it directly to avoid
+        // surprising the user by silently changing the value they set.
         assert(
           !identical(textInputAction, TextInputAction.newline) ||
               maxLines == 1 ||
@@ -292,67 +253,18 @@ class ArnaTextField extends StatefulWidget {
         keyboardType = keyboardType ??
             (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
         enableInteractiveSelection =
-            enableInteractiveSelection ?? (!readOnly || !obscureText),
-        toolbarOptions = toolbarOptions ??
-            (obscureText
-                ? readOnly
-                    // No point in even offering "Select All" in a read-only obscured
-                    // field.
-                    ? const ToolbarOptions()
-                    // Writable, but obscured.
-                    : const ToolbarOptions(selectAll: true, paste: true)
-                : readOnly
-                    // Read-only, not obscured.
-                    ? const ToolbarOptions(selectAll: true, copy: true)
-                    // Writable, not obscured.
-                    : const ToolbarOptions(
-                        copy: true,
-                        cut: true,
-                        selectAll: true,
-                        paste: true,
-                      ));
+            enableInteractiveSelection ?? (!readOnly || !obscureText);
 
   /// Controls the text being edited.
   ///
   /// If null, this widget will create its own [TextEditingController].
   final TextEditingController? controller;
 
-  /// Defines the keyboard focus for this widget.
-  ///
-  /// The [focusNode] is a long-lived object that's typically managed by a [StatefulWidget] parent. See [FocusNode] for
-  /// more information.
-  ///
-  /// To give the keyboard focus to this widget, provide a [focusNode] and then use the current [FocusScope] to request
-  /// the focus:
-  ///
-  /// ```dart
-  /// FocusScope.of(context).requestFocus(myFocusNode);
-  /// ```
-  ///
-  /// This happens automatically when the widget is tapped.
-  ///
-  /// To be notified when the widget gains or loses the focus, add a listener to the [focusNode]:
-  ///
-  /// ```dart
-  /// focusNode.addListener(() { print(myFocusNode.hasFocus); });
-  /// ```
-  ///
-  /// If null, this widget will create its own [FocusNode].
-  ///
-  /// ## Keyboard
-  ///
-  /// Requesting the focus will typically cause the keyboard to be shown if it's not showing already.
-  ///
-  /// On Android, the user can hide the keyboard - without changing the focus - with the system back button. They can
-  /// restore the keyboard's visibility by tapping on a text field.  The user might hide the keyboard and switch to a
-  /// physical keyboard, or they might just need to get it out of the way for a moment, to expose something it's
-  /// obscuring. In this case requesting the focus again will not cause the focus to change, and will not make the keyboard visible.
-  ///
-  /// This widget builds an [EditableText] and will ensure that the keyboard is showing when it is tapped by calling
-  /// [EditableTextState.requestKeyboard()].
+  /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
-  /// A lighter colored hint that appears on the first line of the text field when the text entry is empty.
+  /// A lighter colored hint that appears on the first line of the text field
+  /// when the text entry is empty.
   ///
   /// Defaults to having no text.
   final String? hintText;
@@ -360,8 +272,8 @@ class ArnaTextField extends StatefulWidget {
   /// An optional [Widget] to display before the text.
   final Widget? prefix;
 
-  /// Controls the visibility of the [prefix] widget based on the state of text entry when the [prefix] argument is not
-  /// null.
+  /// Controls the visibility of the [prefix] widget based on the state of text
+  /// entry when the [prefix] argument is not null.
   ///
   /// Defaults to [ArnaOverlayVisibilityMode.always] and cannot be null.
   ///
@@ -371,8 +283,8 @@ class ArnaTextField extends StatefulWidget {
   /// An optional [Widget] to display after the text.
   final Widget? suffix;
 
-  /// Controls the visibility of the [suffix] widget based on the state of text entry when the [suffix] argument is not
-  /// null.
+  /// Controls the visibility of the [suffix] widget based on the state of text
+  /// entry when the [suffix] argument is not null.
   ///
   /// Defaults to [ArnaOverlayVisibilityMode.always] and cannot be null.
   ///
@@ -381,7 +293,8 @@ class ArnaTextField extends StatefulWidget {
 
   /// Show a clear button to clear the current text entry.
   ///
-  /// Can be made to appear depending on various text states of the [TextEditingController].
+  /// Can be made to appear depending on various text states of the
+  /// [TextEditingController].
   ///
   /// Will only appear if no [suffix] widget is appearing.
   ///
@@ -393,8 +306,8 @@ class ArnaTextField extends StatefulWidget {
 
   /// The type of action button to use for the keyboard.
   ///
-  /// Defaults to [TextInputAction.newline] if [keyboardType] is [TextInputType.multiline] and [TextInputAction.done]
-  /// otherwise.
+  /// Defaults to [TextInputAction.newline] if [keyboardType] is
+  /// [TextInputType.multiline] and [TextInputAction.done] otherwise.
   final TextInputAction? textInputAction;
 
   /// {@macro flutter.widgets.editableText.textCapitalization}
@@ -405,12 +318,6 @@ class ArnaTextField extends StatefulWidget {
 
   /// {@macro flutter.widgets.editableText.textAlign}
   final TextAlign textAlign;
-
-  /// Configuration of toolbar options.
-  ///
-  /// If not set, select all and paste will default to be enabled. Copy and cut will be disabled if [obscureText] is
-  /// true. If [readOnly] is true, paste and cut will be disabled regardless.
-  final ToolbarOptions toolbarOptions;
 
   /// {@macro flutter.material.InputDecorator.textAlignVertical}
   final TextAlignVertical? textAlignVertical;
@@ -446,35 +353,42 @@ class ArnaTextField extends StatefulWidget {
   final bool enableSuggestions;
 
   /// {@macro flutter.widgets.editableText.maxLines}
-  ///  * [expands], which determines whether the field should fill the height of its parent.
+  ///  * [expands], which determines whether the field should fill the height of
+  ///    its parent.
   final int? maxLines;
 
   /// {@macro flutter.widgets.editableText.minLines}
-  ///  * [expands], which determines whether the field should fill the height of its parent.
+  ///  * [expands], which determines whether the field should fill the height of
+  ///    its parent.
   final int? minLines;
 
   /// {@macro flutter.widgets.editableText.expands}
   final bool expands;
 
-  /// The maximum number of characters (Unicode grapheme clusters) to allow in the text field.
+  /// The maximum number of characters (Unicode grapheme clusters) to allow in
+  /// the text field.
   ///
-  /// After [maxLength] characters have been input, additional input is ignored, unless [maxLengthEnforcement] is set
-  /// to [MaxLengthEnforcement.none].
+  /// After [maxLength] characters have been input, additional input
+  /// is ignored, unless [maxLengthEnforcement] is set to
+  /// [MaxLengthEnforcement.none].
   ///
-  /// The TextField enforces the length with a [LengthLimitingTextInputFormatter], which is evaluated after the
-  /// supplied [inputFormatters], if any.
+  /// The TextField enforces the length with a
+  /// [LengthLimitingTextInputFormatter], which is evaluated after the supplied
+  /// [inputFormatters], if any.
   ///
-  /// This value must be either null or greater than zero. If set to null (the default), there is no limit to the
-  /// number of characters allowed.
+  /// This value must be either null or greater than zero. If set to null
+  /// (the default), there is no limit to the number of characters allowed.
   ///
-  /// Whitespace characters (e.g. newline, space, tab) are included in the character count.
+  /// Whitespace characters (e.g. newline, space, tab) are included in the
+  /// character count.
   ///
   /// {@macro flutter.services.lengthLimitingTextInputFormatter.maxLength}
   final int? maxLength;
 
   /// Determines how the [maxLength] limit should be enforced.
   ///
-  /// If [MaxLengthEnforcement.none] is set, additional input beyond [maxLength] will not be enforced by the limit.
+  /// If [MaxLengthEnforcement.none] is set, additional input beyond [maxLength]
+  /// will not be enforced by the limit.
   ///
   /// {@macro flutter.services.textFormatter.effectiveMaxLengthEnforcement}
   ///
@@ -491,8 +405,9 @@ class ArnaTextField extends StatefulWidget {
   ///
   /// See also:
   ///
-  ///  * [TextInputAction.next] and [TextInputAction.previous], which automatically shift the focus to the
-  ///    next/previous focusable item when the user is done editing.
+  ///  * [TextInputAction.next] and [TextInputAction.previous], which
+  ///    automatically shift the focus to the next/previous focusable item when
+  ///    the user is done editing.
   final ValueChanged<String>? onSubmitted;
 
   /// {@macro flutter.widgets.editableText.onAppPrivateCommand}
@@ -503,8 +418,9 @@ class ArnaTextField extends StatefulWidget {
 
   /// Disables the text field when false.
   ///
-  /// Text fields in disabled states have a light grey background and don't respond to touch events including the
-  /// [prefix], [suffix] and the clear button.
+  /// Text fields in disabled states have a light grey background and don't
+  /// respond to touch events including the [prefix], [suffix] and the clear
+  /// button.
   final bool? enabled;
 
   /// {@macro flutter.widgets.editableText.cursorWidth}
@@ -554,39 +470,14 @@ class ArnaTextField extends StatefulWidget {
   /// {@macro flutter.widgets.editableText.selectionEnabled}
   bool get selectionEnabled => enableInteractiveSelection;
 
-  /// Called for each distinct tap except for every second tap of a double tap.
-  ///
-  /// The text field builds a [GestureDetector] to handle input events like tap, to trigger focus requests, to move the
-  /// caret, adjust the selection, etc. Handling some of those events by wrapping the text field with a competing
-  /// GestureDetector is problematic.
-  ///
-  /// To unconditionally handle taps, without interfering with the text field's internal gesture detector, provide this
-  /// callback.
-  ///
-  /// If the text field is created with [enabled] false, taps will not be recognized.
-  ///
-  /// To be notified when the text field gains or loses the focus, provide a [focusNode] and add a listener to that.
-  ///
-  /// To listen to arbitrary pointer events without competing with the text field's internal gesture detector, use a
-  /// [Listener].
+  /// {@macro flutter.material.textfield.onTap}
   final GestureTapCallback? onTap;
 
   /// {@macro flutter.widgets.editableText.autofillHints}
   /// {@macro flutter.services.AutofillConfiguration.autofillHints}
   final Iterable<String>? autofillHints;
 
-  /// Restoration ID to save and restore the state of the text field.
-  ///
-  /// If non-null, the text field will persist and restore its current scroll offset and - if no [controller] has been
-  /// provided - the content of the text field. If a [controller] has been provided, it is the responsibility of the
-  /// owner of that controller to persist and restore it, e.g. by using a [RestorableTextEditingController].
-  ///
-  /// The state of this widget is persisted in a [RestorationBucket] claimed from the surrounding [RestorationScope]
-  /// using the provided restoration ID.
-  ///
-  /// See also:
-  ///
-  ///  * [RestorationManager], which explains how state restoration works in Flutter.
+  /// {@macro flutter.material.textfield.restorationId}
   final String? restorationId;
 
   /// {@macro flutter.widgets.editableText.scribbleEnabled}
@@ -595,10 +486,45 @@ class ArnaTextField extends StatefulWidget {
   /// {@macro flutter.services.TextInputConfiguration.enableIMEPersonalizedLearning}
   final bool enableIMEPersonalizedLearning;
 
+  /// {@macro flutter.widgets.EditableText.contextMenuBuilder}
+  ///
+  /// If not provided, will build a default menu based on the platform.
+  ///
+  /// See also:
+  ///
+  ///  * [ArnaTextSelectionToolbar], which is built by default.
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
+
+  static Widget _defaultContextMenuBuilder(
+    final BuildContext context,
+    final EditableTextState editableTextState,
+  ) {
+    return ArnaTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
+  }
+
+  /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.intro}
+  ///
+  /// {@macro flutter.widgets.magnifier.intro}
+  ///
+  /// {@macro flutter.widgets.magnifier.TextMagnifierConfiguration.details}
+  ///
+  /// If it is desired to suppress the magnifier, consider passing
+  /// [TextMagnifierConfiguration.disabled].
+  final TextMagnifierConfiguration? magnifierConfiguration;
+
+  /// {@macro flutter.widgets.EditableText.spellCheckConfiguration}
+  ///
+  /// If [SpellCheckConfiguration.misspelledTextStyle] is not specified in this
+  /// configuration, then [cupertinoMisspelledTextStyle] is used by default.
+  final SpellCheckConfiguration? spellCheckConfiguration;
+
   /// The color of the text field.
   final Color? accentColor;
 
-  /// The cursor for a mouse pointer when it enters or is hovering over the text field.
+  /// The cursor for a mouse pointer when it enters or is hovering over the
+  /// text field.
   final MouseCursor cursor;
 
   @override
@@ -983,8 +909,8 @@ class _ArnaTextFieldState extends State<ArnaTextField>
   void _requestKeyboard() => _editableText.requestKeyboard();
 
   bool _shouldShowSelectionHandles(final SelectionChangedCause? cause) {
-    // When the text field is activated by something that doesn't trigger the selection overlay, we shouldn't show the
-    // handles either.
+    // When the text field is activated by something that doesn't trigger the
+    // selection overlay, we shouldn't show the handles either.
     if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar) {
       return false;
     }
@@ -1149,12 +1075,12 @@ class _ArnaTextFieldState extends State<ArnaTextField>
       ) {
         return Row(
           children: <Widget>[
-            // Insert a prefix at the front if the prefix visibility mode matches
-            // the current text state.
+            // Insert a prefix at the front if the prefix visibility mode
+            // matches the current text state.
             if (_showPrefixWidget(text!))
               Padding(padding: Styles.horizontal, child: widget.prefix),
-            // In the middle part, stack the hintText on top of the main EditableText
-            // if needed.
+            // In the middle part, stack the hintText on top of the main
+            // EditableText if needed.
             Expanded(
               child: Stack(
                 children: <Widget>[
@@ -1179,10 +1105,12 @@ class _ArnaTextFieldState extends State<ArnaTextField>
                 ],
               ),
             ),
-            // First add the explicit suffix if the suffix visibility mode matches.
+            // First add the explicit suffix if the suffix visibility mode
+            // matches.
             if (_showSuffixWidget(text))
               Padding(padding: Styles.horizontal, child: widget.suffix)
-            // Otherwise, try to show a clear button if its visibility mode matches.
+            // Otherwise, try to show a clear button if its visibility mode
+            // matches.
             else if (_showClearButton(text))
               GestureDetector(
                 key: _clearGlobalKey,
@@ -1259,31 +1187,27 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         ),
     ];
 
-    TextSelectionControls? textSelectionControls = widget.selectionControls;
     final bool paintCursorAboveText;
     VoidCallback? handleDidGainAccessibilityFocus;
     Offset? cursorOffset;
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
-        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset =
             Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
         break;
       case TargetPlatform.android:
-        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.fuchsia:
-        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.linux:
-        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         handleDidGainAccessibilityFocus = () {
-          // Automatically activate the TextField when it receives accessibility focus.
+          // Automatically activate the TextField when it receives
+          // accessibility focus.
           if (!_effectiveFocusNode.hasFocus &&
               _effectiveFocusNode.canRequestFocus) {
             _effectiveFocusNode.requestFocus();
@@ -1291,12 +1215,12 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         };
         break;
       case TargetPlatform.macOS:
-        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset =
             Offset((-2) / MediaQuery.of(context).devicePixelRatio, 0);
         handleDidGainAccessibilityFocus = () {
-          // Automatically activate the TextField when it receives accessibility focus.
+          // Automatically activate the TextField when it receives
+          // accessibility focus.
           if (!_effectiveFocusNode.hasFocus &&
               _effectiveFocusNode.canRequestFocus) {
             _effectiveFocusNode.requestFocus();
@@ -1304,10 +1228,10 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         };
         break;
       case TargetPlatform.windows:
-        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         handleDidGainAccessibilityFocus = () {
-          // Automatically activate the TextField when it receives accessibility focus.
+          // Automatically activate the TextField when it receives
+          // accessibility focus.
           if (!_effectiveFocusNode.hasFocus &&
               _effectiveFocusNode.canRequestFocus) {
             _effectiveFocusNode.requestFocus();
@@ -1320,6 +1244,17 @@ class _ArnaTextFieldState extends State<ArnaTextField>
         widget.accentColor ?? ArnaTheme.of(context).accentColor;
     final Color textFieldColor = ArnaColors.textFieldColor.resolveFrom(context);
 
+    // Set configuration as disabled if not otherwise specified.
+    final SpellCheckConfiguration spellCheckConfiguration =
+        widget.spellCheckConfiguration != null &&
+                widget.spellCheckConfiguration !=
+                    const SpellCheckConfiguration.disabled()
+            ? widget.spellCheckConfiguration!.copyWith(
+                misspelledTextStyle:
+                    widget.spellCheckConfiguration!.misspelledTextStyle,
+              )
+            : const SpellCheckConfiguration.disabled();
+
     final Widget paddedEditable = Padding(
       padding: Styles.normal,
       child: RepaintBoundary(
@@ -1329,7 +1264,6 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             key: editableTextKey,
             controller: controller,
             readOnly: widget.readOnly || !_isEnabled,
-            toolbarOptions: widget.toolbarOptions,
             showCursor: widget.showCursor,
             showSelectionHandles: _showSelectionHandles,
             focusNode: _effectiveFocusNode,
@@ -1354,7 +1288,7 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             selectionColor:
                 _effectiveFocusNode.hasFocus ? accent.withOpacity(0.42) : null,
             selectionControls:
-                widget.selectionEnabled ? textSelectionControls : null,
+                widget.selectionEnabled ? widget.selectionControls : null,
             onChanged: widget.onChanged,
             onSelectionChanged: _handleSelectionChanged,
             onEditingComplete: widget.onEditingComplete,
@@ -1389,6 +1323,8 @@ class _ArnaTextFieldState extends State<ArnaTextField>
             restorationId: 'editable',
             scribbleEnabled: widget.scribbleEnabled,
             enableIMEPersonalizedLearning: widget.enableIMEPersonalizedLearning,
+            contextMenuBuilder: widget.contextMenuBuilder,
+            spellCheckConfiguration: spellCheckConfiguration,
           ),
         ),
       ),

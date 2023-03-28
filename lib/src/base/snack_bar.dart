@@ -122,7 +122,7 @@ OverlayEntry showArnaSnackbar({
       action: action,
     ),
   );
-  Overlay.of(context)!.insert(overlayEntry);
+  Overlay.of(context).insert(overlayEntry);
   Future<dynamic>.delayed(Styles.snackbarDuration).then((final _) async {
     if (overlayEntry.mounted) {
       await snackBarKey.currentState?.controller.reverse();

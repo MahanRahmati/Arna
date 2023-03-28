@@ -9,6 +9,9 @@
 - [BREAKING] Update ArnaBody
 - Update ArnaHeaderBar
 - Update ArnaScaffold
+- [BREAKING] Remove ArnaTextSelectionControls
+- Add ArnaMagnifier
+- Add ArnaTextMagnifier
 - Add test for ArnaApp
 - Add test for ArnaScaffold
 - Move animations out of Arna

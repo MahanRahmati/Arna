@@ -1,50 +1,102 @@
 import 'package:arna/arna.dart';
+import 'package:flutter/rendering.dart' show SelectionGeometry;
 
 /// An Arna-style text selection toolbar.
 ///
 /// Typically displays buttons for text manipulation, e.g. copying and pasting
 /// text.
-/// Tries to position itself above [anchorAbove], but if it doesn't fit, then
-/// it positions itself below [anchorBelow].
 class ArnaTextSelectionToolbar extends StatelessWidget {
-  /// Creates an instance of ArnaTextSelectionToolbar.
+  /// Create an instance of [ArnaTextSelectionToolbar] with the given
+  /// [children].
   const ArnaTextSelectionToolbar({
     super.key,
-    required this.anchorAbove,
-    required this.anchorBelow,
     required this.children,
-  }) : assert(children.length > 0);
+    required this.anchors,
+  }) : buttonItems = null;
 
-  /// The focal point above which the toolbar attempts to position itself.
-  ///
-  /// If there is not enough room above before reaching the top of the screen,
-  /// then the toolbar will position itself below [anchorBelow].
-  final Offset anchorAbove;
+  /// Create an instance of [ArnaTextSelectionToolbar] whose children will be
+  /// built from the given [buttonItems].
+  const ArnaTextSelectionToolbar.buttonItems({
+    super.key,
+    required this.buttonItems,
+    required this.anchors,
+  }) : children = null;
 
-  /// The focal point below which the toolbar attempts to position itself, if
-  /// it doesn't fit above [anchorAbove].
-  final Offset anchorBelow;
+  /// Create an instance of [ArnaTextSelectionToolbar] with the default children
+  /// for an editable field.
+  ///
+  /// If a callback is null, then its corresponding button will not be built.
+  ArnaTextSelectionToolbar.editable({
+    super.key,
+    required final ClipboardStatus clipboardStatus,
+    required final VoidCallback? onCopy,
+    required final VoidCallback? onCut,
+    required final VoidCallback? onPaste,
+    required final VoidCallback? onSelectAll,
+    required this.anchors,
+  })  : children = null,
+        buttonItems = EditableText.getEditableButtonItems(
+          clipboardStatus: clipboardStatus,
+          onCopy: onCopy,
+          onCut: onCut,
+          onPaste: onPaste,
+          onSelectAll: onSelectAll,
+        );
 
-  /// The children that will be displayed in the text selection toolbar.
-  ///
-  /// Typically these are buttons.
-  ///
-  /// Must not be empty.
-  ///
-  /// See also:
-  ///   * [ArnaTextSelectionToolbarButton], which builds a default Arna-style
-  ///     text selection toolbar button.
-  final List<Widget> children;
+  /// Create an instance of [ArnaTextSelectionToolbar] with the default children
+  /// for an [EditableText].
+  ArnaTextSelectionToolbar.editableText({
+    super.key,
+    required final EditableTextState editableTextState,
+  })  : children = null,
+        buttonItems = editableTextState.contextMenuButtonItems,
+        anchors = editableTextState.contextMenuAnchors;
+
+  /// Create an instance of [ArnaTextSelectionToolbar] with the default children
+  /// for selectable, but not editable, content.
+  ArnaTextSelectionToolbar.selectable({
+    super.key,
+    required final VoidCallback onCopy,
+    required final VoidCallback onSelectAll,
+    required final SelectionGeometry selectionGeometry,
+    required this.anchors,
+  })  : children = null,
+        buttonItems = SelectableRegion.getSelectableButtonItems(
+          selectionGeometry: selectionGeometry,
+          onCopy: onCopy,
+          onSelectAll: onSelectAll,
+        );
+
+  /// {@macro flutter.material.AdaptiveTextSelectionToolbar.anchors}
+  final TextSelectionToolbarAnchors anchors;
+
+  /// The children of the toolbar, typically buttons.
+  final List<Widget>? children;
+
+  /// The [ContextMenuButtonItem]s that will be turned into the correct button
+  /// widgets for the current platform.
+  final List<ContextMenuButtonItem>? buttonItems;
 
   @override
   Widget build(final BuildContext context) {
+    // If there aren't any buttons to build, build an empty toolbar.
+    if ((children?.isEmpty ?? false) || (buttonItems?.isEmpty ?? false)) {
+      return const SizedBox.shrink();
+    }
+
+    final List<Widget> resultChildren = children ??
+        buttonItems!.map((final ContextMenuButtonItem buttonItem) {
+          return ArnaTextSelectionToolbarButton.buttonItem(
+            buttonItem: buttonItem,
+          );
+        }).toList();
+
     assert(debugCheckHasMediaQuery(context));
     final MediaQueryData mediaQuery = MediaQuery.of(context);
 
     final double paddingAbove = mediaQuery.padding.top + Styles.padding;
-    final double availableHeight = anchorAbove.dy - paddingAbove;
+    final double availableHeight = anchors.primaryAnchor.dy - paddingAbove;
     final bool fitsAbove = Styles.buttonSize <= availableHeight;
-    final Offset localAdjustment = Offset(Styles.padding, paddingAbove);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
@@ -55,12 +107,12 @@ class ArnaTextSelectionToolbar extends StatelessWidget {
       ),
       child: CustomSingleChildLayout(
         delegate: TextSelectionToolbarLayoutDelegate(
-          anchorAbove: anchorAbove - localAdjustment,
-          anchorBelow: anchorBelow - localAdjustment,
+          anchorAbove: anchors.primaryAnchor,
+          anchorBelow: anchors.secondaryAnchor ?? anchors.primaryAnchor,
           fitsAbove: fitsAbove,
         ),
         child: ArnaCard(
-          child: Wrap(children: children),
+          child: Wrap(children: resultChildren),
         ),
       ),
     );

@@ -138,7 +138,7 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
               leading: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  if (compact && widget.items.length > 4 || medium)
+                  if (compact || medium)
                     ArnaButton.icon(
                       icon: Icons.menu_outlined,
                       buttonType: ButtonType.borderless,
@@ -183,36 +183,12 @@ class _ArnaSideScaffoldState extends State<ArnaSideScaffold> {
                     ),
                   ),
                 ),
-                if (compact && widget.items.length < 5)
-                  ArnaBottomBar(
-                    items: widget.items.map(
-                      (final NavigationItem item) {
-                        final int index = widget.items.indexOf(item);
-                        return Expanded(
-                          child: ArnaBottomBarItem(
-                            key: item.key,
-                            label: item.title,
-                            icon: item.icon,
-                            selectedIcon: item.selectedIcon,
-                            onPressed: () => onTap(index),
-                            badge: item.badge,
-                            active: index == _currentIndex,
-                            isFocusable: item.isFocusable,
-                            autofocus: item.autofocus,
-                            accentColor: item.accentColor,
-                            cursor: item.cursor,
-                            semanticLabel: item.semanticLabel,
-                          ),
-                        );
-                      },
-                    ).toList(),
-                  ),
               ],
             ),
             resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
           ),
         ),
-        if (compact && widget.items.length > 4 || medium)
+        if (compact || medium)
           ArnaDrawerController(
             drawer: ArnaDrawer(child: sideItemBuilder),
             drawerCallback: _drawerOpenedCallback,

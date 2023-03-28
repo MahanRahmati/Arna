@@ -9,10 +9,14 @@
 - [BREAKING] Update ArnaBody
 - Update ArnaHeaderBar
 - Update ArnaScaffold
-- [BREAKING] Replace ArnaBottomBar with ArnaNavigationBar
-- [BREAKING] Replace ArnaBottomBarItem with ArnaNavigationBarItem
+- [BREAKING] Remove ArnaTextSelectionControls
+- Add ArnaMagnifier
+- Add ArnaTextMagnifier
 - Add test for ArnaApp
 - Add test for ArnaScaffold
+- Move animations out of Arna
+- [BREAKING] Replace ArnaBottomBar with ArnaNavigationBar
+- [BREAKING] Replace ArnaBottomBarItem with ArnaNavigationBarItem
 - Add test for ArnaNavigationBar
 
 ## 1.0.6

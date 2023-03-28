@@ -3,22 +3,27 @@ import 'package:flutter/services.dart';
 
 /// A [FormField] that contains an [ArnaTextField].
 ///
-/// This is a convenience widget that wraps an [ArnaTextField] widget in a [FormField].
+/// This is a convenience widget that wraps an [ArnaTextField] widget in a
+/// [FormField].
 ///
-/// A [Form] ancestor is not required. The [Form] simply makes it easier to save, reset, or validate multiple fields at
-/// once. To use without a [Form], pass a `GlobalKey<FormFieldState>` (see [GlobalKey]) to the constructor and use
-/// [GlobalKey.currentState] to save or reset the form field.
+/// A [Form] ancestor is not required. The [Form] simply makes it easier to
+/// save, reset, or validate multiple fields at once. To use without a [Form],
+/// pass a `GlobalKey<FormFieldState>` (see [GlobalKey]) to the constructor and
+/// use [GlobalKey.currentState] to save or reset the form field.
 ///
-/// When a [controller] is specified, its [TextEditingController.text] defines the [initialValue]. If this [FormField]
-/// is part of a scrolling container that lazily constructs its children, like a [ListView] or a [CustomScrollView],
-/// then a [controller] should be specified. The controller's lifetime should be managed by a stateful widget ancestor
+/// When a [controller] is specified, its [TextEditingController.text] defines
+/// the [initialValue]. If this [FormField] is part of a scrolling container
+/// that lazily constructs its children, like a [ListView] or a
+/// [CustomScrollView], then a [controller] should be specified.
+/// The controller's lifetime should be managed by a stateful widget ancestor
 /// of the scrolling container.
 ///
-/// If a [controller] is not specified, [initialValue] can be used to give the automatically generated controller an
-/// initial value.
+/// If a [controller] is not specified, [initialValue] can be used to give the
+/// automatically generated controller an initial value.
 ///
-/// Remember to call [TextEditingController.dispose] of the [TextEditingController] when it is no longer needed. This
-/// will ensure any resources used by the object are discarded.
+/// Remember to call [TextEditingController.dispose] of the
+/// [TextEditingController] when it is no longer needed. This will ensure any
+/// resources used by the object are discarded.
 ///
 /// For a documentation about the various parameters, see [ArnaTextField].
 ///
@@ -29,28 +34,33 @@ import 'package:flutter/services.dart';
 /// ```dart
 /// ArnaTextFormField(
 ///   hintText: 'What do people call you?',
-///   onSaved: (String? value) {
+///   onSaved: (final String? value) {
 ///     // This optional block of code can be used to run
 ///     // code when the user saves the form.
 ///   },
-///   validator: (String? value) {
-///     return (value != null && value.contains('@')) ? 'Do not use the @ char.' : null;
+///   validator: (final String? value) {
+///     return (value != null && value.contains('@'))
+///         ? 'Do not use the @ char.'
+///         : null;
 ///   },
-/// )
+/// );
 /// ```
 /// {@end-tool}
 ///
 /// See also:
 ///
-///  * [ArnaTextField], which is the underlying text field without the [Form] integration.
+///  * [ArnaTextField], which is the underlying text field without the [Form]
+///    integration.
 class ArnaTextFormField extends FormField<String> {
   /// Creates a [FormField] that contains an [ArnaTextField].
   ///
-  /// When a [controller] is specified, [initialValue] must be null (the default). If [controller] is null, then a
-  /// [TextEditingController] will be constructed automatically and its `text` will be initialized to [initialValue] or
-  /// the empty string.
+  /// When a [controller] is specified, [initialValue] must be null
+  /// (the default). If [controller] is null, then a [TextEditingController]
+  /// will be constructed automatically and its `text` will be initialized to
+  /// [initialValue] or the empty string.
   ///
-  /// For documentation about the various parameters, see the [ArnaTextField] class.
+  /// For documentation about the various parameters, see the [ArnaTextField]
+  /// class.
   ArnaTextFormField({
     super.key,
     super.onSaved,
@@ -76,7 +86,6 @@ class ArnaTextFormField extends FormField<String> {
     final TextAlignVertical? textAlignVertical,
     final TextDirection? textDirection,
     final bool readOnly = false,
-    final ToolbarOptions? toolbarOptions,
     final bool? showCursor,
     final bool autofocus = false,
     final String obscuringCharacter = '•',
@@ -110,6 +119,8 @@ class ArnaTextFormField extends FormField<String> {
     final Iterable<String>? autofillHints,
     super.restorationId,
     final bool enableIMEPersonalizedLearning = true,
+    final EditableTextContextMenuBuilder? contextMenuBuilder =
+        _defaultContextMenuBuilder,
   })  : assert(initialValue == null || controller == null),
         assert(obscuringCharacter.length == 1),
         assert(maxLines == null || maxLines > 0),
@@ -161,7 +172,6 @@ class ArnaTextFormField extends FormField<String> {
                 textAlignVertical: textAlignVertical,
                 textDirection: textDirection,
                 readOnly: readOnly,
-                toolbarOptions: toolbarOptions,
                 showCursor: showCursor,
                 autofocus: autofocus,
                 obscuringCharacter: obscuringCharacter,
@@ -202,6 +212,7 @@ class ArnaTextFormField extends FormField<String> {
                 autofillHints: autofillHints,
                 restorationId: restorationId,
                 enableIMEPersonalizedLearning: enableIMEPersonalizedLearning,
+                contextMenuBuilder: contextMenuBuilder,
               ),
             );
           },
@@ -212,6 +223,15 @@ class ArnaTextFormField extends FormField<String> {
   /// If null, this widget will create its own [TextEditingController] and
   /// initialize its [TextEditingController.text] with [initialValue].
   final TextEditingController? controller;
+
+  static Widget _defaultContextMenuBuilder(
+    final BuildContext context,
+    final EditableTextState editableTextState,
+  ) {
+    return ArnaTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
+    );
+  }
 
   @override
   FormFieldState<String> createState() => _ArnaTextFormFieldState();
@@ -235,7 +255,8 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
     if (_controller != null) {
       _registerController();
     }
-    // Make sure to update the internal [FormFieldState] value to sync up with text editing controller value.
+    // Make sure to update the internal [FormFieldState] value to sync up with
+    // text editing controller value.
     setValue(_effectiveController.text);
   }
 
@@ -307,8 +328,8 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
 
   @override
   void reset() {
-    // setState will be called in the superclass, so even though state is being manipulated, no setState call is needed
-    // here.
+    // setState will be called in the superclass, so even though state is being
+    // manipulated, no setState call is needed here.
     _effectiveController.text = widget.initialValue ?? '';
     super.reset();
   }
@@ -316,9 +337,11 @@ class _ArnaTextFormFieldState extends FormFieldState<String> {
   void _handleControllerChanged() {
     // Suppress changes that originated from within this class.
     //
-    // In the case where a controller has been passed in to this widget, we register this change listener. In these
-    // cases, we'll also receive change notifications for changes originating from within this class -- for example,
-    // the reset() method. In such cases, the FormField value will already have been set.
+    // In the case where a controller has been passed in to this widget, we
+    // register this change listener. In these cases, we'll also receive change
+    // notifications for changes originating from within this class -- for
+    // example, the reset() method. In such cases, the FormField value will
+    // already have been set.
     if (_effectiveController.text != value) {
       didChange(_effectiveController.text);
     }

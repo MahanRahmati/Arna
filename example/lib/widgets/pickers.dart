@@ -17,19 +17,20 @@ class Pickers extends ConsumerWidget {
           ArnaButton.text(
             label: Strings.datePicker,
             onPressed: () async {
-              final DateTime? pickedDate = await showArnaDatePicker(
+              await showArnaDatePicker(
                 context: context,
                 initialDate: DateTime.now(),
                 firstDate: DateTime(DateTime.now().year - 5),
                 lastDate: DateTime(DateTime.now().year + 5),
-              );
-              if (pickedDate != null) {
-                showArnaSnackbar(
-                  context: context,
-                  message:
-                      '${pickedDate.year}/${pickedDate.month}/${pickedDate.day}',
-                );
-              }
+              ).then((DateTime? value) {
+                if (value != null) {
+                  showArnaSnackbar(
+                    context: context,
+                    message: '${value.year}/${value.month}/${value.day}',
+                  );
+                }
+                return null;
+              });
             },
             tooltipMessage: Strings.add,
           ),

@@ -387,72 +387,12 @@ class ArnaSelectableText extends StatefulWidget {
   /// {@macro flutter.widgets.EditableText.contextMenuBuilder}
   final EditableTextContextMenuBuilder? contextMenuBuilder;
 
-  /// Returns the default button icon for the button of the given
-  /// [ContextMenuButtonType] on any platform.
-  static IconData? getButtonIcon(
-    final BuildContext context,
-    final ContextMenuButtonItem buttonItem,
-  ) {
-    switch (buttonItem.type) {
-      case ContextMenuButtonType.cut:
-        return Icons.cut_outlined;
-      case ContextMenuButtonType.copy:
-        return Icons.copy_outlined;
-      case ContextMenuButtonType.paste:
-        return Icons.paste_outlined;
-      case ContextMenuButtonType.selectAll:
-        return Icons.select_all_outlined;
-      case ContextMenuButtonType.custom:
-        return null;
-    }
-  }
-
-  /// Returns the default button label String for the button of the given
-  /// [ContextMenuButtonType] on any platform.
-  static String getButtonLabel(
-    final BuildContext context,
-    final ContextMenuButtonItem buttonItem,
-  ) {
-    if (buttonItem.label != null) {
-      return buttonItem.label!;
-    }
-
-    final MaterialLocalizations localizations =
-        MaterialLocalizations.of(context);
-    switch (buttonItem.type) {
-      case ContextMenuButtonType.cut:
-        return localizations.cutButtonLabel;
-      case ContextMenuButtonType.copy:
-        return localizations.copyButtonLabel;
-      case ContextMenuButtonType.paste:
-        return localizations.pasteButtonLabel;
-      case ContextMenuButtonType.selectAll:
-        return localizations.selectAllButtonLabel;
-      case ContextMenuButtonType.custom:
-        return '';
-    }
-  }
-
   static Widget _defaultContextMenuBuilder(
     final BuildContext context,
     final EditableTextState editableTextState,
   ) {
-    final TextSelectionToolbarAnchors anchors =
-        editableTextState.contextMenuAnchors;
-    final List<ContextMenuButtonItem> buttonItems =
-        editableTextState.contextMenuButtonItems;
-    return ArnaTextSelectionToolbar(
-      anchorAbove: anchors.primaryAnchor,
-      anchorBelow: anchors.secondaryAnchor == null
-          ? anchors.primaryAnchor
-          : anchors.secondaryAnchor!,
-      children: buttonItems.map((final ContextMenuButtonItem buttonItem) {
-        return ArnaTextSelectionToolbarButton(
-          icon: getButtonIcon(context, buttonItem),
-          onPressed: buttonItem.onPressed,
-          label: getButtonLabel(context, buttonItem),
-        );
-      }).toList(),
+    return ArnaTextSelectionToolbar.editableText(
+      editableTextState: editableTextState,
     );
   }
 
@@ -757,13 +697,11 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
 
     final FocusNode focusNode = _effectiveFocusNode;
 
-    TextSelectionControls? textSelectionControls = widget.selectionControls;
     final bool paintCursorAboveText;
     Offset? cursorOffset;
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
-        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset = Offset(
           (-2) / MediaQuery.of(context).devicePixelRatio,
@@ -771,19 +709,15 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         );
         break;
       case TargetPlatform.android:
-        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.fuchsia:
-        textSelectionControls ??= arnaTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.linux:
-        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         break;
       case TargetPlatform.macOS:
-        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = true;
         cursorOffset = Offset(
           (-2) / MediaQuery.of(context).devicePixelRatio,
@@ -791,7 +725,6 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         );
         break;
       case TargetPlatform.windows:
-        textSelectionControls ??= arnaDesktopTextSelectionControls;
         paintCursorAboveText = false;
         break;
     }
@@ -837,7 +770,7 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         maxLines: widget.maxLines ?? defaultTextStyle.maxLines,
         selectionColor: accent.withOpacity(0.42),
         selectionControls:
-            widget.selectionEnabled ? textSelectionControls : null,
+            widget.selectionEnabled ? widget.selectionControls : null,
         onSelectionChanged: _handleSelectionChanged,
         onSelectionHandleTapped: _handleSelectionHandleTapped,
         rendererIgnoresPointer: true,
@@ -858,8 +791,6 @@ class _ArnaSelectableTextState extends State<ArnaSelectableText>
         enableInteractiveSelection: widget.enableInteractiveSelection,
         magnifierConfiguration: widget.magnifierConfiguration ??
             TextMagnifierConfiguration(
-              shouldDisplayHandlesInMagnifier:
-                  defaultTargetPlatform == TargetPlatform.iOS,
               magnifierBuilder: (
                 final BuildContext context,
                 final MagnifierController controller,

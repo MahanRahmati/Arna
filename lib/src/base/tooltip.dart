@@ -349,7 +349,7 @@ class _ArnaTooltipState extends State<ArnaTooltip>
     final OverlayState overlayState = Overlay.of(
       context,
       debugRequiredFor: widget,
-    )!;
+    );
     final RenderBox box = context.findRenderObject()! as RenderBox;
     final Offset target = box.localToGlobal(
       box.size.center(Offset.zero),

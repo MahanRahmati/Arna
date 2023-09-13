@@ -242,7 +242,8 @@ enum _ArnaListTileSlot {
 
 /// _ArnaListTile class.
 class _ArnaListTile extends RenderObjectWidget
-    with SlottedMultiChildRenderObjectWidgetMixin<_ArnaListTileSlot> {
+    with
+        SlottedMultiChildRenderObjectWidgetMixin<_ArnaListTileSlot, RenderBox> {
   /// Creates an ArnaListTile.
   const _ArnaListTile({
     required this.leading,
@@ -309,7 +310,7 @@ class _ArnaListTile extends RenderObjectWidget
 
 /// _RenderArnaListTile class.
 class _RenderArnaListTile extends RenderBox
-    with SlottedContainerRenderObjectMixin<_ArnaListTileSlot> {
+    with SlottedContainerRenderObjectMixin<_ArnaListTileSlot, RenderBox> {
   /// Renders an ArnaListTile.
   _RenderArnaListTile({
     required final TextDirection textDirection,

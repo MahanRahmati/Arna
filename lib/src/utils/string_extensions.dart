@@ -10,7 +10,7 @@ extension ArnaStringExtension on String {
     '7',
     '8',
     '9',
-    '0'
+    '0',
   ];
 
   /// Normalize the string.

@@ -195,7 +195,7 @@ class ArnaDrawerControllerState extends State<ArnaDrawerController>
             actions: <Type, Action<Intent>>{
               DismissIntent: CallbackAction<Intent>(
                 onInvoke: (final _) => close(),
-              )
+              ),
             },
             child: RepaintBoundary(
               child: Stack(
@@ -227,7 +227,7 @@ class ArnaDrawerControllerState extends State<ArnaDrawerController>
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

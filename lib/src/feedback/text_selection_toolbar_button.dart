@@ -78,6 +78,10 @@ class ArnaTextSelectionToolbarButton extends StatelessWidget {
         return localizations.selectAllButtonLabel;
       case ContextMenuButtonType.custom:
         return '';
+      case ContextMenuButtonType.delete:
+        return localizations.deleteButtonTooltip;
+      case ContextMenuButtonType.liveTextInput:
+        return '';
     }
   }
 

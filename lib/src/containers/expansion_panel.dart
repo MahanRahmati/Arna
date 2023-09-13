@@ -103,7 +103,7 @@ class _ArnaExpansionPanelState extends State<ArnaExpansionPanel>
     }
     _actions = <Type, Action<Intent>>{
       ActivateIntent:
-          CallbackAction<Intent>(onInvoke: (final _) => _handleTap())
+          CallbackAction<Intent>(onInvoke: (final _) => _handleTap()),
     };
     _shortcuts = const <ShortcutActivator, Intent>{
       SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),

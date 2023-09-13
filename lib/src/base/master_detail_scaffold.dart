@@ -453,7 +453,7 @@ class _NestedPageState extends State<_NestedPage> {
                 );
               },
             ),
-            if (_currentIndex != -1) _detailPageRoute(_currentIndex)
+            if (_currentIndex != -1) _detailPageRoute(_currentIndex),
           ];
         },
       ),

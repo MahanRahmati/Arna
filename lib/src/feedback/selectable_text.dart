@@ -69,7 +69,7 @@ class _ArnaSelectableTextSelectionGestureDetectorBuilder
   }
 
   @override
-  void onSingleTapUp(final TapUpDetails details) {
+  void onSingleTapUp(final TapDragUpDetails details) {
     editableText.hideToolbar();
     if (delegate.selectionEnabled) {
       switch (defaultTargetPlatform) {

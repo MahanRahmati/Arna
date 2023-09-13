@@ -32,7 +32,7 @@ class _CheckBoxsState extends State<CheckBoxs> {
             title: '${Strings.checkBox} 2',
             subtitle: Strings.subtitle,
             onChanged: null,
-          )
+          ),
         ],
       ),
     );

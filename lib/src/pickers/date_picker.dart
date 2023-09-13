@@ -549,7 +549,7 @@ class _ArnaCalendarDatePickerState extends State<ArnaCalendarDatePicker> {
                   : ArnaDatePickerMode.day,
             );
           },
-        )
+        ),
       ],
     );
   }

@@ -7,12 +7,12 @@ class Indicators extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaExpansionPanel(
-      leading: const Icon(Icons.refresh_outlined),
+    return const ArnaExpansionPanel(
+      leading: Icon(Icons.refresh_outlined),
       title: Strings.indicator,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const <Widget>[
+        children: <Widget>[
           ArnaProgressIndicator(),
           ArnaProgressIndicator(size: 119),
         ],

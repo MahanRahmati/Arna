@@ -834,7 +834,7 @@ void main() {
         final BuildContext context,
         final RouteInformation information,
       ) {
-        return Text(information.location!);
+        return Text(information.location);
       },
       onPopPage: (
         final Route<void> route,
@@ -874,7 +874,7 @@ void main() {
         final BuildContext context,
         final RouteInformation information,
       ) {
-        return Text(information.location!);
+        return Text(information.location);
       },
       onPopPage: (
         final Route<void> route,
@@ -913,7 +913,7 @@ void main() {
         final BuildContext context,
         final RouteInformation information,
       ) {
-        return Text(information.location!);
+        return Text(information.location);
       },
       onPopPage: (
         final Route<void> route,
@@ -951,7 +951,7 @@ void main() {
         final BuildContext context,
         final RouteInformation information,
       ) {
-        return Text(information.location!);
+        return Text(information.location);
       },
       onPopPage: (
         final Route<void> route,
@@ -991,7 +991,7 @@ void main() {
           final BuildContext context,
           final RouteInformation information,
         ) {
-          return Text(information.location!);
+          return Text(information.location);
         },
         onPopPage: (
           final Route<void> route,
@@ -1186,7 +1186,7 @@ class SimpleNavigatorRouterDelegate extends RouterDelegate<RouteInformation>
           child: Text('base'),
         ),
         ArnaPage<void>(
-          key: ValueKey<String>(routeInformation.location!),
+          key: ValueKey<String>(routeInformation.location),
           child: builder(context, routeInformation),
         ),
       ],

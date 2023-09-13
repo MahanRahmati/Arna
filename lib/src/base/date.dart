@@ -133,7 +133,7 @@ class ArnaDateUtils {
       30,
       31,
       30,
-      31
+      31,
     ];
     return daysInMonth[month - 1];
   }

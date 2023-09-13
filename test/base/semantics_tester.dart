@@ -739,7 +739,7 @@ class SemanticsTester {
   static String _flagsToSemanticsFlagExpression(final dynamic flags) {
     Iterable<SemanticsFlag> list;
     if (flags is int) {
-      list = SemanticsFlag.values.values
+      list = SemanticsFlag.values
           .where((final SemanticsFlag flag) => (flag.index & flags) != 0);
     } else {
       list = flags as List<SemanticsFlag>;
@@ -754,7 +754,7 @@ class SemanticsTester {
   static String _actionsToSemanticsActionExpression(final dynamic actions) {
     Iterable<SemanticsAction> list;
     if (actions is int) {
-      list = SemanticsAction.values.values.where(
+      list = SemanticsAction.values.where(
         (final SemanticsAction action) => (action.index & actions) != 0,
       );
     } else {

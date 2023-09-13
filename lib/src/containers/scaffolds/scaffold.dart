@@ -491,7 +491,7 @@ class ArnaScaffoldState extends State<ArnaScaffold> with RestorationMixin {
             actions: <Type, Action<Intent>>{
               DismissIntent: CallbackAction<Intent>(
                 onInvoke: (final _) => closeDrawer(),
-              )
+              ),
             },
             child: CustomMultiChildLayout(
               delegate: _ArnaScaffoldLayout(minInsets: minInsets),
